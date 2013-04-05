@@ -5,10 +5,10 @@
 // File  : mutex.h
 // Brief :
 
-#ifndef  BASE_MUTEX_H_
-#define  BASE_MUTEX_H_
-#include "./define.h"
+#ifndef  BASE_PUBLIC_MUTEX_H_
+#define  BASE_PUBLIC_MUTEX_H_
 #include <pthread.h>
+#include "./define.h"
 namespace base {
 class Mutex {
  public:
@@ -33,4 +33,4 @@ class MutexWrapper {
   DISABLE_ASSIGN_COPY(MutexWrapper)
 };
 }  // namespace
-#endif  //BASE_MUTEX_H_
+#endif  // BASE_PUBLIC_MUTEX_H_

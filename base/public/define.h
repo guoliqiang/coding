@@ -5,8 +5,8 @@
 // File  : define.h
 // Brief :
 
-#ifndef  BASE_DEFINE_H_
-#define  BASE_DEFINE_H_
+#ifndef  BASE_PUBLIC_DEFINE_H_
+#define  BASE_PUBLIC_DEFINE_H_
 #include <stdlib.h>
 #include <string>
 #include <iostream>   // NOLINT
@@ -24,4 +24,4 @@
                   << std::endl;\
          exit(0);\
        }
-#endif  // BASE_DEFINE_H_
+#endif  // BASE_PUBLIC_DEFINE_H_
