@@ -7,19 +7,25 @@
 #include "../public/mutex.h"
 namespace base {
 // constructor
-Mutex::Mutex() {
+Mutex::Mutex() : need_destroy_(true) {
+  CHECK_EQ(0, pthread_mutex_init(&mu_, NULL));
+}
+
+Mutex::Mutex(Mutex::LinkerInitialized) : need_destroy_(false) {
   CHECK_EQ(0, pthread_mutex_init(&mu_, NULL));
 }
 // destructor
 Mutex::~Mutex() {
-  CHECK_EQ(0, pthread_mutex_destroy(&mu_));
+  if (need_destroy_) {
+    CHECK_EQ(0, pthread_mutex_destroy(&mu_));
+  }
 }
 // lock
 void Mutex::Lock() {
   CHECK_EQ(0, pthread_mutex_lock(&mu_));
 }
 // unlock
-void Mutex::UnLock() {
+void Mutex::Unlock() {
   CHECK_EQ(0, pthread_mutex_unlock(&mu_));
 }
 // trylock
@@ -28,12 +34,13 @@ bool Mutex::TryLock() {
 }
 
 // constructor
-MutexWrapper::MutexWrapper() {
-  mutex_.Lock();
+MutexLock::MutexLock(Mutex * mutex) : mutex_(mutex){
+  mutex_->Lock();
 }
+
 // destructor
-MutexWrapper::~MutexWrapper() {
-  mutex_.UnLock();
+MutexLock::~MutexLock() {
+  mutex_->Unlock();
 }
 
 }  // namespace
