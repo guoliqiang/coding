@@ -7,6 +7,8 @@
 
 #ifndef  BASE_PUBLIC_STRING_UTIL_H_
 #define  BASE_PUBLIC_STRING_UTIL_H_
+#include "./basictypes.h"
+#include <stdarg.h>
 #include <string>
 namespace base {
 enum TrimPositions {
@@ -20,6 +22,11 @@ bool TrimString(const std::string & input,
                 std::string * output);
 // StringPrintf
 // http://wenku.baidu.com/view/b8c67adda58da0116c1749f4.html
-
+const std::string StringPrintf(const char * format, ...) PRINTF_FORMAT(1, 2);
+const std::string& SStringPrintf(std::string* dst, const char* format, ...) PRINTF_FORMAT(2, 3);
+void StringAppendV(std::string * dst,
+                   const char * fromat, va_list) PRINTF_FORMAT(2, 0);
+int VsnPrintf(char * buffer, size_t size, const char * format, va_list args)
+    PRINTF_FORMAT(3, 0);
 }  // namespace
 #endif  // BASE_PUBLIC_STRING_UTIL_H_

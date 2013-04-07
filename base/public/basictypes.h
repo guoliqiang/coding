@@ -113,8 +113,27 @@ const  int64 kint64max  = (( int64) GG_LONGLONG(0x7FFFFFFFFFFFFFFF));
 // use its type.
 //
 // This is interpreted at http://hi.baidu.com/cntrump/item/18200afee5f7abed1b111fae
+// int f(); // function declare without definition
+// std::cout << sizeof(f());  // ok
+//
+// int a[100]
+// a  -- int *
+// &a -- int (*) [100]
+//
+// int * ptr = new int[100];
+// int a[100];
+// int (& b1)[100] = a;    // ok, reference
+// int * const & p = a;    // ok, const reference, due to a is const
+// int *& p1 = ptr;        // ok, reference
+// int (* p2) [100] = &a;  // ok
+//
+// int (& b2)[100] = ptr;  // wrong
+// int *& p3 = ptr;        // ok, reference
+//
 template <typename T, size_t N>
 char (&ArraySizeHelper(T (&array)[N]))[N];
+// declare a function wihch need input type is a refercence of T (&array) [N]
+// output type is char [N]
 
 // That gcc wants both of these prototypes seems mysterious. VC, for
 // its part, can't decide which to use (another mystery). Matching of

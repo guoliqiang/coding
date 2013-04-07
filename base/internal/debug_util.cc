@@ -17,6 +17,12 @@
 #include <string>
 
 #include "../public/basictypes.h"
+#include "../public/safe_strerror_posix.h"
+#include "../public/time.h"
+#include "../public/eintr_wrapper.h"
+#include "../public/logging.h"
+#include "../public/symbolize.h"
+#include "../public/string_util.h"
 #include "../public/string_piece.h"
 
 namespace {
@@ -52,10 +58,10 @@ bool GetBacktraceStrings(void **trace, int size,
                           symbol, sizeof(symbol))) {
       // Don't call DemangleSymbols() here as the symbol is demangled by
       // google::Symbolize().
-      trace_strings->push_back(StringPrintf("%s [%p]", symbol, trace[i]));
+      trace_strings->push_back(base::StringPrintf("%s [%p]", symbol, trace[i]));
       symbolized = true;
     } else {
-      trace_strings->push_back(StringPrintf("%p", trace[i]));
+      trace_strings->push_back(base::StringPrintf("%p", trace[i]));
     }
   }
 

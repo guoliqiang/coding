@@ -19,7 +19,14 @@ typedef pthread_mutex_t* MutexHandle;
 #include <iomanip>
 #include <cstring>
 #include <algorithm>
+
+#include "../public/debug_util.h"
+#include "../public/eintr_wrapper.h"
 #include "../public/mutex.h"
+#include "../public/safe_strerror_posix.h"
+#include "../public/string_piece.h"
+#include "../public/string_util.h"
+// #include "base/utf_string_conversions.h"
 
 DEFINE_int32(v, -1, "LOG verbose level.");
 DEFINE_bool(enable_addition_info_business_id, true,
@@ -498,6 +505,8 @@ void LogAdditionInfo::RemoveBusinessIDByThread() {
 
 }  // namespace logging
 
+/*
 std::ostream& operator<<(std::ostream& out, const wchar_t* wstr) {
   return out << WideToUTF8(std::wstring(wstr));
 }
+*/

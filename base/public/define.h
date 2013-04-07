@@ -13,7 +13,7 @@
 #define DISABLE_ASSIGN_COPY(name)\
        void operator = (const name &);\
        name(const name &);
-
+/*
 #define CHECK(condition) if (!(condition)) {\
           std::cout<< "condition is false" << std::endl;\
           exit(0);\
@@ -24,4 +24,5 @@
                   << std::endl;\
          exit(0);\
        }
+*/
 #endif  // BASE_PUBLIC_DEFINE_H_

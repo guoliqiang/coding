@@ -9,6 +9,7 @@
 #define  BASE_PUBLIC_MUTEX_H_
 #include <pthread.h>
 #include "./define.h"
+#include "./logging.h"
 namespace base {
 class Mutex {
  public:
