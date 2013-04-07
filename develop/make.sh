@@ -5,7 +5,8 @@
 # Date  : 2013-04-05 21:31:25
 # File  : make.sh
 #Brief :
-find $2 -regex ".*\.cc\|.*\.h" | xargs python $1/develop/cpplint.py
+dir=`echo $0|awk -F 'd' '{print $1}'`
+find $1 -regex ".*\.cc\|.*\.h" | xargs python ${dir}develop/cpplint.py
 cmake .  -Wno-dev
 make
 rm -f  CMakeCache.txt
