@@ -32,6 +32,8 @@
 // |dots_param| is the one-based index of the "..." parameter.
 // For v*printf functions (which take a va_list), pass 0 for dots_param.
 // (This is undocumented but matches what the system C headers do.)
+// used in sting-util.cc/h
+// see http://baike.baidu.com/view/4853242.htm
 #define PRINTF_FORMAT(format_param, dots_param) \
     __attribute__((format(printf, format_param, dots_param)))
 

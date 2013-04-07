@@ -18,5 +18,8 @@ enum TrimPositions {
 bool TrimString(const std::string & input,
                 const char trim_chars[],
                 std::string * output);
+// StringPrintf
+// http://wenku.baidu.com/view/b8c67adda58da0116c1749f4.html
+
 }  // namespace
 #endif  // BASE_PUBLIC_STRING_UTIL_H_
