@@ -123,7 +123,8 @@ enum LoggingDestination { LOG_NONE,
 //
 // All processes writing to the log file must have their locking set for it to
 // work properly. Defaults to DONT_LOCK_LOG_FILE.
-enum LogLockingState { LOCK_LOG_FILE, DONT_LOCK_LOG_FILE };
+enum LogLockingState {LOCK_LOG_FILE,
+                      DONT_LOCK_LOG_FILE };
 
 // On startup, should we delete or append to an existing log file (if any)?
 // Defaults to APPEND_TO_OLD_LOG_FILE.

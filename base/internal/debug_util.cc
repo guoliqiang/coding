@@ -58,10 +58,10 @@ bool GetBacktraceStrings(void **trace, int size,
                           symbol, sizeof(symbol))) {
       // Don't call DemangleSymbols() here as the symbol is demangled by
       // google::Symbolize().
-      trace_strings->push_back(base::StringPrintf("%s [%p]", symbol, trace[i]));
+      trace_strings->push_back(StringPrintf("%s [%p]", symbol, trace[i]));
       symbolized = true;
     } else {
-      trace_strings->push_back(base::StringPrintf("%p", trace[i]));
+      trace_strings->push_back(StringPrintf("%p", trace[i]));
     }
   }
 
@@ -81,10 +81,10 @@ bool DebugUtil::SpawnDebuggerOnProcess(unsigned /* process_id */) {
 // Another option that is common is to try to ptrace yourself, but then we
 // can't detach without forking(), and that's not so great.
 // static
+// see http://www.cnblogs.com/eustoma/archive/2012/04/27/2473175.html
 bool DebugUtil::BeingDebugged() {
   int status_fd = open("/proc/self/status", O_RDONLY);
-  if (status_fd == -1)
-    return false;
+  if (status_fd == -1) return false;
 
   // We assume our line will be in the first 1024 characters and that we can
   // read this much all at once.  In practice this will generally be true.
@@ -92,11 +92,9 @@ bool DebugUtil::BeingDebugged() {
   char buf[1024];
 
   ssize_t num_read = HANDLE_EINTR(read(status_fd, buf, sizeof(buf)));
-  if (HANDLE_EINTR(close(status_fd)) < 0)
-    return false;
+  if (HANDLE_EINTR(close(status_fd)) < 0) return false;
 
-  if (num_read <= 0)
-    return false;
+  if (num_read <= 0) return false;
 
   base::StringPiece status(buf, num_read);
   base::StringPiece tracer("TracerPid:\t");

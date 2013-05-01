@@ -28,6 +28,7 @@ class StackTrace {
   // Gets an array of instruction pointer values.
   //   count: (output) the number of elements in the returned array
   const void *const *Addresses(size_t* count);
+
   // Prints a backtrace to stderr
   void PrintBacktrace();
 

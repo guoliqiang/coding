@@ -22,11 +22,6 @@ set(LIB_SRC mutex.cc
             dynamic_annotations.c
             at_exit.cc
             atomicops_internals_x86_gcc.cc
-            lazy_instance.cc
-            platform_thread_posix.cc
-            thread_local_posix.cc
-            thread_restrictions.cc
-
 )
 add_library(libbase ${LIB_SRC})
 set_target_properties(libbase

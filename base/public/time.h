@@ -19,8 +19,8 @@
 // These classes are represented as only a 64-bit value, so they can be
 // efficiently passed by value.
 
-#ifndef BASE_TIME_H_
-#define BASE_TIME_H_
+#ifndef BASE_PUBLIC_TIME_H_
+#define BASE_PUBLIC_TIME_H_
 
 #include <time.h>
 #include <sys/time.h>
@@ -30,19 +30,26 @@
 
 namespace base {
 
+// see http://baike.baidu.com/view/2345439.htm
+//     http://baike.baidu.com/view/152037.htm
+//     http://baike.baidu.com/view/251176.htm
+//     tv_usec is microsecond
+// millisecond
 inline int64 GetTimeInMs() {
   struct timeval now;
   gettimeofday(&now, NULL);
   return static_cast<int64>(now.tv_sec * 1000 + now.tv_usec / 1000);
 }
 
+// microsecond
 inline int64 GetTimeInUsec() {
   struct timeval now;
   gettimeofday(&now, NULL);
   return static_cast<int64>(now.tv_sec * 1000 * 1000 + now.tv_usec);
 }
 
-/// Copy tv to ts adding offset in milliseconds.
+// Copy tv to ts adding offset in milliseconds.
+// see http://hi.baidu.com/jiangyangw3r/item/dfc72fdcfcce81ee3dc2cb9c
 inline void timeval2timespec(timeval *const tv,
                              timespec *ts,
                              int64 offset_milli) {
@@ -66,7 +73,7 @@ class TimeTicks;
 // This unit test does a lot of manual time manipulation.
 class PageLoadTrackerUnitTest;
 
-// TimeDelta ------------------------------------------------------------------
+// TimeDelta
 
 class TimeDelta {
  public:
@@ -132,45 +139,45 @@ class TimeDelta {
 
   // Computations with ints, note that we only allow multiplicative operations
   // with ints, and additive operations with other deltas.
-  TimeDelta operator*(int64 a) const {
+  TimeDelta operator * (int64 a) const {
     return TimeDelta(delta_ * a);
   }
-  TimeDelta operator/(int64 a) const {
+  TimeDelta operator / (int64 a) const {
     return TimeDelta(delta_ / a);
   }
-  TimeDelta& operator*=(int64 a) {
+  TimeDelta& operator *= (int64 a) {
     delta_ *= a;
     return *this;
   }
-  TimeDelta& operator/=(int64 a) {
+  TimeDelta& operator /= (int64 a) {
     delta_ /= a;
     return *this;
   }
-  int64 operator/(TimeDelta a) const {
+  int64 operator / (TimeDelta a) const {
     return delta_ / a.delta_;
   }
 
   // Defined below because it depends on the definition of the other classes.
-  Time operator+(Time t) const;
-  TimeTicks operator+(TimeTicks t) const;
+  Time operator + (Time t) const;
+  TimeTicks operator + (TimeTicks t) const;
 
   // Comparison operators.
-  bool operator==(TimeDelta other) const {
+  bool operator == (TimeDelta other) const {
     return delta_ == other.delta_;
   }
-  bool operator!=(TimeDelta other) const {
+  bool operator != (TimeDelta other) const {
     return delta_ != other.delta_;
   }
-  bool operator<(TimeDelta other) const {
+  bool operator < (TimeDelta other) const {
     return delta_ < other.delta_;
   }
-  bool operator<=(TimeDelta other) const {
+  bool operator <= (TimeDelta other) const {
     return delta_ <= other.delta_;
   }
-  bool operator>(TimeDelta other) const {
+  bool operator > (TimeDelta other) const {
     return delta_ > other.delta_;
   }
-  bool operator>=(TimeDelta other) const {
+  bool operator >= (TimeDelta other) const {
     return delta_ >= other.delta_;
   }
 
@@ -182,18 +189,17 @@ class TimeDelta {
   // Constructs a delta given the duration in microseconds. This is private
   // to avoid confusion by callers with an integer constructor. Use
   // FromSeconds, FromMilliseconds, etc. instead.
-  explicit TimeDelta(int64 delta_us) : delta_(delta_us) {
-  }
+  explicit TimeDelta(int64 delta_us) : delta_(delta_us) {}
 
   // Delta in microseconds.
   int64 delta_;
 };
 
-inline TimeDelta operator*(int64 a, TimeDelta td) {
+inline TimeDelta operator * (int64 a, TimeDelta td) {
   return TimeDelta(a * td.delta_);
 }
 
-// Time -----------------------------------------------------------------------
+// Time
 
 // Represents a wall clock time.
 class Time {
@@ -420,7 +426,7 @@ inline TimeDelta TimeDelta::FromMicroseconds(int64 us) {
   return TimeDelta(us);
 }
 
-// TimeTicks ------------------------------------------------------------------
+// TimeTicks
 
 class TimeTicks {
  public:
@@ -502,8 +508,7 @@ class TimeTicks {
 
   // Please use Now() to create a new object. This is for internal use
   // and testing. Ticks is in microseconds.
-  explicit TimeTicks(int64 ticks) : ticks_(ticks) {
-  }
+  explicit TimeTicks(int64 ticks) : ticks_(ticks) {}
 
   // Tick count in microseconds.
   int64 ticks_;
@@ -515,4 +520,4 @@ inline TimeTicks TimeDelta::operator+(TimeTicks t) const {
 
 }  // namespace base
 
-#endif  // BASE_TIME_H_
+#endif  // BASE_PUBLIC_TIME_H_

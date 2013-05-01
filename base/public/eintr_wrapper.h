@@ -5,6 +5,8 @@
 // This provides a wrapper around system calls which may be interrupted by a
 // signal and return EINTR. See man 7 signal.
 
+// see http://baike.baidu.com/view/3507223.htm
+
 #ifndef BASE_EINTR_WRAPPER_H_
 #define BASE_EINTR_WRAPPER_H_
 

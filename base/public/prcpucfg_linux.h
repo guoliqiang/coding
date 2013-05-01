@@ -35,8 +35,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#ifndef nspr_cpucfg___
-#define nspr_cpucfg___
+#ifndef BASE_PUBLIC_PRCPUCFG_LINUX_H
+#define BASE_PUBLIC_PRCPUCFG_LINUX_H
 
 #ifndef XP_UNIX
 #define XP_UNIX
@@ -704,4 +704,4 @@
 
 #endif /* NO_NSPR_10_SUPPORT */
 
-#endif /* nspr_cpucfg___ */
+#endif   // BASE_PUBLIC_PRCPUCFG_LINUX_H

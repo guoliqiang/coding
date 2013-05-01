@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <string.h>
 
+// see http://www.caichong.net/LINUX/other/1309708800/101225_4.html
+
 // GCC will complain about the unused second wrap function unless we tell it
 // that we meant for them to be potentially unused, which is exactly what this
 // attribute is for.

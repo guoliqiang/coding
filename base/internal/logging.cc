@@ -26,18 +26,21 @@ typedef pthread_mutex_t* MutexHandle;
 #include "../public/safe_strerror_posix.h"
 #include "../public/string_piece.h"
 #include "../public/string_util.h"
-// #include "base/utf_string_conversions.h"
+#include "../public/utf_string_conversions.h"
 
 DEFINE_int32(v, -1, "LOG verbose level.");
 DEFINE_bool(enable_addition_info_business_id, true,
-    "whether enable add business id in log");
+            "whether enable add business id in log");
 
 namespace logging {
 
 bool g_enable_dcheck = false;
 
-const char* const log_severity_names[LOG_NUM_SEVERITIES] = {
-  "INFO", "WARNING", "ERROR", "ERROR_REPORT", "FATAL" };
+const char* const log_severity_names[LOG_NUM_SEVERITIES] = {"INFO",
+                                                            "WARNING",
+                                                            "ERROR",
+                                                            "ERROR_REPORT",
+                                                            "FATAL" };
 
 int min_log_level = 0;
 LogLockingState lock_log_file = LOCK_LOG_FILE;
@@ -74,9 +77,11 @@ bool log_tickcount  = false;
 // An assert handler override specified by the client to be called instead of
 // the debug message dialog and process termination.
 LogAssertHandlerFunction log_assert_handler = NULL;
+
 // An report handler override specified by the client to be called instead of
 // the debug message dialog.
 LogReportHandlerFunction log_report_handler = NULL;
+
 // A log message handler that gets notified of every log message we process.
 LogMessageHandlerFunction log_message_handler = NULL;
 
@@ -86,31 +91,39 @@ static base::Mutex* log_lock = NULL;
 
 // When we don't use a lock, we are using a global mutex. We need to do this
 // because LockFileEx is not thread safe.
+// see http://blog.163.com/coffee_666666/blog/static/184691114201182125470/
 pthread_mutex_t log_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 // Helper functions to wrap platform differences.
-
+// see http://baike.baidu.com/view/1745430.htm
+// @return : int32 - the process's id
 int32 CurrentProcessId() {
   return getpid();
 }
 
+// see http://my.huhoo.net/archives/2009/10/linuxid.html
+// @return : int32 - threadid
 int32 CurrentThreadId() {
   return syscall(__NR_gettid);
 }
 
+// get now absolute microsecond
+// @return : uint64 - microsecond which can not be modified by OS clock
+// see http://blog.csdn.net/hmsiwtv/article/details/8138890
 uint64 TickCount() {
   struct timespec ts;
   clock_gettime(CLOCK_MONOTONIC, &ts);
-
   uint64 absolute_micro = static_cast<int64>(ts.tv_nsec) / 1000;
-
   return absolute_micro;
 }
 
+// close log file.
 void CloseFile(FileHandle log) {
   fclose(log);
 }
 
+// see http://baike.baidu.com/view/1081164.htm
+// delete log file.
 void DeleteFilePath(const PathString& log_name) {
   unlink(log_name.c_str());
 }
@@ -119,32 +132,30 @@ void DeleteFilePath(const PathString& log_name) {
 // and can be used for writing. Returns false if the file could not be
 // initialized. debug_file will be NULL in this case.
 bool InitializeLogFileHandle() {
-  if (log_file)
-    return true;
-
+  if (log_file) return true;
   if (!log_file_name) {
     // Nobody has called InitLogging to specify a debug log file, so here we
     // initialize the log file name to a default.
     // On other platforms we just use the current directory.
     log_file_name = new std::string("debug.log");
   }
-
   if (logging_destination == LOG_ONLY_TO_FILE ||
       logging_destination == LOG_TO_BOTH_FILE_AND_SYSTEM_DEBUG_LOG) {
     log_file = fopen(log_file_name->c_str(), "a");
-    if (log_file == NULL)
-      return false;
+    if (log_file == NULL) return false;
   }
-
   return true;
 }
 
+// TODO(guoliqiang)
 void InitLogMutex() {
   // statically initialized
 }
 
-void InitLogging(const PathChar* new_log_file, LoggingDestination logging_dest,
-                 LogLockingState lock_log, OldFileDeletionState delete_old) {
+void InitLogging(const PathChar* new_log_file,
+                 LoggingDestination logging_dest,
+                 LogLockingState lock_log,
+                 OldFileDeletionState delete_old) {
 #if defined(NDEBUG)
   g_enable_dcheck = false;
 #else
@@ -152,7 +163,6 @@ void InitLogging(const PathChar* new_log_file, LoggingDestination logging_dest,
 #endif
   // TODO(quj): fix it
   //      CommandLine::ForCurrentProcess()->HasSwitch(switches::kEnableDCHECK);
-
   if (log_file) {
     // calling InitLogging twice or after some log call has already opened the
     // default log file will re-initialize to the new options
@@ -165,14 +175,18 @@ void InitLogging(const PathChar* new_log_file, LoggingDestination logging_dest,
 
   // ignore file options if logging is disabled or only to system
   if (logging_destination == LOG_NONE ||
-      logging_destination == LOG_ONLY_TO_SYSTEM_DEBUG_LOG)
+      logging_destination == LOG_ONLY_TO_SYSTEM_DEBUG_LOG) {
     return;
+  }
 
-  if (!log_file_name)
+  if (!log_file_name) {
     log_file_name = new PathString();
+  }
   *log_file_name = new_log_file;
-  if (delete_old == DELETE_OLD_LOG_FILE)
+
+  if (delete_old == DELETE_OLD_LOG_FILE) {
     DeleteFilePath(*log_file_name);
+  }
 
   if (lock_log_file == LOCK_LOG_FILE) {
     InitLogMutex();
@@ -183,26 +197,30 @@ void InitLogging(const PathChar* new_log_file, LoggingDestination logging_dest,
   InitializeLogFileHandle();
 }
 
+//
 void SetMinLogLevel(int level) {
   min_log_level = level;
 }
 
+//
 int GetMinLogLevel() {
   return min_log_level;
 }
 
+//
 void SetLogFilterPrefix(const char* filter)  {
   if (log_filter_prefix) {
     delete log_filter_prefix;
     log_filter_prefix = NULL;
   }
-
-  if (filter)
-    log_filter_prefix = new std::string(filter);
+  if (filter) log_filter_prefix = new std::string(filter);
 }
 
-void SetLogItems(bool enable_process_id, bool enable_thread_id,
-                 bool enable_date, bool enable_timestamp,
+//
+void SetLogItems(bool enable_process_id,
+                 bool enable_thread_id,
+                 bool enable_date,
+                 bool enable_timestamp,
                  bool enable_tickcount) {
   log_process_id = enable_process_id;
   log_thread_id = enable_thread_id;
@@ -211,14 +229,17 @@ void SetLogItems(bool enable_process_id, bool enable_thread_id,
   log_tickcount = enable_tickcount;
 }
 
+//
 void SetLogAssertHandler(LogAssertHandlerFunction handler) {
   log_assert_handler = handler;
 }
 
+//
 void SetLogReportHandler(LogReportHandlerFunction handler) {
   log_report_handler = handler;
 }
 
+//
 void SetLogMessageHandler(LogMessageHandlerFunction handler) {
   log_message_handler = handler;
 }
@@ -227,18 +248,19 @@ void SetLogMessageHandler(LogMessageHandlerFunction handler) {
 // Displays a message box to the user with the error message in it.
 // Used for fatal messages, where we close the app simultaneously.
 void DisplayDebugMessageInDialog(const std::string& str) {
-  if (str.empty())
-    return;
+  if (str.empty()) return;
+  // TODO (guoliqiang)
 }
 
+//
 LogMessage::LogMessage(const char* file, int line, LogSeverity severity,
-                       int ctr)
-    : severity_(severity) {
+                       int ctr) : severity_(severity) {
   Init(file, line);
 }
 
-LogMessage::LogMessage(const char* file, int line, const CheckOpString& result)
-    : severity_(LOG_FATAL) {
+//
+LogMessage::LogMessage(const char* file, int line,
+                       const CheckOpString& result) : severity_(LOG_FATAL) {
   Init(file, line);
   stream_ << "Check failed: " << (*result.str_);
 }
@@ -263,17 +285,13 @@ LogMessage::LogMessage(const char* file, int line, LogSeverity severity)
 // writes the common header info to the stream
 void LogMessage::Init(const char* file, int line) {
   // log only the filename
+  // see http://baike.baidu.com/view/1756792.htm
   const char* last_slash = strrchr(file, '\\');
-  if (last_slash)
-    file = last_slash + 1;
-
-  // TODO(darin): It might be nice if the columns were fixed width.
+  if (last_slash) file = last_slash + 1;
 
   stream_ <<  '[';
-  if (log_process_id)
-    stream_ << CurrentProcessId() << ':';
-  if (log_thread_id)
-    stream_ << CurrentThreadId() << ':';
+  if (log_process_id) stream_ << CurrentProcessId() << ':';
+  if (log_thread_id) stream_ << CurrentThreadId() << ':';
   if (log_date || log_timestamp) {
     time_t t = time(NULL);
     struct tm local_time = {0};
@@ -283,8 +301,7 @@ void LogMessage::Init(const char* file, int line) {
       stream_ << std::setfill('0')
               << std::setw(2) << 1 + tm_time->tm_mon
               << std::setw(2) << tm_time->tm_mday;
-    if (log_date && log_timestamp)
-      stream_ << '/';
+    if (log_date && log_timestamp) stream_ << '/';
     if (log_timestamp)
       stream_ << std::setfill('0')
               << std::setw(2) << tm_time->tm_hour
@@ -292,10 +309,11 @@ void LogMessage::Init(const char* file, int line) {
               << std::setw(2) << tm_time->tm_sec
               << ':';
   }
-  if (log_tickcount)
+  if (log_tickcount) {
     stream_ << std::setfill('0') << std::setw(6) << TickCount() << ':';
-  stream_ << log_severity_names[severity_] << ":" << file <<
-             "(" << line << ")] ";
+  }
+  stream_ << log_severity_names[severity_] << ":" << file
+          << "(" << line << ")] ";
 
   if (FLAGS_enable_addition_info_business_id) {
     stream_ << *(LogAdditionInfo::GetInstance());
@@ -307,22 +325,25 @@ void LogMessage::Init(const char* file, int line) {
 LogMessage::~LogMessage() {
   // TODO(brettw) modify the macros so that nothing is executed when the log
   // level is too high.
-  if (severity_ < min_log_level)
-    return;
+  if (severity_ < min_log_level) return;
 
   if (severity_ == LOG_FATAL) {
     // Include a stack trace on a fatal.
     StackTrace trace;
-    stream_ << std::endl;  // Newline to separate from log message.
+    // Newline to separate from log message.
+    stream_ << std::endl;
     trace.OutputToStream(&stream_);
   }
   stream_ << std::endl;
   std::string str_newline(stream_.str());
 
   // Give any log message handler first dibs on the message.
-  if (log_message_handler && log_message_handler(severity_, str_newline))
+  if (log_message_handler &&
+      log_message_handler(severity_, str_newline)) {
     return;
+  }
 
+  // only output some log info
   if (log_filter_prefix && severity_ <= kMaxFilteredLogLevel &&
       str_newline.compare(message_start_, log_filter_prefix->size(),
                           log_filter_prefix->data()) != 0) {
@@ -362,7 +383,6 @@ LogMessage::~LogMessage() {
       // Ensure that the mutex is initialized in case the client app did not
       // call InitLogging. This is not thread safe. See below.
       InitLogMutex();
-
       pthread_mutex_lock(&log_mutex);
     } else {
       // use the lock
@@ -418,30 +438,32 @@ LogMessage::~LogMessage() {
   }
 }
 
+//
 SystemErrorCode GetLastSystemErrorCode() {
   return errno;
 }
 
+//
 ErrnoLogMessage::ErrnoLogMessage(const char* file,
                                  int line,
                                  LogSeverity severity,
                                  SystemErrorCode err)
-    : err_(err),
-      log_message_(file, line, severity) {
-}
+                  : err_(err),
+                    log_message_(file, line, severity) {}
 
+//
 ErrnoLogMessage::~ErrnoLogMessage() {
   stream() << ": " << safe_strerror(err_);
 }
 
+//
 void CloseLogFile() {
-  if (!log_file)
-    return;
-
+  if (!log_file) return;
   CloseFile(log_file);
   log_file = NULL;
 }
 
+//
 void RawLog(int level, const char* message) {
   if (level >= min_log_level) {
     size_t bytes_written = 0;
@@ -473,40 +495,44 @@ void RawLog(int level, const char* message) {
     DebugUtil::BreakDebugger();
 }
 
+//
 LogAdditionInfo* LogAdditionInfo::GetInstance() {
   static LogAdditionInfo *instance = new LogAdditionInfo;
   return instance;
 }
 
+//
 LogAdditionInfo::LogAdditionInfo() {
   pthread_key_create(&business_id_key_, NULL);
 }
 
+//
 LogAdditionInfo::~LogAdditionInfo() {
   pthread_key_delete(business_id_key_);
 }
 
+//
 std::ostream& operator<<(std::ostream &out, const LogAdditionInfo &info) {
   void *value = pthread_getspecific(info.business_id_key_);
   if (value) {
     out << "[bid:" << reinterpret_cast<uint64>(value) << "] ";
   }
-
   return out;
 }
 
+//
 void LogAdditionInfo::AddBusinessIDByThread(uint64 bid) {
   pthread_setspecific(business_id_key_, reinterpret_cast<void*>(bid));
 }
 
+//
 void LogAdditionInfo::RemoveBusinessIDByThread() {
   pthread_setspecific(business_id_key_, NULL);
 }
 
 }  // namespace logging
 
-/*
 std::ostream& operator<<(std::ostream& out, const wchar_t* wstr) {
   return out << WideToUTF8(std::wstring(wstr));
 }
-*/
+

@@ -14,6 +14,9 @@
 namespace base {
 
 // static
+// @param[in] : duration_ms - the milliseconds seted to sleep
+// brief: This fucntioon is used when your thread wants to sleep.
+//        The function sleep(n) provided by OS must sleep n seconds(not milliseconds).
 void MilliSleep(int duration_ms) {
   struct timespec sleep_time, remaining;
 
@@ -24,61 +27,67 @@ void MilliSleep(int duration_ms) {
   // Contains the portion of duration_ms < 1 sec.
   sleep_time.tv_nsec = duration_ms * 1000 * 1000;  // nanoseconds.
 
-  while (nanosleep(&sleep_time, &remaining) == -1 && errno == EINTR)
+  while (nanosleep(&sleep_time, &remaining) == -1 && errno == EINTR) {
     sleep_time = remaining;
+  }
 }
 
-// TimeDelta ------------------------------------------------------------------
-
+// TimeDelta
+// @return: days
 int TimeDelta::InDays() const {
   return static_cast<int>(delta_ / Time::kMicrosecondsPerDay);
 }
 
+// @return : hours
 int TimeDelta::InHours() const {
   return static_cast<int>(delta_ / Time::kMicrosecondsPerHour);
 }
 
+// @return : minutes
 int TimeDelta::InMinutes() const {
   return static_cast<int>(delta_ / Time::kMicrosecondsPerMinute);
 }
 
+// @return: seconds in double
 double TimeDelta::InSecondsF() const {
   return static_cast<double>(delta_) / Time::kMicrosecondsPerSecond;
 }
 
+// @return : seconds in int64
 int64 TimeDelta::InSeconds() const {
   return delta_ / Time::kMicrosecondsPerSecond;
 }
 
+// @retrun: milliseconds in double
 double TimeDelta::InMillisecondsF() const {
   return static_cast<double>(delta_) / Time::kMicrosecondsPerMillisecond;
 }
 
+// @return: milliseconds in int64
 int64 TimeDelta::InMilliseconds() const {
   return delta_ / Time::kMicrosecondsPerMillisecond;
 }
 
+// @return: round up milliseconds in int64
 int64 TimeDelta::InMillisecondsRoundedUp() const {
   return (delta_ + Time::kMicrosecondsPerMillisecond - 1) /
-      Time::kMicrosecondsPerMillisecond;
+         Time::kMicrosecondsPerMillisecond;
 }
 
+// @return delta
 int64 TimeDelta::InMicroseconds() const {
   return delta_;
 }
 
-// Time -----------------------------------------------------------------------
-
+// Time
 // static
 Time Time::FromTimeT(time_t tt) {
-  if (tt == 0)
-    return Time();  // Preserve 0 so we can tell it doesn't exist.
+  if (tt == 0) return Time();  // Preserve 0 so we can tell it doesn't exist.
   return Time((tt * kMicrosecondsPerSecond) + kTimeTToMicrosecondsOffset);
 }
 
 time_t Time::ToTimeT() const {
-  if (us_ == 0)
-    return 0;  // Preserve 0 so we can tell it doesn't exist.
+  if (us_ == 0) return 0;  // Preserve 0 so we can tell it doesn't exist.
   return (us_ - kTimeTToMicrosecondsOffset) / kMicrosecondsPerSecond;
 }
 
@@ -86,12 +95,11 @@ time_t Time::ToTimeT() const {
 Time Time::FromDoubleT(double dt) {
   return Time(static_cast<int64>((dt *
                                   static_cast<double>(kMicrosecondsPerSecond)) +
-                                 kTimeTToMicrosecondsOffset));
+                                  kTimeTToMicrosecondsOffset));
 }
 
 double Time::ToDoubleT() const {
-  if (us_ == 0)
-    return 0;  // Preserve 0 so we can tell it doesn't exist.
+  if (us_ == 0) return 0;  // Preserve 0 so we can tell it doesn't exist.
   return (static_cast<double>(us_ - kTimeTToMicrosecondsOffset) /
           static_cast<double>(kMicrosecondsPerSecond));
 }
@@ -230,7 +238,7 @@ Time Time::FromExploded(bool is_local, const Exploded& exploded) {
 
   // Adjust from Unix (1970) to Windows (1601) epoch.
   return Time((milliseconds * kMicrosecondsPerMillisecond) +
-      kWindowsEpochDeltaMicroseconds);
+              kWindowsEpochDeltaMicroseconds);
 }
 
 void Time::Explode(bool is_local, Exploded* exploded) const {
@@ -238,10 +246,12 @@ void Time::Explode(bool is_local, Exploded* exploded) const {
   // millisecond resolution, so begin by being lossy.  Adjust from Windows
   // epoch (1601) to Unix epoch (1970);
   int64 milliseconds = (us_ - kWindowsEpochDeltaMicroseconds) /
-      kMicrosecondsPerMillisecond;
+                        kMicrosecondsPerMillisecond;
   time_t seconds = milliseconds / kMillisecondsPerSecond;
 
   struct tm timestruct;
+  // see http://blog.csdn.net/csuwzc/article/details/6912104
+  // local = UTC + 8h
   if (is_local)
     localtime_r(&seconds, &timestruct);
   else
@@ -261,6 +271,7 @@ void Time::Explode(bool is_local, Exploded* exploded) const {
 TimeTicks TimeTicks::Now() {
   uint64_t absolute_micro;
 
+  // see http://hi.baidu.com/shouzhewei/item/7178f61e502f3efc87ad4e82
   struct timespec ts;
   if (clock_gettime(CLOCK_MONOTONIC, &ts) != 0) {
     NOTREACHED() << "clock_gettime(CLOCK_MONOTONIC) failed.";
@@ -291,7 +302,7 @@ struct timespec TimeDelta::ToTimeSpec() const {
        microseconds * Time::kNanosecondsPerMicrosecond};
   return result;
 }
-
+//
 struct timeval Time::ToTimeVal() const {
   struct timeval result;
   int64 us = us_ - kTimeTToMicrosecondsOffset;

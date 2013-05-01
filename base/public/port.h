@@ -1,3 +1,6 @@
+// Copyright 2010 Yunrang Inc. All Rights Reserved.
+// Author: dahaili@yunrang.com (Dahai Li)
+//
 // Copyright (c) 2006-2008 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,10 +12,17 @@
 
 #if !defined(__x86_64__)
 #error "the code should be only build on 64bit OS!"
+
+#define ARCH_CPU_X86_FAMILY 1
+#define ARCH_CPU_X86_64 1
+#define ARCH_CPU_64_BITS 1
+#define ARCH_CPU_LITTLE_ENDIAN 1
+
 #endif
 
 #if !defined(__GNUC__)
 #error "the code should be only build on Gcc compiler."
+#define COMPILER_GCC 1
 #endif
 
 #if defined(__WCHAR_MAX__) && \
@@ -32,8 +42,6 @@
 // |dots_param| is the one-based index of the "..." parameter.
 // For v*printf functions (which take a va_list), pass 0 for dots_param.
 // (This is undocumented but matches what the system C headers do.)
-// used in sting-util.cc/h
-// see http://baike.baidu.com/view/4853242.htm
 #define PRINTF_FORMAT(format_param, dots_param) \
     __attribute__((format(printf, format_param, dots_param)))
 
@@ -74,4 +82,7 @@
 // StringUtil.VariableArgsFunc unit test tests this capability.
 #define GG_VA_COPY(a, b) (va_copy(a, b))
 
+// used in aligen memory
+#define ALIGNOF(type) __alignof__(type)
+#define ALIGNAS(byte_alignment) __attribute__((aligned(byte_alignment)))
 #endif  // BASE_PORT_H_

@@ -49,8 +49,8 @@
  *---------------------------------------------------------------------------
  */
 
-#ifndef BASE_PRTIME_H__
-#define BASE_PRTIME_H__
+#ifndef BASE_PUBLIC_PRTIME_H__
+#define BASE_PUBLIC_PRTIME_H__
 
 #include "./logging.h"
 #include "./prtypes.h"
@@ -89,7 +89,8 @@ typedef PRInt64 PRTime;
 
 /*
  * Time zone and daylight saving time corrections applied to GMT to
- * obtain the local time of some geographic location
+ * obtain the local time of some geographic location.
+ * see http://www.douban.com/note/147740972/
  */
 
 typedef struct PRTimeParameters {
@@ -121,23 +122,23 @@ typedef struct PRTimeParameters {
  */
 
 typedef struct PRExplodedTime {
-    PRInt32 tm_usec;		    /* microseconds past tm_sec (0-99999)  */
-    PRInt32 tm_sec;             /* seconds past tm_min (0-61, accomodating
-                                   up to two leap seconds) */	
-    PRInt32 tm_min;             /* minutes past tm_hour (0-59) */
-    PRInt32 tm_hour;            /* hours past tm_day (0-23) */
-    PRInt32 tm_mday;            /* days past tm_mon (1-31, note that it
-				                starts from 1) */
-    PRInt32 tm_month;           /* months past tm_year (0-11, Jan = 0) */
-    PRInt16 tm_year;            /* absolute year, AD (note that we do not
-				                count from 1900) */
+    PRInt32 tm_usec;		          /* microseconds past tm_sec (0-99999)  */
+    PRInt32 tm_sec;               /* seconds past tm_min (0-61, accomodating
+                                     up to two leap seconds) */
+    PRInt32 tm_min;               /* minutes past tm_hour (0-59) */
+    PRInt32 tm_hour;              /* hours past tm_day (0-23) */
+    PRInt32 tm_mday;              /* days past tm_mon (1-31, note that it
+				                             starts from 1) */
+    PRInt32 tm_month;             /* months past tm_year (0-11, Jan = 0) */
+    PRInt16 tm_year;              /* absolute year, AD (note that we do not
+				                             count from 1900) */
 
-    PRInt8 tm_wday;		        /* calculated day of the week
-				                (0-6, Sun = 0) */
-    PRInt16 tm_yday;            /* calculated day of the year
-				                (0-365, Jan 1 = 0) */
+    PRInt8 tm_wday;		            /* calculated day of the week
+				                             (0-6, Sun = 0) */
+    PRInt16 tm_yday;              /* calculated day of the year
+				                             (0-365, Jan 1 = 0) */
 
-    PRTimeParameters tm_params;  /* time parameters used by conversion */
+    PRTimeParameters tm_params;   /* time parameters used by conversion */
 } PRExplodedTime;
 
 /*
@@ -169,8 +170,7 @@ typedef PRTimeParameters (PR_CALLBACK *PRTimeParamFn)(const PRExplodedTime *gmt)
 /****************************** FUNCTIONS *****************************/
 /**********************************************************************/
 
-NSPR_API(PRTime)
-PR_ImplodeTime(const PRExplodedTime *exploded);
+NSPR_API(PRTime) PR_ImplodeTime(const PRExplodedTime *exploded);
 
 /*
  * Adjust exploded time to normalize field overflows after manipulation.
@@ -184,8 +184,8 @@ PR_ImplodeTime(const PRExplodedTime *exploded);
  *     should treat them as "read-only".
  */
 
-NSPR_API(void) PR_NormalizeTime(
-    PRExplodedTime *exploded, PRTimeParamFn params);
+NSPR_API(void) PR_NormalizeTime(PRExplodedTime *exploded,
+                                PRTimeParamFn params);
 
 /**********************************************************************/
 /*********************** TIME PARAMETER FUNCTIONS *********************/
@@ -225,9 +225,8 @@ NSPR_API(PRTimeParameters) PR_GMTParameters(const PRExplodedTime *gmt);
  * the time string which you are parsing.
  */
 
-NSPR_API(PRStatus) PR_ParseTimeString (
-	const char *string,
-	PRBool default_to_gmt,
-	PRTime *result);
+NSPR_API(PRStatus) PR_ParseTimeString (const char *string,
+	                                     PRBool default_to_gmt,
+	                                     PRTime *result);
 
-#endif  // BASE_PRTIME_H__
+#endif  // BASE_PUBLIC_PRTIME_H__
