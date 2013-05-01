@@ -289,21 +289,6 @@ logging.s:
 .PHONY : logging.s
 
 # target to build an object file
-mutex.o:
-	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/mutex.o
-.PHONY : mutex.o
-
-# target to preprocess a source file
-mutex.i:
-	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/mutex.i
-.PHONY : mutex.i
-
-# target to generate assembly for a file
-mutex.s:
-	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/mutex.s
-.PHONY : mutex.s
-
-# target to build an object file
 platform_thread_posix.o:
 	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/platform_thread_posix.o
 .PHONY : platform_thread_posix.o
@@ -407,6 +392,21 @@ symbolize.i:
 symbolize.s:
 	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/symbolize.s
 .PHONY : symbolize.s
+
+# target to build an object file
+thread.o:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/thread.o
+.PHONY : thread.o
+
+# target to preprocess a source file
+thread.i:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/thread.i
+.PHONY : thread.i
+
+# target to generate assembly for a file
+thread.s:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/thread.s
+.PHONY : thread.s
 
 # target to build an object file
 thread_local_posix.o:
@@ -543,9 +543,6 @@ help:
 	@echo "... logging.o"
 	@echo "... logging.i"
 	@echo "... logging.s"
-	@echo "... mutex.o"
-	@echo "... mutex.i"
-	@echo "... mutex.s"
 	@echo "... platform_thread_posix.o"
 	@echo "... platform_thread_posix.i"
 	@echo "... platform_thread_posix.s"
@@ -567,6 +564,9 @@ help:
 	@echo "... symbolize.o"
 	@echo "... symbolize.i"
 	@echo "... symbolize.s"
+	@echo "... thread.o"
+	@echo "... thread.i"
+	@echo "... thread.s"
 	@echo "... thread_local_posix.o"
 	@echo "... thread_local_posix.i"
 	@echo "... thread_local_posix.s"

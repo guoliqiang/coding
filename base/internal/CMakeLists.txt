@@ -1,5 +1,5 @@
 project(base)
-set(LIB_SRC mutex.cc
+set(LIB_SRC
             string_util.cc
             flags.cc
             string_piece.cc
@@ -26,6 +26,7 @@ set(LIB_SRC mutex.cc
             platform_thread_posix.cc
             thread_local_posix.cc
             thread_restrictions.cc
+            thread.cc
 
 )
 add_library(libbase ${LIB_SRC})
