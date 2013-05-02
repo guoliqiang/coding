@@ -424,6 +424,21 @@ thread_local_posix.s:
 .PHONY : thread_local_posix.s
 
 # target to build an object file
+thread_pool.o:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/thread_pool.o
+.PHONY : thread_pool.o
+
+# target to preprocess a source file
+thread_pool.i:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/thread_pool.i
+.PHONY : thread_pool.i
+
+# target to generate assembly for a file
+thread_pool.s:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/thread_pool.s
+.PHONY : thread_pool.s
+
+# target to build an object file
 thread_restrictions.o:
 	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/thread_restrictions.o
 .PHONY : thread_restrictions.o
@@ -570,6 +585,9 @@ help:
 	@echo "... thread_local_posix.o"
 	@echo "... thread_local_posix.i"
 	@echo "... thread_local_posix.s"
+	@echo "... thread_pool.o"
+	@echo "... thread_pool.i"
+	@echo "... thread_pool.s"
 	@echo "... thread_restrictions.o"
 	@echo "... thread_restrictions.i"
 	@echo "... thread_restrictions.s"

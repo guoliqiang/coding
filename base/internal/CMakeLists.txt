@@ -27,6 +27,7 @@ set(LIB_SRC
             thread_local_posix.cc
             thread_restrictions.cc
             thread.cc
+            thread_pool.cc
 
 )
 add_library(libbase ${LIB_SRC})
