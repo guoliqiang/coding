@@ -46,7 +46,7 @@ void IctTagger::ImportUserWords(const set<string>& words) {
   set<string>::const_iterator it = words.begin();
   for (; it != words.end(); ++it) {
     string word;
-    base::TrimString(*it, " \n\t\v\f\r;", &word);
+    TrimString(*it, " \n\t\v\f\r;", &word);
     if (word.size() > 0) {
       words_str += (word + ";");
     }
@@ -60,7 +60,7 @@ void IctTagger::ImportUserWords(const vector<string>& words) {
   vector<string>::const_iterator it = words.begin();
   for (; it != words.end(); ++it) {
     string word;
-    base::TrimString(*it, " \n\t\v\f\r;", &word);
+    TrimString(*it, " \n\t\v\f\r;", &word);
     if (word.size() > 0) {
       words_str += (word + ";");
     }
@@ -76,7 +76,7 @@ void IctTagger::ImportUserDictFiles(const vector<string>& dicts) {
     ifstream inf((*it).c_str());
     string line;
     while (getline(inf, line)) {
-      base::TrimString(line, " \n\t\v\f\r;", &line);
+      TrimString(line, " \n\t\v\f\r;", &line);
       if (line.size() > 0) {
         words += (line + ";");
       }
