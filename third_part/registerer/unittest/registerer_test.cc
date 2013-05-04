@@ -2,9 +2,9 @@
 // Author: dahaili@yunrang.com (Dahai Li)
 
 #include "../public/registerer.h"
-using namespace std;
-using namespace base;
+#include "../../testing/gtest/include/gtest/gtest.h"
 
+namespace base {
 class Base {
  public:
   virtual int Foo() { return 0; }
@@ -12,8 +12,10 @@ class Base {
 };
 REGISTER_REGISTERER(Base);
 #define REGISTER_BASE(name) REGISTER_CLASS(Base, name)
+}  // namespace base
 
-class Sub1 : public Base {
+namespace sub1 {
+class Sub1 : public base::Base {
  public:
   Sub1() {
     LOG(INFO) << "Sub1";
@@ -22,8 +24,10 @@ class Sub1 : public Base {
   virtual int Foo() { return 1; }
 };
 REGISTER_BASE(Sub1);
+}  // namespace sub1
 
-class Sub2 : public Base {
+namespace sub2 {
+class Sub2 : public base::Base {
  public:
   Sub2() {
     LOG(INFO) << "Sub2";
@@ -32,41 +36,43 @@ class Sub2 : public Base {
   virtual int Foo() { return 2; }
 };
 REGISTER_BASE(Sub2);
+}  // namespace sub2
 
+namespace registerer {
 
-void TEST0() {
+TEST(RegistererTest, GetInstanceByName) {
   LOG(INFO) << "begin test";
-  Base *sub = BaseRegisterer::GetInstanceByName("Sub1");
-  CHECK(sub != NULL);
-  CHECK_EQ(1, sub->Foo());
+  base::Base *sub = base::BaseRegisterer::GetInstanceByName("Sub1");
+  EXPECT_TRUE(sub != NULL);
+  EXPECT_EQ(1, sub->Foo());
   delete sub;
-  sub = BaseRegisterer::GetInstanceByName("Sub2");
-  CHECK(sub != NULL);
-  CHECK_EQ(2, sub->Foo());
+  sub = base::BaseRegisterer::GetInstanceByName("Sub2");
+  EXPECT_TRUE(sub != NULL);
+  EXPECT_EQ(2, sub->Foo());
   delete sub;
-  CHECK_EQ(static_cast<Base*>(NULL),
-           BaseRegisterer::GetInstanceByName("Sub9"));
-  CHECK_EQ(static_cast<Base*>(NULL),
-           BaseRegisterer::GetInstanceByName("Base"));
+  EXPECT_EQ(static_cast<base::Base*>(NULL),
+            base::BaseRegisterer::GetInstanceByName("Sub9"));
+  EXPECT_EQ(static_cast<base::Base*>(NULL),
+            base::BaseRegisterer::GetInstanceByName("Base"));
 }
 
-void TEST1() {
-  Base* sub = BaseRegisterer::GetSingletonInstanceByName("Sub1");
-  CHECK(sub != NULL);
-  CHECK_EQ(1, sub->Foo());
+TEST(RegistererTest, GetSingltonInstanceByName) {
+  base::Base* sub = base::BaseRegisterer::GetSingletonInstanceByName("Sub1");
+  EXPECT_TRUE(sub != NULL);
+  EXPECT_EQ(1, sub->Foo());
 
-  Base* sub1 = BaseRegisterer::GetSingletonInstanceByName("Sub1");
-  CHECK(sub1 != NULL);
-  CHECK_EQ(1, sub1->Foo());
-  CHECK_EQ(sub, sub1);
+  base::Base* sub1 = base::BaseRegisterer::GetSingletonInstanceByName("Sub1");
+  EXPECT_TRUE(sub1 != NULL);
+  EXPECT_EQ(1, sub1->Foo());
+  EXPECT_EQ(sub, sub1);
 
-  sub = BaseRegisterer::GetSingletonInstanceByName("Sub2");
-  CHECK_EQ(2, sub->Foo());
+  sub = base::BaseRegisterer::GetSingletonInstanceByName("Sub2");
+  EXPECT_EQ(2, sub->Foo());
 
-  CHECK_EQ(static_cast<Base*>(NULL),
-            BaseRegisterer::GetSingletonInstanceByName("Sub9"));
-  CHECK_EQ(static_cast<Base*>(NULL),
-            BaseRegisterer::GetSingletonInstanceByName("Base"));
+  EXPECT_EQ(static_cast<base::Base*>(NULL),
+            base::BaseRegisterer::GetSingletonInstanceByName("Sub9"));
+  EXPECT_EQ(static_cast<base::Base*>(NULL),
+            base::BaseRegisterer::GetSingletonInstanceByName("Base"));
 }
 
 class Base2 {
@@ -83,7 +89,7 @@ class Sub3 : public Base2 {
 };
 REGISTER_BASE2(Sub3);
 
-void TEST2() {
+TEST(RegisterTest, GetUniqInstance) {
   Base2 *base = Base2Registerer::GetUniqInstance();
   CHECK(base != NULL);
   delete base;
@@ -110,14 +116,8 @@ class Sub5 : public Base3 {
 REGISTER_BASE3(Sub5);
 
 // death test
-void TEST3() {
-  Base3Registerer::GetUniqInstance();
+TEST(RegisterTest, GetUniqInstanceDeath) {
+  EXPECT_DEATH(Base3Registerer::GetUniqInstance(), "");
 }
 
-int main(int argc, char** argv) {
-  AtExitManager  exit_manager;
-  TEST1();
-  TEST2();
-  TEST3();
-  return 0;
-}
+}  // namespace registerer
