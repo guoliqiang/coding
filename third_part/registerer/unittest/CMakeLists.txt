@@ -1,0 +1,6 @@
+set(SRC registerer_test.cc)
+link_directories(../lib)
+link_directories(../../../base/lib)
+add_executable(reg_unit ${SRC})
+target_link_libraries(reg_unit registerer base)
+SET(CMAKE_EXE_LINKER_FLAGS "-lpthread -lrt")

@@ -1,0 +1,5 @@
+project(registerer)
+link_directories(../../../base/lib)
+set(REG_SRC registerer.cc)
+add_library(libregisterer ${REG_SRC})
+set_target_properties(libregisterer PROPERTIES OUTPUT_NAME "registerer")
