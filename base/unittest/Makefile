@@ -96,6 +96,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named counter_unittest
+
+# Build rule for target.
+counter_unittest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 counter_unittest
+.PHONY : counter_unittest
+
+# fast build rule for target.
+counter_unittest/fast:
+	$(MAKE) -f CMakeFiles/counter_unittest.dir/build.make CMakeFiles/counter_unittest.dir/build
+.PHONY : counter_unittest/fast
+
+#=============================================================================
 # Target rules for targets named debug_string_unittest
 
 # Build rule for target.
@@ -120,6 +133,21 @@ lazy_instace_unittest: cmake_check_build_system
 lazy_instace_unittest/fast:
 	$(MAKE) -f CMakeFiles/lazy_instace_unittest.dir/build.make CMakeFiles/lazy_instace_unittest.dir/build
 .PHONY : lazy_instace_unittest/fast
+
+# target to build an object file
+counter_unittest.o:
+	$(MAKE) -f CMakeFiles/counter_unittest.dir/build.make CMakeFiles/counter_unittest.dir/counter_unittest.o
+.PHONY : counter_unittest.o
+
+# target to preprocess a source file
+counter_unittest.i:
+	$(MAKE) -f CMakeFiles/counter_unittest.dir/build.make CMakeFiles/counter_unittest.dir/counter_unittest.i
+.PHONY : counter_unittest.i
+
+# target to generate assembly for a file
+counter_unittest.s:
+	$(MAKE) -f CMakeFiles/counter_unittest.dir/build.make CMakeFiles/counter_unittest.dir/counter_unittest.s
+.PHONY : counter_unittest.s
 
 # target to build an object file
 debug_util_unittest.o:
@@ -157,10 +185,14 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... counter_unittest"
 	@echo "... debug_string_unittest"
 	@echo "... edit_cache"
 	@echo "... lazy_instace_unittest"
 	@echo "... rebuild_cache"
+	@echo "... counter_unittest.o"
+	@echo "... counter_unittest.i"
+	@echo "... counter_unittest.s"
 	@echo "... debug_util_unittest.o"
 	@echo "... debug_util_unittest.i"
 	@echo "... debug_util_unittest.s"

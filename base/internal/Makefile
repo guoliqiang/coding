@@ -139,6 +139,36 @@ atomicops_internals_x86_gcc.s:
 .PHONY : atomicops_internals_x86_gcc.s
 
 # target to build an object file
+blocking_closure.o:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/blocking_closure.o
+.PHONY : blocking_closure.o
+
+# target to preprocess a source file
+blocking_closure.i:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/blocking_closure.i
+.PHONY : blocking_closure.i
+
+# target to generate assembly for a file
+blocking_closure.s:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/blocking_closure.s
+.PHONY : blocking_closure.s
+
+# target to build an object file
+counter.o:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/counter.o
+.PHONY : counter.o
+
+# target to preprocess a source file
+counter.i:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/counter.i
+.PHONY : counter.i
+
+# target to generate assembly for a file
+counter.s:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/counter.s
+.PHONY : counter.s
+
+# target to build an object file
 debug_util.o:
 	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/debug_util.o
 .PHONY : debug_util.o
@@ -317,6 +347,21 @@ logging.i:
 logging.s:
 	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/logging.s
 .PHONY : logging.s
+
+# target to build an object file
+net.o:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/net.o
+.PHONY : net.o
+
+# target to preprocess a source file
+net.i:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/net.i
+.PHONY : net.i
+
+# target to generate assembly for a file
+net.s:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/net.s
+.PHONY : net.s
 
 # target to build an object file
 platform_thread_posix.o:
@@ -558,6 +603,12 @@ help:
 	@echo "... atomicops_internals_x86_gcc.o"
 	@echo "... atomicops_internals_x86_gcc.i"
 	@echo "... atomicops_internals_x86_gcc.s"
+	@echo "... blocking_closure.o"
+	@echo "... blocking_closure.i"
+	@echo "... blocking_closure.s"
+	@echo "... counter.o"
+	@echo "... counter.i"
+	@echo "... counter.s"
 	@echo "... debug_util.o"
 	@echo "... debug_util.i"
 	@echo "... debug_util.s"
@@ -594,6 +645,9 @@ help:
 	@echo "... logging.o"
 	@echo "... logging.i"
 	@echo "... logging.s"
+	@echo "... net.o"
+	@echo "... net.i"
+	@echo "... net.s"
 	@echo "... platform_thread_posix.o"
 	@echo "... platform_thread_posix.i"
 	@echo "... platform_thread_posix.s"

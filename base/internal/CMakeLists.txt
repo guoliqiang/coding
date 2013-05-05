@@ -30,7 +30,9 @@ set(LIB_SRC
             thread_pool.cc
             fixed_size_priority_queue.cc
             hash.cc
-
+            blocking_closure.cc
+            counter.cc
+            net.cc
 )
 add_library(libbase ${LIB_SRC})
 set_target_properties(libbase
