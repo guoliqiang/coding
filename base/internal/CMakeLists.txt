@@ -28,6 +28,8 @@ set(LIB_SRC
             thread_restrictions.cc
             thread.cc
             thread_pool.cc
+            fixed_size_priority_queue.cc
+            hash.cc
 
 )
 add_library(libbase ${LIB_SRC})

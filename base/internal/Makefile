@@ -214,6 +214,21 @@ env.s:
 .PHONY : env.s
 
 # target to build an object file
+fixed_size_priority_queue.o:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/fixed_size_priority_queue.o
+.PHONY : fixed_size_priority_queue.o
+
+# target to preprocess a source file
+fixed_size_priority_queue.i:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/fixed_size_priority_queue.i
+.PHONY : fixed_size_priority_queue.i
+
+# target to generate assembly for a file
+fixed_size_priority_queue.s:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/fixed_size_priority_queue.s
+.PHONY : fixed_size_priority_queue.s
+
+# target to build an object file
 flags.o:
 	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/flags.o
 .PHONY : flags.o
@@ -242,6 +257,21 @@ flags_reporting.i:
 flags_reporting.s:
 	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/flags_reporting.s
 .PHONY : flags_reporting.s
+
+# target to build an object file
+hash.o:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/hash.o
+.PHONY : hash.o
+
+# target to preprocess a source file
+hash.i:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/hash.i
+.PHONY : hash.i
+
+# target to generate assembly for a file
+hash.s:
+	$(MAKE) -f CMakeFiles/libbase.dir/build.make CMakeFiles/libbase.dir/hash.s
+.PHONY : hash.s
 
 # target to build an object file
 icu_utf.o:
@@ -543,12 +573,18 @@ help:
 	@echo "... env.o"
 	@echo "... env.i"
 	@echo "... env.s"
+	@echo "... fixed_size_priority_queue.o"
+	@echo "... fixed_size_priority_queue.i"
+	@echo "... fixed_size_priority_queue.s"
 	@echo "... flags.o"
 	@echo "... flags.i"
 	@echo "... flags.s"
 	@echo "... flags_reporting.o"
 	@echo "... flags_reporting.i"
 	@echo "... flags_reporting.s"
+	@echo "... hash.o"
+	@echo "... hash.i"
+	@echo "... hash.s"
 	@echo "... icu_utf.o"
 	@echo "... icu_utf.i"
 	@echo "... icu_utf.s"
