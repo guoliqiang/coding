@@ -1,0 +1,6 @@
+set(SRC trie_tree_unittest.cc)
+link_directories(../../../base/lib)
+link_directories(../../testing/gtest/lib/)
+add_executable(trie_unit ${SRC})
+target_link_libraries(trie_unit base gtest)
+SET(CMAKE_EXE_LINKER_FLAGS "-lpthread -lrt")

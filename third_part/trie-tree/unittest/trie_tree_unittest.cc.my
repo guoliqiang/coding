@@ -1,0 +1,73 @@
+// Copyright 2010 Yunrang Inc. All Rights Reserved.
+// Author: yongyipeng@yunrang.com (Peng YongYi)
+
+#include "../internal/trie_tree-inl.h"
+#include "../../testing/gtest/include/gtest/gtest.h"
+
+using namespace trie_tree;
+
+int main(int argc, char** argv) {
+  TrieTree<string> tt;
+  TrieTree<string> * vf_ = &tt;
+  string key1("www.test");
+  string key2("test");
+  string val1("www.test001.com");
+  string val2("www.test002.com");
+
+  vector<string> result;
+  set<string> r_set;
+  vf_->Get(key1, &result);
+  EXPECT_EQ(0, result.size());
+  EXPECT_EQ(false, vf_->Find(key1));
+
+  vf_->Put(key1, val1);
+  vf_->Get(key1, &result);
+  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+    r_set.insert(*it);
+  }
+  EXPECT_EQ(1, result.size());
+  EXPECT_TRUE(r_set.end() != r_set.find(val1));
+  EXPECT_FALSE(r_set.end() != r_set.find(val2));
+  EXPECT_EQ(true, vf_->Find(key1));
+  EXPECT_EQ(8, vf_->GetMinTrie());
+
+  result.clear();
+  r_set.clear();
+  vf_->Put(key1, val2);
+  vf_->Get(key1, &result);
+  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+    r_set.insert(*it);
+  }
+  EXPECT_EQ(2, result.size());
+  EXPECT_EQ(true, vf_->Find(key1));
+  EXPECT_TRUE(r_set.end() != r_set.find(val1));
+  EXPECT_TRUE(r_set.end() != r_set.find(val2));
+  EXPECT_EQ(8, vf_->GetMinTrie());
+
+  result.clear();
+  r_set.clear();
+  vf_->Put(key2, val2);
+  vf_->Get(key2, &result);
+  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+    r_set.insert(*it);
+  }
+  EXPECT_EQ(1, result.size());
+  EXPECT_EQ(true, vf_->Find(key2));
+  EXPECT_FALSE(r_set.end() != r_set.find(val1));
+  EXPECT_TRUE(r_set.end() != r_set.find(val2));
+  EXPECT_EQ(4, vf_->GetMinTrie());
+
+  result.clear();
+  r_set.clear();
+  string key("www.test00");
+  vf_->Get(key1, &result);
+  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+    r_set.insert(*it);
+  }
+  EXPECT_EQ(2, result.size());
+  EXPECT_EQ(true, vf_->Find(key1));
+  EXPECT_TRUE(r_set.end() != r_set.find(val1));
+  EXPECT_TRUE(r_set.end() != r_set.find(val2));
+
+  return 0;
+}
