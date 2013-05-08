@@ -96,6 +96,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named trie_union_unit
+
+# Build rule for target.
+trie_union_unit: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 trie_union_unit
+.PHONY : trie_union_unit
+
+# fast build rule for target.
+trie_union_unit/fast:
+	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/build
+.PHONY : trie_union_unit/fast
+
+#=============================================================================
 # Target rules for targets named trie_unit
 
 # Build rule for target.
@@ -107,6 +120,21 @@ trie_unit: cmake_check_build_system
 trie_unit/fast:
 	$(MAKE) -f CMakeFiles/trie_unit.dir/build.make CMakeFiles/trie_unit.dir/build
 .PHONY : trie_unit/fast
+
+# target to build an object file
+trie_tree_union_unittest.o:
+	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/trie_tree_union_unittest.o
+.PHONY : trie_tree_union_unittest.o
+
+# target to preprocess a source file
+trie_tree_union_unittest.i:
+	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/trie_tree_union_unittest.i
+.PHONY : trie_tree_union_unittest.i
+
+# target to generate assembly for a file
+trie_tree_union_unittest.s:
+	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/trie_tree_union_unittest.s
+.PHONY : trie_tree_union_unittest.s
 
 # target to build an object file
 trie_tree_unittest.o:
@@ -131,7 +159,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... trie_union_unit"
 	@echo "... trie_unit"
+	@echo "... trie_tree_union_unittest.o"
+	@echo "... trie_tree_union_unittest.i"
+	@echo "... trie_tree_union_unittest.s"
 	@echo "... trie_tree_unittest.o"
 	@echo "... trie_tree_unittest.i"
 	@echo "... trie_tree_unittest.s"

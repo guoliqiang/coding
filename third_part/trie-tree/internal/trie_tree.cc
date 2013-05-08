@@ -5,3 +5,4 @@
 // File  : trie_tree.cc
 // Brief :
 #include "./trie_tree-inl.h"
+#include "./trie_tree-inl_union.h"
