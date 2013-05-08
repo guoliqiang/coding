@@ -7,6 +7,10 @@
 #include <string>
 #include "../public/ac_automaton.h"
 #include "../public/utils.h"
+#include "../../../base/public/logging.h"
+#include "../../../base/public/string_util.h"
+
+static int kACLogLevel = 5;
 
 using std::vector;
 using std::map;
@@ -14,12 +18,11 @@ using std::basic_string;
 
 namespace ac_automaton {
 //
-ACAutomaton::ACAutomaton()
-  : m_pChildrenCount(NULL),
-    m_pChildrenAddr(NULL),
-    m_pChildren(NULL),
-    m_pFail(NULL),
-    m_totalStates(0){}
+ACAutomaton::ACAutomaton() : m_pChildrenCount(NULL),
+                             m_pChildrenAddr(NULL),
+                             m_pChildren(NULL),
+                             m_pFail(NULL),
+                             m_totalStates(0){}
 
 //
 ACAutomaton::~ACAutomaton() {
@@ -70,8 +73,8 @@ bool ACAutomaton::Init(const vector<basic_string<uint16> > &patterns) {
     for (size_t j = 0; j < pattern.length(); ++j) {
       uint16 c = pattern[j];
       if (gotoTable[state].find(c) == gotoTable[state].end()) {
-        // printf("state %d goes to %zu when met %d\n",
-        //        state, gotoTable.size(), c);
+        VLOG(kACLogLevel) << "state:" << state << " goto sate:" <<
+                          gotoTable.size() << " for value:" << c;
         gotoTable[state][c] = gotoTable.size();
         state = gotoTable.size();
 
@@ -84,22 +87,19 @@ bool ACAutomaton::Init(const vector<basic_string<uint16> > &patterns) {
     }
     // now the new pattern is added end at state
     m_matchPatternTable[state].push_back(pattern);
+    VLOG(kACLogLevel) << "state:" << state << " own pattern :" << ToUTF8String(pattern);
   }
 
   // convert STL types into build in types for better perf
-  m_totalStates = gotoTable.size() + 1;
-  m_pChildrenCount = new uint16[m_totalStates];
-  m_pChildrenAddr = new uint32[m_totalStates];
-  m_pChildren = new GotoNode[m_totalStates];
-  // pattern count size is big enough to hold all elements for one round
-  // still we allocate big buffer for easy coding
-  if (m_pChildrenCount == NULL  ||
-      m_pChildrenAddr == NULL   ||
-      m_pChildren == NULL) {
-    printf("Could not allocate goto table for %u states\n",
-           m_totalStates);
-    return false;
-  }
+  m_totalStates = gotoTable.size();
+  VLOG(kACLogLevel) << "finally, the sate number is:" << m_totalStates;
+  m_pChildrenCount = new (std::nothrow)uint16[m_totalStates];
+  m_pChildrenAddr = new (std::nothrow)uint32[m_totalStates];
+  m_pChildren = new (std::nothrow)GotoNode[m_totalStates];
+
+  CHECK(m_pChildrenCount != NULL) << "memory is not enough!";
+  CHECK(m_pChildrenAddr != NULL) << "memory is not enough!";
+  CHECK(m_pChildren != NULL) << "memory is not enough!";
 
   uint32 edgeCount = 0;
   for (size_t i = 0; i < gotoTable.size(); ++i) {
@@ -113,13 +113,10 @@ bool ACAutomaton::Init(const vector<basic_string<uint16> > &patterns) {
     }
   }
 
-  m_pFail = new uint32[m_totalStates];
-  AutoDeleteArray<uint32> queue(new uint32[m_totalStates]);
-  if (m_pFail == NULL || !queue.Valid()) {
-    printf("Could not allocate fail table for %u states\n",
-           m_totalStates);
-    return false;
-  }
+  m_pFail = new (std::nothrow)uint32[m_totalStates];
+  AutoDeleteArray<uint32> queue(new (std::nothrow)uint32[m_totalStates]);
+  CHECK(m_pFail != NULL) << "memory is not enough";
+  CHECK(queue.Valid()) << "memory is not enough";
 
   // calculate longest suffix transition(fail table)
   queue.Get()[0] = 0;
@@ -143,12 +140,14 @@ bool ACAutomaton::Init(const vector<basic_string<uint16> > &patterns) {
         GotoNode * array = m_pChildren + m_pChildrenAddr[oldState];
         // the goto state is in [start, end)
         while (start < end) {
-          int mid = (start + end)/2;
+          int mid = start + (end - start)/2;
           if (array[mid].c < c) {
             start = mid + 1;
           } else if (array[mid].c == c) {
             // this will be checked in outter loop, so no jump
             m_pFail[newState] = array[mid].state;
+            VLOG(kACLogLevel) << "state:" << newState << " 's failed state is"
+                              << array[mid].state;
             break;
           } else {
             end = mid;
@@ -156,11 +155,14 @@ bool ACAutomaton::Init(const vector<basic_string<uint16> > &patterns) {
         }
         oldState = m_pFail[oldState];
       }
-      // printf("Fail state of %d is %d\n", newState, m_pFail[newState]);
       m_matchPatternTable[newState].insert(
                   m_matchPatternTable[newState].end(),
                   m_matchPatternTable[m_pFail[newState]].begin(),
                   m_matchPatternTable[m_pFail[newState]].end());
+     for (int i = 0; i < m_matchPatternTable[newState].size(); i++) {
+       VLOG(kACLogLevel) << "sate :" << newState << " own patters:"
+                         << ToUTF8String(m_matchPatternTable[newState][i]);
+     }
     }
   }
   // set fail state of root to -1 is required for above logic
@@ -197,7 +199,7 @@ void ACAutomaton::Match(const basic_string<uint16> &text,
     {
       GotoNode * array = m_pChildren + m_pChildrenAddr[state];
       while (start < end) {
-        int mid = (start + end) / 2;
+        int mid = start + (end - start) / 2;
         if (array[mid].c < c) {
           start = mid + 1;
         } else if (array[mid].c == c) {
@@ -217,9 +219,6 @@ void ACAutomaton::Match(const basic_string<uint16> &text,
           if (pMatchedPos->find(str) == pMatchedPos->end()) {
             (*pMatchedPos)[str] = vector<size_t>();
           }
-          // printf("Matched %s at %zu\n",
-          //       ToUTF8String(str).c_str(),
-          //       i + 1 - str.length());
           (*pMatchedPos)[str].push_back(i + 1 - str.length());
         }
       }
