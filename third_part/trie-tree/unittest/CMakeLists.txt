@@ -1,5 +1,5 @@
 set(SRC trie_tree_unittest.cc)
-set(SRC_1 trie_tree_union_unittest.cc)
+set(SRC_1 trie_tree_unit_unittest.cc)
 link_directories(../../../base/lib)
 link_directories(../../testing/gtest/lib/)
 add_executable(trie_unit ${SRC})

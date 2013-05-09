@@ -124,6 +124,21 @@ ac_automaton.s:
 .PHONY : ac_automaton.s
 
 # target to build an object file
+ac_automaton_unit.o:
+	$(MAKE) -f CMakeFiles/libac_automaton.dir/build.make CMakeFiles/libac_automaton.dir/ac_automaton_unit.o
+.PHONY : ac_automaton_unit.o
+
+# target to preprocess a source file
+ac_automaton_unit.i:
+	$(MAKE) -f CMakeFiles/libac_automaton.dir/build.make CMakeFiles/libac_automaton.dir/ac_automaton_unit.i
+.PHONY : ac_automaton_unit.i
+
+# target to generate assembly for a file
+ac_automaton_unit.s:
+	$(MAKE) -f CMakeFiles/libac_automaton.dir/build.make CMakeFiles/libac_automaton.dir/ac_automaton_unit.s
+.PHONY : ac_automaton_unit.s
+
+# target to build an object file
 utils.o:
 	$(MAKE) -f CMakeFiles/libac_automaton.dir/build.make CMakeFiles/libac_automaton.dir/utils.o
 .PHONY : utils.o
@@ -150,6 +165,9 @@ help:
 	@echo "... ac_automaton.o"
 	@echo "... ac_automaton.i"
 	@echo "... ac_automaton.s"
+	@echo "... ac_automaton_unit.o"
+	@echo "... ac_automaton_unit.i"
+	@echo "... ac_automaton_unit.s"
 	@echo "... utils.o"
 	@echo "... utils.i"
 	@echo "... utils.s"

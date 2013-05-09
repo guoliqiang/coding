@@ -122,19 +122,19 @@ trie_unit/fast:
 .PHONY : trie_unit/fast
 
 # target to build an object file
-trie_tree_union_unittest.o:
-	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/trie_tree_union_unittest.o
-.PHONY : trie_tree_union_unittest.o
+trie_tree_unit_unittest.o:
+	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/trie_tree_unit_unittest.o
+.PHONY : trie_tree_unit_unittest.o
 
 # target to preprocess a source file
-trie_tree_union_unittest.i:
-	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/trie_tree_union_unittest.i
-.PHONY : trie_tree_union_unittest.i
+trie_tree_unit_unittest.i:
+	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/trie_tree_unit_unittest.i
+.PHONY : trie_tree_unit_unittest.i
 
 # target to generate assembly for a file
-trie_tree_union_unittest.s:
-	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/trie_tree_union_unittest.s
-.PHONY : trie_tree_union_unittest.s
+trie_tree_unit_unittest.s:
+	$(MAKE) -f CMakeFiles/trie_union_unit.dir/build.make CMakeFiles/trie_union_unit.dir/trie_tree_unit_unittest.s
+.PHONY : trie_tree_unit_unittest.s
 
 # target to build an object file
 trie_tree_unittest.o:
@@ -161,9 +161,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... trie_union_unit"
 	@echo "... trie_unit"
-	@echo "... trie_tree_union_unittest.o"
-	@echo "... trie_tree_union_unittest.i"
-	@echo "... trie_tree_union_unittest.s"
+	@echo "... trie_tree_unit_unittest.o"
+	@echo "... trie_tree_unit_unittest.i"
+	@echo "... trie_tree_unit_unittest.s"
 	@echo "... trie_tree_unittest.o"
 	@echo "... trie_tree_unittest.i"
 	@echo "... trie_tree_unittest.s"

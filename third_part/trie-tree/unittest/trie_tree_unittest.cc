@@ -1,7 +1,7 @@
 // Copyright 2010 Yunrang Inc. All Rights Reserved.
 // Author: yongyipeng@yunrang.com (Peng YongYi)
 
-#include "../internal/trie_tree-inl.h"
+#include "../public/trie_tree-inl.h"
 
 #include "../../../base/public/logging.h"
 #include "../../testing/gtest/include/gtest/gtest.h"
