@@ -231,6 +231,8 @@ class DoubleArrayImpl {
     array_type_ n = array_[p].base;
     if (static_cast<array_u_type_>(b) == array_[p].check && n < 0)
       set_result(&result, -n-1, len);
+    // "-n-1" is the index of key_ (inputs of patterns)
+    // len is the input of this function
 
     return result;
   }

@@ -1,0 +1,881 @@
+TThreadPoolServer.lo: src/thrift/server/TThreadPoolServer.cpp \
+ ../../config.h src/thrift/server/TThreadPoolServer.h \
+ src/thrift/concurrency/ThreadManager.h \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/shared_ptr.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/shared_ptr.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/user.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/select_compiler_config.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/compiler/gcc.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/select_stdlib_config.hpp \
+ /usr/include/c++/4.4/cstddef \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/c++config.h \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/os_defines.h \
+ /usr/include/features.h /usr/include/bits/predefs.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/cpu_defines.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stddef.h \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/no_tr1/utility.hpp \
+ /usr/include/c++/4.4/utility /usr/include/c++/4.4/bits/stl_relops.h \
+ /usr/include/c++/4.4/bits/stl_pair.h /usr/include/c++/4.4/bits/move.h \
+ /usr/include/c++/4.4/bits/concept_check.h \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/stdlib/libstdcpp3.hpp \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/confname.h \
+ /usr/include/getopt.h /usr/include/bits/unistd.h \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/select_platform_config.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/platform/linux.hpp \
+ /usr/include/c++/4.4/cstdlib /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib.h \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/posix_features.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/suffix.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/no_tr1/memory.hpp \
+ /usr/include/c++/4.4/memory /usr/include/c++/4.4/bits/stl_algobase.h \
+ /usr/include/c++/4.4/bits/functexcept.h \
+ /usr/include/c++/4.4/exception_defines.h \
+ /usr/include/c++/4.4/bits/cpp_type_traits.h \
+ /usr/include/c++/4.4/ext/type_traits.h \
+ /usr/include/c++/4.4/ext/numeric_traits.h \
+ /usr/include/c++/4.4/bits/stl_iterator_base_types.h \
+ /usr/include/c++/4.4/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/4.4/bits/stl_iterator.h \
+ /usr/include/c++/4.4/debug/debug.h /usr/include/c++/4.4/bits/allocator.h \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/c++allocator.h \
+ /usr/include/c++/4.4/ext/new_allocator.h /usr/include/c++/4.4/new \
+ /usr/include/c++/4.4/exception /usr/include/c++/4.4/bits/stl_construct.h \
+ /usr/include/c++/4.4/bits/stl_uninitialized.h \
+ /usr/include/c++/4.4/bits/stl_tempbuf.h \
+ /usr/include/c++/4.4/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/4.4/backward/auto_ptr.h \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/assert.hpp \
+ /usr/include/assert.h /usr/include/c++/4.4/iostream \
+ /usr/include/c++/4.4/ostream /usr/include/c++/4.4/ios \
+ /usr/include/c++/4.4/iosfwd /usr/include/c++/4.4/bits/stringfwd.h \
+ /usr/include/c++/4.4/bits/postypes.h /usr/include/c++/4.4/cwchar \
+ /usr/include/wchar.h /usr/include/stdio.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stdarg.h \
+ /usr/include/bits/wchar.h /usr/include/bits/wchar2.h \
+ /usr/include/c++/4.4/bits/char_traits.h \
+ /usr/include/c++/4.4/bits/localefwd.h \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/c++locale.h \
+ /usr/include/c++/4.4/clocale /usr/include/locale.h \
+ /usr/include/bits/locale.h /usr/include/c++/4.4/cctype \
+ /usr/include/ctype.h /usr/include/c++/4.4/bits/ios_base.h \
+ /usr/include/c++/4.4/ext/atomicity.h \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/gthr.h \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
+ /usr/include/signal.h /usr/include/bits/setjmp.h \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/atomic_word.h \
+ /usr/include/c++/4.4/bits/locale_classes.h /usr/include/c++/4.4/string \
+ /usr/include/c++/4.4/bits/ostream_insert.h \
+ /usr/include/c++/4.4/cxxabi-forced.h \
+ /usr/include/c++/4.4/bits/stl_function.h \
+ /usr/include/c++/4.4/backward/binders.h \
+ /usr/include/c++/4.4/bits/basic_string.h \
+ /usr/include/c++/4.4/initializer_list \
+ /usr/include/c++/4.4/bits/basic_string.tcc \
+ /usr/include/c++/4.4/bits/locale_classes.tcc \
+ /usr/include/c++/4.4/streambuf /usr/include/c++/4.4/bits/streambuf.tcc \
+ /usr/include/c++/4.4/bits/basic_ios.h \
+ /usr/include/c++/4.4/bits/locale_facets.h /usr/include/c++/4.4/cwctype \
+ /usr/include/wctype.h \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/ctype_base.h \
+ /usr/include/c++/4.4/bits/streambuf_iterator.h \
+ /usr/include/c++/4.4/x86_64-linux-gnu/bits/ctype_inline.h \
+ /usr/include/c++/4.4/bits/locale_facets.tcc \
+ /usr/include/c++/4.4/bits/basic_ios.tcc \
+ /usr/include/c++/4.4/bits/ostream.tcc /usr/include/c++/4.4/istream \
+ /usr/include/c++/4.4/bits/istream.tcc \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/current_function.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/checked_delete.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/throw_exception.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/exception/detail/attribute_noreturn.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/detail/workaround.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/exception/exception.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/shared_count.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/bad_weak_ptr.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_counted_base.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_has_sync.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_counted_base_gcc_x86.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/detail/sp_typeinfo.hpp \
+ /usr/include/c++/4.4/typeinfo \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_counted_impl.hpp \
+ /usr/include/c++/4.4/functional \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_convertible.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_nullptr_t.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/spinlock_pool.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/spinlock.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/spinlock_sync.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/yield_k.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/memory_order.hpp \
+ /usr/include/c++/4.4/algorithm /usr/include/c++/4.4/bits/stl_algo.h \
+ /usr/include/c++/4.4/bits/algorithmfwd.h \
+ /usr/include/c++/4.4/bits/stl_heap.h \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/operator_bool.hpp \
+ /usr/include/c++/4.4/tr1/functional /usr/include/c++/4.4/tr1/tuple \
+ /usr/include/c++/4.4/tr1/type_traits \
+ /usr/include/c++/4.4/tr1_impl/type_traits \
+ /usr/include/c++/4.4/tr1/functional_hash.h \
+ /usr/include/c++/4.4/tr1_impl/functional_hash.h \
+ /usr/include/c++/4.4/tr1_impl/functional src/thrift/concurrency/Thread.h \
+ /usr/include/stdint.h \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/weak_ptr.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/weak_ptr.hpp \
+ src/thrift/server/TServer.h src/thrift/TProcessor.h \
+ src/thrift/protocol/TProtocol.h src/thrift/transport/TTransport.h \
+ src/thrift/Thrift.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/bits/stdio2.h \
+ /usr/include/netinet/in.h /usr/include/sys/socket.h \
+ /usr/include/sys/uio.h /usr/include/bits/uio.h \
+ /usr/include/bits/socket.h /usr/include/bits/sockaddr.h \
+ /usr/include/asm/socket.h /usr/include/asm-generic/socket.h \
+ /usr/include/asm/sockios.h /usr/include/asm-generic/sockios.h \
+ /usr/include/bits/socket2.h /usr/include/bits/in.h \
+ /usr/include/inttypes.h /usr/include/c++/4.4/map \
+ /usr/include/c++/4.4/bits/stl_tree.h /usr/include/c++/4.4/bits/stl_map.h \
+ /usr/include/c++/4.4/bits/stl_multimap.h /usr/include/c++/4.4/list \
+ /usr/include/c++/4.4/bits/stl_list.h /usr/include/c++/4.4/bits/list.tcc \
+ /usr/include/c++/4.4/set /usr/include/c++/4.4/bits/stl_set.h \
+ /usr/include/c++/4.4/bits/stl_multiset.h /usr/include/c++/4.4/vector \
+ /usr/include/c++/4.4/bits/stl_vector.h \
+ /usr/include/c++/4.4/bits/stl_bvector.h \
+ /usr/include/c++/4.4/bits/vector.tcc \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/utility/enable_if.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_convertible.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/intrinsics.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/config.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_same.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/bool_trait_def.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/template_arity_spec.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/int.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/int_fwd.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/adl_barrier.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/adl.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/msvc.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/intel.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/gcc.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/workaround.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/nttp_decl.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/nttp.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/integral_wrapper.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/integral_c_tag.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/static_constant.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/static_cast.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/cat.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/config/config.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/template_arity_fwd.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/preprocessor/params.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/preprocessor.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/comma_if.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/punctuation/comma_if.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/control/if.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/control/iif.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/logical/bool.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/facilities/empty.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/punctuation/comma.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/repeat.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/repetition/repeat.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/debug/error.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/detail/auto_rec.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/tuple/eat.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/inc.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/arithmetic/inc.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/lambda.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/ttp.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/ctps.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/overload_resolution.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/integral_constant.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/bool.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/bool_fwd.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/integral_c.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/integral_c_fwd.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/lambda_support.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/bool_trait_undef.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_reference.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_lvalue_reference.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_rvalue_reference.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/ice.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/yes_no_type.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/ice_or.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/ice_and.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/ice_not.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/ice_eq.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_volatile.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/cv_traits_impl.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_array.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_arithmetic.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_integral.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_float.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_void.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_abstract.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/add_lvalue_reference.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/add_reference.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/type_trait_def.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/type_trait_undef.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/add_rvalue_reference.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_function.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/false_result.hpp \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+ src/thrift/TLogging.h /usr/include/sys/time.h \
+ src/thrift/transport/TTransportException.h \
+ src/thrift/protocol/TProtocolException.h \
+ /home/guoliqiang/git-coding/coding/third_part/boost//include/boost/static_assert.hpp \
+ /usr/include/sys/param.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.4.3/include-fixed/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.4.3/include-fixed/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+ /usr/include/linux/param.h /usr/include/asm/param.h \
+ /usr/include/asm-generic/param.h /usr/include/byteswap.h \
+ src/thrift/transport/TServerTransport.h \
+ src/thrift/transport/TTransport.h \
+ src/thrift/transport/TTransportException.h \
+ src/thrift/protocol/TBinaryProtocol.h src/thrift/protocol/TProtocol.h \
+ src/thrift/protocol/TVirtualProtocol.h \
+ src/thrift/protocol/TBinaryProtocol.tcc \
+ src/thrift/protocol/TBinaryProtocol.h /usr/include/c++/4.4/limits \
+ src/thrift/concurrency/Thread.h
+
+../../config.h:
+
+src/thrift/server/TThreadPoolServer.h:
+
+src/thrift/concurrency/ThreadManager.h:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/shared_ptr.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/shared_ptr.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/user.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/select_compiler_config.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/compiler/gcc.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/select_stdlib_config.hpp:
+
+/usr/include/c++/4.4/cstddef:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/c++config.h:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/os_defines.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/cpu_defines.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stddef.h:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/no_tr1/utility.hpp:
+
+/usr/include/c++/4.4/utility:
+
+/usr/include/c++/4.4/bits/stl_relops.h:
+
+/usr/include/c++/4.4/bits/stl_pair.h:
+
+/usr/include/c++/4.4/bits/move.h:
+
+/usr/include/c++/4.4/bits/concept_check.h:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/stdlib/libstdcpp3.hpp:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
+
+/usr/include/bits/unistd.h:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/select_platform_config.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/platform/linux.hpp:
+
+/usr/include/c++/4.4/cstdlib:
+
+/usr/include/stdlib.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/time.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/alloca.h:
+
+/usr/include/bits/stdlib.h:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/posix_features.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/suffix.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/config/no_tr1/memory.hpp:
+
+/usr/include/c++/4.4/memory:
+
+/usr/include/c++/4.4/bits/stl_algobase.h:
+
+/usr/include/c++/4.4/bits/functexcept.h:
+
+/usr/include/c++/4.4/exception_defines.h:
+
+/usr/include/c++/4.4/bits/cpp_type_traits.h:
+
+/usr/include/c++/4.4/ext/type_traits.h:
+
+/usr/include/c++/4.4/ext/numeric_traits.h:
+
+/usr/include/c++/4.4/bits/stl_iterator_base_types.h:
+
+/usr/include/c++/4.4/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/4.4/bits/stl_iterator.h:
+
+/usr/include/c++/4.4/debug/debug.h:
+
+/usr/include/c++/4.4/bits/allocator.h:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/c++allocator.h:
+
+/usr/include/c++/4.4/ext/new_allocator.h:
+
+/usr/include/c++/4.4/new:
+
+/usr/include/c++/4.4/exception:
+
+/usr/include/c++/4.4/bits/stl_construct.h:
+
+/usr/include/c++/4.4/bits/stl_uninitialized.h:
+
+/usr/include/c++/4.4/bits/stl_tempbuf.h:
+
+/usr/include/c++/4.4/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/4.4/backward/auto_ptr.h:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/assert.hpp:
+
+/usr/include/assert.h:
+
+/usr/include/c++/4.4/iostream:
+
+/usr/include/c++/4.4/ostream:
+
+/usr/include/c++/4.4/ios:
+
+/usr/include/c++/4.4/iosfwd:
+
+/usr/include/c++/4.4/bits/stringfwd.h:
+
+/usr/include/c++/4.4/bits/postypes.h:
+
+/usr/include/c++/4.4/cwchar:
+
+/usr/include/wchar.h:
+
+/usr/include/stdio.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stdarg.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/bits/wchar2.h:
+
+/usr/include/c++/4.4/bits/char_traits.h:
+
+/usr/include/c++/4.4/bits/localefwd.h:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/c++locale.h:
+
+/usr/include/c++/4.4/clocale:
+
+/usr/include/locale.h:
+
+/usr/include/bits/locale.h:
+
+/usr/include/c++/4.4/cctype:
+
+/usr/include/ctype.h:
+
+/usr/include/c++/4.4/bits/ios_base.h:
+
+/usr/include/c++/4.4/ext/atomicity.h:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/gthr.h:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/gthr-default.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/signal.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/atomic_word.h:
+
+/usr/include/c++/4.4/bits/locale_classes.h:
+
+/usr/include/c++/4.4/string:
+
+/usr/include/c++/4.4/bits/ostream_insert.h:
+
+/usr/include/c++/4.4/cxxabi-forced.h:
+
+/usr/include/c++/4.4/bits/stl_function.h:
+
+/usr/include/c++/4.4/backward/binders.h:
+
+/usr/include/c++/4.4/bits/basic_string.h:
+
+/usr/include/c++/4.4/initializer_list:
+
+/usr/include/c++/4.4/bits/basic_string.tcc:
+
+/usr/include/c++/4.4/bits/locale_classes.tcc:
+
+/usr/include/c++/4.4/streambuf:
+
+/usr/include/c++/4.4/bits/streambuf.tcc:
+
+/usr/include/c++/4.4/bits/basic_ios.h:
+
+/usr/include/c++/4.4/bits/locale_facets.h:
+
+/usr/include/c++/4.4/cwctype:
+
+/usr/include/wctype.h:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/ctype_base.h:
+
+/usr/include/c++/4.4/bits/streambuf_iterator.h:
+
+/usr/include/c++/4.4/x86_64-linux-gnu/bits/ctype_inline.h:
+
+/usr/include/c++/4.4/bits/locale_facets.tcc:
+
+/usr/include/c++/4.4/bits/basic_ios.tcc:
+
+/usr/include/c++/4.4/bits/ostream.tcc:
+
+/usr/include/c++/4.4/istream:
+
+/usr/include/c++/4.4/bits/istream.tcc:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/current_function.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/checked_delete.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/throw_exception.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/exception/detail/attribute_noreturn.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/detail/workaround.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/exception/exception.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/shared_count.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/bad_weak_ptr.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_counted_base.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_has_sync.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_counted_base_gcc_x86.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/detail/sp_typeinfo.hpp:
+
+/usr/include/c++/4.4/typeinfo:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_counted_impl.hpp:
+
+/usr/include/c++/4.4/functional:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_convertible.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/sp_nullptr_t.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/spinlock_pool.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/spinlock.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/spinlock_sync.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/yield_k.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/memory_order.hpp:
+
+/usr/include/c++/4.4/algorithm:
+
+/usr/include/c++/4.4/bits/stl_algo.h:
+
+/usr/include/c++/4.4/bits/algorithmfwd.h:
+
+/usr/include/c++/4.4/bits/stl_heap.h:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/detail/operator_bool.hpp:
+
+/usr/include/c++/4.4/tr1/functional:
+
+/usr/include/c++/4.4/tr1/tuple:
+
+/usr/include/c++/4.4/tr1/type_traits:
+
+/usr/include/c++/4.4/tr1_impl/type_traits:
+
+/usr/include/c++/4.4/tr1/functional_hash.h:
+
+/usr/include/c++/4.4/tr1_impl/functional_hash.h:
+
+/usr/include/c++/4.4/tr1_impl/functional:
+
+src/thrift/concurrency/Thread.h:
+
+/usr/include/stdint.h:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/weak_ptr.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/smart_ptr/weak_ptr.hpp:
+
+src/thrift/server/TServer.h:
+
+src/thrift/TProcessor.h:
+
+src/thrift/protocol/TProtocol.h:
+
+src/thrift/transport/TTransport.h:
+
+src/thrift/Thrift.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/bits/stdio2.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/sys/socket.h:
+
+/usr/include/sys/uio.h:
+
+/usr/include/bits/uio.h:
+
+/usr/include/bits/socket.h:
+
+/usr/include/bits/sockaddr.h:
+
+/usr/include/asm/socket.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/asm/sockios.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/bits/socket2.h:
+
+/usr/include/bits/in.h:
+
+/usr/include/inttypes.h:
+
+/usr/include/c++/4.4/map:
+
+/usr/include/c++/4.4/bits/stl_tree.h:
+
+/usr/include/c++/4.4/bits/stl_map.h:
+
+/usr/include/c++/4.4/bits/stl_multimap.h:
+
+/usr/include/c++/4.4/list:
+
+/usr/include/c++/4.4/bits/stl_list.h:
+
+/usr/include/c++/4.4/bits/list.tcc:
+
+/usr/include/c++/4.4/set:
+
+/usr/include/c++/4.4/bits/stl_set.h:
+
+/usr/include/c++/4.4/bits/stl_multiset.h:
+
+/usr/include/c++/4.4/vector:
+
+/usr/include/c++/4.4/bits/stl_vector.h:
+
+/usr/include/c++/4.4/bits/stl_bvector.h:
+
+/usr/include/c++/4.4/bits/vector.tcc:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/utility/enable_if.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_convertible.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/intrinsics.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/config.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_same.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/bool_trait_def.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/template_arity_spec.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/int.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/int_fwd.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/adl_barrier.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/adl.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/msvc.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/intel.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/gcc.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/workaround.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/nttp_decl.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/nttp.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/integral_wrapper.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/integral_c_tag.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/static_constant.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/static_cast.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/cat.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/config/config.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/template_arity_fwd.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/preprocessor/params.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/preprocessor.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/comma_if.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/punctuation/comma_if.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/control/if.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/control/iif.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/logical/bool.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/facilities/empty.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/punctuation/comma.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/repeat.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/repetition/repeat.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/debug/error.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/detail/auto_rec.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/tuple/eat.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/inc.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/preprocessor/arithmetic/inc.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/lambda.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/ttp.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/ctps.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/config/overload_resolution.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/integral_constant.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/bool.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/bool_fwd.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/integral_c.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/integral_c_fwd.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/mpl/aux_/lambda_support.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/bool_trait_undef.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_reference.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_lvalue_reference.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_rvalue_reference.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/ice.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/yes_no_type.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/ice_or.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/ice_and.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/ice_not.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/ice_eq.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_volatile.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/cv_traits_impl.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_array.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_arithmetic.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_integral.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_float.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_void.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_abstract.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/add_lvalue_reference.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/add_reference.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/type_trait_def.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/type_trait_undef.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/add_rvalue_reference.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/is_function.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/false_result.hpp:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/type_traits/detail/is_function_ptr_helper.hpp:
+
+src/thrift/TLogging.h:
+
+/usr/include/sys/time.h:
+
+src/thrift/transport/TTransportException.h:
+
+src/thrift/protocol/TProtocolException.h:
+
+/home/guoliqiang/git-coding/coding/third_part/boost//include/boost/static_assert.hpp:
+
+/usr/include/sys/param.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.4.3/include-fixed/limits.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.4.3/include-fixed/syslimits.h:
+
+/usr/include/limits.h:
+
+/usr/include/bits/posix1_lim.h:
+
+/usr/include/bits/local_lim.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/bits/posix2_lim.h:
+
+/usr/include/bits/xopen_lim.h:
+
+/usr/include/linux/param.h:
+
+/usr/include/asm/param.h:
+
+/usr/include/asm-generic/param.h:
+
+/usr/include/byteswap.h:
+
+src/thrift/transport/TServerTransport.h:
+
+src/thrift/transport/TTransport.h:
+
+src/thrift/transport/TTransportException.h:
+
+src/thrift/protocol/TBinaryProtocol.h:
+
+src/thrift/protocol/TProtocol.h:
+
+src/thrift/protocol/TVirtualProtocol.h:
+
+src/thrift/protocol/TBinaryProtocol.tcc:
+
+src/thrift/protocol/TBinaryProtocol.h:
+
+/usr/include/c++/4.4/limits:
+
+src/thrift/concurrency/Thread.h:
