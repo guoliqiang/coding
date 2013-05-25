@@ -1,0 +1,5 @@
+set(SRC boost_unittest.cc)
+link_directories(../lib/)
+add_executable(boost_unit ${SRC})
+target_link_libraries(boost_unit libboost_regex.a)
+INCLUDE_DIRECTORIES(../include/)
