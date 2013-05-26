@@ -1,0 +1,18 @@
+set(SRC CppServer.cc
+        ../proto/gen-cpp/Calculator.cpp
+        ../proto/gen-cpp/shared_constants.cpp
+        ../proto/gen-cpp/SharedService.cpp
+        ../proto/gen-cpp/shared_types.cpp
+        ../proto/gen-cpp/tutorial_constants.cpp
+        ../proto/gen-cpp/tutorial_types.cpp
+        )
+link_directories(../../lib)
+link_directories(../../../libevent/lib)
+add_executable(server_unit ${SRC})
+target_link_libraries(server_unit thrift thriftnb thriftz event)
+INCLUDE_DIRECTORIES(../../include/)
+INCLUDE_DIRECTORIES(../../../boost/include/)
+set_target_properties(server_unit
+             PROPERTIES
+             COMPILE_FLAGS  "-DHAVE_NETINET_IN_H"
+             )
