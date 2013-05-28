@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF   CMakeFiles/mysql_plugin.dir/mysql_plugin.c.o  -o mysql_plugin  -lpthread ../libmysql/libmysqlclient.a -lpthread -lz -lm -lrt -ldl 

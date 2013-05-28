@@ -1,0 +1,13 @@
+re2/prefilter_tree.cc:288: Compile() not called
+re2/testing/filtered_re2_test.cc:268: S: 4
+re2/testing/filtered_re2_test.cc:270: i: 0 : 1
+re2/testing/filtered_re2_test.cc:270: i: 1 : 6
+re2/testing/filtered_re2_test.cc:270: i: 2 : 5
+re2/testing/filtered_re2_test.cc:270: i: 3 : 4
+FilteredRE2Test.EmptyTest
+FilteredRE2Test.SmallOrTest
+FilteredRE2Test.SmallLatinTest
+FilteredRE2Test.AtomTests
+FilteredRE2Test.MatchEmptyPattern
+FilteredRE2Test.MatchTests
+PASS

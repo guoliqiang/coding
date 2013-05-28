@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wall -O2 -g -DDBUG_OFF   CMakeFiles/mysql_waitpid.dir/mysql_waitpid.c.o  -o mysql_waitpid  -lpthread ../mysys/libmysys.a ../dbug/libdbug.a ../mysys/libmysys.a ../dbug/libdbug.a ../strings/libstrings.a -lz -lm -lrt -lpthread 

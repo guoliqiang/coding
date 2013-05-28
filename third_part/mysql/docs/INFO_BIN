@@ -1,0 +1,46 @@
+===== Information about the build process: =====
+Build was run at 2013-05-26 17:23:27 on host 'guoliqiang-desktop'
+
+Build was done on  Linux-2.6.32-21-generic using x86_64
+Build was done using cmake 2.8.1 
+
+===== Compiler flags used (from the 'sql/' subdirectory): =====
+# compile C with /usr/bin/gcc
+# compile CXX with /usr/bin/c++
+C_FLAGS =  -Wall -O2 -g -DDBUG_OFF -I/home/guoliqiang/git-coding/coding/third_part/mysql/mysql-5.5.24/include -I/home/guoliqiang/git-coding/coding/third_part/mysql/mysql-5.5.24/sql -I/home/guoliqiang/git-coding/coding/third_part/mysql/mysql-5.5.24/regex  
+C_DEFINES = -DHAVE_CONFIG_H -DMYSQL_SERVER -DHAVE_EVENT_SCHEDULER
+CXX_FLAGS =  -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF -I/home/guoliqiang/git-coding/coding/third_part/mysql/mysql-5.5.24/include -I/home/guoliqiang/git-coding/coding/third_part/mysql/mysql-5.5.24/sql -I/home/guoliqiang/git-coding/coding/third_part/mysql/mysql-5.5.24/regex  
+CXX_DEFINES = -DHAVE_CONFIG_H -DMYSQL_SERVER -DHAVE_EVENT_SCHEDULER
+
+Pointer size: 8
+
+===== Feature flags used: =====
+-- Cache values
+CMAKE_BUILD_TYPE:STRING=RelWithDebInfo
+CMAKE_INSTALL_PREFIX:PATH=/home/guoliqiang/git-coding/coding/third_part/mysql
+COMMUNITY_BUILD:BOOL=ON
+ENABLED_PROFILING:BOOL=ON
+ENABLE_DEBUG_SYNC:BOOL=ON
+ENABLE_GCOV:BOOL=OFF
+INSTALL_LAYOUT:STRING=STANDALONE
+MYSQL_DATADIR:PATH=/home/guoliqiang/git-coding/coding/third_part/mysql/data
+MYSQL_MAINTAINER_MODE:BOOL=OFF
+WITH_ARCHIVE_STORAGE_ENGINE:BOOL=OFF
+WITH_BLACKHOLE_STORAGE_ENGINE:BOOL=OFF
+WITH_DEBUG:BOOL=OFF
+WITH_EMBEDDED_SERVER:BOOL=OFF
+WITH_EXTRA_CHARSETS:STRING=all
+WITH_FEDERATED_STORAGE_ENGINE:BOOL=OFF
+WITH_INNOBASE_STORAGE_ENGINE:BOOL=ON
+WITH_LIBEDIT:BOOL=ON
+WITH_LIBWRAP:BOOL=OFF
+WITH_PARTITION_STORAGE_ENGINE:BOOL=ON
+WITH_PERFSCHEMA_STORAGE_ENGINE:BOOL=ON
+WITH_PIC:BOOL=OFF
+WITH_READLINE:BOOL=OFF
+WITH_SSL:STRING=no
+WITH_UNIT_TESTS:BOOL=ON
+WITH_VALGRIND:BOOL=OFF
+WITH_ZLIB:STRING=system
+
+===== EOF =====

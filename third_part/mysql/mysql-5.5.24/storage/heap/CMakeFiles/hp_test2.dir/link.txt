@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF   CMakeFiles/hp_test2.dir/hp_test2.c.o  -o hp_test2  -lpthread ../../mysys/libmysys.a libheap.a ../../dbug/libdbug.a ../../strings/libstrings.a ../../mysys/libmysys.a ../../dbug/libdbug.a ../../strings/libstrings.a -lz -lm -lrt -lpthread 

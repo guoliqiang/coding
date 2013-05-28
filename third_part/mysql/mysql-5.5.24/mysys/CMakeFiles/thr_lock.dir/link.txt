@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wall -O2 -g -DDBUG_OFF   CMakeFiles/thr_lock.dir/thr_lock.c.o  -o thr_lock  -lpthread libmysys.a ../dbug/libdbug.a libmysys.a ../dbug/libdbug.a ../strings/libstrings.a -lz -lm -lrt -lpthread 

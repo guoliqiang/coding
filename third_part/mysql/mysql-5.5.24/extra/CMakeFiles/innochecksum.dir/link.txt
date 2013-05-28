@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wall -O2 -g -DDBUG_OFF   CMakeFiles/innochecksum.dir/innochecksum.c.o  -o innochecksum  -lpthread 

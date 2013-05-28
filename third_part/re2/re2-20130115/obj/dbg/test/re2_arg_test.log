@@ -1,0 +1,7 @@
+REArgTest.Int16Test
+REArgTest.Uint16Test
+REArgTest.IntTest
+REArgTest.UInt32Test
+REArgTest.Iint64Test
+REArgTest.Uint64Test
+PASS

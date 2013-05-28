@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF  -shared -Wl,-soname,libdaemon_example.so -o libdaemon_example.so CMakeFiles/daemon_example.dir/daemon_example.cc.o -lpthread ../../libservices/libmysqlservices.a -lpthread 

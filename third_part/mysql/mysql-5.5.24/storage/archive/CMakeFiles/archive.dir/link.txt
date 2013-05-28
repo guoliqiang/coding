@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF  -shared -Wl,-soname,ha_archive.so -o ha_archive.so CMakeFiles/archive.dir/azio.c.o CMakeFiles/archive.dir/ha_archive.cc.o -lpthread ../../libservices/libmysqlservices.a -lz -lpthread 

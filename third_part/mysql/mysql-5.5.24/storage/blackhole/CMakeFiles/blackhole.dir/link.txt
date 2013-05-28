@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF  -shared -Wl,-soname,ha_blackhole.so -o ha_blackhole.so CMakeFiles/blackhole.dir/ha_blackhole.cc.o -lpthread ../../libservices/libmysqlservices.a -lpthread 

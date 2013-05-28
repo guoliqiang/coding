@@ -1,0 +1,11 @@
+re2/testing/tester.cc:72: Backtrack enabled
+re2/testing/tester.cc:72: NFA enabled
+re2/testing/tester.cc:72: DFA enabled
+re2/testing/tester.cc:72: DFA1 enabled
+re2/testing/tester.cc:72: OnePass enabled
+re2/testing/tester.cc:72: BitState enabled
+re2/testing/tester.cc:72: RE2 enabled
+re2/testing/tester.cc:72: RE2a enabled
+re2/testing/tester.cc:72: RE2b enabled
+Regexp.SearchTests
+PASS

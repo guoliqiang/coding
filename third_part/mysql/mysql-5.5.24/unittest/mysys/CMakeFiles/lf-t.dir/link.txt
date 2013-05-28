@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wall -O2 -g -DDBUG_OFF   CMakeFiles/lf-t.dir/lf-t.c.o  -o lf-t  -lpthread ../mytap/libmytap.a ../../mysys/libmysys.a ../../strings/libstrings.a ../../dbug/libdbug.a ../../mysys/libmysys.a ../../dbug/libdbug.a ../../strings/libstrings.a -lz -lm -lrt -lpthread 

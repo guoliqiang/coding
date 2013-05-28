@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC  -Wall -O2 -g -DDBUG_OFF  -shared -Wl,-soname,auth_socket.so -o auth_socket.so CMakeFiles/auth_socket.dir/auth_socket.c.o -lpthread ../../libservices/libmysqlservices.a -lpthread 

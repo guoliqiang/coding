@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF   CMakeFiles/myisam_ftdump.dir/myisam_ftdump.c.o  -o myisam_ftdump  -lpthread libmyisam.a ../../mysys/libmysys.a ../../dbug/libdbug.a ../../mysys/libmysys.a ../../dbug/libdbug.a ../../strings/libstrings.a -lz -lm -lrt -lpthread 

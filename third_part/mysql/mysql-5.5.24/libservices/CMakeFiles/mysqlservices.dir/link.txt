@@ -1,0 +1,2 @@
+/usr/bin/ar cr libmysqlservices.a  CMakeFiles/mysqlservices.dir/my_snprintf_service.c.o CMakeFiles/mysqlservices.dir/thd_alloc_service.c.o CMakeFiles/mysqlservices.dir/thd_wait_service.c.o CMakeFiles/mysqlservices.dir/my_thread_scheduler_service.c.o
+/usr/bin/ranlib libmysqlservices.a

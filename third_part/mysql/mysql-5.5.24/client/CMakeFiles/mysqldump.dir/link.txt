@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF   CMakeFiles/mysqldump.dir/mysqldump.c.o CMakeFiles/mysqldump.dir/__/sql-common/my_user.c.o  -o mysqldump  -lpthread ../libmysql/libmysqlclient.a -lpthread -lz -lm -lrt -ldl 

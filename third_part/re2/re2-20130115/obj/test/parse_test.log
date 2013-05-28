@@ -1,0 +1,10 @@
+TestParse.SimpleRegexps
+TestParse.FoldCase
+TestParse.Literal
+TestParse.MatchNL
+TestParse.NoMatchNL
+TestParse.Prefix
+TestParse.InvalidRegexps
+TestToString.EquivalentParse
+NamedCaptures.ErrorArgs
+PASS

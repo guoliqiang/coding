@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC  -Wall -O2 -g -DDBUG_OFF  -shared -Wl,-soname,mypluglib.so -o mypluglib.so CMakeFiles/ftexample.dir/plugin_example.c.o -lpthread ../../libservices/libmysqlservices.a -lpthread 

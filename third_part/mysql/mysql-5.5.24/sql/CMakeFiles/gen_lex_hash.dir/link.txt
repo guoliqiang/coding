@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF   CMakeFiles/gen_lex_hash.dir/gen_lex_hash.cc.o  -o gen_lex_hash  -lpthread 

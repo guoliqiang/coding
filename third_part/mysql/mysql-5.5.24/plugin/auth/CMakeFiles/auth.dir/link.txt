@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC  -Wall -O2 -g -DDBUG_OFF  -shared -Wl,-soname,auth.so -o auth.so CMakeFiles/auth.dir/dialog.c.o -lpthread ../../libservices/libmysqlservices.a -lpthread 

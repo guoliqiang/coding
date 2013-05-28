@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wall -O2 -g -DDBUG_OFF   CMakeFiles/comp_sql.dir/comp_sql.c.o  -o comp_sql  -lpthread 

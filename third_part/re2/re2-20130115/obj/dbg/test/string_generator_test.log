@@ -1,0 +1,7 @@
+StringGenerator.NoLength
+StringGenerator.NoLengthNoAlphabet
+StringGenerator.NoAlphabet
+StringGenerator.Simple
+StringGenerator.UTF8
+StringGenerator.GenNULL
+PASS

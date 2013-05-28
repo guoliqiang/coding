@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -Wall -Wno-unused-parameter -fno-implicit-templates -fno-exceptions -fno-rtti -O2 -g -DDBUG_OFF  -shared -Wl,-soname,ha_federated.so -o ha_federated.so CMakeFiles/federated.dir/ha_federated.cc.o CMakeFiles/federated.dir/__/__/mysys/string.c.o -lpthread ../../libservices/libmysqlservices.a -lpthread 

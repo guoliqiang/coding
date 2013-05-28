@@ -1,0 +1,74 @@
+re2/testing/possible_match_test.cc:109: Checking regexp=
+re2/testing/possible_match_test.cc:109: Checking regexp=Abcdef
+re2/testing/possible_match_test.cc:109: Checking regexp=abc(def|ghi)
+re2/testing/possible_match_test.cc:109: Checking regexp=a+hello
+re2/testing/possible_match_test.cc:109: Checking regexp=a*hello
+re2/testing/possible_match_test.cc:109: Checking regexp=def|abc
+re2/testing/possible_match_test.cc:109: Checking regexp=a(b)(c)[d]
+re2/testing/possible_match_test.cc:109: Checking regexp=ab(cab|cat)
+re2/testing/possible_match_test.cc:109: Checking regexp=ab(cab|ca)x
+re2/testing/possible_match_test.cc:109: Checking regexp=(ab|x)(c|de)
+re2/testing/possible_match_test.cc:109: Checking regexp=(ab|x)?(c|z)?
+re2/testing/possible_match_test.cc:109: Checking regexp=[^\\s\\S]
+re2/testing/possible_match_test.cc:109: Checking regexp=(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=[a\303\241]
+re2/testing/possible_match_test.cc:109: Checking regexp=a*
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)Abcdef
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)abc(def|ghi)
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)a+hello
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)a*hello
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)def|abc
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)a(b)(c)[d]
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)ab(cab|cat)
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)ab(cab|ca)x
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)(ab|x)(c|de)
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)(ab|x)?(c|z)?
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)[^\\s\\S]
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)[a\303\241]
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)a*
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)A*
+re2/testing/possible_match_test.cc:109: Checking regexp=\\AAbcdef
+re2/testing/possible_match_test.cc:109: Checking regexp=\\Aabc(def|ghi)
+re2/testing/possible_match_test.cc:109: Checking regexp=\\Aa+hello
+re2/testing/possible_match_test.cc:109: Checking regexp=\\Aa*hello
+re2/testing/possible_match_test.cc:109: Checking regexp=\\Adef|abc
+re2/testing/possible_match_test.cc:109: Checking regexp=\\Aa(b)(c)[d]
+re2/testing/possible_match_test.cc:109: Checking regexp=\\Aab(cab|cat)
+re2/testing/possible_match_test.cc:109: Checking regexp=\\Aab(cab|ca)x
+re2/testing/possible_match_test.cc:109: Checking regexp=\\A(ab|x)(c|de)
+re2/testing/possible_match_test.cc:109: Checking regexp=\\A(ab|x)?(c|z)?
+re2/testing/possible_match_test.cc:109: Checking regexp=\\A[^\\s\\S]
+re2/testing/possible_match_test.cc:109: Checking regexp=\\A(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=\\A(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=\\A(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=\\A[a\303\241]
+re2/testing/possible_match_test.cc:109: Checking regexp=\\Aa*
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\AAbcdef
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\Aabc(def|ghi)
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\Aa+hello
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\Aa*hello
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\Adef|abc
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\Aa(b)(c)[d]
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\Aab(cab|cat)
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\Aab(cab|ca)x
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\A(ab|x)(c|de)
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\A(ab|x)?(c|z)?
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\A[^\\s\\S]
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\A(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\A(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\A(abc)+
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\A[a\303\241]
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\Aa*
+re2/testing/possible_match_test.cc:109: Checking regexp=(?i)\\AA*
+re2/re2.cc:196: Error parsing '*hello': no argument for repetition operator: *
+re2/testing/possible_match_test.cc:236: 27012 regexps, 9561552 tests
+CplusplusStrings.EightBit
+PossibleMatchRange.HandWritten
+PossibleMatchRange.Failures
+PossibleMatchRange.Exhaustive
+PASS

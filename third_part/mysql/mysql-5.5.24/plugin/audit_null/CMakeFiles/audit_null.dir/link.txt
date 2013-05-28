@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC  -Wall -O2 -g -DDBUG_OFF  -shared -Wl,-soname,adt_null.so -o adt_null.so CMakeFiles/audit_null.dir/audit_null.c.o -lpthread ../../libservices/libmysqlservices.a -lpthread 

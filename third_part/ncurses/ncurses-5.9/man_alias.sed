@@ -1,0 +1,15 @@
+s,@DATADIR@,/home/guoliqiang/git-coding/coding/third_part/ncurses//share,g
+s,@TERMINFO@,/home/guoliqiang/git-coding/coding/third_part/ncurses//share/terminfo,g
+s,@NCURSES_MAJOR@,5,g
+s,@NCURSES_MINOR@,9,g
+s,@NCURSES_PATCH@,20110404,g
+s,@NCURSES_OSPEED@,short,g
+s,@CAPTOINFO@,captoinfo,g
+s,@CLEAR@,clear,g
+s,@INFOCMP@,infocmp,g
+s,@INFOTOCAP@,infotocap,g
+s,@TABS@,tabs,g
+s,@TIC@,tic,g
+s,@TOE@,toe,g
+s,@TPUT@,tput,g
+s,@TSET@,tset,g

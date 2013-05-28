@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC  -Wall -O2 -g -DDBUG_OFF  -shared -Wl,-soname,qa_auth_client.so -o qa_auth_client.so CMakeFiles/qa_auth_client.dir/qa_auth_client.c.o -lpthread ../../libservices/libmysqlservices.a -lpthread 

@@ -1,0 +1,8 @@
+re2/set.cc:43: Error parsing '(': missing ): (
+re2/set.cc:43: Error parsing '(': missing ): (
+re2/set.cc:43: Error parsing '(': missing ): (
+Set.Unanchored
+Set.UnanchoredFactored
+Set.UnanchoredDollar
+Set.Anchored
+PASS
