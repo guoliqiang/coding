@@ -1,4 +1,4 @@
-#!/home/guoliqiang/git-coding/coding/third_part/python/bin/python2.6
+#!/home/guoliqiang/git-coding/coding/third_part/python/bin/python2.7
 
 import pydoc
 if __name__ == '__main__':

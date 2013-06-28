@@ -8,18 +8,6 @@ from datetime import datetime
 import Flags
 import Path
 import BuildManager
-scons_dir = ARGUMENTS.get('scons_dir', '')
-
-if scons_dir != '':
-  # print('')
-  # print('%s  %s' % (Util.Highlight('scons dir:', 1, False), scons_dir))
-  sys.path.insert(0, scons_dir)
-
-python_dir = ARGUMENTS.get('python_dir', '')
-if python_dir != '':
-  # print('%s %s'% (Util.Highlight('python dir:', 1, False), python_dir))
-  # print('')
-  sys.path.insert(0, scons_dir)
 
 EnsureSConsVersion(1, 2)
 EnsurePythonVersion(2, 6)

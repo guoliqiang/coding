@@ -1,4 +1,4 @@
-#!/home/guoliqiang/git-coding/coding/third_part/python/bin/python2.6
+#!/home/guoliqiang/git-coding/coding/third_part/python/bin/python2.7
 """An RFC 2821 smtp proxy.
 
 Usage: %(program)s [options] [localhost:localport [remotehost:remoteport]]
@@ -121,15 +121,7 @@ class SMTPChannel(asynchat.async_chat):
         self.__rcpttos = []
         self.__data = ''
         self.__fqdn = socket.getfqdn()
-        try:
-            self.__peer = conn.getpeername()
-        except socket.error as err:
-            # a race condition  may occur if the other end is closing
-            # before we can get the peername
-            self.close()
-            if err.args[0] != errno.ENOTCONN:
-                raise
-            return
+        self.__peer = conn.getpeername()
         print >> DEBUGSTREAM, 'Peer:', repr(self.__peer)
         self.push('220 %s %s' % (self.__fqdn, __version__))
         self.set_terminator('\r\n')
@@ -299,20 +291,7 @@ class SMTPServer(asyncore.dispatcher):
                 localaddr, remoteaddr)
 
     def handle_accept(self):
-        try:
-            conn, addr = self.accept()
-        except TypeError:
-            # sometimes accept() might return None
-            return
-        except socket.error as err:
-            # ECONNABORTED might be thrown
-            if err.args[0] != errno.ECONNABORTED:
-                raise
-            return
-        else:
-            # sometimes addr == None instead of (ip, port)
-            if addr == None:
-                return
+        conn, addr = self.accept()
         print >> DEBUGSTREAM, 'Incoming connection from %s' % repr(addr)
         channel = SMTPChannel(self, conn, addr)
 
