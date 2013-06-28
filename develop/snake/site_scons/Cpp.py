@@ -51,6 +51,11 @@ def cc_binary(name = None, srcs = [], deps = [], libs = [], path = [],
 
 def GetCppInclude(obj):
   result = ['.', Path.GetOutputDir(), Path.GetBaseDir()]
+  if obj.has_thrift_dep:
+    result.append(Path.GetThriftOutPath())
+    result.append(Path.AddBaseDir('third_part/boost/include'))
+    result.append(Path.AddBaseDir('third_part/libevent'))
+    result.append(Path.AddBaseDir('third_part/thrift/include'))
   return result
 
 class CppBuilder(LanguageBuilder):
@@ -81,6 +86,8 @@ class CppBuilder(LanguageBuilder):
 
 
   def _GetOpenedFiles(self, path, obj = None):
+    if self._HasCopt(obj, "no_style_check"):
+      return
     d = os.path.dirname(path)
     if d in self._checked_dir:
       return
@@ -108,8 +115,12 @@ class CppBuilder(LanguageBuilder):
       distcc_hosts.sort()
       while len(distcc_hosts[0]) == 0:
         del distcc_hosts[0]
+        if len(distcc_hosts) == 0:
+          break
+        pass
+      pass
       # check if the hostname is in the list
-      hostname = '%s.yunrang.com' % socket.gethostname()
+      hostname = '%s' % Util.GetIp('eth0')
       for i in range(len(distcc_hosts)):
         if distcc_hosts[i] == hostname:
           distcc_hosts = distcc_hosts[i+1:] + distcc_hosts[0:i]
@@ -118,6 +129,7 @@ class CppBuilder(LanguageBuilder):
           distcc_hosts = distcc_hosts[i:] + distcc_hosts[0:i]
           break
       env['ENV']['DISTCC_HOSTS'] = ' '.join(distcc_hosts)
+      print Util.BuildMessage("distcc host:" + ' '.join(distcc_hosts))
       if len(self._distcc_log) > 0:
         if os.path.exists(self._distcc_log):
           os.remove(self._distcc_log)
@@ -181,6 +193,8 @@ class CppBuilder(LanguageBuilder):
       return self._GetStaticLib(obj.name_)
     return self._GetLibPath(obj.name_)
 
+  def RegisterSnakeBuilders(self):
+    return {}
 
   def _GetFlags(self, obj, env):
     source = []
@@ -193,6 +207,11 @@ class CppBuilder(LanguageBuilder):
 
     if 'path' in obj.option_:
       path += obj.option_['path']
+
+    if obj.has_thrift_dep :
+      libs += ['thriftnb', 'thriftz', 'thrift', 'event']
+      path.append(Path.AddBaseDir('third_part/thrift/lib'))
+      path.append(Path.AddBaseDir('third_part/libevent/lib'))
 
     # check dependent obj's special attributes
     for d in obj.depends_:
@@ -229,6 +248,9 @@ class CppBuilder(LanguageBuilder):
       cc_flags += ' '
       cc_flags += ' '.join(obj.option_['cflags'])
 
+    if obj.has_thrift_dep:
+      cc_flags += '-Wno-return-type -DHAVE_NETINET_IN_H'
+
     CXX_value = env['CXX']
     if (not self._use_distcc == 'on'):
       CXX_value = 'g++'
@@ -254,3 +276,12 @@ class CppBuilder(LanguageBuilder):
                                  CXX = CXX_value)
   def Finish(self, env):
     self._StyleCheck()
+
+
+def CheckThriftDependency(obj):
+  obj.has_thrift_dep = obj.name_.endswith('_thrift')
+  for d in obj.depends_:
+    if d.endswith('_thrift'):
+      obj.has_thrift_dep = True
+    pass
+  pass

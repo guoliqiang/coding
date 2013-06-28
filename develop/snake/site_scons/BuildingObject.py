@@ -2,13 +2,14 @@
 
 class BuildingObject(object):
   def __init__(self):
-    self.name_ = ''          # logical name.    //base:base
-    self.path_ = ''          # virtual path     /home/$ROOT/coding/base/base
-    self.sources_ = []       # logical name     //base:string_util.cc
-    self.depends_ = []       # logical name     //base:base
-    self.raw_depends_ = []   # same as depends_ but raw
-    self.option_ = {}        # copt / cflags / link_flags
-    self.build_type_ = ''    # cc_binary cc_libary
+    self.name_ = ''              # logical name.    //base:base
+    self.path_ = ''              # virtual path     /home/$ROOT/coding/base/base
+    self.sources_ = []           # logical name     //base:string_util.cc
+    self.depends_ = []           # logical name     //base:base
+    self.raw_depends_ = []       # same as depends_ but raw
+    self.option_ = {}            # copt / cflags / link_flags
+    self.build_type_ = ''        # cc_binary cc_libary
+    self.has_thrift_dep = False
     pass
 
   def __str__(self):

@@ -1,0 +1,16 @@
+cc_binary(name = 'lazy_instace_unittest',
+           srcs = ['lazy_instace_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )
+
+cc_binary(name = 'counter_unittest',
+          srcs = ['counter_unittest.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest'
+                 ],
+          )

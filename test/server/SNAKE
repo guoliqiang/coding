@@ -1,0 +1,7 @@
+cc_binary(name = 'CppServer',
+          srcs = ['CppServer.cc'],
+          deps = [
+            '//test/proto:shared_thrift',
+            '//test/proto:tutorial_thrift'
+          ]
+)

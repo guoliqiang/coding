@@ -1,0 +1,13 @@
+thrift_library(name = 'shared_thrift',
+    srcs = [
+    'shared.thrift',
+    ],
+    gen_cpp = 1,
+    )
+
+thrift_library(name = 'tutorial_thrift',
+    srcs = [
+    'tutorial.thrift',
+    ],
+    gen_cpp = 1,
+    )

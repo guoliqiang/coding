@@ -1,0 +1,717 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Darts: Double ARray Trie System</title>
+<link type="text/css" rel="stylesheet" href="darts.css">
+</head>
+<body>
+<h1>Darts: Double-ARray Trie System</h1>
+
+<h2>はじめに</h2>
+<p>Darts は, Double-Array <a href="#aoe">[Aoe 1989]</a>を構築するための シンプルな C++
+Template Library です. Double-Array は Trie 
+を表現するためのデータ構造です. ハッシュ木, デジタルトライ, パトリシア木,
+Suffix Array による擬似 Trieといった 他の Trie の実装に比べ高速に動作します. 
+オリジナル の Double-Arrayは, 動的に key の追加削除を行えるような
+枠組ですが, Darts は ソート済の辞書を一括してDouble-Array に変換することに機能を絞っています.</p>
+
+<p>ハッシュのような単純な辞書として使うことも可能ですが,
+形態素解析器の辞書に必須の Common Prefix Search を非常に高速に行うことができます.</p>
+
+<p>2003年7月現在, Darts は, <a
+href="http://mecab.sourceforge.jp/">MeCab</a>,
+<a href="http://chasen.org">ChaSen</a> に採用されています.
+Darts は, <a href="http://mecab.sourceforge.jp/">MeCab</a> で使
+われている Double-Array のコードを 改めてパッケージングしたものです.</p>
+
+</ul>
+
+<h2><a name="download">ダウンロード</a></h2>
+<ul>
+<li><b>Darts</b> はフリーソフトウェアです．<a
+<a href="http://www.gnu.org/licenses/lgpl.txt">LGPL</a>(Lesser GNU
+General Public License) または BSD ライセンスに従って本ソフトウェアを使用,再配布することができます.
+詳細は COPYING, LGPL, BSD各ファイルを参照して下さい．
+</ul>
+
+<h3><a name="source">Source</a></h3>
+
+<ul>
+<li>darts-0.32.tar.gz: <a href= "./src/darts-0.32.tar.gz">HTTP</a></li>
+</ul>
+
+</ul>
+</ul>
+
+<h2><a name="install">インストール</a></h2>
+<pre>
+% ./configure 
+% make
+% make check
+% make install
+あとは, /usr/local/include/darts.h を include して使う
+</pre>
+
+<h2><a name="news">新着情報</a></h2>
+<ul>
+<li><strong>2008-03-23</strong>: <a href="#download">darts 0.32</a><br>
+<ul>
+<li>ライセンスファイルが同封されていなかった問題を修正
+<li>細かいコードのクリーンナップ (const をできるだけ付けるようにした)
+</ul>
+
+<li><strong>2007-01-27</strong>: darts 0.31</a><br>
+<ul>
+<li>ライセンスをLGPLからBSD,LGPLのデュアルライセンスに変更
+</ul>
+
+<li><strong>2005-12-25</strong>: darts 0.3<br>
+<ul>
+<li>Double Array の作成時に不正特殊をアクセスする可能性があるバグを修正
+<li>メッソド名の一部変更 (setArray を set_array になど)
+<li>rpm パッケージ配布の停止
+</ul>
+</li>
+
+<li><strong>2003-8-3</strong>: darts 0.2<br>
+<ul>
+<li>特殊な検索文字列において, DoubleArray の未知領域をアクセスする可能性が
+    あるバグを修正
+<li>DoubleArray のノードを traverse するメソッド traverse () を追加 (実験的)
+<li>setArray () にて DoubleArray のサイズを指定できるようになった
+<li>commonPrefixSearch のインタフェースが変更された.
+    検索結果のバッファサイズを指定できるようになり, 安全性が高まった. 
+</ul>
+</li>
+
+<li><strong>2003-2-15</strong>: darts 0.1<br>
+<ul>
+<li>rpm パッケージを用意した.</li>
+<li>mkdarts darts を $(prefix)/libexec/darts 以下にインストールするようにした</li>
+</ul>
+</li>
+
+<li><strong>2003-2-14</strong>: darts 0.09<br>
+<ul>
+<li>open (FILE *), save (FILE *) インタフェイスの廃止
+    将来, C++ stream に変更する可能性があるため</li>
+<li>make install した時に darts.h が $(prefix)/include にインストールさ
+    れるようにした.</li>
+<li>result_type, key_type という typedef を用意した.    
+</ul>
+</li>
+
+<li><strong>2002-12-26</strong>: darts 0.08<br>
+<ul>
+
+<li>zlib の関数を zlib namespace に入れる.</li>
+
+<li>open, save の default mode を "rb", "wb"
+に変更</li>
+
+<li>Darts::build の戻り値の変更</li>
+
+<li>progress_func の 第一引数 (title の廃止)</li>
+</ul>
+</li>
+
+<li><strong>2002-12-05</strong>: darts 0.07<br>
+<ul>
+<li>progress func に NULL を指定を指定したときに core をはくbugを修正
+</ul>
+</li>
+
+<li><strong>2002-10-13</strong>: darts 0.06<br>
+ 
+<ul>
+<li>gcc 3.2 への対応<br>
+ gcc 3.2 では, 正常なDoubleArray
+が作成できないバグを修正 (コンパイラのバグの可能性あり)<br>
+ <a href="http://www.carc.aist.go.jp/~miyata.t/">宮田さん</a>からの
+ご報告いただきました. ありがとうございます.</li>
+</ul>
+</li>
+
+<li><strong>2002-04-23</strong>: darts 0.05<br>
+<ul>
+<li>メソッド名の変更</li>
+</ul>
+</li>
+
+<li><strong>2001-06-11</strong>: darts 0.04<br>
+<ul>
+<li>mkdarts の辞書ファイルとして - が与えられた場合,
+標準入力から辞書を読み込 むようにした.</li>
+
+<li>configure option に --with-zlib or --without-zlib
+を追加</li>
+</ul>
+</li>
+
+<li><strong>2001-05-24</strong>: darts 0.03<br>
+<ul>
+<li>ライセンスが GPL になってた部分を修正. LGPL
+です.</li>
+</ul>
+</li>
+
+<li><strong>2001-05-23</strong>: darts 0.02<br>
+<ul>
+<li>文字列終端と NULL文字の区別ができていなかったバグを修正. これにともない,
+index の互換性が無くなりました. <a href=
+"http://cl.aist-nara.ac.jp/~kazuma-t/">高岡さん</a>ら
+ご指摘をうけました. ありがとうございます.</li>
+
+<li>zlib を使い Double-Array を圧縮する methodを追加 (experimental)</li>
+
+<li>open,save の戻り値の変更, 標準的な UNIXに従い 0 を成功としました.</li>
+
+<li>get_unit_size という Double-Array の各要素の size を取得する method を追加</li>
+</ul>
+</li>
+
+<li><strong>2001-05-21</strong>: darts 0.01<br>
+<ul>
+<li>Initial Release!</li>
+</ul>
+</li>
+</ul>
+
+<h2><a name="usage-tools">使い方</a></h2>
+<p>
+Darts は, darts.h を提供するのみの, C++ Template
+Library です. そのつど include
+して使用します.<br>
+inline 化による高速性を期待して,
+このような配布形態にしています. 
+</p>
+
+<h3>クラスのインターフェイス</h3>
+<pre>
+namespace Darts {
+
+   template &lt;class NodeType, class NodeUType class ArrayType, 
+                class ArrayUType, class LengthFunc = Length<NodeType>&lt;NodeType&gt; &gt;
+
+   class DobuleArrayImpl
+   {
+    public:
+     typedef ArrayType   result_type;
+     typedef NodeType    key_type;
+
+     DoubleArrayImpl();
+     ~DoubleArrayImpl();
+
+     int    set_array(void *ptr, size_t = 0);
+     void   *array();
+     void   clear();
+     size_t size ();
+     size_t unit_size ();
+     size_t nonzero_size ();
+     size_t total_size ();
+
+     int build (size_t        key_size,
+                key_type      **key,
+                size_t        *len = 0,
+                result_type   *val = 0,
+                int (*pg)(size_t, size_t) = 0);
+
+     int open (const char *file,
+               const char *mode = "rb",
+               size_t offset = 0,
+               size_t _size = 0);
+
+     int save (const char *file,
+               const char *mode = "wb",
+               size_t offset = 0);
+
+     result_type exactMatchSearch (const key_type *key,
+                                   size_t len = 0,
+                                   size_t node_pos = 0)
+      
+     size_t commonPrefixSearch  (const key_type *key,
+                                 result_type *result,
+                                 size_t result_size,
+                                 size_t len = 0,
+                                 size_t node_pos = 0)
+
+     result_type traverse (const key_type *key, 
+                           size_t &node_pos, 
+                           size_t &key_pos, 
+                           size_t len = 0)
+   };
+
+   typedef Darts::DoubleArrayImpl&lt;char, unsigned char,
+              int, unsigned int&gt; DoubleArray;
+   // int, unsigned int は, プラットフォーム依存. 実際には, 32 bit 整数
+   // になるように, configure が適切な型を選択する
+};
+</pre>
+
+<h3>テンプレート引数の説明</h3>
+<p>
+<table border="1mm">
+<tr>
+<td>NodeType</td>
+<td>Trie の各ノードの型です. 一般的な C 文字列の検索なら, char
+以外に設定する必要はありません.</td>
+</tr>
+
+<tr>
+<td>NodeUType</td>
+<td>Trie の各ノードの型を符号無し整数に変換した型です.
+一般的な C 文字列の検索なら, unsigned char 以外に設定する必要はありません.</td>
+</tr>
+
+<tr>
+<td>ArrayType</td>
+<td>Double-Array の Base の要素に使用される型です.
+通常は signed の 32bit 整数に設定します</td>
+</tr>
+
+<tr>
+<td>ArrayUType</td>
+<td>Double-Array の Check の要素に使用される型です.
+通常は unsigned の 32bit 整数に設定します</td>
+</tr>
+
+<tr>
+<td>LengthFunc</td>
+<td>NodeType の配列を引数にしたときに,
+その配列のサイズを返す関数オブジェクトを 指定します.
+内部呼び出しに operator () を使っている ので, ()
+を overload しておく必要があります. NodeType が,
+char の場合は, strlen を wrap した関数オブジェクトが,
+それ以外は 0 を終了条件とみなして配列のサイズを計算します.</td>
+</tr>
+</table>
+
+<p>32bit 整数の定義は OS, コンパイラ依存です.<br>
+実際には configure script が,
+自動的に判別し,32bit になるように選択してくれます.
+もし64 bit 整数を用いる場合は, template
+引数で個々に指定してください.</p>
+
+<h3>typedef の説明</h3>
+<p>
+テンプレート引数に与えられた型の別名定義です. 外部から型名を参照する
+時に使います.
+</p>
+<table border>
+<tr>
+<td>key_type</td>
+<td>検索する key の 1つの要素の型です. NodeType と同一です.</td>
+</tr>
+
+<tr>
+<td>result_type</td>
+<td>1つの結果の型です. ArrayType と同一です.</td>
+</tr>
+</table>
+
+<h3>メソッドの説明</h3>
+<dl>
+<dt><code><font color="#dc143c">int
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">build</font>(size_t size, const key_type **str, const size_t
+*len = 0, const result_type *val = 0, int (*progress_func)(size_t, size_t)
+= 0)</code></dt>
+
+<dd>Double Array を構築します.<br>
+<br>
+size には, 辞書のサイズ
+(いくつの単語を登録するか),<br>
+str には, 各単語へのポインタ (要素は size個)<br>
+len は個々の単語のサイズの配列 (要素は size個)<br>
+val には, 各単語に対応する値の配列 (要素は size個)<br>
+progress_func には, 構築状況の表示に用いる関数へのポインタを指定します.<br>
+str の各要素は辞書順にソートされている必要があります.<br>
+また, val の各要素の中に, 負の要素はあってはいけません.<br>
+len, val, pg はそれぞれ省略可能です,<br>省略されると len には LengthFunc により計算された値が,<br>
+val には, 各要素が 0 から数えて何番目かをあらわす値が,<br>
+pg には, 何も表示を行なわないと解釈されます.<br>
+<br>
+<br>
+構築に成功すると, 0 が, 失敗すると負の値が返ります.<br>
+表示関数 progress_func は, 2つの引数があります.<br>
+1つ目は size_t 型の整数で,今まで構築した語彙の数,<br>2つ目も size_t 型の整数で全体の語彙の数です.<br>
+このようなインタフェースを持つ関数へのポインタを渡すことで構築時の表示を
+変更することができます.<br><br></dd>
+
+<dt><code><font color="#dc143c">result_type
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">exactMatchSearch</font>(const key_type *key, size_t len
+= 0, size_t node_pos = 0)</code></dt>
+<dd>exact match による検索を行います.<br>
+<br>
+key には, 検索したい文字列を,<br>
+len には その文字列のサイズを,<br>
+node_pos には, Double-Array の検索開始位置を指定します.<br>
+<br>
+len, と node_pos はそれぞれ省略可能で, 省略されると
+len には LengthFunc により計算された値が使用され,<br>
+node_pos は, root ノードとなります.<br>
+<br>
+戻り値として, 検索に成功した場合はその key
+に対応する値が, 失敗したら -1 が返ってきます.
+<br>
+<br>
+</dd>
+
+<dt><code><font color="#dc143c">size_t
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">commonPrefixSearch</font> (const key_type *key,
+result_type *result, size_t result_size, size_t len = 0, size_t node_pos = 0)</code></dt>
+
+<dd>common prefix search による検索を行います.<br>
+<br>
+key には, 検索したい文字列を,<br>
+result は, 検索後, マッチした複数の結果値を格納するための配列を,<br>
+result_size は, 配列 result のサイズを,<br>
+len には 検索文字列のサイズを,<br>
+node_pos には, Double-Array の検索開始位置を指定します.<br>
+<br>
+len, と node_pos はそれぞれ省略可能で, 省略されると
+len には LengthFunc により計算された値が使用され,<br>
+node_pos は, root ノードとなります.<br>
+<br>
+戻り値として, マッチした要素の個数が返ってきます.
+各要素の実際の値は, result を参照することで得られます.
+マッチした要素の個数が, result_size を越えた場合は, result_size 個だけ
+配列 result に結果を格納します. 戻り値は, 実際にマッチした個数なので, 
+result_size を越えた場合は, result のサイズを増やし, 
+再検索してください.
+<br>
+<br>
+</dd>
+
+<dt><code><font color="#dc143c">result_t
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">traverse</font> (const key_type *key,
+size_t &node_pos, size_t &key_pos, size_t len = 0)</code></dt>
+
+<dd>Trie を traverse します<br>
+<br>
+key には, 検索したい文字列を,<br>
+node_pos, には, DoubleArray の検索位置を,<br>
+key_pos には, 検索文字列の, 検索開始位置を,<br>
+len には, 検索文字列のサイズを指定します.<br>
+<br>
+traverse のプロセスとは, key に従って TRIE を辿っていくことを差します.<br>
+ただし, 最後に辿った Trie 中の node の位置, 最後に辿った検索文字列の位置(何番目の文字)を得ることができます. 
+これが, exactMatchSearch との違いになります.
+<br>
+<br>
+node_pos は通常 root の位置 (0) を指定しておきます.
+node_pos は, 参照となっています. 関数呼び出し後, node_pos の値を
+参照することで, traverse 後の, DoubleArray の位置が得られます.
+<br>
+key_pos は通常先頭の位置 (0) を指定しておきます.
+key_pos も, 参照となっています. 関数呼び出し後, key_pos の値を
+参照することで, traverse 後の, 文字列の位置が得られます.
+<br>
+
+<br>
+探索に失敗した場合は, 負の値 (-1) or (-2) を返します.<br>
+-1 は, leaf で失敗, -2 は, 途中の node で失敗を示します.<br>
+探索に成功した場合は, key に対応する value を返します.
+<br>
+<br>
+</dd>
+
+
+<dt><code><font color="#dc143c">int
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">save</font>(const char *file, const char *mode = "wb",
+size_t offset = 0)</code></dt>
+
+<dd>Double-Array をファイルに保存します.<br>
+<br>
+file には, 保存先のファイル名を,<br>
+mode には, fopen(3) に用いられる
+modeを指定します.<br>
+offset は将来のために予約されていて,
+現在は使用されていません.<br>
+<br>
+戻り値には 成功すれば, 0 が, 失敗すれば -1
+が返ってきます. <br>
+<br>
+</dd>
+
+<dt><code><font color="#dc143c">int
+Darts::DoubleArrayImpl</font>::<font color="DarkBlue">open</font>
+(const char *file, const char *mode = "rb", size_t offset = 0,
+size_t size = 0)</code></dt>
+
+<dd>Double-Array をファイルから読みこみます.<br>
+<br>
+file には読みこむファイル名を,<br>
+mode には fopen(3) に用いられるmodeを,<br>
+offset には, ファイルの 何 byte
+目から読むかの offset 情報を,<br>
+size には, 実際に 何 byte
+読むのかを指定します.<br>
+<br>
+size が 0 (デフォルト値) の場合は, size =
+ファイルサイズとなります.<br>
+<br>
+戻り値には 成功すれば, 0 が, 失敗すれば -1
+が返ってきます. <br>
+<br>
+</dd>
+
+<dt><code><font color="#dc143c">size_t
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">size</font>()</code></dt>
+
+<dd>Double-Array のサイズを返します. <br>
+<br>
+</dd>
+
+<dt><code><font color="#dc143c">size_t
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">unit_size</font>()</code></dt>
+
+<dd>Double-Array の1要素のサイズを返します.<br>
+<br>
+size() * unit_size() が, Double-Array
+を保持するのに必要なメモリ のサイズになります. <br>
+<br>
+</dd>
+
+<dt><code><font color="#dc143c">size_t
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">nonzero_size</font>()</code></dt>
+
+<dd>Double-Array の各要素のうち,
+使用領域のサイズを返します.<br>
+nonezero_size()/size() にて, 圧縮率が計算できます.
+<br>
+<br>
+</dd>
+
+<dt><code><font color="#dc143c">void
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">set_array</font>(void *ptr, size_t array_size = 0)</code></dt>
+
+<dd>ptr を Double-Array と解釈して Double-Array
+への pointer に代入します.<br>
+これは, mmap(2) を用い, 保存済みの Double-Array
+への pointer を取得し,<br>
+その値を外部からセットする目的で用意されています.
+見てのとおり 非常に ad-hoc な methodです.<br>
+<br>また, array_size にて, Double-Array のサイズ (size() の戻り値) を指定することができます.<br>
+このサイズは, Double-Array のサイズであって, メモリのサイズではありません.
+array_size * unit_size () が, 実際のメモリサイズです. ご注意下さい.
+<br>
+<br>
+この method を用いて設定された
+メモリ領域への解放作業は行われません. <br>
+<br>
+</dd>
+
+<dt><code><font color="#dc143c">const void*
+Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">array</font>()</code></dt>
+<dd>
+Double Array を 生の void ポインタとして取得します.<br/>
+この領域は, DoubleArray のインスタンスが管理しており,
+扱いには注意が必要です.
+<br>
+<br>
+</dd>
+
+<dt><code><font color=
+"#dc143c">Darts::DoubleArrayImpl</font>::<font color=
+"DarkBlue">clear</font>()</code></dt>
+
+<dd>保持している, Double-Array を解放します. <br>
+<br>
+</dd>
+</dl>
+
+<h2>サンプルプログラミング</h2>
+<p>
+static な辞書から Double-Arrayを構築する. 
+</p>
+
+<pre>
+#include &lt;iostream&gt;
+#include &lt;darts.h&gt;
+
+int main (int argc, char **argv)
+{
+  using namespace std;
+
+  Darts::DoubleArray::key_type   *str[] = { "ALGOL", "ANSI", "ARCO",  "ARPA", "ARPANET", "ASCII" }; // same as char*
+  Darts::DobuleArray::result_type val[] = { 1, 2, 3, 4, 5, 6 }; // same as int 
+
+  Darts::DoubleArray da;
+  da.build (6, str, 0, val); 
+
+  cout &lt;&lt; da.exactMatchSearch("ALGOL") &lt;&lt; endl;
+  cout &lt;&lt; da.exactMatchSearch("ANSI") &lt;&lt; endl;
+  cout &lt;&lt; da.exactMatchSearch("ARCO") &lt;&lt; endl;;
+  cout &lt;&lt; da.exactMatchSearch("ARPA") &lt;&lt; endl;;
+  cout &lt;&lt; da.exactMatchSearch("ARPANET") &lt;&lt; endl;;
+  cout &lt;&lt; da.exactMatchSearch("ASCII") &lt;&lt; endl;;
+  cout &lt;&lt; da.exactMatchSearch("APPARE") &lt;&lt; endl;
+
+  da.save("some_file");
+}
+
+実行結果
+1
+2
+3
+4
+5
+6
+-1
+</pre>
+
+<p>
+標準入力から対話的に Double-Array に対し Common Prefix
+Search を行う 
+</p>
+
+<pre>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#include &lt;darts.h&gt;
+
+int main (int argc, char **argv)
+{
+  using namespace std;
+
+  Darts::DoubleArray da;
+  if (da.open("some_file") == -1) return -1;
+
+  Darts::DoubleArray::result_type  r [1024];
+  Darts::DoubleArray::key_type     buf [1024];
+
+  while (cin.getline (buf, 1024)) {
+    size_t result = da.commonPrefixSearch(buf, r, 1024);
+    if (result == 0) {
+       cout &lt;&lt; buf &lt;&lt; ": not found" &lt;&lt; endl;
+    } else {
+       cout &lt;&lt; buf &lt;&lt; ": found, num=" &lt;&lt; result &lt;&lt; " ";
+       copy (r, r + result, ostream_iterator&lt;Darts::DoubleArray::result_type&gt;(cout, " "));
+       cout &lt;&lt; endl;
+    }
+  }
+
+  return 0;
+}
+</pre>
+<p>
+他のサンプルとして, mkdarts.cpp や darts.cpp をご覧ください
+</p>
+</ul>
+
+<h2>付属プログラムの説明</h2>
+<h3>mkdarts</h3>
+
+<pre>
+% ./mkdarts DictionaryFile DoubleArrayFile 
+</pre>
+
+ソート済みの辞書を DoubleArrayFile に変換します. 
+
+<h3>darts</h3>
+<pre>
+% ./darts DoubleArrayFile 
+</pre>
+<p>
+DoubleArrayFile に対し対話的に common prefix search
+を行います.<br>
+ サンプルプログラムの 2番目とほぼ同じです. 
+</p>
+
+<h3>使用例</h3>
+<pre>
+% cd tests
+% head -10 linux.words
+ALGOL
+ANSI
+ARCO
+ARPA
+ARPANET
+ASCII
+ .. 
+
+% ../mkdarts linux.words dar
+Making Double Array: 100% |*******************************************|
+Done!, Compression Ratio: 94.6903 %
+
+% ../darts dar
+Linux
+Linux: found, num=2 3697 3713
+Windows
+Windows: not found
+LaTeX
+LaTeX: found, num=1 3529
+</pre>
+
+<h2>既知の問題</h2>
+<h3>構造体の表現方法</h3>
+<p>Double-Array は, </p>
+<pre>
+struct Unit
+{
+   ArrayType    base;
+   ArrayUType   check;
+};
+</pre>
+<p>
+のような Unit の配列として表現されています.
+このファイルの入出力は, fread, fwrite を用いて, 
+</p>
+<pre>
+fread  ((Unit *)array,  sizeof(Unit), size, fp);
+fwrite ((Unit *)array,  sizeof(Unit), size, fp);
+</pre>
+<p>
+のように, 行われています. ごくまれですが,
+構造体の配列の間に gap を挿入 する
+OS/コンパイラがあるそうです. したがって,
+このような読み書きは厳密に言えば移植性がありません.
+私が使用している g++ 2.95.2 と Tru64 に附属の cxx
+は問題ないようなので, このままの状態にしていますが,
+いずれ移植性を高めるために書きなおすつもりです. 
+</p>
+
+<h2><a name="todo">TODO</a></h2>
+<ul>
+<li>Double-Array の解説文書の作成</li>
+<li>幅優先の格納を考える</li>
+<li>一部 vector &lt;&gt; を使ってる部分を駆逐</li>
+<li>英語のマニュアルを書く</li>
+<li>動的な削除と追加をサポート</li>
+</ul>
+
+<h2>参考文献, リンク</h2>
+<ul>
+<li><a name="aoe"><strong>[Aoe1989]</strong> Aoe, J. <cite>An
+Efficient Digital Search Algorithm by Using a Double-Array
+Structure.</cite> <strong>IEEE Transactions on Software
+Engineering.</strong> Vol. 15, 9 (Sep 1989). pp.
+1066-1077.</a></li>
+
+<li><strong>[Datrie]</strong> Theppitak Karoonboonyanan <cite>An
+Implementation of Double-Array Trie</cite><a href=
+"http://www.links.nectec.or.th/~thep/datrie/">http://www.links.nectec.or.th/~thep/datrie/</a></li>
+
+<li><strong>[単語と辞書]</strong> 松本裕治 ほか.
+<cite>単語と辞書</cite>
+<strong>岩波講座言語の科学</strong> Vol.3 pp.79-81</li>
+</ul>
+
+<hr>
+<p>$Id: index.html 1674 2008-03-22 11:21:34Z taku $;</p>
+
+</body>
+</html>

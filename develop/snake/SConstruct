@@ -1,3 +1,5 @@
+import sys
+import Util
 import os
 import socket
 import SCons
@@ -6,7 +8,18 @@ from datetime import datetime
 import Flags
 import Path
 import BuildManager
-import Util
+scons_dir = ARGUMENTS.get('scons_dir', '')
+
+if scons_dir != '':
+  # print('')
+  # print('%s  %s' % (Util.Highlight('scons dir:', 1, False), scons_dir))
+  sys.path.insert(0, scons_dir)
+
+python_dir = ARGUMENTS.get('python_dir', '')
+if python_dir != '':
+  # print('%s %s'% (Util.Highlight('python dir:', 1, False), python_dir))
+  # print('')
+  sys.path.insert(0, scons_dir)
 
 EnsureSConsVersion(1, 2)
 EnsurePythonVersion(2, 6)
@@ -39,6 +52,7 @@ print('%s   %s' %
       (Util.Highlight('Build strategy:', 1, False), _build_strategy))
 print('%s  %s' %
       (Util.Highlight('Build directory:', 1, False), Flags.SNAKE_OUT))
+print('')
 
 _build_target = ARGUMENTS.get('t')
 if _build_target == None:
@@ -48,6 +62,7 @@ if _build_target == None:
 base_env.VariantDir(Path.GetOutputDir(), Path.GetBaseDir(), duplicate = 0)
 
 # user our parser to analysis the dependencies and build
+
 target = Path.GetLogicalPath(ARGUMENTS.get('cur_dir'), _build_target)
 build_manager = BuildManager.GetBuildManager(base_env)
 build_manager.Build(target)

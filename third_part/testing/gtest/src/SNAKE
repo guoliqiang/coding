@@ -1,0 +1,17 @@
+cc_library(name = 'gtest',
+           srcs = [
+                  'benchmark.cc',
+                  'gtest.cc',
+                  'gtest-filepath.cc',
+                  'gtest_main.cc',
+                  'gtest-printers.cc',
+                  'gtest-typed-test.cc',
+                  'benchmark_main.cc',
+                  'gtest-death-test.cc',
+                  'gtest-port.cc',
+                  'gtest-test-part.cc'
+           ],
+           deps = [
+                 '//third_part/testing/gmock/src:gmock',
+           ]
+)

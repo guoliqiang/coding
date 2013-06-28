@@ -1,0 +1,34 @@
+2001-06-11  Taku Kudo  <taku-ku@rice.aist-nara.ac.jp>
+
+	* configure.in:
+	add mode --with(out)-zlib to enable|disable zlib by user.
+
+	* mkarts.c:
+	"-" is used as STDIN input.
+
+2001-05-25  Taku Kudo  <taku-ku@rice.aist-nara.ac.jp>
+
+	* Bugs in EOS (end of string) handling:
+	In previous code, one cannot distingwish string's terminal and
+	NULL charactor, since NULL charctor is used as a maker for 
+	any string's terminal.	to cope with this problem, 
+	I used a special charctor (insted of NULL) to identify the string's terminal. 
+	This modification will cause a incompatibility of index structure.
+	
+	* compress double-array using zlib:
+	added an experimental code allows users to (de)compress the doulbe-array
+	using zlib.
+
+	* Modifiing the return value of open and save:
+	Taking the UNIX-style functions into account,
+	the return value of function, open and save are modified.
+	0 implies 'successfull' -1 implies 'errro'.
+
+	* new method:
+	get_unit_size(), which returns the size of one Unit of Double-Array,
+	is added to the class.
+
+2001-05-21  Taku Kudo  <taku-ku@rice.aist-nara.ac.jp>
+
+	* Initial Release:
+

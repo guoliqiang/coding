@@ -1,3 +1,5 @@
+#!/usr/bin/env python2.6
+
 from SCons.Script import ARGUMENTS
 import glob
 import hashlib
@@ -9,9 +11,20 @@ import sys
 import time
 import Flags
 import SCons
+import socket
+import fcntl
+import struct
 
 
 _verbose = int(ARGUMENTS.get('verbose', '1'))
+
+def GetIp(ifname):
+  s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+  return socket.inet_ntoa(fcntl.ioctl(s.fileno(),
+                                      0x8915,  # SIOCGIFADDR
+                                      struct.pack('256s', ifname[:15])
+                                     )[20:24]
+                         )
 
 def Log(msg, v = 0):
   if v > _verbose: return
@@ -198,6 +211,16 @@ def ColorfulBuild(env, log_in_one_line):
   env['ANDROIDTESTSTR'] = android_message
   env['BISONCOMSTR'] = gen_cpp_message
   env['PYTHONCOMSTR'] = build_python_message
+
+
+def MatchOnePattern(file_path, pattern, group_num = 1):
+  result = []
+  pattern_re = re.compile(pattern)
+  for line in open(str(file_path), 'r'):
+    m = pattern_re.match(line)
+    if m:
+      result.append(m.group(group_num))
+  return result
 
 
 def EchoSpawn(sh, escape, cmd, args, env):

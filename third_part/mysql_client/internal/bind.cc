@@ -8,12 +8,14 @@ namespace util_mysql {
 
 class MysqlConnection;
 
+//
 MysqlBind::MysqlBind(MysqlConnection *conn, const std::string &query)
                     : conn_(conn) {
   query_statment_ = query;
   ParamInit();
 }
 
+//
 void MysqlBind::ParamInit() {
   stmt_ = conn_->GetStmtHandle();
   if (NULL == stmt_)
@@ -34,6 +36,7 @@ void MysqlBind::ParamInit() {
   }
 }
 
+//
 MysqlBind::~MysqlBind() {
   for (int i = 0; i < param_num_; i++) {
     if (bind_[i].buffer) {
@@ -46,6 +49,7 @@ MysqlBind::~MysqlBind() {
   Close();
 }
 
+//
 bool MysqlBind::FillParamInfo(int32 column_index,
                               const void *data,
                               size_t size,
@@ -89,14 +93,17 @@ bool MysqlBind::SetParam(int32 column_index, const std::string &data) {
                        MYSQL_TYPE_STRING, false);
 }
 
+//
 bool MysqlBind::SetParam(int32 column_index, uint32 data) {
   return FillParamInfo(column_index, &data, 4, MYSQL_TYPE_LONG, true);
 }
 
+//
 bool MysqlBind::SetParam(int32 column_index, int32 data) {
   return FillParamInfo(column_index, &data, 4, MYSQL_TYPE_LONG, false);
 }
 
+//
 bool MysqlBind::SetParam(int32 column_index, uint64 data) {
   return FillParamInfo(column_index, &data, 8, MYSQL_TYPE_LONGLONG, true);
 }

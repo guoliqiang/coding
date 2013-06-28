@@ -1,0 +1,8 @@
+thrift_library(name = 'clustering_thrift',
+    srcs = [
+    'clustering.thrift',
+    ],
+    gen_cpp = 1,
+    gen_py = 1,
+    gen_php = 1,
+    )

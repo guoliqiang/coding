@@ -56,6 +56,10 @@ def GetRelativePath(path):
   return path[2:].replace(':', '/')
 
 
+def AddBaseDir(path):
+  return os.path.join(GetBaseDir(), path)
+
+
 def GetAbsPath(path, abort = True):
   assert path.startswith('//')
   path = GetRelativePath(path)
@@ -67,6 +71,9 @@ def GetAbsPath(path, abort = True):
   else:
     return ''
   pass
+
+def GetThriftOutPath():
+  return os.path.join(GetOutputDir(), Flags.THRIFT_OUT)
 
 
 def GetAbsRelativePath(path):
@@ -92,3 +99,12 @@ def IsSVNClient():
 
 def IsGITClient():
   return os.path.exists(os.path.join(GetBaseDir(), '.git'))
+
+
+def GetCustomizedOutputPath():
+  outDir = ''
+  return os.path.join(GetOutputDir(), outDir)
+
+
+def GetCustomizedThriftPhpOutPath():
+  return os.path.join(GetCustomizedOutputPath(), 'php/thrift-out')

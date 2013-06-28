@@ -1,0 +1,171 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(darts.cpp)
+AM_INIT_AUTOMAKE(darts, 0.32)
+
+dnl Checks for programs.
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_MAKE_SET
+AC_LANG_CPLUSPLUS
+
+dnl Checks for libraries.
+
+dnl Checks for header files.
+AC_HEADER_STDC
+# AC_CHECK_HEADERS(string.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_TYPE_OFF_T
+AC_TYPE_SIZE_T
+AC_CHECK_SIZEOF(char)
+AC_CHECK_SIZEOF(short)
+AC_CHECK_SIZEOF(int)
+AC_CHECK_SIZEOF(long)
+AC_CHECK_SIZEOF(long long)
+
+dnl
+dnl check gcc
+dnl
+if test -n "$GCC"; then
+   CFLAGS="-O3 -Wall"
+   CXXFLAGS="-O3 -Wall"
+fi
+
+dnl check C++ features
+dnl
+AC_DEFUN(CHECK_CXX_STL, [
+  AC_MSG_CHECKING(if ${CXX-c++} supports stl <$1> (required))
+  AC_TRY_COMPILE(
+	[
+	  #include <$1>
+	], [
+	;
+	], [
+	  ac_stl_$1=yes
+	], [
+	  config_error=yes
+	  AC_WARN(${CXX-c++} stl <$1> does not work)
+        ])
+  AC_MSG_RESULT([$ac_stl_$1])
+])
+
+CHECK_CXX_STL(vector)
+CHECK_CXX_STL(cstdio)
+CHECK_CXX_STL(cstring)
+CHECK_CXX_STL(string)
+
+# check for namespaces
+AC_MSG_CHECKING(if ${CXX-c++} supports namespaces (required) )
+AC_TRY_COMPILE(
+[
+namespace Foo { struct A {}; }
+using namespace Foo;
+],[
+A a;
+],[
+ ac_namespaces=yes
+dnl AC_DEFINE(HAVE_CXX_NAMESPACE)
+],[
+ config_error=yes
+ ac_namespaces=no
+])
+AC_MSG_RESULT([$ac_namespaces])
+
+# namespace
+if test "x$ac_namespaces" = xyes ; then
+AC_MSG_CHECKING(if ${CXX-c++} uses std namespace )
+AC_TRY_COMPILE(
+[
+#include <iostream>
+namespace std{}
+using namespace std;
+],[
+cout << "test" << endl;
+],[
+ ac_std_namespace=yes
+ AC_DEFINE(HAVE_CXX_STD_NAMESPACE)
+],[
+ ac_std_namespace=maybe
+])
+
+# std namespace
+if test "x$ac_std_namespace" = xmaybe ; then
+AC_TRY_COMPILE(
+[
+#include <iostream.h>
+namespace std{}
+using namespace std;
+],[
+cout << "test" << endl;
+],[
+ ac_std_namespace=yes
+ AC_DEFINE(HAVE_CXX_STD_NAMESPACE)
+],[
+ ac_std_namespace=no
+])
+fi
+AC_MSG_RESULT([$ac_std_namespace])
+fi
+
+dnl
+dnl check C++ features
+dnl
+AC_DEFUN(CHECK_CXX_STL, [
+  AC_MSG_CHECKING(if ${CXX-c++} supports stl <$1> (required))
+  AC_TRY_COMPILE(
+        [
+          #include <$1>
+        ], [
+        ;
+        ], [
+          ac_stl_$1=yes
+        ], [
+          config_error=yes
+          AC_WARN(${CXX-c++} stl <$1> does not work)
+        ])
+  AC_MSG_RESULT([$ac_stl_$1])
+])
+
+AC_MSG_CHECKING(if ${CXX-c++} environment provides all required features)
+if test "x$config_error" = xyes ; then
+  AC_MSG_RESULT([no])
+  AC_MSG_ERROR([Your compiler is not powerful enough to compile Darts. \
+        If it should be, see config.log for more information of why it failed.])
+fi
+AC_MSG_RESULT([yes])
+
+DARTS_DEFAULT_ARRAY_SIZE=4
+DARTS_DEFAULT_NODE_SIZE=1
+
+DARTS_SIZEOF_CHAR=$ac_cv_sizeof_char
+DARTS_SIZEOF_SHORT=$ac_cv_sizeof_short
+DARTS_SIZEOF_INT=$ac_cv_sizeof_int
+DARTS_SIZEOF_LONG=$ac_cv_sizeof_long
+DARTS_SIZEOF_LONG_LONG=$ac_cv_sizeof_long_long
+
+AC_SUBST(DARTS_DEFAULT_ARRAY_SIZE)
+AC_SUBST(DARTS_DEFAULT_NODE_SIZE)
+AC_SUBST(DARTS_SIZEOF_CHAR)
+AC_SUBST(DARTS_SIZEOF_SHORT)
+AC_SUBST(DARTS_SIZEOF_INT)
+AC_SUBST(DARTS_SIZEOF_LONG)
+AC_SUBST(DARTS_SIZEOF_LONG_LONG)
+
+DARTS_HAVE_ZLIB_H=0
+AC_ARG_WITH(
+  zlib,
+  [  --with-zlib use zlib]
+)
+
+if test "$with_zlib" != "no"; then
+  AC_CHECK_HEADERS(zlib.h)
+  AC_CHECK_LIB(z,gzopen)
+fi
+
+if test "$ac_cv_header_zlib_h" = "yes"; then
+  DARTS_HAVE_ZLIB_H=1
+fi
+AC_SUBST(DARTS_HAVE_ZLIB_H)
+
+AM_CONFIG_HEADER(config.h)
+AC_OUTPUT([Makefile tests/Makefile darts.h darts.spec])

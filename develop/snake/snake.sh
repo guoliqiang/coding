@@ -19,6 +19,9 @@ scons \
 --f=$base_dir/develop/snake/SConstruct \
 cur_dir=$original_dir \
 base_dir=$base_dir \
+scons_dir=$base_dir/third_part/scons/ \
+python_dir=$base_dir/third_part/python/ \
+thrift_bin=$base_dir/third_part/thrift/bin/thrift \
 -Q \
 --jobs=4 \
 $@

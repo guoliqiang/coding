@@ -1,0 +1,12 @@
+cc_library(name = 'gmock',
+           srcs = [
+             'gmock-cardinalities.cc',
+             'gmock.cc',
+             'gmock-internal-utils.cc',
+             'gmock-matchers.cc',
+             'gmock-spec-builders.cc'
+           ],
+           deps = [
+             '//third_part/testing/gtest/src:gtest',
+           ]
+)

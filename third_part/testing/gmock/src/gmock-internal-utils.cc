@@ -41,7 +41,7 @@
 #include <ostream>  // NOLINT
 #include <string>
 #include "../include/gmock/gmock.h"
-#include "../../include/gmock/internal/gmock-port.h"
+#include "../include/gmock/internal/gmock-port.h"
 #include "../../gtest/include/gtest/gtest.h"
 
 namespace testing {

@@ -10,7 +10,7 @@ import os
 import traceback
 
 "Add new language build here"
-_Languages = ('Cpp')
+_Languages = ('Cpp Thrift')
 
 class BuildManager(object):
   """Object that manages all build for all languages."""
@@ -133,6 +133,14 @@ class BuildManager(object):
     return result
 
 
+  def _SpecialCheck(self, obj_list):
+    from Cpp import CheckThriftDependency
+    for k in range(len(obj_list)):
+      name = obj_list[k]
+      obj = self.GetObjByName(name)
+      CheckThriftDependency(obj)
+    pass
+
   def _GetAllDependents(self, targets):
     obj_list = self._GetAllObjs(targets)
     result = self._TopologySort(obj_list)
@@ -154,6 +162,7 @@ class BuildManager(object):
         obj_idx -= 1
       dep_idx -= 1
     result.reverse()
+    self._SpecialCheck(result)
     return result
 
 
@@ -204,7 +213,9 @@ class BuildManager(object):
       for r in registers:
         self.builders_[r] = lang_builder
       lang_builder.GenerateEnv(self.env_)
-
+      builders = lang_builder.RegisterSnakeBuilders()
+      if len(builders) > 0:
+        self.env_.Append(BUILDERS = builders)
 
   def AddDependentSnakeFile(self, snake_file):
     assert os.path.exists(snake_file)
