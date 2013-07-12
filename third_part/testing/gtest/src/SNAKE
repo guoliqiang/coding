@@ -13,5 +13,6 @@ cc_library(name = 'gtest',
            ],
            deps = [
                  '//third_part/testing/gmock/src:gmock',
-           ]
+           ],
+           copt = ['no_style_check']
 )

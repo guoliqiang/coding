@@ -6,7 +6,6 @@ cc_library(name = 'gmock',
              'gmock-matchers.cc',
              'gmock-spec-builders.cc'
            ],
-           deps = [
-             '//third_part/testing/gtest/src:gtest',
-           ]
+           deps = [],
+           copt = ['no_style_check']
 )

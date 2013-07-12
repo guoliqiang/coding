@@ -63,8 +63,8 @@ class BuildManager(object):
         self._LoadSnakeFile(build_file)
 
     # ... means build all objects under the directory
-    if target.endswith(':...'):
-      path = Path.GetAbsPath(target[:-4])
+    if target.endswith(':*'):
+      path = Path.GetAbsPath(target[:-2])
       for obj in self.obj_maps_.itervalues():
         if os.path.dirname(obj.path_) == path:
           self.build_targets_.append(obj.name_)  # logical path
@@ -83,6 +83,8 @@ class BuildManager(object):
       obj_name = obj_list[idx][0]
       obj = self.GetObjByName(obj_name)
       for dep in obj.depends_:
+        if Path.IsStaticLib(dep):
+          continue
         if dep not in obj_set:
           obj_list.append([dep, obj_name])
           obj_set.append(dep)
@@ -97,6 +99,12 @@ class BuildManager(object):
     for item in obj_list:
       obj = self.GetObjByName(item)
       out_map[item] = len(obj.depends_)
+      for dep in obj.depends_:
+        if Path.IsStaticLib(dep):
+          out_map[item] -= 1
+        pass
+      pass
+    pass
     for i in range(len(obj_list)):
       found = False
       for idx in range(len(objs) - 1, -1, -1):
@@ -218,7 +226,7 @@ class BuildManager(object):
         self.env_.Append(BUILDERS = builders)
 
   def AddDependentSnakeFile(self, snake_file):
-    assert os.path.exists(snake_file)
+    assert os.path.exists(snake_file), 'INPUT: %s END' % snake_file
     if not snake_file in self.processed_snakes_:
       self.dependent_snakes_.append(snake_file)
     pass

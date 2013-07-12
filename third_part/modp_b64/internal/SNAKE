@@ -1,0 +1,4 @@
+cc_library(name= "modp_b64",
+           srcs = ['modp_b64.cc'],
+           copt = ['no_style_check']
+          )

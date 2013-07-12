@@ -1,5 +1,3 @@
-#!/usr/bin/python2.6
-
 SNAKE_NAME = 'SNAKE'
 SNAKE_OUT = '.snake'
 LOCAL_SNAKE_DIR = '/usr/local/snake'

@@ -1,5 +1,3 @@
-#!/usr/bin/python2.6
-
 class BuildingObject(object):
   def __init__(self):
     self.name_ = ''              # logical name.    //base:base
@@ -9,7 +7,7 @@ class BuildingObject(object):
     self.raw_depends_ = []       # same as depends_ but raw
     self.option_ = {}            # copt / cflags / link_flags
     self.build_type_ = ''        # cc_binary cc_libary
-    self.has_thrift_dep = False
+    self.has_thrift_dep = False  # dependent thrift ?
     pass
 
   def __str__(self):
@@ -21,6 +19,5 @@ class BuildingObject(object):
     if self.option_:
       result += ', option: %s' % str(self.option_)
     else:
-      result += ', public'
       result += '>'
     return result

@@ -1,0 +1,8 @@
+cc_binary(name='zk_manager_unittest',
+          srcs = ['zk_manager_unittest.cc'],
+          deps = [
+                 '//base/internal:base',
+                 '//third_part/testing/gtest/src:gtest',
+                 '//third_part/zk_manager/internal:zk_manager'
+          ]
+          )

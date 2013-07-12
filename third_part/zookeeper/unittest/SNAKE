@@ -1,0 +1,16 @@
+#cc_binary(name = 'zookeeper',
+#          srcs = ['zookeeper.cc'],
+#          deps = [
+#            '//libs/third_part/zookeeper:zookeeper_mt'
+#          ]
+#          )
+
+cc_binary(name = 'zookeeper_unittest',
+          srcs = ['zookeeper_unittest.cc'],
+          deps = [
+            '//base/internal:base',
+            '//libs/third_part/zookeeper:zookeeper_mt',
+            '//third_part/testing/gtest/src:gtest'
+          ],
+          copt=['always_link']
+          )

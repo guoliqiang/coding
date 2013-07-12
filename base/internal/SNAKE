@@ -33,6 +33,8 @@ cc_library(name = 'base',
                    'blocking_closure.cc',
                    'counter.cc',
                    'net.cc',
+                   'shared_ptr.cc',
+                   'varint.cc'
                   ],
            deps = [],  # base should not depends on other components!
            copt = ['no_style_check']

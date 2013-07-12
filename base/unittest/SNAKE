@@ -14,3 +14,12 @@ cc_binary(name = 'counter_unittest',
                   '//third_part/testing/gtest/src:gtest'
                  ],
           )
+
+cc_binary(name = 'time_unittest',
+           srcs = ['time_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )
+

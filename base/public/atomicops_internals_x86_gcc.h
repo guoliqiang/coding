@@ -25,6 +25,7 @@ namespace subtle {
 
 // 32-bit low-level operations on any platform.
 
+// see http://hi.baidu.com/pan_edward/item/f5ae9d37c2ccb9f7e6bb7ace
 inline Atomic32 NoBarrier_CompareAndSwap(volatile Atomic32* ptr,
                                          Atomic32 old_value,
                                          Atomic32 new_value) {

@@ -1,0 +1,9 @@
+cc_library(name = 'encode',
+           srcs = ['base64encoder.cc',
+                   'converseencoder.cc'
+                  ],
+           deps = [
+                   '//third_part/registerer/internal:registerer',
+                   '//third_part/crypto/internal:crypto'
+                  ]
+           )

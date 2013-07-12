@@ -9,8 +9,8 @@ import Flags
 import Path
 import BuildManager
 
-EnsureSConsVersion(1, 2)
-EnsurePythonVersion(2, 6)
+EnsureSConsVersion(2, 3)
+EnsurePythonVersion(2, 7)
 
 Util.EnsureSnakeDir()
 
@@ -25,9 +25,9 @@ Util.PrepareEnv(base_env)
 
 _build_strategy = ARGUMENTS.get('c', 'dbg')
 
-print('%s         %s UTC %s' %
+print('%s         %s  %s' %
       (Util.Highlight('Build at:', 1, False),
-       socket.gethostname(), datetime.utcnow()))
+      socket.gethostname(), Util.LocalTime()))
 print('%s       %s %s' %
       (Util.Highlight('Build with:', 1, False),
        '-'.join((base_env['CXX'], base_env['CXXVERSION'])),
@@ -39,13 +39,12 @@ print('%s   %s' %
 print('%s   %s' %
       (Util.Highlight('Build strategy:', 1, False), _build_strategy))
 print('%s  %s' %
-      (Util.Highlight('Build directory:', 1, False), Flags.SNAKE_OUT))
+      (Util.Highlight('Build directory:', 1, False), Path.AddBaseDir(Flags.SNAKE_OUT)))
 print('')
 
 _build_target = ARGUMENTS.get('t')
 if _build_target == None:
   Util.Abort('no target specified.')
-
 
 base_env.VariantDir(Path.GetOutputDir(), Path.GetBaseDir(), duplicate = 0)
 

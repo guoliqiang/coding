@@ -1,0 +1,12 @@
+cc_library(name = "zk_manager",
+           srcs = ['zk_manager_base.cc',
+                   'zk_manager.cc',
+                   'zk_manager_helper.cc'],
+           deps = [
+                   '//third_part/encode/internal:encode',
+                   '//third_part/crypto/internal:crypto',
+                   '//libs/third_part/zookeeper:zookeeper_mt',
+                   '//libs/third_part/openssl:ssl',
+                   '//libs/third_part/openssl:crypto'
+                  ]
+           )

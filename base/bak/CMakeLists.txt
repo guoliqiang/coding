@@ -1,0 +1,42 @@
+project(base)
+set(LIB_SRC
+            string_util.cc
+            flags.cc
+            string_piece.cc
+            debug_util.cc
+            symbolize.cc
+            demangle.cc
+            logging.cc
+            prtime.cc
+            time.cc
+            safe_strerror_posix.cc
+            flags_reporting.cc
+            env.cc
+            utf_string_conversions.cc
+            utf_string_conversion_utils.cc
+            string16.cc
+            dmg_fp.cc
+            env.cc
+            icu_utf.cc
+            utf.cc
+            dynamic_annotations.c
+            at_exit.cc
+            atomicops_internals_x86_gcc.cc
+            lazy_instance.cc
+            platform_thread_posix.cc
+            thread_local_posix.cc
+            thread_restrictions.cc
+            thread.cc
+            thread_pool.cc
+            fixed_size_priority_queue.cc
+            hash.cc
+            blocking_closure.cc
+            counter.cc
+            net.cc
+)
+add_library(libbase ${LIB_SRC})
+set_target_properties(libbase
+            PROPERTIES
+            COMPILE_FLAGS  "-fPIC -lpthread  -ldl -lrt"
+            )
+set_target_properties(libbase PROPERTIES OUTPUT_NAME "base")

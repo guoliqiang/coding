@@ -1,5 +1,3 @@
-#!/usr/bin/env python2.6
-
 from LanguageBuilder import LanguageBuilder
 from LanguageBuilder import RegisterObj
 from SCons.Script import ARGUMENTS
@@ -13,28 +11,25 @@ import Flags
 import Path
 import Util
 import sys
-sys.path.append('develop/snake/third_part/python')
+sys.path.append('develop/snake/third_part/cpplint/')
 import cpplint
+import BuildingObject
 
 """Cpp build registerers"""
+
 def _cc_internal(name, srcs, deps, copt, libs, path,
                  cflags, link_flags, build_type):
   opt = {}
   if copt != None and len(copt) > 0:
     opt['copt'] = copt
-
   if cflags != None and len(cflags) > 0:
     opt['cflags'] = cflags
-
   if libs != None and len(libs) > 0:
     opt['libs'] = libs
-
   if link_flags != None and len(link_flags) > 0:
     opt['link_flags'] = link_flags
-
   if path != None and len(path) > 0:
     opt['path'] = path
-
   RegisterObj(name, srcs, deps, opt, build_type)
 
 
@@ -51,12 +46,13 @@ def cc_binary(name = None, srcs = [], deps = [], libs = [], path = [],
 
 def GetCppInclude(obj):
   result = ['.', Path.GetOutputDir(), Path.GetBaseDir()]
+  result.append(Path.AddBaseDir('third_part/boost/include'))
   if obj.has_thrift_dep:
     result.append(Path.GetThriftOutPath())
-    result.append(Path.AddBaseDir('third_part/boost/include'))
     result.append(Path.AddBaseDir('third_part/libevent'))
     result.append(Path.AddBaseDir('third_part/thrift/include'))
   return result
+
 
 class CppBuilder(LanguageBuilder):
   """C++ code builders"""
@@ -68,12 +64,11 @@ class CppBuilder(LanguageBuilder):
                                      '%s/distcc_log' % Flags.SNAKE_OUT)
     self._use_distcc = ARGUMENTS.get('use_distcc', 'on')
     self._lib_name_map = {}
-    self._opend_files = set()
+    self._source_files = set()
     self._checked_dir = set()
 
 
   def _HasCopt(self, obj, opt):
-    """Checks if an obj is specified one c/c++ option."""
     return obj.option_.has_key('copt') and opt in obj.option_['copt']
 
 
@@ -94,17 +89,16 @@ class CppBuilder(LanguageBuilder):
     self._checked_dir.add(d)
     for f in obj.sources_:
       if f.endswith('.h') or f.endswith('.cc') or f.endswith('.cpp'):
-        self._opend_files.add(os.path.join(d, Path.GetBaseName(f)))
+        self._source_files.add(os.path.join(d, Path.GetBaseName(f)))
         pass
     pass
 
 
   def _StyleCheck(self):
-    for f in self._opend_files:
+    for f in self._source_files:
       cpplint.ProcessFile(f, cpplint._cpplint_state.verbose_level, False)
     if cpplint._cpplint_state.error_count > 0:
-      print Util.BuildMessage('There\'re %d style warnings in the opend files, '
-                              'please try fixing them before submit the code!' %
+      print Util.BuildMessage('There are %d style warnings in the soruce files!' %
                               cpplint._cpplint_state.error_count, 'WARNING')
     pass
 
@@ -129,7 +123,10 @@ class CppBuilder(LanguageBuilder):
           distcc_hosts = distcc_hosts[i:] + distcc_hosts[0:i]
           break
       env['ENV']['DISTCC_HOSTS'] = ' '.join(distcc_hosts)
-      print Util.BuildMessage("distcc host:" + ' '.join(distcc_hosts))
+      if len(distcc_hosts) == 0:
+        print Util.BuildMessage("compiling only at localhost:%s" % hostname)
+      else:
+        print Util.BuildMessage("distcc host:" + ' '.join(distcc_hosts))
       if len(self._distcc_log) > 0:
         if os.path.exists(self._distcc_log):
           os.remove(self._distcc_log)
@@ -151,9 +148,7 @@ class CppBuilder(LanguageBuilder):
       link_flags.append('-static-libstdc++')
     else:
       cc_flags += '-fno-strict-aliasing '
-
     env.Replace(LINKFLAGS = ' '.join(link_flags))
-
     if self._build_mode == 'dbg':
       env.Replace(CCFLAGS = ' '.join([cc_flags]))
     elif self._build_mode == 'opt':
@@ -170,22 +165,21 @@ class CppBuilder(LanguageBuilder):
 
 
   def _GetLibName(self, path):
-    lib_name = 'lib' + os.path.basename(path) + '.a'
-    return os.path.join(os.path.dirname(path), lib_name)
+    lib_name = 'lib' + os.path.basename(Path.GetRelativePath(path)) + '.a'
+    return "//" + os.path.join(os.path.dirname(Path.GetRelativePath(path)), lib_name)
 
 
   def _GetLibPath(self, name):
     try:
       lib_name = self._lib_name_map[name]
     except:
-      build_name = Path.GetAbsRelativePath(name)
-      lib_name = self._GetLibName(build_name)
+      lib_name = Path.GetAbsRelativePath(self._GetLibName(name))
       self._lib_name_map[name] = lib_name
     return lib_name
 
 
   def _GetStaticLib(self, path, abort = True):
-    return Path.GetAbsPath(self._GetLibName(p), abort)
+    return Path.GetAbsPath(self._GetLibName(path), abort)
 
 
   def _GetLibPathForObj(self, obj):
@@ -215,7 +209,11 @@ class CppBuilder(LanguageBuilder):
 
     # check dependent obj's special attributes
     for d in obj.depends_:
-      dep_obj = self.build_manager_.GetObjByName(d)
+      dep_obj = BuildingObject.BuildingObject()
+      if Path.IsStaticLib(d):
+        dep_obj.name_ = d
+      else:
+        dep_obj = self.build_manager_.GetObjByName(d)
       d_lib = self._GetLibPathForObj(dep_obj)
       if self._HasCopt(dep_obj, 'always_link'):
         always_link_libs += ' %s' % d_lib
@@ -265,6 +263,13 @@ class CppBuilder(LanguageBuilder):
                            LINKFLAGS = link_flags,
                            CCFLAGS = cc_flags,
                            CXX = CXX_value)
+    Util.Log(target)
+    Util.Log(source + lib_sources)
+    Util.Log(libs)
+    Util.Log(libpath)
+    Util.Log(cpp_path)
+    Util.Log(link_flags)
+    Util.Log(CXX_value)
     if obj.build_type_ in ['cc_library']:
       print Util.BuildMessage(os.path.dirname(target) +
                               "/lib" +
@@ -276,6 +281,7 @@ class CppBuilder(LanguageBuilder):
                                  CXX = CXX_value)
   def Finish(self, env):
     self._StyleCheck()
+
 
 
 def CheckThriftDependency(obj):

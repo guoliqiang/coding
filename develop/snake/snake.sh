@@ -1,6 +1,6 @@
 #!/bin/bash
 # use example:
-#  bash devel/scons/build.sh [t=target] [c=opt]
+# bash develop/snake/snake.sh [t=target] [c=opt]
 
 original_dir=`pwd -P`
 cd -P `dirname $0`/../../
@@ -14,8 +14,8 @@ fi
 cd -P .  # go to real path if this is a symbol link.
 cd $base_dir
 
-export PATH=$PATH:$base_dir/third_part/scons/bin/
-export PATH=$PATH:$base_dir/third_part/python/bin/
+export PATH=$base_dir/third_part/scons/bin/:$PATH
+export PATH=$base_dir/third_part/python/bin/:$PATH
 
 scons \
 --site-dir=$base_dir/develop/snake/site_scons \
