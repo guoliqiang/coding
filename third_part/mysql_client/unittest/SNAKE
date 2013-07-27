@@ -1,0 +1,7 @@
+cc_binary(name = 'query_test',
+          srcs = ['query_test.cc'],
+          deps = [
+          '//third_part/mysql_client/internal:mysql_client',
+          '//base/internal:base'
+          ]
+          )

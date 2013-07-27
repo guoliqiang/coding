@@ -1,0 +1,9 @@
+cc_library(name='da_trie',
+           srcs=[
+                 'da_trie.cc',
+                 'da_trie_string16.cc'
+                ],
+           deps=[
+                '//base/internal:base'
+                ]
+           )

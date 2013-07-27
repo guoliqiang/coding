@@ -1,0 +1,10 @@
+cc_library(name = 'hadoop_pipes',
+           srcs = ['HadoopPipes.cc',
+                   'SerialUtils.cc',
+                   'StringUtils.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           copt = ['no_style_check']
+          )

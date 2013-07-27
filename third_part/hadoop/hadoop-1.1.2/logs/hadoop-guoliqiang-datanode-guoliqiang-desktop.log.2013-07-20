@@ -1,0 +1,96 @@
+2013-07-20 00:42:21,642 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 00:42:21,744 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 00:42:24,642 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 00:42:24,669 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 27 msecs for RPC and NN processing
+2013-07-20 01:42:22,868 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 01:42:22,869 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 01:42:25,870 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 01:42:25,870 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 02:42:21,066 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 02:42:21,066 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 02:42:21,066 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 02:42:21,067 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 1 msecs for RPC and NN processing
+2013-07-20 03:42:22,268 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 03:42:22,268 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 03:42:25,267 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 03:42:25,268 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 1 msecs for RPC and NN processing
+2013-07-20 04:42:20,467 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 04:42:20,467 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 04:42:23,468 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 04:42:23,468 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 05:42:21,667 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 05:42:21,667 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 05:42:24,666 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 05:42:24,666 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 06:42:22,867 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 06:42:22,867 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 06:42:25,866 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 06:42:25,866 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 07:42:21,066 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 07:42:21,066 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 07:42:24,065 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 07:42:24,065 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 08:42:22,265 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 08:42:22,283 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 08:42:25,265 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 08:42:25,316 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 51 msecs for RPC and NN processing
+2013-07-20 09:42:20,515 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 09:42:20,515 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 09:42:23,516 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 09:42:23,516 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 10:42:21,714 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 10:42:21,813 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 99ms
+2013-07-20 10:42:24,714 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 10:42:24,715 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 1 msecs for RPC and NN processing
+2013-07-20 11:42:22,914 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 11:42:22,915 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 11:42:22,915 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 11:42:22,915 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 12:42:21,113 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 12:42:21,114 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 12:42:21,114 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 12:42:21,114 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 13:42:22,313 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 13:42:22,314 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 13:42:22,314 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 13:42:22,315 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 1 msecs for RPC and NN processing
+2013-07-20 14:42:20,512 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 14:42:20,513 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 14:42:20,513 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 14:42:20,513 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 15:42:21,712 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 15:42:21,713 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 15:42:24,712 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 15:42:24,713 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 1 msecs for RPC and NN processing
+2013-07-20 16:42:22,913 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 16:42:22,914 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 16:42:22,914 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 16:42:22,914 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 17:42:21,112 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 17:42:21,113 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 17:42:21,113 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 17:42:21,113 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 18:42:22,311 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 18:42:22,334 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 23ms
+2013-07-20 18:42:22,335 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 18:42:22,335 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 19:42:20,533 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 19:42:20,533 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 19:42:20,533 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 19:42:20,534 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 1 msecs for RPC and NN processing
+2013-07-20 20:42:21,735 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 20:42:21,735 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 20:42:24,736 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 1 ms
+2013-07-20 20:42:24,736 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 1 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 21:42:22,935 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 21:42:22,935 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 21:42:22,936 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 21:42:22,936 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 22:42:21,134 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 22:42:21,134 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 0ms
+2013-07-20 22:42:24,133 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 22:42:24,133 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 0 msecs for RPC and NN processing
+2013-07-20 23:42:22,333 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting asynchronous block report scan
+2013-07-20 23:42:22,334 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Finished asynchronous block report scan in 1ms
+2013-07-20 23:42:22,334 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Reconciled asynchronous block report against current state in 0 ms
+2013-07-20 23:42:22,335 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 6 blocks took 0 msec to generate and 1 msecs for RPC and NN processing

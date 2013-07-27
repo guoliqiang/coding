@@ -1,0 +1,12 @@
+cc_library(name = 'mysql_client',
+          srcs = ['bind.cc',
+                  'connection.cc',
+                  'query.cc',
+                  'result.cc',
+                  'transaction.cc'
+                  ],
+          deps = [
+                 '//libs/third_part/mysql:mysqlclient_r',
+                 '//libs/third_part/zlib:z'
+                 ]
+          )

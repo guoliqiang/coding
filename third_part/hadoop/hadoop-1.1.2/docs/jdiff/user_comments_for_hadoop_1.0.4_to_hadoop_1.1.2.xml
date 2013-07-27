@@ -1,0 +1,1146 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<comments
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+  xsi:noNamespaceSchemaLocation='comments.xsd'
+  name="hadoop_1.0.4_to_hadoop_1.1.2"
+  jdversion="1.0.9">
+
+<!-- This file contains comments for a JDiff report. -->
+<!-- It is used only in generating the report, and does not need to ship with the final report. -->
+
+<!-- The id attribute in an identifier element identifiers the change as noted in the report. -->
+<!-- An id has the form package[.class[.[ctor|method|field].signature]], where [] indicates optional text. -->
+<!-- A comment element can have multiple identifier elements, which will -->
+<!-- will cause the same text to appear at each place in the report, but -->
+<!-- will be converted to separate comments when the comments file is used. -->
+<!-- HTML tags in the text field will appear in the report. -->
+<comment>
+  <identifier id="org.apache.hadoop.conf"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.conf.ConfServlet"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.conf.ConfServlet.BadFormatException"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.conf.Configuration"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.conf.Configuration.writeXml_added(java.io.Writer)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.CommonConfigurationKeys"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.CommonConfigurationKeys.HADOOP_RELAXED_VERSION_CHECK_DEFAULT"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.CommonConfigurationKeys.HADOOP_RELAXED_VERSION_CHECK_KEY"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.CommonConfigurationKeys.HADOOP_SECURITY_USE_WEAK_HTTP_CRYPTO_DEFAULT"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.CommonConfigurationKeys.HADOOP_SECURITY_USE_WEAK_HTTP_CRYPTO_KEY"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.FileSystem"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.FileSystem.getDefaultBlockSize_added(org.apache.hadoop.fs.Path)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.FileSystem.getDefaultBlockSize_changed()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.FileSystem.getDefaultReplication_added(org.apache.hadoop.fs.Path)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.fs.FileSystem.getDefaultReplication_changed()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.http"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.http.HttpServer"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.http.HttpServer.CONF_CONTEXT_ATTRIBUTE"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.http.HttpServer.KRB5_FILTER"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.http.HttpServer.SPNEGO_FILTER"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.http.HttpServer.addInternalServlet_changed(java.lang.String, java.lang.String, java.lang.Class, boolean, boolean)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.MD5Hash"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.MD5Hash.getDigester_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.ReadaheadPool"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.ReadaheadPool.ReadaheadRequest"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.BZip2Codec"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.BZip2Codec.createInputStream_added(java.io.InputStream, org.apache.hadoop.io.compress.Decompressor, long, long, org.apache.hadoop.io.compress.SplittableCompressionCodec.READ_MODE)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.BlockDecompressorStream"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.BlockDecompressorStream.ctor_changed(java.io.InputStream)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.BlockDecompressorStream.ctor_changed(java.io.InputStream, org.apache.hadoop.io.compress.Decompressor)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.BlockDecompressorStream.ctor_changed(java.io.InputStream, org.apache.hadoop.io.compress.Decompressor, int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.CompressionInputStream"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.CompressionInputStream.ctor_changed(java.io.InputStream)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.CompressionInputStream.getPos_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.CompressionInputStream.maxAvailableData"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.CompressionInputStream.seekToNewSource_added(long)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.CompressionInputStream.seek_added(long)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.DecompressorStream"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.DecompressorStream.ctor_changed(java.io.InputStream)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.DecompressorStream.ctor_changed(java.io.InputStream, org.apache.hadoop.io.compress.Decompressor)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.DecompressorStream.ctor_changed(java.io.InputStream, org.apache.hadoop.io.compress.Decompressor, int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.SplitCompressionInputStream"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.SplittableCompressionCodec"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.SplittableCompressionCodec.READ_MODE"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.BZip2Constants"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.BZip2Constants.END_OF_BLOCK"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.BZip2Constants.END_OF_STREAM"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.BLOCK_DELIMITER"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.EOS_DELIMITER"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.STATE"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.ctor_added(java.io.InputStream, org.apache.hadoop.io.compress.SplittableCompressionCodec.READ_MODE)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.getProcessedByteCount_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.numberOfBytesTillNextMarker_added(java.io.InputStream)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.reportCRCError_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.skipToNextMarker_added(long, int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.updateProcessedByteCount_added(int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.updateReportedByteCount_added(int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.POSIX_FADV_DONTNEED"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.POSIX_FADV_NOREUSE"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.POSIX_FADV_NORMAL"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.POSIX_FADV_RANDOM"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.POSIX_FADV_SEQUENTIAL"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.POSIX_FADV_WILLNEED"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.SYNC_FILE_RANGE_WAIT_AFTER"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.SYNC_FILE_RANGE_WAIT_BEFORE"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.SYNC_FILE_RANGE_WRITE"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.posixFadviseIfPossible_added(java.io.FileDescriptor, long, long, int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.nativeio.NativeIO.syncFileRangeIfPossible_added(java.io.FileDescriptor, long, long, int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.retry"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.retry.RetryPolicies.MultipleLinearRandomRetry"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.retry.RetryPolicies.MultipleLinearRandomRetry.Pair"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.retry.RetryProxy"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.retry.RetryProxy.create_added(java.lang.Class, java.lang.Object, org.apache.hadoop.io.retry.RetryPolicy, java.util.Map)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.io.retry.RetryUtils"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.ipc"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.ipc.Client"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.ipc.Client.IPC_CLIENT_CONNECT_MAX_RETRIES_DEFAULT"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.ipc.Client.IPC_CLIENT_CONNECT_MAX_RETRIES_KEY"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.ipc.Client.getTimeout_added(org.apache.hadoop.conf.Configuration)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.ipc.RPC"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.ipc.RPC.getProxy_added(java.lang.Class, long, java.net.InetSocketAddress, org.apache.hadoop.security.UserGroupInformation, org.apache.hadoop.conf.Configuration, javax.net.SocketFactory, int, org.apache.hadoop.io.retry.RetryPolicy)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.AdminOperationsProtocol"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.AdminOperationsProtocol.setSafeMode_added(org.apache.hadoop.mapred.JobTracker.SafeModeAction)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.Counters"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.Counters.MAX_GROUP_LIMIT"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.HDFSMonitorThread"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobClient"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobClient.MAPREDUCE_CLIENT_RETRY_POLICY_ENABLED_DEFAULT"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobClient.MAPREDUCE_CLIENT_RETRY_POLICY_ENABLED_KEY"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobClient.MAPREDUCE_CLIENT_RETRY_POLICY_SPEC_DEFAULT"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobClient.MAPREDUCE_CLIENT_RETRY_POLICY_SPEC_KEY"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobConf"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobConf.MAPRED_JOB_MAP_MEMORY_MB_PROPERTY"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobConf.MAPRED_JOB_REDUCE_MEMORY_MB_PROPERTY"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobTracker"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobTracker.MAPRED_CLUSTER_MAX_MAP_MEMORY_MB_PROPERTY"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobTracker.MAPRED_CLUSTER_MAX_REDUCE_MEMORY_MB_PROPERTY"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobTracker.SafeModeAction"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobTracker.getVIVersion_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobTracker.isInSafeMode_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobTracker.setSafeMode_added(org.apache.hadoop.mapred.JobTracker.SafeModeAction)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobTracker.startTracker_added(org.apache.hadoop.mapred.JobConf, java.lang.String, boolean)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.JobTracker.submitJob_added(org.apache.hadoop.mapred.JobID, java.lang.String, org.apache.hadoop.security.UserGroupInformation, org.apache.hadoop.security.Credentials, boolean)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.KeyValueLineRecordReader"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.KeyValueLineRecordReader.getProgress_changed()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.LineRecordReader"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.LineRecordReader.getProgress_changed()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.Reporter"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.Reporter.getProgress_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.SafeModeException"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.Task.TaskReporter"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.Task.TaskReporter.getProgress_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskController"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskController.createLogDir_changed(org.apache.hadoop.mapred.TaskAttemptID, boolean)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskTracker"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskTracker.isIdleAndClean_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskTrackerStatus"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskTrackerStatus.ctor_added(java.lang.String, java.lang.String, int, java.util.List, int, int, int, int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskTrackerStatus.ctor_removed(java.lang.String, java.lang.String, int, java.util.List, int, int, int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskTrackerStatus.getDirFailures_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskTrackerStatus.getFailures_removed()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.TaskTrackerStatus.getTaskFailures_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.lib"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.lib.NLineInputFormat"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapred.lib.NLineInputFormat.createFileSplit_added(org.apache.hadoop.fs.Path, long, long)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce.StatusReporter"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce.StatusReporter.getProgress_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce.TaskInputOutputContext"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce.TaskInputOutputContext.getProgress_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce.lib.input"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce.lib.input.LineRecordReader"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce.lib.input.LineRecordReader.getProgress_changed()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce.lib.input.NLineInputFormat"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.mapreduce.lib.input.NLineInputFormat.createFileSplit_added(org.apache.hadoop.fs.Path, long, long)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.net"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.net.DNS"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.net.DNS.LOG"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.net.DNS.getIPs_added(java.lang.String, boolean)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.net.NetUtils"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.net.NetUtils.connect_added(java.net.Socket, java.net.SocketAddress, java.net.SocketAddress, int)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.net.NetUtils.getIPs_added(java.lang.String, boolean)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.net.NetUtils.isValidSubnet_added(java.lang.String)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.net.NetworkTopology.InvalidTopologyException"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.security"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.security.SecurityUtil"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.security.SecurityUtil.getLocalHostName_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.security.SecurityUtil.openSecureHttpConnection_added(java.net.URL)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.security.SecurityUtil.useKsslAuth_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.security.authentication.util"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.security.authentication.util.KerberosUtil"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.security.authentication.util.KerberosUtil.getServicePrincipal_added(java.lang.String, java.lang.String)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobBuilder"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobBuilder.build_changed()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobConfigurationParser"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobConfigurationParser.ctor_changed()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobHistoryParserFactory.VersionDetector"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobHistoryUtils"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobSubmittedEvent"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobSubmittedEvent.ctor_added(org.apache.hadoop.mapreduce.JobID, java.lang.String, java.lang.String, long, java.lang.String, java.util.Map, java.lang.String)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobSubmittedEvent.ctor_changed(org.apache.hadoop.mapreduce.JobID, java.lang.String, java.lang.String, long, java.lang.String, java.util.Map)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.JobSubmittedEvent.getJobQueueName_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.LoggedJob"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.LoggedJob.getJobProperties_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.LoggedTaskAttempt"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.LoggedTaskAttempt.getResourceUsageMetrics_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.ParsedJob"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.ParsedTask"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.ParsedTaskAttempt"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.ResourceUsageMetrics"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.TaskInfo"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.TaskInfo.ctor_added(long, int, long, int, long, org.apache.hadoop.tools.rumen.ResourceUsageMetrics)"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.tools.rumen.TaskInfo.getResourceUsageMetrics_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.util"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.util.Progress"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.util.Progress.getProgress_added()"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.util.PureJavaCrc32"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.util.StringUtils"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+<comment>
+  <identifier id="org.apache.hadoop.util.StringUtils.join_added(java.lang.CharSequence, java.lang.Object[])"/>
+  <text>
+    InsertCommentsHere
+  </text>
+</comment>
+
+</comments>

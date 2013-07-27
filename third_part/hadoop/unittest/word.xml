@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>hadoop.pipes.executable</name>
+    <value>/usr/local/hadoop/hdfs/bin/word_count</value>
+  </property>
+  <property>
+    <name>hadoop.pipes.java.recordreader</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hadoop.pipes.java.recordwriter</name>
+    <value>true</value>
+  </property>
+</configuration>

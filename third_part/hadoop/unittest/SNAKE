@@ -1,0 +1,7 @@
+cc_binary(name='word_count',
+         srcs = ['word_count.cc'],
+         deps = [
+                '//third_part/hadoop_pipes/internal:hadoop_pipes'
+                ],
+         )
+

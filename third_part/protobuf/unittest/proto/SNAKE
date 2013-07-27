@@ -1,0 +1,5 @@
+proto_library(name = 'test_proto',
+              srcs = ['test.proto'],
+              gen_cpp = 1,
+              gen_py = 1,
+              )

@@ -1,0 +1,6 @@
+cc_library(name = 'proto_wrapper',
+           srcs = ['proto_wrapper.cc'],
+           deps = [
+           '//libs/third_part/protobuf:protobuf'
+           ]
+           )

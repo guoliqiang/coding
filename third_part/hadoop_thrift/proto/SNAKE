@@ -1,0 +1,5 @@
+thrift_library(name = 'hadoopfs_thrift',
+               srcs = ['hadoopfs.thrift'],
+               gen_cpp = 1
+               gen_java = 1
+               )

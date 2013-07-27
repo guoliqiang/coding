@@ -1,0 +1,2 @@
+2013-07-19 14:44:55,750 INFO org.apache.hadoop.mapred.UserLogCleaner: Deleting user log path job_201307171144_0007
+2013-07-19 16:44:55,750 INFO org.apache.hadoop.mapred.UserLogCleaner: Deleting user log path job_201307171144_0009

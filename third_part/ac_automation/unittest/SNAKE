@@ -1,0 +1,7 @@
+cc_binary(name='ac_unittest',
+          srcs = ['ac_unittest.cc'],
+          deps = [
+                 '//third_part/ac_automation/internal:ac_automation',
+                 '//base/internal:base'
+                 ]
+          )

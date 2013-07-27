@@ -1,0 +1,107 @@
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream.STATE Class
+MISSING @SINCE TAG: org.apache.hadoop.conf.ConfServlet Class
+NO DOC BLOCK: org.apache.hadoop.conf.ConfServlet.BadFormatException Class
+NO DOC BLOCK: org.apache.hadoop.mapred.HDFSMonitorThread Class
+NO DOC BLOCK: org.apache.hadoop.tools.rumen.JobHistoryParserFactory.VersionDetector Class
+NO DOC BLOCK: org.apache.hadoop.tools.rumen.JobHistoryUtils Class
+MISSING @SINCE TAG: org.apache.hadoop.mapred.JobTracker.SafeModeAction Class
+NO DOC BLOCK: org.apache.hadoop.net.NetworkTopology.InvalidTopologyException Class
+MISSING @SINCE TAG: org.apache.hadoop.tools.rumen.ParsedJob Class
+MISSING @SINCE TAG: org.apache.hadoop.tools.rumen.ParsedTask Class
+MISSING @SINCE TAG: org.apache.hadoop.tools.rumen.ParsedTaskAttempt Class
+MISSING @SINCE TAG: org.apache.hadoop.util.PureJavaCrc32 Class
+MISSING @SINCE TAG: org.apache.hadoop.io.ReadaheadPool Class
+MISSING @SINCE TAG: org.apache.hadoop.io.ReadaheadPool.ReadaheadRequest Interface
+MISSING @SINCE TAG: org.apache.hadoop.tools.rumen.ResourceUsageMetrics Class
+MISSING @SINCE TAG: org.apache.hadoop.io.retry.RetryPolicies.MultipleLinearRandomRetry Class
+MISSING @SINCE TAG: org.apache.hadoop.io.retry.RetryPolicies.MultipleLinearRandomRetry.Pair Class
+NO DOC BLOCK: org.apache.hadoop.io.retry.RetryUtils Class
+MISSING @SINCE TAG: org.apache.hadoop.mapred.SafeModeException Class
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.SplitCompressionInputStream Class
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.SplittableCompressionCodec Interface
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.SplittableCompressionCodec.READ_MODE Class
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream Constructor (java.io.InputStream, org.apache.hadoop.io.compress.SplittableCompressionCodec.READ_MODE)
+MISSING @SINCE TAG: org.apache.hadoop.tools.rumen.JobSubmittedEvent Constructor (org.apache.hadoop.mapreduce.JobID, java.lang.String, java.lang.String, long, java.lang.String, java.util.Map, java.lang.String)
+NO DOC BLOCK: org.apache.hadoop.tools.rumen.TaskInfo Constructor (long, int, long, int, long, org.apache.hadoop.tools.rumen.ResourceUsageMetrics)
+NO DOC BLOCK: org.apache.hadoop.mapred.TaskTrackerStatus Constructor (java.lang.String, java.lang.String, int, java.util.List, int, int, int, int)
+MISSING @SINCE TAG: org.apache.hadoop.net.NetUtils Method connect(java.net.Socket, java.net.SocketAddress, java.net.SocketAddress, int)
+NO DOC BLOCK: org.apache.hadoop.io.retry.RetryProxy Method create(java.lang.Class, java.lang.Object, org.apache.hadoop.io.retry.RetryPolicy, java.util.Map)
+MISSING @SINCE TAG: org.apache.hadoop.mapred.lib.NLineInputFormat Method createFileSplit(org.apache.hadoop.fs.Path, long, long)
+MISSING @SINCE TAG: org.apache.hadoop.mapreduce.lib.input.NLineInputFormat Method createFileSplit(org.apache.hadoop.fs.Path, long, long)
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.BZip2Codec Method createInputStream(java.io.InputStream, org.apache.hadoop.io.compress.Decompressor, long, long, org.apache.hadoop.io.compress.SplittableCompressionCodec.READ_MODE)
+MISSING @SINCE TAG: org.apache.hadoop.fs.FileSystem Method getDefaultBlockSize(org.apache.hadoop.fs.Path)
+MISSING @SINCE TAG: org.apache.hadoop.fs.FileSystem Method getDefaultReplication(org.apache.hadoop.fs.Path)
+MISSING @SINCE TAG: org.apache.hadoop.io.MD5Hash Method getDigester()
+MISSING @SINCE TAG: org.apache.hadoop.mapred.TaskTrackerStatus Method getDirFailures()
+MISSING @SINCE TAG: org.apache.hadoop.net.DNS Method getIPs(java.lang.String, boolean)
+MISSING @SINCE TAG: org.apache.hadoop.net.NetUtils Method getIPs(java.lang.String, boolean)
+MISSING @SINCE TAG: org.apache.hadoop.tools.rumen.LoggedJob Method getJobProperties()
+NO DOC BLOCK: org.apache.hadoop.tools.rumen.JobSubmittedEvent Method getJobQueueName()
+MISSING @SINCE TAG: org.apache.hadoop.security.SecurityUtil Method getLocalHostName()
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.CompressionInputStream Method getPos()
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream Method getProcessedByteCount()
+MISSING @SINCE TAG: org.apache.hadoop.mapred.Reporter Method getProgress()
+NO DOC BLOCK: org.apache.hadoop.mapred.Task.TaskReporter Method getProgress()
+MISSING @SINCE TAG: org.apache.hadoop.mapreduce.StatusReporter Method getProgress()
+NO DOC BLOCK: org.apache.hadoop.mapreduce.TaskInputOutputContext Method getProgress()
+MISSING @SINCE TAG: org.apache.hadoop.util.Progress Method getProgress()
+MISSING @SINCE TAG: org.apache.hadoop.ipc.RPC Method getProxy(java.lang.Class, long, java.net.InetSocketAddress, org.apache.hadoop.security.UserGroupInformation, org.apache.hadoop.conf.Configuration, javax.net.SocketFactory, int, org.apache.hadoop.io.retry.RetryPolicy)
+NO DOC BLOCK: org.apache.hadoop.tools.rumen.LoggedTaskAttempt Method getResourceUsageMetrics()
+MISSING @SINCE TAG: org.apache.hadoop.tools.rumen.TaskInfo Method getResourceUsageMetrics()
+MISSING @SINCE TAG: org.apache.hadoop.security.authentication.util.KerberosUtil Method getServicePrincipal(java.lang.String, java.lang.String)
+MISSING @SINCE TAG: org.apache.hadoop.mapred.TaskTrackerStatus Method getTaskFailures()
+MISSING @SINCE TAG: org.apache.hadoop.ipc.Client Method getTimeout(org.apache.hadoop.conf.Configuration)
+NO DOC BLOCK: org.apache.hadoop.mapred.JobTracker Method getVIVersion()
+MISSING @SINCE TAG: org.apache.hadoop.mapred.TaskTracker Method isIdleAndClean()
+NO DOC BLOCK: org.apache.hadoop.mapred.JobTracker Method isInSafeMode()
+MISSING @SINCE TAG: org.apache.hadoop.net.NetUtils Method isValidSubnet(java.lang.String)
+MISSING @SINCE TAG: org.apache.hadoop.util.StringUtils Method join(java.lang.CharSequence, java.lang.Object[])
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream Method numberOfBytesTillNextMarker(java.io.InputStream)
+MISSING @SINCE TAG: org.apache.hadoop.security.SecurityUtil Method openSecureHttpConnection(java.net.URL)
+MISSING @SINCE TAG: org.apache.hadoop.io.nativeio.NativeIO Method posixFadviseIfPossible(java.io.FileDescriptor, long, long, int)
+NO DOC BLOCK: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream Method reportCRCError()
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.CompressionInputStream Method seek(long)
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.CompressionInputStream Method seekToNewSource(long)
+MISSING @SINCE TAG: org.apache.hadoop.mapred.AdminOperationsProtocol Method setSafeMode(org.apache.hadoop.mapred.JobTracker.SafeModeAction)
+NO DOC BLOCK: org.apache.hadoop.mapred.JobTracker Method setSafeMode(org.apache.hadoop.mapred.JobTracker.SafeModeAction)
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream Method skipToNextMarker(long, int)
+NO DOC BLOCK: org.apache.hadoop.mapred.JobTracker Method startTracker(org.apache.hadoop.mapred.JobConf, java.lang.String, boolean)
+MISSING @SINCE TAG: org.apache.hadoop.mapred.JobTracker Method submitJob(org.apache.hadoop.mapred.JobID, java.lang.String, org.apache.hadoop.security.UserGroupInformation, org.apache.hadoop.security.Credentials, boolean)
+MISSING @SINCE TAG: org.apache.hadoop.io.nativeio.NativeIO Method syncFileRangeIfPossible(java.io.FileDescriptor, long, long, int)
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream Method updateProcessedByteCount(int)
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream Method updateReportedByteCount(int)
+MISSING @SINCE TAG: org.apache.hadoop.security.SecurityUtil Method useKsslAuth()
+MISSING @SINCE TAG: org.apache.hadoop.conf.Configuration Method writeXml(java.io.Writer)
+NO DOC BLOCK: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream Field BLOCK_DELIMITER
+NO DOC BLOCK: org.apache.hadoop.http.HttpServer Field CONF_CONTEXT_ATTRIBUTE
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.bzip2.BZip2Constants Field END_OF_BLOCK
+MISSING @SINCE TAG: org.apache.hadoop.io.compress.bzip2.BZip2Constants Field END_OF_STREAM
+NO DOC BLOCK: org.apache.hadoop.io.compress.bzip2.CBZip2InputStream Field EOS_DELIMITER
+NO DOC BLOCK: org.apache.hadoop.fs.CommonConfigurationKeys Field HADOOP_RELAXED_VERSION_CHECK_DEFAULT
+MISSING @SINCE TAG: org.apache.hadoop.fs.CommonConfigurationKeys Field HADOOP_RELAXED_VERSION_CHECK_KEY
+NO DOC BLOCK: org.apache.hadoop.fs.CommonConfigurationKeys Field HADOOP_SECURITY_USE_WEAK_HTTP_CRYPTO_DEFAULT
+NO DOC BLOCK: org.apache.hadoop.fs.CommonConfigurationKeys Field HADOOP_SECURITY_USE_WEAK_HTTP_CRYPTO_KEY
+NO DOC BLOCK: org.apache.hadoop.ipc.Client Field IPC_CLIENT_CONNECT_MAX_RETRIES_DEFAULT
+NO DOC BLOCK: org.apache.hadoop.ipc.Client Field IPC_CLIENT_CONNECT_MAX_RETRIES_KEY
+NO DOC BLOCK: org.apache.hadoop.http.HttpServer Field KRB5_FILTER
+NO DOC BLOCK: org.apache.hadoop.net.DNS Field LOG
+NO DOC BLOCK: org.apache.hadoop.mapred.JobTracker Field MAPRED_CLUSTER_MAX_MAP_MEMORY_MB_PROPERTY
+NO DOC BLOCK: org.apache.hadoop.mapred.JobTracker Field MAPRED_CLUSTER_MAX_REDUCE_MEMORY_MB_PROPERTY
+NO DOC BLOCK: org.apache.hadoop.mapred.JobConf Field MAPRED_JOB_MAP_MEMORY_MB_PROPERTY
+NO DOC BLOCK: org.apache.hadoop.mapred.JobConf Field MAPRED_JOB_REDUCE_MEMORY_MB_PROPERTY
+NO DOC BLOCK: org.apache.hadoop.mapred.JobClient Field MAPREDUCE_CLIENT_RETRY_POLICY_ENABLED_DEFAULT
+NO DOC BLOCK: org.apache.hadoop.mapred.JobClient Field MAPREDUCE_CLIENT_RETRY_POLICY_ENABLED_KEY
+NO DOC BLOCK: org.apache.hadoop.mapred.JobClient Field MAPREDUCE_CLIENT_RETRY_POLICY_SPEC_DEFAULT
+NO DOC BLOCK: org.apache.hadoop.mapred.JobClient Field MAPREDUCE_CLIENT_RETRY_POLICY_SPEC_KEY
+MISSING @SINCE TAG: org.apache.hadoop.mapred.Counters Field MAX_GROUP_LIMIT
+NO DOC BLOCK: org.apache.hadoop.io.compress.CompressionInputStream Field maxAvailableData
+NO DOC BLOCK: org.apache.hadoop.io.nativeio.NativeIO Field POSIX_FADV_DONTNEED
+NO DOC BLOCK: org.apache.hadoop.io.nativeio.NativeIO Field POSIX_FADV_NOREUSE
+NO DOC BLOCK: org.apache.hadoop.io.nativeio.NativeIO Field POSIX_FADV_NORMAL
+NO DOC BLOCK: org.apache.hadoop.io.nativeio.NativeIO Field POSIX_FADV_RANDOM
+NO DOC BLOCK: org.apache.hadoop.io.nativeio.NativeIO Field POSIX_FADV_SEQUENTIAL
+NO DOC BLOCK: org.apache.hadoop.io.nativeio.NativeIO Field POSIX_FADV_WILLNEED
+NO DOC BLOCK: org.apache.hadoop.http.HttpServer Field SPNEGO_FILTER
+NO DOC BLOCK: org.apache.hadoop.io.nativeio.NativeIO Field SYNC_FILE_RANGE_WAIT_AFTER
+NO DOC BLOCK: org.apache.hadoop.io.nativeio.NativeIO Field SYNC_FILE_RANGE_WAIT_BEFORE
+NO DOC BLOCK: org.apache.hadoop.io.nativeio.NativeIO Field SYNC_FILE_RANGE_WRITE

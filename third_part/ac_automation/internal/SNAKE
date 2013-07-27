@@ -1,0 +1,9 @@
+cc_library(name = 'ac_automation',
+           srcs = ['ac_automaton.cc',
+                   'ac_automaton_unit.cc',
+                   'utils.cc'
+                   ],
+           deps = [
+                  '//base/internal:base'
+                  ]
+           )

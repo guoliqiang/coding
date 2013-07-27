@@ -1,0 +1,1 @@
+svn co https://svn.apache.org/repos/asf/hadoop/common/branches/HDFS-265/src/contrib/thriftfs/

@@ -1,0 +1,690 @@
+2013-07-24 00:53:47,328 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 00:53:47,368 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 00:53:47,369 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 00:53:47,454 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 00:53:47,456 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 00:53:47,456 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 00:53:47,457 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 00:53:47,457 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 00:53:47,457 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 00:53:47,457 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 00:53:47,457 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 00:53:47,462 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 00:53:47,462 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 00:53:47,462 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 00:53:47,462 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 00:53:47,462 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 00:53:47,462 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 00:53:47,535 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 00:53:47,540 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 00:53:47,540 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 00:53:47,540 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 00:53:47,541 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 00:53:47,587 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 00:53:47,587 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 00:53:47,588 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 00:53:47,654 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 00:53:47,654 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 00:53:47,856 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374598427000:1374594827073&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 00:53:47,856 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374598427000:1374594827073&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 00:53:48,070 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 01:53:48,085 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 01:53:48,086 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 01:53:48,086 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 01:53:48,158 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 01:53:48,160 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 01:53:48,160 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 01:53:48,161 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 01:53:48,161 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 01:53:48,161 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 01:53:48,161 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 01:53:48,161 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 01:53:48,167 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 01:53:48,167 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 01:53:48,167 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 01:53:48,167 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 01:53:48,167 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 01:53:48,170 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 01:53:48,170 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 01:53:48,173 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 01:53:48,173 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 01:53:48,173 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 01:53:48,173 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 01:53:48,233 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 01:53:48,233 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 01:53:48,234 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 01:53:48,309 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 01:53:48,309 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 01:53:48,558 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374602028000:1374598427861&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 01:53:48,558 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374602028000:1374598427861&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 01:53:48,796 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 02:53:48,864 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 02:53:48,865 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 02:53:48,865 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 02:53:48,942 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 02:53:48,943 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 02:53:48,943 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 02:53:48,944 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 02:53:48,944 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 02:53:48,944 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 02:53:48,944 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 02:53:48,944 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 02:53:48,949 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 02:53:48,949 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 02:53:48,950 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 02:53:48,950 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 02:53:48,950 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 02:53:48,950 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 02:53:48,972 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 02:53:48,975 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 02:53:48,976 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 02:53:48,976 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 02:53:48,976 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 02:53:49,016 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 02:53:49,016 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 02:53:49,018 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 02:53:49,117 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 02:53:49,117 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 02:53:49,310 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374605628000:1374602028567&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 02:53:49,310 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374605628000:1374602028567&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 02:53:49,547 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 03:53:49,631 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 03:53:49,631 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 03:53:49,631 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 03:53:49,709 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 03:53:49,735 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 03:53:49,735 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 03:53:49,736 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 03:53:49,736 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 03:53:49,736 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 03:53:49,736 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 03:53:49,736 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 03:53:49,742 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 03:53:49,742 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 03:53:49,742 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 03:53:49,742 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 03:53:49,742 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 03:53:49,742 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 03:53:49,743 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 03:53:49,745 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 03:53:49,745 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 03:53:49,745 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 03:53:49,745 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 03:53:49,801 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 03:53:49,801 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 03:53:49,802 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 03:53:49,868 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 03:53:49,868 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 03:53:50,105 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374609229000:1374605629324&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 03:53:50,105 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374609229000:1374605629324&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 03:53:50,315 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 04:53:50,340 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 04:53:50,340 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 04:53:50,340 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 04:53:50,417 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 04:53:50,419 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 04:53:50,419 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 04:53:50,420 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 04:53:50,420 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 04:53:50,420 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 04:53:50,420 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 04:53:50,420 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 04:53:50,425 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 04:53:50,425 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 04:53:50,425 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 04:53:50,425 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 04:53:50,425 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 04:53:50,426 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 04:53:50,426 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 04:53:50,429 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 04:53:50,429 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 04:53:50,429 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 04:53:50,430 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 04:53:50,484 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 04:53:50,484 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 04:53:50,485 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 04:53:50,567 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 04:53:50,568 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 04:53:50,969 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374612830000:1374609230111&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 04:53:50,969 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374612830000:1374609230111&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 04:53:51,241 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 05:53:51,260 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 05:53:51,260 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 05:53:51,261 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 05:53:51,336 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 05:53:51,337 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 05:53:51,337 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 05:53:51,338 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 05:53:51,338 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 05:53:51,338 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 05:53:51,338 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 05:53:51,338 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 05:53:51,343 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 05:53:51,344 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 05:53:51,344 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 05:53:51,344 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 05:53:51,344 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 05:53:51,344 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 05:53:51,371 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 05:53:51,373 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 05:53:51,373 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 05:53:51,373 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 05:53:51,373 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 05:53:51,427 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 05:53:51,427 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 05:53:51,428 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 05:53:51,494 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 05:53:51,494 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 05:53:51,696 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374616431000:1374612831006&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 05:53:51,696 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374616431000:1374612831006&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 05:53:51,959 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 06:53:52,010 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 06:53:52,017 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 06:53:52,017 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 06:53:52,104 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 06:53:52,144 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 06:53:52,144 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 06:53:52,146 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 06:53:52,146 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 06:53:52,146 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 06:53:52,146 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 06:53:52,146 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 06:53:52,153 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 06:53:52,153 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 06:53:52,153 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 06:53:52,153 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 06:53:52,153 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 06:53:52,153 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 06:53:52,154 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 06:53:52,156 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 06:53:52,156 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 06:53:52,156 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 06:53:52,156 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 06:53:52,229 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 06:53:52,229 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 06:53:52,230 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 06:53:52,287 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 06:53:52,288 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 06:53:52,490 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374620032000:1374616431724&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 06:53:52,490 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374620032000:1374616431724&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 06:53:52,752 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 07:53:52,868 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 07:53:52,920 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 07:53:52,920 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 07:53:53,082 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 07:53:53,163 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 07:53:53,163 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 07:53:53,192 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 07:53:53,218 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 07:53:53,218 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 07:53:53,218 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 07:53:53,218 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 07:53:53,223 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 07:53:53,223 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 07:53:53,223 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 07:53:53,223 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 07:53:53,223 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 07:53:53,223 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 07:53:53,224 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 07:53:53,227 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 07:53:53,233 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 07:53:53,233 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 07:53:53,233 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 07:53:53,273 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 07:53:53,273 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 07:53:53,274 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 07:53:53,340 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 07:53:53,384 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 07:53:54,353 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374623632000:1374620032525&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 07:53:54,353 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374623632000:1374620032525&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 07:53:54,702 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 08:53:54,793 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 08:53:54,800 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 08:53:54,800 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 08:53:54,896 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 08:53:54,898 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 08:53:54,898 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 08:53:54,899 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 08:53:54,899 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 08:53:54,899 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 08:53:54,899 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 08:53:54,899 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 08:53:54,904 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 08:53:54,904 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 08:53:54,904 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 08:53:54,904 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 08:53:54,904 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 08:53:54,904 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 08:53:54,905 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 08:53:54,907 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 08:53:54,908 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 08:53:54,908 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 08:53:54,908 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 08:53:54,963 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 08:53:54,963 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 08:53:54,964 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 08:53:55,046 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 08:53:55,047 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 08:53:55,239 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374627234000:1374623634398&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 08:53:55,240 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374627234000:1374623634398&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 08:53:55,513 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 09:53:55,798 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 09:53:55,862 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 09:53:55,863 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 09:53:56,031 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 09:53:56,106 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 09:53:56,106 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 09:53:56,113 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 09:53:56,113 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 09:53:56,113 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 09:53:56,113 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 09:53:56,113 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 09:53:56,118 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 09:53:56,118 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 09:53:56,118 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 09:53:56,118 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 09:53:56,119 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 09:53:56,119 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 09:53:56,119 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 09:53:56,257 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 09:53:56,257 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 09:53:56,257 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 09:53:56,258 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 09:53:56,305 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 09:53:56,306 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 09:53:56,307 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 09:53:56,447 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 09:53:56,448 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 09:53:56,649 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374630835000:1374627235276&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 09:53:56,649 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374630835000:1374627235276&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 09:53:56,939 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 10:53:57,207 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 10:53:57,232 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 10:53:57,232 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 10:53:57,400 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 10:53:57,477 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 10:53:57,477 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 10:53:57,485 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 10:53:57,485 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 10:53:57,485 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 10:53:57,485 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 10:53:57,485 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 10:53:57,491 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 10:53:57,491 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 10:53:57,491 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 10:53:57,491 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 10:53:57,491 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 10:53:57,491 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 10:53:57,606 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 10:53:57,610 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 10:53:57,610 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 10:53:57,610 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 10:53:57,610 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 10:53:57,661 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 10:53:57,661 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 10:53:57,662 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 10:53:57,744 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 10:53:57,745 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 10:53:58,031 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374634437000:1374630836695&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 10:53:58,031 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374634437000:1374630836695&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 10:53:58,390 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 11:53:58,472 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 11:53:58,472 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 11:53:58,472 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 11:53:58,605 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 11:53:58,626 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 11:53:58,626 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 11:53:58,627 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 11:53:58,627 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 11:53:58,627 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 11:53:58,627 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 11:53:58,627 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 11:53:58,632 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 11:53:58,632 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 11:53:58,632 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 11:53:58,632 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 11:53:58,632 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 11:53:58,632 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 11:53:58,633 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 11:53:58,636 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 11:53:58,637 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 11:53:58,637 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 11:53:58,637 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 11:53:58,697 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 11:53:58,697 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 11:53:58,698 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 11:53:58,780 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 11:53:58,781 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 11:53:59,060 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374638038000:1374634438095&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 11:53:59,060 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374638038000:1374634438095&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 11:53:59,367 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 12:53:59,558 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 12:53:59,587 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 12:53:59,588 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 12:53:59,687 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 12:53:59,706 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 12:53:59,706 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 12:53:59,707 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 12:53:59,707 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 12:53:59,707 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 12:53:59,707 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 12:53:59,707 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 12:53:59,713 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 12:53:59,713 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 12:53:59,713 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 12:53:59,713 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 12:53:59,713 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 12:53:59,713 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 12:53:59,714 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 12:53:59,717 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 12:53:59,717 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 12:53:59,717 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 12:53:59,717 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 12:53:59,770 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 12:53:59,770 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 12:53:59,771 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 12:53:59,887 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 12:53:59,888 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 12:54:00,122 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374641639000:1374638039127&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 12:54:00,122 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374641639000:1374638039127&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 12:54:00,343 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 13:54:09,744 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 13:54:10,443 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 13:54:10,538 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 13:54:16,690 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 13:54:21,262 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 13:54:21,268 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 13:54:21,355 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 13:54:21,592 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 13:54:21,609 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 13:54:21,609 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 13:54:21,616 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 13:54:21,780 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 13:54:21,818 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 13:54:21,819 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 13:54:21,917 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 13:54:21,925 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 13:54:21,995 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 13:55:13,751 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 13:55:14,125 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 13:55:14,187 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 13:55:14,211 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 13:55:14,226 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 13:55:19,087 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 13:55:19,296 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 13:55:20,029 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 13:55:43,809 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 13:55:44,890 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 13:55:49,736 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374645252000:1374641640127&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 13:55:49,771 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374645252000:1374641640127&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 13:55:59,114 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 14:56:09,749 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 14:56:10,076 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 14:56:10,091 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 14:56:12,029 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 14:56:13,147 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 14:56:13,147 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 14:56:13,204 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 14:56:13,204 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 14:56:13,229 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 14:56:13,229 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 14:56:13,229 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 14:56:13,283 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 14:56:13,283 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 14:56:13,283 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 14:56:13,311 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 14:56:13,311 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 14:56:13,315 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 14:56:13,604 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 14:56:13,635 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 14:56:13,661 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 14:56:13,661 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 14:56:13,662 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 14:56:13,714 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 14:56:13,714 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 14:56:13,757 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 14:56:14,248 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 14:56:14,248 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 14:56:15,309 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374648970000:1374645357260&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 14:56:27,198 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374648970000:1374645357260&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 14:56:31,881 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 15:56:40,759 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 15:56:40,812 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 15:56:40,812 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 15:56:41,609 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 15:56:42,232 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 15:56:42,256 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 15:56:42,326 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 15:56:42,348 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 15:56:42,348 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 15:56:42,348 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 15:56:42,348 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 15:56:42,358 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 15:56:42,358 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 15:56:42,358 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 15:56:42,382 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 15:56:42,382 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 15:56:42,404 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 15:56:42,567 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 15:56:42,579 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 15:56:42,588 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 15:56:42,588 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 15:56:42,588 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 15:56:42,667 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 15:56:42,667 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 15:56:42,699 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 15:56:43,210 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 15:56:43,211 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 15:57:03,550 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374652600000:1374648989976&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 15:57:03,550 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374652600000:1374648989976&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 15:57:04,911 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 16:58:03,170 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 16:58:03,531 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 16:58:03,670 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 16:58:06,679 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 16:58:09,645 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 16:58:09,645 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 16:58:10,115 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 16:58:10,172 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 16:58:10,184 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 16:58:10,200 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 16:58:10,200 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 16:58:10,469 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 16:58:10,510 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 16:58:10,510 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 16:58:10,543 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 16:58:10,543 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 16:58:10,699 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 16:58:11,430 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 16:58:11,466 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 16:58:11,508 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 16:58:11,508 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 16:58:11,508 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 16:58:11,643 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 16:58:11,643 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 16:58:11,708 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 16:59:18,987 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 16:59:18,987 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 16:59:20,593 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374656284000:1374652624487&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 16:59:20,593 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374656284000:1374652624487&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 16:59:26,418 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 17:59:58,108 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 17:59:58,425 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 17:59:58,449 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 18:00:01,187 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 18:00:03,087 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 18:00:03,093 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 18:00:03,227 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 18:00:03,262 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 18:00:03,284 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 18:00:03,284 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 18:00:03,285 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 18:00:03,368 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 18:00:03,376 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 18:00:03,376 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 18:00:03,389 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 18:00:03,389 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 18:00:03,403 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 18:00:42,137 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 18:00:42,180 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 18:00:42,199 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 18:00:42,209 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 18:00:42,216 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 18:00:42,277 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 18:00:42,277 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 18:00:42,304 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 18:00:42,869 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 18:00:42,869 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 18:00:43,353 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374659998000:1374656364844&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 18:00:43,353 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374659998000:1374656364844&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 18:00:44,682 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 19:00:45,385 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 19:00:45,392 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 19:00:45,393 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 19:00:45,577 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 19:00:45,609 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 19:00:45,609 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 19:00:45,610 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 19:00:45,610 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 19:00:45,610 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 19:00:45,610 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 19:00:45,610 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 19:00:45,615 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 19:00:45,615 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 19:00:45,615 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 19:00:45,615 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 19:00:45,615 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 19:00:45,615 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 19:00:45,616 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 19:00:45,618 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 19:00:45,619 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 19:00:45,619 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 19:00:45,619 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 19:00:45,655 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 19:00:45,655 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 19:00:46,083 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 19:00:46,647 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 19:00:46,648 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 19:00:48,296 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374663645000:1374660044256&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 19:00:48,297 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374663645000:1374660044256&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 19:00:50,057 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 20:01:29,235 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 20:01:32,386 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 20:01:32,446 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 20:01:45,818 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 20:01:53,606 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 20:01:53,613 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 20:01:53,993 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 20:01:54,039 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 20:01:54,081 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 20:01:54,081 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 20:01:54,081 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 20:01:55,356 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 20:01:55,415 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 20:01:55,415 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 20:01:55,512 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 20:01:55,517 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 20:01:55,943 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 20:02:02,403 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 20:02:02,599 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 20:02:02,713 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 20:02:02,713 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 20:02:02,735 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 20:02:02,784 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 20:02:02,784 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 20:02:03,452 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 20:04:25,761 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 20:04:25,762 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 20:04:26,394 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374667299000:1374663648506&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 20:04:26,394 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374667299000:1374663648506&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 20:04:28,076 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 21:04:28,916 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 21:04:28,950 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 21:04:28,961 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 21:04:30,120 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 21:04:30,166 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 21:04:30,166 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 21:04:30,181 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 21:04:30,181 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 21:04:30,181 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 21:04:30,181 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 21:04:30,181 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 21:04:30,190 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 21:04:30,190 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 21:04:30,190 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 21:04:30,191 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 21:04:30,191 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 21:04:30,191 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 21:04:30,389 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 21:04:30,394 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 21:04:30,396 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 21:04:30,396 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 21:04:30,396 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 21:04:30,653 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 21:04:30,654 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 21:04:30,655 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 21:04:30,729 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 21:04:30,746 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 21:04:31,015 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374671069000:1374667467578&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 21:04:31,015 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374671069000:1374667467578&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 21:04:31,790 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 22:04:42,923 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 22:04:42,956 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 22:04:42,956 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 22:04:43,514 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 22:04:43,728 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 22:04:43,728 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 22:04:43,768 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 22:04:43,768 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 22:04:43,768 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 22:04:43,768 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 22:04:43,768 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 22:04:43,805 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 22:04:43,805 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 22:04:43,805 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 22:04:43,805 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 22:04:43,805 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 22:04:43,809 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 22:04:43,832 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 22:04:43,862 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 22:04:43,862 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 22:04:43,862 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 22:04:43,862 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 22:04:43,923 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 22:04:43,940 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 22:04:43,968 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 22:04:44,074 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 22:04:44,074 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 22:04:45,255 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374674683000:1374671071492&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 22:04:45,255 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374674683000:1374671071492&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 22:04:46,202 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573
+2013-07-24 23:04:46,394 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 23:04:46,405 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 23:04:46,405 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 23:04:46,706 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getimage=1
+2013-07-24 23:04:46,709 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file fsimage size 3573 bytes.
+2013-07-24 23:04:46,709 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?getedit=1
+2013-07-24 23:04:46,710 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Downloaded file edits size 4 bytes.
+2013-07-24 23:04:46,710 INFO org.apache.hadoop.hdfs.util.GSet: VM type       = 64-bit
+2013-07-24 23:04:46,710 INFO org.apache.hadoop.hdfs.util.GSet: 2% max memory = 17.77875 MB
+2013-07-24 23:04:46,710 INFO org.apache.hadoop.hdfs.util.GSet: capacity      = 2^21 = 2097152 entries
+2013-07-24 23:04:46,710 INFO org.apache.hadoop.hdfs.util.GSet: recommended=2097152, actual=2097152
+2013-07-24 23:04:46,717 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: fsOwner=guoliqiang
+2013-07-24 23:04:46,717 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: supergroup=supergroup
+2013-07-24 23:04:46,718 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isPermissionEnabled=true
+2013-07-24 23:04:46,718 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: dfs.block.invalidate.limit=100
+2013-07-24 23:04:46,718 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: isAccessTokenEnabled=false accessKeyUpdateInterval=0 min(s), accessTokenLifetime=0 min(s)
+2013-07-24 23:04:46,718 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: Caching file names occuring more than 10 times 
+2013-07-24 23:04:46,718 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files = 31
+2013-07-24 23:04:46,721 INFO org.apache.hadoop.hdfs.server.common.Storage: Number of files under construction = 0
+2013-07-24 23:04:46,721 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: EOF of /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits, reached end of edit log Number of transactions found: 0.  Bytes read: 4
+2013-07-24 23:04:46,721 INFO org.apache.hadoop.hdfs.server.common.Storage: Edits file /usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits of size 4 edits # 0 loaded in 0 seconds.
+2013-07-24 23:04:46,721 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-24 23:04:46,789 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 23:04:46,789 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 23:04:46,791 INFO org.apache.hadoop.hdfs.server.common.Storage: Image file of size 3573 saved in 0 seconds.
+2013-07-24 23:04:46,906 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 23:04:46,907 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hadooptmp/dfs/namesecondary/current/edits
+2013-07-24 23:04:47,100 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Posted URL 0.0.0.0:50070putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374678286000:1374674685846&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 23:04:47,100 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50070/getimage?putimage=1&port=50090&machine=0.0.0.0&token=-32:671602484:0:1374678286000:1374674685846&newChecksum=d611befee1e100a18c481b021494a394
+2013-07-24 23:04:47,454 INFO org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 3573

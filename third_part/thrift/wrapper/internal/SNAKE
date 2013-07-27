@@ -1,0 +1,3 @@
+cc_library(name='thrift_wrapper',
+          srcs = ['thrift.cc']
+          )

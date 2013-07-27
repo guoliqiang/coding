@@ -1,0 +1,264 @@
+2013-07-21 00:42:23,534 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 00:52:32,017 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 00:52:32,018 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 00:52:32,018 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 00:52:32,058 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 00:52:32,580 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 00:52:32,602 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 00:52:32,602 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 00:52:32,602 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 187 
+2013-07-21 00:52:32,638 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 00:52:32,638 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 01:42:24,736 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 01:52:32,881 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 01:52:32,881 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 01:52:32,881 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 01:52:32,882 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 01:52:33,362 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 01:52:33,364 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 01:52:33,364 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 01:52:33,364 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 68 
+2013-07-21 01:52:33,365 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 01:52:33,365 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 02:42:25,934 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 02:52:33,600 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 02:52:33,600 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 02:52:33,600 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 02:52:33,600 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 02:52:34,075 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 02:52:34,077 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 02:52:34,077 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 02:52:34,077 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 79 
+2013-07-21 02:52:34,078 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 02:52:34,078 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 03:42:21,136 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 03:52:34,300 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 03:52:34,300 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 03:52:34,301 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 03:52:34,301 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 03:52:34,780 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 03:52:34,782 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 03:52:34,782 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 03:52:34,782 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 59 
+2013-07-21 03:52:34,782 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 03:52:34,783 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 04:42:22,336 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 04:52:35,008 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 04:52:35,009 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 04:52:35,009 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 04:52:35,009 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 04:52:35,594 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 04:52:35,597 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 04:52:35,598 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 04:52:35,598 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 68 
+2013-07-21 04:52:35,598 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 04:52:35,598 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 05:42:23,534 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 05:52:35,829 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 05:52:35,830 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 05:52:35,830 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 05:52:35,830 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 05:52:36,248 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 05:52:36,250 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 05:52:36,250 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 05:52:36,250 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 60 
+2013-07-21 05:52:36,256 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 05:52:36,256 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 06:42:24,736 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 06:52:36,482 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 06:52:36,482 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 06:52:36,482 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 06:52:36,482 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 06:52:36,904 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 06:52:36,906 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 06:52:36,907 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 06:52:36,908 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 77 
+2013-07-21 06:52:36,913 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 06:52:36,914 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 07:42:22,936 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 07:52:37,150 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 07:52:37,150 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 07:52:37,151 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 07:52:37,151 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 07:52:37,762 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 07:52:37,773 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 07:52:37,774 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 07:52:37,774 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 73 
+2013-07-21 07:52:37,774 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 07:52:37,775 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 08:42:24,133 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 08:52:38,105 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 08:52:38,105 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 08:52:38,108 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 08:52:38,108 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 08:52:38,703 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 08:52:38,705 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 08:52:38,706 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 08:52:38,706 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 77 
+2013-07-21 08:52:38,712 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 08:52:38,713 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 09:42:22,334 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 09:52:39,043 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 09:52:39,043 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 09:52:39,043 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 09:52:39,044 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 09:52:39,527 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 09:52:39,529 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 09:52:39,530 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 09:52:39,530 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 77 
+2013-07-21 09:52:39,558 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 09:52:39,559 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 10:42:23,534 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 10:52:39,790 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 10:52:39,791 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 10:52:39,791 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 10:52:39,791 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 10:52:40,238 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 10:52:40,240 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 10:52:40,241 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 10:52:40,241 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 60 
+2013-07-21 10:52:40,246 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 10:52:40,247 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 11:42:24,732 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 11:52:40,486 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 11:52:40,486 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 11:52:40,486 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 11:52:40,486 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 11:52:40,954 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 11:52:40,975 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 11:52:40,976 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 11:52:40,976 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 71 
+2013-07-21 11:52:40,981 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 11:52:40,982 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 12:42:25,932 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 12:52:41,256 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 12:52:41,256 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 12:52:41,256 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 12:52:41,256 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 12:52:41,768 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 12:52:41,770 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 12:52:41,770 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 12:52:41,771 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 65 
+2013-07-21 12:52:41,776 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 12:52:41,776 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 13:42:24,131 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 13:52:41,996 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 13:52:41,996 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 13:52:41,997 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 13:52:41,997 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 13:52:42,509 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 13:52:42,511 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 13:52:42,511 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 13:52:42,511 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 75 
+2013-07-21 13:52:42,517 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 13:52:42,517 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 14:42:25,332 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 14:52:42,762 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 14:52:42,762 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 14:52:42,762 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 14:52:42,762 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 14:52:43,333 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 14:52:43,338 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 14:52:43,338 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 14:52:43,338 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 68 
+2013-07-21 14:52:43,495 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 14:52:43,496 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 15:42:23,530 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 15:52:43,746 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 15:52:43,746 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 15:52:43,746 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 15:52:43,746 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 15:52:44,228 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 15:52:44,230 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 15:52:44,230 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 15:52:44,230 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 78 
+2013-07-21 15:52:44,231 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 15:52:44,231 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 16:42:24,730 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 16:52:44,520 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 16:52:44,521 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 16:52:44,523 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 16:52:44,524 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 16:52:44,981 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 16:52:44,983 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 16:52:44,984 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 16:52:44,984 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 79 
+2013-07-21 16:52:44,989 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 16:52:44,990 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 17:42:25,930 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 17:52:45,207 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 17:52:45,208 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 17:52:45,208 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 17:52:45,208 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 17:52:45,737 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 17:52:45,739 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 17:52:45,740 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 17:52:45,740 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 75 
+2013-07-21 17:52:45,745 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 17:52:45,745 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 18:42:24,129 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 18:52:45,992 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 18:52:45,992 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 18:52:45,993 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 18:52:45,993 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 18:52:46,484 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 18:52:46,525 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 18:52:46,526 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 18:52:46,526 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 79 
+2013-07-21 18:52:46,553 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 18:52:46,553 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 19:42:21,299 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 19:52:46,945 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 19:52:46,945 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 19:52:46,945 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 19:52:46,945 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 19:52:47,536 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 19:52:47,539 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 19:52:47,540 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 19:52:47,565 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 70 
+2013-07-21 19:52:47,582 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 19:52:47,582 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 20:42:22,501 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 20:52:47,858 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 20:52:47,883 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 20:52:47,892 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 20:52:47,892 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 20:52:48,405 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 20:52:48,407 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 20:52:48,408 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 20:52:48,436 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 84 
+2013-07-21 20:52:48,443 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 20:52:48,443 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 21:42:20,698 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 21:52:48,685 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 21:52:48,685 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 21:52:48,685 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 21:52:48,685 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 21:52:49,253 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 21:52:49,256 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 21:52:49,256 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 21:52:49,256 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 75 
+2013-07-21 21:52:49,257 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 21:52:49,257 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 22:42:21,899 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 22:52:49,482 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 22:52:49,482 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 22:52:49,482 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 22:52:49,482 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 22:52:50,047 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 22:52:50,050 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 22:52:50,051 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 22:52:50,051 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 83 
+2013-07-21 22:52:50,051 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 22:52:50,051 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 23:42:26,098 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-21 23:52:50,277 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-21 23:52:50,300 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-21 23:52:50,311 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 23:52:50,311 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-21 23:52:50,757 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-21 23:52:50,759 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: d611befee1e100a18c481b021494a394
+2013-07-21 23:52:50,759 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-21 23:52:50,760 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 84 
+2013-07-21 23:52:50,765 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-21 23:52:50,765 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new

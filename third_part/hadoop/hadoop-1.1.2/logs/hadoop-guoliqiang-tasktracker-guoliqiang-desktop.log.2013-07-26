@@ -1,0 +1,97 @@
+2013-07-26 13:37:41,451 INFO org.apache.hadoop.mapred.TaskTracker: LaunchTaskAction (registerTask): attempt_201307171144_0010_m_000004_0 task's state:UNASSIGNED
+2013-07-26 13:37:41,616 INFO org.apache.hadoop.mapred.TaskTracker: Trying to launch : attempt_201307171144_0010_m_000004_0 which needs 1 slots
+2013-07-26 13:37:41,625 INFO org.apache.hadoop.mapred.TaskTracker: In TaskLauncher, current free slots : 2 and trying to launch attempt_201307171144_0010_m_000004_0 which needs 1 slots
+2013-07-26 13:37:43,906 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Using existing cache of /usr/local/hadoop/hdfs/bin/word_count->/usr/local/hadoop/mapred/local/taskTracker/distcache/-5542987987931660703_1224561580_1823000258/localhost/usr/local/hadoop/hdfs/bin/word_count
+2013-07-26 13:37:44,116 INFO org.apache.hadoop.mapred.JobLocalizer: Initializing user guoliqiang on this TT.
+2013-07-26 13:37:45,060 INFO org.apache.hadoop.mapred.JvmManager: In JvmRunner constructed JVM ID: jvm_201307171144_0010_m_1815398271
+2013-07-26 13:37:45,060 INFO org.apache.hadoop.mapred.JvmManager: JVM Runner jvm_201307171144_0010_m_1815398271 spawned.
+2013-07-26 13:37:45,063 INFO org.apache.hadoop.mapred.TaskController: Writing commands to /usr/local/hadoop/mapred/local/ttprivate/taskTracker/guoliqiang/jobcache/job_201307171144_0010/attempt_201307171144_0010_m_000004_0/taskjvm.sh
+2013-07-26 13:37:46,776 INFO org.apache.hadoop.mapred.TaskTracker: JVM with ID: jvm_201307171144_0010_m_1815398271 given task: attempt_201307171144_0010_m_000004_0
+2013-07-26 13:37:48,156 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_m_000004_0 0.0% setup
+2013-07-26 13:37:48,198 INFO org.apache.hadoop.mapred.TaskTracker: Task attempt_201307171144_0010_m_000004_0 is done.
+2013-07-26 13:37:48,198 INFO org.apache.hadoop.mapred.TaskTracker: reported output size for attempt_201307171144_0010_m_000004_0  was -1
+2013-07-26 13:37:48,216 INFO org.apache.hadoop.mapred.TaskTracker: addFreeSlot : current free slots : 2
+2013-07-26 13:37:48,492 INFO org.apache.hadoop.mapred.TaskTracker: LaunchTaskAction (registerTask): attempt_201307171144_0010_m_000000_0 task's state:UNASSIGNED
+2013-07-26 13:37:48,492 INFO org.apache.hadoop.mapred.TaskTracker: LaunchTaskAction (registerTask): attempt_201307171144_0010_m_000001_0 task's state:UNASSIGNED
+2013-07-26 13:37:48,493 INFO org.apache.hadoop.mapred.TaskTracker: Trying to launch : attempt_201307171144_0010_m_000000_0 which needs 1 slots
+2013-07-26 13:37:48,493 INFO org.apache.hadoop.mapred.TaskTracker: In TaskLauncher, current free slots : 2 and trying to launch attempt_201307171144_0010_m_000000_0 which needs 1 slots
+2013-07-26 13:37:48,493 INFO org.apache.hadoop.mapred.TaskTracker: Trying to launch : attempt_201307171144_0010_m_000001_0 which needs 1 slots
+2013-07-26 13:37:48,493 INFO org.apache.hadoop.mapred.TaskTracker: In TaskLauncher, current free slots : 1 and trying to launch attempt_201307171144_0010_m_000001_0 which needs 1 slots
+2013-07-26 13:37:48,677 INFO org.apache.hadoop.mapred.JvmManager: JVM : jvm_201307171144_0010_m_1815398271 exited with exit code 0. Number of tasks it ran: 1
+2013-07-26 13:37:48,745 INFO org.apache.hadoop.mapred.TaskTracker: Received KillTaskAction for task: attempt_201307171144_0010_m_000004_0
+2013-07-26 13:37:48,761 INFO org.apache.hadoop.mapred.TaskTracker: About to purge task: attempt_201307171144_0010_m_000004_0
+2013-07-26 13:37:48,762 INFO org.apache.hadoop.mapred.IndexCache: Map ID attempt_201307171144_0010_m_000004_0 not found in cache
+2013-07-26 13:37:48,820 INFO org.apache.hadoop.mapred.JvmManager: In JvmRunner constructed JVM ID: jvm_201307171144_0010_m_-540768420
+2013-07-26 13:37:48,830 INFO org.apache.hadoop.mapred.JvmManager: JVM Runner jvm_201307171144_0010_m_-540768420 spawned.
+2013-07-26 13:37:48,852 INFO org.apache.hadoop.mapred.TaskController: Writing commands to /usr/local/hadoop/mapred/local/ttprivate/taskTracker/guoliqiang/jobcache/job_201307171144_0010/attempt_201307171144_0010_m_000000_0/taskjvm.sh
+2013-07-26 13:37:48,866 INFO org.apache.hadoop.mapred.JvmManager: In JvmRunner constructed JVM ID: jvm_201307171144_0010_m_-1290498037
+2013-07-26 13:37:48,866 INFO org.apache.hadoop.mapred.JvmManager: JVM Runner jvm_201307171144_0010_m_-1290498037 spawned.
+2013-07-26 13:37:48,989 INFO org.apache.hadoop.mapred.TaskController: Writing commands to /usr/local/hadoop/mapred/local/ttprivate/taskTracker/guoliqiang/jobcache/job_201307171144_0010/attempt_201307171144_0010_m_000001_0/taskjvm.sh
+2013-07-26 13:37:49,016 INFO org.apache.hadoop.io.nativeio.NativeIO: Got UserName guoliqiang for UID 1000 from the native implementation
+2013-07-26 13:37:50,182 INFO org.apache.hadoop.mapred.TaskTracker: JVM with ID: jvm_201307171144_0010_m_-540768420 given task: attempt_201307171144_0010_m_000000_0
+2013-07-26 13:37:50,810 INFO org.apache.hadoop.mapred.TaskTracker: JVM with ID: jvm_201307171144_0010_m_-1290498037 given task: attempt_201307171144_0010_m_000001_0
+2013-07-26 13:37:57,340 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_m_000000_0 1.0% hdfs://localhost:9000/usr/local/hadoop/hdfs/input/hello.txt:0+5
+2013-07-26 13:37:57,342 INFO org.apache.hadoop.mapred.TaskTracker: Task attempt_201307171144_0010_m_000000_0 is done.
+2013-07-26 13:37:57,342 INFO org.apache.hadoop.mapred.TaskTracker: reported output size for attempt_201307171144_0010_m_000000_0  was 25
+2013-07-26 13:37:57,342 INFO org.apache.hadoop.mapred.TaskTracker: addFreeSlot : current free slots : 1
+2013-07-26 13:37:57,423 INFO org.apache.hadoop.mapred.TaskTracker: LaunchTaskAction (registerTask): attempt_201307171144_0010_m_000002_0 task's state:UNASSIGNED
+2013-07-26 13:37:57,423 INFO org.apache.hadoop.mapred.TaskTracker: Trying to launch : attempt_201307171144_0010_m_000002_0 which needs 1 slots
+2013-07-26 13:37:57,423 INFO org.apache.hadoop.mapred.TaskTracker: In TaskLauncher, current free slots : 1 and trying to launch attempt_201307171144_0010_m_000002_0 which needs 1 slots
+2013-07-26 13:37:57,429 INFO org.apache.hadoop.mapred.TaskTracker: LaunchTaskAction (registerTask): attempt_201307171144_0010_r_000000_0 task's state:UNASSIGNED
+2013-07-26 13:37:57,458 INFO org.apache.hadoop.mapred.TaskTracker: Trying to launch : attempt_201307171144_0010_r_000000_0 which needs 1 slots
+2013-07-26 13:37:57,479 INFO org.apache.hadoop.mapred.TaskTracker: In TaskLauncher, current free slots : 2 and trying to launch attempt_201307171144_0010_r_000000_0 which needs 1 slots
+2013-07-26 13:37:57,542 INFO org.apache.hadoop.mapred.JvmManager: Killing JVM: jvm_201307171144_0010_m_-540768420
+2013-07-26 13:37:57,543 INFO org.apache.hadoop.mapred.JvmManager: In JvmRunner constructed JVM ID: jvm_201307171144_0010_m_774640324
+2013-07-26 13:37:57,543 INFO org.apache.hadoop.mapred.JvmManager: JVM Runner jvm_201307171144_0010_m_774640324 spawned.
+2013-07-26 13:37:57,544 INFO org.apache.hadoop.mapred.JvmManager: JVM : jvm_201307171144_0010_m_-540768420 exited with exit code 0. Number of tasks it ran: 1
+2013-07-26 13:37:57,551 INFO org.apache.hadoop.mapred.TaskController: Writing commands to /usr/local/hadoop/mapred/local/ttprivate/taskTracker/guoliqiang/jobcache/job_201307171144_0010/attempt_201307171144_0010_m_000002_0/taskjvm.sh
+2013-07-26 13:37:57,566 INFO org.apache.hadoop.mapred.JvmManager: In JvmRunner constructed JVM ID: jvm_201307171144_0010_r_-1834249927
+2013-07-26 13:37:57,566 INFO org.apache.hadoop.mapred.JvmManager: JVM Runner jvm_201307171144_0010_r_-1834249927 spawned.
+2013-07-26 13:37:57,673 INFO org.apache.hadoop.mapred.TaskController: Writing commands to /usr/local/hadoop/mapred/local/ttprivate/taskTracker/guoliqiang/jobcache/job_201307171144_0010/attempt_201307171144_0010_r_000000_0/taskjvm.sh
+2013-07-26 13:37:58,149 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_m_000001_0 -0.0% hdfs://localhost:9000/usr/local/hadoop/hdfs/input/hello.txt:5+5
+2013-07-26 13:37:58,652 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_m_000001_0 -0.0% hdfs://localhost:9000/usr/local/hadoop/hdfs/input/hello.txt:5+5
+2013-07-26 13:37:58,653 INFO org.apache.hadoop.mapred.TaskTracker: Task attempt_201307171144_0010_m_000001_0 is done.
+2013-07-26 13:37:58,653 INFO org.apache.hadoop.mapred.TaskTracker: reported output size for attempt_201307171144_0010_m_000001_0  was 6
+2013-07-26 13:37:58,654 INFO org.apache.hadoop.mapred.TaskTracker: addFreeSlot : current free slots : 1
+2013-07-26 13:37:59,140 INFO org.apache.hadoop.mapred.TaskTracker: JVM with ID: jvm_201307171144_0010_m_774640324 given task: attempt_201307171144_0010_m_000002_0
+2013-07-26 13:37:59,210 INFO org.apache.hadoop.mapred.JvmManager: JVM : jvm_201307171144_0010_m_-1290498037 exited with exit code 0. Number of tasks it ran: 1
+2013-07-26 13:37:59,453 INFO org.apache.hadoop.mapred.TaskTracker: JVM with ID: jvm_201307171144_0010_r_-1834249927 given task: attempt_201307171144_0010_r_000000_0
+2013-07-26 13:38:06,010 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_m_000002_0 0.0% hdfs://localhost:9000/usr/local/hadoop/hdfs/input/hello.txt:10+1
+2013-07-26 13:38:06,012 INFO org.apache.hadoop.mapred.TaskTracker: Task attempt_201307171144_0010_m_000002_0 is done.
+2013-07-26 13:38:06,012 INFO org.apache.hadoop.mapred.TaskTracker: reported output size for attempt_201307171144_0010_m_000002_0  was 6
+2013-07-26 13:38:06,012 INFO org.apache.hadoop.mapred.TaskTracker: addFreeSlot : current free slots : 2
+2013-07-26 13:38:06,262 INFO org.apache.hadoop.mapred.JvmManager: JVM : jvm_201307171144_0010_m_774640324 exited with exit code 0. Number of tasks it ran: 1
+2013-07-26 13:38:06,524 INFO org.apache.hadoop.mapred.TaskTracker.clienttrace: src: 127.0.1.1:50060, dest: 127.0.1.1:34509, bytes: 25, op: MAPRED_SHUFFLE, cliID: attempt_201307171144_0010_m_000000_0, duration: 67980889
+2013-07-26 13:38:06,626 INFO org.apache.hadoop.mapred.TaskTracker.clienttrace: src: 127.0.1.1:50060, dest: 127.0.1.1:34509, bytes: 6, op: MAPRED_SHUFFLE, cliID: attempt_201307171144_0010_m_000001_0, duration: 846586
+2013-07-26 13:38:06,800 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_r_000000_0 0.22222224% reduce > copy (2 of 3 at 0.00 MB/s) > 
+2013-07-26 13:38:09,856 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_r_000000_0 0.22222224% reduce > copy (2 of 3 at 0.00 MB/s) > 
+2013-07-26 13:38:11,690 INFO org.apache.hadoop.mapred.TaskTracker.clienttrace: src: 127.0.1.1:50060, dest: 127.0.1.1:34513, bytes: 6, op: MAPRED_SHUFFLE, cliID: attempt_201307171144_0010_m_000002_0, duration: 59322545
+2013-07-26 13:38:12,058 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_r_000000_0 0.22222224% reduce > copy (2 of 3 at 0.00 MB/s) > 
+2013-07-26 13:38:12,144 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_r_000000_0 0.22222224% reduce > copy (2 of 3 at 0.00 MB/s) > 
+2013-07-26 13:38:15,924 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_r_000000_0 1.0% reduce > reduce
+2013-07-26 13:38:17,371 INFO org.apache.hadoop.mapred.TaskTracker: Task attempt_201307171144_0010_r_000000_0 is in commit-pending, task state:COMMIT_PENDING
+2013-07-26 13:38:17,372 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_r_000000_0 1.0% reduce > reduce
+2013-07-26 13:38:17,558 INFO org.apache.hadoop.mapred.TaskTracker: Received commit task action for attempt_201307171144_0010_r_000000_0
+2013-07-26 13:38:18,411 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_r_000000_0 1.0% reduce > reduce
+2013-07-26 13:38:18,413 INFO org.apache.hadoop.mapred.TaskTracker: Task attempt_201307171144_0010_r_000000_0 is done.
+2013-07-26 13:38:18,413 INFO org.apache.hadoop.mapred.TaskTracker: reported output size for attempt_201307171144_0010_r_000000_0  was -1
+2013-07-26 13:38:18,413 INFO org.apache.hadoop.mapred.TaskTracker: addFreeSlot : current free slots : 2
+2013-07-26 13:38:18,491 INFO org.apache.hadoop.mapred.TaskTracker: LaunchTaskAction (registerTask): attempt_201307171144_0010_m_000003_0 task's state:UNASSIGNED
+2013-07-26 13:38:18,491 INFO org.apache.hadoop.mapred.TaskTracker: Trying to launch : attempt_201307171144_0010_m_000003_0 which needs 1 slots
+2013-07-26 13:38:18,491 INFO org.apache.hadoop.mapred.TaskTracker: In TaskLauncher, current free slots : 2 and trying to launch attempt_201307171144_0010_m_000003_0 which needs 1 slots
+2013-07-26 13:38:18,760 INFO org.apache.hadoop.mapred.JvmManager: In JvmRunner constructed JVM ID: jvm_201307171144_0010_m_2072101963
+2013-07-26 13:38:18,778 INFO org.apache.hadoop.mapred.JvmManager: JVM : jvm_201307171144_0010_r_-1834249927 exited with exit code 0. Number of tasks it ran: 1
+2013-07-26 13:38:18,778 INFO org.apache.hadoop.mapred.TaskTracker: Received KillTaskAction for task: attempt_201307171144_0010_r_000000_0
+2013-07-26 13:38:18,778 INFO org.apache.hadoop.mapred.TaskTracker: About to purge task: attempt_201307171144_0010_r_000000_0
+2013-07-26 13:38:18,785 INFO org.apache.hadoop.mapred.JvmManager: JVM Runner jvm_201307171144_0010_m_2072101963 spawned.
+2013-07-26 13:38:18,838 INFO org.apache.hadoop.mapred.TaskController: Writing commands to /usr/local/hadoop/mapred/local/ttprivate/taskTracker/guoliqiang/jobcache/job_201307171144_0010/attempt_201307171144_0010_m_000003_0/taskjvm.sh
+2013-07-26 13:38:19,844 INFO org.apache.hadoop.mapred.TaskTracker: JVM with ID: jvm_201307171144_0010_m_2072101963 given task: attempt_201307171144_0010_m_000003_0
+2013-07-26 13:38:20,756 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_m_000003_0 0.0% 
+2013-07-26 13:38:20,890 INFO org.apache.hadoop.mapred.TaskTracker: attempt_201307171144_0010_m_000003_0 0.0% cleanup
+2013-07-26 13:38:20,891 INFO org.apache.hadoop.mapred.TaskTracker: Task attempt_201307171144_0010_m_000003_0 is done.
+2013-07-26 13:38:20,891 INFO org.apache.hadoop.mapred.TaskTracker: reported output size for attempt_201307171144_0010_m_000003_0  was -1
+2013-07-26 13:38:20,892 INFO org.apache.hadoop.mapred.TaskTracker: addFreeSlot : current free slots : 2
+2013-07-26 13:38:21,347 INFO org.apache.hadoop.mapred.JvmManager: JVM : jvm_201307171144_0010_m_2072101963 exited with exit code 0. Number of tasks it ran: 1
+2013-07-26 13:38:22,787 INFO org.apache.hadoop.mapred.TaskTracker: Received 'KillJobAction' for job: job_201307171144_0010
+2013-07-26 13:38:22,787 INFO org.apache.hadoop.mapred.IndexCache: Map ID attempt_201307171144_0010_m_000003_0 not found in cache
+2013-07-26 13:38:22,788 INFO org.apache.hadoop.mapred.UserLogCleaner: Adding job_201307171144_0010 for user-log deletion with retainTimeStamp:1374903502788
