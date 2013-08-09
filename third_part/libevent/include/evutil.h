@@ -34,6 +34,6 @@
   use <event2/util.h> instead.
 */
 
-#include <event2/util.h>
+#include "third_part/libevent/include/event2/util.h"
 
 #endif /* _EVUTIL_H_ */

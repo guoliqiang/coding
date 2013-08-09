@@ -1,7 +1,8 @@
 cc_library(name = 'hadoop_pipes',
            srcs = ['HadoopPipes.cc',
                    'SerialUtils.cc',
-                   'StringUtils.cc'
+                   'StringUtils.cc',
+                   'HadoopLogging.cc'
                   ],
            deps = [
                    '//base/internal:base',

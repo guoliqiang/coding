@@ -22,7 +22,7 @@
 
 #include "TVirtualProtocol.h"
 
-#include <boost/shared_ptr.hpp>
+#include "third_part/boost/include/boost/shared_ptr.hpp"
 
 namespace apache { namespace thrift { namespace protocol {
 
@@ -171,7 +171,7 @@ class TDebugProtocolFactory : public TProtocolFactory {
 
 
 // TODO(dreiss): Move (part of) ThriftDebugString into a .cpp file and remove this.
-#include <thrift/transport/TBufferTransports.h>
+#include "third_part/thrift/include/thrift/transport/TBufferTransports.h"
 
 namespace apache { namespace thrift {
 

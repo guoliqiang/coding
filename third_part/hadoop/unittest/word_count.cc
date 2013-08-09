@@ -5,13 +5,16 @@
 // File  : word_count.cc
 // Brief :
 
-#include<algorithm>
-#include<limits>
-#include<string>
-#include"stdint.h"
-#include"third_part/hadoop_pipes/public/Pipes.hh"
-#include"third_part/hadoop_pipes/public/TemplateFactory.hh"
-#include"third_part/hadoop_pipes/public/StringUtils.hh"
+#include <algorithm>
+#include <limits>
+#include <string>
+#include <iostream>
+#include "stdint.h"
+#include "base/public/logging.h"
+#include "third_part/hadoop_pipes/public/Pipes.hh"
+#include "third_part/hadoop_pipes/public/HadoopLogging.h"
+#include "third_part/hadoop_pipes/public/TemplateFactory.hh"
+#include "third_part/hadoop_pipes/public/StringUtils.hh"
 
 using namespace std;
 
@@ -40,5 +43,11 @@ class WordCountReducer:public HadoopPipes::Reducer {
 };
 
 int main(int argc, char** argv) {
+  FLAGS_HP_v = 3;
+  std::cout << "word_count" << std::endl;
+  std::cout << "word_count" << std::endl;
+  for (int i = 0; i < argc; i++) {
+    HP_LOG(INFO) << argv[i];
+  }
   return HadoopPipes::runTask(HadoopPipes::TemplateFactory<WordCountMapper, WordCountReducer>());
 }

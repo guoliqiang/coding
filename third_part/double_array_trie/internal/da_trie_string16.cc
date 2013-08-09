@@ -11,8 +11,8 @@
 #include "../../../base/public/logging.h"
 #include "../../../base/public/utf_string_conversions.h"
 
-using namespace base;
-using namespace std;
+using namespace base;  // NOLINT
+using namespace std;  // NOLINT
 
 
 void DATrie16Basic::BuildFrom(const base::hash_map<string16, int> &map) {

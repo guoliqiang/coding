@@ -37,7 +37,7 @@
 extern "C" {
 #endif
 
-#include <event2/event-config.h>
+#include "event-config.h"
 #ifdef _EVENT_HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
@@ -46,7 +46,7 @@ extern "C" {
 #endif
 
 /* For int types. */
-#include <event2/util.h>
+#include "util.h"
 
 struct evbuffer;
 

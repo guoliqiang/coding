@@ -10,8 +10,8 @@
 #include <cstring>
 
 #include "../../../base/public/logging.h"
-using namespace std;
-using namespace base;
+using namespace std;  // NOLINT
+using namespace base;  // NOLINT
 
 
 void DATrieBasic::BuildFrom(const base::hash_map<std::string, int> &map) {

@@ -19,9 +19,13 @@
 #include "third_part/hadoop_pipes/public/Pipes.hh"
 #include "third_part/hadoop_pipes/public/SerialUtils.hh"
 #include "third_part/hadoop_pipes/public/StringUtils.hh"
-#include "base/public/logging.h"
-#include "third_part/openssl/include/openssl/hmac.h"
-#include "third_part/openssl/include/openssl/buffer.h"
+#include "third_part/hadoop_pipes/public/HadoopLogging.h"
+#include "base/public/string_util.h"
+
+// not use the openssl in third_part.
+// An error was emerged, may be the version of them are not same
+#include <openssl/hmac.h>
+#include <openssl/buffer.h>
 
 #include <map>
 #include <vector>
@@ -44,12 +48,16 @@ using namespace HadoopUtils;
 
 namespace HadoopPipes {
 
+static const int kHPLogLevel = 2;  // for debug
+#define kLL kHPLogLevel
+
 class JobConfImpl: public JobConf {
  private:
   map<string, string> values;
  
  public:
   void set(const string& key, const string& value) {
+    HP_VLOG(kLL) << "set JobConf, key:" << key <<" value:" << value;
     values[key] = value;
   }
 
@@ -135,6 +143,7 @@ class TextUpwardProtocol: public UpwardProtocol {
   TextUpwardProtocol(FILE* _stream): stream(_stream) {}
     
   virtual void output(const string& key, const string& value) {
+    HP_VLOG(kLL) << "output key:" << key << " value:" << value;
     fprintf(stream, "output%c", fieldSeparator);
     writeBuffer(key);
     fprintf(stream, "%c", fieldSeparator);
@@ -144,6 +153,7 @@ class TextUpwardProtocol: public UpwardProtocol {
 
   virtual void partitionedOutput(int reduce, const string& key,
                                  const string& value) {
+    HP_VLOG(kLL) << "partitioned Output key:" << key << " value:" << value;
     fprintf(stream, "parititionedOutput%c%d%c", fieldSeparator, reduce, 
             fieldSeparator);
     writeBuffer(key);
@@ -153,17 +163,21 @@ class TextUpwardProtocol: public UpwardProtocol {
   }
 
   virtual void status(const string& message) {
+    HP_VLOG(kLL) << "status:" << message;
     fprintf(stream, "status%c%s%c", fieldSeparator, message.c_str(), 
             lineSeparator);
   }
 
   virtual void progress(float progress) {
+    HP_VLOG(kLL) << "progress:" << progress;
     fprintf(stream, "progress%c%f%c", fieldSeparator, progress, 
             lineSeparator);
   }
 
   virtual void registerCounter(int id, const string& group, 
                                const string& name) {
+    HP_VLOG(kLL) << "register counter id:" << id << " group:" << group
+              << " name:" << name;
     fprintf(stream, "registerCounter%c%d%c%s%c%s%c", fieldSeparator, id,
             fieldSeparator, group.c_str(), fieldSeparator, name.c_str(), 
             lineSeparator);
@@ -171,11 +185,14 @@ class TextUpwardProtocol: public UpwardProtocol {
 
   virtual void incrementCounter(const TaskContext::Counter* counter, 
                                 uint64_t amount) {
+    HP_VLOG(kLL) << "increment counter counter_id" << counter->getId()
+              << " amout:" << amount;
     fprintf(stream, "incrCounter%c%d%c%ld%c", fieldSeparator, counter->getId(), 
             fieldSeparator, (long)amount, lineSeparator);
   }
     
   virtual void done() {
+    HP_VLOG(kLL) << "done";
     fprintf(stream, "done%c", lineSeparator);
   }
 };
@@ -232,21 +249,29 @@ class TextProtocol: public Protocol {
       HADOOP_ASSERT(sep == '\t', "Short text protocol command " + command);
       sep = readUpto(value, delim);
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command
+                << " key:" << key << " value:" << value;
       handler->mapItem(key, value);
     } else if (command == "reduceValue") {
       HADOOP_ASSERT(sep == '\t', "Short text protocol command " + command);
       sep = readUpto(value, delim);
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command
+                << " value:" << value;
       handler->reduceValue(value);
     } else if (command == "reduceKey") {
       HADOOP_ASSERT(sep == '\t', "Short text protocol command " + command);
       sep = readUpto(key, delim);
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command
+                << " key:" << key;
       handler->reduceKey(key);
     } else if (command == "start") {
       HADOOP_ASSERT(sep == '\t', "Short text protocol command " + command);
       sep = readUpto(arg, delim);
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command
+                << " arg:" << arg;
       handler->start(toInt(arg));
     } else if (command == "setJobConf") {
       HADOOP_ASSERT(sep == '\t', "Short text protocol command " + command);
@@ -259,6 +284,8 @@ class TextProtocol: public Protocol {
         values.push_back(arg);
       }
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command
+                << " values:" << JoinVector(values);
       handler->setJobConf(values);
     } else if (command == "setInputTypes") {
       HADOOP_ASSERT(sep == '\t', "Short text protocol command " + command);
@@ -266,6 +293,8 @@ class TextProtocol: public Protocol {
       HADOOP_ASSERT(sep == '\t', "Short text protocol command " + command);
       sep = readUpto(value, delim);
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command
+                << " key:" << key << " value:" << value;
       handler->setInputTypes(key, value);
     } else if (command == "runMap") {
       string split;
@@ -277,6 +306,8 @@ class TextProtocol: public Protocol {
       HADOOP_ASSERT(sep == '\t', "Short text protocol command " + command);
       sep = readUpto(arg, delim);
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command
+                << " reduces:" << reduces << " arg:" << arg;
       handler->runMap(split, toInt(reduces), toBool(arg));
     } else if (command == "runReduce") {
       HADOOP_ASSERT(sep == '\t', "Short text protocol command " + command);
@@ -285,12 +316,16 @@ class TextProtocol: public Protocol {
       string piped;
       sep = readUpto(piped, delim);
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command
+                << " arg:" << arg << " piped:" << piped;
       handler->runReduce(toInt(arg), toBool(piped));
     } else if (command == "abort") { 
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command;
       handler->abort();
     } else if (command == "close") {
       HADOOP_ASSERT(sep == '\n', "Long text protocol command " + command);
+      HP_VLOG(kLL) << "command:" << command;
       handler->close();
     } else {
       throw Error("Illegal text protocol command " + command);
@@ -321,12 +356,14 @@ class BinaryUpwardProtocol: public UpwardProtocol {
   }
 
   virtual void authenticate(const string &responseDigest) {
+    HP_VLOG(kLL) << "response digest:" << responseDigest;
     serializeInt(AUTHENTICATION_RESP, *stream);
     serializeString(responseDigest, *stream);
     stream->flush();
   }
 
   virtual void output(const string& key, const string& value) {
+    HP_VLOG(kLL) << "output key:" << key << " value:" << value;
     serializeInt(OUTPUT, *stream);
     serializeString(key, *stream);
     serializeString(value, *stream);
@@ -334,6 +371,8 @@ class BinaryUpwardProtocol: public UpwardProtocol {
 
   virtual void partitionedOutput(int reduce, const string& key,
                                  const string& value) {
+    HP_VLOG(kLL) << "partitioned output reduce:" << reduce
+              << " key:" << key << " value:" << value;
     serializeInt(PARTITIONED_OUTPUT, *stream);
     serializeInt(reduce, *stream);
     serializeString(key, *stream);
@@ -341,22 +380,27 @@ class BinaryUpwardProtocol: public UpwardProtocol {
   }
 
   virtual void status(const string& message) {
+    HP_VLOG(kLL) << "status:" << message;
     serializeInt(STATUS, *stream);
     serializeString(message, *stream);
   }
 
   virtual void progress(float progress) {
+    HP_VLOG(kLL) << "progerss:" << progress;
     serializeInt(PROGRESS, *stream);
     serializeFloat(progress, *stream);
     stream->flush();
   }
 
   virtual void done() {
+    HP_VLOG(kLL) << "DONE:" << DONE;
     serializeInt(DONE, *stream);
   }
 
   virtual void registerCounter(int id, const string& group, 
                                const string& name) {
+    HP_VLOG(kLL) << "register counter id:" << id
+              << " group:" << group << " name:" << name;
     serializeInt(REGISTER_COUNTER, *stream);
     serializeInt(id, *stream);
     serializeString(group, *stream);
@@ -365,6 +409,8 @@ class BinaryUpwardProtocol: public UpwardProtocol {
 
   virtual void incrementCounter(const TaskContext::Counter* counter, 
                                 uint64_t amount) {
+    HP_VLOG(kLL) << "increment counter, couter_id:" << counter->getId()
+              << " amount:" << amount;
     serializeInt(INCREMENT_COUNTER, *stream);
     serializeInt(counter->getId(), *stream);
     serializeLong(amount, *stream);
@@ -401,6 +447,7 @@ class BinaryProtocol: public Protocol {
     passBuff[passwordLength] = 0;
     password.replace(0, passwordLength, (const char *) passBuff, passwordLength);
     delete [] passBuff;
+    HP_VLOG(kLL) << "password:" << password;
     return; 
   }
 
@@ -419,10 +466,13 @@ class BinaryProtocol: public Protocol {
     authDone = true;
     string responseDigest = createDigest(password, digest);
     uplink->authenticate(responseDigest);
+    HP_VLOG(kLL) << "digest:" << digest << " challenge:" << challenge;
   }
 
   bool verifyDigest(string &password, string& digest, string& challenge) {
     string expectedDigest = createDigest(password, challenge);
+    HP_VLOG(kLL) << "password:" << password << " challenge:" << challenge
+              << " digest:" << digest << " expectedDigest:" << expectedDigest;
     if (digest == expectedDigest) {
       return true;
     } else {
@@ -440,7 +490,7 @@ class BinaryProtocol: public Protocol {
     HMAC_Final(&ctx, digest, &digestLen);
     HMAC_cleanup(&ctx);
 
-    //now apply base64 encoding
+    // now apply base64 encoding
     BIO *bmem, *b64;
     BUF_MEM *bptr;
 
@@ -455,7 +505,9 @@ class BinaryProtocol: public Protocol {
     memcpy(digestBuffer, bptr->data, bptr->length-1);
     digestBuffer[bptr->length-1] = 0;
     BIO_free_all(b64);
-
+    
+    HP_VLOG(kLL) << "passwod:" << password << " msg:" << msg
+              << " return:" << string(digestBuffer);
     return string(digestBuffer);
   }
 
@@ -490,12 +542,15 @@ class BinaryProtocol: public Protocol {
         deserializeString(digest, *downStream);
         deserializeString(challenge, *downStream);
         verifyDigestAndRespond(digest, challenge);
+        HP_VLOG(kLL) << "AUTHENTICATION_REQ" << " digest:" << digest
+                  << " challenge:" << challenge;
         break;
       }
       case START_MESSAGE: {
         int32_t prot;
         prot = deserializeInt(*downStream);
         handler->start(prot);
+        HP_VLOG(kLL) << "START_MESSAGE" << " prot:" << prot;
         break;
       }
       case SET_JOB_CONF: {
@@ -508,6 +563,7 @@ class BinaryProtocol: public Protocol {
           result.push_back(item);
         }
         handler->setJobConf(result);
+        HP_VLOG(kLL) << "SET_JOB_CONF" << " result:" << JoinVector(result);
         break;
       }
       case SET_INPUT_TYPES: {
@@ -516,6 +572,8 @@ class BinaryProtocol: public Protocol {
         deserializeString(keyType, *downStream);
         deserializeString(valueType, *downStream);
         handler->setInputTypes(keyType, valueType);
+        HP_VLOG(kLL) << "SET_INPUT_TYPES" << " keyType:" << keyType
+                  << " valueType:" << valueType;
         break;
       }
       case RUN_MAP: {
@@ -526,12 +584,15 @@ class BinaryProtocol: public Protocol {
         numReduces = deserializeInt(*downStream);
         piped = deserializeInt(*downStream);
         handler->runMap(split, numReduces, piped);
+        HP_VLOG(kLL) << "RUN_MAP" << " split:" << split << " numReduces:"
+                  << numReduces << " piped:" << piped;
         break;
       }
       case MAP_ITEM: {
         deserializeString(key, *downStream);
         deserializeString(value, *downStream);
         handler->mapItem(key, value);
+        HP_VLOG(kLL) << "MAP_ITEM" << " key:" << key << " value:" << value;
         break;
       }
       case RUN_REDUCE: {
@@ -540,22 +601,27 @@ class BinaryProtocol: public Protocol {
         reduce = deserializeInt(*downStream);
         piped = deserializeInt(*downStream);
         handler->runReduce(reduce, piped);
+        HP_VLOG(kLL) << "RUN_REDUCE" << " reduce:" << reduce << " piped:" << piped;
         break;
       }
       case REDUCE_KEY: {
         deserializeString(key, *downStream);
         handler->reduceKey(key);
+        HP_VLOG(kLL) << "REDUCE_KEY" << " key:" << key;
         break;
       }
       case REDUCE_VALUE: {
         deserializeString(value, *downStream);
         handler->reduceValue(value);
+        HP_VLOG(kLL) << "REDUCE_VALUE" << " value:" << value;
         break;
       }
       case CLOSE:
         handler->close();
+        HP_VLOG(kLL) << "CLOSE";
         break;
       case ABORT:
+        HP_VLOG(kLL) << "ABORT";
         handler->abort();
         break;
       default:
@@ -613,7 +679,9 @@ class CombineContext: public ReduceContext {
   }
 
   virtual void emit(const std::string& key, const std::string& value) {
+    HP_VLOG(kLL) << "emit" << " key:" << key << " value:" << value;
     if (partitioner != NULL) {
+      HP_VLOG(kLL) << partitioner->partition(key, numReduces);
       uplink->partitionedOutput(partitioner->partition(key, numReduces),
                                 key, value);
     } else {
@@ -626,6 +694,7 @@ class CombineContext: public ReduceContext {
   }
 
   virtual void setStatus(const std::string& status) {
+    HP_VLOG(kLL) << "status:" << status;
     baseContext->setStatus(status);
   }
 
@@ -655,10 +724,13 @@ class CombineContext: public ReduceContext {
     
   virtual Counter* getCounter(const std::string& group, 
                               const std::string& name) {
+    HP_VLOG(kLL) << "group:" << group << " name:" << name;
     return baseContext->getCounter(group, name);
   }
 
-  virtual void incrementCounter(const Counter* counter, uint64_t amount) {
+  virtual void incrementCounter(const Counter* counter,
+                                uint64_t amount) {
+    HP_VLOG(kLL) << "amount:" << amount;
     baseContext->incrementCounter(counter, amount);
   }
 };
@@ -690,6 +762,7 @@ class CombineRunner: public RecordWriter {
 
   virtual void emit(const std::string& key,
                     const std::string& value) {
+    HP_VLOG(kLL) << "emit key:" << key << " value:" << value;
     numBytes += key.length() + value.length();
     data[key].push_back(value);
     if (numBytes >= spillSize) {
@@ -780,6 +853,7 @@ class TaskContextImpl: public MapContext, public ReduceContext,
   }
 
   virtual void setJobConf(vector<string> values) {
+    HP_VLOG(kLL) << "setJobConf values:" << JoinVector(values);
     int len = values.size();
     JobConfImpl* result = new JobConfImpl();
     HADOOP_ASSERT(len % 2 == 0, "Odd length of job conf values");
@@ -790,11 +864,15 @@ class TaskContextImpl: public MapContext, public ReduceContext,
   }
 
   virtual void setInputTypes(string keyType, string valueType) {
+    HP_VLOG(kLL) << "set Input types keyType:" << keyType << " valueType:"
+              << valueType;
     inputKeyClass = new string(keyType);
     inputValueClass = new string(valueType);
   }
 
   virtual void runMap(string _inputSplit, int _numReduces, bool pipedInput) {
+    HP_VLOG(kLL) << "runMap inputSplit" << _inputSplit << " numReduces:"
+              << _numReduces << " pipedInput:" << pipedInput;
     inputSplit = new string(_inputSplit);
     reader = factory->createRecordReader(*this);
     HADOOP_ASSERT((reader == NULL) == pipedInput,
@@ -821,12 +899,14 @@ class TaskContextImpl: public MapContext, public ReduceContext,
   }
 
   virtual void mapItem(const string& _key, const string& _value) {
+    HP_VLOG(kLL) << "mapItem key:" << _key << " value:" << _value;
     newKey = &_key;
     value = &_value;
     isNewKey = true;
   }
 
   virtual void runReduce(int reduce, bool pipedOutput) {
+    HP_VLOG(kLL) << "runReduce reduce:" << reduce << " pipedOutput:" << pipedOutput;
     reducer = factory->createReducer(*this);
     writer = factory->createRecordWriter(*this);
     HADOOP_ASSERT((writer == NULL) == pipedOutput,
@@ -836,16 +916,19 @@ class TaskContextImpl: public MapContext, public ReduceContext,
   }
 
   virtual void reduceKey(const string& _key) {
+    HP_VLOG(kLL) << "reduceKye key:" << _key;
     isNewKey = true;
     newKey = &_key;
   }
 
   virtual void reduceValue(const string& _value) {
+    HP_VLOG(kLL) << "reduceValue value:" << _value;
     isNewValue = true;
     value = &_value;
   }
     
   virtual bool isDone() {
+    HP_VLOG(kLL) << "isDone";
     pthread_mutex_lock(&mutexDone);
     bool doneCopy = done;
     pthread_mutex_unlock(&mutexDone);
@@ -853,22 +936,26 @@ class TaskContextImpl: public MapContext, public ReduceContext,
   }
 
   virtual void close() {
+    HP_VLOG(kLL) << "close";
     pthread_mutex_lock(&mutexDone);
     done = true;
     pthread_mutex_unlock(&mutexDone);
   }
 
   virtual void abort() {
+    HP_VLOG(kLL) << "abort";
     throw Error("Aborted by driver");
   }
 
   void waitForTask() {
+    HP_VLOG(kLL) << "wairForTask";
     while (!done && !hasTask) {
       protocol->nextEvent();
     }
   }
 
   bool nextKey() {
+    HP_VLOG(kLL) << "nextKey";
     if (reader == NULL) {
       while (!isNewKey) {
         nextValue();
@@ -897,6 +984,7 @@ class TaskContextImpl: public MapContext, public ReduceContext,
 
    // Advance to the next value.
   virtual bool nextValue() {
+    HP_VLOG(kLL) << "nextValue";
     if (isNewKey || done) {
       return false;
     }
@@ -927,6 +1015,7 @@ class TaskContextImpl: public MapContext, public ReduceContext,
   // Mark your task as having made progress without changing the status 
   // message.
   virtual void progress() {
+    HP_VLOG(kLL) << "progress";
     if (uplink != 0) {
       uint64_t now = getCurrentMillis();
       if (now - lastProgress > 1000) {
@@ -963,6 +1052,7 @@ class TaskContextImpl: public MapContext, public ReduceContext,
   }
 
   virtual void emit(const string& key, const string& value) {
+    HP_VLOG(kLL) << "emit key:" << key << " value:" << value;
     progress();
     if (writer != NULL) {
       writer->emit(key, value);
@@ -977,6 +1067,7 @@ class TaskContextImpl: public MapContext, public ReduceContext,
   // Register a counter with the given group and name.
   virtual Counter* getCounter(const std::string& group, 
                               const std::string& name) {
+    HP_VLOG(kLL) << "get counter, group:" << group << " name:" << name;
     int id = registeredCounterIds.size();
     registeredCounterIds.push_back(id);
     uplink->registerCounter(id, group, name);
@@ -985,10 +1076,12 @@ class TaskContextImpl: public MapContext, public ReduceContext,
 
   // Increment the value of the counter with the given amount.
   virtual void incrementCounter(const Counter* counter, uint64_t amount) {
+    HP_VLOG(kLL) << "increment counter amount:" << amount;
     uplink->incrementCounter(counter, amount); 
   }
 
   void closeAll() {
+    HP_VLOG(kLL) << "closeAll";
     if (reader) {
       reader->close();
     }
@@ -1026,6 +1119,7 @@ void* ping(void* ptr) {
   char* portStr = getenv("hadoop.pipes.command.port");
   int MAX_RETRIES = 3;
   int remaining_retries = MAX_RETRIES;
+  HP_VLOG(kLL) << "ping port:" << portStr;
   while (!context->isDone()) {
     try{
       sleep(5);
@@ -1038,6 +1132,7 @@ void* ping(void* ptr) {
         addr.sin_family = AF_INET;
         addr.sin_port = htons(toInt(portStr));
         addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+        HP_VLOG(kLL) << "port:" <<  addr.sin_port << "addr:" << addr.sin_addr.s_addr;
         HADOOP_ASSERT(connect(sock, (sockaddr*) &addr, sizeof(addr)) == 0,
                       string("problem connecting command socket: ") +
                       strerror(errno));
@@ -1079,6 +1174,7 @@ bool runTask(const Factory& factory) {
     FILE* outStream = NULL;
     char *bufin = NULL;
     char *bufout = NULL;
+    HP_VLOG(kLL) << "runTask port:" << portStr;
     if (portStr) {
       sock = socket(PF_INET, SOCK_STREAM, 0);
       HADOOP_ASSERT(sock != - 1,

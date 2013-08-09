@@ -20,11 +20,11 @@
 #ifndef _THRIFT_PROTOCOL_TPROTOCOL_H_
 #define _THRIFT_PROTOCOL_TPROTOCOL_H_ 1
 
-#include <thrift/transport/TTransport.h>
-#include <thrift/protocol/TProtocolException.h>
+#include "third_part/thrift/include/thrift/transport/TTransport.h"
+#include "third_part/thrift/include/thrift/protocol/TProtocolException.h"
 
-#include <boost/shared_ptr.hpp>
-#include <boost/static_assert.hpp>
+#include "third_part/boost/include/boost/shared_ptr.hpp"
+#include "third_part/boost/include/boost/static_assert.hpp"
 
 #ifdef HAVE_NETINET_IN_H
 #include <netinet/in.h>

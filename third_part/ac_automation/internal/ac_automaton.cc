@@ -18,11 +18,11 @@ using std::basic_string;
 
 namespace ac_automaton {
 //
-ACAutomaton::ACAutomaton() : m_pChildrenCount(NULL),
+ACAutomaton::ACAutomaton() : m_totalStates(0),
+                             m_pChildrenCount(NULL),
                              m_pChildrenAddr(NULL),
                              m_pChildren(NULL),
-                             m_pFail(NULL),
-                             m_totalStates(0){}
+                             m_pFail(NULL) {}
 
 //
 ACAutomaton::~ACAutomaton() {
@@ -87,15 +87,16 @@ bool ACAutomaton::Init(const vector<basic_string<uint16> > &patterns) {
     }
     // now the new pattern is added end at state
     m_matchPatternTable[state].push_back(pattern);
-    VLOG(kACLogLevel) << "state:" << state << " own pattern :" << ToUTF8String(pattern);
+    VLOG(kACLogLevel) << "state:" << state
+                      << " own pattern :" << ToUTF8String(pattern);
   }
 
   // convert STL types into build in types for better perf
   m_totalStates = gotoTable.size();
   VLOG(kACLogLevel) << "finally, the sate number is:" << m_totalStates;
-  m_pChildrenCount = new (std::nothrow)uint16[m_totalStates];
-  m_pChildrenAddr = new (std::nothrow)uint32[m_totalStates];
-  m_pChildren = new (std::nothrow)GotoNode[m_totalStates];
+  m_pChildrenCount = new(std::nothrow) uint16[m_totalStates];
+  m_pChildrenAddr = new(std::nothrow) uint32[m_totalStates];
+  m_pChildren = new(std::nothrow) GotoNode[m_totalStates];
 
   CHECK(m_pChildrenCount != NULL) << "memory is not enough!";
   CHECK(m_pChildrenAddr != NULL) << "memory is not enough!";
@@ -113,8 +114,8 @@ bool ACAutomaton::Init(const vector<basic_string<uint16> > &patterns) {
     }
   }
 
-  m_pFail = new (std::nothrow)uint32[m_totalStates];
-  AutoDeleteArray<uint32> queue(new (std::nothrow)uint32[m_totalStates]);
+  m_pFail = new(std::nothrow) uint32[m_totalStates];
+  AutoDeleteArray<uint32> queue(new(std::nothrow) uint32[m_totalStates]);
   CHECK(m_pFail != NULL) << "memory is not enough";
   CHECK(queue.Valid()) << "memory is not enough";
 
@@ -174,7 +175,7 @@ bool ACAutomaton::Match(const std::string &text,
                         map<std::string, vector<size_t> >
                         * pMatchedPos) const {
   basic_string<uint16> text16;
-  if(!ToString16(text, &text16)) return false;
+  if (!ToString16(text, &text16)) return false;
   map<std::basic_string<uint16>, vector<size_t> > temp_rs;
   Match(text16, &temp_rs);
   for (map<std::basic_string<uint16>, vector<size_t> >::iterator i

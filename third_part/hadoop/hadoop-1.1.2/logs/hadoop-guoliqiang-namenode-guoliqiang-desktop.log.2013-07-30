@@ -1,0 +1,420 @@
+2013-07-30 00:24:05,895 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 00:24:05,896 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 00:24:05,896 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 00:24:05,896 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 00:24:06,286 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 00:24:06,288 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: 94eb5cd33ba0d907483765b91388b140
+2013-07-30 00:24:06,289 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 00:24:06,289 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 44 
+2013-07-30 00:24:06,289 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 00:24:06,290 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 00:31:49,344 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 01:24:06,495 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 01:24:06,496 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 01:24:06,496 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 01:24:06,496 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 01:24:06,919 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 01:24:06,922 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: c9170961c9e6b02ac04fc16f73ad14b8
+2013-07-30 01:24:06,923 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 01:24:06,923 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 70 
+2013-07-30 01:24:06,924 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 01:24:06,925 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 01:31:47,545 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 02:24:07,167 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 02:24:07,167 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 02:24:07,167 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 02:24:07,168 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 02:24:07,543 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 02:24:07,547 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: a3fd079c5920ed39210302674ca3b3c0
+2013-07-30 02:24:07,547 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 02:24:07,547 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 70 
+2013-07-30 02:24:07,548 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 02:24:07,548 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 02:31:45,748 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 03:24:07,761 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 03:24:07,761 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 03:24:07,762 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 03:24:07,762 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 03:24:08,149 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 03:24:08,153 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 03:24:08,154 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 03:24:08,154 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 58 
+2013-07-30 03:24:08,154 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 03:24:08,155 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 03:31:46,945 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 04:24:08,386 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 04:24:08,386 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 04:24:08,386 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 04:24:08,386 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 04:24:08,791 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 04:24:08,794 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 04:24:08,795 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 04:24:08,795 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 68 
+2013-07-30 04:24:08,796 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 04:24:08,796 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 04:31:48,146 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 05:24:09,033 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 05:24:09,033 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 05:24:09,033 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 05:24:09,033 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 05:24:09,415 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 05:24:09,418 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 05:24:09,419 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 05:24:09,419 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 51 
+2013-07-30 05:24:09,419 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 05:24:09,420 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 05:31:46,347 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 06:24:09,671 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 06:24:09,671 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 06:24:09,672 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 06:24:09,672 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 06:24:10,056 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 06:24:10,059 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 06:24:10,060 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 06:24:10,060 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 53 
+2013-07-30 06:24:10,068 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 06:24:10,068 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 06:31:47,545 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 07:24:10,283 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 07:24:10,283 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 07:24:10,283 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 07:24:10,283 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 07:24:10,654 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 07:24:10,656 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 07:24:10,657 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 07:24:10,657 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 54 
+2013-07-30 07:24:10,657 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 07:24:10,658 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 07:31:48,744 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 08:24:11,011 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 08:24:11,018 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 08:24:11,036 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 08:24:11,036 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 08:24:11,611 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 08:24:11,614 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 08:24:11,614 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 08:24:11,614 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 74 
+2013-07-30 08:24:11,615 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 08:24:11,615 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 08:31:43,952 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 09:24:11,983 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 09:24:11,983 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 09:24:12,010 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 09:24:12,010 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 09:24:12,419 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 09:24:12,422 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 09:24:12,423 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 09:24:12,423 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 61 
+2013-07-30 09:24:12,424 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 09:24:12,424 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 09:31:45,153 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 10:24:12,718 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 10:24:12,727 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 10:24:12,749 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 10:24:12,749 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 10:24:13,192 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 10:24:13,195 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 10:24:13,196 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 10:24:13,196 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 58 
+2013-07-30 10:24:13,240 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 10:24:13,241 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 10:31:49,457 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 11:24:13,549 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 11:24:13,563 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 11:24:13,585 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 11:24:13,585 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 11:24:14,016 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 11:24:14,057 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 11:24:14,058 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 11:24:14,085 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 67 
+2013-07-30 11:24:14,108 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 11:24:14,108 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 11:31:44,658 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 12:24:14,379 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 12:24:14,391 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 12:24:14,415 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 12:24:14,415 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 12:24:14,932 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 12:24:14,935 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 12:24:14,935 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 12:24:14,936 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 53 
+2013-07-30 12:24:14,936 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 12:24:14,937 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 12:31:45,858 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 13:24:15,168 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 13:24:15,168 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 13:24:15,168 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 13:24:15,169 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 13:24:15,572 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 13:24:15,575 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 13:24:15,576 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 13:24:15,576 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 65 
+2013-07-30 13:24:15,576 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 13:24:15,577 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 13:31:47,056 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 14:24:15,845 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 14:24:15,845 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 14:24:15,869 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 14:24:15,869 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 14:24:16,462 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 14:24:16,464 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 14:24:16,465 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 14:24:16,465 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 103 
+2013-07-30 14:24:16,466 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 14:24:16,466 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 14:31:45,256 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 15:24:16,974 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 15:24:17,067 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 15:24:17,104 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 15:24:17,111 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 15:24:17,992 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 15:24:18,018 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 15:24:18,019 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 15:24:18,019 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 68 
+2013-07-30 15:24:18,057 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 15:24:18,058 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 15:31:46,555 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 16:24:18,485 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 16:24:18,485 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 16:24:18,507 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 16:24:18,515 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 16:24:19,489 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 16:24:19,491 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 16:24:19,492 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 16:24:19,492 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 69 
+2013-07-30 16:24:19,525 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 16:24:19,525 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 16:31:44,758 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 17:24:19,947 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 17:24:19,947 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 17:24:19,966 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 17:24:19,967 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 17:24:20,539 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 17:24:20,547 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 17:24:20,548 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 17:24:20,548 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 74 
+2013-07-30 17:24:20,600 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 17:24:20,600 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 17:31:45,959 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 18:24:20,944 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 18:24:20,945 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 18:24:20,945 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 18:24:20,945 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 18:24:21,483 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 18:24:21,486 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: ca49c1c475001fbfed8db9acbb5ed67e
+2013-07-30 18:24:21,487 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 18:24:21,487 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 66 
+2013-07-30 18:24:21,488 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 18:24:21,488 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 18:31:47,157 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 19:18:16,768 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 1 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 19:18:16,849 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-1546641598335110967 to 127.0.0.1:50010 
+2013-07-30 19:18:18,313 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/bin/word_count. blk_-5204246291916321795_1306
+2013-07-30 19:18:18,449 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_-5204246291916321795_1306 size 2853047
+2013-07-30 19:18:18,450 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/bin/word_count from client DFSClient_NONMAPREDUCE_-19392601_1
+2013-07-30 19:18:18,450 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/bin/word_count is closed by DFSClient_NONMAPREDUCE_-19392601_1
+2013-07-30 19:18:18,959 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* ask 127.0.0.1:50010 to delete  blk_-1546641598335110967_1305
+2013-07-30 19:18:22,644 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-728214782351916814 to 127.0.0.1:50010 
+2013-07-30 19:18:22,645 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-5913953595531718973 to 127.0.0.1:50010 
+2013-07-30 19:18:22,645 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_2281552323012979213 to 127.0.0.1:50010 
+2013-07-30 19:18:24,537 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Increasing replication for file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.split. New replication is 10
+2013-07-30 19:18:24,548 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.split. blk_4816148817285084587_1307
+2013-07-30 19:18:24,597 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_4816148817285084587_1307 size 343
+2013-07-30 19:18:24,600 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.split from client DFSClient_NONMAPREDUCE_-1425873416_1
+2013-07-30 19:18:24,600 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.split is closed by DFSClient_NONMAPREDUCE_-1425873416_1
+2013-07-30 19:18:24,622 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.splitmetainfo. blk_-3146428983323606550_1308
+2013-07-30 19:18:24,641 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_-3146428983323606550_1308 size 77
+2013-07-30 19:18:24,643 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.splitmetainfo from client DFSClient_NONMAPREDUCE_-1425873416_1
+2013-07-30 19:18:24,643 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.splitmetainfo is closed by DFSClient_NONMAPREDUCE_-1425873416_1
+2013-07-30 19:18:24,869 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.xml. blk_5022970191856658149_1309
+2013-07-30 19:18:24,873 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_5022970191856658149_1309 size 32312
+2013-07-30 19:18:24,874 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.xml from client DFSClient_NONMAPREDUCE_-1425873416_1
+2013-07-30 19:18:24,874 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0017/job.xml is closed by DFSClient_NONMAPREDUCE_-1425873416_1
+2013-07-30 19:18:24,959 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* ask 127.0.0.1:50010 to delete  blk_2281552323012979213_1303 blk_-5913953595531718973_1301 blk_-728214782351916814_1304
+2013-07-30 19:18:24,988 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /tmp/hadoop/mapred/system/job_201307292018_0017/job-info. blk_9085816579344125427_1310
+2013-07-30 19:18:25,007 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_9085816579344125427_1310 size 137
+2013-07-30 19:18:25,008 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /tmp/hadoop/mapred/system/job_201307292018_0017/job-info from client DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 19:18:25,009 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /tmp/hadoop/mapred/system/job_201307292018_0017/job-info is closed by DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 19:18:25,077 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0017_conf.xml. blk_7856354709955034844_1312
+2013-07-30 19:18:25,081 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_7856354709955034844_1312 size 45641
+2013-07-30 19:18:25,081 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0017_conf.xml from client DFSClient_NONMAPREDUCE_933358043_34
+2013-07-30 19:18:25,082 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0017_conf.xml is closed by DFSClient_NONMAPREDUCE_933358043_34
+2013-07-30 19:18:25,099 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /tmp/hadoop/mapred/system/job_201307292018_0017/jobToken. blk_2753241086951791832_1313
+2013-07-30 19:18:25,104 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_2753241086951791832_1313 size 106
+2013-07-30 19:18:25,105 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /tmp/hadoop/mapred/system/job_201307292018_0017/jobToken from client DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 19:18:25,106 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /tmp/hadoop/mapred/system/job_201307292018_0017/jobToken is closed by DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 19:18:52,442 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/output/_temporary/_attempt_201307292018_0017_r_000000_0/part-00000. blk_2095495630745439262_1314
+2013-07-30 19:18:52,485 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_2095495630745439262_1314 size 15
+2013-07-30 19:18:52,487 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_temporary/_attempt_201307292018_0017_r_000000_0/part-00000 from client DFSClient_attempt_201307292018_0017_r_000000_0_-1109439294_1
+2013-07-30 19:18:52,487 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_temporary/_attempt_201307292018_0017_r_000000_0/part-00000 is closed by DFSClient_attempt_201307292018_0017_r_000000_0_-1109439294_1
+2013-07-30 19:18:55,598 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_SUCCESS from client DFSClient_attempt_201307292018_0017_m_000003_0_-160396504_1
+2013-07-30 19:18:55,599 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_SUCCESS is closed by DFSClient_attempt_201307292018_0017_m_000003_0_-160396504_1
+2013-07-30 19:18:55,614 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_4816148817285084587 to 127.0.0.1:50010 
+2013-07-30 19:18:55,615 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-3146428983323606550 to 127.0.0.1:50010 
+2013-07-30 19:18:55,615 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_5022970191856658149 to 127.0.0.1:50010 
+2013-07-30 19:18:55,757 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0017_1375183104895_guoliqiang_NA. blk_-5774198378171422735_1315
+2013-07-30 19:18:55,787 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_-5774198378171422735_1315 size 19194
+2013-07-30 19:18:55,787 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0017_1375183104895_guoliqiang_NA from client DFSClient_NONMAPREDUCE_933358043_34
+2013-07-30 19:18:55,787 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0017_1375183104895_guoliqiang_NA is closed by DFSClient_NONMAPREDUCE_933358043_34
+2013-07-30 19:18:55,881 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_9085816579344125427 to 127.0.0.1:50010 
+2013-07-30 19:18:55,881 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_2753241086951791832 to 127.0.0.1:50010 
+2013-07-30 19:18:57,964 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* ask 127.0.0.1:50010 to delete  blk_-3146428983323606550_1308 blk_5022970191856658149_1309 blk_2753241086951791832_1313 blk_4816148817285084587_1307 blk_9085816579344125427_1310
+2013-07-30 19:22:43,788 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 61 Total time for transactions(ms): 0Number of transactions batched in Syncs: 1 Number of syncs: 37 SyncTimes(ms): 543 
+2013-07-30 19:22:43,796 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-5204246291916321795 to 127.0.0.1:50010 
+2013-07-30 19:22:45,012 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/bin/word_count. blk_-2297718930180307822_1316
+2013-07-30 19:22:45,147 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_-2297718930180307822_1316 size 2853087
+2013-07-30 19:22:45,147 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/bin/word_count from client DFSClient_NONMAPREDUCE_-138373919_1
+2013-07-30 19:22:45,148 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/bin/word_count is closed by DFSClient_NONMAPREDUCE_-138373919_1
+2013-07-30 19:22:45,974 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* ask 127.0.0.1:50010 to delete  blk_-5204246291916321795_1306
+2013-07-30 19:22:49,246 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-5774198378171422735 to 127.0.0.1:50010 
+2013-07-30 19:22:49,246 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_7856354709955034844 to 127.0.0.1:50010 
+2013-07-30 19:22:49,246 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_2095495630745439262 to 127.0.0.1:50010 
+2013-07-30 19:22:50,605 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Increasing replication for file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.split. New replication is 10
+2013-07-30 19:22:50,615 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.split. blk_3932532625536458114_1317
+2013-07-30 19:22:50,641 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_3932532625536458114_1317 size 343
+2013-07-30 19:22:50,642 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.split from client DFSClient_NONMAPREDUCE_1306114265_1
+2013-07-30 19:22:50,642 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.split is closed by DFSClient_NONMAPREDUCE_1306114265_1
+2013-07-30 19:22:50,740 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.splitmetainfo. blk_2404585620734236656_1318
+2013-07-30 19:22:50,748 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_2404585620734236656_1318 size 77
+2013-07-30 19:22:50,749 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.splitmetainfo from client DFSClient_NONMAPREDUCE_1306114265_1
+2013-07-30 19:22:50,749 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.splitmetainfo is closed by DFSClient_NONMAPREDUCE_1306114265_1
+2013-07-30 19:22:50,821 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.xml. blk_4971906655393331794_1319
+2013-07-30 19:22:50,826 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_4971906655393331794_1319 size 32312
+2013-07-30 19:22:50,827 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.xml from client DFSClient_NONMAPREDUCE_1306114265_1
+2013-07-30 19:22:50,827 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0018/job.xml is closed by DFSClient_NONMAPREDUCE_1306114265_1
+2013-07-30 19:22:50,872 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /tmp/hadoop/mapred/system/job_201307292018_0018/job-info. blk_-9185163001519262349_1320
+2013-07-30 19:22:50,878 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_-9185163001519262349_1320 size 137
+2013-07-30 19:22:50,879 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /tmp/hadoop/mapred/system/job_201307292018_0018/job-info from client DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 19:22:50,880 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /tmp/hadoop/mapred/system/job_201307292018_0018/job-info is closed by DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 19:22:50,933 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0018_conf.xml. blk_-5322970628234008450_1322
+2013-07-30 19:22:50,938 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_-5322970628234008450_1322 size 45641
+2013-07-30 19:22:50,939 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0018_conf.xml from client DFSClient_NONMAPREDUCE_2081024375_30
+2013-07-30 19:22:50,940 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0018_conf.xml is closed by DFSClient_NONMAPREDUCE_2081024375_30
+2013-07-30 19:22:50,957 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /tmp/hadoop/mapred/system/job_201307292018_0018/jobToken. blk_4911613239293016269_1323
+2013-07-30 19:22:50,968 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_4911613239293016269_1323 size 106
+2013-07-30 19:22:50,969 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /tmp/hadoop/mapred/system/job_201307292018_0018/jobToken from client DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 19:22:50,969 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /tmp/hadoop/mapred/system/job_201307292018_0018/jobToken is closed by DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 19:22:51,975 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* ask 127.0.0.1:50010 to delete  blk_7856354709955034844_1312 blk_2095495630745439262_1314 blk_-5774198378171422735_1315
+2013-07-30 19:23:19,759 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/output/_temporary/_attempt_201307292018_0018_r_000000_0/part-00000. blk_3513868223410567050_1324
+2013-07-30 19:23:19,790 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_3513868223410567050_1324 size 15
+2013-07-30 19:23:19,792 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_temporary/_attempt_201307292018_0018_r_000000_0/part-00000 from client DFSClient_attempt_201307292018_0018_r_000000_0_-1552251244_1
+2013-07-30 19:23:19,792 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_temporary/_attempt_201307292018_0018_r_000000_0/part-00000 is closed by DFSClient_attempt_201307292018_0018_r_000000_0_-1552251244_1
+2013-07-30 19:23:22,826 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_SUCCESS from client DFSClient_attempt_201307292018_0018_m_000003_0_-266947389_1
+2013-07-30 19:23:22,826 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_SUCCESS is closed by DFSClient_attempt_201307292018_0018_m_000003_0_-266947389_1
+2013-07-30 19:23:22,837 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_3932532625536458114 to 127.0.0.1:50010 
+2013-07-30 19:23:22,837 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_2404585620734236656 to 127.0.0.1:50010 
+2013-07-30 19:23:22,837 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_4971906655393331794 to 127.0.0.1:50010 
+2013-07-30 19:23:23,017 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0018_1375183370830_guoliqiang_NA. blk_-6482976266722790821_1325
+2013-07-30 19:23:23,039 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_-6482976266722790821_1325 size 19197
+2013-07-30 19:23:23,040 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0018_1375183370830_guoliqiang_NA from client DFSClient_NONMAPREDUCE_2081024375_30
+2013-07-30 19:23:23,040 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0018_1375183370830_guoliqiang_NA is closed by DFSClient_NONMAPREDUCE_2081024375_30
+2013-07-30 19:23:23,071 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-9185163001519262349 to 127.0.0.1:50010 
+2013-07-30 19:23:23,071 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_4911613239293016269 to 127.0.0.1:50010 
+2013-07-30 19:23:24,979 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* ask 127.0.0.1:50010 to delete  blk_4971906655393331794_1319 blk_4911613239293016269_1323 blk_2404585620734236656_1318 blk_-9185163001519262349_1320 blk_3932532625536458114_1317
+2013-07-30 19:24:21,760 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 19:24:21,760 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 119 Total time for transactions(ms): 2Number of transactions batched in Syncs: 2 Number of syncs: 74 SyncTimes(ms): 1031 
+2013-07-30 19:24:21,761 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=15618, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 19:24:21,761 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 15618, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 19:24:22,265 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 19:24:22,268 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: a78e2be5e7ecb8d4ecca3f0b91f2580f
+2013-07-30 19:24:22,268 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 19:24:22,268 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 91 
+2013-07-30 19:24:22,269 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 19:24:22,269 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 19:31:48,367 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 1 msecs
+2013-07-30 20:24:22,530 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 20:24:22,530 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 20:24:22,530 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 20:24:22,530 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 20:24:23,014 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 20:24:23,018 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: 7e8c2460fcaf1c37b580b19de6fb35e2
+2013-07-30 20:24:23,018 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 20:24:23,018 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 89 
+2013-07-30 20:24:23,042 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 20:24:23,043 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 20:31:46,566 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 20:46:42,844 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 1 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 20:46:42,978 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-2297718930180307822 to 127.0.0.1:50010 
+2013-07-30 20:46:43,126 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* ask 127.0.0.1:50010 to delete  blk_-2297718930180307822_1316
+2013-07-30 20:46:44,202 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/bin/word_count. blk_8617828661456175544_1326
+2013-07-30 20:46:44,330 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_8617828661456175544_1326 size 2854599
+2013-07-30 20:46:44,331 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/bin/word_count from client DFSClient_NONMAPREDUCE_-2071191302_1
+2013-07-30 20:46:44,331 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/bin/word_count is closed by DFSClient_NONMAPREDUCE_-2071191302_1
+2013-07-30 20:46:49,983 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-6482976266722790821 to 127.0.0.1:50010 
+2013-07-30 20:46:49,984 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-5322970628234008450 to 127.0.0.1:50010 
+2013-07-30 20:46:49,984 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_3513868223410567050 to 127.0.0.1:50010 
+2013-07-30 20:46:51,393 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Increasing replication for file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.split. New replication is 10
+2013-07-30 20:46:51,403 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.split. blk_1368971427274489498_1327
+2013-07-30 20:46:51,443 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_1368971427274489498_1327 size 343
+2013-07-30 20:46:51,444 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.split from client DFSClient_NONMAPREDUCE_-541350103_1
+2013-07-30 20:46:51,444 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.split is closed by DFSClient_NONMAPREDUCE_-541350103_1
+2013-07-30 20:46:51,470 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.splitmetainfo. blk_4959341217239126685_1328
+2013-07-30 20:46:51,475 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_4959341217239126685_1328 size 77
+2013-07-30 20:46:51,477 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.splitmetainfo from client DFSClient_NONMAPREDUCE_-541350103_1
+2013-07-30 20:46:51,477 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.splitmetainfo is closed by DFSClient_NONMAPREDUCE_-541350103_1
+2013-07-30 20:46:51,562 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.xml. blk_7657576782292082904_1329
+2013-07-30 20:46:51,566 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_7657576782292082904_1329 size 32312
+2013-07-30 20:46:51,568 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.xml from client DFSClient_NONMAPREDUCE_-541350103_1
+2013-07-30 20:46:51,568 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/.staging/job_201307292018_0019/job.xml is closed by DFSClient_NONMAPREDUCE_-541350103_1
+2013-07-30 20:46:51,618 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /tmp/hadoop/mapred/system/job_201307292018_0019/job-info. blk_6456064374868402928_1330
+2013-07-30 20:46:51,622 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_6456064374868402928_1330 size 137
+2013-07-30 20:46:51,623 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /tmp/hadoop/mapred/system/job_201307292018_0019/job-info from client DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 20:46:51,623 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /tmp/hadoop/mapred/system/job_201307292018_0019/job-info is closed by DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 20:46:51,657 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0019_conf.xml. blk_8714909861520053550_1332
+2013-07-30 20:46:51,660 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_8714909861520053550_1332 size 45641
+2013-07-30 20:46:51,662 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0019_conf.xml from client DFSClient_NONMAPREDUCE_565411492_33
+2013-07-30 20:46:51,662 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0019_conf.xml is closed by DFSClient_NONMAPREDUCE_565411492_33
+2013-07-30 20:46:51,676 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /tmp/hadoop/mapred/system/job_201307292018_0019/jobToken. blk_-739685618967659099_1333
+2013-07-30 20:46:51,685 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_-739685618967659099_1333 size 106
+2013-07-30 20:46:51,685 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /tmp/hadoop/mapred/system/job_201307292018_0019/jobToken from client DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 20:46:51,685 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /tmp/hadoop/mapred/system/job_201307292018_0019/jobToken is closed by DFSClient_NONMAPREDUCE_1730108018_1
+2013-07-30 20:46:52,127 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* ask 127.0.0.1:50010 to delete  blk_-5322970628234008450_1322 blk_3513868223410567050_1324 blk_-6482976266722790821_1325
+2013-07-30 20:47:20,718 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/output/_temporary/_attempt_201307292018_0019_r_000000_0/part-00000. blk_-8100185940394570323_1334
+2013-07-30 20:47:20,748 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_-8100185940394570323_1334 size 15
+2013-07-30 20:47:20,749 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_temporary/_attempt_201307292018_0019_r_000000_0/part-00000 from client DFSClient_attempt_201307292018_0019_r_000000_0_1970612196_1
+2013-07-30 20:47:20,749 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_temporary/_attempt_201307292018_0019_r_000000_0/part-00000 is closed by DFSClient_attempt_201307292018_0019_r_000000_0_1970612196_1
+2013-07-30 20:47:23,361 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_SUCCESS from client DFSClient_attempt_201307292018_0019_m_000003_0_945951946_1
+2013-07-30 20:47:23,362 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_SUCCESS is closed by DFSClient_attempt_201307292018_0019_m_000003_0_945951946_1
+2013-07-30 20:47:23,517 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_1368971427274489498 to 127.0.0.1:50010 
+2013-07-30 20:47:23,517 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_4959341217239126685 to 127.0.0.1:50010 
+2013-07-30 20:47:23,517 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_7657576782292082904 to 127.0.0.1:50010 
+2013-07-30 20:47:23,723 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.allocateBlock: /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0019_1375188411576_guoliqiang_NA. blk_6745452753215316537_1335
+2013-07-30 20:47:23,742 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addStoredBlock: blockMap updated: 127.0.0.1:50010 is added to blk_6745452753215316537_1335 size 19194
+2013-07-30 20:47:23,746 INFO org.apache.hadoop.hdfs.StateChange: Removing lease on  file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0019_1375188411576_guoliqiang_NA from client DFSClient_NONMAPREDUCE_565411492_33
+2013-07-30 20:47:23,747 INFO org.apache.hadoop.hdfs.StateChange: DIR* NameSystem.completeFile: file /usr/local/hadoop/hdfs/output/_logs/history/job_201307292018_0019_1375188411576_guoliqiang_NA is closed by DFSClient_NONMAPREDUCE_565411492_33
+2013-07-30 20:47:23,851 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_6456064374868402928 to 127.0.0.1:50010 
+2013-07-30 20:47:23,851 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* NameSystem.addToInvalidates: blk_-739685618967659099 to 127.0.0.1:50010 
+2013-07-30 20:47:25,129 INFO org.apache.hadoop.hdfs.StateChange: BLOCK* ask 127.0.0.1:50010 to delete  blk_4959341217239126685_1328 blk_-739685618967659099_1333 blk_1368971427274489498_1327 blk_6456064374868402928_1330 blk_7657576782292082904_1329
+2013-07-30 21:24:23,317 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 21:24:23,318 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 60 Total time for transactions(ms): 2Number of transactions batched in Syncs: 1 Number of syncs: 37 SyncTimes(ms): 635 
+2013-07-30 21:24:23,318 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=7838, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 21:24:23,318 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 7838, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 21:24:23,853 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 21:24:23,857 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: e884cbe93a39fa8a8698f51bb619e43a
+2013-07-30 21:24:23,858 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 21:24:23,858 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 129 
+2013-07-30 21:24:23,858 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 21:24:23,859 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 21:31:44,772 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 22:24:24,102 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 22:24:24,103 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 22:24:24,103 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 22:24:24,103 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 22:24:24,658 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 22:24:24,660 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: 02e1d81d6117a93a49e6fa07d6cc1982
+2013-07-30 22:24:24,661 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 22:24:24,661 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 91 
+2013-07-30 22:24:24,661 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 22:24:24,662 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 22:31:45,973 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs
+2013-07-30 23:24:24,909 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll Edit Log from 127.0.0.1
+2013-07-30 23:24:24,910 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 0 SyncTimes(ms): 0 
+2013-07-30 23:24:24,910 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 23:24:24,910 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits
+2013-07-30 23:24:25,363 INFO org.apache.hadoop.hdfs.server.namenode.TransferFsImage: Opening connection to http://0.0.0.0:50090/getimage?getimage=1
+2013-07-30 23:24:25,366 INFO org.apache.hadoop.hdfs.server.namenode.GetImageServlet: Downloaded new fsimage with checksum: 4dcd916d7357036f9fdabff25d297ac4
+2013-07-30 23:24:25,366 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Roll FSImage from 127.0.0.1
+2013-07-30 23:24:25,366 INFO org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Number of transactions: 0 Total time for transactions(ms): 0Number of transactions batched in Syncs: 0 Number of syncs: 1 SyncTimes(ms): 91 
+2013-07-30 23:24:25,367 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: closing edit log: position=4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 23:24:25,367 INFO org.apache.hadoop.hdfs.server.namenode.FSEditLog: close success: truncate to 4, editlog=/usr/local/hadoop/hdfs/name/current/edits.new
+2013-07-30 23:31:44,173 INFO org.apache.hadoop.hdfs.StateChange: *BLOCK* NameSystem.processReport: from 127.0.0.1:50010, blocks: 6, processing time: 0 msecs

@@ -21,8 +21,8 @@
 #define _THRIFT_TPROCESSOR_H_ 1
 
 #include <string>
-#include <thrift/protocol/TProtocol.h>
-#include <boost/shared_ptr.hpp>
+#include "third_part/thrift/include/thrift/protocol/TProtocol.h"
+#include "third_part/boost/include/boost/shared_ptr.hpp"
 
 namespace apache { namespace thrift {
 

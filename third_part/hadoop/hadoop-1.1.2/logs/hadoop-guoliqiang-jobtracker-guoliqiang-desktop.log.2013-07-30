@@ -1,0 +1,145 @@
+2013-07-30 19:18:24,926 INFO org.apache.hadoop.mapred.JobInProgress: job_201307292018_0017: nMaps=3 nReduces=1 max=-1
+2013-07-30 19:18:25,020 INFO org.apache.hadoop.mapred.JobTracker: Job job_201307292018_0017 added successfully for user 'guoliqiang' to queue 'default'
+2013-07-30 19:18:25,020 INFO org.apache.hadoop.mapred.AuditLogger: USER=guoliqiang	IP=127.0.0.1	OPERATION=SUBMIT_JOB	TARGET=job_201307292018_0017	RESULT=SUCCESS
+2013-07-30 19:18:25,020 INFO org.apache.hadoop.mapred.JobTracker: Initializing job_201307292018_0017
+2013-07-30 19:18:25,023 INFO org.apache.hadoop.mapred.JobInProgress: Initializing job_201307292018_0017
+2013-07-30 19:18:25,115 INFO org.apache.hadoop.mapred.JobInProgress: jobToken generated and stored with users keys in /tmp/hadoop/mapred/system/job_201307292018_0017/jobToken
+2013-07-30 19:18:25,119 INFO org.apache.hadoop.mapred.JobInProgress: Input size for job job_201307292018_0017 = 11. Number of splits = 3
+2013-07-30 19:18:25,120 INFO org.apache.hadoop.mapred.JobInProgress: tip:task_201307292018_0017_m_000000 has split on node:/default-rack/guoliqiang-desktop
+2013-07-30 19:18:25,120 INFO org.apache.hadoop.mapred.JobInProgress: tip:task_201307292018_0017_m_000001 has split on node:/default-rack/guoliqiang-desktop
+2013-07-30 19:18:25,120 INFO org.apache.hadoop.mapred.JobInProgress: tip:task_201307292018_0017_m_000002 has split on node:/default-rack/guoliqiang-desktop
+2013-07-30 19:18:25,120 INFO org.apache.hadoop.mapred.JobInProgress: job_201307292018_0017 LOCALITY_WAIT_FACTOR=1.0
+2013-07-30 19:18:25,120 INFO org.apache.hadoop.mapred.JobInProgress: Job job_201307292018_0017 initialized successfully with 3 map tasks and 1 reduce tasks.
+2013-07-30 19:18:25,232 INFO org.apache.hadoop.mapred.JobTracker: Adding task (JOB_SETUP) 'attempt_201307292018_0017_m_000004_0' to tip task_201307292018_0017_m_000004, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:18:28,254 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0017_m_000004_0' has completed task_201307292018_0017_m_000004 successfully.
+2013-07-30 19:18:28,255 INFO org.apache.hadoop.mapred.JobTracker: Adding task (MAP) 'attempt_201307292018_0017_m_000000_0' to tip task_201307292018_0017_m_000000, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:18:28,255 INFO org.apache.hadoop.mapred.JobInProgress: Choosing data-local task task_201307292018_0017_m_000000
+2013-07-30 19:18:28,255 INFO org.apache.hadoop.mapred.JobTracker: Adding task (MAP) 'attempt_201307292018_0017_m_000001_0' to tip task_201307292018_0017_m_000001, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:18:28,256 INFO org.apache.hadoop.mapred.JobInProgress: Choosing data-local task task_201307292018_0017_m_000001
+2013-07-30 19:18:37,618 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0017_m_000000_0' has completed task_201307292018_0017_m_000000 successfully.
+2013-07-30 19:18:37,619 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0017_m_000001_0' has completed task_201307292018_0017_m_000001 successfully.
+2013-07-30 19:18:37,620 INFO org.apache.hadoop.mapred.JobTracker: Adding task (MAP) 'attempt_201307292018_0017_m_000002_0' to tip task_201307292018_0017_m_000002, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:18:37,620 INFO org.apache.hadoop.mapred.JobInProgress: Choosing data-local task task_201307292018_0017_m_000002
+2013-07-30 19:18:37,620 INFO org.apache.hadoop.mapred.JobTracker: Adding task (REDUCE) 'attempt_201307292018_0017_r_000000_0' to tip task_201307292018_0017_r_000000, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:18:46,078 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0017_m_000002_0' has completed task_201307292018_0017_m_000002 successfully.
+2013-07-30 19:18:53,639 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0017_r_000000_0' has completed task_201307292018_0017_r_000000 successfully.
+2013-07-30 19:18:53,641 INFO org.apache.hadoop.mapred.JobTracker: Adding task (JOB_CLEANUP) 'attempt_201307292018_0017_m_000003_0' to tip task_201307292018_0017_m_000003, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:18:55,754 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0017_m_000003_0' has completed task_201307292018_0017_m_000003 successfully.
+2013-07-30 19:18:55,755 INFO org.apache.hadoop.mapred.JobInProgress: Job job_201307292018_0017 has completed successfully.
+2013-07-30 19:18:55,755 INFO org.apache.hadoop.mapred.JobInProgress$JobSummary: jobId=job_201307292018_0017,submitTime=1375183104895,launchTime=1375183105120,firstMapTaskLaunchTime=1375183108255,firstReduceTaskLaunchTime=1375183117620,firstJobSetupTaskLaunchTime=1375183105232,firstJobCleanupTaskLaunchTime=1375183133641,finishTime=1375183135755,numMaps=3,numSlotsPerMap=1,numReduces=1,numSlotsPerReduce=1,user=guoliqiang,queue=default,status=SUCCEEDED,mapSlotSeconds=31,reduceSlotsSeconds=15,clusterMapCapacity=2,clusterReduceCapacity=2,jobName=
+2013-07-30 19:18:55,833 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0017_m_000000_0'
+2013-07-30 19:18:55,833 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0017_m_000001_0'
+2013-07-30 19:18:55,833 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0017_m_000002_0'
+2013-07-30 19:18:55,833 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0017_m_000003_0'
+2013-07-30 19:18:55,833 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0017_m_000004_0'
+2013-07-30 19:18:55,833 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0017_r_000000_0'
+2013-07-30 19:18:55,856 INFO org.apache.hadoop.mapred.JobHistory: Creating DONE subfolder at file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/done/version-1/localhost_1375100343022_/2013/07/30/000000
+2013-07-30 19:18:55,857 INFO org.apache.hadoop.mapred.JobHistory: Moving file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/job_201307292018_0017_1375183104895_guoliqiang_NA to file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/done/version-1/localhost_1375100343022_/2013/07/30/000000
+2013-07-30 19:18:55,860 INFO org.apache.hadoop.mapred.JobHistory: Moving file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/job_201307292018_0017_conf.xml to file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/done/version-1/localhost_1375100343022_/2013/07/30/000000
+2013-07-30 19:22:50,848 INFO org.apache.hadoop.mapred.JobInProgress: job_201307292018_0018: nMaps=3 nReduces=1 max=-1
+2013-07-30 19:22:50,888 INFO org.apache.hadoop.mapred.JobTracker: Job job_201307292018_0018 added successfully for user 'guoliqiang' to queue 'default'
+2013-07-30 19:22:50,888 INFO org.apache.hadoop.mapred.JobTracker: Initializing job_201307292018_0018
+2013-07-30 19:22:50,888 INFO org.apache.hadoop.mapred.AuditLogger: USER=guoliqiang	IP=127.0.0.1	OPERATION=SUBMIT_JOB	TARGET=job_201307292018_0018	RESULT=SUCCESS
+2013-07-30 19:22:50,888 INFO org.apache.hadoop.mapred.JobInProgress: Initializing job_201307292018_0018
+2013-07-30 19:22:50,971 INFO org.apache.hadoop.mapred.JobInProgress: jobToken generated and stored with users keys in /tmp/hadoop/mapred/system/job_201307292018_0018/jobToken
+2013-07-30 19:22:50,974 INFO org.apache.hadoop.mapred.JobInProgress: Input size for job job_201307292018_0018 = 11. Number of splits = 3
+2013-07-30 19:22:50,974 INFO org.apache.hadoop.mapred.JobInProgress: tip:task_201307292018_0018_m_000000 has split on node:/default-rack/guoliqiang-desktop
+2013-07-30 19:22:50,974 INFO org.apache.hadoop.mapred.JobInProgress: tip:task_201307292018_0018_m_000001 has split on node:/default-rack/guoliqiang-desktop
+2013-07-30 19:22:50,974 INFO org.apache.hadoop.mapred.JobInProgress: tip:task_201307292018_0018_m_000002 has split on node:/default-rack/guoliqiang-desktop
+2013-07-30 19:22:50,974 INFO org.apache.hadoop.mapred.JobInProgress: job_201307292018_0018 LOCALITY_WAIT_FACTOR=1.0
+2013-07-30 19:22:50,974 INFO org.apache.hadoop.mapred.JobInProgress: Job job_201307292018_0018 initialized successfully with 3 map tasks and 1 reduce tasks.
+2013-07-30 19:22:51,212 INFO org.apache.hadoop.mapred.JobTracker: Adding task (JOB_SETUP) 'attempt_201307292018_0018_m_000004_0' to tip task_201307292018_0018_m_000004, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:22:53,325 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0018_m_000004_0' has completed task_201307292018_0018_m_000004 successfully.
+2013-07-30 19:22:53,326 INFO org.apache.hadoop.mapred.JobTracker: Adding task (MAP) 'attempt_201307292018_0018_m_000000_0' to tip task_201307292018_0018_m_000000, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:22:53,326 INFO org.apache.hadoop.mapred.JobInProgress: Choosing data-local task task_201307292018_0018_m_000000
+2013-07-30 19:22:53,326 INFO org.apache.hadoop.mapred.JobTracker: Adding task (MAP) 'attempt_201307292018_0018_m_000001_0' to tip task_201307292018_0018_m_000001, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:22:53,326 INFO org.apache.hadoop.mapred.JobInProgress: Choosing data-local task task_201307292018_0018_m_000001
+2013-07-30 19:23:00,889 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0018_m_000000_0' has completed task_201307292018_0018_m_000000 successfully.
+2013-07-30 19:23:00,890 INFO org.apache.hadoop.mapred.JobTracker: Adding task (MAP) 'attempt_201307292018_0018_m_000002_0' to tip task_201307292018_0018_m_000002, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:23:00,890 INFO org.apache.hadoop.mapred.JobInProgress: Choosing data-local task task_201307292018_0018_m_000002
+2013-07-30 19:23:00,890 INFO org.apache.hadoop.mapred.JobTracker: Adding task (REDUCE) 'attempt_201307292018_0018_r_000000_0' to tip task_201307292018_0018_r_000000, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:23:01,498 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0018_m_000001_0' has completed task_201307292018_0018_m_000001 successfully.
+2013-07-30 19:23:08,810 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0018_m_000002_0' has completed task_201307292018_0018_m_000002 successfully.
+2013-07-30 19:23:21,196 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0018_r_000000_0' has completed task_201307292018_0018_r_000000 successfully.
+2013-07-30 19:23:21,200 INFO org.apache.hadoop.mapred.JobTracker: Adding task (JOB_CLEANUP) 'attempt_201307292018_0018_m_000003_0' to tip task_201307292018_0018_m_000003, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 19:23:23,014 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0018_m_000003_0' has completed task_201307292018_0018_m_000003 successfully.
+2013-07-30 19:23:23,015 INFO org.apache.hadoop.mapred.JobInProgress: Job job_201307292018_0018 has completed successfully.
+2013-07-30 19:23:23,015 INFO org.apache.hadoop.mapred.JobInProgress$JobSummary: jobId=job_201307292018_0018,submitTime=1375183370830,launchTime=1375183370974,firstMapTaskLaunchTime=1375183373326,firstReduceTaskLaunchTime=1375183380890,firstJobSetupTaskLaunchTime=1375183371212,firstJobCleanupTaskLaunchTime=1375183401200,finishTime=1375183403015,numMaps=3,numSlotsPerMap=1,numReduces=1,numSlotsPerReduce=1,user=guoliqiang,queue=default,status=SUCCEEDED,mapSlotSeconds=26,reduceSlotsSeconds=20,clusterMapCapacity=2,clusterReduceCapacity=2,jobName=
+2013-07-30 19:23:23,059 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0018_m_000000_0'
+2013-07-30 19:23:23,059 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0018_m_000001_0'
+2013-07-30 19:23:23,059 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0018_m_000002_0'
+2013-07-30 19:23:23,060 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0018_m_000003_0'
+2013-07-30 19:23:23,060 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0018_m_000004_0'
+2013-07-30 19:23:23,060 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0018_r_000000_0'
+2013-07-30 19:23:23,060 INFO org.apache.hadoop.mapred.JobHistory: Moving file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/job_201307292018_0018_1375183370830_guoliqiang_NA to file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/done/version-1/localhost_1375100343022_/2013/07/30/000000
+2013-07-30 19:23:23,081 INFO org.apache.hadoop.mapred.JobHistory: Moving file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/job_201307292018_0018_conf.xml to file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/done/version-1/localhost_1375100343022_/2013/07/30/000000
+2013-07-30 20:18:59,418 INFO org.apache.hadoop.security.token.delegation.AbstractDelegationTokenSecretManager: Updating the current master key for generating delegation tokens
+2013-07-30 20:20:41,840 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0001' of user 'guoliqiang'
+2013-07-30 20:20:41,840 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0001_conf.xml
+2013-07-30 20:22:41,855 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0002' of user 'guoliqiang'
+2013-07-30 20:22:41,855 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0002_conf.xml
+2013-07-30 20:23:41,856 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0003' of user 'guoliqiang'
+2013-07-30 20:23:41,857 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0003_conf.xml
+2013-07-30 20:24:41,857 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0004' of user 'guoliqiang'
+2013-07-30 20:24:41,857 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0004_conf.xml
+2013-07-30 20:37:41,859 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0005' of user 'guoliqiang'
+2013-07-30 20:37:41,859 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0005_conf.xml
+2013-07-30 20:38:41,860 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0006' of user 'guoliqiang'
+2013-07-30 20:38:41,860 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0006_conf.xml
+2013-07-30 20:40:41,862 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0007' of user 'guoliqiang'
+2013-07-30 20:40:41,862 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0007_conf.xml
+2013-07-30 20:46:51,597 INFO org.apache.hadoop.mapred.JobInProgress: job_201307292018_0019: nMaps=3 nReduces=1 max=-1
+2013-07-30 20:46:51,625 INFO org.apache.hadoop.mapred.JobTracker: Job job_201307292018_0019 added successfully for user 'guoliqiang' to queue 'default'
+2013-07-30 20:46:51,625 INFO org.apache.hadoop.mapred.AuditLogger: USER=guoliqiang	IP=127.0.0.1	OPERATION=SUBMIT_JOB	TARGET=job_201307292018_0019	RESULT=SUCCESS
+2013-07-30 20:46:51,626 INFO org.apache.hadoop.mapred.JobTracker: Initializing job_201307292018_0019
+2013-07-30 20:46:51,627 INFO org.apache.hadoop.mapred.JobInProgress: Initializing job_201307292018_0019
+2013-07-30 20:46:51,692 INFO org.apache.hadoop.mapred.JobInProgress: jobToken generated and stored with users keys in /tmp/hadoop/mapred/system/job_201307292018_0019/jobToken
+2013-07-30 20:46:51,695 INFO org.apache.hadoop.mapred.JobInProgress: Input size for job job_201307292018_0019 = 11. Number of splits = 3
+2013-07-30 20:46:51,695 INFO org.apache.hadoop.mapred.JobInProgress: tip:task_201307292018_0019_m_000000 has split on node:/default-rack/guoliqiang-desktop
+2013-07-30 20:46:51,695 INFO org.apache.hadoop.mapred.JobInProgress: tip:task_201307292018_0019_m_000001 has split on node:/default-rack/guoliqiang-desktop
+2013-07-30 20:46:51,696 INFO org.apache.hadoop.mapred.JobInProgress: tip:task_201307292018_0019_m_000002 has split on node:/default-rack/guoliqiang-desktop
+2013-07-30 20:46:51,696 INFO org.apache.hadoop.mapred.JobInProgress: job_201307292018_0019 LOCALITY_WAIT_FACTOR=1.0
+2013-07-30 20:46:51,696 INFO org.apache.hadoop.mapred.JobInProgress: Job job_201307292018_0019 initialized successfully with 3 map tasks and 1 reduce tasks.
+2013-07-30 20:46:51,987 INFO org.apache.hadoop.mapred.JobTracker: Adding task (JOB_SETUP) 'attempt_201307292018_0019_m_000004_0' to tip task_201307292018_0019_m_000004, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 20:46:53,797 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0019_m_000004_0' has completed task_201307292018_0019_m_000004 successfully.
+2013-07-30 20:46:53,798 INFO org.apache.hadoop.mapred.JobTracker: Adding task (MAP) 'attempt_201307292018_0019_m_000000_0' to tip task_201307292018_0019_m_000000, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 20:46:53,798 INFO org.apache.hadoop.mapred.JobInProgress: Choosing data-local task task_201307292018_0019_m_000000
+2013-07-30 20:46:53,798 INFO org.apache.hadoop.mapred.JobTracker: Adding task (MAP) 'attempt_201307292018_0019_m_000001_0' to tip task_201307292018_0019_m_000001, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 20:46:53,799 INFO org.apache.hadoop.mapred.JobInProgress: Choosing data-local task task_201307292018_0019_m_000001
+2013-07-30 20:47:01,663 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0019_m_000000_0' has completed task_201307292018_0019_m_000000 successfully.
+2013-07-30 20:47:01,663 INFO org.apache.hadoop.mapred.JobTracker: Adding task (MAP) 'attempt_201307292018_0019_m_000002_0' to tip task_201307292018_0019_m_000002, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 20:47:01,664 INFO org.apache.hadoop.mapred.JobInProgress: Choosing data-local task task_201307292018_0019_m_000002
+2013-07-30 20:47:01,664 INFO org.apache.hadoop.mapred.JobTracker: Adding task (REDUCE) 'attempt_201307292018_0019_r_000000_0' to tip task_201307292018_0019_r_000000, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 20:47:02,269 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0019_m_000001_0' has completed task_201307292018_0019_m_000001 successfully.
+2013-07-30 20:47:09,817 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0019_m_000002_0' has completed task_201307292018_0019_m_000002 successfully.
+2013-07-30 20:47:21,906 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0019_r_000000_0' has completed task_201307292018_0019_r_000000 successfully.
+2013-07-30 20:47:21,909 INFO org.apache.hadoop.mapred.JobTracker: Adding task (JOB_CLEANUP) 'attempt_201307292018_0019_m_000003_0' to tip task_201307292018_0019_m_000003, for tracker 'tracker_guoliqiang-desktop:localhost/127.0.0.1:40458'
+2013-07-30 20:47:23,720 INFO org.apache.hadoop.mapred.JobInProgress: Task 'attempt_201307292018_0019_m_000003_0' has completed task_201307292018_0019_m_000003 successfully.
+2013-07-30 20:47:23,721 INFO org.apache.hadoop.mapred.JobInProgress: Job job_201307292018_0019 has completed successfully.
+2013-07-30 20:47:23,721 INFO org.apache.hadoop.mapred.JobInProgress$JobSummary: jobId=job_201307292018_0019,submitTime=1375188411576,launchTime=1375188411696,firstMapTaskLaunchTime=1375188413798,firstReduceTaskLaunchTime=1375188421664,firstJobSetupTaskLaunchTime=1375188411987,firstJobCleanupTaskLaunchTime=1375188441909,finishTime=1375188443721,numMaps=3,numSlotsPerMap=1,numReduces=1,numSlotsPerReduce=1,user=guoliqiang,queue=default,status=SUCCEEDED,mapSlotSeconds=27,reduceSlotsSeconds=20,clusterMapCapacity=2,clusterReduceCapacity=2,jobName=
+2013-07-30 20:47:23,760 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0019_m_000000_0'
+2013-07-30 20:47:23,760 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0019_m_000001_0'
+2013-07-30 20:47:23,760 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0019_m_000002_0'
+2013-07-30 20:47:23,760 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0019_m_000003_0'
+2013-07-30 20:47:23,760 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0019_m_000004_0'
+2013-07-30 20:47:23,760 INFO org.apache.hadoop.mapred.JobTracker: Removing task 'attempt_201307292018_0019_r_000000_0'
+2013-07-30 20:47:23,761 INFO org.apache.hadoop.mapred.JobHistory: Moving file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/job_201307292018_0019_1375188411576_guoliqiang_NA to file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/done/version-1/localhost_1375100343022_/2013/07/30/000000
+2013-07-30 20:47:23,773 INFO org.apache.hadoop.mapred.JobHistory: Moving file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/job_201307292018_0019_conf.xml to file:/home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/logs/history/done/version-1/localhost_1375100343022_/2013/07/30/000000
+2013-07-30 20:56:41,864 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0008' of user 'guoliqiang'
+2013-07-30 20:56:41,864 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0008_conf.xml
+2013-07-30 21:04:41,866 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0009' of user 'guoliqiang'
+2013-07-30 21:04:41,866 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0009_conf.xml
+2013-07-30 21:09:41,868 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0010' of user 'guoliqiang'
+2013-07-30 21:09:41,868 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0010_conf.xml
+2013-07-30 21:12:41,922 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0011' of user 'guoliqiang'
+2013-07-30 21:12:41,922 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0011_conf.xml
+2013-07-30 21:25:41,925 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0012' of user 'guoliqiang'
+2013-07-30 21:25:41,925 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0012_conf.xml
+2013-07-30 21:26:41,926 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0013' of user 'guoliqiang'
+2013-07-30 21:26:41,926 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0013_conf.xml
+2013-07-30 21:30:41,927 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0014' of user 'guoliqiang'
+2013-07-30 21:30:41,927 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0014_conf.xml
+2013-07-30 21:32:41,928 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0015' of user 'guoliqiang'
+2013-07-30 21:32:41,928 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0015_conf.xml
+2013-07-30 21:38:41,930 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0016' of user 'guoliqiang'
+2013-07-30 21:38:41,930 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0016_conf.xml

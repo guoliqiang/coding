@@ -1,0 +1,8 @@
+cc_binary(name = 'memory_monitor_unittest',
+          srcs = ['memory_monitor_unittest.cc'],
+          deps = [
+                 '//third_part/memory_monitor/internal:memory_monitor',
+                 '//base/internal:base',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+         )

@@ -21,10 +21,10 @@
 #define _THRIFT_TRANSPORT_TBUFFERTRANSPORTS_H_ 1
 
 #include <cstring>
-#include "boost/scoped_array.hpp"
+#include "third_part/boost/include/boost/scoped_array.hpp"
 
-#include <thrift/transport/TTransport.h>
-#include <thrift/transport/TVirtualTransport.h>
+#include "third_part/thrift/include/thrift/transport/TTransport.h"
+#include "third_part/thrift/include/thrift/transport/TVirtualTransport.h"
 
 #ifdef __GNUC__
 #define TDB_LIKELY(val) (__builtin_expect((val), 1))

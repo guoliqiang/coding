@@ -61,7 +61,7 @@ void MysqlResult::GetFieldName(int32 column_index, std::string *name) {
   name->assign(fields_[column_index].name);
 }
 
-// TODO (guoliqiang) add explanation for this function
+// TODO(guoliqiang) add explanation for this function
 uint64 MysqlResult::GetFieldWidth(int32 column_index) {
   if (column_index >= GetFieldsNum()) {
     LOG(ERROR) << "column index cross border !";

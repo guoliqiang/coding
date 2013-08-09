@@ -1,0 +1,141 @@
+Meta VERSION="1" .
+Job JOBID="job_201307291428_0008" JOBNAME="NA" USER="guoliqiang" SUBMIT_TIME="1375099447951" JOBCONF="hdfs://localhost:9000/usr/local/hadoop/hadooptmp/mapred/staging/guoliqiang/\.staging/job_201307291428_0008/job\.xml" VIEW_JOB="*" MODIFY_JOB="*" JOB_QUEUE="default" .
+Job JOBID="job_201307291428_0008" JOB_PRIORITY="NORMAL" .
+Job JOBID="job_201307291428_0008" LAUNCH_TIME="1375099448795" TOTAL_MAPS="3" TOTAL_REDUCES="1" JOB_STATUS="PREP" .
+Task TASKID="task_201307291428_0008_m_000004" TASK_TYPE="SETUP" START_TIME="1375099449023" SPLITS="" .
+MapAttempt TASK_TYPE="SETUP" TASKID="task_201307291428_0008_m_000004" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000004_0" START_TIME="1375099449167" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="SETUP" TASKID="task_201307291428_0008_m_000004" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000004_0" TASK_STATUS="SUCCESS" FINISH_TIME="1375099450832" HOSTNAME="/default-rack/guoliqiang-desktop" STATE_STRING="setup" COUNTERS="{(FileSystemCounters)(FileSystemCounters)[(FILE_BYTES_WRITTEN)(FILE_BYTES_WRITTEN)(54400)]}{(org\.apache\.hadoop\.mapred\.Task$Counter)(Map-Reduce Framework)[(PHYSICAL_MEMORY_BYTES)(Physical memory \\(bytes\\) snapshot)(90984448)][(SPILLED_RECORDS)(Spilled Records)(0)][(CPU_MILLISECONDS)(CPU time spent \\(ms\\))(110)][(COMMITTED_HEAP_BYTES)(Total committed heap usage \\(bytes\\))(78577664)][(VIRTUAL_MEMORY_BYTES)(Virtual memory \\(bytes\\) snapshot)(673079296)]}" .
+Task TASKID="task_201307291428_0008_m_000004" TASK_TYPE="SETUP" TASK_STATUS="SUCCESS" FINISH_TIME="1375099450834" COUNTERS="{(FileSystemCounters)(FileSystemCounters)[(FILE_BYTES_WRITTEN)(FILE_BYTES_WRITTEN)(54400)]}{(org\.apache\.hadoop\.mapred\.Task$Counter)(Map-Reduce Framework)[(PHYSICAL_MEMORY_BYTES)(Physical memory \\(bytes\\) snapshot)(90984448)][(SPILLED_RECORDS)(Spilled Records)(0)][(CPU_MILLISECONDS)(CPU time spent \\(ms\\))(110)][(COMMITTED_HEAP_BYTES)(Total committed heap usage \\(bytes\\))(78577664)][(VIRTUAL_MEMORY_BYTES)(Virtual memory \\(bytes\\) snapshot)(673079296)]}" .
+Job JOBID="job_201307291428_0008" JOB_STATUS="RUNNING" .
+Task TASKID="task_201307291428_0008_m_000000" TASK_TYPE="MAP" START_TIME="1375099450835" SPLITS="/default-rack/guoliqiang-desktop" .
+Task TASKID="task_201307291428_0008_m_000001" TASK_TYPE="MAP" START_TIME="1375099450835" SPLITS="/default-rack/guoliqiang-desktop" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000000" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000000_0" START_TIME="1375099450884" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000000" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000000_0" TASK_STATUS="FAILED" FINISH_TIME="1375099457130" HOSTNAME="guoliqiang-desktop" ERROR="java\.io\.IOException
+	at org\.apache\.hadoop\.mapred\.pipes\.OutputHandler\.waitForAuthentication(OutputHandler\.java:188)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.waitForAuthentication(Application\.java:194)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.<init>(Application\.java:149)
+	at org\.apache\.hadoop\.mapred\.pipes\.PipesMapRunner\.run(PipesMapRunner\.java:68)
+	at org\.apache\.hadoop\.mapred\.MapTask\.runOldMapper(MapTask\.java:436)
+	at org\.apache\.hadoop\.mapred\.MapTask\.run(MapTask\.java:372)
+	at org\.apache\.hadoop\.mapred\.Child$4\.run(Child\.java:255)
+	at java\.security\.AccessController\.doPrivileged(Native Method)
+	at javax\.security\.auth\.Subject\.doAs(Subject\.java:416)
+	at org\.apache\.hadoop\.security\.UserGroupInformation\.doAs(UserGroupInformation\.java:1149)
+	at org\.apache\.hadoop\.mapred\.Child\.main(Child\.java:249)
+" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000001" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000001_0" START_TIME="1375099450897" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000001" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000001_0" TASK_STATUS="FAILED" FINISH_TIME="1375099457355" HOSTNAME="guoliqiang-desktop" ERROR="java\.io\.IOException
+	at org\.apache\.hadoop\.mapred\.pipes\.OutputHandler\.waitForAuthentication(OutputHandler\.java:188)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.waitForAuthentication(Application\.java:194)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.<init>(Application\.java:149)
+	at org\.apache\.hadoop\.mapred\.pipes\.PipesMapRunner\.run(PipesMapRunner\.java:68)
+	at org\.apache\.hadoop\.mapred\.MapTask\.runOldMapper(MapTask\.java:436)
+	at org\.apache\.hadoop\.mapred\.MapTask\.run(MapTask\.java:372)
+	at org\.apache\.hadoop\.mapred\.Child$4\.run(Child\.java:255)
+	at java\.security\.AccessController\.doPrivileged(Native Method)
+	at javax\.security\.auth\.Subject\.doAs(Subject\.java:416)
+	at org\.apache\.hadoop\.security\.UserGroupInformation\.doAs(UserGroupInformation\.java:1149)
+	at org\.apache\.hadoop\.mapred\.Child\.main(Child\.java:249)
+" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000000" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000000_1" START_TIME="1375099457185" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000000" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000000_1" TASK_STATUS="FAILED" FINISH_TIME="1375099463719" HOSTNAME="guoliqiang-desktop" ERROR="java\.io\.IOException
+	at org\.apache\.hadoop\.mapred\.pipes\.OutputHandler\.waitForAuthentication(OutputHandler\.java:188)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.waitForAuthentication(Application\.java:194)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.<init>(Application\.java:149)
+	at org\.apache\.hadoop\.mapred\.pipes\.PipesMapRunner\.run(PipesMapRunner\.java:68)
+	at org\.apache\.hadoop\.mapred\.MapTask\.runOldMapper(MapTask\.java:436)
+	at org\.apache\.hadoop\.mapred\.MapTask\.run(MapTask\.java:372)
+	at org\.apache\.hadoop\.mapred\.Child$4\.run(Child\.java:255)
+	at java\.security\.AccessController\.doPrivileged(Native Method)
+	at javax\.security\.auth\.Subject\.doAs(Subject\.java:416)
+	at org\.apache\.hadoop\.security\.UserGroupInformation\.doAs(UserGroupInformation\.java:1149)
+	at org\.apache\.hadoop\.mapred\.Child\.main(Child\.java:249)
+" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000001" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000001_1" START_TIME="1375099457507" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000001" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000001_1" TASK_STATUS="FAILED" FINISH_TIME="1375099463672" HOSTNAME="guoliqiang-desktop" ERROR="java\.io\.IOException
+	at org\.apache\.hadoop\.mapred\.pipes\.OutputHandler\.waitForAuthentication(OutputHandler\.java:188)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.waitForAuthentication(Application\.java:194)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.<init>(Application\.java:149)
+	at org\.apache\.hadoop\.mapred\.pipes\.PipesMapRunner\.run(PipesMapRunner\.java:68)
+	at org\.apache\.hadoop\.mapred\.MapTask\.runOldMapper(MapTask\.java:436)
+	at org\.apache\.hadoop\.mapred\.MapTask\.run(MapTask\.java:372)
+	at org\.apache\.hadoop\.mapred\.Child$4\.run(Child\.java:255)
+	at java\.security\.AccessController\.doPrivileged(Native Method)
+	at javax\.security\.auth\.Subject\.doAs(Subject\.java:416)
+	at org\.apache\.hadoop\.security\.UserGroupInformation\.doAs(UserGroupInformation\.java:1149)
+	at org\.apache\.hadoop\.mapred\.Child\.main(Child\.java:249)
+" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000000" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000000_2" START_TIME="1375099463861" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000000" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000000_2" TASK_STATUS="FAILED" FINISH_TIME="1375099470125" HOSTNAME="guoliqiang-desktop" ERROR="java\.io\.IOException
+	at org\.apache\.hadoop\.mapred\.pipes\.OutputHandler\.waitForAuthentication(OutputHandler\.java:188)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.waitForAuthentication(Application\.java:194)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.<init>(Application\.java:149)
+	at org\.apache\.hadoop\.mapred\.pipes\.PipesMapRunner\.run(PipesMapRunner\.java:68)
+	at org\.apache\.hadoop\.mapred\.MapTask\.runOldMapper(MapTask\.java:436)
+	at org\.apache\.hadoop\.mapred\.MapTask\.run(MapTask\.java:372)
+	at org\.apache\.hadoop\.mapred\.Child$4\.run(Child\.java:255)
+	at java\.security\.AccessController\.doPrivileged(Native Method)
+	at javax\.security\.auth\.Subject\.doAs(Subject\.java:416)
+	at org\.apache\.hadoop\.security\.UserGroupInformation\.doAs(UserGroupInformation\.java:1149)
+	at org\.apache\.hadoop\.mapred\.Child\.main(Child\.java:249)
+" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000001" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000001_2" START_TIME="1375099463862" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000001" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000001_2" TASK_STATUS="FAILED" FINISH_TIME="1375099470422" HOSTNAME="guoliqiang-desktop" ERROR="java\.io\.IOException
+	at org\.apache\.hadoop\.mapred\.pipes\.OutputHandler\.waitForAuthentication(OutputHandler\.java:188)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.waitForAuthentication(Application\.java:194)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.<init>(Application\.java:149)
+	at org\.apache\.hadoop\.mapred\.pipes\.PipesMapRunner\.run(PipesMapRunner\.java:68)
+	at org\.apache\.hadoop\.mapred\.MapTask\.runOldMapper(MapTask\.java:436)
+	at org\.apache\.hadoop\.mapred\.MapTask\.run(MapTask\.java:372)
+	at org\.apache\.hadoop\.mapred\.Child$4\.run(Child\.java:255)
+	at java\.security\.AccessController\.doPrivileged(Native Method)
+	at javax\.security\.auth\.Subject\.doAs(Subject\.java:416)
+	at org\.apache\.hadoop\.security\.UserGroupInformation\.doAs(UserGroupInformation\.java:1149)
+	at org\.apache\.hadoop\.mapred\.Child\.main(Child\.java:249)
+" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000000" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000000_3" START_TIME="1375099470201" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000000" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000000_3" TASK_STATUS="FAILED" FINISH_TIME="1375099476513" HOSTNAME="guoliqiang-desktop" ERROR="java\.io\.IOException
+	at org\.apache\.hadoop\.mapred\.pipes\.OutputHandler\.waitForAuthentication(OutputHandler\.java:188)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.waitForAuthentication(Application\.java:194)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.<init>(Application\.java:149)
+	at org\.apache\.hadoop\.mapred\.pipes\.PipesMapRunner\.run(PipesMapRunner\.java:68)
+	at org\.apache\.hadoop\.mapred\.MapTask\.runOldMapper(MapTask\.java:436)
+	at org\.apache\.hadoop\.mapred\.MapTask\.run(MapTask\.java:372)
+	at org\.apache\.hadoop\.mapred\.Child$4\.run(Child\.java:255)
+	at java\.security\.AccessController\.doPrivileged(Native Method)
+	at javax\.security\.auth\.Subject\.doAs(Subject\.java:416)
+	at org\.apache\.hadoop\.security\.UserGroupInformation\.doAs(UserGroupInformation\.java:1149)
+	at org\.apache\.hadoop\.mapred\.Child\.main(Child\.java:249)
+" .
+Task TASKID="task_201307291428_0008_m_000000" TASK_TYPE="MAP" TASK_STATUS="FAILED" FINISH_TIME="1375099476513" ERROR="java\.io\.IOException
+	at org\.apache\.hadoop\.mapred\.pipes\.OutputHandler\.waitForAuthentication(OutputHandler\.java:188)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.waitForAuthentication(Application\.java:194)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.<init>(Application\.java:149)
+	at org\.apache\.hadoop\.mapred\.pipes\.PipesMapRunner\.run(PipesMapRunner\.java:68)
+	at org\.apache\.hadoop\.mapred\.MapTask\.runOldMapper(MapTask\.java:436)
+	at org\.apache\.hadoop\.mapred\.MapTask\.run(MapTask\.java:372)
+	at org\.apache\.hadoop\.mapred\.Child$4\.run(Child\.java:255)
+	at java\.security\.AccessController\.doPrivileged(Native Method)
+	at javax\.security\.auth\.Subject\.doAs(Subject\.java:416)
+	at org\.apache\.hadoop\.security\.UserGroupInformation\.doAs(UserGroupInformation\.java:1149)
+	at org\.apache\.hadoop\.mapred\.Child\.main(Child\.java:249)
+" TASK_ATTEMPT_ID="" .
+Task TASKID="task_201307291428_0008_m_000003" TASK_TYPE="CLEANUP" START_TIME="1375099476545" SPLITS="" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000001" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000001_3" START_TIME="1375099470503" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="MAP" TASKID="task_201307291428_0008_m_000001" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000001_3" TASK_STATUS="FAILED" FINISH_TIME="1375099476944" HOSTNAME="guoliqiang-desktop" ERROR="java\.io\.IOException
+	at org\.apache\.hadoop\.mapred\.pipes\.OutputHandler\.waitForAuthentication(OutputHandler\.java:188)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.waitForAuthentication(Application\.java:194)
+	at org\.apache\.hadoop\.mapred\.pipes\.Application\.<init>(Application\.java:149)
+	at org\.apache\.hadoop\.mapred\.pipes\.PipesMapRunner\.run(PipesMapRunner\.java:68)
+	at org\.apache\.hadoop\.mapred\.MapTask\.runOldMapper(MapTask\.java:436)
+	at org\.apache\.hadoop\.mapred\.MapTask\.run(MapTask\.java:372)
+	at org\.apache\.hadoop\.mapred\.Child$4\.run(Child\.java:255)
+	at java\.security\.AccessController\.doPrivileged(Native Method)
+	at javax\.security\.auth\.Subject\.doAs(Subject\.java:416)
+	at org\.apache\.hadoop\.security\.UserGroupInformation\.doAs(UserGroupInformation\.java:1149)
+	at org\.apache\.hadoop\.mapred\.Child\.main(Child\.java:249)
+" .
+MapAttempt TASK_TYPE="CLEANUP" TASKID="task_201307291428_0008_m_000003" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000003_0" START_TIME="1375099476548" TRACKER_NAME="tracker_guoliqiang-desktop:localhost/127\.0\.0\.1:33622" HTTP_PORT="50060" .
+MapAttempt TASK_TYPE="CLEANUP" TASKID="task_201307291428_0008_m_000003" TASK_ATTEMPT_ID="attempt_201307291428_0008_m_000003_0" TASK_STATUS="SUCCESS" FINISH_TIME="1375099478162" HOSTNAME="/default-rack/guoliqiang-desktop" STATE_STRING="cleanup" COUNTERS="{(FileSystemCounters)(FileSystemCounters)[(FILE_BYTES_WRITTEN)(FILE_BYTES_WRITTEN)(54400)]}{(org\.apache\.hadoop\.mapred\.Task$Counter)(Map-Reduce Framework)[(PHYSICAL_MEMORY_BYTES)(Physical memory \\(bytes\\) snapshot)(96903168)][(SPILLED_RECORDS)(Spilled Records)(0)][(CPU_MILLISECONDS)(CPU time spent \\(ms\\))(90)][(COMMITTED_HEAP_BYTES)(Total committed heap usage \\(bytes\\))(62324736)][(VIRTUAL_MEMORY_BYTES)(Virtual memory \\(bytes\\) snapshot)(674004992)]}" .
+Task TASKID="task_201307291428_0008_m_000003" TASK_TYPE="CLEANUP" TASK_STATUS="SUCCESS" FINISH_TIME="1375099478357" COUNTERS="{(FileSystemCounters)(FileSystemCounters)[(FILE_BYTES_WRITTEN)(FILE_BYTES_WRITTEN)(54400)]}{(org\.apache\.hadoop\.mapred\.Task$Counter)(Map-Reduce Framework)[(PHYSICAL_MEMORY_BYTES)(Physical memory \\(bytes\\) snapshot)(96903168)][(SPILLED_RECORDS)(Spilled Records)(0)][(CPU_MILLISECONDS)(CPU time spent \\(ms\\))(90)][(COMMITTED_HEAP_BYTES)(Total committed heap usage \\(bytes\\))(62324736)][(VIRTUAL_MEMORY_BYTES)(Virtual memory \\(bytes\\) snapshot)(674004992)]}" .
+Job JOBID="job_201307291428_0008" FINISH_TIME="1375099478357" JOB_STATUS="FAILED" FINISHED_MAPS="0" FINISHED_REDUCES="0" FAIL_REASON="# of failed Map Tasks exceeded allowed limit\. FailedCount: 1\. LastFailedTask: task_201307291428_0008_m_000000" .

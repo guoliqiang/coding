@@ -1,0 +1,3 @@
+2013-07-27 11:45:11,887 INFO org.apache.hadoop.security.token.delegation.AbstractDelegationTokenSecretManager: Updating the current master key for generating delegation tokens
+2013-07-27 13:39:18,382 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307171144_0010' of user 'guoliqiang'
+2013-07-27 13:39:18,406 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307171144_0010_conf.xml

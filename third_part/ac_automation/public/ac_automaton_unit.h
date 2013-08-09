@@ -59,11 +59,11 @@ class ACAutomatonUnit {
 };
 
 template <typename Key>
-ACAutomatonUnit<Key>::ACAutomatonUnit() : m_pChildrenCount(NULL),
+ACAutomatonUnit<Key>::ACAutomatonUnit() : m_totalStates(0),
+                                          m_pChildrenCount(NULL),
                                           m_pChildrenAddr(NULL),
                                           m_pChildren(NULL),
-                                          m_pFail(NULL),
-                                          m_totalStates(0){}
+                                          m_pFail(NULL){}
 
 //
 template <typename Key>

@@ -20,9 +20,9 @@
 #ifndef _THRIFT_TRANSPORT_TTRANSPORT_H_
 #define _THRIFT_TRANSPORT_TTRANSPORT_H_ 1
 
-#include <thrift/Thrift.h>
-#include <boost/shared_ptr.hpp>
-#include <thrift/transport/TTransportException.h>
+#include "third_part/thrift/include/thrift/Thrift.h"
+#include "third_part/boost/include/boost/shared_ptr.hpp"
+#include "third_part/thrift/include/thrift/transport/TTransportException.h"
 #include <string>
 
 namespace apache { namespace thrift { namespace transport {

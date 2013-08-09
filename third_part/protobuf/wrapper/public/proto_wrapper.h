@@ -1,8 +1,8 @@
-#ifndef BASE_PROTO_UTIL_H_
-#define BASE_PROTO_UTIL_H_
+#ifndef PROTO_WRAPPER_H_
+#define PROTO_WRAPPER_H_
 
 #include <string>
-// #include "file/file.h"
+#include "file/public/file.h"
 #include "third_part/protobuf/include/google/protobuf/text_format.h"
 
 
@@ -18,7 +18,6 @@ inline bool ConvertToString(const google::protobuf::Message &message,
   return google::protobuf::TextFormat::PrintToString(message, str);
 }
 
-/*
 inline bool ConvertToBinaryFile(const std::string &src_path,
                                 const std::string &dst_path,
                                 google::protobuf::Message *message) {
@@ -37,8 +36,7 @@ inline bool ConvertToBinaryFile(const std::string &src_path,
   file::File::WriteStringToFile(binary_format_str, dst_path);
   return true;
 }
-*/
 }  // namespace proto_wrapper
 
 
-#endif  // BASE_PROTO_UTIL_H_
+#endif  // PROTO_WRAPPER_H_

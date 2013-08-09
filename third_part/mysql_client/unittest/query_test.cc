@@ -1,15 +1,15 @@
 // Copyrights 2011 Yunrang Inc. All Rights Reserved.
 // Author: jianxu@yunrang.com (Xu Jian)
 
-#include "../query.h"
+#include "../public/query.h"
 
 #include "../../../base/public/logging.h"
 #include "../../../base/public/string_util.h"
 #include "../../../base/public/flags.h"
 #include "../../../base/public/callback_spec.h"
 #include "../../../base/public/thread.h"
-#include "../connection.h"
-#include "../result.h"
+#include "../public/connection.h"
+#include "../public/result.h"
 
 DEFINE_string(mysql_host, "localhost", "mysql server host name");
 DEFINE_string(mysql_db, "social", "test database on mysql server");

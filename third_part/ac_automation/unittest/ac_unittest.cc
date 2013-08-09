@@ -10,7 +10,7 @@
 #include "../../../base/public/string_util.h"
 
 
-using namespace ac_automaton;
+using namespace ac_automaton;  // NOLINT
 
 int main(int argc, char** argv) {
   ACAutomaton ac;
@@ -51,9 +51,10 @@ int main(int argc, char** argv) {
   text2.push_back("一所");
   text2.push_back("好学校");
   ac_unit.Match(text2, &rs2);
-  for (std::map<std::vector<std::string>, std::vector<size_t> >::iterator i = rs2.begin();
+  for (std::map<std::vector<std::string>, std::vector<size_t> >::iterator i = rs2.begin();  // NOLINT
        i != rs2.end(); i++) {
-    LOG(INFO) << JoinVector(i->first, ',') << " find at :" << JoinVector(i->second, ',');
+    LOG(INFO) << JoinVector(i->first, ',')
+              << " find at :" << JoinVector(i->second, ',');
   }
 
   return 0;

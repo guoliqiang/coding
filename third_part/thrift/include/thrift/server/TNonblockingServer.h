@@ -20,15 +20,15 @@
 #ifndef _THRIFT_SERVER_TNONBLOCKINGSERVER_H_
 #define _THRIFT_SERVER_TNONBLOCKINGSERVER_H_ 1
 
-#include <thrift/Thrift.h>
-#include <thrift/server/TServer.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/concurrency/ThreadManager.h>
+#include "third_part/thrift/include/thrift/Thrift.h"
+#include "third_part/thrift/include/thrift/server/TServer.h"
+#include "third_part/thrift/include/thrift/transport/TBufferTransports.h"
+#include "third_part/thrift/include/thrift/transport/TSocket.h"
+#include "third_part/thrift/include/thrift/concurrency/ThreadManager.h"
 #include <climits>
-#include <thrift/concurrency/Thread.h>
-#include <thrift/concurrency/PlatformThreadFactory.h>
-#include <thrift/concurrency/Mutex.h>
+#include "third_part/thrift/include/thrift/concurrency/Thread.h"
+#include "third_part/thrift/include/thrift/concurrency/PlatformThreadFactory.h"
+#include "third_part/thrift/include/thrift/concurrency/Mutex.h"
 #include <stack>
 #include <vector>
 #include <string>
@@ -37,7 +37,7 @@
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
-#include <event.h>
+#include "third_part/libevent/include/event.h"
 
 
 
@@ -387,6 +387,22 @@ class TNonblockingServer : public TServer {
   }
 
   ~TNonblockingServer();
+
+  uint16_t getServerPort() {
+    if (serverSocket_ > 0) {
+      struct sockaddr_in in_addr;
+      socklen_t len = sizeof(in_addr);;
+      int rc = getsockname(
+          serverSocket_,
+          (struct sockaddr*)(&in_addr),
+          &len);
+
+      if (!rc) {
+        return ntohs(in_addr.sin_port);
+      }
+    }
+    return 0;
+  }
 
   void setThreadManager(boost::shared_ptr<ThreadManager> threadManager);
 

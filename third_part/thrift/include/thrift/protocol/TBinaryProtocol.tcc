@@ -21,7 +21,7 @@
 #define _THRIFT_PROTOCOL_TBINARYPROTOCOL_TCC_ 1
 
 #include "TBinaryProtocol.h"
-
+#include <arpa/inet.h>
 #include <limits>
 
 
