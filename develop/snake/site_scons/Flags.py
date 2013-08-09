@@ -7,4 +7,8 @@ DISTCC_BIN = 'third_part/distcc/bin/distcc'
 
 STATIC_LIB_PREFIX = '//libs/'
 
+STATIC_SNAKE_PREFIX = '//libs/SNAKE'
+
 THRIFT_OUT = 'thrift-out'
+
+PROTO_OUT = 'proto-out'

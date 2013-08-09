@@ -1,0 +1,8 @@
+cc_binary(name = 'http_server_unittest',
+          srcs = ['http_server_unittest.cc'],
+          deps = [
+                 '//third_part/http_server/internal:http_server',
+                 '//file/internal:file',
+                 '//third_part/registerer/internal:registerer'
+                 ]
+         )

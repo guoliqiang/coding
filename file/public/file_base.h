@@ -21,32 +21,50 @@ class Status {
   ~Status() {}
 
   // Return a success status.
-  static Status OK() { return Status(); }
+  static Status OK() { 
+    return Status();
+  }
 
   // Return error status of an appropriate type.
   static Status IOError(const std::string& msg) {
     return Status(kIOError, msg);
   }
+
   static Status NotFound(const std::string& msg) {
     return Status(kNotFound, msg);
   }
+
   static Status Corruption(const std::string& msg) {
     return Status(kCorruption, msg);
   }
+
   static Status Unsupported(const std::string& msg) {
     return Status(kUnsupported, msg);
   }
 
   // Returns true iff the status indicates success.
-  bool ok() const { return code_ == kOk; }
+  bool ok() const {
+    return code_ == kOk;
+  }
   // Returns true iff the status indicates a NotFound error.
-  bool IsNotFound() const { return code_ == kNotFound; }
+  bool IsNotFound() const {
+    return code_ == kNotFound;
+  }
+  
   // Returns true iff the status indicates an IO error.
-  bool IsIOError() const { return code_ == kIOError; }
+  bool IsIOError() const {
+    return code_ == kIOError;
+  }
+  
   // Returns true if the status indicates an Corruption error
-  bool IsCorruption() const { return code_ == kCorruption; }
+  bool IsCorruption() const {
+    return code_ == kCorruption;
+  }
+  
   // Returns true iff the status indicates an unsupported functionality
-  bool IsUnsupported() const { return code_ == kUnsupported; }
+  bool IsUnsupported() const {
+    return code_ == kUnsupported;
+  }
 
   // Return a string representation of this status suitable for printing.
   // Returns the string "OK" for success.
@@ -71,6 +89,7 @@ class Status {
   int code_;
   std::string msg_;
 };
+
 
 // Abstract object of file class.
 class FileBase {

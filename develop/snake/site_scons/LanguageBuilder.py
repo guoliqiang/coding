@@ -28,7 +28,7 @@ def RegisterObj(name = None, srcs = [], deps = [],
 
   cur_dir = os.getcwd()
   full_name = Path.GetLogicalPath(cur_dir, name)
-  assert not Path.IsStaticLib(full_name)
+  # assert not Path.IsStaticLib(full_name)
 
   build_manager = BuildManager.GetBuildManager()
   if build_manager.HasObj(full_name):
@@ -36,7 +36,7 @@ def RegisterObj(name = None, srcs = [], deps = [],
 
   # insert the object
   obj = BuildingObject.BuildingObject()
-  obj.name_ = full_name
+  obj.name_ = Path.RemoveSnake(full_name)
   obj.path_ = os.path.join(cur_dir, name)
   obj.build_type_ = build_type
   for src in srcs:
@@ -52,10 +52,14 @@ def RegisterObj(name = None, srcs = [], deps = [],
     obj.raw_depends_.append(dep_path) # before duplicate
     if dep_path not in obj.depends_:
       obj.depends_.append(dep_path)   # after dumplicate
-    if Path.IsStaticLib(dep): continue
+    if Path.IsStaticLib(dep): 
+      if not os.path.exists(Path.GetSnakeFilePathWithoutAbort(Path.GetPrivateLogicalPath(dep))):
+        continue
+      else:
+        dep_path = Path.GetLogicalPath(cur_dir, Path.GetPrivateLogicalPath(dep))
     dep_snake_file = Path.GetSnakeFilePath(dep_path)
     build_manager.AddDependentSnakeFile(dep_snake_file)
-  build_manager.AddObj(full_name, obj)
+  build_manager.AddObj(obj.name_, obj)
   return obj
 
 

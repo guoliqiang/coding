@@ -3,9 +3,9 @@
 
 #include <errno.h>
 
-#include "file/file_posix.h"
-#include "base/scoped_ptr.h"
-#include "base/logging.h"
+#include "../public/file_posix.h"
+#include "base/public/scoped_ptr.h"
+#include "base/public/logging.h"
 
 using std::string;
 using std::vector;
@@ -117,15 +117,18 @@ Status FilePosix::CreateDir(const string& path) {
 
 Status FilePosix::GetFilesInDir(const string& dir, vector<string>* files) {
   DIR *dp = NULL;
-  struct dirent *entry = NULL;
+  struct dirent entry;
+  struct dirent* entryPtr = NULL;
   vector<string> result;
 
   if ((dp = opendir(dir.c_str())) == NULL) {
     return Status::IOError("cannot open directory: " + dir);
   }
 
-  while ((entry = readdir(dp)) != NULL) {
-    const string path = JoinPath(dir, entry->d_name);
+  readdir_r(dp, &entry, &entryPtr);
+  while (entryPtr != NULL) {
+    const string path = JoinPath(dir, entry.d_name);
+    readdir_r(dp, &entry, &entryPtr);
     if (IsDir(path))
       continue;
     result.push_back(path);
@@ -138,19 +141,23 @@ Status FilePosix::GetFilesInDir(const string& dir, vector<string>* files) {
 Status FilePosix::GetDirsInDir(const std::string& dir,
                                vector<std::string>* dirs) {
   DIR *dp = NULL;
-  struct dirent *entry = NULL;
+  struct dirent entry;
+  struct dirent* entryPtr = NULL;
   vector<string> result;
 
   if ((dp = opendir(dir.c_str())) == NULL) {
     return Status::IOError("cannot open directory: " + dir);
   }
 
-  while ((entry = readdir(dp)) != NULL) {
-    if (0 == strcmp(".", entry->d_name) ||
-        0 == strcmp("..", entry->d_name)) {
+  readdir_r(dp, &entry, &entryPtr);
+  while (entryPtr != NULL) {
+    if (0 == strcmp(".", entry.d_name) ||
+        0 == strcmp("..", entry.d_name)) {
+      readdir_r(dp, &entry, &entryPtr);
       continue;
     }
-    const string path = JoinPath(dir, entry->d_name);
+    const string path = JoinPath(dir, entry.d_name);
+    readdir_r(dp, &entry, &entryPtr);
     if (!IsDir(path))
       continue;
     result.push_back(path);
@@ -173,9 +180,11 @@ Status FilePosix::DeleteRecursively(const string& name) {
     DIR* dir = opendir(name.c_str());
     if (dir != NULL) {
       while (true) {
-        struct dirent* entry = readdir(dir);
-        if (entry == NULL) break;
-        string entry_name = entry->d_name;
+        struct dirent entry;
+        struct dirent* entryPtr = NULL;
+        readdir_r(dir, &entry, &entryPtr);
+        if (entryPtr == NULL) break;
+        string entry_name = entry.d_name;
         if (entry_name != "." && entry_name != "..") {
           Status s = DeleteRecursively(name + "/" + entry_name);
           if (!s.ok())

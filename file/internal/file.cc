@@ -33,7 +33,6 @@
 // branched by dahaili@yunrang.com
 // TODO(unknown): add unittests
 
-#include "../public/file.h"
 
 #include <stdio.h>
 #include <sys/stat.h>
@@ -43,9 +42,15 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include "../../base/public/logging.h"
-#include "../../base/public/string_util.h"
-#include "../../base/public/time.h"
+#include "../public/file.h"
+#include "../public/file_base.h"
+#include "base/public/time.h"
+#include "base/public/logging.h"
+#include "base/public/string_util.h"
+
+using std::string;
+using std::vector;
+using base::Time;
 
 namespace {
 const char kCurrentDirectory[] = ".";
@@ -132,16 +137,13 @@ bool File::CreateDir(const string& name, int mode) {
 
 bool File::RecursivelyCreateDir(const string& path, int mode) {
   if (CreateDir(path, mode)) return true;
-
   if (Exists(path)) return false;
-
   // Try creating the parent.
   string::size_type slashpos = path.find_last_of('/');
   if (slashpos == string::npos) {
     // No parent given.
     return false;
   }
-
   return RecursivelyCreateDir(path.substr(0, slashpos), mode) &&
          CreateDir(path, mode);
 }
@@ -323,7 +325,6 @@ string File::GetExtension(const string& path) {
   const string::size_type dot = ExtensionSeparatorPosition(base);
   if (dot == string::npos)
     return string();
-
   return base.substr(dot);
 }
 }  // namespace file

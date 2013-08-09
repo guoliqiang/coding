@@ -1,6 +1,3 @@
-#!/usr/bin/python2.6
-
-
 from SCons.Script import ARGUMENTS
 import Path
 import SCons.Script
@@ -10,7 +7,7 @@ import os
 import traceback
 
 "Add new language build here"
-_Languages = ('Cpp Thrift')
+_Languages = ('Cpp Thrift Proto')
 
 class BuildManager(object):
   """Object that manages all build for all languages."""
@@ -81,10 +78,11 @@ class BuildManager(object):
     # get all objs
     while idx < len(obj_list):
       obj_name = obj_list[idx][0]
+      if not self.HasObj(obj_name):
+         idx += 1
+         continue
       obj = self.GetObjByName(obj_name)
       for dep in obj.depends_:
-        if Path.IsStaticLib(dep):
-          continue
         if dep not in obj_set:
           obj_list.append([dep, obj_name])
           obj_set.append(dep)
@@ -97,13 +95,11 @@ class BuildManager(object):
     objs = [] + obj_list
     result = []
     for item in obj_list:
+      if not self.HasObj(item):
+        out_map[item] = 0
+        continue
       obj = self.GetObjByName(item)
       out_map[item] = len(obj.depends_)
-      for dep in obj.depends_:
-        if Path.IsStaticLib(dep):
-          out_map[item] -= 1
-        pass
-      pass
     pass
     for i in range(len(obj_list)):
       found = False
@@ -132,6 +128,8 @@ class BuildManager(object):
       key = objs[idx]
       result.append(key)
       for k in out_map.iterkeys():
+        if not self.HasObj(k):
+          continue
         if key in self.GetObjByName(k).depends_:
           out_map[k] -= 1
 
@@ -143,10 +141,14 @@ class BuildManager(object):
 
   def _SpecialCheck(self, obj_list):
     from Cpp import CheckThriftDependency
+    from Cpp import CheckProtoDependency
     for k in range(len(obj_list)):
       name = obj_list[k]
+      if not self.HasObj(name):
+        continue
       obj = self.GetObjByName(name)
       CheckThriftDependency(obj)
+      CheckProtoDependency(obj)
     pass
 
   def _GetAllDependents(self, targets):
@@ -157,10 +159,16 @@ class BuildManager(object):
     dep_idx = len(result) - 1
     while dep_idx > 0:
       dep_obj_name = result[dep_idx]
+      if not self.HasObj(dep_obj_name):
+        dep_idx -= 1
+        continue # for tail libs
       dep_obj = self.GetObjByName(dep_obj_name)
       obj_idx = dep_idx - 1
       while obj_idx >= 0:
         obj_name = result[obj_idx]
+        if not self.HasObj(obj_name):
+          obj_idx -= 1
+          continue # for tail libs
         obj = self.GetObjByName(obj_name)
         if (dep_obj_name in obj.depends_):
           for d in dep_obj.depends_:
@@ -176,6 +184,8 @@ class BuildManager(object):
 
   def _PreProcessObjs(self):
     for obj_name in self.building_objs_:
+      if not self.HasObj(obj_name):
+        continue
       obj = self.GetObjByName(obj_name)
       try:
         builder = self.builders_[obj.build_type_]
@@ -186,6 +196,8 @@ class BuildManager(object):
   def _BuildObjs(self):
     os.chdir(Path.GetBaseDir())
     for obj_name in self.building_objs_:
+      if Path.IsStaticLib(obj_name):
+        continue
       obj = self.GetObjByName(obj_name)
       try:
         builder = self.builders_[obj.build_type_]

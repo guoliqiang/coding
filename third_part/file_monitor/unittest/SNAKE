@@ -1,0 +1,19 @@
+cc_binary(name = 'notify_unittest',
+          srcs = ['notify_unittest.cc'],
+          deps = [
+                 '//base/internal:base',
+                 '//third_part/testing/gtest/src:gtest'
+                 ]
+          )
+
+cc_binary(name = 'file_monitor_unittest',
+          srcs = ['file_monitor_unittest.cc'],
+          deps = [
+                 '//base/internal:base',
+                 '//third_part/testing/gtest/src:gtest',
+                 '//third_part/file_monitor/internal:file_monitor',
+                 '//third_part/crypto/internal:crypto',
+                 '//file/internal:file',
+                 '//third_part/registerer/internal:registerer'
+                 ]
+          )

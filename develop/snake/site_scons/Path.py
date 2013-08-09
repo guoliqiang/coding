@@ -17,6 +17,13 @@ def GetOutputDir():
   strategy = ARGUMENTS.get('c', 'dbg')
   return os.path.join(GetBaseDir(), Flags.SNAKE_OUT, strategy)
 
+def GetSnakeFilePathWithoutAbort(logical_path):
+  """'//base/internal:base' --> '~/$ROOT/base/internal/SNAKE'"""
+  assert logical_path.startswith('//') and logical_path.find(':') != -1 , "INPUT : %s" % logical_path
+  snake_path = os.path.join(logical_path.split(':')[0], Flags.SNAKE_NAME)
+  return GetAbsPath(snake_path, abort = False)
+
+
 
 def GetSnakeFilePath(logical_path):
   """'//base/internal:base' --> '~/$ROOT/base/internal/SNAKE'"""
@@ -53,6 +60,13 @@ def GetRelativePath(path):
   assert path.startswith('//'), "INPUT %s" % path
   return path[2:].replace(':', '/')
 
+def RemoveSnake(path):
+  return path.replace('//libs/SNAKE', '//libs')
+ 
+def GetPrivateLogicalPath(path):
+  """"""
+  assert path.startswith(Flags.STATIC_LIB_PREFIX), "INPUT %s" % path
+  return Flags.STATIC_SNAKE_PREFIX + '/' + path[len(Flags.STATIC_LIB_PREFIX):]
 
 def AddBaseDir(path):
   """path -> ~/$ROOT/path"""
@@ -76,6 +90,8 @@ def GetAbsPath(path, abort = True):
 def GetThriftOutPath():
   return os.path.join(GetOutputDir(), Flags.THRIFT_OUT)
 
+def GetProtoOutPath():
+  return os.path.join(GetOutputDir(), Flags.PROTO_OUT)
 
 def GetAbsRelativePath(path):
   """//base/internal:base  --> ~/$ROOT/.snake/dbg/base/internal/base or

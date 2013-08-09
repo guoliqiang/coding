@@ -1,0 +1,12 @@
+cc_library(name = 'http_server',
+           srcs = [
+                  'http_server.cc',
+                  'parse_multipart_formdata.cc'
+                  ],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/url_util/internal:url_util',
+                  '//third_part/file_monitor/internal:file_monitor',
+                  '//third_part/crypto/internal:crypto'
+                  ]
+           )

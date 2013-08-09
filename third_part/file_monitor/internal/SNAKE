@@ -1,0 +1,11 @@
+cc_library(name = 'file_monitor',
+           srcs = ['callback_executer.cc',
+                   'event_pipeline.cc',
+                   'file_watcher.cc',
+                   'hash_batch_calculator.cc',
+                   'monitor_handler.cc'
+                   ],
+            deps = [
+                   '//base/internal:base'
+                   ]
+           )

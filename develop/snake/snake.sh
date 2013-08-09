@@ -23,6 +23,7 @@ scons \
 cur_dir=$original_dir \
 base_dir=$base_dir \
 thrift_bin=$base_dir/third_part/thrift/bin/thrift \
+proto_bin=$base_dir/third_part/protobuf/bin/protoc \
 -Q \
 --jobs=4 \
 $@

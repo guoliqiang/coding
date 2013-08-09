@@ -182,10 +182,11 @@ def ColorfulBuild(env, log_in_one_line):
   env['SHLINKCOMSTR'] = link_shared_library_message
   env['LINKCOMSTR'] = link_program_message
   env['THRIFTCCOMSTR'] = gen_cpp_message
+  env['PROTOCCOMSTR'] = gen_cpp_message
   env['THRIFTJAVACOMSTR'] = gen_java_message
   env['THRIFTPHPCOMSTR'] = gen_php_message
   env['THRIFTPYCOMSTR'] = gen_python_message
-
+  env['PROTOPYCCOMSTR'] = gen_python_message
 
 def MatchOnePattern(file_path, pattern, group_num = 1):
   result = []

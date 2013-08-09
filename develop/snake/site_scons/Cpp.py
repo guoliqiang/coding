@@ -51,6 +51,9 @@ def GetCppInclude(obj):
     result.append(Path.GetThriftOutPath())
     result.append(Path.AddBaseDir('third_part/libevent'))
     result.append(Path.AddBaseDir('third_part/thrift/include'))
+  if obj.has_proto_dep:
+    result.append(Path.GetProtoOutPath())
+    result.append(Path.AddBaseDir('third_part/protobuf/include'))
   return result
 
 
@@ -194,7 +197,7 @@ class CppBuilder(LanguageBuilder):
     source = []
     path = []
     always_link_libs = ''
-    libs = ['dl', 'rt', 'crypt']
+    libs = ['dl', 'rt', 'crypt'] # crypt is the lib of linux sys
 
     if 'libs' in obj.option_:
       libs += obj.option_['libs']
@@ -206,6 +209,10 @@ class CppBuilder(LanguageBuilder):
       libs += ['thriftnb', 'thriftz', 'thrift', 'event']
       path.append(Path.AddBaseDir('third_part/thrift/lib'))
       path.append(Path.AddBaseDir('third_part/libevent/lib'))
+
+    if obj.has_proto_dep:
+      libs += ['protobuf']
+      path.append(Path.AddBaseDir('third_part/protobuf/lib'))
 
     # check dependent obj's special attributes
     for d in obj.depends_:
@@ -289,5 +296,13 @@ def CheckThriftDependency(obj):
   for d in obj.depends_:
     if d.endswith('_thrift'):
       obj.has_thrift_dep = True
+    pass
+  pass
+
+def CheckProtoDependency(obj):
+  obj.has_proto_dep = obj.name_.endswith('_proto')
+  for d in obj.depends_:
+    if d.endswith('_proto'):
+      obj.has_proto_dep = True
     pass
   pass

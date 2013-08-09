@@ -124,7 +124,6 @@ class File {
  private:
   DISALLOW_COPY_AND_ASSIGN(File);
 };
-
 }  // namespace file
 
 #endif  // FILE_FILE_H__

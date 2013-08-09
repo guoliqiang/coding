@@ -1,5 +1,3 @@
-#!/usr/bin/env python2.6
-
 from LanguageBuilder import LanguageBuilder
 from LanguageBuilder import RegisterObj
 from SCons.Script import Action
@@ -113,7 +111,7 @@ class ThriftBuilder(LanguageBuilder):
 
   def GenerateEnv(self, env):
     assert len(_thrift_bin) > 0
-    env['THRIFT'] = Path.AddBaseDir(_thrift_bin)
+    env['THRIFT'] = _thrift_bin
     env['THRIFTSOURCEDIR'] = ('-I %s' % (Path.GetBaseDir()))
     env['THRIFTOUTDIR'] = Path.GetThriftOutPath()
     env['THRIFTCFLAGS'] = ':include_prefix'

@@ -1,17 +1,19 @@
 // Copyright 2010 Yunrang Inc. All Rights Reserved.
 // Author: dahaili@yunrang.com (Dahai Li)
 
-#include "file/file_base.h"
-#include "file/file_hadoop.h"
-#include "file/file_posix.h"
-#include "base/yr.h"
+#include "../public/file_base.h"
+#include "../public/file_posix.h"
+#include "base/public/string_util.h"
+
+using std::string;
+using namespace base;  // NOLINT
 
 namespace {
 
 enum FSType {
   kPosix = 0,
-  kHdfs = 1,
-  kSocket = 2,
+//  kHdfs = 1,
+//  kSocket = 2,
   kUnknown = 3,
 };
 
@@ -22,10 +24,10 @@ FSType GetFileType(const string &path) {
   string scheme = path.substr(0, pos);
   if (scheme == "file")
     return kPosix;
-  if (scheme == "hdfs")
-    return kHdfs;
-  if (scheme == "socket")
-    return kSocket;
+//  if (scheme == "hdfs")
+//    return kHdfs;
+//  if (scheme == "socket")
+//    return kSocket;
   return kUnknown;
 }
 
@@ -63,12 +65,12 @@ Status FileBase::Open(const std::string &path, Mode mode, FileBase **file_obj) {
   case kPosix:
     *file_obj = file::FileBaseRegisterer::GetInstanceByName("FilePosix");
     break;
-  case kHdfs:
-    *file_obj = file::FileBaseRegisterer::GetInstanceByName("FileHadoop");
-    break;
-  case kSocket:
-    *file_obj = file::FileBaseRegisterer::GetInstanceByName("FileSocket");
-    break;
+//  case kHdfs:
+//    *file_obj = file::FileBaseRegisterer::GetInstanceByName("FileHadoop");
+//    break;
+//  case kSocket:
+//    *file_obj = file::FileBaseRegisterer::GetInstanceByName("FileSocket");
+//    break;
   default:
     return Status::Unsupported(path);
   }
@@ -97,8 +99,8 @@ bool FileBase::Exists(const string &path) {
   switch (GetFileType(path)) {
   case kPosix:
     return FilePosix::Exists(path);
-  case kHdfs:
-    return FileHadoop::Exists(path);
+//  case kHdfs:
+//   return FileHadoop::Exists(path);
   default:
     break;
   }
@@ -109,8 +111,8 @@ bool FileBase::IsDir(const string &path) {
   switch (GetFileType(path)) {
   case kPosix:
     return FilePosix::IsDir(path);
-  case kHdfs:
-    return FileHadoop::IsDir(path);
+//  case kHdfs:
+//    return FileHadoop::IsDir(path);
   default:
     break;
   }
@@ -126,8 +128,8 @@ Status FileBase::MoveFile(const std::string &old_path,
   switch (GetFileType(old_path)) {
   case kPosix:
     return FilePosix::MoveFile(old_path, new_path);
-  case kHdfs:
-    return FileHadoop::MoveFile(old_path, new_path);
+//  case kHdfs:
+//    return FileHadoop::MoveFile(old_path, new_path);
   default:
     break;
   }
@@ -138,8 +140,8 @@ Status FileBase::CreateDir(const std::string& path) {
   switch (GetFileType(path)) {
   case kPosix:
     return FilePosix::CreateDir(path);
-  case kHdfs:
-    return FileHadoop::CreateDir(path);
+//  case kHdfs:
+//    return FileHadoop::CreateDir(path);
   default:
     break;
   }
@@ -151,8 +153,8 @@ Status FileBase::GetDirsInDir(const std::string &dir,
   switch (GetFileType(dir)) {
   case kPosix:
     return FilePosix::GetDirsInDir(dir, dirs);
-  case kHdfs:
-    return FileHadoop::GetDirsInDir(dir, dirs);
+//  case kHdfs:
+//    return FileHadoop::GetDirsInDir(dir, dirs);
   default:
     break;
   }
@@ -164,8 +166,8 @@ Status FileBase::GetFilesInDir(const std::string &dir,
   switch (GetFileType(dir)) {
   case kPosix:
     return FilePosix::GetFilesInDir(dir, files);
-  case kHdfs:
-    return FileHadoop::GetFilesInDir(dir, files);
+//  case kHdfs:
+//    return FileHadoop::GetFilesInDir(dir, files);
   default:
     break;
   }
@@ -176,8 +178,8 @@ Status FileBase::DeleteRecursively(const std::string &dir) {
   switch (GetFileType(dir)) {
   case kPosix:
     return FilePosix::DeleteRecursively(dir);
-  case kHdfs:
-    return FileHadoop::DeleteRecursively(dir);
+//  case kHdfs:
+//    return FileHadoop::DeleteRecursively(dir);
   default:
     break;
   }

@@ -23,45 +23,28 @@ namespace file {
 
 class FilePosix: public FileBase {
  public:
-
   FilePosix();
-
   ~FilePosix();
-
   Status Write(const void *buffer, size_type length);
-
   Status Read(size_type length, std::string *result);
-
   Status Seek(size_type pos, SeekPos seek_pos);
-
   size_type Position() const;
-
   Status Flush();
-
   bool Eof() const;
-
   static bool Exists(const std::string &path);
-
   static bool IsDir(const std::string &path);
-
   static Status MoveFile(const std::string &old_path,
                          const std::string &new_path);
-
   static Status GetDirsInDir(const std::string &dir,
                              std::vector<std::string> *dirs);
-
   static Status GetFilesInDir(const std::string &dir,
                               std::vector<std::string> *files);
-
   static Status CreateDir(const std::string &path);
-
   static Status DeleteRecursively(const std::string& name);
-
+ 
  protected:
   Status OpenInternal(const std::string &path, Mode mode);
-
   bool IsSeekable() const;
-
   // Join the path.
   static std::string JoinPath(const std::string &dirname,
                               const std::string &basename);

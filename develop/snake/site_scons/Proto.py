@@ -104,4 +104,3 @@ class ProtoBuilder(LanguageBuilder):
                         CPPPATH = cpp_path)
     if obj.option_['gen_py']:
       py_source = env.ProtoPyLibrary([], source)
-
