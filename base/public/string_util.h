@@ -849,7 +849,7 @@ std::string JoinString(const std::vector<std::string>& parts,
 
 // Join array to string
 template<typename T>
-std::string JoinVector(const std::vector<T>& parts, char sep) {
+std::string JoinVector(const std::vector<T>& parts, char sep = '\t') {
   if (parts.size() == 0) return "";
   std::stringstream s;
   typename std::vector<T>::const_iterator iter = parts.begin();

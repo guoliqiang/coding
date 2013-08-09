@@ -52,6 +52,8 @@ int TcpListen(int port, int backlog) {
   }
   memset(&sin, 0, sizeof(struct sockaddr_in));
   sin.sin_family = AF_INET;
+  // http://baike.baidu.com/view/1512659.htm
+  // INADDR_ANY : any ip of the host
   sin.sin_addr.s_addr = htonl(INADDR_ANY);
   sin.sin_port = htons(port);
   setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));

@@ -34,7 +34,8 @@ cc_library(name = 'base',
                    'counter.cc',
                    'net.cc',
                    'shared_ptr.cc',
-                   'varint.cc'
+                   'varint.cc',
+                   'instance_pool.cc'
                   ],
            deps = [],  # base should not depends on other components!
            copt = ['no_style_check']

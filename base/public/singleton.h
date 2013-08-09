@@ -152,6 +152,8 @@ template <typename Type> base::subtle::Atomic32
 //     void Bar() { ... }
 //    private:
 //     FooClass() { ... }
+//     ~FooClass() {}  // NOTE: the destructor can be private because of 
+//                     // the use of DefaultSingletonTraits and AtExit
 //     friend struct DefaultSingletonTraits<FooClass>;
 //
 //     DISALLOW_COPY_AND_ASSIGN(FooClass);

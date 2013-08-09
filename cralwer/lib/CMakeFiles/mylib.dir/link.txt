@@ -1,2 +1,0 @@
-/usr/bin/ar cr libmylib.a  CMakeFiles/mylib.dir/lib.cc.o
-/usr/bin/ranlib libmylib.a
