@@ -66,6 +66,7 @@ proc_t MemoryMonitor::GetProcInfo() {
 bool MemoryMonitor::RssCheck(int64 threshold, string* alarm_message) {
   int64 cur_rss =
     static_cast<int64>(proc_info_.rss * 4);
+  // 4KB for one page
   if (cur_rss < threshold) {
     return false;
   }

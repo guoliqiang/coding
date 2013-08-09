@@ -1,7 +1,0 @@
-set(SRC query_test.cc)
-link_directories(../lib)
-link_directories(../../mysql/lib)
-link_directories(../../../base/lib)
-add_executable(query_unit ${SRC})
-target_link_libraries(query_unit  base mysqlbase mysqlclient_r)
-SET(CMAKE_EXE_LINKER_FLAGS "-lpthread -lrt")

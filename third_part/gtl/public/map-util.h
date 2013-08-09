@@ -88,7 +88,7 @@ const typename Collection::value_type::second_type&
 FindOrDie(const Collection& collection,
           const typename Collection::value_type::first_type& key) {
   typename Collection::const_iterator it = collection.find(key);
-  GOOGLE_CHECK(it != collection.end()) << "Map key not found: " << key;
+  CHECK(it != collection.end()) << "Map key not found: " << key;
   return it->second;
 }
 
