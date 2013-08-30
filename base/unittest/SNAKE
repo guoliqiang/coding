@@ -47,3 +47,12 @@ cc_binary(name = 'icu_unittest',
                    ],
            )
 
+cc_binary(name = 'sparse_array_test',
+           srcs = ['sparse_array_test.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   '//third_part/testing/gtest/src:gtest'
+                   ],
+           )
+

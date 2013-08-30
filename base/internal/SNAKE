@@ -38,7 +38,9 @@ cc_library(name = 'base',
                    'instance_pool.cc',
                    'affinity.cc',
                    'rune.cc',
-                   'string_split.cc'
+                   'string_split.cc',
+                   'sparse_array.cc',
+                   'sparse_set.cc'
                   ],
            deps = [],  # base should not depends on other components!
            copt = ['no_style_check']
