@@ -5,6 +5,7 @@ cc_library(name= 'file',
                  'file_posix.cc'
                  ],
            deps =[
-                 '//base/internal:base'
+                 '//base/internal:base',
+                 '//third_part/registerer/internal:registerer'
                  ]
            )
