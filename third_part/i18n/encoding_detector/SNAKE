@@ -1,0 +1,29 @@
+cc_library(name = 'mozilla_detector',
+           srcs = [
+                   'CharDistribution.cc',
+                   'JpCntx.cc',
+                   'LangBulgarianModel.cc',
+                   'LangCyrillicModel.cc',
+                   'LangGreekModel.cc',
+                   'LangHungarianModel.cc',
+                   'LangThaiModel.cc',
+                   'nsBig5Prober.cc',
+                   'nsEscCharsetProber.cc',
+                   'nsEscSM.cc',
+                   'nsEUCJPProber.cc',
+                   'nsEUCKRProber.cc',
+                   'nsEUCTWProber.cc',
+                   'nsGB2312Prober.cc',
+                   'nsLatin1Prober.cc',
+                   'nsMBCSGroupProber.cc',
+                   'nsMBCSSM.cc',
+                   'nsSBCharSetProber.cc',
+                   'nsSBCSGroupProber.cc',
+                   'nsSJISProber.cc',
+                   'nsUniversalDetector.cc',
+                   'nsUTF8Prober.cc',
+                   ],
+           copt = ['no_style_check']
+           )
+
+

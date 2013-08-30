@@ -1,0 +1,7 @@
+cc_library(name = 'daemonizer',
+           srcs = ['daemonizer.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/release/internal:release'
+                  ]
+           )

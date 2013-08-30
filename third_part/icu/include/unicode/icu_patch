@@ -1,0 +1,26 @@
+Index: i18n/decnumstr.cpp
+===================================================================
+--- i18n/decnumstr.cpp	(revision 28788)
++++ i18n/decnumstr.cpp	(working copy)
+@@ -70,7 +70,7 @@
+         return;
+     }
+     if (length > fLength) {
+-        uprv_memset(&fText[fLength], length - fLength, 0);
++        uprv_memset(&fText[fLength], 0, length - fLength);
+     }
+     fLength = length;
+     fText[fLength] = 0;
+Index: common/unicode/uversion.h
+===================================================================
+--- common/unicode/uversion.h	(revision 28788)
++++ common/unicode/uversion.h	(working copy)
+@@ -116,7 +116,7 @@
+ #   define U_NAMESPACE_QUALIFIER U_ICU_NAMESPACE::
+ 
+ #   ifndef U_USING_ICU_NAMESPACE
+-#       define U_USING_ICU_NAMESPACE 1
++#       define U_USING_ICU_NAMESPACE 0
+ #   endif
+ #   if U_USING_ICU_NAMESPACE
+         U_NAMESPACE_USE

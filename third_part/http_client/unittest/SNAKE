@@ -1,0 +1,21 @@
+cc_binary(name='curl_wrapper_unittest',
+          srcs = ['curl_wrapper_unittest.cc'],
+          deps = [
+                 '//third_part/http_client/internal:curl_wrapper'
+                 ]
+          )
+
+cc_binary(name='http_client_unittest',
+          srcs = ['http_client_unittest.cc'],
+          deps = [
+                 '//third_part/http_client/internal:http_client',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
+
+cc_binary(name='wget',
+          srcs = ['wget.cc'],
+          deps = [
+                 '//third_part/http_client/internal:http_client',
+                 ]
+          )

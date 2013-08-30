@@ -23,3 +23,27 @@ cc_binary(name = 'time_unittest',
                    ],
            )
 
+cc_binary(name = 'flag_unittest',
+           srcs = ['flag_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )
+
+cc_binary(name = 'rune_unittest',
+           srcs = ['rune_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )
+
+cc_binary(name = 'icu_unittest',
+           srcs = ['icu_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )
+

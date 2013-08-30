@@ -1,0 +1,34 @@
+cc_binary(name = 'mozilla_encoding_detector_unittest',
+           srcs = ['mozilla_encoding_detector_unittest.cc'],
+           deps = [
+                  '//third_part/i18n/wrapper/internal:mozilla_encoding_detector',
+                  '//third_part/testing/gtest/src:gtest',
+                  ]
+           )
+
+cc_binary(name = 'mozilla_language_detector_unittest',
+           srcs = ['mozilla_language_detector_unittest.cc'],
+           deps = [
+                  '//third_part/i18n/wrapper/internal:mozilla_language_detector',
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/parser_master/internal:parser_master',
+                  ]
+           )
+
+cc_binary(name = 'invalid_code_detector_unittest',
+           srcs = ['invalid_code_detector_unittest.cc'],
+           deps = [
+                  '//third_part/i18n/wrapper/internal:invalid_code_detector',
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/parser_master/internal:parser_master',
+                  ]
+           )
+
+cc_binary(name = 'utf8_converter_unittest',
+           srcs = ['utf8_converter_unittest.cc'],
+           deps = [
+                  '//third_part/i18n/wrapper/internal:utf8_converter',
+                  '//third_part/testing/gtest/src:gtest',
+                  ]
+           )
+

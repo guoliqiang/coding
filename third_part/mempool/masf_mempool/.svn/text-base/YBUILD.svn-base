@@ -1,0 +1,22 @@
+# Copyright 2010 Yunrang Inc. All Rights Reserved.
+# Author: yanliangcui@yunrang.com (Yanliang Cui)
+
+cc_library(name = 'masf_mempool',
+           srcs = [
+                   'masf_mempool.cc',
+                  ],
+           deps = [
+                   '//base:base',
+                  ],
+          )
+
+cc_test(name = 'masf_unittest',
+        srcs = [
+                'masf_unittest.cc',
+               ],  
+        deps = [
+                ':masf_mempool',
+                '//base:base',
+               ]   
+         )
+

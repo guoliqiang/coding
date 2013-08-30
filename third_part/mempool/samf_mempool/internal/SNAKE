@@ -1,0 +1,6 @@
+cc_library(name='samf_mempool',
+           srcs = ['samf_mempool.cc'],
+           deps = [
+                  '//base/internal:base'
+                  ]
+           )

@@ -35,7 +35,10 @@ cc_library(name = 'base',
                    'net.cc',
                    'shared_ptr.cc',
                    'varint.cc',
-                   'instance_pool.cc'
+                   'instance_pool.cc',
+                   'affinity.cc',
+                   'rune.cc',
+                   'string_split.cc'
                   ],
            deps = [],  # base should not depends on other components!
            copt = ['no_style_check']

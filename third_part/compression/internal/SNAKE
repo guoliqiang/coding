@@ -1,0 +1,14 @@
+cc_library(name = 'compression',
+           srcs = [
+                   'compression.cc',
+                   'gzip_compression.cc',
+                   'lzo_compression.cc',
+                   'snappy_compression.cc',
+                   'zlib_compression.cc'
+                  ],
+           deps = [
+                  '//libs/third_part/snappy:snappy',
+                  '//libs/third_part/zlib:z',
+                  '//third_part/minilzo/internal:minilzo',
+                  ]
+           )

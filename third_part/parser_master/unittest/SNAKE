@@ -1,0 +1,55 @@
+cc_binary(name = 'parse_master_util_unittest',
+           srcs = ['parse_master_util_unittest.cc'],
+           deps = [
+                  '//third_part/parser_master/internal:parser_master',
+                  '//third_part/testing/gtest/src:gtest',
+                  ]
+           )
+
+cc_binary(name = 'dom_node_unittest',
+           srcs = ['dom_node_unittest.cc'],
+           deps = [
+                  '//third_part/parser_master/internal:parser_master',
+                  '//third_part/testing/gtest/src:gtest',
+                  ]
+           )
+
+cc_binary(name = 'html_tag_unittest',
+          srcs = ['html_tag_unittest.cc'],
+          deps = [
+                 '//third_part/parser_master/internal:parser_master',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
+
+cc_binary(name = 'cdata_test',
+          srcs = ['cdata_test.cc'],
+          deps = [
+                 '//third_part/parser_master/internal:parser_master',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
+
+cc_binary(name = 'html_lexer_unittest',
+          srcs = ['html_lexer_unittest.cc'],
+          deps = [
+                 '//third_part/parser_master/internal:parser_master',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
+
+cc_binary(name = 'parse_master_unittest',
+          srcs = ['parse_master_unittest.cc'],
+          deps = [
+                 '//third_part/parser_master/internal:parser_master',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
+
+cc_binary(name = 'parse_master_benchmark',
+          srcs = ['parse_master_benchmark.cc'],
+          deps = [
+                 '//third_part/parser_master/internal:parser_master',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )

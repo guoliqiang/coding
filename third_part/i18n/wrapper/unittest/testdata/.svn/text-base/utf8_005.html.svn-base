@@ -1,0 +1,2674 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<meta name="Generator" content="ECSHOP v2.6.1" /> 
+<meta name="keywords" content="第五大道,奢侈品,原装正品,国际顶级品牌,网上的奥特莱斯,超值抢购" />
+<meta name="description" content="第五大道奢侈品网是中国最大的网上奢侈品销售商城，在线售卖200余个国际顶级时尚奢侈品牌商品，平均折扣为2-8折，所有商品均由品牌制造商和经销商直接提供，百分百原装正品，专业服务，卓越品质，值得信赖。" /> 
+ 
+<link href="images/new.css" rel="stylesheet" type="text/css" />
+<style> 
+bady{margin:0px auto; padding:0px;}
+#dibuad{margin:4px 1px 3px 0px; padding:0px; width:959px; height:123px; float:left; overflow:hidden;}
+#dibuad ul{margin:0px; padding:0px; list-style:none;}
+#dibuad ul li{margin:0px 9px 0px 0px; padding:0px; width:230px; height:118px; float:left; border-style:solid; border-width:1px; border-color:#CCCCCC; overflow:hidden;}
+#dibuadtwo{margin:0px 0px 2px 0px; padding:0px; width:232px; height:118px; float:right; border-style:solid; border-width:1px; border-color:#CCCCCC; overflow:hidden;}
+
+
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 
+<title>第五大道：中国最大的奢侈品和商务礼品销售中心，Gucci、Prada 普拉达、Burberry 巴宝莉、Cartier 卡地亚、Tiffany、Coach</title> 
+
+ <script >
+ window.error=function (){
+ return ture;
+ }
+ </script>
+
+</style>
+<style type="text/css">
+</style>
+<script src="http://www.5lux.com/flash/AC_RunActiveContent.js" type="text/javascript"></script>
+ <script type="text/javascript" src="js/utils.js"></script><script type="text/javascript" src="js/transport.js"></script></head> 
+<body>
+<div id="all">
+<script type="text/javascript">
+var process_request = "正在处理您的请求...";
+</script>
+<script type="text/JavaScript"> 
+navHover = function() { 
+var lis = document.getElementById("navmenu").getElementsByTagName("LI"); 
+for (var i=0; i<lis.length; i++) { 
+lis[i].onmouseover=function() { 
+this.className+=" iehover"; 
+} 
+lis[i].onmouseout=function() { 
+this.className=this.className.replace(new RegExp(" iehover\\b"), ""); 
+} 
+} 
+} 
+if (window.attachEvent) window.attachEvent("onload", navHover); 
+</script>
+
+ 
+
+<link href="images/ding1.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+
+#all{top:0px; margin:0px auto; padding:0px; width:960px;background-color:#ffffff; float:none; overflow: hidden;}
+
+#head{width:960px;  background-color:#FFFFFF; margin:0px auto ; padding:0px;}
+
+.ding{width:960px ; height:20px; background-color:#efefef; margin:0px; padding:0px; overflow:hidden;}
+#ding{width:960px ; height:20px; background-color:#efefef; margin:0px; padding:0px;}
+
+#denglu{ 
+margin:0px 0px 0px 3px; 
+border: 0 none; 
+padding: 0; 
+width:310px;
+list-style: none; 
+height:20px; 
+background:#efefef;
+float:left;
+text-decoration: none
+} 
+
+#navmenu li {
+	margin: 0px;
+    padding: 0px;
+	float: left;
+	list-style: none;
+	position: relative;
+	height:20px;
+	line-height:25px;
+	font-size:12px;
+	letter-spacing: 3px;
+}
+
+#navmenu li a{
+	font:"宋体 " ;
+	font-size:12px;
+	line-height:20px;
+	color:#000000;
+	font-weight:500;
+}
+
+
+
+
+#navmenu ul { 
+margin: 0px; 
+border: 0 none; 
+padding: 0px; 
+width: 90px; 
+list-style: none; 
+display: none; 
+position: absolute; 
+top:20px; 
+left: 0; 
+} 
+#navmenu ul li { 
+float: none; 
+height:20px;
+line-height:25px;
+margin:0px;
+padding:0px;
+} 
+
+#navmenu ul li a { 
+float: none; 
+height:20px;
+line-height:20px;
+font:"宋体"; color:#000000;
+margin:0px;
+padding:0px;
+} 
+
+#navmenu ul li a:hover { 
+float: none; 
+height:20px;
+line-height:25px;
+font:"宋体";
+margin:0px;
+padding:0px;
+
+} 
+
+/* Root Menu */ 
+#navmenu a { 
+padding: 0 6px; 
+float: none !important; /*For Opera*/ 
+float: left; /*For IE*/ 
+display: block; 
+color: #fff; 
+font:宋体; font-weight:100; font-size:12px;
+text-decoration: none; 
+height: auto !important; 
+height: 20px; /*For IE*/ 
+line-height:20px;
+} 
+/* Root Menu Hover Persistence */ 
+#navmenu a:hover, 
+#navmenu li:hover a, 
+#navmenu li.iehover a { 
+margin:0px;
+color: #F60;
+padding:0px;
+} 
+
+#navmenu li:hover li a, 
+#navmenu li.iehover li a { 
+float: none; 
+background: #cacaca; 
+color: #333; 
+display:block;
+border:solid 1px #fff; 
+height:20px;
+line-height:24px;
+margin:0px;
+padding:0px;
+} 
+
+#navmenu li:hover li a:hover, 
+#navmenu li:hover li:hover a, 
+#navmenu li.iehover li a:hover, 
+#navmenu li.iehover li.iehover a { 
+background: #949494; 
+color: #FFF; 
+height:20px;
+line-height:24px;
+margin:0px;
+padding:0px;
+} 
+
+#navmenu li:hover li:hover li a, 
+#navmenu li.iehover li.iehover li a { 
+background: #c3e5fe; 
+color: #666; 
+height:20px;
+line-height:24px;
+margin:0px;
+padding:0px;
+} 
+
+#navmenu li:hover li:hover li a:hover, 
+#navmenu li:hover li:hover li:hover a, 
+#navmenu li.iehover li.iehover li a:hover, 
+#navmenu li.iehover li.iehover li.iehover a { 
+background: #76b6e4; 
+color: #FFF; 
+height:20px;
+line-height:24px;
+margin:0px; font:"宋体"; font-weight:100;
+padding:0px;
+} 
+
+#navmenu ul ul, 
+#navmenu ul ul ul { 
+display: none; 
+position: absolute; 
+top: 0; 
+left: 160px;
+margin:0px;
+padding:0px; 
+} 
+
+#navmenu li:hover ul ul, 
+#navmenu li:hover ul ul ul, 
+#navmenu li.iehover ul ul, 
+#navmenu li.iehover ul ul ul { 
+display: none;
+margin:0px;
+padding:0px; 
+} 
+#navmenu li:hover ul, 
+#navmenu ul li:hover ul, 
+#navmenu ul ul li:hover ul, 
+#navmenu li.iehover ul, 
+#navmenu ul li.iehover ul, 
+#navmenu ul ul li.iehover ul { 
+display: block;
+margin:0px;
+padding:0px; 
+}
+
+#sousuo{
+	width:960px;
+	height:25px;
+	float:left;
+	margin:0px 0px 0px 0px ;
+	padding:0px 0px 2px 0px ;
+	background-color:#d3d3d3;}
+
+
+.ysousuo{margin:0px; padding:0px; height:27px; float:left; width:960px; background-color:#d3d3d3; height:27px; overflow:hidden;}
+.ysousuoa{margin:0px; padding:0px; height:27px; float:left; overflow:hidden;}
+
+.ysousuob{margin:0px 6px 1px 5px ; height:27px; float:left; width:350px;}
+.ysousuob ul{margin:0px ;padding:0px; height:27px;}
+.ysousuob ul li{margin:0px; padding:2px 2px 0px 0px ; height:27px; float:left; list-style:none;}
+
+.sskk{margin:3px 0px 2px 2px; padding:0px 0px 0px 0px ; border-color:#666666; border-style:solid; border-width:1px; height:16px;}
+
+.sskkgo{margin:4px 2px 2px 4px; padding:0px 0px 0px 0px ;}
+
+
+
+.remensou{margin:0px; padding:0px; width:540px; height:26px; float:right;}
+.remensou ul {margin:0px; padding:0px;}
+.remensou ul li{margin:6px 2px 2px 6px;padding:0px; font:"宋体"; list-style:none; float:left;}
+
+
+.remensou ul li a{font-family:"宋体"; font-size:13px; color:#666666; font-weight:bold;list-style:none; text-decoration:none;}
+.remensou ul li a:hover{font-family:"宋体"; font-size:13px; list-style:none; text-decoration:none; line-height:20px ;color:#666666;}
+
+
+.STYLE1 {color: #FFFFFF;}
+
+
+-->
+
+</style>
+
+<div id="all">
+	<div id="head" >
+				<div id="ding">		
+			<div id="denglu">
+									<a href="http://www.5lux.com">欢迎来到第五大道 </a>                   
+					<a href="user.php"> |用户登录</a>
+					<a href="user.php?act=register">| 免费注册 |</a>  <!-- <a href="user.php"> --> <font style="color:#EE1153; text-decoration:underline; ">注册送10元</font><!-- </a> --> 
+							</div>
+			<div style='floaat:right;'>
+				<div id="navmenu" style="margin-left:-50px;">
+					<li>
+						<div  style="width:280px; height:20px">
+							<marquee scrollAmount=2 width=270 >
+								<font style="font:'宋体'; color:#EE1153; size:12px; word-spacing:inherit; "></font>
+							</marquee>
+						</div>
+					</li>
+									<li><span class="ptong">我的第五大道▼|</span>
+						<ul>
+							<li><a href="user.php">用户中心</a> </li>
+							<li><a href="user.php?act=order_list" class="iehover">我的订单</a> </li>
+							<li><a href="user.php?act=collection_list">我的收藏</a> </li>
+							<li><a href="user.php?act=affiliate">邀请朋友</a> </li>
+							<li><a href="charge.php?id=76">积分兑换</a> </li>
+						</ul>
+					</li>
+					<li>更多服务▼|
+						<ul>
+							<li><a href="article.php?id=9">网购步骤</a> </li>
+							<li><a href="article.php?id=89">配送方式</a> </li>
+							<li><a href="article.php?id=38">在线支付</a> </li>
+							<li><a href="article.php?id=25">退换货品</a> </li>
+							<li><a href="article.php?id=30">VIP会员</a> </li>
+							<li><a href="group_buy.php">团购商品</a> </li>
+						</ul>
+					</li>
+								</div>
+				<div id="hudongqu"  style="float:right;">
+					<div align="right">
+						<!-- <a href="message.php">互动区| </a> -->
+						<a href="article.php?id=93"> <font color="#EE1153"> 贵宾卡</font></a>
+						<a href="flow.php">|购物袋</a></div><div id="naber" style="float:right"><u><a href="flow.php" title="查看购物车"> 0</a><a href="flow.php">件商品</a></u>
+					</div>
+				</div>  
+			</div>
+		</div>
+				   
+		<div id="logo"><a href="index.php"><img src="themes/default/images/dodo/zhuyemm_04.jpg" width="346" height="89" border="0"/></a></div>
+		<div id="flash-all">
+			<div id="flash">
+				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" 
+				codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" 
+				width="600" height="100">
+				<param name="movie" value="YTPP.swf" />
+				<param name="quality" value="high" />
+				<param name="wmode" value="opaque" />
+				<embed src="YTPP.swf" wmode="opaque" quality="high" 
+				pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" 
+				width="600" height="100"></embed>
+				</object>
+				<table width="300" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+				<td>&nbsp;</td>
+				</tr>
+				</table>
+			</div>
+			
+			<div id="dianhua"><img src="themes/default/images/dodo/zhuyemm_06.jpg" align="right" /></div>
+		</div>
+		<div id="daohang">
+			<a href="newgoods.php">最新上架</a>
+			<a href="brand.php">所有品牌</a>
+			<a href="category.php?id=2">箱包</a>
+			<a href="category.php?id=3">服饰</a>
+			<a href="category.php?id=4">鞋帽</a>
+			<a href="category.php?id=5">化妆品</a>
+			<a href="category.php?id=7">男士</a>
+			<a href="category.php?id=108">儿童</a>
+			<a href="category.php?id=6">钟表饰品</a>
+			<a href="category.php?id=100">家居电子</a>
+			<a href="tehui.php?id=68">清仓</a>
+			<a href="qianggou.php">秒杀名牌</a>
+			<a href="http://www.5lux.com.cn/blog/">奢尚志</a>
+		</div>
+	<div class="ysousuo">
+		<div class="ysousuoa">
+			<img src="http://www.5lux.com/themes/default/images/dodo/sousuo1.jpg" width="52" height="27">
+		</div>
+		<div class="ysousuob">
+			<ul>
+				<form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r"  style="_position:relative; top:5px;">
+					<li>
+						<input name="keywords" type="text" id="keyword" value="" class="sskk" " size="32" />
+					</li> 
+					<li>
+						<input type="image" name="Submit" class="sskkgo" src="http://www.5lux.com/themes/default/images/dodo/goodto.gif"/ >
+					</li>
+				</form>
+				<li>
+					<a href="search.php?encode=YToyOntzOjM6ImFjdCI7czoxNToiYWR2YW5jZWRfc2VhcmNoIjtzOjE4OiJzZWFyY2hfZW5jb2RlX3RpbWUiO2k6MTI2NzE3ODA4Njt9" target="_blank"><img src="http://www.5lux.com/themes/default/images/dodo/zhuyeca_04.jpg" width="68" height="23" border="0"/></a>
+				</li>
+			</ul>
+		</div>
+		<div class="remensou">
+			<ul>
+				<li><a><font color="#333333" size="2">热门搜索:</font></a></li>
+				<li><a href="http://www.5lux.com/brand.php?id=47" target="_blank">LV</a></li>
+				<li><a href="http://www.5lux.com/brand.php?id=53" target="_blank">PRADA</a></li>
+				<li><a href="http://www.5lux.com/brand.php?id=36" target="_blank">GUCCI</a></li>
+				<li><a href="http://www.5lux.com/brand.php?id=12" target="_blank">巴宝莉</a></li>
+				<li><a href="http://www.5lux.com/brand.php?id=21" target="_blank">COACH</a></li>
+				<li><a href="http://www.5lux.com/brand.php?id=176" target="_blank">阿克波斯</a></li>
+				<li><a href="http://www.5lux.com/brand.php?id=45" target="_blank">兰蔻</a></li>
+				<li><a href="http://www.5lux.com/BIRKINSTILLING.html " target="_blank">订购爱马仕柏金包</a></li>
+			</ul>	
+		</div>
+	</div>
+</div>
+
+
+
+  <div id="FLASHlx">
+    <table width="960" border="0" cellspacing="0" cellpadding="0" >
+      <tr>
+        <td width="960" height="500" background="idex/bgimg.jpg"><script type="text/javascript">
+var swf_width=960;
+var swf_height=500;
+</script>
+            <script type="text/javascript" src="idex/cycle_image.js"></script>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="geduan">
+  </div>
+<div class="geduan2"><img src="themes/default/images/dodo/xcsdcaaa.jpg" width="950px" height="7" /></div>
+
+<style type="text/css">
+#spq{margin:0px auto; padding:0px 0px 0px 0px ; width:960px;height:453px;}
+
+#spdaohang{width:960px;height:453px;px; margin:0px ; padding:0px; float:left;}
+
+.spleft{
+	width:182px;
+	height:453px;
+	margin:22px 0px 0px 0px ;
+	padding:0px;
+	float:left;
+	background-image:url(themes/default/images/dodo/boxqqbj.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+	overflow:hidden;
+}
+
+
+.spleftpp{
+	width:182px;
+	height:235px;
+	margin:35px 0px 0px 0px;
+	padding:0px;
+	float:left;
+}
+.spleftbott{width:154px;
+	height:28px;
+	margin:0px 0px 0px 10px;
+	padding:0px;
+	float:left;}
+	
+	
+.spleftad{width:188px;
+	height:118px;
+	margin:15px 0px 0px 0px ;
+	padding:8px 0px 0px 0px ;
+	float:left;}
+
+`
+
+
+
+
+
+.spright{width:750px; height:453px;; margin:0px ; padding:0px; float:right;}
+
+
+
+.nTab{
+float: left;
+width: 765px;
+height:433px;
+margin:0px 0px 0px 10px ;
+background:#FFFFFF;
+background-position: left;
+background-repeat:repeat-y;
+padding::0px 0px 5px 0px;
+}
+
+.nTab .TabTitle{
+clear: both;
+height: 22px;
+width:765px;
+height:27px;
+overflow:hidden;
+
+}
+
+
+.nTab .TabTitle ul{
+border:0;
+margin:0;
+padding:0;
+}
+
+
+.nTab .TabTitle li{
+float: left;
+width: 97px;
+height:27px;
+cursor: pointer;
+padding-top: 0px;
+padding-right: 0px;
+padding-left: 0px;
+padding-bottom: 2px;
+list-style-type: none;
+font-size: 12px;
+text-align: center;
+margin: 0;
+}
+
+
+.nTab .TabTitle .active{margin-right:0px;  height:20px;}
+
+.nTab .TabTitle .active a{font:"宋体"; font-size:12px; color:#000000; line-height:10px;}
+
+
+.nTab .TabTitle .normal{margin-right:0px; height:20px;}
+
+.nTab .TabTitle .normal a{font:"宋体"; font-size:12px; color:#FFFFFF; line-height:10px;}
+
+
+.nTab .TabContent{
+width:auto;background:#fff;
+margin:0px 0px 5px 0px ;
+padding:2px 0 0 0;
+border-right:1px #c1c1c1 solid;border-left:1px #c1c1c1 solid;
+border-top:1px #c1c1c1 solid;
+border-bottom:1px #c1c1c1 solid;
+width:762px;
+height:433px;
+
+}
+.nTab .TabContent ul{height:408px; width:750px; float:left list-style:none; margin: 0px 0px 0px 5px ;  padding:0px ;}  
+
+
+
+.nTab .TabContent ul  li{ height:205px; width:140px;  float:left; list-style:none; margin:7px 0px 0px 7px ;
+}
+
+
+
+
+
+
+ .shangp{height:140px; width:140px;  float:left; list-style:none;}
+
+
+
+
+
+
+
+
+.shpming{height:35px; width:120px; float:left; list-style:none; margin:15px 11px 0px 5px; background-color:#efebef; padding:0px; overflow:hidden;}
+
+.shpming a{
+	font-size:12px;
+	color:#666666;
+	text-decoration:none;
+	line-height:18px;
+	font-family: "宋体";
+	font-stretch:wider;
+	vertical-align: top;
+
+}
+
+.shpming a:hover{
+	font-size:12px;
+	color:#FF3366;
+	text-decoration:none;
+	line-height:18px;
+	font-family: "宋体";
+	font-stretch:wider;
+	vertical-align: top;
+
+}
+
+
+
+
+.jiage{height:12px; width:135px; float:left; list-style:none; margin:0px 0px 0px 0px ; padding:0px;}
+.jiage a{
+	font-size:12px;
+	color:#cf6768;
+	font-family: "宋体";
+	font-weight:bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+.none {display:none;}
+
+
+
+.boxLista {
+	MARGIN:15px auto; OVERFLOW: auto; WIDTH: 130px; HEIGHT: 210px;
+}
+
+.boxLista UL {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 0px; LIST-STYLE: none none outside; BORDER-TOP: 0px; PADDING-LEFT: 0px; Z-INDEX: 0; PADDING-BOTTOM: 0px; MARGIN: 0px 0px; BORDER-LEFT: 0px; WIDTH: auto; PADDING-TOP: 0px; BORDER-BOTTOM: 0px; color:#FF0000;
+}
+.boxLista UL LI {
+	LINE-HEIGHT: 20px;
+	margin-bottom:10px;
+	border-bottom:1px dashed #CCCCCC;
+
+}
+
+.boxLista UL LI A{
+	COLOR: #000000;
+	margin-bottom:10px;
+	font-size:12px;
+
+}
+
+.boxLista UL LI A:link {
+	COLOR: #000000;
+	margin-bottom:10px;
+	font-size:12px;
+
+}
+.boxLista UL LI A:hover {
+	COLOR: #ff0000;
+	margin-bottom:10px;
+	font-size:12px;
+
+}
+
+#topBrandsa {
+	
+}
+</style>
+
+
+
+
+
+
+<script type="text/javascript">
+function nTabs(el,Num){
+	for(var i=0; i<7; i++) {
+		document.getElementById('myTab1_Content' + i).style.display = 'none';
+	}
+	if(document.getElementById('myTab1_Content' + Num).innerHTML == '') {
+		Ajax.call('http://www.5lux.com/ajax.php?act=list_brand&bid=' + Num, '', function(data){
+			document.getElementById('myTab1_Content' + Num) .innerHTML = data;
+			document.getElementById('myTab1_Content' + Num).style.display = '';
+		}, 'GET', 'TEXT');	
+	}else{
+		document.getElementById('myTab1_Content' + Num).style.display = '';
+	}
+}
+
+</script>
+
+
+ 
+ <div id="spq">
+  <div class="spleft">
+  <div class="spleftpp"><div class="boxLista">
+<ul id="topBrandsa">
+
+      <li> <a href="brand.php?id=214">
+   
+       -  第五大道礼品卡 <br>
+    	
+	     -  5LUX VIPCARD <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=170">
+   
+   	
+	     -  7 For All Mankind <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=176">
+   
+       -  阿克波斯 <br>
+    	
+	     -  Akribos XXIV <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=130">
+   
+       -  亚历山大·麦昆 <br>
+    	
+	     -  Alexander McQueen <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=123">
+   
+       -  亚历山大·王 <br>
+    	
+	     -  Alexander Wang <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=107">
+   
+       -  安娜苏  <br>
+    	
+	     -  Anna Sui <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=3">
+   
+       -  安娜.克莱恩 <br>
+    	
+	     -  Anne Klein <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=4">
+   
+       -  阿玛尼 <br>
+    	
+	     -  Armani <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=200">
+   
+       -  爱彼 <br>
+    	
+	     -  Audemars Piguet <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=196">
+   
+       -  雅漾 <br>
+    	
+	     -  AVENE <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=6">
+   
+       -  巴黎世家 <br>
+    	
+	     -  Balenciaga <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=7">
+   
+       -  百利 <br>
+    	
+	     -  Bally <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=142">
+   
+       -  巴尔曼 <br>
+    	
+	     -  Balmain <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=9">
+   
+       -  香蕉共和国 <br>
+    	
+	     -  Banana Republic <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=199">
+   
+       -  名士 <br>
+    	
+	     -  Baume&Mercier <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=10">
+   
+   	
+	     -  BCBG  <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=109">
+   
+       -  贝玲妃 <br>
+    	
+	     -  Benefit <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=135">
+   
+       -  碧欧泉 <br>
+    	
+	     -  Biotherml <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=209">
+   
+       -  宝珀 <br>
+    	
+	     -  BLANCPAIN <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=171">
+   
+       -  波比布朗 <br>
+    	
+	     -  Bobbi Brown <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=195">
+   
+       -  贝佳斯 <br>
+    	
+	     -  BORGHESE <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=101">
+   
+       -  宝缇嘉 <br>
+    	
+	     -  Bottega Veneta <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=172">
+   
+       -  宝玑 <br>
+    	
+	     -  Breguet <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=146">
+   
+   	
+	     -  Bric’s <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=12">
+   
+       -  巴宝莉 <br>
+    	
+	     -  Burberry <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=13">
+   
+       -  宝格丽 <br>
+    	
+	     -  Bvlgari <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=14">
+   
+       -  CK <br>
+    	
+	     -  Calvin Klein <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=136">
+   
+       -  卡地亚 <br>
+    	
+	     -  Cartier <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=181">
+   
+       -  川久保玲 <br>
+    	
+	     -  CDG <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=16">
+   
+       -  赛琳 <br>
+    	
+	     -  Celine <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=207">
+   
+       -  雪铁纳 <br>
+    	
+	     -  Certina <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=17">
+   
+       -  香奈儿 <br>
+    	
+	     -  Chanel <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=18">
+   
+       -  克洛伊 <br>
+    	
+	     -  Chloe <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=180">
+   
+       -  萧邦 <br>
+    	
+	     -  Chopard <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=119">
+   
+       -  克里斯汀·拉克鲁瓦 <br>
+    	
+	     -  Christian Lacroix <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=122">
+   
+       -  克里斯提·鲁布托 <br>
+    	
+	     -  Christian Louboutin <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=106">
+   
+       -  娇韵诗  <br>
+    	
+	     -  Clarins <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=163">
+   
+   	
+	     -  Clarks 其乐 <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=20">
+   
+       -  倩碧 <br>
+    	
+	     -  Clinique <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=21">
+   
+       -  蔻驰 <br>
+    	
+	     -  Coach <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=173">
+   
+   	
+	     -  Current/Elliott <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=22">
+   
+       -  迪赛 <br>
+    	
+	     -  Diesel <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=24">
+   
+       -  迪奥 <br>
+    	
+	     -  Dior <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=76">
+   
+   	
+	     -  DKNY <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=25">
+   
+       -  D & G <br>
+    	
+	     -  Dolce & Gabbana <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=98">
+   
+       -  登喜路 <br>
+    	
+	     -  Dunhill <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=154">
+   
+       -  黛安·冯芙丝汀宝 <br>
+    	
+	     -  DVF <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=183">
+   
+       -  埃德·哈迪 <br>
+    	
+	     -  Ed Hardy <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=133">
+   
+       -  伊兰纤姿 <br>
+    	
+	     -  ELANCYL <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=26">
+   
+       -  伊丽莎白.雅顿 <br>
+    	
+	     -  Elizabeth Arden <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=121">
+   
+       -  璞琪 <br>
+    	
+	     -  Emilio Pucci <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=149">
+   
+       -  杰尼亚 <br>
+    	
+	     -  Ermenegildo Zegna <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=85">
+   
+       -  埃斯普利 <br>
+    	
+	     -  ESPRIT <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=28">
+   
+       -  雅诗兰黛 <br>
+    	
+	     -  Estee Lauder <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=29">
+   
+       -  芬迪 <br>
+    	
+	     -  Fendi <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=30">
+   
+       -  费拉格慕 <br>
+    	
+	     -  Ferragamo <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=201">
+   
+       -  宠爱之名 <br>
+    	
+	     -  For Beloved One <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=82">
+   
+   	
+	     -  Forever 21 <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=33">
+   
+       -  化石 <br>
+    	
+	     -  Fossil <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=113">
+   
+       -  芙拉 <br>
+    	
+	     -  Furla <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=34">
+   
+       -  盖普 <br>
+    	
+	     -  Gap <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=210">
+   
+       -  芝柏 <br>
+    	
+	     -  Girard-Perregaux <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=37">
+   
+       -  纪梵希 <br>
+    	
+	     -  Givenchy <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=36">
+   
+       -  古琦 <br>
+    	
+	     -  Gucci <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=112">
+   
+       -  娇兰 <br>
+    	
+	     -  Guerlain <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=35">
+   
+   	
+	     -  Guess <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=38">
+   
+   	
+	     -  H&M <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=192">
+   
+       -  水芝澳 <br>
+    	
+	     -  H2O <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=186">
+   
+       -  候司顿 <br>
+    	
+	     -  Halston <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=191">
+   
+       -  汉米尔顿 <br>
+    	
+	     -  Hamilton <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=129">
+   
+       -  原宿情人 <br>
+    	
+	     -  Harajuku Lovers <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=187">
+   
+       -  哈瓦那人字拖 <br>
+    	
+	     -  Havaianas <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=39">
+   
+       -  爱马仕 <br>
+    	
+	     -  Hermes <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=128">
+   
+       -  赫莲娜 <br>
+    	
+	     -  HR <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=40">
+   
+       -  雨果.波士 <br>
+    	
+	     -  Hugo Boss <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=161">
+   
+   	
+	     -  Incase <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=131">
+   
+       -  三宅一生 <br>
+    	
+	     -  ISSEY MIYAKE <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=205">
+   
+       -  万国 <br>
+    	
+	     -  IWC <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=111">
+   
+   	
+	     -  J.CREW <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=139">
+   
+       -  积家 <br>
+    	
+	     -  Jaeger-Le Coultre <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=166">
+   
+       -  吴季刚 <br>
+    	
+	     -  Jason Wu <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=138">
+   
+       -  让·保罗·高缇耶 <br>
+    	
+	     -  Jean Paul Gaultier <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=162">
+   
+       -  吉尔·桑达 <br>
+    	
+	     -  Jil Sander <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=42">
+   
+       -  吉米.丘 <br>
+    	
+	     -  Jimmy Choo <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=78">
+   
+   	
+	     -  JOCKEY <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=167">
+   
+       -  约翰·加利亚诺 <br>
+    	
+	     -  John Galliano <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=68">
+   
+   	
+	     -  JONES NEW YORK <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=43">
+   
+       -  橘滋 <br>
+    	
+	     -  Juicy Couture <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=155">
+   
+   	
+	     -  K Karl Lagerfeld <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=153">
+   
+       -  凯特·丝蓓 <br>
+    	
+	     -  Kate Spade <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=70">
+   
+       -  凯尼斯.柯尔 <br>
+    	
+	     -  Kenneth Cole <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=206">
+   
+       -  高田贤三 <br>
+    	
+	     -  Kenzo <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=212">
+   
+       -  欧舒丹 <br>
+    	
+	     -  L'Occitane <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=169">
+   
+       -  莱佳奴 <br>
+    	
+	     -  La cannelle <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=105">
+   
+       -  海蓝之谜 <br>
+    	
+	     -  LA MER <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=178">
+   
+       -  萝贝拉 <br>
+    	
+	     -  La Perla <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=159">
+   
+       -  蓓莉 <br>
+    	
+	     -  La Prairie <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=156">
+   
+       -  鳄鱼 <br>
+    	
+	     -  Lacoste <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=99">
+   
+       -  兰姿 <br>
+    	
+	     -  Lancel <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=45">
+   
+       -  兰蔻 <br>
+    	
+	     -  Lancome <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=125">
+   
+       -  朗万 <br>
+    	
+	     -  Lanvin <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=134">
+   
+       -  力士保 <br>
+    	
+	     -  LeSportsac <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=46">
+   
+       -  李维斯 <br>
+    	
+	     -  Levi’s <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=69">
+   
+       -  丽兹.克莱本 <br>
+    	
+	     -  Liz Claiborne <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=104">
+   
+       -  珑骧  <br>
+    	
+	     -  Longchamp <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=148">
+   
+       -  浪琴 <br>
+    	
+	     -  Longines <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=47">
+   
+       -  路易.威登 <br>
+    	
+	     -  Louis Vuitton/LV <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=177">
+   
+       -  卢森皮卡尔 <br>
+    	
+	     -  Lucien Piccard <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=73">
+   
+       -  媚登峰 <br>
+    	
+	     -  Maidenform <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=194">
+   
+   	
+	     -  MAKE UP FOR EVER <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=211">
+   
+       -  芒果 <br>
+    	
+	     -  Mango <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=150">
+   
+       -  莫罗•伯拉尼克 <br>
+    	
+	     -  Manolo Blahnik <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=48">
+   
+       -  马克.雅可布 <br>
+    	
+	     -  Marc Jacobs <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=77">
+   
+       -  玛丽莲 梦露 <br>
+    	
+	     -  MarilynMonroe <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=164">
+   
+       -  马克.纳森 <br>
+    	
+	     -  Mark Nason <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=152">
+   
+       -  玛尼 <br>
+    	
+	     -  Marni <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=158">
+   
+       -  玛莎·斯图尔特 <br>
+    	
+	     -  Martha Stewart <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=202">
+   
+   	
+	     -  MAURICE LACROIX 艾美 <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=87">
+   
+   	
+	     -  Max Studio <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=144">
+   
+       -  麦丝玛拉 <br>
+    	
+	     -  MaxMara <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=157">
+   
+       -  迈克·柯尔 <br>
+    	
+	     -  Michael Kors <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=49">
+   
+   	
+	     -  Miss Sixty <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=120">
+   
+       -  米索尼 <br>
+    	
+	     -  Missoni <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=100">
+   
+       -  缪缪 <br>
+    	
+	     -  Miu Miu <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=96">
+   
+       -  万宝龙 <br>
+    	
+	     -  Montblanc <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=165">
+   
+       -  莫斯奇诺 <br>
+    	
+	     -  Moschino <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=74">
+   
+       -  摩凡陀 <br>
+    	
+	     -  Movado <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=116">
+   
+       -  玛百莉 <br>
+    	
+	     -  Mulberry <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=71">
+   
+       -  诺蒂卡 <br>
+    	
+	     -  Nautica <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=51">
+   
+       -  玖熙 <br>
+    	
+	     -  Nine West <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=75">
+   
+   	
+	     -  Nouvelle Seamless <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=203">
+   
+       -  奥尔马 <br>
+    	
+	     -  OLMA <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=137">
+   
+       -  欧米茄 <br>
+    	
+	     -  Omega <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=204">
+   
+       -  豪利时 <br>
+    	
+	     -  Oris <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=118">
+   
+       -  奥斯卡·德拉伦塔 <br>
+    	
+	     -  Oscar de la Renta <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=86">
+   
+       -  其他品牌 <br>
+    	
+	     -  others <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=114">
+   
+       -  保罗.史密斯 <br>
+    	
+	     -  Paul Smith <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=145">
+   
+       -  伯爵 <br>
+    	
+	     -  Piaget <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=54">
+   
+       -  美国波罗-拉夫.劳伦 <br>
+    	
+	     -  Polo Ralph Lauren <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=175">
+   
+       -  保时捷 <br>
+    	
+	     -  Porsche <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=213">
+   
+       -  宝姿 <br>
+    	
+	     -  PORTS <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=53">
+   
+       -  普拉达 <br>
+    	
+	     -  Prada <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=132">
+   
+       -  雷达 <br>
+    	
+	     -  Rado <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=184">
+   
+       -   雷朋 <br>
+    	
+	     -  Ray-Ban <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=197">
+   
+       -  蕾蒙威 <br>
+    	
+	     -  Raymond weil <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=115">
+   
+       -  罗伯特·卡沃利 <br>
+    	
+	     -  Roberto Cavalli <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=185">
+   
+       -  劳力士 <br>
+    	
+	     -  Rolex <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=55">
+   
+       -  新秀丽 <br>
+    	
+	     -  Samsonite <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=95">
+   
+       -  资生堂 <br>
+    	
+	     -  Shiseido <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=108">
+   
+       -  植村秀  <br>
+    	
+	     -  Shu Uemura <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=126">
+   
+       -  希思黎 <br>
+    	
+	     -  Sisley <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=147">
+   
+   	
+	     -  SK-II  <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=117">
+   
+       -  斯特拉·麦卡特尼 <br>
+    	
+	     -  Stella McCartney <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=93">
+   
+   	
+	     -  SUISSE PROGRAMME <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=56">
+   
+       -  施华洛世奇 <br>
+    	
+	     -  Swarovski <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=193">
+   
+       -  斯沃琪 <br>
+    	
+	     -  Swatch <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=143">
+   
+       -  豪雅 <br>
+    	
+	     -  Tag Heuer <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=103">
+   
+       -  蒂芙尼 <br>
+    	
+	     -  Tiffany & Co. <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=190">
+   
+   	
+	     -  Tissot 天梭 <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=198">
+   
+       -  梅花 <br>
+    	
+	     -  Titoni <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=64">
+   
+       -  托德斯 <br>
+    	
+	     -  TOD'S <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=61">
+   
+       -  汤米.海飞格 <br>
+    	
+	     -  Tommy Hilfiger <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=160">
+   
+       -  托里·伯奇 <br>
+    	
+	     -  Tory Burch <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=174">
+   
+       -  塔米 <br>
+    	
+	     -  Tumi <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=151">
+   
+       -  澳大利亚UGG <br>
+    	
+	     -  Ugg Australia <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=57">
+   
+       -  贝纳通 <br>
+    	
+	     -  United Colors Benetton <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=168">
+   
+       -  美国天使 <br>
+    	
+	     -  US Angels <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=141">
+   
+       -  江诗丹顿 <br>
+    	
+	     -  Vacheron Constantin <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=97">
+   
+       -  瓦伦蒂诺 <br>
+    	
+	     -  Valentino <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=58">
+   
+       -  维拉.王 <br>
+    	
+	     -  Vera Wang <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=127">
+   
+       -  范思哲 <br>
+    	
+	     -  Versace <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=59">
+   
+       -  维多利亚的秘密 <br>
+    	
+	     -  Victoria's Secret <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=140">
+   
+       -  维果.罗夫 <br>
+    	
+	     -  Viktor&Rolf <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=188">
+   
+       -  维维安·韦斯特伍德 <br>
+    	
+	     -  Vivienne Westwood <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=179">
+   
+   	
+	     -  XOXO <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=65">
+   
+   	
+	     -  Y-3 <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=102">
+   
+       -  伊夫圣罗兰 <br>
+    	
+	     -  YSL <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=182">
+   
+       -  扎克·珀森 <br>
+    	
+	     -  Zac Posen <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=60">
+   
+       -  飒拉 <br>
+    	
+	     -  Zara <br>
+      </a>
+   </li>
+      <li> <a href="brand.php?id=208">
+   
+       -  真力时 <br>
+    	
+	     -  ZENITH <br>
+      </a>
+   </li>
+      
+</UL>
+	
+
+</DIV></div>
+  <div class="spleftbott"><a href="brand.php"><img src="themes/default/images/dodo/boxqq2.jpg" border="0" /></a></div>
+  
+    <div class="spleftad"><a href="gywm.php?id=48"><img src="themes/default/images/dodo/cdsccsadwe.jpg" border="0"/></a></div>
+    
+  
+  </div>
+  
+  
+  
+  
+  <div class="spright">
+
+<div align="center" style="padding-left:25px;">
+<div class="nTab" >
+    
+    <div class="TabTitle">
+      <ul id="myTab1">
+        <li class="active" onclick ="nTabs(this,0);"><img src="themes/default/images/dodo/jipin.jpg" width="93" height="25"></li>
+        <li class="normal" onclick ="nTabs(this,1);"><img src="themes/default/images/dodo/remai.jpg"  width="93" height="25"></li>
+        <li class="normal" onclick ="nTabs(this,2);"><img src="themes/default/images/dodo/meirong.jpg"  width="93" height="25"></li>
+	<li class="normal" onclick ="nTabs(this,3);"><img src="themes/default/images/dodo/pinpai.jpg"  width="93" height="25"></li>
+	<li class="normal" onclick ="nTabs(this,4);"><img src="themes/default/images/dodo/nanshi.jpg"  width="93" height="25"></li>
+        <li class="normal" onclick ="nTabs(this,5);"><img src="themes/default/images/dodo/zhongbiao.jpg"  width="93" height="25"></li>
+	<li class="normal" onclick ="nTabs(this,6);"><img src="themes/default/images/dodo/qingcang.jpg"  width="93" height="25"></li>	
+      </ul>
+    </div>
+    
+	
+	
+    <div id="TabContent" class="TabContent">
+    
+    <div id="myTab1_Content0"><ul>
+           
+	     		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=12389" title="Oscar de la Renta奥斯卡•德拉伦塔 黑红抽象印花图案上衣" target="_blank" ><img src="images/201102/thumb_img/12389_thumb_G_1297501940764.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=12389" title="Oscar de la Renta奥斯卡•德拉伦塔 黑红抽象印花图案上衣" target="_blank">  
+			   Oscar de la Renta <br>
+    	
+	   奥斯卡·德拉伦塔  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥7780元</a></div>
+						  </li>
+	 		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=12323" title="Juicy Couture橘滋 白色Gen Y甜蜜之吻肩包" target="_blank" ><img src="images/201102/thumb_img/12323_thumb_G_1297223152212.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=12323" title="Juicy Couture橘滋 白色Gen Y甜蜜之吻肩包" target="_blank">  
+			   Juicy Couture <br>
+    	
+	   橘滋  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥1650元</a></div>
+						  </li>
+	 		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=12296" title="Dolce & Gabbana杜嘉班纳 拼接牛皮配麂皮低帮运动鞋" target="_blank" ><img src="images/201101/thumb_img/12296_thumb_G_1296372267007.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=12296" title="Dolce &amp; Gabbana杜嘉班纳 拼接牛皮配麂皮低帮运动鞋" target="_blank">  
+			   Dolce & Gabbana <br>
+    	
+	   D & G  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥3590元</a></div>
+						  </li>
+	 		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=12229" title="PRADA普拉达 朱砂灰全皮经典LOGO女士直桶单肩斜挎两用包" target="_blank" ><img src="images/201101/thumb_img/12229_thumb_G_1296196755777.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=12229" title="PRADA普拉达 朱砂灰全皮经典LOGO女士直桶单肩斜挎两用包" target="_blank">  
+			   Prada <br>
+    	
+	   普拉达  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥11980元</a></div>
+						  </li>
+	 		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=11985" title="Swarovski施华洛世奇 甜蜜奶嘴水晶挂坠1002698（2011年新款）" target="_blank" ><img src="images/201101/thumb_img/11985_thumb_G_1294643030241.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=11985" title="Swarovski施华洛世奇 甜蜜奶嘴水晶挂坠1002698（2011年新款）" target="_blank">  
+			   Swarovski <br>
+    	
+	   施华洛世奇  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥275元</a></div>
+						  </li>
+	 		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=11695" title="GUCCI古琦 红棕色铆钉双G图饰大型饺子包" target="_blank" ><img src="images/201012/thumb_img/11695_thumb_G_1293417125505.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=11695" title="GUCCI古琦 红棕色铆钉双G图饰大型饺子包" target="_blank">  
+			   Gucci <br>
+    	
+	   古琦  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥14900元</a></div>
+						  </li>
+	 		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=11602" title="第五大道奢侈品贵宾卡20000元" target="_blank" ><img src="images/201012/thumb_img/11602_thumb_G_1293007632704.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=11602" title="第五大道奢侈品贵宾卡20000元" target="_blank">  
+			   5LUX VIPCARD <br>
+    	
+	   第五大道礼品卡  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥19700元</a></div>
+						  </li>
+	 		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=11424" title="Ferragamo菲拉格慕 中国红奢华非洲豹系列女士丝巾 " target="_blank" ><img src="images/201012/thumb_img/11424_thumb_G_1292384686232.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=11424" title="Ferragamo菲拉格慕 中国红奢华非洲豹系列女士丝巾 " target="_blank">  
+			   Ferragamo <br>
+    	
+	   费拉格慕  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥895元</a></div>
+						  </li>
+	 		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=11331" title="MIUMIU缪缪 象牙白纹理皮超好手感两用斜挎包" target="_blank" ><img src="images/201012/thumb_img/11331_thumb_G_1292207278568.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=11331" title="MIUMIU缪缪 象牙白纹理皮超好手感两用斜挎包" target="_blank">  
+			   Miu Miu <br>
+    	
+	   缪缪  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥10900元</a></div>
+						  </li>
+	 		 
+	      <li>  <div class="shangp"> <a href="goods.php?id=7540" title="Louis Vuitton路易威登 灰色DANIEL MM经典棋盘格男士斜挎包" target="_blank" ><img src="images/201007/thumb_img/7540_thumb_G_1280497449152.jpg" border="0" width="140" height="140"/></a></div>
+		  
+		        <div class="shpming"><font color="#666666" > <a href="goods.php?id=7540" title="Louis Vuitton路易威登 灰色DANIEL MM经典棋盘格男士斜挎包" target="_blank">  
+			   Louis Vuitton/LV <br>
+    	
+	   路易.威登  
+   </a></font></div>
+				
+			
+								<div class="jiage"><a>折扣价：￥8390元</a></div>
+						  </li>
+	 		  
+	  </ul>
+	  </div>
+	
+	<div id="myTab1_Content1"></div>
+	
+	<div id="myTab1_Content2"></div>
+	
+	<div id="myTab1_Content3"></div>
+	
+	<div id="myTab1_Content4"></div>
+	
+	<div id="myTab1_Content5"></div>
+	
+	<div id="myTab1_Content6"></div>
+	
+
+    </div>
+</div>
+ 
+
+</div>
+
+</div>
+</div>
+  
+
+
+<div id="anniu">
+    <table width="946" height="42" border="0">
+      <tr>
+        <td width="177" height="38" align="center"><a href="user.php?act=register" target="_blank"><img src="themes/default/images/dodo/saxsxaa_01.gif"          width="128" height="35" border="0"/></a></td>
+        <td width="214" align="center"> 
+	    <a href="http://www.5lux.com/Showroom.html" target="_blank" ><img src="themes/default/images/dodo/saxsxaa_03.gif" width="111" height="35" align="top" border="0"/>	</a>	</td>
+        <td width="224" align="center"><a href="qianggou.php" target="_blank" ><img src="themes/default/images/dodo/saxsxaa_05.gif" width="110" height="35" border="0"/></a></td>
+        <td width="329" align="center"><table width="259" border="0">
+            <tr>
+             <td> <input name="text" type="text"   id="user_email" onfocus="if (this.value == '请输入电子邮件') this.value = '';"  onblur="if (this.value == '') this.value = '请输入电子邮件';"  value="请输入电子邮件"  size="21"  /></td>
+              <td width="25">
+	      <input name="input" type="image" value="订阅" onclick="add_email_list()"; src="themes/default/images/dodo/zhuyecct_17.jpg" width="25" height="30"/>
+	    </td>
+              <td width="94"><img src="themes/default/images/dodo/zhuyecct_19.jpg" width="100" height="19" /></td>
+            </tr>
+        </table></td>
+      </tr>
+    </table>
+</div>
+
+<div class="geduan2"><img src="themes/default/images/dodo/xcsdcaaa.jpg" width="950px" height="7" /></div>
+			  
+			   <div id="adfive">
+			    <div id="zuo">
+				
+				
+				
+			    <script type="text/javascript">
+         var swf_width=333;
+        var swf_height=291;
+        </script>
+        <script type="text/javascript" src="data/flashdata/redfocus/cycle_image.js"></script>
+		
+		
+		
+		
+		
+		
+			    </div>
+			    <div id="youbian">
+			    <div class=" xxs"><a href="brand.php?id=47" target="_blank"><img src="themes/default/images/dodo/xggimg1.jpg" width="307" height="143" border="0"/></a></div>
+			    <div class=" xxs"><a href="brand.php?id=104" target="_blank"><img src="themes/default/images/dodo/xggimg2.jpg" width="307" height="143" border="0"/></a></div>
+			 
+			   <div class=" xxs"><a href="brand.php?id=74" target="_blank"><img src="themes/default/images/dodo/xggimg3.jpg" width="307" height="143" border="0" /></a></div>
+			    
+			   <div class=" xxs"><a href="brand.php?id=48" target="_blank"><img src="themes/default/images/dodo/xggimg4.jpg" width="307" height="143" border="0"/></a></div>			   
+			   </div>
+	
+			
+				
+			    
+ </div>
+
+
+
+<div id="beijing">
+  
+  
+  
+  
+  
+  <div id="texllj">
+          <div id="texlljtop"><img src="themes/default/images/dodo/zhuyecssss.jpg" width="960" height="24" /></div>
+          <div id="texlljwork">
+		  
+		     <div class="texlljworkone">
+			 <ul>
+			 <li><img src="themes/default/images/dodo/zhuyess2_15.jpg" /></li>
+			
+              <li><a href="brand.php?id=17">Chanel 香奈儿  </a></li>
+              <li><a href="brand.php?id=36">Gucci  古琦</a></li>
+			  <li><a href="brand.php?id=12">Burberry  巴宝莉</a></li>
+              <li><a href="brand.php?id=29">Fendi 芬迪</a></li>
+			  
+			  <li><a href="brand.php?id=53">Prada  普拉达</a></li>
+			  <li><a href="brand.php?id=103">Tiffany  蒂芙尼</a></li>
+			  <li><a href="brand.php?id=21">Coach  寇弛</a></li>
+			  
+			  
+			  <li><a href="brand.php">更多</a></li>
+			  
+			  </ul>
+		    </div>
+			 
+			 
+			 
+			  <div class="texlljworkone">
+			  <ul>
+			  <li><img src="themes/default/images/dodo/zhuyess2_17.jpg" /></li>
+			  <li><a href="brand.php?id=4">Armani 阿玛尼</a></li>
+              <li><a href="brand.php?id=98">Dunhill 登喜路</a></li>
+              <li><a href="brand.php?id=40">Hugo Boos 雨果.波士</a></li>
+              <li><a href="brand.php?id=149">Zegna 杰尼亚</a></li>
+			  <li><a href="brand.php?id=14">Calvin Klein CK</a></li>
+			  <li><a href="brand.php?id=30">Ferragamo 费拉格慕</a></li>
+			  
+			  <li><a href="brand.php?id=61">Tommy Hilfiger 汤米.海飞格</a></li>
+			
+			  <li><a href="brand.php">更多</a></li>
+			 </ul>
+			 </div>
+			 
+			 
+			  <div class="texlljworktwo">
+			  <ul>
+			  <li><img src="themes/default/images/dodo/zhuyess2_19.jpg" /></li>
+			  <li><a href="category.php?id=9">手提包</a></li>
+			  <li><a href="category.php?id=3">服装</a></li>
+			  <li><a href="category.php?id=4">鞋帽</a></li>
+			  <li><a href="category.php?id=6">钟表首饰</a></li>
+			 <li><a href="category.php?id=2">更多</a></li>	 
+			 </ul>
+			 </div>
+			 
+			 <div class="texlljworktwo">
+			 <ul>
+			 <li><img src="themes/default/images/dodo/zhuyess2_21.jpg" /></li>
+			  <li><a href="category.php?id=61">箱包</a></li>
+			  <li><a href="category.php?id=59">衣服</a></li>
+			  <li><a href="category.php?id=91">配饰</a></li>
+			  <li><a href="category.php?id=64">领带</a></li>
+			  <li><a href="category.php?id=7">更多</a></li>		 
+			  </ul>
+			 </div>
+			 
+			 
+			  <div class="texlljworktwo">
+			  <ul>
+			 <li><img src="themes/default/images/dodo/zhuyess2_23.jpg" /></li>
+			  <li><a href="category.php?id=45">护肤品</a></li>
+			  <li><a href="category.php?id=44">彩妆</a></li>
+			  <li><a href="category.php?id=46">香水</a></li>
+			  <li><a href="category.php?id=93">美体</a></li>
+			  <li><a href="category.php?id=47">更多</a></li>			
+			   </ul>
+			 </div>
+			 
+			 <div class="texlljworktwo">
+			 <ul>
+			 <li><img src="themes/default/images/dodo/zhuyess2_25.jpg" /></li>
+			  <li><a href="category.php?id=100">品味家居</a></li>
+			  <li><a href="category.php?id=107">儿童精品</a></li>
+			  <li><a href="category.php?id=106">时尚电子</a></li>
+			  <li><a><a href="category.php?id=68">超值特惠专区</a></li>
+			  <li><a href="category.php?id=100">更多</a></li>	
+			</ul>
+			 </div>
+		  
+		 
+		  </div>
+</div>
+
+                   <div id="bottomad"><a href="xykzhifu.html"><img src="themes/default/images/dodo/kspp_10.jpg" border="0" width="960" height="107"/></a></div>
+</div>
+
+
+
+
+
+
+
+
+<div id="dibuad">
+<ul>
+<li><a href="http://www.5lux.com/blog/?cat=9" target="_blank"><img src="themes/default/images/dodo/kspp_19.jpg" border="0" /></a> </li>
+<li> <a href="zhx.html" target='_blank'><img src="zhx/zhx_index.jpg" width="230" height="118" align="top" border="0"/>
+	</a></li>
+<li><a href="http://t.sina.com.cn/5lux" target="_blank"><img src="themes/default/images/dodo/kspp_23.jpg" border="0" /></a></li>
+
+</ul>
+<div id="dibuadtwo"><a href="http://www.5lux.com/yqpy.php# " target="_blank"><img src="themes/default/images/dodo/kspp_25.jpg" border="0" /></a></div>
+</div>
+
+
+
+
+
+ 
+  <table width="960" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="208"><table width="208" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="prokou" width="222"><img src="themes/default/images/contact.jpg" width="204" height="222" class="imgc" /></td>
+          </tr>
+          <tr>
+            <td class="bot_3"></td>
+          </tr>
+        </table></td>
+        <td width="10"></td>
+        <td width="742" valign="top" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="te"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td align="center" valign="top" ><table width="139" border="0" cellspacing="0" cellpadding="0" >
+                    <tr>
+                   <td width="139" background="themes/default/images/foot1.jpg" height="49"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="foline" >                          <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=9" title="网上购物步骤"  class="help">网上购物步骤</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=23" title="账户及订单"  class="help">账户及订单</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=17" title="怎样给朋友下单"  class="help">怎样给朋友下单</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=27" title="送礼服务"  class="help">送礼服务</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=93" title="第五大道贵宾卡"  class="help">第五大道贵宾卡</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=89" title="配送方式及范围"  class="help">配送方式及范围</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                              </td>
+                    </tr>
+                </table></td>
+                <td align="center" valign="top" ><table width="139" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="139" background="themes/default/images/foot2.jpg" height="49"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="foline">                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=34" title="EMS 邮政快递"  class="help">EMS 邮政快递</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=35" title="顺丰加急快递"  class="help">顺丰加急快递</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=33" title="全国快递"  class="help">全国快递</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=84" title="国际快递"  class="help">国际快递</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=32" title="货到付款"  class="help">货到付款</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                              </td>
+                    </tr>
+                </table></td>
+                <td align="center" valign="top"><table width="139" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="139" background="themes/default/images/foot3.jpg" height="49"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="foline" >                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=39" title="邮政、银行汇款"  class="help">邮政、银行汇款</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=82" title="余额支付"  class="help">余额支付</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=37" title="货到付款"  class="help">货到付款</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=38" title="在线支付"  class="help">在线支付</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=81" title="上门自取付款"  class="help">上门自取付款</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=88" title="易宝大额支付"  class="help">易宝大额支付</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=92" title="信用卡无限额支付"  class="help">信用卡无限额支付</a> </td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                              </td>
+                    </tr>
+                </table></td>
+                <td align="center" valign="top"><table width="139" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="139" background="themes/default/images/foot4.jpg" height="49"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="foline" >                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=11" title="在线订购"  class="help">在线订购</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=12" title="电话订购   "  class="help">电话订购</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=13" title="邮寄订购"  class="help">邮寄订购</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=14" title="传真订购  "  class="help">传真订购</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=15" title="QQ在线订购"  class="help">QQ在线订购</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=16" title="E-MAIL订购"  class="help">E-MAIL订购</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                              </td>
+                    </tr>
+                </table></td>
+                <td align="center" valign="top"><table width="139" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="139" background="themes/default/images/foot5.jpg" height="49"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="foline">                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=25" title="退货/换货/错货"  class="help">退货/换货/错货</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=26" title="常见问题  "  class="help">常见问题</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=85" title="售后服务"  class="help">售后服务</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=80" title="工作时间"  class="help">工作时间</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=90" title="在线客服咨询"  class="help">在线客服咨询</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td  class="fofont"><a href="article.php?id=94" title="鉴别真伪"  class="help">鉴别真伪</a></td>
+                            </tr>
+                            <tr>
+                              <td height="1"></td>
+                            </tr>
+                          </table>
+                                              </td>
+                    </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td id="bot_5"></td>
+          </tr>
+        </table></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>  
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6cea4b7347a17670aef0d0951a90a427' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<script language="javascript" src="http://chat10.live800.com/live800/chatClient/monitor.js?jid=1498428508&companyID=90685&configID=159471&codeType=custom"></script>
+
+
+
+<div style='display:none;'><a href='http://www.live800.com'>在线客服</a></div><script language="javascript" src="http://chat10.live800.com/live800/chatClient/floatButton.js?jid=1498428508&companyID=90685&configID=164653&codeType=custom"></script><div style='display:none;'><a href='http://www.live800.com'>在线客服系统</a></div>
+
+
+<div class="blank5"></div>
+
+<div id="foot">
+	<ul>
+		<li>
+			<a href="gywm.php?id=43">关于第五大道</a> | <a href="user.php?act=yhxy">使用条件</a> | <a href="article.php?id=30">VIP会员计划</a> | <a href="article.php?id=9">购物帮助</a> | <a href="article.php?id=25">退换货品</a> | <a href="article.php?id=54">投诉建议</a> | 
+			<a href="gywm.php?id=49">工作机会</a> | <a href="http://www.5lux.com/themes/default/showroom.html">实体展厅</a> | <a href="gywm.php?id=48">新闻报道</a> | <a href="article.php?id=96">友情链接</a> | <a href="article.php?id=4">联络我们 | <a href="article.php?id=87">法律声明</a>| <a href="http://eladies.sina.com.cn/">新浪女性</a>
+		</li>	
+	</ul>
+</div>
+<div class="blank5"></div>
+<div  class="footspu">Copyright 2008-2010 瑞美嘉信国际信息技术（北京）有限公司　版权所有　　　京ICP证100949号<br>Copyright   2008 - 2015 　Fifth Avenue Globe Inc. 　All Rights Reserved
+</div>
+<div class="blank5"></div>
+<center><script src="http://s18.cnzz.com/stat.php?id=1245175&web_id=1245175&show=pic" language="JavaScript" charset="utf-8"></script></center>
+
+
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-18196583-21']);
+	_gaq.push(['_addOrganic', 'sogou', 'query']);
+	_gaq.push(['_addOrganic', 'youdao', 'q']);
+	_gaq.push(['_addOrganic', 'soso', 'w']);
+	_gaq.push(['_addOrganic', 'sina', 'q']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? ' https://ssl' : ' http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script> 
+
+</body>
+
+<SCRIPT src="http://www.5lux.com/flash/FlashActive.js" type=text/javascript></SCRIPT>
+<script type="text/javascript">
+var email = document.getElementById('user_email');
+window.onload = function(){
+email.onfocus = function(){
+this.value = "";
+}
+email.onblur = function(){
+if(this.value == ""){
+this.value = "";
+}
+}
+}
+function add_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=add&email=' + email.value, '', rep_add_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_add_email_list(text)
+{
+  alert(text);
+}
+function cancel_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=del&email=' + email.value, '', rep_cancel_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_cancel_email_list(text)
+{
+  alert(text);
+}
+function check_email()
+{
+  if (Utils.isEmail(email.value))
+  {
+    return true;
+  }
+  else
+  {
+    alert('邮件地址非法！');
+    return false;
+  }
+}
+</script>
+
+</html>
+            

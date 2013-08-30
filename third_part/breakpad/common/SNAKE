@@ -1,0 +1,7 @@
+cc_library(name = 'string_conversion',
+           srcs = [
+                   'string_conversion.cc',
+                   'convert_UTF.c',
+                  ],
+           copt = ['no_style_check']
+          )

@@ -1,0 +1,9 @@
+cc_library(name = 'minidump_sender',
+           srcs = ['minidump_sender.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//file/internal:file',
+                  '//third_part/breakpad/client/linux/handler:exception_handler',
+                  '//third_part/breakpad/common/linux:http_upload',
+                  ]
+           )

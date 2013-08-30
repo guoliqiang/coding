@@ -1,0 +1,31 @@
+// Copyright 2011 Yunrang Inc. All Rights Reserved.
+// Author: yongyipeng@yunrang.com (Yongyi PENG)
+// description of Serialized dom tree
+
+package parse_master;
+
+message BuffIndexMeta {
+  required int32 offset = 1;
+  required int32 length = 2;
+  optional string value = 3;  // for debug
+}
+
+message BuffIndexPairMeta {
+  required BuffIndexMeta first = 1;
+  optional BuffIndexMeta second = 2;
+}
+
+message DomNodeMeta {
+  required BuffIndexMeta buff_index = 1;
+  required int32 type = 2;
+  required int32 parent = 3;
+  optional int32 tag = 4;
+  optional BuffIndexMeta tag_name = 5;
+  repeated BuffIndexPairMeta attrs = 6;
+  optional int32 id = 7;  // for debug
+}
+
+message DomNodeMetaList {
+  repeated DomNodeMeta dom_nodes = 1;
+  optional string html = 2;
+}

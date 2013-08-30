@@ -1,0 +1,6 @@
+cc_library(name='masf_mempool',
+           srcs = ['masf_mempool.cc'],
+           deps = [
+                  '//base/internal:base'
+                  ]
+           )

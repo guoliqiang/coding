@@ -1,0 +1,7 @@
+cc_library(name = 'string',
+           srcs = ['utf8_util.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//libs//third_part/icu:icuuc'
+                  ]
+                  )

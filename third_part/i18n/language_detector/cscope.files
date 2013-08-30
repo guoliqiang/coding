@@ -1,0 +1,14 @@
+./textcat.h
+./wg_mempool.c
+./language_detector.h
+./fingerprint.c
+./common.c
+./common.h
+./textcat.c
+./language.h
+./config.h
+./wg_mempool.h
+./fingerprint.h
+./constants.h
+./language_detector_unittest.cc
+./language_detector.cc

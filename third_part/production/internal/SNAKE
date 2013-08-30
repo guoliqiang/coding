@@ -1,0 +1,6 @@
+cc_library(name = 'production_safety_checker',
+           srcs = ['production_safety_checker.cc'],
+           deps = [
+                  '//base/internal:base'
+                  ]
+           )

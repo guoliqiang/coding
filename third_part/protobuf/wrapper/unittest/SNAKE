@@ -1,0 +1,7 @@
+cc_binary(name='proto_unittest',
+          srcs = ['proto_unittest.cc'],
+          deps = [
+                 '//third_part/protobuf/wrapper/internal:proto_wrapper',
+                 '//third_part/protobuf/wrapper/proto:test_proto',
+                 ]
+          )

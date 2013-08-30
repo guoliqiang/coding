@@ -5101,7 +5101,7 @@ fi
 
                                         if test "x${ac_cv_env_CXXFLAGS_set}" = "x"; then :
 
-            CXXFLAGS="${CXXFLAGS} -m64"
+            CXXFLAGS="${CXXFLAGS} -m64 -fPIC"
             ac_cv_env_CXXFLAGS_set=set
             ac_cv_env_CXXFLAGS_value='-m64'
 
@@ -5109,7 +5109,7 @@ fi
 
           if test "x${ac_cv_env_CFLAGS_set}" = "x"; then :
 
-            CFLAGS="${CFLAGS} -m64"
+            CFLAGS="${CFLAGS} -m64 -fPIC"
             ac_cv_env_CFLAGS_set=set
             ac_cv_env_CFLAGS_value='-m64'
 

@@ -1,0 +1,6 @@
+cc_library(name = 'host_util',
+           srcs = ['host_util.cc'],
+           deps = [
+                  '//base/internal:base'
+                  ]
+           )

@@ -1,0 +1,40 @@
+cc_binary(name = 'path_master_unittest',
+           srcs = ['path_master_unittest.cc'],
+           deps = [
+                  '//third_part/path_master/internal:path_master',
+                  '//third_part/testing/gtest/src:gtest',
+                  ]
+           )
+
+cc_binary(name = 'path_master_benchmark',
+           srcs = ['path_master_benchmark.cc'],
+           deps = [
+                  '//third_part/path_master/internal:path_master',
+                  ]
+           )
+
+cc_binary(name = 'path_test',
+           srcs = ['path_test.cc'],
+           deps = [
+                  '//third_part/path_master/internal:path_master',
+                  '//third_part/testing/gtest/src:gtest',
+                  ]
+           )
+
+cc_binary(name = 'path_test2',
+           srcs = ['path_test2.cc'],
+           deps = [
+                  '//third_part/path_master/internal:path_master',
+                  '//third_part/testing/gtest/src:gtest',
+                  ]
+           )
+
+cc_binary(name = 'path_test3',
+           srcs = ['path_test3.cc'],
+           deps = [
+                  '//third_part/path_master/internal:path_master',
+                  '//third_part/testing/gtest/src:gtest',
+                  ]
+           )
+
+

@@ -5,10 +5,10 @@
 # It is necessary for linking the library.
 
 # The name that we can dlopen(3).
-dlname='libprotobuf-lite.so.8'
+dlname=''
 
 # Names of this library.
-library_names='libprotobuf-lite.so.8.0.0 libprotobuf-lite.so.8 libprotobuf-lite.so'
+library_names=''
 
 # The name of the static archive.
 old_library='libprotobuf-lite.a'

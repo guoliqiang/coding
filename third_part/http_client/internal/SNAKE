@@ -1,0 +1,21 @@
+cc_library(name= 'curl_wrapper',
+           srcs = ['curl_wrapper.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//libs/third_part/libcurl:curl',
+                  '//libs/third_part/openssl:ssl',
+                  '//libs/third_part/openssl:crypto',
+                  '//libs/third_part/zlib:z',
+                  ]
+           )
+
+cc_library(name= 'http_client',
+           srcs = ['http_client.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/compression/internal:compression',
+                  '//third_part/i18n/wrapper/internal:utf8_converter',
+                  '//third_part/googleurl/wrapper/internal:googleurlwrapper',
+                  '//file/internal:file'
+                  ]
+           )

@@ -250,7 +250,8 @@ const LogSeverity LOG_DFATAL_LEVEL = LOG_FATAL;
 // function of LogMessage which seems to avoid the problem.
 
 #define LOG(severity) COMPACT_GOOGLE_LOG_ ## severity.stream()
-#define HERE(severity) VLOG(severity) << ""
+#define VHERE(severity) VLOG(severity) << ""
+#define HERE(severity) LOG(severity) << ""
 #define SYSLOG(severity) LOG(severity)
 
 #define LOG_IF(severity, condition) \

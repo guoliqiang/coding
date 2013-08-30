@@ -1,0 +1,19 @@
+cc_library(name = 'crash_generation_client',
+          srcs = [
+                  'crash_generation_client.cc',
+                 ],
+          deps = [
+                 ],
+          copt = ['no_style_check']
+         )
+
+cc_library(name = 'crash_generation_server',
+          srcs = [
+                  'crash_generation_server.cc'
+                 ],
+          deps = [
+                  '//third_part/breakpad/common/linux:guid_creator',
+                  '//third_part/breakpad/client/linux/handler:exception_handler',
+                 ],
+          copt = ['no_style_check']
+         )

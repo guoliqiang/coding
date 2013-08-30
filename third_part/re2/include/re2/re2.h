@@ -183,8 +183,8 @@
 #include <stdint.h>
 #include <map>
 #include <string>
-#include "re2/stringpiece.h"
-#include "re2/variadic_function.h"
+#include "stringpiece.h"
+#include "variadic_function.h"
 
 namespace re2 {
 

@@ -1,0 +1,15 @@
+cc_library(name = 'parser_master',
+           srcs = ['dom_node.cc',
+                   'html_lexer.cc',
+                   'html_tag.cc',
+                   'parse_master.cc',
+                   'parser_holder.cc',
+                   'util.cc'
+                   ],
+            deps = [
+                   '//base/internal:base',
+                   '//third_part/parser_master/proto:dom_node_meta_proto',
+                   '//third_part/protobuf/wrapper/internal:proto_wrapper',
+                   '//third_part/string/internal:string',
+                   ]
+            )

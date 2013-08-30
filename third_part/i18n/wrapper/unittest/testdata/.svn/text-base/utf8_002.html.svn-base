@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>红色警戒用户列表</title>
+<style>
+body{margin:0 auto;padding:0 0 10px 0;font-size:12px;line-height:22px;font-family:"宋体","Arial Narrow"; background:#F5F5F5;-webkit-text-size-adjust:none;}
+form,ul,li,p,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
+input,select{font-size:12px;line-height:16px;}
+img{border:0;}
+ul,li{list-style-type:none;}
+h3{font-size:14px;}
+h4{font-size:14px;font-weight:normal;text-align:center;cursor:pointer;overflow:hidden;}
+h4 a{width:100%;height:100%;display:block;}
+a{color:#00007F;text-decoration:none;}
+a:hover{color:#bd0a01;text-decoration:underline;}
+a.lcblue{color:#0F479C;}
+.tc{text-align:center;}
+.tl{text-align:left;}
+.tr{text-align:right;}
+.dis{display:block;}
+.undis{display:none;}
+.fl{float:left;}
+.fr{float:right;}
+.cl{clear:both;}
+.orange {color:#db6010;}
+.gray{color:#666;}
+.yellow{color:#939393;}a.yellow{color:#ffde5b;}a:hover.yellow{color:#fff; text-decoration:none; border-bottom:2px solid #000;}
+a.white{color:#FFF;} a:hover.white {color:#FF0; text-decoration:underline;}
+.F14 {font-size:14px;}
+.F12 {font-size:12px;}
+.FWB {font-weight:bold;}
+.LL01 {width:500px; display:block;}
+.RR01 {width:130px;}
+.header {margin:0 auto; height:100px; width:100%;}
+.header_A {width:980px; margin:8px auto 0;}
+.header1 {margin:0 auto; height:2px; width:100%; background:#F63; font-size:0;}
+.header2 {margin:0 auto; height:1px; width:100%; background:#fff; font-size:0;}
+.header3 {margin:0 auto; height:10px; width:100%; background:#DDD; font-size:0;}
+.header4 {margin:0 auto; height:1px; width:100%; background:#ccc; font-size:0;}
+
+.box01 {margin:10px auto; width:958px; height:28px; background:#FFF; border:1px solid #CCC; padding:0 0 0 20px; line-height:28px; color:#333;}
+.box01 a {color:#333; text-decoration:none;}
+.box01 a:hover {color:#F00; text-decoration:underline;}
+.box02 {margin:0 auto; width:980px; height:40px; text-align:center; font-size:14px; font-family:Georgia; line-height:40px; color:#999; font-weight:bold; border-bottom:1px solid #999;}
+.box02 a {color:#333; padding:0 4px;}
+.box02 a:hover {color:#C39; text-decoration:none;}
+
+.box022 {margin:0 auto; width:980px; height:40px; text-align:center; font-size:14px; font-family:Georgia; line-height:40px; color:#999; font-weight:bold; border-top:1px solid #C33; padding:0 0 20px 0;}
+.box022 a {color:#333; padding:0 4px;}
+.box022 a:hover {color:#C39; text-decoration:none;}
+
+.box03 {margin:10px auto; width:980px;}
+.box03 ul {}
+.box03 li {float:left; line-height:26px; font-size:12px; margin:4px;}
+.box03 li a {width:142px; height:26px; display:block; color:#000; padding:0 0 0 5px;}
+.box03 li a:hover {width:142px; height:26px; display:block; background:#333; color:#fff; text-decoration:none; padding:0 0 0 5px;}
+.box04 {margin:0 auto; width:980px; text-align:center; line-height:30px; font-size:14px; font-weight:bold; font-family:Georgia; border-top:1px solid #666; padding:10px 0;}
+.box04 a {color:#666;}
+.box04 a:hover {color:#333; text-decoration:none;}
+.box05 {margin:0 auto; width:100%; background:#E1E1E1; border-bottom:1px solid #999; border-top:1px solid #999; text-align:center; color:#666; padding:10px 0; line-height:26px;}
+</style>
+</head>
+
+<body>
+<div class="header">
+<div class="header_A"><a href="./" title="红色警戒"><img src="../images/userlistlogo.gif" alt="红色警戒" /></a></div>
+</div>
+<div class="header2"></div>
+<div class="header1"></div>
+<div class="header3"></div>
+<div class="header4"></div>
+<div class="box01"><a href="#">红色警报之二战首页</a> > <a href="#">B</a></div>
+<div class="box02"><a href="http://bbs.hongjing.com/userlist/type_A">A</a> | <a href="http://bbs.hongjing.com/userlist/type_B">B</a> | <a href="http://bbs.hongjing.com/userlist/type_C">C</a> | <a href="http://bbs.hongjing.com/userlist/type_D">D</a> | <a href="http://bbs.hongjing.com/userlist/type_E">E</a> | <a href="http://bbs.hongjing.com/userlist/type_F">F</a> | <a href="http://bbs.hongjing.com/userlist/type_G">G</a> | <a href="http://bbs.hongjing.com/userlist/type_H">H</a> | <a href="http://bbs.hongjing.com/userlist/type_I">I</a> | <a href="http://bbs.hongjing.com/userlist/type_J">J</a> | <a href="http://bbs.hongjing.com/userlist/type_K">K</a> | <a href="http://bbs.hongjing.com/userlist/type_L">L</a> | <a href="http://bbs.hongjing.com/userlist/type_M">M</a> | <a href="http://bbs.hongjing.com/userlist/type_N">N</a> | <a href="http://bbs.hongjing.com/userlist/type_O">O</a> | <a href="http://bbs.hongjing.com/userlist/type_P">P</a> | <a href="http://bbs.hongjing.com/userlist/type_Q">Q</a> | <a href="http://bbs.hongjing.com/userlist/type_R">R</a> | <a href="http://bbs.hongjing.com/userlist/type_S">S</a> | <a href="http://bbs.hongjing.com/userlist/type_T">T</a> | <a href="http://bbs.hongjing.com/userlist/type_U">U</a> | <a href="http://bbs.hongjing.com/userlist/type_V">V</a> | <a href="http://bbs.hongjing.com/userlist/type_W">W</a> | <a href="http://bbs.hongjing.com/userlist/type_X">X</a> | <a href="http://bbs.hongjing.com/userlist/type_Y">Y</a> | <a href="http://bbs.hongjing.com/userlist/type_Z">Z</a> | <a href="http://bbs.hongjing.com/userlist/type_1">0-9</a>
+</div>
+<div class="box03">
+<ul>    	<li><a href="../space-uid-5.html" target="_blank">·白狸</a></li>
+    	    	<li><a href="../space-uid-10.html" target="_blank">·碧波仙子</a></li>
+    	    	<li><a href="../space-uid-18.html" target="_blank">·边缘人</a></li>
+    	    	<li><a href="../space-uid-40.html" target="_blank">·不醒人士</a></li>
+    	    	<li><a href="../space-uid-68.html" target="_blank">·北方苍凉月</a></li>
+    	    	<li><a href="../space-uid-76.html" target="_blank">·巴乔</a></li>
+    	    	<li><a href="../space-uid-81.html" target="_blank">·笨鸟先生</a></li>
+    	    	<li><a href="../space-uid-94.html" target="_blank">·斑点猫</a></li>
+    	    	<li><a href="../space-uid-116.html" target="_blank">·吧吧炉</a></li>
+    	    	<li><a href="../space-uid-146.html" target="_blank">·冰凌雪儿</a></li>
+    	    	<li><a href="../space-uid-152.html" target="_blank">·半张嘴</a></li>
+    	    	<li><a href="../space-uid-207.html" target="_blank">·冰之旅</a></li>
+    	    	<li><a href="../space-uid-228.html" target="_blank">·滨江大道东</a></li>
+    	    	<li><a href="../space-uid-243.html" target="_blank">·宝剑峰</a></li>
+    	    	<li><a href="../space-uid-254.html" target="_blank">·百万雄师</a></li>
+    	    	<li><a href="../space-uid-261.html" target="_blank">·波波</a></li>
+    	    	<li><a href="../space-uid-267.html" target="_blank">·玻璃耗子</a></li>
+    	    	<li><a href="../space-uid-278.html" target="_blank">·霸王龙</a></li>
+    	    	<li><a href="../space-uid-329.html" target="_blank">·不夜之侯</a></li>
+    	    	<li><a href="../space-uid-349.html" target="_blank">·宝贝狐</a></li>
+    	    	<li><a href="../space-uid-370.html" target="_blank">·北方网狼</a></li>
+    	    	<li><a href="../space-uid-373.html" target="_blank">·冰箱</a></li>
+    	    	<li><a href="../space-uid-381.html" target="_blank">·百里冰</a></li>
+    	    	<li><a href="../space-uid-396.html" target="_blank">·碧珊</a></li>
+    	    	<li><a href="../space-uid-410.html" target="_blank">·冰松鼠</a></li>
+    	    	<li><a href="../space-uid-445.html" target="_blank">·巴蒂</a></li>
+    	    	<li><a href="../space-uid-454.html" target="_blank">·彼岸蔷薇</a></li>
+    	    	<li><a href="../space-uid-478.html" target="_blank">·百步穿杨</a></li>
+    	    	<li><a href="../space-uid-479.html" target="_blank">·冰凝</a></li>
+    	    	<li><a href="../space-uid-504.html" target="_blank">·白枫</a></li>
+    	    	<li><a href="../space-uid-512.html" target="_blank">·白兔先生</a></li>
+    	    	<li><a href="../space-uid-529.html" target="_blank">·白杨</a></li>
+    	    	<li><a href="../space-uid-531.html" target="_blank">·冰王子</a></li>
+    	    	<li><a href="../space-uid-534.html" target="_blank">·白金圣斗士</a></li>
+    	    	<li><a href="../space-uid-578.html" target="_blank">·本拉登</a></li>
+    	    	<li><a href="../space-uid-584.html" target="_blank">·白雪飘飘</a></li>
+    	    	<li><a href="../space-uid-629.html" target="_blank">·半死鱼</a></li>
+    	    	<li><a href="../space-uid-631.html" target="_blank">·冰女儿</a></li>
+    	    	<li><a href="../space-uid-639.html" target="_blank">·白鸦</a></li>
+    	    	<li><a href="../space-uid-658.html" target="_blank">·彼岸草</a></li>
+    	    	<li><a href="../space-uid-684.html" target="_blank">·暴雪</a></li>
+    	    	<li><a href="../space-uid-690.html" target="_blank">·冰洁雪儿</a></li>
+    	    	<li><a href="../space-uid-696.html" target="_blank">·薄荷女生</a></li>
+    	    	<li><a href="../space-uid-702.html" target="_blank">·板凳</a></li>
+    	    	<li><a href="../space-uid-757.html" target="_blank">·冰雨星</a></li>
+    	    	<li><a href="../space-uid-767.html" target="_blank">·跷跷鼻</a></li>
+    	    	<li><a href="../space-uid-777.html" target="_blank">·被追杀的狼</a></li>
+    	    	<li><a href="../space-uid-802.html" target="_blank">·白木瓜</a></li>
+    	    	<li><a href="../space-uid-812.html" target="_blank">·北方的蛇</a></li>
+    	    	<li><a href="../space-uid-839.html" target="_blank">·白国际</a></li>
+    	    	<li><a href="../space-uid-843.html" target="_blank">·冰雪霜雾类</a></li>
+    	    	<li><a href="../space-uid-852.html" target="_blank">·笨丫头</a></li>
+    	    	<li><a href="../space-uid-859.html" target="_blank">·北方的郎</a></li>
+    	    	<li><a href="../space-uid-866.html" target="_blank">·北国风光</a></li>
+    	    	<li><a href="../space-uid-878.html" target="_blank">·帮主</a></li>
+    	    	<li><a href="../space-uid-881.html" target="_blank">·白鲨</a></li>
+    	    	<li><a href="../space-uid-917.html" target="_blank">·薄荷冰</a></li>
+    	    	<li><a href="../space-uid-919.html" target="_blank">·百里溪</a></li>
+    	    	<li><a href="../space-uid-922.html" target="_blank">·八戒</a></li>
+    	    	<li><a href="../space-uid-958.html" target="_blank">·bbsek89</a></li>
+    	        <div class="cl"></div>
+    </ul>
+</div>
+<div class="box04"><div class="pages"><strong>1</strong><a href="http://bbs.hongjing.com/userlist/type_B?page=2">2</a><a href="http://bbs.hongjing.com/userlist/type_B?page=3">3</a><a href="http://bbs.hongjing.com/userlist/type_B?page=4">4</a><a href="http://bbs.hongjing.com/userlist/type_B?page=5">5</a><a href="http://bbs.hongjing.com/userlist/type_B?page=6">6</a><a href="http://bbs.hongjing.com/userlist/type_B?page=2" class="next">下一页</a></div></div>
+
+<div class="box022"><a href="http://bbs.hongjing.com/userlist/type_A">A</a> | <a href="http://bbs.hongjing.com/userlist/type_B">B</a> | <a href="http://bbs.hongjing.com/userlist/type_C">C</a> | <a href="http://bbs.hongjing.com/userlist/type_D">D</a> | <a href="http://bbs.hongjing.com/userlist/type_E">E</a> | <a href="http://bbs.hongjing.com/userlist/type_F">F</a> | <a href="http://bbs.hongjing.com/userlist/type_G">G</a> | <a href="http://bbs.hongjing.com/userlist/type_H">H</a> | <a href="http://bbs.hongjing.com/userlist/type_I">I</a> | <a href="http://bbs.hongjing.com/userlist/type_J">J</a> | <a href="http://bbs.hongjing.com/userlist/type_K">K</a> | <a href="http://bbs.hongjing.com/userlist/type_L">L</a> | <a href="http://bbs.hongjing.com/userlist/type_M">M</a> | <a href="http://bbs.hongjing.com/userlist/type_N">N</a> | <a href="http://bbs.hongjing.com/userlist/type_O">O</a> | <a href="http://bbs.hongjing.com/userlist/type_P">P</a> | <a href="http://bbs.hongjing.com/userlist/type_Q">Q</a> | <a href="http://bbs.hongjing.com/userlist/type_R">R</a> | <a href="http://bbs.hongjing.com/userlist/type_S">S</a> | <a href="http://bbs.hongjing.com/userlist/type_T">T</a> | <a href="http://bbs.hongjing.com/userlist/type_U">U</a> | <a href="http://bbs.hongjing.com/userlist/type_V">V</a> | <a href="http://bbs.hongjing.com/userlist/type_W">W</a> | <a href="http://bbs.hongjing.com/userlist/type_X">X</a> | <a href="http://bbs.hongjing.com/userlist/type_Y">Y</a> | <a href="http://bbs.hongjing.com/userlist/type_Z">Z</a> | <a href="http://bbs.hongjing.com/userlist/type_1">0-9</a>
+</div>
+
+<div class="box05">红色警报之二战,献给二战胜利65周年作品</div>
+
+</body>
+</html>

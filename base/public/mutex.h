@@ -166,9 +166,12 @@ class WriterMutexLock {
 };
 
 // Catch bug where variable name is omitted, e.g. MutexLock (&mu);
-#define MutexLock(x) COMPILE_ASSERT(0, mutex_lock_decl_missing_var_name)
-#define ReaderMutexLock(x) COMPILE_ASSERT(0, rmutex_lock_decl_missing_var_name)
-#define WriterMutexLock(x) COMPILE_ASSERT(0, wmutex_lock_decl_missing_var_name)
+// this marco conflict with third_part/protobuf/include/google/protobuf/stubs/common.h
+// because using the same class name.
+
+// #define MutexLock(x) COMPILE_ASSERT(0, mutex_lock_decl_missing_var_name)
+// #define ReaderMutexLock(x) COMPILE_ASSERT(0, rmutex_lock_decl_missing_var_name)
+// #define WriterMutexLock(x) COMPILE_ASSERT(0, wmutex_lock_decl_missing_var_name)
 
 // A faster lock than mutex.
 // SpinLock use less CPU instructions than Mutex, but may be less efficient if

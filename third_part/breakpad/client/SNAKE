@@ -1,0 +1,10 @@
+cc_library(name = 'minidump_file_writer',
+           srcs = [
+                   'minidump_file_writer.cc',
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   '//third_part/breakpad/common:string_conversion',
+                  ],
+           copt = ['no_style_check']
+          )

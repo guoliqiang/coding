@@ -1,0 +1,7 @@
+cc_library(name = 'release',
+           srcs = ['release_flag.cc',
+                   'release_path.cc',
+                   'deploy.cc'
+                  ],
+           deps = []
+           )

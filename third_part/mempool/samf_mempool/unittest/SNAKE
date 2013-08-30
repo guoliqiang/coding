@@ -1,0 +1,15 @@
+cc_binary(name='samf_unittest',
+           srcs = ['samf_unittest.cc'],
+           deps = [
+                  '//third_part/mempool/samf_mempool/internal:samf_mempool',
+                  '//third_part/testing/gtest/src:gtest'
+                  ]
+           )
+
+cc_binary(name='samf_benchmark',
+           srcs = ['samf_benchmark.cc'],
+           deps = [
+                  '//third_part/mempool/samf_mempool/internal:samf_mempool',
+                  '//third_part/testing/gtest/src:benchmark'
+                  ]
+           )

@@ -1,12 +1,10 @@
-cc_library(name = 'gtest',
+cc_library(name = 'gtest_lib',
            srcs = [
                   'benchmark.cc',
                   'gtest.cc',
                   'gtest-filepath.cc',
-                  'gtest_main.cc',
                   'gtest-printers.cc',
                   'gtest-typed-test.cc',
-                  'benchmark_main.cc',
                   'gtest-death-test.cc',
                   'gtest-port.cc',
                   'gtest-test-part.cc'
@@ -14,6 +12,26 @@ cc_library(name = 'gtest',
            deps = [
                  '//third_part/testing/gmock/src:gmock',
                  '//base/internal:base'
+           ],
+           copt = ['no_style_check']
+)
+
+cc_library(name = 'gtest',
+           srcs = [
+                  'gtest_main.cc',
+           ],
+           deps = [
+                 '//third_part/testing/gtest/src:gtest_lib',
+           ],
+           copt = ['no_style_check']
+)
+
+cc_library(name = 'benchmark',
+           srcs = [
+                  'benchmark_main.cc',
+           ],
+           deps = [
+                 '//third_part/testing/gtest/src:gtest_lib',
            ],
            copt = ['no_style_check']
 )

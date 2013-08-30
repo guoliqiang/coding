@@ -1124,7 +1124,7 @@ class LIBPROTOBUF_EXPORT MutexLock {
   explicit MutexLock(Mutex *mu) : mu_(mu) { this->mu_->Lock(); }
   ~MutexLock() { this->mu_->Unlock(); }
  private:
-  Mutex *const mu_;
+  internal::Mutex *const mu_;
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MutexLock);
 };
 

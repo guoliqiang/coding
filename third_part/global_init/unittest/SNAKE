@@ -1,0 +1,6 @@
+cc_binary(name = "gloabal_unit",
+          srcs = ['gloabal_unit.cc'],
+          deps = [
+                 '//third_part/global_init/internal:global_init'
+                 ]
+          )

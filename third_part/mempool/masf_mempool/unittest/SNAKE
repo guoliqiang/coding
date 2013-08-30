@@ -1,0 +1,7 @@
+cc_binary(name='masf_unittest',
+           srcs = ['masf_unittest.cc'],
+           deps = [
+                  '//third_part/mempool/masf_mempool/internal:masf_mempool',
+                  '//third_part/testing/gtest/src:gtest'
+                  ]
+           )

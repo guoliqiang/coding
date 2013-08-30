@@ -1,0 +1,25 @@
+cc_library(name = 'googleurl',
+           srcs = ['gurl.cc',
+                   'url_canon_host.cc',
+                   'url_canon_mailtourl.cc',
+                   'url_canon_relative.cc',
+                   'url_util.cc',
+                   'url_canon_icu.cc',
+                   'url_canon_path.cc',
+                   'url_canon_stdurl.cc',
+                   'url_canon_etc.cc',
+                   'url_canon_internal.cc',
+                   'url_canon_pathurl.cc',
+                   'url_parse.cc',
+                   'url_canon_fileurl.cc',
+                   'url_canon_ip.cc',
+                   'url_canon_query.cc',
+                   'url_parse_file.cc'
+                   ],
+             deps = [
+                    '//base/internal:base',
+                    '//libs/third_part/icu:icuuc',
+                    '//libs/third_part/icu:icudata',
+                    ], # the order of icuuc and icudata must not be changed
+             copt = ['no_style_check',]
+            )

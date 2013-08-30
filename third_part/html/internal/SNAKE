@@ -1,0 +1,6 @@
+cc_library(name = 'html_unescape_char',
+           srcs = ['html_unescape_char.cc'],
+           deps = [
+                  '//base/internal:base'
+                  ]
+           )

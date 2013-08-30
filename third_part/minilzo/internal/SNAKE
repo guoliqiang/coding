@@ -1,0 +1,4 @@
+cc_library(name = 'minilzo',
+           srcs = ['minilzo.c'],
+           copt = ['no-style-check']
+           )

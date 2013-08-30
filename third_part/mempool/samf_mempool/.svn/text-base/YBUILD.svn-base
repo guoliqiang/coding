@@ -1,0 +1,32 @@
+# Copyright 2010 Yunrang Inc. All Rights Reserved.
+# Author: yanliangcui@yunrang.com (Yanliang Cui)
+
+
+cc_library(name = 'samf_mempool',
+           srcs = [
+                   'samf_mempool.cc',
+                  ],
+           deps = [
+                   '//base:base',
+                  ],
+          )
+
+cc_test(name = 'samf_unittest',
+        srcs = [
+                'samf_unittest.cc',
+               ],  
+        deps = [
+                ':samf_mempool',
+                '//base:base',
+               ]   
+         )
+
+cc_benchmark(name = 'samf_benchmark',
+             srcs = [
+                     'samf_benchmark.cc',
+                    ],  
+             deps = [
+                     ':samf_mempool',
+                     '//base:base',
+                    ]   
+              )

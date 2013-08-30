@@ -3,6 +3,8 @@ cc_library(name = 'url_util',
                   'url_util.cc'
                   ],
            deps = [
-                  '//base/internal:base'
+                  '//base/internal:base',
+                  '//file/internal:file',
+                  '//third_part/release/internal:release',
                   ],
            )

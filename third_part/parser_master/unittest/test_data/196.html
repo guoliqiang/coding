@@ -1,0 +1,948 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>坪山汽车站时刻表查询|坪山汽车站长途汽车时刻表查询 - 长途客运时刻查询</title>
+<meta name="description" content="坪山汽车站时刻表查询|坪山汽车站长途汽车时刻表查询|长途汽车时刻表查询|长途汽车班次查询|客运汽车站电话|汽车查询|全国汽车站查询" />
+<meta name="keywords" content="坪山汽车站汽车时刻表,包含坪山汽车站的所有长途汽车时刻表信息;提供最全面的长途汽车时刻表查询,并提供最全面的相应列表"  />
+<link href="/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/css/css2.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="/JavaScript/jquery-1.3.2.min.js"
+	type="text/javascript"></script>
+</head>
+<body>
+<div class="box">
+<!--头部-->
+<div id="head">
+  <div class="lftop"></div>
+  <div class="top">
+    <div class="logo">
+      <ul>
+        <li style="float: left; "><a href="http://www.keyunzhan.com/"><img
+		src="images/logo.gif" width="231" height="72" border="0" alt="客运站" /></a></li>
+                 <li class="ta"><h1>坪山汽车站</h1></li>
+                       <li class="tj">
+                              游客！ <a href="http://www.keyunzhan.com/ticket_add">免费发布二手票信息</a> <a  href="http://www.keyunzhan.com/login">登录</a> <a  href="http://www.keyunzhan.com/register">注册</a>
+                  </li>
+      </ul>
+    </div>
+    <div class="nav">
+      <ul>
+        <li class="lih"><a href="http://www.keyunzhan.com/" title="客运站">首&nbsp;&nbsp;页</a></li>
+        <li><img src="/images/nb.gif" alt="" /></li>
+        <li class="lih"><a href="http://www.keyunzhan.com/ticket_center" title="票务点">票务点</a></li>
+        <li><img src="/images/nb.gif" alt="" /></li>
+        <li class="liar"><a href="http://www.keyunzhan.com/stationList" title="客运站">客运站</a></li>
+        <li><img src="/images/nb.gif" alt="" /></li>
+        <li class="lih"><a href="http://www.keyunzhan.com/keyun_news" title="客运动态">客运动态</a></li>
+        <li><img src="/images/nb.gif" alt="" /></li>
+        <li class="lih"><a href="http://www.keyunzhan.com/price" title="票价查询">票价查询</a></li>
+        <li><img src="/images/nb.gif" alt="" /></li>
+        <li class="lih"><a href="http://www.keyunzhan.com/wenda" title="提出客运的问题并获得解答">客运问答</a></li>
+        <li><img src="/images/nb.gif" alt="" /></li>
+        <li class="lih"><a href="http://www.keyunzhan.com/hotel/" title="酒店预订">酒店预订</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="rttop"></div>
+</div>
+<!--内容-->
+<div id="mian">
+
+<div  class="clear"></div> 
+ <div class="breadcrumb">
+      您当前的位置：<a href="http://www.keyunzhan.com" title="长途汽车查询">长途汽车查询</a>&gt;<a href="/stationList" title="全国客运站大全">客运站</a>&gt;<h2><a href="/sid-972">坪山汽车站</a></h2>&gt;<h3>坪山汽车站汽车时刻表</h3>
+    </div>
+<!-- 内容 -->
+<div style="clear:both; margin:0 auto;">
+<div class="mianleft">
+  <script type="text/javascript" src="http://un.zhuna.cn/javascript/Search.js"></script>
+<script type="text/javascript" src="/JavaScript/tab.js"></script>
+<script type="text/javascript" src="/JavaScript/aircity.js"></script>
+<script type="text/javascript" src="/JavaScript/j.dimensions.js"></script>
+<script type="text/javascript" src="/JavaScript/j.suggest.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function(){
+	
+	$("#startstate").suggest(citys,{hot_list:commoncitys,dataContainer:'#arrcity_3word',onSelect:function(){$("#endstate").focus().click();}, attachObject:'#suggest'});
+	$("#endstate").suggest(citys,{hot_list:commoncitys,attachObject:"#suggest2"});
+});
+function checkform(){
+	a=$("#startstate").val();
+	b=$("#endstate").val();
+	if(a=='中文/拼音' || a==''){
+		alert('请输入出发站点');
+		return false;
+	}
+	if(b=='中文/拼音' || b==''){
+		alert('请输入到达站点');
+		return false;
+	}
+	return true;
+}
+
+</script>
+<div class="hiline">
+  <div class="redtitle_nav5">
+    <ul id="menu5">
+      <li class="mover" onclick="setTab(5,0)">站—站查询</li>
+      <li class="mout" onclick="setTab(5,1)">地点查询</li>
+      <li class="mout" onclick="setTab(5,2)">汽车站查询</li>
+      <li class="mout" onclick="setTab(5,3)">酒店预订</li>
+      <li class="mout" onclick="setTab(5,4)">全站搜索</li>
+    </ul>
+  </div>
+  <div id="main5">
+    <form id="searchform" name="searchform" method="post" action="/result.php" onsubmit="return checkform();">
+      <ul>
+        <li class="z"><img src="images/cf.gif" alt="" />&nbsp;
+          <input type="hidden" name="arrcity_3word" id="arrcity_3word" value="" />
+          <input name="startstate" type="text" class="searchSelect" id="startstate" style="WIDTH: 200px" size="12" maxlength="50" />
+          <div id='suggest' class="ac_results"> </div>
+          到达
+          <input name="endstate" type="text" class="searchSelect" id="endstate" style="WIDTH: 200px" size="12" maxlength="50" />
+          <div id='suggest2' class="ac_results"> </div>
+          <input type="image" src="images/an2.gif" alt="Submit" />
+        </li>
+        </form>
+        <li>热门站点：
+          
+          <a href="b-%E5%B9%BF%E5%B7%9E-%E6%B7%B1%E5%9C%B3" title="广州到深圳汽车">广州到深圳</a>
+          
+          <a href="b-%E4%B9%89%E4%B9%8C-%E6%9D%AD%E5%B7%9E" title="义乌到杭州汽车">义乌到杭州</a>
+          
+          <a href="b-%E6%9D%AD%E5%B7%9E-%E5%AE%81%E6%B3%A2" title="杭州到宁波汽车">杭州到宁波</a>
+          
+          <a href="b-%E6%B7%B1%E5%9C%B3-%E5%8E%A6%E9%97%A8" title="深圳到厦门汽车">深圳到厦门</a>
+          
+          <a href="b-%E6%B7%B1%E5%9C%B3-%E5%B9%BF%E5%B7%9E" title="深圳到广州汽车">深圳到广州</a>
+          
+        </li>
+      </ul>
+        <form  method="post" action="/result.php">
+      <ul style="display: none">
+        <li class="z">&nbsp;
+          请输入城市：
+          <input type="text" style="WIDTH: 200px" size="12" maxlength="50" class="searchSelect" name="city" id="city" />
+          &nbsp;
+          <input type="image" src="images/an2.gif" alt="Submit" />
+        </li>
+      </ul>
+      <ul style="display: none">
+        <li class="z">&nbsp;请输入车站：
+          <input type="text" style="WIDTH: 200px" size="12" maxlength="50" name="station" id="station" />
+          &nbsp;
+          <input type="image" src="images/an2.gif" alt="Submit" />
+        </li>
+        <li>热门客运站：
+	      <!-- google_ad_section_start -->
+          
+          <a href="/sid-951" title="福永汽车站时刻表">福永汽车站</a>
+          
+          <a href="/sid-953" title="沙井中心客运站时刻表">沙井中心客运站</a>
+          
+          <a href="/sid-38" title="宝安汽车站时刻表">宝安汽车站</a>
+          
+          <a href="/sid-96" title="宝安龙华汽车站时刻表">宝安龙华汽车站</a>
+          
+          <a href="/sid-972" title="坪山汽车站时刻表">坪山汽车站</a>
+          
+          <!-- google_ad_section_end -->  
+        </li>
+      </ul>
+    </form>
+    <ul style="display: none">
+    <li>
+    <form action="http://www.keyunzhan.com/hotel/search.php" method="get" name="form1" target="_blank" id="form1">
+      <table width="600" border="0" align="center" cellpadding="5" cellspacing="0" class="search_box">        
+          <tr>
+            <td bgcolor="#FFFFFF"><input name="uid" type="hidden" value="222711" />
+              <table width="100%" border="0" cellspacing="0" cellpadding="3">
+                <tr>
+                  <td align="right">选择城市 </td>
+                  <td><select id="pid" style="width:64px;margin-right:3px;" >
+                      <option value="" selected="selected">请选省</option>
+                    </select>
+                    <select name="cid" id="cid"  style="width:64px; " >
+                      <option value="" selected="selected">选择市</option>
+                    </select></td>
+                  <td align="right">入住日期 </td>
+                  <td align="left"><select name="tm1" id="tm1" style="width:132px;"><option value="0">不限</option>   </select></td>
+                  <td align="right">离店日期</td>
+                  <td align="left"><select name="tm2" id="tm2" style="width:132px;"><option value="0">不限</option>
+                    </select></td>
+                </tr>
+                <tr>
+                  <td align="right">价格范围 </td>
+                  <td><input name="minprice" type="text" id="minprice" style="width:49px;" value=""/>
+                    至
+                    <input name="maxprice" type="text" style="width:49px;" id="maxprice" value=""/></td>
+                  <td align="right">酒店星级 </td>
+                  <td align="left"><select name="xj" style="width:132px;" id="xj">
+                      <option value="0" selected="selected">不限</option>
+                      <option value="2" >二星及以下/经济型 </option>
+                      <option value="3" >三星级/舒适型 </option>
+                      <option value="4" >四星级/高档型 </option>
+                      <option value="5" >五星级/豪华型 </option>
+                    </select></td>
+                  <td align="right">酒店靠近 </td>
+                  <td align="left"><input name="k1" type="text" style="width:126px;" id="k1" value="" title="酒店位置 例如：长安街"/></td>
+                </tr>
+                <tr>
+                  <td align="right">酒店名称 </td>
+                  <td><input name="k2" type="text" style="width:126px;" id="k2" value="" title="例：如家、7天"/></td>
+                  <td align="right">&nbsp;</td>
+                  <td align="left"><input type="submit" value="查询酒店" class="searchbutton"/></td>
+                </tr>
+              </table></td>
+          </tr>      
+      </table>
+        </form>
+        </li>
+    </ul>
+    <ul style="display: none">
+    <li>
+      <form action=" http://www.keyunzhan.com/search" id="cse-search-box">
+        <div>
+          <input type="hidden" name="cx" value="007774369621299135440:vfbrjcln-q4" />
+          <input type="hidden" name="cof" value="FORID:11" />
+          <input type="hidden" name="ie" value="UTF-8" />
+          <input type="text" name="q" size="31" />
+          <input type="submit" name="sa" value="搜索" />
+        </div>
+      </form>
+      </li>
+    </ul>
+    <div > </div>
+  </div>
+</div>
+ <script type="text/javascript" src="http://www.google.com/cse/brand?form=cse-search-box&amp;lang=zh-Hans"></script>
+<script type="text/javascript">
+loadCity('pid','cid',53);
+loadDate('tm1','tm2','','');
+</script>  		<script type="text/javascript"><!--
+        google_ad_client = "pub-8041083238990119";
+        /* 728x90, 创建于 10-9-15 */
+        google_ad_slot = "1805635540";
+        google_ad_width = 728;
+        google_ad_height = 90;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+         <div  class="lfbg">
+ <div class="lfbgbtn">
+      <ul>
+        <li><img src="images/an.gif"/><h3>坪山汽车站时刻表</h3></li>
+      </ul>
+    </div>
+         <div class="kynew">
+       <div class="ky_sf">省内短途</div>
+       <div class="ky_ban">
+       
+          <div class="kyb_head">
+          <ul id="menu3">
+           
+            <a class="hdar" onclick="setTabStation(3,0)">佛山</a>
+             
+            <a  onclick="setTabStation(3,1)">江门</a>
+             
+            <a  onclick="setTabStation(3,2)">肇庆</a>
+             
+            <a  onclick="setTabStation(3,3)">云浮</a>
+             
+            <a  onclick="setTabStation(3,4)">清远</a>
+             
+            <a  onclick="setTabStation(3,5)">广州</a>
+             
+            <a  onclick="setTabStation(3,6)">中山</a>
+             
+            <a  onclick="setTabStation(3,7)">阳江</a>
+             
+            <a  onclick="setTabStation(3,8)">韶关</a>
+             
+            <a  onclick="setTabStation(3,9)">湛江</a>
+             
+            <a  onclick="setTabStation(3,10)">茂名</a>
+             
+            <a  onclick="setTabStation(3,11)">惠州</a>
+             
+          </ul>
+         </div>
+           <div id="main3">
+     
+         
+          <ul >
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E4%BD%9B%E5%B1%B1" title="坪山汽车站到佛山汽车时刻表">佛山</a>
+              
+              <a href="/se-972-%E4%B8%89%E6%B0%B4" title="坪山汽车站到三水汽车时刻表">三水</a>
+              
+              <a href="/se-972-%E9%A1%BA%E5%BE%B7" title="坪山汽车站到顺德汽车时刻表">顺德</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E6%B1%9F%E9%97%A8" title="坪山汽车站到江门汽车时刻表">江门</a>
+              
+              <a href="/se-972-%E5%BC%80%E5%B9%B3" title="坪山汽车站到开平汽车时刻表">开平</a>
+              
+              <a href="/se-972-%E6%96%B0%E4%BC%9A" title="坪山汽车站到新会汽车时刻表">新会</a>
+              
+              <a href="/se-972-%E6%81%A9%E5%B9%B3" title="坪山汽车站到恩平汽车时刻表">恩平</a>
+              
+              <a href="/se-972-%E5%8F%B0%E5%B1%B1" title="坪山汽车站到台山汽车时刻表">台山</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E5%9B%9B%E4%BC%9A" title="坪山汽车站到四会汽车时刻表">四会</a>
+              
+              <a href="/se-972-%E6%80%80%E9%9B%86" title="坪山汽车站到怀集汽车时刻表">怀集</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E4%BA%91%E6%B5%AE" title="坪山汽车站到云浮汽车时刻表">云浮</a>
+              
+              <a href="/se-972-%E7%BD%97%E5%AE%9A" title="坪山汽车站到罗定汽车时刻表">罗定</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E6%B8%85%E8%BF%9C" title="坪山汽车站到清远汽车时刻表">清远</a>
+              
+              <a href="/se-972-%E8%BF%9E%E5%B7%9E" title="坪山汽车站到连州汽车时刻表">连州</a>
+              
+              <a href="/se-972-%E8%8B%B1%E5%BE%B7" title="坪山汽车站到英德汽车时刻表">英德</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E5%B9%BF%E5%B7%9E" title="坪山汽车站到广州汽车时刻表">广州</a>
+              
+              <a href="/se-972-%E7%95%AA%E7%A6%BA" title="坪山汽车站到番禺汽车时刻表">番禺</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E4%B8%AD%E5%B1%B1" title="坪山汽车站到中山汽车时刻表">中山</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E9%98%B3%E6%B1%9F" title="坪山汽车站到阳江汽车时刻表">阳江</a>
+              
+              <a href="/se-972-%E9%98%B3%E8%A5%BF" title="坪山汽车站到阳西汽车时刻表">阳西</a>
+              
+              <a href="/se-972-%E9%98%B3%E6%98%A5" title="坪山汽车站到阳春汽车时刻表">阳春</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E9%9F%B6%E5%85%B3" title="坪山汽车站到韶关汽车时刻表">韶关</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E6%B9%9B%E6%B1%9F" title="坪山汽车站到湛江汽车时刻表">湛江</a>
+              
+              <a href="/se-972-%E5%90%B4%E5%B7%9D" title="坪山汽车站到吴川汽车时刻表">吴川</a>
+              
+              <a href="/se-972-%E9%9B%B7%E5%B7%9E" title="坪山汽车站到雷州汽车时刻表">雷州</a>
+              
+              <a href="/se-972-%E5%BB%89%E6%B1%9F" title="坪山汽车站到廉江汽车时刻表">廉江</a>
+              
+              <a href="/se-972-%E5%BE%90%E9%97%BB" title="坪山汽车站到徐闻汽车时刻表">徐闻</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E9%AB%98%E5%B7%9E" title="坪山汽车站到高州汽车时刻表">高州</a>
+              
+              <a href="/se-972-%E7%94%B5%E7%99%BD" title="坪山汽车站到电白汽车时刻表">电白</a>
+              
+              <a href="/se-972-%E4%BF%A1%E5%AE%9C" title="坪山汽车站到信宜汽车时刻表">信宜</a>
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+      
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E9%BE%99%E9%97%A8" title="坪山汽车站到龙门汽车时刻表">龙门</a>
+              
+         </div>
+         </ul>
+           
+       </div>
+       </div>
+   </div>         
+      <div class="kynew">
+       <div class="ky_sf">省外长途</div>
+       <div class="ky_ban">
+       
+          <div class="kyb_head">
+           <ul id="menu4">
+            
+            <a  class="hdar" onclick="setTabStation(4,0)">江苏</a>
+             
+            <a  class="" onclick="setTabStation(4,1)">湖南</a>
+             
+            <a  class="" onclick="setTabStation(4,2)">福建</a>
+             
+            <a  class="" onclick="setTabStation(4,3)">江西</a>
+             
+            <a  class="" onclick="setTabStation(4,4)">云南</a>
+             
+            <a  class="" onclick="setTabStation(4,5)">广西</a>
+             
+            <a  class="" onclick="setTabStation(4,6)">湖北</a>
+             
+            <a  class="" onclick="setTabStation(4,7)">河南</a>
+             
+            <a  class="" onclick="setTabStation(4,8)">重庆</a>
+             
+            <a  class="" onclick="setTabStation(4,9)">贵州</a>
+             
+            <a  class="" onclick="setTabStation(4,10)">四川</a>
+             
+            <a  class="" onclick="setTabStation(4,11)">其它</a>
+             
+          </ul>
+          </div>
+           <div id="main4">
+         
+          <ul >
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E6%B5%B7%E5%AE%89" title="坪山汽车站到海安汽车时刻表">海安</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E8%A1%A1%E9%98%B3" title="坪山汽车站到衡阳汽车时刻表">衡阳</a>
+              
+              <a href="/se-972-%E8%A1%A1%E5%B1%B1" title="坪山汽车站到衡山汽车时刻表">衡山</a>
+              
+              <a href="/se-972-%E9%83%B4%E5%B7%9E" title="坪山汽车站到郴州汽车时刻表">郴州</a>
+              
+              <a href="/se-972-%E9%82%B5%E4%B8%9C" title="坪山汽车站到邵东汽车时刻表">邵东</a>
+              
+              <a href="/se-972-%E9%82%B5%E9%98%B3%E5%8E%BF" title="坪山汽车站到邵阳县汽车时刻表">邵阳县</a>
+              
+              <a href="/se-972-%E9%9A%86%E5%9B%9E" title="坪山汽车站到隆回汽车时刻表">隆回</a>
+              
+              <a href="/se-972-%E6%B4%9E%E5%8F%A3" title="坪山汽车站到洞口汽车时刻表">洞口</a>
+              
+              <a href="/se-972-%E5%9F%8E%E6%AD%A5" title="坪山汽车站到城步汽车时刻表">城步</a>
+              
+              <a href="/se-972-%E6%AD%A6%E5%86%88" title="坪山汽车站到武冈汽车时刻表">武冈</a>
+              
+              <a href="/se-972-%E6%96%B0%E9%82%B5" title="坪山汽车站到新邵汽车时刻表">新邵</a>
+              
+              <a href="/se-972-%E6%96%B0%E5%AE%81" title="坪山汽车站到新宁汽车时刻表">新宁</a>
+              
+              <a href="/se-972-%E9%BE%99%E5%B1%B1" title="坪山汽车站到龙山汽车时刻表">龙山</a>
+              
+              <a href="/se-972-%E6%A1%91%E6%A4%8D" title="坪山汽车站到桑植汽车时刻表">桑植</a>
+              
+              <a href="/se-972-%E6%B5%8F%E9%98%B3" title="坪山汽车站到浏阳汽车时刻表">浏阳</a>
+              
+              <a href="/se-972-%E9%95%BF%E6%B2%99%E5%8E%BF" title="坪山汽车站到长沙县汽车时刻表">长沙县</a>
+              
+              <a href="/se-972-%E5%B8%B8%E5%BE%B7" title="坪山汽车站到常德汽车时刻表">常德</a>
+              
+              <a href="/se-972-%E6%A1%83%E6%BA%90" title="坪山汽车站到桃源汽车时刻表">桃源</a>
+              
+              <a href="/se-972-%E6%B1%89%E5%AF%BF" title="坪山汽车站到汉寿汽车时刻表">汉寿</a>
+              
+              <a href="/se-972-%E5%B2%B3%E9%98%B3" title="坪山汽车站到岳阳汽车时刻表">岳阳</a>
+              
+              <a href="/se-972-%E4%B8%B4%E6%B9%98" title="坪山汽车站到临湘汽车时刻表">临湘</a>
+              
+              <a href="/se-972-%E5%8D%8E%E5%AE%B9" title="坪山汽车站到华容汽车时刻表">华容</a>
+              
+              <a href="/se-972-%E5%B9%B3%E6%B1%9F" title="坪山汽车站到平江汽车时刻表">平江</a>
+              
+              <a href="/se-972-%E7%9B%8A%E9%98%B3" title="坪山汽车站到益阳汽车时刻表">益阳</a>
+              
+              <a href="/se-972-%E5%8D%97%E5%8E%BF" title="坪山汽车站到南县汽车时刻表">南县</a>
+              
+              <a href="/se-972-%E6%B0%B8%E5%B7%9E" title="坪山汽车站到永州汽车时刻表">永州</a>
+              
+              <a href="/se-972-%E4%B8%9C%E5%AE%89" title="坪山汽车站到东安汽车时刻表">东安</a>
+              
+              <a href="/se-972-%E6%96%B0%E7%94%B0" title="坪山汽车站到新田汽车时刻表">新田</a>
+              
+              <a href="/se-972-%E8%93%9D%E5%B1%B1" title="坪山汽车站到蓝山汽车时刻表">蓝山</a>
+              
+              <a href="/se-972-%E5%AE%81%E8%BF%9C" title="坪山汽车站到宁远汽车时刻表">宁远</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E5%8E%A6%E9%97%A8" title="坪山汽车站到厦门汽车时刻表">厦门</a>
+              
+              <a href="/se-972-%E6%B3%89%E5%B7%9E" title="坪山汽车站到泉州汽车时刻表">泉州</a>
+              
+              <a href="/se-972-%E7%9F%B3%E7%8B%AE" title="坪山汽车站到石狮汽车时刻表">石狮</a>
+              
+              <a href="/se-972-%E6%99%8B%E6%B1%9F" title="坪山汽车站到晋江汽车时刻表">晋江</a>
+              
+              <a href="/se-972-%E7%A6%8F%E5%B7%9E" title="坪山汽车站到福州汽车时刻表">福州</a>
+              
+              <a href="/se-972-%E7%A6%8F%E6%B8%85" title="坪山汽车站到福清汽车时刻表">福清</a>
+              
+              <a href="/se-972-%E6%BC%B3%E5%B7%9E" title="坪山汽车站到漳州汽车时刻表">漳州</a>
+              
+              <a href="/se-972-%E8%8E%86%E7%94%B0" title="坪山汽车站到莆田汽车时刻表">莆田</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E6%8A%9A%E5%B7%9E" title="坪山汽车站到抚州汽车时刻表">抚州</a>
+              
+              <a href="/se-972-%E5%8D%97%E5%9F%8E" title="坪山汽车站到南城汽车时刻表">南城</a>
+              
+              <a href="/se-972-%E5%90%89%E5%AE%89" title="坪山汽车站到吉安汽车时刻表">吉安</a>
+              
+              <a href="/se-972-%E5%90%89%E6%B0%B4" title="坪山汽车站到吉水汽车时刻表">吉水</a>
+              
+              <a href="/se-972-%E6%96%B0%E5%B9%B2" title="坪山汽车站到新干汽车时刻表">新干</a>
+              
+              <a href="/se-972-%E4%BF%AE%E6%B0%B4" title="坪山汽车站到修水汽车时刻表">修水</a>
+              
+              <a href="/se-972-%E6%A8%9F%E6%A0%91" title="坪山汽车站到樟树汽车时刻表">樟树</a>
+              
+              <a href="/se-972-%E9%AB%98%E5%AE%89" title="坪山汽车站到高安汽车时刻表">高安</a>
+              
+              <a href="/se-972-%E4%B8%8A%E9%AB%98" title="坪山汽车站到上高汽车时刻表">上高</a>
+              
+              <a href="/se-972-%E9%93%9C%E9%BC%93" title="坪山汽车站到铜鼓汽车时刻表">铜鼓</a>
+              
+              <a href="/se-972-%E8%B5%A3%E5%B7%9E" title="坪山汽车站到赣州汽车时刻表">赣州</a>
+              
+              <a href="/se-972-%E8%B5%A3%E5%8E%BF" title="坪山汽车站到赣县汽车时刻表">赣县</a>
+              
+              <a href="/se-972-%E4%BF%A1%E4%B8%B0" title="坪山汽车站到信丰汽车时刻表">信丰</a>
+              
+              <a href="/se-972-%E9%BE%99%E5%8D%97" title="坪山汽车站到龙南汽车时刻表">龙南</a>
+              
+              <a href="/se-972-%E5%AE%81%E9%83%BD" title="坪山汽车站到宁都汽车时刻表">宁都</a>
+              
+              <a href="/se-972-%E5%AE%9A%E5%8D%97" title="坪山汽车站到定南汽车时刻表">定南</a>
+              
+              <a href="/se-972-%E4%BA%8E%E9%83%BD" title="坪山汽车站到于都汽车时刻表">于都</a>
+              
+              <a href="/se-972-%E5%8D%97%E6%98%8C" title="坪山汽车站到南昌汽车时刻表">南昌</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E6%98%86%E6%98%8E" title="坪山汽车站到昆明汽车时刻表">昆明</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E8%B1%A1%E5%B7%9E" title="坪山汽车站到象州汽车时刻表">象州</a>
+              
+              <a href="/se-972-%E5%BF%BB%E5%9F%8E" title="坪山汽车站到忻城汽车时刻表">忻城</a>
+              
+              <a href="/se-972-%E6%A2%A7%E5%B7%9E" title="坪山汽车站到梧州汽车时刻表">梧州</a>
+              
+              <a href="/se-972-%E5%B2%91%E6%BA%AA" title="坪山汽车站到岑溪汽车时刻表">岑溪</a>
+              
+              <a href="/se-972-%E5%8C%97%E6%B5%B7" title="坪山汽车站到北海汽车时刻表">北海</a>
+              
+              <a href="/se-972-%E8%B4%B5%E6%B8%AF" title="坪山汽车站到贵港汽车时刻表">贵港</a>
+              
+              <a href="/se-972-%E6%A1%82%E5%B9%B3" title="坪山汽车站到桂平汽车时刻表">桂平</a>
+              
+              <a href="/se-972-%E7%99%BE%E8%89%B2" title="坪山汽车站到百色汽车时刻表">百色</a>
+              
+              <a href="/se-972-%E9%9A%86%E6%9E%97" title="坪山汽车站到隆林汽车时刻表">隆林</a>
+              
+              <a href="/se-972-%E5%B9%B3%E6%9E%9C" title="坪山汽车站到平果汽车时刻表">平果</a>
+              
+              <a href="/se-972-%E9%9D%96%E8%A5%BF" title="坪山汽车站到靖西汽车时刻表">靖西</a>
+              
+              <a href="/se-972-%E5%BE%B7%E4%BF%9D" title="坪山汽车站到德保汽车时刻表">德保</a>
+              
+              <a href="/se-972-%E9%82%A3%E5%9D%A1" title="坪山汽车站到那坡汽车时刻表">那坡</a>
+              
+              <a href="/se-972-%E7%94%B0%E4%B8%9C" title="坪山汽车站到田东汽车时刻表">田东</a>
+              
+              <a href="/se-972-%E7%8E%89%E6%9E%97" title="坪山汽车站到玉林汽车时刻表">玉林</a>
+              
+              <a href="/se-972-%E9%99%86%E5%B7%9D" title="坪山汽车站到陆川汽车时刻表">陆川</a>
+              
+              <a href="/se-972-%E5%AE%B9%E5%8E%BF" title="坪山汽车站到容县汽车时刻表">容县</a>
+              
+              <a href="/se-972-%E5%8D%9A%E7%99%BD" title="坪山汽车站到博白汽车时刻表">博白</a>
+              
+              <a href="/se-972-%E9%98%B2%E5%9F%8E%E6%B8%AF" title="坪山汽车站到防城港汽车时刻表">防城港</a>
+              
+              <a href="/se-972-%E4%B8%8A%E6%80%9D" title="坪山汽车站到上思汽车时刻表">上思</a>
+              
+              <a href="/se-972-%E6%A1%82%E6%9E%97" title="坪山汽车站到桂林汽车时刻表">桂林</a>
+              
+              <a href="/se-972-%E5%85%A8%E5%B7%9E" title="坪山汽车站到全州汽车时刻表">全州</a>
+              
+              <a href="/se-972-%E5%85%B4%E5%AE%89" title="坪山汽车站到兴安汽车时刻表">兴安</a>
+              
+              <a href="/se-972-%E8%8D%94%E6%B5%A6" title="坪山汽车站到荔浦汽车时刻表">荔浦</a>
+              
+              <a href="/se-972-%E6%9F%B3%E5%B7%9E" title="坪山汽车站到柳州汽车时刻表">柳州</a>
+              
+              <a href="/se-972-%E5%8D%97%E5%AE%81" title="坪山汽车站到南宁汽车时刻表">南宁</a>
+              
+              <a href="/se-972-%E5%AE%BE%E9%98%B3" title="坪山汽车站到宾阳汽车时刻表">宾阳</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E5%AE%9C%E6%98%8C" title="坪山汽车站到宜昌汽车时刻表">宜昌</a>
+              
+              <a href="/se-972-%E8%A5%84%E6%A8%8A" title="坪山汽车站到襄樊汽车时刻表">襄樊</a>
+              
+              <a href="/se-972-%E6%9E%A3%E9%98%B3" title="坪山汽车站到枣阳汽车时刻表">枣阳</a>
+              
+              <a href="/se-972-%E5%A4%A9%E9%97%A8" title="坪山汽车站到天门汽车时刻表">天门</a>
+              
+              <a href="/se-972-%E5%88%A9%E5%B7%9D" title="坪山汽车站到利川汽车时刻表">利川</a>
+              
+              <a href="/se-972-%E8%8D%86%E9%97%A8" title="坪山汽车站到荆门汽车时刻表">荆门</a>
+              
+              <a href="/se-972-%E9%92%9F%E7%A5%A5" title="坪山汽车站到钟祥汽车时刻表">钟祥</a>
+              
+              <a href="/se-972-%E5%AE%89%E9%99%86" title="坪山汽车站到安陆汽车时刻表">安陆</a>
+              
+              <a href="/se-972-%E8%8D%86%E5%B7%9E" title="坪山汽车站到荆州汽车时刻表">荆州</a>
+              
+              <a href="/se-972-%E7%9B%91%E5%88%A9" title="坪山汽车站到监利汽车时刻表">监利</a>
+              
+              <a href="/se-972-%E7%9F%B3%E9%A6%96" title="坪山汽车站到石首汽车时刻表">石首</a>
+              
+              <a href="/se-972-%E5%85%AC%E5%AE%89" title="坪山汽车站到公安汽车时刻表">公安</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E5%95%86%E4%B8%98" title="坪山汽车站到商丘汽车时刻表">商丘</a>
+              
+              <a href="/se-972-%E5%91%A8%E5%8F%A3" title="坪山汽车站到周口汽车时刻表">周口</a>
+              
+              <a href="/se-972-%E5%A4%AA%E5%BA%B7" title="坪山汽车站到太康汽车时刻表">太康</a>
+              
+              <a href="/se-972-%E9%83%B8%E5%9F%8E" title="坪山汽车站到郸城汽车时刻表">郸城</a>
+              
+              <a href="/se-972-%E9%A9%BB%E9%A9%AC%E5%BA%97" title="坪山汽车站到驻马店汽车时刻表">驻马店</a>
+              
+              <a href="/se-972-%E6%B3%8C%E9%98%B3" title="坪山汽车站到泌阳汽车时刻表">泌阳</a>
+              
+              <a href="/se-972-%E6%B4%9B%E9%98%B3" title="坪山汽车站到洛阳汽车时刻表">洛阳</a>
+              
+              <a href="/se-972-%E8%AE%B8%E6%98%8C" title="坪山汽车站到许昌汽车时刻表">许昌</a>
+              
+              <a href="/se-972-%E5%8D%97%E9%98%B3" title="坪山汽车站到南阳汽车时刻表">南阳</a>
+              
+              <a href="/se-972-%E9%82%93%E5%B7%9E" title="坪山汽车站到邓州汽车时刻表">邓州</a>
+              
+              <a href="/se-972-%E5%94%90%E6%B2%B3" title="坪山汽车站到唐河汽车时刻表">唐河</a>
+              
+              <a href="/se-972-%E6%96%B0%E9%87%8E" title="坪山汽车站到新野汽车时刻表">新野</a>
+              
+              <a href="/se-972-%E9%83%91%E5%B7%9E" title="坪山汽车站到郑州汽车时刻表">郑州</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E5%9E%AB%E6%B1%9F" title="坪山汽车站到垫江汽车时刻表">垫江</a>
+              
+              <a href="/se-972-%E5%BF%A0%E5%8E%BF" title="坪山汽车站到忠县汽车时刻表">忠县</a>
+              
+              <a href="/se-972-%E6%A2%81%E5%B9%B3" title="坪山汽车站到梁平汽车时刻表">梁平</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E9%81%B5%E4%B9%89" title="坪山汽车站到遵义汽车时刻表">遵义</a>
+              
+              <a href="/se-972-%E6%B9%84%E6%BD%AD" title="坪山汽车站到湄潭汽车时刻表">湄潭</a>
+              
+              <a href="/se-972-%E4%BD%99%E5%BA%86" title="坪山汽车站到余庆汽车时刻表">余庆</a>
+              
+              <a href="/se-972-%E5%87%AF%E9%87%8C" title="坪山汽车站到凯里汽车时刻表">凯里</a>
+              
+              <a href="/se-972-%E8%B4%B5%E9%98%B3" title="坪山汽车站到贵阳汽车时刻表">贵阳</a>
+              
+              <a href="/se-972-%E5%85%B4%E4%B9%89" title="坪山汽车站到兴义汽车时刻表">兴义</a>
+              
+              <a href="/se-972-%E7%BD%97%E7%94%B8" title="坪山汽车站到罗甸汽车时刻表">罗甸</a>
+              
+              <a href="/se-972-%E9%83%BD%E5%8C%80" title="坪山汽车站到都匀汽车时刻表">都匀</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E6%88%90%E9%83%BD" title="坪山汽车站到成都汽车时刻表">成都</a>
+              
+              <a href="/se-972-%E5%8D%97%E5%85%85" title="坪山汽车站到南充汽车时刻表">南充</a>
+              
+              <a href="/se-972-%E8%A5%BF%E5%85%85" title="坪山汽车站到西充汽车时刻表">西充</a>
+              
+              <a href="/se-972-%E4%BB%AA%E9%99%87" title="坪山汽车站到仪陇汽车时刻表">仪陇</a>
+              
+              <a href="/se-972-%E6%AD%A6%E8%83%9C" title="坪山汽车站到武胜汽车时刻表">武胜</a>
+              
+              <a href="/se-972-%E5%B2%B3%E6%B1%A0" title="坪山汽车站到岳池汽车时刻表">岳池</a>
+              
+              <a href="/se-972-%E4%BB%81%E5%AF%BF" title="坪山汽车站到仁寿汽车时刻表">仁寿</a>
+              
+              <a href="/se-972-%E6%B3%B8%E5%B7%9E" title="坪山汽车站到泸州汽车时刻表">泸州</a>
+              
+              <a href="/se-972-%E9%81%82%E5%AE%81" title="坪山汽车站到遂宁汽车时刻表">遂宁</a>
+              
+              <a href="/se-972-%E5%B0%84%E6%B4%AA" title="坪山汽车站到射洪汽车时刻表">射洪</a>
+              
+              <a href="/se-972-%E8%93%AC%E6%BA%AA" title="坪山汽车站到蓬溪汽车时刻表">蓬溪</a>
+              
+              
+         </div>
+         </ul>
+           
+          <ul style="display: none;">
+         <div class="kyb_con">
+            
+              <a href="/se-972-%E6%B2%99%E5%B8%82" title="坪山汽车站到沙市汽车时刻表">沙市</a>
+              
+              <a href="/se-972-%E4%B8%87%E5%8E%BF" title="坪山汽车站到万县汽车时刻表">万县</a>
+              
+              <a href="/se-972-%E5%90%88%E5%B7%9D" title="坪山汽车站到合川汽车时刻表">合川</a>
+              
+              <a href="/se-972-%E5%85%AB%E6%AD%A5" title="坪山汽车站到八步汽车时刻表">八步</a>
+              
+              <a href="/se-972-%E5%A1%98%E6%B8%A1%E5%8F%A3" title="坪山汽车站到塘渡口汽车时刻表">塘渡口</a>
+              
+              <a href="/se-972-%E4%B9%98%E5%B7%9E" title="坪山汽车站到乘州汽车时刻表">乘州</a>
+              
+              <a href="/se-972-%E9%A3%8E%E5%86%88" title="坪山汽车站到风冈汽车时刻表">风冈</a>
+              
+              
+         </div>
+         </ul>
+           
+       </div>
+       </div>
+   </div>      
+   <script type="text/javascript"><!--
+        google_ad_client = "pub-8041083238990119";
+        /* 728x90, 创建于 10-9-15 */
+        google_ad_slot = "1805635540";
+        google_ad_width = 728;
+        google_ad_height = 90;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+      </div>  
+     </div>
+</div>
+<!--右-->
+<div class="mianright">
+  <div class="rtbg">
+    <script type="text/javascript"><!--
+google_ad_client = "pub-8041083238990119";
+/* 客运站全站250x250, 创建于 10-9-15 */
+google_ad_slot = "0889406632";
+google_ad_width = 250;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+  </div>
+  <div class="rtbg">
+    <div class="rtbgbt"><img src="images/an.gif" alt="" />深圳客运站</div>
+    <div class="rtbgwz">
+      <ul class="stationlist">
+        
+        <li><a href="/sid-951" title="福永汽车站时刻表" target="_blank">福永汽车站</a> </li>
+        
+        <li><a href="/sid-953" title="沙井中心客运站时刻表" target="_blank">沙井中心客运站</a> </li>
+        
+        <li><a href="/sid-38" title="宝安汽车站时刻表" target="_blank">宝安汽车站</a> </li>
+        
+        <li><a href="/sid-96" title="宝安龙华汽车站时刻表" target="_blank">宝安龙华汽车站</a> </li>
+        
+        <li><a href="/sid-972" title="坪山汽车站时刻表" target="_blank">坪山汽车站</a> </li>
+        
+        <li><a href="/sid-57" title="侨社汽车客运站时刻表" target="_blank">侨社汽车客运站</a> </li>
+        
+        <li><a href="/sid-39" title="深圳罗湖客运站时刻表" target="_blank">深圳罗湖客运站</a> </li>
+        
+        <li><a href="/sid-44" title="南山客运站时刻表" target="_blank">南山客运站</a> </li>
+        
+        <li><a href="/sid-43" title="龙岗汽车总站时刻表" target="_blank">龙岗汽车总站</a> </li>
+        
+        <li><a href="/sid-977" title="深圳银湖车站时刻表" target="_blank">深圳银湖车站</a> </li>
+        
+        <li><a href="/sid-975" title="沙井汽车站时刻表" target="_blank">沙井汽车站</a> </li>
+        
+        <li><a href="/sid-955" title="丹竹头汽车站时刻表" target="_blank">丹竹头汽车站</a> </li>
+        
+        <li><a href="/sid-974" title="坪地汽车站时刻表" target="_blank">坪地汽车站</a> </li>
+        
+        <li><a href="/sid-970" title="龙东汽车站时刻表" target="_blank">龙东汽车站</a> </li>
+        
+        <li><a href="/sid-45" title="南头汽车客运站时刻表" target="_blank">南头汽车客运站</a> </li>
+        
+        <li><a href="/sid-41" title="东湖汽车客运站时刻表" target="_blank">东湖汽车客运站</a> </li>
+        
+        <li><a href="/sid-40" title="蛇口客运站时刻表" target="_blank">蛇口客运站</a> </li>
+        
+        <li><a href="/sid-1132" title="福田汽车站时刻表" target="_blank">福田汽车站</a> </li>
+        
+        <li><a href="/sid-979" title="龙运通平湖汽车客运站时刻表" target="_blank">龙运通平湖汽车客运站</a> </li>
+        
+        <li><a href="/sid-98" title="龙岗布吉汽车站时刻表" target="_blank">龙岗布吉汽车站</a> </li>
+        
+      </ul>
+    </div>
+    <div class="gd"><a href="sc-shenzhen" title="更多深圳客运站">更多深圳客运站&gt;&gt;</a></div>
+  </div>
+  <div class="rtbg">
+    <div class="rtbgbt"><img src="images/an.gif" alt="" />深圳票务点</div>
+    <div class="rtbgwz">
+      <ul>
+                
+        <li><a href="/tcd-668"
+		title="龙华，民治，观兰到湘潭，长沙，宁乡，益阳，桃江详细信息">龙华，民治，观兰到湘潭，长沙，宁乡，益阳，桃 ...</a></li>
+        
+              </ul>
+    </div>
+    <div class="gd"><a href="piaowu-shenzhen" title="更多深圳票务点">更多深圳票务点&gt;&gt;</a></div>
+  </div>
+  <!--广告-->
+  <div class="gg">
+    <iframe src="/ad/bd250x250.htm" style="width:250px; height:250px; overflow: hidden;overflow-x:hidden; overflow-y:hidden;"  frameborder="0" scrolling="no"> </iframe>
+  </div>
+</div>
+<div style="clear:both"></div>
+</div>
+</div>﻿<!--底部-->
+<div id="foot">
+广告合作，投资本站QQ：1123892174(只限合作，不提供咨询)&nbsp;&nbsp;友情链接交换&rarr;
+<a href="http://sighttp.qq.com/cgi-bin/check?sigkey=d3cbf95869033cb6abb00e83e5975a758b2467901ead06af743244e5fe1ae205" target="_blank" onclick="javascript:var tempSrc='http://sighttp.qq.com/wpa.js?rantime='+Math.random()+'&amp;sigkey=d3cbf95869033cb6abb00e83e5975a758b2467901ead06af743244e5fe1ae205';var oldscript=document.getElementById('testJs');var newscript=document.createElement('script');newscript.setAttribute('type','text/javascript'); newscript.setAttribute('id', 'testJs');newscript.setAttribute('src',tempSrc);if(oldscript == null){document.body.appendChild(newscript);}else{oldscript.parentNode.replaceChild(newscript, oldscript);}return false;"><img border="0" src='http://wpa.qq.com/pa?p=1:934180741:1' alt="点击这里给我发消息" title="友情链接 | 广告合作" /></a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy;客运站&nbsp;&nbsp;<a href="http://www.miibeian.gov.cn/
+" target="_blank">苏ICP备09007625号</a></div>
+ <div style="display:none">
+     <script language="javascript" src="http://count23.51yes.com/click.aspx?id=230770251&logo=1" charset="gb2312"></script>
+ </div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16494430-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+ <script language="javascript" src="/ss-11.js" charset="gb2312"></script>
+</div>
+<script type="text/javascript"> /*keyunzhan漂浮120*270，创建于2010-5-28*/ var cpro_id = 'u29729';</script>
+<script type="text/javascript" src="http://cpro.baidu.com/cpro/ui/f.js"></script>
+<script type="text/javascript" src="/qqx.js"></script> 
+</body>
+</html>

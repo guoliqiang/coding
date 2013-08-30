@@ -5,10 +5,10 @@
 # It is necessary for linking the library.
 
 # The name that we can dlopen(3).
-dlname='libprotoc.so.8'
+dlname=''
 
 # Names of this library.
-library_names='libprotoc.so.8.0.0 libprotoc.so.8 libprotoc.so'
+library_names=''
 
 # The name of the static archive.
 old_library='libprotoc.a'

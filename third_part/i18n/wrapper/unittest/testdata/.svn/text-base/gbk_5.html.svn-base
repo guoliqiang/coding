@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0020)http://www.1518.com/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+
+<title>1518姓名测试_名字测试打分</title>
+<meta name="keywords" content="姓名测算,姓名测试,姓名配对,在线占卜,姓名打分,占卜">
+<meta name="description" content="1518姓名测试网站(www.1518.com)提供权威可信赖的在线测试服务：包括免费姓名测试、姓名配对、在线占卜、姓名打分等。">
+<link href="./gbk_5_files/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./gbk_5_files/fun.js"></script>
+<link rel="shortcut icon" href="http://www.1518.com/favicon.ico">
+<link rel="icon" href="http://www.1518.com/1518favicon.gif" type="image/gif">
+</head>
+<body>
+<div id="head">
+	<div class="left">1518姓名测试(www.1518.com)</div>
+    <div class="right">
+        <dl id="share" onmouseover="Show()" onmouseout="Hide()">
+            <dt>分享<div><!-- 圆角边 --></div></dt>
+            <dd id="shareHid" style="display: none; ">
+                <script src="./gbk_5_files/out_url.html"></script><a href="javascript:void(window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+encodeURIComponent(document.location.href)));" title="
+
+分享到QQ空间">QQ空间</a>
+<a href="javascript:window.open('http://www.kaixin001.com/repaste/share.php?rtitle='+encodeURIComponent(document.title.substring(0,76))+'&rurl='+encodeURIComponent(location.href)+'&rcontent=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); void 0" style="color:#000000;text-decoration:none;font-size:12px;font-weight:normal">开心网</a>
+<a href="javascript:window.open('http://share.renren.com/share/buttonshare.do?title='+encodeURIComponent(document.title.substring(0,76))+'&link='+encodeURIComponent(location.href)+'&content=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); void 0" style="color:#000000;text-decoration:none;font-size:12px;font-weight:normal">人人网</a>
+<a href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f='http://v.t.sina.com.cn/share/share.php?appkey=3593491597',u=z||d.location,p=['&url=',e(u),'&title=',e(t||d.title),'&source=',e(r),'&sourceUrl=',e(l),'&content=',c||'gb2312','&pic=',e(p||'')].join('');function%20a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,'','','','','',''));">新浪微博</a>
+<a href="javascript:void window.open('http://my.liaojie.com/fx?t=' + encodeURI(document.title) + '&u=' + this.location.href,'','height=450,width=480,left='+(document.body.clientWidth-480)/2+',top='+(document.body.clientHeight-450)/2+',toolbar=no,menubar=no,scrollabars=no,resizable=yes,location=no,status=no');">分享到了解</a>
+
+            </dd>
+        </dl>
+    </div>
+</div><div id="con" class="warp">
+	<div id="logo">
+    	<div class="logo"><a href="./gbk_5_files/gbk_5.html"><img src="./gbk_5_files/1518.gif" border="0" alt="1518姓名测试"></a></div>
+		<div class="tlt">
+			<h2>最多人使用的姓名测试网站</h2>
+			<span class="hui">为方便下次使用，请记住我们的网址:</span>&nbsp;<span class="red">www.1518.com</span>
+		</div>
+    	</div>
+   	<!-- 左侧 -->
+    	<div class="left">
+    	<!-- 搜索 -->
+    	<div id="serch">
+        	<form name="form1" action="http://www.1518.com/s" onsubmit="javascript:return validateForm();">
+			<input type="hidden" name="st" value="2">
+			<div class="tlt">姓名测试</div>
+            <table width="100%" border="0" cellpadding="0" cellspacing="1" class="tab1">
+              <tbody><tr>
+                <td width="5%" align="right">&nbsp;</td>
+                <td width="7%" align="left">姓：</td>
+                <td width="23%"><input name="word1" maxlength="2" type="text" size="13" class="inp"></td>
+                <td width="5%" align="left">名：</td>
+                <td width="39%"><input name="word2" maxlength="3" type="text" size="23" class="inp"></td>
+                <td width="21%"><input type="submit" name="Submit" value="开始测算" class="sub"></td>
+              </tr>
+            </tbody></table>
+
+            <div class="tishi">
+            	<font class="hui">测算试试：</font>
+<a href="http://www.1518.com/s?st=2&word1=%B2%CC&word2=%D7%BF%E5%FB&Submit=%BF%AA%CA%BC%B2%E2%CB%E3" class="hui">蔡卓妍</a>
+<a href="http://www.1518.com/s?st=2&word1=%D6%DC&word2=%B4%AB%D0%DB&Submit=%BF%AA%CA%BC%B2%E2%CB%E3" class="hui">周传雄</a>
+<a href="http://www.1518.com/s?st=2&word1=%D1%D4&word2=%B3%D0%D0%F1&Submit=%BF%AA%CA%BC%B2%E2%CB%E3" class="hui">言承旭</a>
+<a href="http://www.1518.com/s?st=2&word1=%B0%B2&word2=%D2%D4%D0%F9&Submit=%BF%AA%CA%BC%B2%E2%CB%E3" class="hui">安以轩</a>
+<a href="http://www.1518.com/s?st=2&word1=%D5%C5&word2=%BD%DC&Submit=%BF%AA%CA%BC%B2%E2%CB%E3" class="hui">张杰</a>
+<a href="http://www.1518.com/s?st=2&word1=%D0%ED&word2=%D6%BE%B0%B2&Submit=%BF%AA%CA%BC%B2%E2%CB%E3" class="hui">许志安</a>
+<a href="http://www.1518.com/s?st=2&word1=%C6%EB&word2=%C7%D8&Submit=%BF%AA%CA%BC%B2%E2%CB%E3" class="hui">齐秦</a>
+<a href="http://www.1518.com/s?st=2&word1=%D0%ED&word2=%CE%A1&Submit=%BF%AA%CA%BC%B2%E2%CB%E3" class="hui">许巍</a>
+            </div>
+            <div class="g46815"><div id="last_dis3">
+<script type="text/javascript" src="./gbk_5_files/js.js"></script><script type="text/javascript"><!--
+google_ad_client = "pub-6665102527169468";
+/* 468x15, 创建于 09-3-17 */
+google_ad_slot = "2748385374";
+google_ad_width = 468;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript" src="./gbk_5_files/show_ads.js">
+</script><script src="./gbk_5_files/show_ads_impl.js"></script><script>google_protectAndRun("ads_core.google_render_ad", google_handleError, google_render_ad);</script><ins style="display:inline-table;border:none;height:15px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><ins id="google_ads_frame2_anchor" style="display:block;border:none;height:15px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><iframe allowtransparency="true" frameborder="0" height="15" hspace="0" id="google_ads_frame2" marginheight="0" marginwidth="0" name="google_ads_frame" scrolling="no" src="./gbk_5_files/ads.html" style="left:0;position:absolute;top:0" vspace="0" width="468"></iframe></ins></ins>
+
+</div></div>
+            </form>
+        </div>
+        <div id="menu">
+        	    <h2>我们的服务</h2>
+            <dl>
+            	<dd><a href="./gbk_5_files/gbk_5.html"><font class="red">姓名测试</font></a></dd>
+            	<dd><a href="http://ceshi.1518.com/">心理测试</a></dd>
+            	<dd><a href="http://zhougongjiemeng.1518.com/">周公解梦</a></dd>
+            	<dd><a href="http://wannianli.1518.com/">万年历</a></dd>
+            </dl>
+            <dl>
+            	<dd><a href="http://shouji.1518.com/">手机号码测吉凶</a></dd>
+            	<dd><a href="http://chepai.1518.com/">车牌号码吉凶</a></dd>
+            	<dd><a href="http://qq.1518.com/"><font class="blue">QQ号码吉凶</font></a></dd>
+            	<dd><a href="http://yuming.1518.com/">域名占卜</a></dd>
+            </dl>
+            <dl>
+            	<dd><a href="http://xingzuo.1518.com/">星座查询</a></dd>
+            	<dd><a href="http://xingzuopeidui.1518.com/">星座配对</a></dd>
+            	<dd><a href="http://xingzuo.1518.com/astro.html">星座运程</a></dd>
+            	<dd><a href="http://taluopai.1518.com/">塔罗牌</a></dd>
+            </dl>
+            <dl>
+            	<dd><a href="http://qiming.1518.com/">免费起名</a></dd>
+            	<dd><a href="http://gongsi.1518.com/">公司测名</a></dd>
+            	<dd><a href="http://xuexingpeidui.1518.com/">血型配对</a></dd>
+            	<dd><a href="http://xuexingfenxi.1518.com/">血型分析</a></dd>
+            </dl>
+            <dl>
+            	<dd><a href="http://shengxiaopeidui.1518.com/">生肖配对</a></dd>
+            	<dd><a href="http://shengxiao.1518.com/">生肖查询</a></dd>
+            	<dd><a href="http://shengxiao.1518.com/shengri/">生日密码</a></dd>
+            	<dd><a href="http://t.1518.com/" target="_blank">微博有缘人</a></dd>
+	    </dl>
+            <dl>
+		<dd><a href="http://peidui.1518.com/">姓名配对</a></dd>
+                <dd><a href="http://qianming.1518.com/"><font class="green">个性签名</font></a></dd>
+		<dd><a href="http://renpin.1518.com/">人品计算器</a></dd>
+                <dd><a href="http://fengshui.1518.com/">风水</a></dd>
+            </dl>        </div>
+        <div class="mt">
+        	<center>
+	            	<div id="last_dis1">
+<script type="text/javascript" src="./gbk_5_files/js(1).js"></script><a href="http://sp.1518.com/go.php?u=1&type=1" target="_blank"><img src="./gbk_5_files/201010221459677.gif" border="0"></a>
+
+</div>
+            	</center>
+	</div>
+    </div>
+    <!-- 右侧 -->
+    <div class="right">
+    	<div id="last_dis2">
+<script type="text/javascript" src="./gbk_5_files/js(2).js"></script><script type="text/javascript"><!--
+google_ad_client = "pub-6665102527169468";
+/* 336x280, 创建于 10-7-13 */
+google_ad_slot = "5938223137";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript" src="./gbk_5_files/show_ads.js">
+</script><script src="./gbk_5_files/show_ads_impl.js"></script><script src="./gbk_5_files/expansion_embed.js"></script><script src="./gbk_5_files/test_domain.js"></script><script>google_protectAndRun("ads_core.google_render_ad", google_handleError, google_render_ad);</script><ins style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px"><ins id="google_ads_frame1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px"><iframe allowtransparency="true" frameborder="0" height="280" hspace="0" id="google_ads_frame1" marginheight="0" marginwidth="0" name="google_ads_frame" scrolling="no" src="./gbk_5_files/ads(1).html" style="left:0;position:absolute;top:0" vspace="0" width="336"></iframe></ins></ins>
+
+</div>
+    	<style>
+	.list_fagui{ width:100%; overflow:hidden;}
+	.list_fagui li{width:80px;line-height:18px;font-size:12px;}
+	.list_fagui h2{ font-size:14px; height:30px; margin-bottom:10px; line-height:34px; overflow:hidden; border-bottom:1px solid #E4E4E4;}
+	</style>
+	<div class="list_fagui">
+		<h2>这些人正在测算</h2>
+		<marquee style="width:100%;height:80px;" scrollamount="1" direction="up" onmouseover="this.stop()" onmouseout="this.start()">
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B5%CB&word2=%D7%D3%D6%DB" target="_blank">邓子舟</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CD%F5&word2=%CF%B2%B0%B2" target="_blank">王喜安</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D5%C5&word2=%D4%C2%C1%E1" target="_blank">张月玲</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C5%CB&word2=%D0%C0%E7%F7" target="_blank">潘欣琪</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C2%DE&word2=%C7%EC%B8%D6" target="_blank">罗庆钢</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B4%DE&word2=%CD%A2%B3%AC" target="_blank">崔廷超</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D0%ED&word2=%BC%D2%ACu" target="_blank">许家瑄</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C1%BA&word2=%C9%D9%C6%C1" target="_blank">梁少屏</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C0%EE&word2=%DC%BD%C8%D8" target="_blank">李芙蓉</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D5%D4&word2=%C8%F4%DC%B0" target="_blank">赵若馨</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%BB%C6&word2=%D2%E0%D0%FE" target="_blank">黄亦玄</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B1%DF&word2=%D2%B5%B1%A6" target="_blank">边业宝</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%BA%FA&word2=%CF%FE%C1%C1" target="_blank">胡晓亮</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B9%F9&word2=%E1%B0%E8%F4" target="_blank">郭岚梏</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CE%C2&word2=%D7%D3%C0%A4" target="_blank">温子坤</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CB%CE&word2=%E7%F1%B3%A9" target="_blank">宋珩畅</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C2%AC&word2=%E2%F9%DC%E7" target="_blank">卢怡茜</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%BA%AB&word2=%E5%B6%D4%F3" target="_blank">韩宥泽</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B3%C2&word2=%CA%AB%EC%D7" target="_blank">陈诗熳</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D3%E0&word2=%EA%D8%D2%D0" target="_blank">余曦倚</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C1%F5&word2=%D7%D3%C7%C7" target="_blank">刘子乔</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CE%BA&word2=%C7%EC%D4%C6" target="_blank">魏庆云</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CE%E4&word2=%D4%D8%D8%A9" target="_blank">武载丞</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D5%C5&word2=%D3%EE%E5%96" target="_blank">张宇鍠</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C1%D6&word2=%B4%BA%C1%D6" target="_blank">林春林</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C5%CB&word2=%BD%A8%C9%FA" target="_blank">潘建生</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D3%E0&word2=%D4%F3%CF%BC" target="_blank">余泽霞</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D2%FC&word2=%ABh%CD%A5" target="_blank">尹玥庭</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CA%B7&word2=%BA%C6%B4%D4" target="_blank">史浩丛</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CB%CE&word2=%C3%F7%BA%BD" target="_blank">宋明航</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B3%C2&word2=%B0%A2%B6%B7" target="_blank">陈阿斗</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C4%F4&word2=%BF%C6%D1%D4" target="_blank">聂科言</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B8%CA&word2=%BA%C6%C3%FA" target="_blank">甘浩铭</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D1%D5&word2=%C8%F0%C1%AB" target="_blank">颜瑞莲</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D1%F4&word2=%D5%E6%F3%CF" target="_blank">阳真笙</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CD%F5&word2=%D7%D3%D5%D1" target="_blank">王子昭</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C2%ED&word2=%BF%A5" target="_blank">马骏</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%BA%A3&word2=%BF%A5%BA%AD" target="_blank">海骏涵</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D3%E0&word2=%D5%DC%BA%EA" target="_blank">余哲宏</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C1%F5&word2=%D2%CB%D1%A9" target="_blank">刘宜雪</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D5%B2&word2=%C1%A6%B6%E4" target="_blank">詹力朵</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CA%AF&word2=%C1%FA%C9%FA" target="_blank">石龙生</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%BB%F4&word2=%D4%CF%C1%F9" target="_blank">霍韵六</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B3%C2&word2=%D2%F6%CF%E7" target="_blank">陈姻乡</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C0%EE&word2=%E3%E5%E8%AA" target="_blank">李沐瑾</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C1%F5&word2=%B4%F3%C3%B7" target="_blank">刘大梅</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D2%F3&word2=%E8%A4%CF%BC" target="_blank">殷瑜霞</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CE%E4&word2=%CB%CC%D3%EA" target="_blank">武颂雨</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B7%BD&word2=%D1%DE%C3%B7" target="_blank">方艳梅</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B4%F7&word2=%B1%BE%C0%FB" target="_blank">戴本利</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CD%F5&word2=%D7%D3%C0%E8" target="_blank">王子黎</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C7%F1&word2=%98s%BD%F0" target="_blank">邱榮金</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CC%D5&word2=%BF%A1%D1%E5" target="_blank">陶俊彦</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D5%C5&word2=%B8%BB%B7%E1" target="_blank">张富丰</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D2%FC&word2=%B6%AB%BD%DC" target="_blank">尹东杰</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B6%AD&word2=%D3%EA%B9%DA" target="_blank">董雨冠</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B3%C2&word2=%C0%A4%E9%BA" target="_blank">陈坤楹</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%BA%FA&word2=%D7%D3%B7%E5" target="_blank">胡子峰</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C4%F4&word2=%CE%C0%C3%E1" target="_blank">聂卫冕</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C7%F1&word2=%D0%F0%BF%AD" target="_blank">邱叙凯</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D6%EC&word2=%D5%FD%C0%D6" target="_blank">朱正乐</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%BB%C6&word2=%CE%C0%C6%BC" target="_blank">黄卫萍</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B1R&word2=%D1%E0%83x" target="_blank">盧燕儀</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C3%CF&word2=%D7%D3%E9%AA" target="_blank">孟子楠</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B3%C2&word2=%B8%CC%CF%E7" target="_blank">陈柑乡</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D0%ED&word2=%C0%ED" target="_blank">许理</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D5%C2&word2=%CB%AE%CC%EC" target="_blank">章水天</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C5%ED&word2=%C8%F3%C4%DD" target="_blank">彭润妮</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D6%EC&word2=%B5%A4%CD%AE" target="_blank">朱丹彤</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C8%CE&word2=%BC%CE%BA%C6" target="_blank">任嘉浩</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D5%D4&word2=%CA%C0%D9%BE" target="_blank">赵世倬</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B5%CB&word2=%D6%DB%D7%D3" target="_blank">邓舟子</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C7%FA&word2=%D1%C5%E7%E4" target="_blank">曲雅玟</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C0%EE&word2=%D3%EA%C5%B5" target="_blank">李雨诺</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C0%EE&word2=%C8%F3%C7%DA" target="_blank">李润勤</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%BA%FA&word2=%C3%AB%EE%A3" target="_blank">胡毛睿</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B9%C5&word2=%BD%A8" target="_blank">古建</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D1%EE&word2=%C6%E4%D4%AA" target="_blank">杨其元</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C8%EE&word2=%C9%D0%EC%F7" target="_blank">阮尚祺</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C7%F0&word2=%C7%AC" target="_blank">丘乾</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D0%ED&word2=%EA%BB%C8%BB" target="_blank">许昊然</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%BC%D6&word2=%C1%88" target="_blank">贾翀</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D3%E1&word2=%BF%C9%BB%AA" target="_blank">俞可华</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CB%DE&word2=%CF%C2%D2%A3" target="_blank">宿下遥</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%B1%CF&word2=%BB%D4%C8%E3" target="_blank">毕辉茹</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CC%EF&word2=%C3%F7%C1%C1" target="_blank">田明亮</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C0%E4&word2=%D0%BE%D2%A5" target="_blank">冷芯谣</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C4%AA&word2=%BA%A3%D1%E0" target="_blank">莫海燕</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C5%E1&word2=%CB%BC%ED%B5" target="_blank">裴思淼</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CD%F5&word2=%BC%D1%C8%E3" target="_blank">王佳茹</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C1%F5&word2=%EA%CC%D5%C1" target="_blank">刘晏樟</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%C1%F5&word2=%C3%B5" target="_blank">刘玫</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D1%EE&word2=%D2%C0%D2%C0" target="_blank">杨依依</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CD%F5&word2=%C0%F2" target="_blank">王莉</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D3%CE&word2=%ADZ%E5%D0" target="_blank">游璟逍</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D0%EC&word2=%C3%F9%B8%DE" target="_blank">徐鸣皋</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D1%D5&word2=%EE%A3%E6%EB" target="_blank">颜睿骐</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D3%C8&word2=%CF%FE%BA%E9" target="_blank">尤晓洪</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%CB%EF&word2=%C3%C0%C8%D9" target="_blank">孙美荣</a></li>
+						
+		<li><a href="http://www.1518.com/s?st=2&word1=%D5%C5&word2=%BE%FC" target="_blank">张军</a></li>
+				</marquee>
+        </div> 
+    </div>
+</div>
+<div id="down" class="warp">
+<div class="d1 hui"><a href="./gbk_5_files/gbk_5.html" class="hui">1518姓名测试</a></div>
+<div class="d2 hui"><img src="./gbk_5_files/jz.jpg" align="absmiddle"><a href="http://www.1518.com/jz.php">捐赠给开发者</a> | <a href="http://www.1518.com/service.php">广告服务</a> | <a href="./gbk_5_files/gbk_5.html" onclick="this.style.behavior=&#39;url(#default#homepage)&#39;;this.setHomepage(&#39;http://www.1518.com/&#39;);return false;" class="hui" target="_top">设置主页</a> | <a href="javascript:window.external.AddFavorite('http://www.1518.com/', '1518姓名测试 - www.1518.com')" class="hui">IE收藏夹</a></div>
+<div class="d3 hui">
+友情链接: 
+		
+<a href="http://www.hao123.com/" class="hui" target="_blank">hao123</a>
+		
+<a href="http://www.520.com/" class="hui" target="_blank">520上网主页</a>
+		
+<a href="http://abc.qq.com/" class="hui" target="_blank">QQ网址大全</a>
+		
+<a href="http://123.taobao.com/" class="hui" target="_blank">淘网址</a>
+		
+<a href="http://www.99166.com/" class="hui" target="_blank">八字周易算命</a>
+		
+<a href="http://www.2523.com/" class="hui" target="_blank">2523导航</a>
+		
+<a href="http://www.spos.com.cn/" class="hui" target="_blank">食谱网</a>
+		
+<a href="http://51.aqioo.com/" class="hui" target="_blank">免费算命大全</a>
+		
+<a href="http://www.globrand.com/" class="hui" target="_blank">全球品牌网</a>
+		
+<a href="http://www.andfang.com/" class="hui" target="_blank">北京租房</a>
+		
+<a href="http://hao.360.cn/" class="hui" target="_blank">360网址</a>
+		
+<a href="http://www.yxlady.com/" class="hui" target="_blank">伊秀女性网</a>
+		
+<a href="http://www.chinatarot.com/" class="hui" target="_blank">塔罗牌占卜</a>
+		
+<a href="http://china.zyw.com/" class="hui" target="_blank">电子商务资源网</a>
+<a href="http://www.1518.com/link.html" class="hui">更多&gt;&gt;</a>
+</div>
+</div>
+<script language="javascript">
+var w=document.form1.word1;
+w.focus();
+function validateForm()
+{
+	if(form1.word1.value == "") 
+	{
+		alert("请输入您的姓氏！");
+		form1.word1.focus();
+		return false;
+	}
+	if(form1.word2.value == "") 
+	{
+		alert("请输入您的名字！");
+		form1.word2.focus();
+		return false;
+	}
+	var reg=/[^\u4E00-\u9FA5]/g;
+	if(reg.test(form1.word1.value))
+	{ 
+		alert("请您输入汉字！");
+	     	form1.word1.focus();
+	     	return false;
+	}
+	if(reg.test(form1.word2.value))
+	{ 
+		alert("请您输入汉字！");
+	     	form1.word2.focus();
+	     	return false;
+	}
+}
+</script>
+<div id="last_dis11" style="display:none"></div>
+<div id="last_dis22" style="display:none"></div>
+<div id="last_dis33" style="display:none"></div>
+<script type="text/javascript">
+document.getElementById("last_dis1").innerHTML=document.getElementById("last_dis11").innerHTML;
+document.getElementById("last_dis2").innerHTML=document.getElementById("last_dis22").innerHTML;
+document.getElementById("last_dis3").innerHTML=document.getElementById("last_dis33").innerHTML;
+document.getElementById("last_dis11").innerHTML="";
+document.getElementById("last_dis22").innerHTML="";
+document.getElementById("last_dis33").innerHTML="";
+</script>
+<div style="display:none"><script src="./gbk_5_files/stat.php" language="JavaScript" charset="gb2312"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1252347" target="_blank" title="站长统计">站长统计</a><img src="./gbk_5_files/stat.htm" border="0" width="0" height="0"></div>
+
+</body></html>

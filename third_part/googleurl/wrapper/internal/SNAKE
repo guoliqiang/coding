@@ -1,0 +1,11 @@
+cc_library(name = 'googleurlwrapper',
+           srcs =['url.cc',
+                  'url_denormalizer.cc'
+                 ],
+           deps =[
+                  '//base/internal:base',
+                  '//third_part/googleurl/internal:googleurl',
+                  '//third_part/url_util/internal:url_util',
+                  '//third_part/punycode/internal:punycode'
+                 ]
+          )

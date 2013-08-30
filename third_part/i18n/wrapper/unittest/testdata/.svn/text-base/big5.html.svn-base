@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>網頁皇(香港) 送 $880 網頁設計增值服務 客戶眾多 信心保證 </title>
+<meta name="description" content="平價高質網頁設計服務--客戶眾多,信心保證! 多年經驗,價格取勝! 明碼實價,絕不取巧! " />
+<meta name="keywords" content="網頁設計, 網站設計, web design" />
+<script type="text/javascript">
+<!--
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+    font-size: 11pt
+}
+
+a:link {
+	text-decoration: none;
+	color: #476C8E;
+}
+a:visited {
+	text-decoration: none;
+	color: #476C8E;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
+
+.style1 {
+    font-size: 12pt;
+    color: #FF0000;
+}
+.style3 {font-size: 12}
+
+-->
+</style>
+
+</head>
+<body bgcolor="#FFFFFF" onload="MM_preloadImages('images/button1_o.gif','images/button2_o.gif','images/button3_o.gif','images/button4_o.gif','images/button5_o.gif')" link="#0000CC" vlink="#0000CC" alink="#0000CC">
+<!-- ImageReady Slices (layout.psd) -->
+<table id="Table_01" width="801"  border="0" cellpadding="0" cellspacing="0">
+ <tr> 
+  <td><a href="http://webking.hk/"><img src="images/logo.gif" alt="主頁" width="141" height="45" border="0" /></a></td>
+  <td colspan="3"><a href="http://webking.hk/" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image40','','images/button1_o.gif',1)"><img src="images/button1.gif" alt="關於我們" name="Image40" width="87" height="45" border="0" /></a></td>
+  <td colspan="2"><a href="http://webking.hk/index.php?page=2" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image41','','images/button2_o.gif',1)"><img src="images/button2.gif" alt="聯絡我們" name="Image41" width="84" height="45" border="0" /></a></td>
+  <td colspan="2"><a href="http://webking.hk/index.php?page=3" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image38','','images/button3_o.gif',1)"><img src="images/button3.gif" alt="觀看樣板" name="Image38" width="88" height="45" border="0" /></a></td>
+  <td><a href="http://webking.hk/index.php?page=4" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image39','','images/button4_o.gif',1)"><img src="images/button4.gif" alt="客戶列表" name="Image39" width="85" height="45" border="0" /></a></td>
+  <td colspan="2"><a href="http://webking.hk/index.php?page=5" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image42','','images/button5_o.gif',1)"><img src="images/button5.gif" alt="價目表" name="Image42" width="94" height="45" border="0" /></a></td>
+  <td><img src="images/menu_right.gif" width="221" height="45" alt="" usemap="#Map" border="0" /></td>
+  <td><img src="images/spacer.gif" width="1" height="45" alt="" /></td>
+ </tr>
+ <tr> 
+  <td colspan="2"><img src="images/header1.gif" width="185" height="224" alt="" /></td>
+  <td colspan="9"><img src="images/header2.gif" width="394" height="224" alt="" /></td>
+  <td> <img src="images/header3.gif" width="221" height="224" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="1" height="224" alt="" /></td>
+ </tr>
+ <tr> 
+  <td colspan="2" rowspan="9" align="center" valign="top"><div align="center"><img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+    <img src="images/mcp_logo.gif" alt="Microsoft Certified Professional" width="166" height="73" /><br />
+    <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+      <a href="http://webking.hk/index.php?page=14" >為您節省40%費用<br />
+     </a> <img src="images/menu_line.gif" width="185" height="10" alt="" /><br /> 
+     <!-- <a href="http://webking.hk/index.php?page=5">$499 = .com + 電郵</a><br /> -->
+      <a href="http://webking.hk/index.php?page=5">$1,699 = 網頁設計方案</a> <br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+	  
+	  
+      <a href="http://webking.hk/index.php?page=5#value_added_880">送 $880 網頁設計增值服務</a> <br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+      <a href="http://webking.hk/index.php?page=30">網頁皇月曆女郎 </a><br />
+
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+      <a href="http://webking.hk/index.php?page=16">網頁皇宣傳海報 </a><br />
+
+      
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+    <a href="http://webking.hk/ecard.php" target="ecard">網頁皇電子賀卡</a><br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />	  
+
+      <img src="images/contact.gif" alt="" width="185" height="140" border="0" usemap="#Map4" />
+      <map name="Map4" id="Map4">
+        <area shape="rect" coords="75,54,168,66" href="mailto:info@webking.hk" alt="info@webking.hk" />
+        <area shape="rect" coords="72,9,142,37" href="http://webking.hk/index.php?page=2" alt="聯絡我們" />
+      </map>
+	  
+
+<a href="http://webking.hk/case.php?id=232" target="new">婚紗/嫁娶相關網頁實例</a> <br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+	  
+	  	  
+      <a href="http://webking.hk/case.php?id=330" target="new">時裝內衣網頁實例</a> <br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+  
+        <a href="http://webking.hk/case.php?id=212" target="new">首飾網頁實例</a> <br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+          
+          
+        <a href="http://webking.hk/case.php?id=561" target="new">團體及協會網頁實例</a> <br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />          
+          
+      <a href="http://webking.hk/case.php?id=444" target="new">花店網頁設計實例</a> <br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+      
+      <a href="http://webking.hk/case.php?id=220" target="new">地產公司網頁設計實例</a> <br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+      
+      <a href="http://webking.hk/case.php?id=391" target="new">僱傭中心網頁設計實例</a> <br />
+      <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+
+     
+      
+      <br />
+
+    <img src="images/signin.gif" width="185" height="80" alt="" usemap="#Map3" border="0" /><br />
+    <a href="http://webking.hk/index.php?page=7">我要嫁給網頁皇 </a><br />
+    <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+    <a href="http://webking.hk/index.php?page=8">如何擊敗同業網站?</a><br />
+    <img src="images/menu_line.gif" width="185" height="10" alt="" /><br />
+    <a href="http://webking.hk/index.php?page=9">最好的網站宣傳方法</a><br />
+    <img src="images/menu_line.gif" width="185" height="10" alt="" />
+	    <a href="http://webking.hk/index.php?page=21">Web design price list</a><br />
+    <img src="images/menu_line.gif" width="185" height="10" alt="" />
+		    <a href="http://webking.hk/index.php?page=22">最平的網上商店</a><br />
+    <img src="images/menu_line.gif" width="185" height="10" alt="" />
+	
+	
+	</div></td>
+  <td colspan="9" rowspan="9" valign="top"><br />
+    
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="371" height="291">
+
+  <param name="movie" value="images/banner_carr.swf" />
+
+  <param name="quality" value="high" />
+
+  <embed src="images/banner_carr.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="371" height="291"></embed>
+
+</object>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="2">
+
+    <tr valign="top">
+
+      <td><img src="images/arrow3.gif" width="25" height="25"  alt="" /></td>
+
+      <td><span class="style1">客戶眾多 信心保證</span></td>
+
+    </tr>
+
+    <tr valign="top"> 
+
+     <td width="11">&nbsp;</td>
+
+     <td>過去 10 年為大量知名公司,企業,機構及名人服務. <br />
+
+       能夠得到眾多客戶認同, 就是我們對您的信心保證. <br />
+
+       <br />
+
+      <a href="http://webking.hk/index.php?page=4">[客戶例表] </a> :: 
+
+	  <a href="http://webking.hk/index.php?page=3">[網頁設計實例] </a></td>
+
+    </tr>
+
+    <tr valign="top">
+
+      <td width="11">&nbsp;</td>
+
+      <td>&nbsp;</td>
+
+    </tr>
+
+    <tr valign="top">
+
+      <td width="11"><img src="images/arrow3.gif" width="25" height="25"  alt="" /></td>
+
+      <td><span class="style1">明碼實價 絕無隱藏收費</span></td>
+
+    </tr>
+
+    <tr valign="top">
+
+      <td width="11">&nbsp;</td>
+
+      <td>一般香港網頁公司的網頁設計服務費用並不包括寄存和.com域名. 
+
+        最後的隱藏收費往往會比預算高出1倍! <br />
+
+        <br />        
+
+        <strong>網頁皇</strong>的<a href="http://webking.hk/index.php?page=5">網頁計劃</a>已包括必要的服務, 適合大部分客戶需求. 以優惠價格, 替你設計網頁.<br />
+
+        <br />
+
+      <a href="http://webking.hk/index.php?page=5">[價目表]</a> <a href="http://webking.hk/index.php?page=6&amp;action=register"></a></td>
+
+    </tr>
+
+    <tr valign="top">
+
+      <td>&nbsp;</td>
+
+      <td>&nbsp;</td>
+
+    </tr>
+
+    <tr valign="top">
+
+      <td><img src="images/arrow3.gif" width="25" height="25" alt="" /></td>
+
+      <td><span class="style1">微軟認可MCP 為您專業服務</span></td>
+
+    </tr>
+
+    <tr valign="top">
+
+      <td>&nbsp;</td>
+
+      <td>公司管理層獲微軟認可MCP, 目標是不斷提升團隊質素.</td>
+
+    </tr>
+
+    <tr valign="top">
+
+      <td>&nbsp;</td>
+
+      <td>&nbsp;</td>
+
+    </tr>
+
+    <tr valign="top">
+
+      <td width="11"><img src="images/arrow3.gif" width="25" height="25" alt=""  /></td>
+
+      <td><span class="style1">網頁皇為您節省40%費用 提供平價高質網頁設計</span></td>
+
+    </tr>
+
+    <tr valign="top">
+
+      <td>&nbsp;</td>
+
+      <td><strong>一</strong>般香港網頁公司多以捆綁式銷售,使您購買過多用不著或重複的服務. 
+
+        
+
+        縱使標榜為免費, 但成本早已計在您的帳單上!<br />
+
+        <br />
+
+        <table width="100%" border="0" cellspacing="2">
+
+          <tr>
+
+            <td>通常您要為以下的服務多付 1 倍價錢:</td>
+
+          </tr>
+
+          <tr>
+
+            <td><img src="images/arrow2.gif" width="37" height="11" alt=""  /> 有了人流分析, 人流計會變得多餘</td>
+
+          </tr>
+
+          <tr>
+
+            <td><img src="images/arrow2.gif" width="37" height="11" alt=""  /> 無限電郵地址, 但 5 個已經十分足夠</td>
+
+          </tr>
+
+          <tr>
+
+            <td><img src="images/arrow2.gif" width="37" height="11" alt=""  /> 1GB的網頁空間, 比您需要的多出數 10 倍</td>
+
+          </tr>
+
+          <tr>
+
+            <td><img src="images/arrow2.gif" width="37" height="11" alt=""  /> 100 個搜尋器登記, 但 3 個著名搜尋器而足夠</td>
+
+          </tr>
+
+          <tr>
+
+            <td><img src="images/arrow2.gif" width="37" height="11" alt=""  /> 還有大多數客戶不會用到的如: <br />
+
+<img src="images/spacer.gif" width="37" height="11" alt="" /> 無限自動回郵, 無限電郵轉寄, <br />
+
+<img src="images/spacer.gif" width="37" height="11" alt="" /> 無限電郵別名, 無限子網域, <br />
+
+<img src="images/spacer.gif" width="37" height="11" alt="" /> PHP, ASP, CGI, Perl, SSI, MySQL, SSL ... ...</td>
+
+          </tr>
+
+        </table>
+
+        <br />
+
+         <strong>事實証明</strong>只要在搜尋器查詢&quot;網頁設計&quot;, &quot;網站設計&quot; 或 &quot;web design 公司&quot;, 
+
+        您會發現大部分網頁設計服務公司也是如此. 
+
+        <br />
+
+        <br />
+
+        <table width="100%" border="0" cellspacing="2">
+
+          <tr>
+
+            <td><strong>網頁皇</strong>只收取您需要的基本服務費用!</td>
+
+          </tr>
+
+          <tr>
+
+            <td><img src="images/arrow2.gif" width="37" height="11" alt=""  />看不明手上的複雜網頁設計報價單? </td>
+
+          </tr>
+
+          <tr>
+
+            <td><img src="images/arrow2.gif" width="37" height="11" alt=""  />不明白報價單中網頁設計收費細節?</td>
+
+          </tr>
+
+          <tr>
+
+            <td>請看看我們簡單的 <a href="http://webking.hk/index.php?page=5">[價目表]</a> <a href="http://webking.hk/index.php?page=6&amp;action=register"></a></td>
+
+          </tr>
+
+      </table>      </td>
+
+    </tr>
+
+    <tr valign="top"> 
+
+     <td>&nbsp;</td>
+
+     <td><br /></td>
+
+    </tr>
+
+    <tr valign="top"> 
+
+     <td width="11"><img src="images/arrow3.gif" width="25" height="25"  alt="" /></td>
+
+     <td><span class="style1">關於我們</span></td>
+
+    </tr>
+
+    <tr valign="top"> 
+
+     <td width="11">&nbsp;</td>
+
+     <td><b>B&amp;T Co. Ltd.</b> 成立於2001年2月. 
+
+      至今已建立了一群關係良好的客戶. 致力於網頁設計, 網站內容管理與及寄存服務. 
+
+       <br />
+
+       <br />
+
+      我們設立&quot;網頁皇(香港)&quot;部門, 專門提供靜態網頁服務.  <a href="http://www.btcms.com" target="new">[B&amp;T公司網站]</a></td>
+
+    </tr>
+
+</table>
+
+ 
+   
+   
+   
+   <br />
+   <br />
+   <table width="100%" border="0" cellpadding="2" cellspacing="0">
+     <tr valign="top">
+       <td width="11"><img src="images/arrow3.gif" width="25" height="25" alt="" /></td>
+       <td><span class="style1">網頁相關資訊</span></td>
+     </tr>
+     <tr valign="top">
+       <td width="11">&nbsp;</td>
+       <td><span class="style3"> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=332">2011 網頁皇女郎 @ WebKing.hk</a><br /> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=331">SAMSUNG SGH-i908 Hard reset (回原廠預設值) 詳盡方法</a><br /> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=330">2010年4月 網頁皇后 Anita</a><br /> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=329">網頁皇后 Poster</a><br /> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=328">2010 網頁皇后  </a><br /> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=327">2010網頁皇女郎月曆</a><br /> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=326">網上創業商機 之 自己做老板 不做打工仔 (美少女 Maggie)!!</a><br /> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=325">網頁設計實例 之 美容店 及 化妝品公司</a><br /> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=324">網頁設計實例 之 時裝店, 時裝公司, Fashion </a><br /> <img src="images/arrow.gif" width="16" height="11" border="0" alt="" /><a href ="http://webking.hk/forum/index.php?topic=323">網頁設計實例 之 補習班</a><br />      
+         <a href="http://webking.hk/forum/index.php">[更多]</a></span></td>
+     </tr>
+   </table>
+   <br /></td>
+  <td rowspan="9" valign="top"> <img src="images/newdemo.gif" alt="" width="221" height="132" border="0" usemap="#Map5" /><br />
+   <br />
+   
+   <table width="140" border="1" align="center" cellpadding="0" cellspacing="5" >
+    <tr>
+     <td align="center" valign="top">
+      <div align="center" id="demo" style="overflow:hidden;height:400px;width:95px;">
+       <div id="demo1"><a href="http://webking.hk/index.php?page=3"><img src="images/demo1.jpg" width="120" height="96" border="0" alt="" /><br />
+<img src="images/demo2.jpg" width="120" height="101" border="0" alt="" /><br />
+<img src="images/demo3.jpg" width="120" height="97" border="0" alt="" /><br />
+<img src="images/demo6.jpg" width="120" height="108" border="0" alt="" /><br />
+<img src="images/demo5.jpg" width="120" height="124" border="0" alt="" /><br />
+<img src="images/demo7.jpg" width="120" height="106" border="0" alt="" /></a></div>
+    <div id="demo2"></div>
+</div>     </td>
+    </tr>
+   </table>
+   
+<script language="javascript" type="text/javascript">
+<!--
+var demo = document.getElementById("demo");
+var demo1 = document.getElementById("demo1");
+var demo2 = document.getElementById("demo2");
+var speed=5;
+demo2.innerHTML = demo1.innerHTML 
+function Marquee(){
+    if(demo2.offsetTop-demo.scrollTop<=0) 
+        demo.scrollTop-=demo1.offsetHeight 
+    else{
+        demo.scrollTop++
+    }
+}
+var MyMar = setInterval(Marquee,speed);  
+demo.onmouseover = function(){clearInterval(MyMar)}  
+demo.onmouseout = function(){MyMar = setInterval(Marquee,speed)}  
+-->
+</script>   
+   
+     </td>
+  <td> <img src="images/spacer.gif" width="1" height="32" alt="" /></td>
+ </tr>
+ <tr> 
+  <td> <img src="images/spacer.gif" width="1" height="24" alt="" /></td>
+ </tr>
+ <tr> 
+  <td> <img src="images/spacer.gif" width="1" height="76" alt="" /></td>
+ </tr>
+ <tr> 
+  <td> <img src="images/spacer.gif" width="1" height="4" alt="" /></td>
+ </tr>
+ <tr> 
+  <td> <img src="images/spacer.gif" width="1" height="140" alt="" /></td>
+ </tr>
+ <tr> 
+  <td> <img src="images/spacer.gif" width="1" height="3" alt="" /></td>
+ </tr>
+ <tr> 
+  <td> <img src="images/spacer.gif" width="1" height="6" alt="" /></td>
+ </tr>
+ <tr> 
+  <td> <img src="images/spacer.gif" width="1" height="29" alt="" /></td>
+ </tr>
+ <tr> 
+  <td> <img src="images/spacer.gif" width="1" height="33" alt="" /></td>
+ </tr>
+ <tr> 
+  <td colspan="12"> <div align="center"><span class="style3"><a href="http://webking.hk/">網頁皇網頁設計主頁</a> <a href="#">::</a> <a href="http://webking.hk/index.php?page=2">聯絡我們</a> <a href="#">::</a> <a href="http://webking.hk/index.php?page=10">網站地圖</a> <a href="#">::</a> <a href="http://webking.hk/forum/index.php">實用文章</a> <a href="#">::</a> <a href="http://webking.hk/index.php?page=13">Web design公司FAQ</a> <a href="#">::</a> <a href="http://webking.hk/forum/index.php?board=2.0">客戶資訊</a> <a href="#">::</a> <a href="http://webking.hk/forum/index.php?board=1.0">寫網頁Tips</a>
+  <a href="#">::</a> <a href="http://webking.hk/forum/index.php?board=10.0">各行業目錄</a>
+   <a href="#">::</a> <a href="http://webking.hk/index.php?page=17">客戶免費連結</a>
+  </span><br />
+        <img src="images/copyright.gif" width="800" height="47" alt="" /></div></td>
+  <td> <img src="images/spacer.gif" width="1" height="47" alt="" /></td>
+ </tr>
+ <tr> 
+  <td> <img src="images/spacer.gif" width="141" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="44" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="14" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="29" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="34" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="50" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="22" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="66" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="85" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="85" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="9" height="1" alt="" /></td>
+  <td> <img src="images/spacer.gif" width="221" height="1" alt="" /></td>
+  <td></td>
+ </tr>
+</table>
+<!-- End ImageReady Slices -->
+<map name="Map" id="Map"> 
+ <area shape="rect" coords="105,5,147,15" href="http://webking.com.hk" target="new" alt="WebKing Web Design English Web Site" />
+ <area shape="rect" coords="106,17,147,25" href="http://webking.com.hk/index.php?page=3" target="new" alt="email us" />
+ <area shape="rect" coords="105,27,148,46" href="http://webking.com.hk/index.php?page=1" target="new" alt="web design demo" />
+</map>
+<map name="Map2" id="Map2"> 
+ <area shape="rect" coords="131,20,166,40" href="http://webking.hk/index.php?page=6" alt=""/>
+</map>
+<map name="Map3" id="Map3"> 
+ <area shape="rect" coords="72,5,168,76" href="http://webking.hk/index.php?page=6&amp;action=register" alt=""/>
+</map>
+
+<map name="Map5" id="Map5">
+  <area shape="rect" coords="16,46,217,124" href="http://webking.hk/index.php?page=3" alt="看客戶實例" />
+</map>
+
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-619306-3";
+urchinTracker();
+</script>
+
+
+</body>
+</html>

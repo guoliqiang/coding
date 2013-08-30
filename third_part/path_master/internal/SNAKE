@@ -1,0 +1,10 @@
+cc_library(name = 'path_master',
+           srcs = ['parser.cc',
+                   'path_item.cc',
+                   'path_master.cc'],
+           deps = [
+                  '//third_part/parser_master/internal:parser_master',
+                  '//base/internal:base',
+                  '//libs/third_part/re2:re2',
+                  ]
+           )

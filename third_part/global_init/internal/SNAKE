@@ -1,0 +1,10 @@
+cc_library(name='global_init',
+           srcs = ['global_init.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/minidump_sender/internal:minidump_sender',
+                  '//third_part/release/internal:release',
+                  '//third_part/production/internal:production_safety_checker',
+                  '//third_part/daemonizer/internal:daemonizer'
+                  ]
+           )

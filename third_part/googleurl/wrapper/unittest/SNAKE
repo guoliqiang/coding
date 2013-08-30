@@ -1,0 +1,31 @@
+cc_binary(name = 'url_unittest',
+           srcs = ['url_unittest.cc'],
+           deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/googleurl/wrapper/internal:googleurlwrapper'
+                  ]
+           )
+
+cc_binary(name = 'urlparser_unittest',
+           srcs = ['urlparser_unittest.cc'],
+           deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/googleurl/wrapper/internal:googleurlwrapper'
+                  ]
+           )
+
+cc_binary(name = 'url_denormalizer_unittest',
+           srcs = ['url_denormalizer_unittest.cc'],
+           deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/googleurl/wrapper/internal:googleurlwrapper'
+                  ]
+           )
+
+cc_binary(name = 'url_benchmark',
+           srcs = ['url_benchmark.cc'],
+           deps = [
+                  '//third_part/testing/gtest/src:benchmark',
+                  '//third_part/googleurl/wrapper/internal:googleurlwrapper'
+                  ]
+           )

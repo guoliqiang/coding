@@ -1,0 +1,7 @@
+cc_binary(name = 'get_host_name',
+           srcs = ['get_host_name.cc'],
+           deps = [
+                  '//third_part/host_util/internal:host_util',
+                  '//third_part/global_init/internal:global_init'
+                  ]
+           )

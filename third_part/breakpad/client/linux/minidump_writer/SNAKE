@@ -1,0 +1,12 @@
+cc_library(name = 'minidump_writer',
+           srcs = [
+                   'linux_dumper.cc',
+                   'minidump_writer.cc',  
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   '//third_part/breakpad/client:minidump_file_writer',
+                   '//third_part/breakpad/common/linux:file_id',
+                  ],
+           copt = ['no_style_check']
+          )

@@ -1,0 +1,150 @@
+# Copyright 2010 Yunrang Inc. All Rights Reserved.
+# Author: yaopengzeng@yunrang.com (YaoPeng Zeng)
+
+cc_library(name = 'yrencoding_detector',
+           srcs = ['yrencoding_detector.cc',
+                   'yrencoding_dictionary.cc',
+                   'yrencoding_detector_helper.cc',
+                    ],
+           deps = ['//base:base',
+                   '//file:file',
+                   '//util/release:release',
+                   ]
+           )
+
+cc_test(name = 'yrencoding_detector_unittest',
+        srcs = ['yrencoding_detector_unittest.cc'],
+        deps = [
+                ':yrencoding_detector',
+                ]
+        )
+
+cc_library(name = 'yrlanguage_detector',
+           srcs = ['yrlanguage_detector.cc',
+                   'yrlanguage_detector_helper.cc',
+                   ],
+            deps = ['//base:base',
+                    '//file:file',
+                    ':yrencoding_detector',
+                    ]
+           )
+
+cc_test(name = 'yrlanguage_detector_unittest',
+        srcs = ['yrlanguage_detector_unittest.cc'],
+        deps = [':yrlanguage_detector',
+                ]
+        )
+
+cc_binary(name = 'detector_tool',
+          srcs = ['detector_tool.cc'],
+          deps = [
+                  '//util/i18n:yrencoding_detector',
+                  '//util/i18n:yrlanguage_detector',
+                  '//file:file',
+                  '//base:base',
+                 ]
+         )
+
+cc_library(name = 'invalid_code_detector',
+           srcs = ['invalid_code_detector.cc',
+                   ],
+           deps = ['//base:base',
+                   ':common_chinese_detector',
+                   ],
+           copt = ['always_link',
+                  ],
+           )
+
+cc_library(name = 'common_chinese_detector',
+           srcs = ['common_chinese_detector.cc',
+                   ],
+           deps = ['//base:base',
+                  '//file:file',
+                  '//util/release:release',
+                   ],
+           copt = ['always_link',
+                  ],
+           )
+
+cc_test(name = 'invalid_code_detector_unittest',
+        srcs = ['invalid_code_detector_unittest.cc',
+                ],
+        deps = ['//base:base',
+                '//file:file',
+                ':invalid_code_detector',
+                ':common_chinese_detector',
+                ],
+        )
+
+cc_library(name = 'mozilla_language_detector',
+           srcs = ['mozilla_language_detector.cc'],
+           deps = ['//base:base',
+                   '//third_party/i18n/language_detector:textcat',
+                   '//file:file',
+                   '//util/parse_master2/public:parse_master',
+                   '//util/i18n:mozilla_encoding_detector',
+                   '//util/release:release',
+                   ],
+    )
+
+cc_test(name = 'mozilla_language_detector_unittest',
+        srcs = ['mozilla_language_detector_unittest.cc',
+                ],
+        deps = ['//base:base',
+                '//file:file',
+                '//util/i18n:mozilla_encoding_detector',
+                '//util/i18n:mozilla_language_detector',
+                ],
+        )
+
+cc_library(name = 'mozilla_encoding_detector',
+           srcs = ['mozilla_encoding_detector.cc'],
+           deps = ['//base:base',
+                   '//third_party/i18n/encoding_detector:mozilla_detector',
+                   '//file:file',
+                   ],
+    )
+
+cc_test(name = 'mozilla_encoding_detector_unittest',
+        srcs = ['mozilla_encoding_detector_unittest.cc',
+                ],
+        deps = ['//base:base',
+                '//file:file',
+                ':mozilla_encoding_detector',
+                ],
+        )
+
+cc_library(name = 'ip_to_location',
+           srcs = ['ip_to_location.cc',
+                   ],
+           deps = ['//base:base',
+                   '//file:file',
+                   '//util/release:release',
+                   ],
+           )
+
+cc_test(name = 'ip_to_location_unittest',
+        srcs = ['ip_to_location_unittest.cc'
+                ],
+        deps = ['//base:base',
+                ':ip_to_location',
+                ]
+        )
+
+cc_library(name = 'fast_language_detector',
+           srcs = ['fast_language_detector.cc'],
+           deps = ['//base:base',
+                   '//util/i18n:mozilla_encoding_detector',
+                   '//libs/third_party/icu:icuuc',
+                   '//libs/third_party/icu:icudata',
+                   ],
+    )
+
+cc_test(name = 'fast_language_detector_unittest',
+        srcs = ['fast_language_detector_unittest.cc',
+                ],
+        deps = ['//base:base',
+                '//file:file',
+                '//util/i18n:fast_language_detector',
+                ],
+        )

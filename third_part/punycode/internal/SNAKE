@@ -1,0 +1,4 @@
+cc_library(name = 'punycode',
+           srcs = ['punycoder.cc'],
+           copt = ['no_style_check']
+           )

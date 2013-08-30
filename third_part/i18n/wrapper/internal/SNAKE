@@ -1,0 +1,50 @@
+cc_library(name = 'mozilla_encoding_detector',
+           srcs = ['mozilla_encoding_detector.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/i18n/encoding_detector:mozilla_detector',
+                  '//file/internal:file',
+                  ]
+           )
+
+cc_library(name = 'mozilla_language_detector',
+           srcs = ['mozilla_language_detector.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/i18n/language_detector:textcat',
+                  '//third_part/i18n/wrapper/internal:mozilla_encoding_detector',
+                  '//third_part/release/internal:release',
+                  '//file/internal:file',
+                  ]
+           )
+
+cc_library(name = 'common_chinese_detector',
+           srcs = ['common_chinese_detector.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/release/internal:release',
+                  '//file/internal:file',
+                  ]
+           )
+
+cc_library(name = 'invalid_code_detector',
+           srcs = ['invalid_code_detector.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/i18n/wrapper/internal:common_chinese_detector',
+                  '//third_part/release/internal:release',
+                  '//file/internal:file',
+                  ]
+           )
+
+cc_library(name = 'utf8_converter',
+           srcs = ['utf8_converter.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/parser_master/internal:parser_master',
+                  '//third_part/i18n/wrapper/internal:mozilla_encoding_detector',
+                  '//third_part/i18n/wrapper/internal:invalid_code_detector',
+                  '//third_part/release/internal:release',
+                  '//file/internal:file',
+                  ]
+           )
