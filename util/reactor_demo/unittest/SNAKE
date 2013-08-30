@@ -1,0 +1,8 @@
+cc_binary(name = 'reactor_server',
+          srcs = [
+                 'reactor_server.cc'
+                 ],
+          deps = [
+                 '//util/reactor_demo/internal:reactor'
+                 ]
+         )

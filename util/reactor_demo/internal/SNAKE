@@ -1,0 +1,7 @@
+cc_library(name = 'reactor',
+           srcs = ['reactor.cc',
+                   'event_demultiplexer.cc'
+                  ],
+           deps = ['//base/internal:base'
+                  ]
+           )
