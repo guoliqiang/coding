@@ -1,0 +1,7 @@
+cc_binary(name='arena_unittest',
+           srcs = ['arena_unittest.cc'],
+           deps = [
+                  '//third_part/mempool/arena/internal:arena',
+                  '//third_part/testing/gtest/src:gtest'
+                  ]
+           )
