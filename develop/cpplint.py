@@ -2699,9 +2699,9 @@ _HEADERS_CONTAINING_TEMPLATES = (
 
     # gcc extensions.
     # Note: std::hash is their hash, ::hash is our hash
-    ('"base/hash_tables.h"', ('hash_map', 'hash_multimap',)),
-    ('"base/hash_tables.h"', ('hash_set', 'hash_multiset',)),
-    ('"base/scoped_ptr.h"', ('scoped_ptr', 'scoped_array',)),
+    ('"base/public/hash_tables.h"', ('hash_map', 'hash_multimap',)),
+    ('"base/public/hash_tables.h"', ('hash_set', 'hash_multiset',)),
+    ('"base/public/scoped_ptr.h"', ('scoped_ptr', 'scoped_array',)),
     ('<slist>', ('slist',)),
     )
 

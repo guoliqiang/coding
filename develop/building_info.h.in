@@ -1,0 +1,15 @@
+// Copyright SNAKE. All Rights Reserved.
+
+#ifndef BUILDING_INFO_H_
+#define BUILDING_INFO_H_
+
+
+#define BUILD_COMPILER                "BD_COM"
+#define BUILD_HOST                    "BD_HOST"
+#define BUILD_MODE                    "BD_MODE"
+#define BUILD_PLATFORM                "BD_PLATFORM"
+#define BUILD_TARGET                  "BD_TARGET"
+#define BUILD_TIME                    "BD_TIME"
+
+
+#endif  // BUILDING_INFO_H_

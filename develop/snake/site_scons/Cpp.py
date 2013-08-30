@@ -14,6 +14,8 @@ import sys
 sys.path.append('develop/snake/third_part/cpplint/')
 import cpplint
 import BuildingObject
+import BuildManager
+from BuildManager import GetBuildManager
 
 """Cpp build registerers"""
 
@@ -146,6 +148,12 @@ class CppBuilder(LanguageBuilder):
     env['LINK'] = 'g++'
     cc_flags = ('-m64 -fPIC -Wall -Werror -Wwrite-strings -Wno-sign-compare -g '
                 '-Wuninitialized -Wno-error=deprecated-declarations ')
+    # these is just for using proftools                                                                                                        
+    cc_flags += ('-fno-builtin-malloc -fno-builtin-free -fno-builtin-realloc '
+                 '-fno-builtin-calloc -fno-builtin-cfree -fno-builtin-memalign '
+                 '-fno-builtin-posix_memalign -fno-builtin-valloc '
+                 '-fno-builtin-pvalloc -fno-omit-frame-pointer ')
+
     link_flags = ['-pthread ']
     if self._GetGccVersion() >= '4.5':  # only available after gcc4.5
       link_flags.append('-static-libstdc++')
@@ -276,6 +284,7 @@ class CppBuilder(LanguageBuilder):
     Util.Log(libpath)
     Util.Log(cpp_path)
     Util.Log(link_flags)
+    Util.Log(cc_flags)
     Util.Log(CXX_value)
     if obj.build_type_ in ['cc_library']:
       print Util.BuildMessage(os.path.dirname(target) +
@@ -286,8 +295,30 @@ class CppBuilder(LanguageBuilder):
                                  CPPPATH = cpp_path,
                                  CCFLAGS = cc_flags,
                                  CXX = CXX_value)
+   
+  def _GenerateBuildingInfo(self, env):
+    content = open(Path.AddBaseDir(Flags.BUILDING_INFO_IN)).read()
+    content = content.replace('BD_TIME', 'Local Time:%s' % Util.LocalTime())
+    content = content.replace('BD_HOST', socket.gethostname())
+    cxx = env['CXX'].split('/')
+    cxx.reverse()
+    content = content.replace('BD_COM', '-'.join((cxx[0], env['CXXVERSION'])))
+    content = content.replace('BD_MODE', self._build_mode)
+    (sys, d1, release, d2, machine) = os.uname()
+    content = content.replace('BD_PLATFORM', '-'.join((sys, release, machine)))
+    # build binary map
+    targets = ''
+    for b in GetBuildManager().build_targets_:
+      if len(targets) > 0: targets += ','
+      targets += '%s' % b
+    content = content.replace('BD_TARGET', targets)
+    path = os.path.join(Path.GetOutputDir(), Flags.BUILDING_INFO_OUT)
+    Util.MkDir(os.path.dirname(path))
+    open(path, 'w').write(content)
+
   def Finish(self, env):
     self._StyleCheck()
+    self._GenerateBuildingInfo(env)
 
 
 
