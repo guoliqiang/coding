@@ -1,7 +1,0 @@
-2013-07-31 19:19:42,056 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0017' of user 'guoliqiang'
-2013-07-31 19:19:42,056 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0017_conf.xml
-2013-07-31 19:23:42,074 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0018' of user 'guoliqiang'
-2013-07-31 19:23:42,074 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0018_conf.xml
-2013-07-31 20:19:00,741 INFO org.apache.hadoop.security.token.delegation.AbstractDelegationTokenSecretManager: Updating the current master key for generating delegation tokens
-2013-07-31 20:47:42,101 INFO org.apache.hadoop.mapred.JobTracker: Retired job with id: 'job_201307292018_0019' of user 'guoliqiang'
-2013-07-31 20:47:42,124 INFO org.apache.hadoop.mapred.JobHistory: Deleting localized job conf at /home/guoliqiang/git-coding/coding/third_part/hadoop/hadoop-1.1.2/libexec/../logs/job_201307292018_0019_conf.xml
