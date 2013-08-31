@@ -5,10 +5,13 @@
 // DESCRIPTION
 // 
 // SparseArray<T>(m) is a map from integers in [0, m) to T values.
-// It requires (sizeof(T)+sizeof(int))*m memory, but it provides
+// It requires (sizeof(T)+sizeof(int))*m memory in max, but it provides
 // fast iteration through the elements in the array and fast clearing
 // of the array.  The array has a concept of certain elements being
 // uninitialized (having no value).
+//
+// In real, if there k instances the used sizeof(int) * m + k * sizeof(T)
+// (k < m)
 // 
 // Insertion and deletion are constant time operations.
 // 
