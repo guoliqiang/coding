@@ -56,3 +56,10 @@ cc_binary(name = 'sparse_array_test',
                    ],
            )
 
+cc_binary(name = 'heap_unittest',
+           srcs = ['heap_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )

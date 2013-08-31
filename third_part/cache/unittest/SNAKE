@@ -1,0 +1,7 @@
+cc_binary(name = 'lru_cache_test',
+           srcs = ['lru_cache_test.cc'],
+           deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  ]
+           )
+
