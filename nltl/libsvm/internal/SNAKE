@@ -1,0 +1,7 @@
+cc_library(name = 'libsvm',
+           srcs = ['svm.cc'],
+           deps = [
+                  '//base/internal:base',
+                  ],
+           copt = ['no_style_check']
+           )
