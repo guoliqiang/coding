@@ -1,0 +1,4 @@
+cc_binary(name = 'signal_handler_unittest',
+          srcs = ['signal_handler_unittest.cc'],
+          deps = ['//third_part/signal_handler/internal:signal_handler']
+          )

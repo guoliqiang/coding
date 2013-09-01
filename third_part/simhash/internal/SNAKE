@@ -1,0 +1,4 @@
+cc_library(name = 'simhash',
+           srcs = ['simhash.cc'],
+           deps = ['//base/internal:base']
+           )

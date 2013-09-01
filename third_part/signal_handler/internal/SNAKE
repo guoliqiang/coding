@@ -1,0 +1,4 @@
+cc_library(name = 'signal_handler',
+           srcs = ['signal_handler.cc'],
+           deps = ['//base/internal:base']
+           )
