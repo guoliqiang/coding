@@ -7,6 +7,7 @@
 
 #ifndef  __HEAP_H_
 #define  __HEAP_H_
+
 #include <algorithm>
 #include "base/public/logging.h"
 namespace base {
@@ -45,6 +46,10 @@ class Heap {
    return values_.size();
   }
 
+  bool Min() {
+    return min_;
+  }
+
  protected:
   bool min_;
   std::vector<Type> values_;
@@ -53,16 +58,16 @@ class Heap {
 template<typename Type>
 class FixSizeHeap : public Heap<Type> {
  public:
-  FixSizeHeap(uint32_t size, bool min):Heap<Type>(!min), size_(size){}
+  FixSizeHeap(uint32_t size, bool min = true):Heap<Type>(min), size_(size){}
   
   void Push(const Type & input)  {
    if (Heap<Type>::Size() < size_) Heap<Type>::Push(input);
    else {
-     if (Heap<Type>::min_ && Heap<Type>::Get() > input) {
+     if (!Heap<Type>::min_ && Heap<Type>::Get() > input) {
        Heap<Type>::Pop();
        Heap<Type>::Push(input);
      }
-     if (!Heap<Type>::min_ && Heap<Type>::Get() < input) {
+     if (Heap<Type>::min_ && Heap<Type>::Get() < input) {
        Heap<Type>::Pop();
        Heap<Type>::Push(input);
      }
@@ -80,6 +85,15 @@ class FixSizeHeap : public Heap<Type> {
   uint32_t Size() {
     return Heap<Type>::Size();
   }
+  
+  bool Min() {
+    return Heap<Type>::Min();
+  }
+
+  uint32_t FixSize() {
+    return size_;
+  }
+
  private:
   uint32_t size_;
 }; 

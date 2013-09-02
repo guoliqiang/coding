@@ -9,7 +9,7 @@
 using namespace base;  // NOLINT
 
 int main(int argc, char** argv) {
-  Heap<int> heap(true);
+  Heap<int> heap;
   for (int i = 0; i < 10; i++) {
     heap.Push(random()%100);
   }
@@ -17,5 +17,16 @@ int main(int argc, char** argv) {
     LOG(INFO) << heap.Get();
     heap.Pop();
   }
+  HERE(INFO);
+
+  FixSizeHeap<int> fheap(5);
+  for (int i = 0; i < 10; i++) {
+    fheap.Push(random()%100);
+  }
+  while (fheap.Size() > 0) {
+    LOG(INFO) << fheap.Get();
+    fheap.Pop();
+  }
+
   return 0;
 }
