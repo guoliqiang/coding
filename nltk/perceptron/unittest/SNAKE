@@ -1,0 +1,4 @@
+cc_binary(name = 'perceptron_unittest',
+          srcs = ['perceptron_unittest.cc'],
+          deps = ['//nltk/perceptron/internal:perceptron']
+          )

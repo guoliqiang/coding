@@ -1,0 +1,4 @@
+cc_library(name = 'perceptron',
+           srcs = ['perceptron.cc'],
+           deps = ['//base/internal:base',
+                   '//file/internal:file'])
