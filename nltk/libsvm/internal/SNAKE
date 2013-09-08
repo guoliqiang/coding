@@ -1,7 +1,38 @@
-cc_library(name = 'libsvm',
+cc_library(name = 'svm',
            srcs = ['svm.cc'],
            deps = [
                   '//base/internal:base',
                   ],
            copt = ['no_style_check']
            )
+
+cc_binary(name = 'svm_train',
+           srcs = ['svm_train.cc'],
+           deps = [
+                  '//nltk/libsvm/internal:svm',
+                  ],
+           copt = ['no_style_check']
+           )
+
+#cc_library(name = 'cache',
+#           srcs = ['cache.cc'],
+#           deps = [
+#                  '//base/internal:base',
+#                  ],
+#           )
+
+#cc_library(name = 'kernel',
+#           srcs = ['kernel.cc'],
+#           deps = [
+#                  '//base/internal:base',
+#                  ],
+#           )
+
+#cc_library(name = 'solve',
+#           srcs = ['solve.cc'],
+#           deps = [
+#                  '//base/internal:base',
+#                  ],
+#           )
+
+
