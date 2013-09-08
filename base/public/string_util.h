@@ -861,7 +861,7 @@ std::string JoinVector(const std::vector<T>& parts, char sep = '\t') {
 }
 
 template <typename T>
-std::string JoinKeys(T *v, const std::string &sep) {
+std::string JoinKeys(T *v, const std::string &sep = "\t") {
   if (!v || v->empty()) return "";
   std::stringstream s;
   typename T::const_iterator iter = v->begin();
@@ -873,7 +873,7 @@ std::string JoinKeys(T *v, const std::string &sep) {
 }
 
 template <typename T>
-std::string JoinValues(T *v, const std::string &sep) {
+std::string JoinValues(T *v, const std::string &sep = "\t") {
   if (!v || v->empty()) return "";
   std::stringstream s;
   typename T::const_iterator iter = v->begin();
@@ -884,6 +884,18 @@ std::string JoinValues(T *v, const std::string &sep) {
   return s.str();
 }
 
+template <typename T>
+std::string JoinKeysValues(T *v, const std::string &sep = "\t",
+                           const std::string & sep2 = ":") {
+  if (!v || v->empty()) return "";
+  std::stringstream s;
+  typename T::const_iterator iter = v->begin();
+  s << iter->first << sep2 << iter->second;
+  for (++iter; iter != v->end(); ++iter) {
+    s << sep << iter->first << sep2 << iter->second;
+  }
+  return s.str();
+}
 
 // WARNING: this uses whitespace as defined by the HTML5 spec. If you need
 // a function similar to this but want to trim all types of whitespace, then

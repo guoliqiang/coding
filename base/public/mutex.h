@@ -195,6 +195,32 @@ class SpinLock {
 };
 
 /// Wrapper for pthread_cond_t.
+// http://baike.baidu.com/view/7844657.htm
+// used sample
+// 
+// Wait:
+//
+// mu->lock();
+// while(!ok_condition) {
+//   condvar.wait
+// }
+// mu->unlock();
+//
+//
+// Signal:
+//
+// mu->lock();
+// set  ok_condition.
+// mu->unlock();
+// condvar.signal();
+//
+// or
+//
+// mu->lock();
+// set ok_condition;
+// condvar.signal();
+// mu->unlock();
+
 class CondVar {
  public:
   CondVar()   { CHECK(0 == pthread_cond_init(&cv_, NULL)); }
@@ -211,6 +237,33 @@ class CondVar {
   void SignalAll() { CHECK(0 == pthread_cond_broadcast(&cv_)); }
  private:
   pthread_cond_t cv_;
+};
+
+// event occur once, signal all waiting threads and the latter thread should
+// not wait.
+
+class EventWaiter {
+ public:
+  EventWaiter() : flag_(false){}
+  ~EventWaiter() {}
+  
+  void Wait() {
+    MutexLock lock(&mutex_);
+    while (!flag_) {
+      cv_.Wait(&mutex_);
+    }
+  }
+
+  void SignalAll() {
+    MutexLock lock(&mutex_);
+    flag_ = true;
+    cv_.SignalAll();
+  }
+ 
+ private:
+  Mutex mutex_;
+  CondVar cv_;
+  bool flag_;
 };
 
 class BlockingCounter {

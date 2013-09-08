@@ -40,7 +40,9 @@ cc_library(name = 'base',
                    'rune.cc',
                    'string_split.cc',
                    'sparse_array.cc',
-                   'sparse_set.cc'
+                   'sparse_set.cc',
+                   'normal_sparse_array.cc',
+                   'util.cc'
                   ],
            deps = [],  # base should not depends on other components!
            copt = ['no_style_check']
