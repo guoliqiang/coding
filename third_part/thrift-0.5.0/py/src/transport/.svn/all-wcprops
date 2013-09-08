@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/transport
+END
+TSocket.py
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/transport/TSocket.py
+END
+TSSLSocket.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/transport/TSSLSocket.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/transport/__init__.py
+END
+TTransport.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/transport/TTransport.py
+END
+TZlibTransport.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/transport/TZlibTransport.py
+END
+THttpClient.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/transport/THttpClient.py
+END
+TTwisted.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/transport/TTwisted.py
+END

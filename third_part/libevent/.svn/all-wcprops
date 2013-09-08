@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent
+END
+http-internal.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/http-internal.h
+END
+evrpc-internal.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/evrpc-internal.h
+END
+event-internal.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/event-internal.h
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/ChangeLog
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/README
+END
+evutil.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/evutil.h
+END
+evsignal.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/evsignal.h
+END
+strlcpy-internal.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/strlcpy-internal.h
+END
+evhttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/evhttp.h
+END
+evrpc.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/evrpc.h
+END
+evdns.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/evdns.h
+END
+min_heap.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/min_heap.h
+END
+log.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/log.h
+END
+event.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/event.h
+END
+event-config.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/libevent/event-config.h
+END

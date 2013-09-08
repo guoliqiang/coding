@@ -56,6 +56,21 @@ class LRUCache {
     return value_list_.end();
   }
 
+  typename LRUCache::iterator back() {
+    CHECK_GT(Size(), 0);
+    LRUCache::iterator rs = end();
+    rs--;
+    return rs;
+  }
+  
+  void Erase(iterator it) {
+    Erase(it->first);
+  }
+
+  void Erase(const TypeKey &key) {
+    RemoveValue(key);
+  }
+
  private:
   void RemoveValue(const TypeKey &key) {
     typename Map::iterator iter = index_.find(key);

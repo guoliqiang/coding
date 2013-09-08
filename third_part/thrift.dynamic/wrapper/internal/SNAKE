@@ -1,0 +1,7 @@
+cc_library(name='thrift_wrapper',
+          srcs = ['thrift.cc'],
+          deps = ['//libs/third_part/thrift:thrift',
+                  '//libs/third_part/thrift:thriftnb',
+                  '//libs/third_part/thrift:thriftz',
+                  ]
+          )

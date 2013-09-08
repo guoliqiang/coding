@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/processor
+END
+StatsProcessor.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/processor/StatsProcessor.h
+END
+PeekProcessor.h
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/processor/PeekProcessor.h
+END

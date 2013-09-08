@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency
+END
+TimerManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency/TimerManager.h
+END
+Util.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency/Util.h
+END
+Exception.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency/Exception.h
+END
+FunctionRunner.h
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency/FunctionRunner.h
+END
+Mutex.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency/Mutex.h
+END
+PosixThreadFactory.h
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency/PosixThreadFactory.h
+END
+ThreadManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency/ThreadManager.h
+END
+Monitor.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency/Monitor.h
+END
+Thread.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/concurrency/Thread.h
+END

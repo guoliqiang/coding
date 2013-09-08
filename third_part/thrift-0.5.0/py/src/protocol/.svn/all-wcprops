@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/protocol
+END
+TBinaryProtocol.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/protocol/TBinaryProtocol.py
+END
+TCompactProtocol.py
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/protocol/TCompactProtocol.py
+END
+TBase.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/protocol/TBase.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/protocol/__init__.py
+END
+fastbinary.py
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/protocol/fastbinary.py
+END
+TProtocol.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/protocol/TProtocol.py
+END

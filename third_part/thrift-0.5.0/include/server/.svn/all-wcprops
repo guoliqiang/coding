@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/server
+END
+TServer.h
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/server/TServer.h
+END
+TThreadedServer.h
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/server/TThreadedServer.h
+END
+TThreadPoolServer.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/server/TThreadPoolServer.h
+END
+TNonblockingServer.h
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/server/TNonblockingServer.h
+END
+TSimpleServer.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/server/TSimpleServer.h
+END

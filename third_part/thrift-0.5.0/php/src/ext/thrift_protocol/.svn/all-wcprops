@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/php/src/ext/thrift_protocol
+END
+config.m4
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/php/src/ext/thrift_protocol/config.m4
+END
+php_thrift_protocol.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/php/src/ext/thrift_protocol/php_thrift_protocol.cpp
+END
+php_thrift_protocol.h
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/php/src/ext/thrift_protocol/php_thrift_protocol.h
+END

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/server
+END
+THttpServer.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/server/THttpServer.py
+END
+TServer.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/server/TServer.py
+END
+TNonblockingServer.py
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/server/TNonblockingServer.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/server/__init__.py
+END
+TProcessPoolServer.py
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/py/src/server/TProcessPoolServer.py
+END

@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport
+END
+TSimpleFileTransport.h
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TSimpleFileTransport.h
+END
+THttpServer.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/THttpServer.h
+END
+TFDTransport.h
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TFDTransport.h
+END
+TShortReadTransport.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TShortReadTransport.h
+END
+TBufferTransports.h
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TBufferTransports.h
+END
+TTransportException.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TTransportException.h
+END
+TZlibTransport.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TZlibTransport.h
+END
+TTransportUtils.h
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TTransportUtils.h
+END
+THttpClient.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/THttpClient.h
+END
+TServerSocket.h
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TServerSocket.h
+END
+TSocketPool.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TSocketPool.h
+END
+TServerTransport.h
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TServerTransport.h
+END
+TSocket.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TSocket.h
+END
+TTransport.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TTransport.h
+END
+THttpTransport.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/THttpTransport.h
+END
+TFileTransport.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/thrift-0.5.0/include/transport/TFileTransport.h
+END
