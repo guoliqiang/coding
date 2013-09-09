@@ -105,7 +105,11 @@ struct ProblemNode {
   int32_t line_no;
   int32_t lable;
   base::NormalSarray<double> element;
-  
+  ProblemNode() {
+    line_no = -1;
+    lable = 0;
+  }
+
   void LogContent(int l = 0) {
     VLOG(l) << "line no:" << line_no;
     VLOG(l) << "lable:" << lable;

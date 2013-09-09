@@ -10,7 +10,7 @@
 
 #include "model.h"
 #include "kernel.h"
-
+#include "base/public/string_util.h"
 
 namespace nltk {
 namespace svm {
@@ -48,41 +48,59 @@ class Predict {
         CHECK_GE(index, 0);
         node.element.insert(index, value);
       }
-      rs += IntToString(SvmPredict(node)) + "\n";
+      rs += (IntToString(SvmPredict(node)) + "\n");
     }
-    file::File::WriteStringToFile(output, rs);
+    file::File::WriteStringToFile(rs, output);
   }
 
-  int32_t SvmPredict(const ProblemNode & input) {
+  int32_t SvmPredict(ProblemNode & input) {
+    input.LogContent();
     std::map<int32_t, int32_t> votes;
     int32_t max_vote = 0;
     int32_t max_lable = 0;
-    for (std::map<int32_t, int32_t>::iterator i =  Model::GetInstance().start_.begin();
-         i != Model::GetInstance().start_.end(); i++) {
-      std::map<int32_t, int32_t>::iterator tmp = i;
+    for (std::map<int32_t, int32_t>::reverse_iterator i =
+         Model::GetInstance().start_.rbegin();
+         i != Model::GetInstance().start_.rend(); i++) {
+      std::map<int32_t, int32_t>::reverse_iterator tmp = i;
       tmp++;
-      for (std::map<int32_t, int32_t>::iterator j = tmp;
-           j != Model::GetInstance().start_.end(); j++) {
+      for (std::map<int32_t, int32_t>::reverse_iterator j = tmp;
+           j != Model::GetInstance().start_.rend(); j++) {
         base::shared_ptr<ModelNode> foo = (*Model::GetInstance().model_[i->first].get())[j->first];
         CHECK(foo.get() != NULL);
-        bool bar = 0;
+        double bar = 0;
         CHECK(Model::GetInstance().count_.count(i->first));
         for (int k = 0; k < Model::GetInstance().count_[i->first]; k++) {
           double alpha;
           CHECK(foo->alpha.get(k, &alpha));
-          if (!Free(alpha, i->first)) continue;
+          if (!Free(alpha * +1, i->first)) {
+            VLOG(3) << "bound alpha:" << alpha << " at:" << k;
+            continue;
+          }
+          VLOG(3) << i->second << " " << k;
+          VLOG(3) << "alpha:" << alpha << "kernel:" << Kernel::GetInstance().
+                   Do(*Model::GetInstance().node_[j->second + k].get(), input);
           bar += alpha * Kernel::GetInstance().
-                 Do(*Model::GetInstance().node_[i->first + k].get(), input);
+                 Do(*Model::GetInstance().node_[i->second + k].get(), input);
+          VLOG(3) << "bar:" << bar;
         }
         CHECK(Model::GetInstance().count_.count(j->first));
         for (int k = 0; k < Model::GetInstance().count_[j->first]; k++) {
           double alpha = 0;
           CHECK(foo->alpha.get(Model::GetInstance().count_[i->first] + k, &alpha));
-          if (!Free(alpha, j->first)) continue;
+          if (!Free(alpha * -1, j->first)) {
+            VLOG(3) << "bound alpha:" << alpha << " at:" << k;
+            continue;
+          }
+          VLOG(3) << j->second << " " << k << " size:"
+                  << Model::GetInstance().node_.size();
+          VLOG(3) << "alpha:" << alpha << "kernel:" << Kernel::GetInstance().
+                   Do(*Model::GetInstance().node_[j->second + k].get(), input);
           bar += alpha * Kernel::GetInstance().
-                 Do(*Model::GetInstance().node_[j->first + k].get(), input);
+                 Do(*Model::GetInstance().node_[j->second + k].get(), input);
+          VLOG(3) << "bar:" << bar;
         }
         bar -= foo->b;
+        VLOG(3) << "bar:" << bar << " -b: " << foo->b;
         if (bar > 0)  {
           if (votes.count(i->first)) {
             votes[i->first]++;
@@ -103,17 +121,13 @@ class Predict {
         }
       }
     }
+    VLOG(3)<< JoinKeysValues(&votes);
     return max_lable;
   }
 
  private:
   bool Free(const double & alpha, int32_t lable) {
     if (alpha <= 0) return false;
-    double foo = Model::GetInstance().para_->c_;
-    if (Model::GetInstance().para_->weights_.count(lable)) {
-      foo *= Model::GetInstance().para_->weights_[lable];
-    }
-    if (alpha >= foo) return false;
     return true;
   }
 

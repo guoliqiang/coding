@@ -5,8 +5,12 @@
 // File  : predict_unittest.cc
 // Brief :
 #include "../../public/predict.h"
+#include "base/public/logging.h"
 
 int main(int argc, char** argv) {
-  nltk::svm::Predict::GetInstance().SvmPredict("input.txt", "output.txt");
+  base::AtExitManager exit;
+  base::ParseCommandLineFlags(&argc, &argv, true);
+  nltk::svm::Predict::GetInstance().LoadModel("output");
+  nltk::svm::Predict::GetInstance().SvmPredict("pinput.txt", "predict");
   return 0;
 }

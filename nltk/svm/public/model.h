@@ -39,6 +39,7 @@ class Model {
     base::FromStringToThrift(content, &model_out);
     para_.reset(new Parameter());
     Transfer(model_out.para, para_.get());
+    para_->LogContent();
     start_ = model_out.start;
     count_ = model_out.count;
     for (std::map<int32_t, std::map<int32_t, modelnode> >::iterator
@@ -47,6 +48,7 @@ class Model {
       if (!model_.count(i->first)) {
         base::shared_ptr<std::map<int32_t,
               base::shared_ptr<ModelNode> > > bar;
+        bar.reset(new std::map<int32_t, base::shared_ptr<ModelNode> >());
         model_.insert(std::make_pair(i->first, bar));
       }
       for (std::map<int32_t, modelnode>::iterator j = i->second.begin();
@@ -57,6 +59,11 @@ class Model {
         }
         Transfer(j->second, (*model_[i->first].get())[j->first].get());
       }
+    }
+    for (int i = 0; i < model_out.node.size(); i++) {
+      base::shared_ptr<ProblemNode> foo(new ProblemNode());
+      Transfer(model_out.node[i], foo.get());
+      node_.push_back(foo);
     }
   }
 
