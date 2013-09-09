@@ -32,40 +32,7 @@ class Model {
 
   Model() {}
   
-  void LoadModel(const std::string & path) {
-    std::string content = "";
-    file::File::ReadFileToString(path, &content);
-    modelout model_out;
-    base::FromStringToThrift(content, &model_out);
-    para_.reset(new Parameter());
-    Transfer(model_out.para, para_.get());
-    para_->LogContent();
-    start_ = model_out.start;
-    count_ = model_out.count;
-    for (std::map<int32_t, std::map<int32_t, modelnode> >::iterator
-         i = model_out.model.begin(); i != model_out.model.end();
-         i++) {
-      if (!model_.count(i->first)) {
-        base::shared_ptr<std::map<int32_t,
-              base::shared_ptr<ModelNode> > > bar;
-        bar.reset(new std::map<int32_t, base::shared_ptr<ModelNode> >());
-        model_.insert(std::make_pair(i->first, bar));
-      }
-      for (std::map<int32_t, modelnode>::iterator j = i->second.begin();
-           j != i->second.end(); j++) {
-        if(!model_[i->first]->count(j->first)) {
-          base::shared_ptr<ModelNode> foo(new ModelNode());
-          model_[i->first]->insert(std::make_pair(j->first, foo));
-        }
-        Transfer(j->second, (*model_[i->first].get())[j->first].get());
-      }
-    }
-    for (int i = 0; i < model_out.node.size(); i++) {
-      base::shared_ptr<ProblemNode> foo(new ProblemNode());
-      Transfer(model_out.node[i], foo.get());
-      node_.push_back(foo);
-    }
-  }
+  void LoadModel(const std::string & path);
 
  public:
   base::shared_ptr<Parameter> para_;
@@ -86,15 +53,18 @@ class Model {
      b->eps_ = a.eps;
      b->kernel_type_ = static_cast<KernelType>(a.kernel_type);
   }
+
   void Transfer(const problemnode & a, ProblemNode * b) {
     b->lable = a.lable;
     b->element.set(a.sparse_array);
   }
+
   void Transfer(const modelnode & a, ModelNode * b) {
     b->b = a.b;
     b->best_obj = a.best_obj;
     b->alpha.set(a.sparse_array);
   }
+
  private:
   DISALLOW_COPY_AND_ASSIGN(Model);
 };

@@ -18,5 +18,24 @@ DEFINE_int32(mem_size, 1000, "");
 DEFINE_double(eps, 1e-3, "");
 DEFINE_string(weights, "", "");
 
+Parameter::Parameter() {
+  c_ = FLAGS_c;
+  degree_ = FLAGS_degree;
+  gamma_ = FLAGS_gamma;
+  coef0_ = FLAGS_coef0;
+  mem_size_ = FLAGS_mem_size;
+  eps_ = FLAGS_eps;
+  std::vector<std::string> foo;
+  Tokenize(FLAGS_weights, "\t ", &foo);
+  for (int i = 0; i < foo.size(); i++) {
+    std::vector<std::string> bar;
+    SplitString(foo[i], ':', &bar);
+    CHECK_EQ(bar.size(), 2);
+    weights_[StringToInt(bar[0])] = StringToDouble(bar[1]);
+  }
+  CHECK(g_kernel_type.String2Enum(FLAGS_kernel_type, &kernel_type_));
+}
+
+
 }  // namespace svm
 }  // namespace nltk

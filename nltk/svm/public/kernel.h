@@ -37,39 +37,19 @@ BEGIN_STRINGMAP_PARSER(nltk::svm::KernelType)
   STRINGMAP_ENUM(nltk::svm::SIGMOID)
 END_STRINGMAP_PARSER()
 
+namespace nltk {
+namespace svm {
+static util::StringEnumParser<KernelType> g_kernel_type;
+}  // namespace nltk
+}  // namespace svm
+
 
 namespace nltk {
 namespace svm {
 
-DECLARE_double(c);
-DECLARE_double(degree);
-DECLARE_double(gamma);
-DECLARE_double(coef0);
-DECLARE_string(kernel_type);
-DECLARE_int32(mem_size);
-DECLARE_double(eps);
-DECLARE_string(weights);
-static util::StringEnumParser<KernelType> g_kernel_type;
-
 class Parameter {
  public:
-  Parameter() {
-    c_ = FLAGS_c;
-    degree_ = FLAGS_degree;
-    gamma_ = FLAGS_gamma;
-    coef0_ = FLAGS_coef0;
-    mem_size_ = FLAGS_mem_size;
-    eps_ = FLAGS_eps;
-    std::vector<std::string> foo;
-    Tokenize(FLAGS_weights, "\t ", &foo);
-    for (int i = 0; i < foo.size(); i++) {
-      std::vector<std::string> bar;
-      SplitString(foo[i], ':', &bar);
-      CHECK_EQ(bar.size(), 2);
-      weights_[StringToInt(bar[0])] = StringToDouble(bar[1]);
-    }
-    CHECK(g_kernel_type.String2Enum(FLAGS_kernel_type, &kernel_type_));
-  }
+  Parameter();
 
   void LogContent(int l = 0) {
     VLOG(l) << "[paremeter]";
@@ -105,6 +85,7 @@ struct ProblemNode {
   int32_t line_no;
   int32_t lable;
   base::NormalSarray<double> element;
+  
   ProblemNode() {
     line_no = -1;
     lable = 0;
@@ -145,17 +126,23 @@ class Kernel {
     CHECK(false);
   }
 
-  double Do(const ProblemNode & a, const ProblemNode & b) {
+  double Do(const ProblemNode & a,
+            const ProblemNode & b) {
     return ((this->*f_)(a, b));
   }
 
  private:
-  double dot(const ProblemNode & a, const ProblemNode & b) {
-    base::NormalSarray<double>::const_iterator i = a.element.begin();
-    base::NormalSarray<double>::const_iterator ei = a.element.end();
+  double dot(const ProblemNode & a,
+             const ProblemNode & b) {
+    base::NormalSarray<double>::const_iterator
+          i = a.element.begin();
+    base::NormalSarray<double>::const_iterator
+          ei = a.element.end();
     
-    base::NormalSarray<double>::const_iterator j = b.element.begin();
-    base::NormalSarray<double>::const_iterator ej = b.element.end();
+    base::NormalSarray<double>::const_iterator
+          j = b.element.begin();
+    base::NormalSarray<double>::const_iterator
+          ej = b.element.end();
     if (i == ei || j == ej) return 0;
     double rs = 0;
     while (i != ei && j!= ej) {
@@ -182,24 +169,35 @@ class Kernel {
     return ret;
   }
 
-  double linear(const ProblemNode & a, const ProblemNode & b) {
+  double linear(const ProblemNode & a,
+                const ProblemNode & b) {
     return dot(a, b);   
   }
 
-  double poly(const ProblemNode & a, const ProblemNode & b) {
-    return powi(para_->gamma_ * dot(a, b) + para_->coef0_, para_->degree_);
+  double poly(const ProblemNode & a,
+              const ProblemNode & b) {
+    return powi(para_->gamma_ * dot(a, b) + para_->coef0_,
+                para_->degree_);
   }
 
-  double rbf(const ProblemNode & a, const ProblemNode & b) {
-    return exp(-(para_->gamma_) * (dot(a, a) + dot(b, b) - 2 * dot(a, b)));
+  double rbf(const ProblemNode & a,
+             const ProblemNode & b) {
+    return exp(-(para_->gamma_) *
+           (dot(a, a) + dot(b, b) - 2 * dot(a, b)));
   }
 
-  double sigmoid(const ProblemNode & a, const ProblemNode & b) {
-    return tanh(para_->gamma_ * dot(a, b) + para_->coef0_);
+  double sigmoid(const ProblemNode & a,
+                 const ProblemNode & b) {
+    return tanh(para_->gamma_ * dot(a, b) +
+                para_->coef0_);
   }
+
  private:
-  double (Kernel::*f_)(const ProblemNode & a, const ProblemNode & b);
+  double (Kernel::*f_)(const ProblemNode & a,
+                       const ProblemNode & b);
   base::shared_ptr<Parameter> para_;
+ 
+ private:
   DISALLOW_COPY_AND_ASSIGN(Kernel);
 };
 
