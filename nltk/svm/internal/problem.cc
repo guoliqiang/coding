@@ -6,9 +6,12 @@
 // Brief :
 
 #include "../public/problem.h"
+#include "../public/scale.h"
 
 namespace nltk {
 namespace svm {
+
+DEFINE_bool(scale, true, "");
 
 bool Problem::ReadFile(std::string path) {
   std::string content;
@@ -54,6 +57,10 @@ bool Problem::ReadFile(std::string path) {
   }
   FLAGS_gamma = 1.0 / static_cast<double>(max_feature_num);
   para_.reset(new Parameter());
+  if (FLAGS_scale) {
+    LOG(INFO) << "scaling begin...";
+    Scale::GetInstance().Do(&node_);
+  }
   LogContent();
   return true;
 }

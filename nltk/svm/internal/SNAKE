@@ -1,9 +1,11 @@
 cc_library(name = 'svmlib',
            srcs = ['problem.cc',
-                    'kernel.cc',
-                    'model.cc',
-                    'solver.cc',
-                    'cache.cc'],
+                   'kernel.cc',
+                   'model.cc',
+                   'solver.cc',
+                   'cache.cc',
+                   'scale.cc'
+                   ],
            deps = [
                   '//base/internal:base',
                   '//file/internal:file',
