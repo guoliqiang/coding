@@ -1,0 +1,4 @@
+cc_binary(name = 'last_num',
+          srcs = ['last_number.cc'],
+          deps = ['//base/internal:base']
+          )

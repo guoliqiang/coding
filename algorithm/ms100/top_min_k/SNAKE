@@ -1,0 +1,4 @@
+cc_binary(name = 'top_mini_k',
+          srcs = ['top_mini_k.cc'],
+          deps = ['//base/internal:base']
+          )

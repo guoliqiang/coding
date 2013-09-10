@@ -1,0 +1,4 @@
+cc_binary(name = 'max_min_stack',
+          srcs = ['max_min_stack.cc'],
+          deps = ['//base/internal:base']
+          )

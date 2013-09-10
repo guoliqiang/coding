@@ -1,0 +1,4 @@
+cc_binary(name = 'deep_copy',
+          srcs = ['deep_copy.cc'],
+          deps = ['//base/internal:base']
+          )

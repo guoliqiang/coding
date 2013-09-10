@@ -1,0 +1,4 @@
+cc_binary(name = 'bst_image',
+          srcs = ['bst_image.cc'],
+          deps = ['//base/internal:base']
+          )

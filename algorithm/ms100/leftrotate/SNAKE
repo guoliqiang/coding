@@ -1,0 +1,4 @@
+cc_binary(name = 'leftrotate',
+          srcs = ['leftrotate.cc'],
+          deps = ['//base/internal:base']
+          )

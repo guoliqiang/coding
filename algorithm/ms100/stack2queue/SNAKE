@@ -1,0 +1,4 @@
+cc_binary(name = 'stack2queue',
+          srcs = ['stack2queue.cc'],
+          deps = ['//base/internal:base']
+          )

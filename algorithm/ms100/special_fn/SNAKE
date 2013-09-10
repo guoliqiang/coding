@@ -1,0 +1,4 @@
+cc_binary(name = 'special_fn',
+          srcs = ['special_fn.cc'],
+          deps = ['//base/internal:base']
+          )

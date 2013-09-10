@@ -1,0 +1,4 @@
+cc_binary(name = 'is_last_root',
+          srcs = ['is_last_root.cc'],
+          deps = ['//base/internal:base']
+          )

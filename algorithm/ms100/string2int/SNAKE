@@ -1,0 +1,4 @@
+cc_binary(name = 'string2int',
+          srcs = ['string2int.cc'],
+          deps = ['//base/internal:base']
+          )

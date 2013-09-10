@@ -1,0 +1,4 @@
+cc_binary(name = 'bst2dq',
+          srcs = ['bst2dq.cc'],
+          deps = ['//base/internal:base']
+          )

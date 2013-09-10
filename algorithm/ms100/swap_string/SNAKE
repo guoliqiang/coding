@@ -1,0 +1,4 @@
+cc_binary(name = 'swap_string',
+          srcs = ['swap_string.cc'],
+          deps = ['//base/internal:base']
+          )
