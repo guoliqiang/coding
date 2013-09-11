@@ -15,21 +15,58 @@
 namespace nltk {
 namespace svm {
 
+DECLARE_double(lower);
+DECLARE_double(upper);
+
 class Scale {
  public:
-  static Scale & GetInstance() {
-    return * Singleton<Scale>::get();
+  virtual void Do(std::vector<base::shared_ptr<ProblemNode> > * v) = 0;
+  virtual ~Scale(){}
+};
+
+class MaxMinScale : public Scale {
+ public:
+  static MaxMinScale * GetInstance() {
+    return Singleton<MaxMinScale>::get();
   }
 
-  Scale() {} 
+  MaxMinScale() {} 
   void Do(std::vector<base::shared_ptr<ProblemNode> > * v);
+  
+  double Do(int32_t index, double value,
+            std::map<int32_t,
+            base::shared_ptr<std::pair<double, double> > > *
+            f = NULL) {
+    if (f != NULL && !f->count(index)) return value;
+
+    std::map<int32_t,
+        base::shared_ptr<std::pair<double, double> > > * foo = f;
+    if (foo == NULL) {
+      foo = &feature_max_min_;
+    }
+    CHECK(foo->count(index));
+    double max = (*foo)[index]->first;
+    double min = (*foo)[index]->second;
+    if (max == min) return value;  // ingnore single value feature
+    if (value <= min) {  // may be < when f!= NULL
+      return FLAGS_lower;
+    }
+    if (value >= max) {  // may be > when f!= NULL
+      return FLAGS_upper;
+    }
+    return  (FLAGS_upper - FLAGS_lower) *
+            ((value - min) / (max - min));
+  }
+
  private:
   void GetFeatureMaxMin(std::vector<base::shared_ptr<ProblemNode> >& v);
+ 
+ public:
+  std::map<int32_t,
+           base::shared_ptr<std::pair<double, double> > > feature_max_min_;
+ 
  private:
- std::map<int32_t,
-          base::shared_ptr<std::pair<double, double> > > feature_max_min_;
- private:
-  DISALLOW_COPY_AND_ASSIGN(Scale);
+  DISALLOW_COPY_AND_ASSIGN(MaxMinScale);
 };
 
 }  // svm

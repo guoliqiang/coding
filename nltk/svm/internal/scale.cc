@@ -17,7 +17,7 @@ namespace svm {
 DEFINE_double(upper, 1.0, "");
 DEFINE_double(lower, -1.0, "");
 
-void Scale::GetFeatureMaxMin(
+void MaxMinScale::GetFeatureMaxMin(
      std::vector<base::shared_ptr<ProblemNode> >& v) {
   for (int i = 0; i< v.size(); i++) {
     for (base::NormalSarray<double>::iterator j = v[i]->element.begin();
@@ -37,27 +37,14 @@ void Scale::GetFeatureMaxMin(
   }
 }
 
-void Scale::Do(
+void MaxMinScale::Do(
      std::vector<base::shared_ptr<ProblemNode> >* v) {
   feature_max_min_.clear();
   GetFeatureMaxMin(*v);
   for (int i = 0; i< v->size(); i++) {
     for (base::NormalSarray<double>::iterator j = (*v)[i]->element.begin();
          j != (*v)[i]->element.end(); j++) {
-      CHECK(feature_max_min_.count(j->first));
-      double max = feature_max_min_[j->first]->first;
-      double min = feature_max_min_[j->first]->second;
-      if (max == min) continue;  // ingnore single value feature
-      if (j->second == min) {
-        j->second = FLAGS_lower;
-        continue;
-      }
-      if (j->second == max) {
-        j->second = FLAGS_upper;
-        continue;
-      }
-      j->second = (FLAGS_upper - FLAGS_lower) *
-                  ((j->second - min) / (max - min));
+      j->second = Do(j->first, j->second);
     }
   }
 }

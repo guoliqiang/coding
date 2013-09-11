@@ -5,6 +5,7 @@
 // File  : predict.cc
 // Brief :
 #include "../public/predict.h"
+#include "../public/scale.h"
 namespace nltk {
 namespace svm {
 
@@ -33,6 +34,9 @@ void Predict::SvmPredict(const std::string input,
       int32_t index = StringToInt(foo[0]);
       double value = StringToDouble(foo[1]);
       CHECK_GE(index, 0);
+      // scale
+      value = MaxMinScale::GetInstance()->Do(index, value,
+              &(Model::GetInstance().feature_max_min_));
       node.element.insert(index, value);
     }
     rs += (IntToString(SvmPredict(node)) + "\n");

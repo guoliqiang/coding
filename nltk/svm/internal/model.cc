@@ -19,6 +19,16 @@ void Model::LoadModel(const std::string & path) {
   para_->LogContent();
   start_ = model_out.start;
   count_ = model_out.count;
+  for (std::map<int32_t, featurenode>::iterator i =
+       model_out.feature_max_min.begin();
+       i != model_out.feature_max_min.end(); i++) {
+    base::shared_ptr<std::pair<double, double> >
+          foo(new std::pair<double, double>());
+    foo->first = i->second.max;
+    foo->second = i->second.min;
+    feature_max_min_.insert(std::make_pair(i->first, foo));
+  }
+
   for (std::map<int32_t, std::map<int32_t, modelnode> >::iterator
        i = model_out.model.begin(); i != model_out.model.end();
        i++) {

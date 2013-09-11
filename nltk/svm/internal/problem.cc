@@ -59,7 +59,7 @@ bool Problem::ReadFile(std::string path) {
   para_.reset(new Parameter());
   if (FLAGS_scale) {
     LOG(INFO) << "scaling begin...";
-    Scale::GetInstance().Do(&node_);
+    MaxMinScale::GetInstance()->Do(&node_);
   }
   LogContent();
   return true;

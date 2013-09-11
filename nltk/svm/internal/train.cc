@@ -6,6 +6,7 @@
 // Brief :
 
 #include "../public/train.h"
+#include "../public/scale.h"
 
 namespace nltk {
 namespace svm {
@@ -17,6 +18,7 @@ void Train::ReadFile(const std::string path) {
   Model::GetInstance().node_ = Problem::GetInstance().node_;
   Model::GetInstance().start_ = Problem::GetInstance().start_;
   Model::GetInstance().count_ = Problem::GetInstance().count_;
+  Model::GetInstance().feature_max_min_ = MaxMinScale::GetInstance()->feature_max_min_;
 }
 
 void Train::SvmTrain() {
@@ -38,7 +40,7 @@ void Train::SvmTrain() {
         b.push_back(Problem::GetInstance().node_[j->second + k]);
       }
       scoped_ptr<Solver> solver(new SMO(a, b, Problem::GetInstance().para_));
-         
+
       base::shared_ptr<ModelNode> ptr(new ModelNode());
       if (!Model::GetInstance().model_.count(i->first)) {
         base::shared_ptr<std::map<int32_t,
@@ -60,6 +62,15 @@ void Train::WriteModel(std::string path) {
   Transfer(*(Problem::GetInstance().para_.get()), &model_out.para);
   model_out.start = Problem::GetInstance().start_;
   model_out.count = Problem::GetInstance().count_;
+  for (std::map<int32_t, base::shared_ptr<std::pair<double, double> > >::iterator
+       i = MaxMinScale::GetInstance()->feature_max_min_.begin();
+       i != MaxMinScale::GetInstance()->feature_max_min_.end(); i++) {
+    featurenode foo;
+    foo.max = i->second->first;
+    foo.min = i->second->second;
+    model_out.feature_max_min.insert(std::make_pair(i->first, foo));
+  }
+
   for (int i = 0; i < Problem::GetInstance().node_.size(); i++) {
     problemnode foo;
     Transfer(*(Problem::GetInstance().node_[i].get()), &foo);

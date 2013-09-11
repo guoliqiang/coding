@@ -41,7 +41,10 @@ class Model {
   std::vector<base::shared_ptr<ProblemNode> > node_;
   std::map<int32_t, int32_t> start_;
   std::map<int32_t, int32_t> count_;
- 
+  std::map<int32_t,
+           base::shared_ptr<std::pair<double, double> > > feature_max_min_;
+
+
  private:
   void Transfer(const parameter & a, Parameter * b) {
      b->c_ = a.c;

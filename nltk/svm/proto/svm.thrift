@@ -24,7 +24,12 @@ struct parameter {
 
 struct problemnode {
   1:  i32 lable;
-  20: map<i32, double> sparse_array;
+  10: map<i32, double> sparse_array;
+}
+
+struct featurenode {
+  1:  double max;
+  10: double min;
 }
 
 struct modelout {
@@ -33,5 +38,6 @@ struct modelout {
  20: list<problemnode> node;
  30: map<i32, i32> start;
  40: map<i32, i32> count;
+ 50: map<i32, featurenode> feature_max_min;
 }
 
