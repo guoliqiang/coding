@@ -11,6 +11,8 @@ all:
 	$(WORK_ROOT)/develop/snake/snake.sh t=*
 	if test $$? -ne 0; then exit 1; fi; \
   cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/svm_train $(WORK_ROOT)/$(PROJ_NAME)/; \
+  cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/svm_predict $(WORK_ROOT)/$(PROJ_NAME)/; \
+  cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/svm_scale $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 
 opt:

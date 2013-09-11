@@ -14,6 +14,7 @@
 
 namespace nltk {
 namespace svm {
+
 class Scale {
  public:
   static Scale & GetInstance() {
@@ -30,6 +31,7 @@ class Scale {
  private:
   DISALLOW_COPY_AND_ASSIGN(Scale);
 };
+
 }  // svm
 }  // namespace nltk
 
