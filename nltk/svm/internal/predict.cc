@@ -56,7 +56,8 @@ int32_t Predict::SvmPredict(ProblemNode & input) {
     tmp++;
     for (std::map<int32_t, int32_t>::reverse_iterator j = tmp;
          j != Model::GetInstance().start_.rend(); j++) {
-      base::shared_ptr<ModelNode> foo = (*Model::GetInstance().model_[i->first].get())[j->first];
+      base::shared_ptr<ModelNode> foo =
+            (*Model::GetInstance().model_[i->first].get())[j->first];
       CHECK(foo.get() != NULL);
       double bar = 0;
       CHECK(Model::GetInstance().count_.count(i->first));

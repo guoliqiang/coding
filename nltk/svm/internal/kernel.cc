@@ -36,6 +36,5 @@ Parameter::Parameter() {
   CHECK(g_kernel_type.String2Enum(FLAGS_kernel_type, &kernel_type_));
 }
 
-
 }  // namespace svm
 }  // namespace nltk
