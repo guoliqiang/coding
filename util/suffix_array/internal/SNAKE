@@ -1,0 +1,4 @@
+cc_library(name = 'suffix_array',
+           srcs = ['suffix_array.cc'],
+           deps = ['//base/internal:base']
+           )

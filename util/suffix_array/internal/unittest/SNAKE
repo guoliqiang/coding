@@ -1,0 +1,4 @@
+cc_binary(name = 'suffix_array_unittest',
+           srcs = ['suffix_array_unittest.cc'],
+           deps = ['//util/suffix_array/internal:suffix_array']
+           )
