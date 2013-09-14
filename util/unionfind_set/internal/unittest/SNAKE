@@ -1,0 +1,4 @@
+cc_binary(name = 'unionfind_set_unittest',
+          srcs = ['unionfind_set_unittest.cc'],
+          deps = ['//base/internal:base']
+          )
