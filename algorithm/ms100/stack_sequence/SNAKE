@@ -1,0 +1,4 @@
+cc_binary(name = 'stack_sequence',
+          srcs = ['stack_sequence.cc'],
+          deps = ['//base/internal:base']
+          )

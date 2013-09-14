@@ -11,6 +11,7 @@
 #include "base/public/logging.h"
 
 namespace algorithm {
+
 int onenum(int i) {
   int rs = 0;
   while (i) {
@@ -18,6 +19,10 @@ int onenum(int i) {
    i &= i-1;
   }
   return rs;
+}
+
+bool ispow(int i) {
+  return (i & (i-1)) == 0 ? true : false;
 }
 
 int onenum2(uint64_t i) {

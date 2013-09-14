@@ -1,0 +1,4 @@
+cc_binary(name = 'pow',
+          srcs = ['pow.cc'],
+          deps = ['//base/internal:base']
+          )

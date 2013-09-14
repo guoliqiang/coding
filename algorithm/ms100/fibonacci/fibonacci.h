@@ -8,6 +8,8 @@
 #ifndef  __FIBONACCI_H_
 #define  __FIBONACCI_H_
 
+// 台阶走一步或两步的问题等价与fibbonacci问题
+
 #include <vector>
 #include "base/public/logging.h"
 

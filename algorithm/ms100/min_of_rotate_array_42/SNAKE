@@ -1,0 +1,4 @@
+cc_binary(name = 'p42',
+          srcs = ['p42.cc'],
+          deps = ['//base/internal:base']
+          )

@@ -1,0 +1,99 @@
+// Copyright 2013 Jike Inc. All Rights Reserved.
+// Author: Liqiang Guo(guoliqiang@jike.com)
+// I just want to GH to hss~
+// Date  : 2013-09-12 19:11:58
+// File  : p41.h
+// Brief :
+
+#ifndef  __P41_H_
+#define  __P41_H_
+
+#include <vector>
+
+namespace algorithm {
+
+class Bar {
+ public:
+  Bar(std::vector<int> * ptr) : ptr_(ptr){}
+  
+  bool Next(int * rs) {
+    if (i_ >= ptr_->size()) return false;
+    double foo = (*ptr_)[i_];
+    std::vector<int> tmp;
+    IntToVec(foo, &tmp)
+    if (j_ < tmp.size()) return tmp[j_++];
+    else {
+      i_++;
+      j_ = 0;
+      if (i_ >= ptr_->size()) return false;
+      foo = (*ptr_)[i_];
+      IntToVec(foo, &tmp)
+      return tmp[j_++];
+    }
+  }
+
+ public:
+  bool IntToVec(int i, std::vector<int> * rs) {
+    rs->clear();
+    while (i) {
+      tmp.insert(tmp.begin(), foo % 10);
+      foo /= 10;
+    }
+  }
+
+  int Size(std::vector<int> & a = *ptr_) {
+    int rs = 0;
+    for (int i = 0; i < a.size(); i++) {
+      int foo = a[i];
+      while (foo) {
+        rs++;
+        foo /= 10;
+      }
+    }
+    return rs;
+  }
+
+ public:
+  int i_ = 0;
+  int j_ = 0;
+  std::vector<int> * ptr_;
+};
+
+
+
+bool Geater(std::vector<int> & a, std::vector<int> & b) {
+  Bar b1(&a);
+  Bar b2(&b);
+  CHECK(b1.Size() == b2.Size());
+  int i = 0;
+  int j = 0;
+  while (b1.Next(&i) && b2.Next(&j)) {
+    if (i > j) return true;
+    if (i < j) return false;
+  }
+  return false;
+}
+
+struct DpNode {
+  std::vector<int> value;
+}
+
+void BuildDp(std::vector<int> & v, DpNode ** dp) {
+  for (int i = 0; i < v.size(); i++) {
+    (*dp)[i][i].value.push_back(v[i]);
+  }
+  for (int j = 1; j < v.size(); j ++) {
+    for (int i = 0; i < v.size() - j; i++) {
+      std::vetor<std::vector<int> > tmp;
+      for (int k = i; k <= i + j; k++) {
+        std::vector<int> t1 = dp[i][k].values;
+        std::vector<int> t2 = dp[k + 1] [i + j].values;
+        
+      }
+    }
+  }
+}
+
+}  // namespace algorithm
+
+#endif  //  __P41_H_

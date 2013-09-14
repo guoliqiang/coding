@@ -1,0 +1,4 @@
+cc_binary(name = 'add_bracket',
+          srcs = ['add_bracket.cc'],
+          deps = ['//base/internal:base']
+          )

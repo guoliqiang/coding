@@ -13,6 +13,7 @@
 namespace algorithm {
 
 inline void swap(char * p1, char * p2) {
+  if (p1 == p2) return;
   char foo = *p1;
   *p1 = *p2;
   *p2 = foo;

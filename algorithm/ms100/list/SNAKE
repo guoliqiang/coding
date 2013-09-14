@@ -1,0 +1,4 @@
+cc_binary(name = 'list',
+          srcs = ['list.cc'],
+          deps = ['//base/internal:base']
+          )

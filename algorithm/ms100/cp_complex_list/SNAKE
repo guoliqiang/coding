@@ -1,0 +1,4 @@
+cc_binary(name = 'complex_list',
+          srcs = ['complex_list.cc'],
+          deps = ['//base/internal:base']
+          )

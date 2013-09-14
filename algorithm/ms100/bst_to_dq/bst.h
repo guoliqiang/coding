@@ -12,6 +12,7 @@
 #include <vector>
 #include <algorithm>
 #include "stdlib.h"
+#include "time.h"
 #include "base/public/logging.h"
 
 namespace algorithm {
@@ -45,6 +46,54 @@ Node<type> * BuildBST(std::vector<type> & v) {
 }
 
 template <typename type>
+int Count(Node<type> * root) {
+  if (root == NULL) return 0;
+  else {
+    return 1 + Count(root->left) + Count(root->right);
+  }
+}
+
+template <typename type>
+Node<type> * Find(Node<type> * root, int v) {
+  if (root == NULL) return NULL;
+  if (root->value == v) return root;
+  if (Find(root->left, v) != NULL) return Find(root->left, v);
+  return Find(root->right, v);
+}
+
+template <typename type>
+void RandomNode(Node<type> * root, int & n,
+                        Node<type> ** rs) {
+  n--;
+  if (n <= 0) {
+    if (*rs == NULL){
+      *rs = root;
+    }
+    return;
+  }
+  if (root->left != NULL) {
+    RandomNode(root->left, n, rs);
+  }
+  if (root->right != NULL) {
+    RandomNode(root->right, n, rs);
+  }
+}
+
+template <typename type>
+Node<type> * RandomNode(Node<type> * root) {
+  static int f = 0;
+  if (f == 0) {
+    srand(time(NULL));
+    f++;
+  }
+  int r = rand() % (Count(root));
+  Node<type> * rs = NULL;
+  RandomNode(root, r, &rs);
+  CHECK(rs != NULL);
+  return rs;
+}
+
+template <typename type>
 void MiddleRootIterate(Node<type> * root) {
   if (root == NULL) return;
   MiddleRootIterate(root->left);
@@ -59,6 +108,15 @@ void DeleteBST(Node<type> * root) {
   DeleteBST(root->right);
   delete root;
 }
+
+template <typename type>
+int Deepth(Node<type> * root) {
+  if (root == NULL) return 0;
+  int l = Deepth(root->left);
+  int r = Deepth(root->right);
+  return (l > r) ? (l + 1) : (r + 1);
+}
+
 
 template <typename type>
 void DeleteDQ(Node<type> * head) {

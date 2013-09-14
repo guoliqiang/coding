@@ -10,5 +10,7 @@ using namespace algorithm;  // NOLINT
 int main(int argc, char** argv) {
   LOG(INFO) << onenum(34);
   LOG(INFO) << onenum2(34);
+  LOG(INFO) << ispow(64);
+  LOG(INFO) << ispow(34);
   return 0;
 }

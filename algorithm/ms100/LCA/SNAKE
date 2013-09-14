@@ -1,0 +1,4 @@
+cc_binary(name = 'LCA',
+          srcs = ['LCA.cc'],
+          deps = ['//base/internal:base']
+          )

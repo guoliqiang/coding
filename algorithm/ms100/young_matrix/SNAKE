@@ -1,0 +1,4 @@
+cc_binary(name = 'young_matrix',
+          srcs = ['young_matrix.cc'],
+          deps = ['//base/internal:base']
+          )

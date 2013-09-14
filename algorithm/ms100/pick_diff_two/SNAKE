@@ -1,0 +1,4 @@
+cc_binary(name = 'pick_diff_two',
+          srcs = ['pick_diff_two.cc'],
+          deps = ['//base/internal:base']
+          )
