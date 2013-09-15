@@ -1,0 +1,4 @@
+cc_binary(name = 'kmp_unittest',
+           srcs = ['kmp_unittest.cc'],
+           deps = ['//base/internal:base']
+           )

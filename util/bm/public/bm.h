@@ -6,6 +6,9 @@
 // Brief :
 // http://blog.chinaunix.net/uid-23390992-id-3320412.html
 // http://blog.csdn.net/sealyao/article/details/4568167#
+// Usually, BM is faster 3~5 times than KMP.
+// KMP is restricted by is matche squence (from left to right, so each move step 
+// can not greatehr the number of matched characters).
 
 #ifndef  __BM_H_
 #define  __BM_H_
