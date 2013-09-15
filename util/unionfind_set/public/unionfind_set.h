@@ -29,7 +29,7 @@ class UFSet {
  public:
   int Insert(const type & v);
   bool Find(const type & v, type * re);
-  bool Union(const type & a, const type & b);
+  bool Union(const type & a, const type & b, bool first_root = false);
   bool FindPC(const type & v, type * re);
   bool Exist(const type & v);
 
@@ -84,7 +84,8 @@ UFNode<type> * UFSet<type>::FindPCSub(UFNode<type> * v) {
 }
 
 template <typename type>
-bool UFSet<type>::Union(const type & a, const type & b) {
+bool UFSet<type>::Union(const type & a, const type & b,
+                        bool first_root /*=false*/) {
   if (!Exist(a)) return false;
   if (!Exist(b)) return false;
   UFNode<type> * foo = set_[a].get();
@@ -95,12 +96,14 @@ bool UFSet<type>::Union(const type & a, const type & b) {
   while (bar->parent != NULL) {
     bar = bar->parent;
   }
-  if (foo->count < bar->count) {
-    bar->count += foo->count;
-    foo->parent = bar;
-  } else {
+  if (foo->count > bar->count || first_root) {
+    // b-->a root is a;
     foo->count += bar->count;
     bar->parent = foo;
+  } else {
+    // a-->b root is b;
+    bar->count += foo->count;
+    foo->parent = bar;
   }
   return true;
 }
