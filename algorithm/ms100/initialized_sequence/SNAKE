@@ -1,0 +1,4 @@
+cc_binary(name = 'p53',
+          srcs = ['p53.cc'],
+          deps = ['//base/internal:base']
+          )

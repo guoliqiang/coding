@@ -1,0 +1,4 @@
+cc_binary(name = 'add',
+          srcs = ['add.cc'],
+          deps = ['//base/internal:base']
+          )

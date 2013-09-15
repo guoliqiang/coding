@@ -1,17 +1,21 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
 // I just want to GH to hss~
-// Date  : 2013-09-09 20:05:04
-// File  : special_fn.cc
+// Date  : 2013-09-15 11:07:07
+// File  : p53.cc
 // Brief :
-
-#include "./special_fn.h"
 #include "base/public/logging.h"
+// at before, the initialized sequence is specified by only its
+// declare sequence.
 
-using namespace algorithm;  // NOLINT
+class A {
+ public:
+  A():n2(1), n1(n2 + 1) {}
+  int n1;
+  int n2;
+};
 
 int main(int argc, char** argv) {
-  LOG(INFO) << fn(10) << " " << fn2(10);
-  LOG(INFO) << fn3<10>() << " " << fn2(10);
   return 0;
 }
+

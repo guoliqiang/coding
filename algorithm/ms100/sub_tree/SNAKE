@@ -1,0 +1,4 @@
+cc_binary(name = 'sub_tree',
+          srcs = ['sub_tree.cc'],
+          deps = ['//base/internal:base']
+          )

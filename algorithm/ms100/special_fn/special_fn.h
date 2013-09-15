@@ -8,12 +8,25 @@
 #ifndef  __SPECIAL_FN_H_
 #define  __SPECIAL_FN_H_
 namespace algorithm {
+// wrong can not use ?
 int fn(int n) {
   return n ? n + fn(n-1) : 0;
 }
 
 int fn2(int n) {
   return ((n + 1) * n) / 2;
+}
+
+// 1 new a[n]
+// 2.!!n
+// 3 template
+template <int N>
+int fn3() {
+  return N + fn3<N-1>();
+}
+template <>
+int fn3<1>() {
+  return 1;
 }
 
 }  // namespace algorithm

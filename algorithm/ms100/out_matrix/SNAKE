@@ -1,0 +1,4 @@
+cc_binary(name = 'out_matrix',
+          srcs = ['out_matrix.cc'],
+          deps = ['//base/internal:base']
+          )
