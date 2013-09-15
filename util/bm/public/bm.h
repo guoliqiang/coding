@@ -4,6 +4,8 @@
 // Date  : 2013-09-15 17:04:40
 // File  : bm.h
 // Brief :
+// http://blog.chinaunix.net/uid-23390992-id-3320412.html
+// http://blog.csdn.net/sealyao/article/details/4568167#
 
 #ifndef  __BM_H_
 #define  __BM_H_
