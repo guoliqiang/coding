@@ -7,8 +7,17 @@
 // 1.Hungarian Algorithm
 //   http://www.nocow.cn/index.php/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95
 //   O(V*E)
-//   点最多，边也最多
+//   边最多
+//   最大匹配边的个数 <==> 二分图下的最小覆盖（选出一个覆盖所有边的最小点集合）点的个数
+//   proof:http://www.matrix67.com/blog/archives/116
+//   找出最小覆盖点的算法
+//
 //   http://162.105.203.28/course/ada09/students/00748244-YT-HungaryAlgorithm.pdf
+
+// poj1274 poj2159 poj
+
+// 也可以用来求解最小匹配问题（转换成最大匹配问题）
+// 扩展 带权重的最大匹配问题
 
 #ifndef  __MAX_MATCHING_H_
 #define  __MAX_MATCHING_H_
@@ -119,8 +128,8 @@ bool Search(std::vector<std::vector<int> > & matrix,
 // more simple implementation
 // link recored the edge from right to left
 int Hungarian(std::vector<std::vector<int> > & matrix,
-               std::vector<int> & left,
-               std::vector<int> * link) {
+              std::vector<int> & left,
+              std::vector<int> * link) {
   int match_count = 0;
   link->clear();
   link->assign(matrix.size(), -1);
@@ -133,6 +142,11 @@ int Hungarian(std::vector<std::vector<int> > & matrix,
   }
   return match_count;
 }
+
+// TODO (guoliqiang) 
+// 从左边开始找出所有未成功找的增广路径，标记这些路径中的点
+// set = 左边标记过的点  +  右边没有标记过的点
+void FindMinCoverSet() {}
 
 }  // namespace algorithm
 
