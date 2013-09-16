@@ -1,0 +1,4 @@
+cc_binary(name = 'str_combination',
+          srcs = ['str_combination.cc'],
+          deps = ['//base/internal:base']
+          )

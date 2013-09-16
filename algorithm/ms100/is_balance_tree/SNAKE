@@ -1,0 +1,4 @@
+cc_binary(name = 'balance_tree',
+          srcs = ['balance_tree.cc'],
+          deps = ['//base/internal:base']
+          )
