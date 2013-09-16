@@ -1,0 +1,4 @@
+cc_binary(name = 'quick_sort',
+          srcs = ['quick_sort.cc'],
+          deps = ['//base/internal:base']
+          )

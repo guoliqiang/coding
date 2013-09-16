@@ -1,0 +1,4 @@
+cc_binary(name = 'max_matching',
+          srcs = ['max_matching.cc'],
+          deps = ['//base/internal:base']
+          )

@@ -1,0 +1,4 @@
+cc_binary(name = 'next_permutation',
+          srcs = ['next_permutation.cc'],
+          deps = ['//base/internal:base']
+          )
