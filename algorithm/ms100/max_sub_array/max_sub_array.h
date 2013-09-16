@@ -28,8 +28,7 @@ int MaxSubArray(std::vector<type> & a, int * begin = NULL,
     if (a[i] + foo[i - 1] > a[i]) {
       foo[i] = a[i] + foo[i - 1];
       len[i] = len[i - 1] + 1;
-    }
-    else {
+    } else {
       foo[i] = a[i];
       len [i] = 1;
     }
