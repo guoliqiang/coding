@@ -1,0 +1,4 @@
+cc_binary(name = 'k-th',
+          srcs = ['k-th.cc'],
+          deps = ['//base/internal:base']
+          )
