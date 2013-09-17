@@ -34,6 +34,7 @@
 #define GTL_STL_UTIL_INL_H__
 
 #include <string>
+#include <vector>
 #include <algorithm>
 
 namespace gtl {
@@ -124,6 +125,19 @@ template <class Element, class Container>
 bool FindElement(const Element& element, const Container& container) {
   return container.end() !=
          std::find(container.begin(), container.end(), element);
+}
+
+template <class T>
+T & operator + (T & v1, const T & v2) {
+  v1.insert(v1.end(), v2.begin(), v2.end());
+  return v1;
+}
+
+
+template <class T>
+T & operator += (T & v1, const T & v2) {
+  v1.insert(v1.end(), v2.begin(), v2.end());
+  return v1;
 }
 
 }  // namespace gtl
