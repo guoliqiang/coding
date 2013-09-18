@@ -29,5 +29,53 @@ int main(int argc, char** argv) {
   Hungarian(matrix, left, &link);
   LOG(INFO) << JoinVector(link);
 
+  link.clear();
+  matrix.clear();
+  AdjaMatrix(matrix, 3);
+  SetMatrix(matrix, 0, 0, 0);
+  SetMatrix(matrix, 0, 1, 2);
+  SetMatrix(matrix, 0, 2, 0);
+
+  SetMatrix(matrix, 1, 0, 0);
+  SetMatrix(matrix, 1, 1, 0);
+  SetMatrix(matrix, 1, 2, 3);
+  
+  SetMatrix(matrix, 2, 0, 0);
+  SetMatrix(matrix, 2, 1, 0);
+  SetMatrix(matrix, 2, 2, 3);
+  /*
+  AdjaMatrix(matrix, 5);
+  SetMatrix(matrix, 0, 0, 3);
+  SetMatrix(matrix, 0, 1, 5);
+  SetMatrix(matrix, 0, 2, 5);
+  SetMatrix(matrix, 0, 3, 4);
+  SetMatrix(matrix, 0, 4, 1);
+
+  SetMatrix(matrix, 1, 0, 2);
+  SetMatrix(matrix, 1, 1, 2);
+  SetMatrix(matrix, 1, 2, 0);
+  SetMatrix(matrix, 1, 3, 2);
+  SetMatrix(matrix, 1, 4, 2);
+  
+  SetMatrix(matrix, 2, 0, 2);
+  SetMatrix(matrix, 2, 1, 4);
+  SetMatrix(matrix, 2, 2, 4);
+  SetMatrix(matrix, 2, 3, 1);
+  SetMatrix(matrix, 2, 4, 0);
+  
+  SetMatrix(matrix, 3, 0, 0);
+  SetMatrix(matrix, 3, 1, 1);
+  SetMatrix(matrix, 3, 2, 1);
+  SetMatrix(matrix, 3, 3, 0);
+  SetMatrix(matrix, 3, 4, 0);
+  
+  SetMatrix(matrix, 4, 0, 1);
+  SetMatrix(matrix, 4, 1, 2);
+  SetMatrix(matrix, 4, 2, 1);
+  SetMatrix(matrix, 4, 3, 3);
+  SetMatrix(matrix, 4, 4, 3);
+  */
+  KM(matrix, &link);
+  LOG(INFO) << JoinVector(link);
   return 0;
 }

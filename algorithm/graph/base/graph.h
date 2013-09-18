@@ -19,11 +19,17 @@ void AdjaMatrix(std::vector<std::vector<int> > & matrix, int size) {
   }
 }
 
-void SetMatrix(std::vector<std::vector<int> > & matrix, int i, int j, int v = 1) {
+void SetMatrixDouble(std::vector<std::vector<int> > & matrix, int i, int j, int v = 1) {
   CHECK(i < matrix.size());
   CHECK(j < matrix.size());
   matrix[i][j] = v;
   matrix[j][i] = v;
+}
+
+void SetMatrix(std::vector<std::vector<int> > & matrix, int i, int j, int v = 1) {
+  CHECK(i < matrix.size());
+  CHECK(j < matrix.size());
+  matrix[i][j] = v;
 }
 
 void OutMatrix(std::vector<std::vector<int> > & matrix) {
