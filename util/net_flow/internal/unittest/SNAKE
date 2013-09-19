@@ -1,0 +1,4 @@
+cc_binary(name = 'max_flow_unittest',
+           srcs = ['max_flow_unittest.cc'],
+           deps = ['//base/internal:base']
+           )
