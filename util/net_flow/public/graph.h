@@ -87,6 +87,16 @@ class Graph {
     }
   }
 
+  void Out() {
+    for (int i = 0; i < adj_.size(); i++) {
+      for (int j = 0; j < adj_.size(); j++) {
+        if (adj_[i][j] != NULL)
+          LOG(INFO) << "[" << i << "][" << j << "]" << " capcity:" << adj_[i][j]->capcity_
+                    << " flow:" << adj_[i][j]->flow_;
+      }
+    }
+  }
+
   int VCnt() {
     return v_cnt_;
   }

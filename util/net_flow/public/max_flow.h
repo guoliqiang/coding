@@ -88,23 +88,23 @@ class MaxFlow {
     int rs = 0;
     std::map<int, Edge *> path;
     while (PFS(path)) {
-      // LOG(INFO) << "path:" << JoinKeys(&path);
-      // LOG(INFO) << "begin real path:";
-      // LOG(INFO) << d_;
+      LOG(INFO) << "path:" << JoinKeys(&path);
+      LOG(INFO) << "begin real path:";
+      LOG(INFO) << d_;
       int foo = d_;
       CHECK(path.count(foo));
       int avalable_flow = path[foo]->CapRto(foo);
       foo = path[foo]->Other(foo);
       while (foo != s_) {
-        // LOG(INFO) << foo;
+        LOG(INFO) << foo;
         CHECK(path.count(foo));
         if (avalable_flow > path[foo]->CapRto(foo)) {
           avalable_flow = path[foo]->CapRto(foo);
         }
         foo = path[foo]->Other(foo);
       }
-      // LOG(INFO) << foo;
-      // LOG(INFO) << "begin real end with avalableflow :" << avalable_flow;
+      LOG(INFO) << foo;
+      LOG(INFO) << "begin real end with avalableflow :" << avalable_flow;
       rs += avalable_flow;
       
       foo = d_;
