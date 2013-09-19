@@ -35,9 +35,12 @@
 #define MAP_UTIL_H__
 
 #include <string>
-#include <algorithem>
+#include <algorithm>
+
 
 namespace gtl {
+
+using namespace std; // NOLINT
 
 // Perform a lookup in a map or hash_map.
 // If the key is present in the map then the value associated with that
