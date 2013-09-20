@@ -40,7 +40,7 @@ public:
 #include <map>
 #include <set>
 #include <algorithm>
-
+/*
 // height[i] >= height[i - 1] -1 (i is the subscript of string:, 1,2...)
 // "abcdf"
 //  height[cdf] >= height[bcdf] - 1
@@ -290,11 +290,14 @@ int Build(std::string & str) {
   delete [] trank;
   return rs;
 }
+*/
+
 
 
 /*
- * O(n) 140ms
+ * O(n) 140ms uisng dp 
  *
+ */
 int lengthOfLongestSubstring(std::string s) {
   if (s.size() == 0) return 0;
   std::map<char, int> foo;
@@ -315,10 +318,12 @@ int lengthOfLongestSubstring(std::string s) {
   delete [] dp;
   return rs;
 }
-*/
+
+
 
 /*
 // official answer
+// not very understand
 
 int lengthOfLongestSubstring(std::string s) {
   int n = s.length();
@@ -347,6 +352,7 @@ int lengthOfLongestSubstring(std::string s) {
 }
 */
 
+/*
 std::string Reverse(std::string & str) {
   std::string rs;
   for (int i = str.size() - 1; i >= 0; i--) {
@@ -354,16 +360,17 @@ std::string Reverse(std::string & str) {
   }
   return rs;
 }
+*/
 
 int main(int argc, char** argv) {
-  std::string str = "esbtzjaaijqkgmtaajpsdfiqtvxsgfvijpxrvxgfumsuprzlyvhclgkhccmcnquukivlpnjlfteljvykbddtrpmxzcrdqinsnlsteonhcegtkoszzonkwjevlasgjlcquzuhdmmkhfniozhuphcfkeobturbuoefhmtgcvhlsezvkpgfebbdbhiuwdcftenihseorykdguoqotqyscwymtjejpdzqepjkadtftzwebxwyuqwyeegwxhroaaymusddwnjkvsvrwwsmolmidoybsotaqufhepinkkxicvzrgbgsarmizugbvtzfxghkhthzpuetufqvigmyhmlsgfaaqmmlblxbqxpluhaawqkdluwfirfngbhdkjjyfsxglsnakskcbsyafqpwmwmoxjwlhjduayqyzmpkmrjhbqyhongfdxmuwaqgjkcpatgbrqdllbzodnrifvhcfvgbixbwywanivsdjnbrgskyifgvksadvgzzzuogzcukskjxbohofdimkmyqypyuexypwnjlrfpbtkqyngvxjcwvngmilgwbpcsseoywetatfjijsbcekaixvqreelnlmdonknmxerjjhvmqiztsgjkijjtcyetuygqgsikxctvpxrqtuhxreidhwcklkkjayvqdzqqapgdqaapefzjfngdvjsiiivnkfimqkkucltgavwlakcfyhnpgmqxgfyjziliyqhugphhjtlllgtlcsibfdktzhcfuallqlonbsgyyvvyarvaxmchtyrtkgekkmhejwvsuumhcfcyncgeqtltfmhtlsfswaqpmwpjwgvksvazhwyrzwhyjjdbphhjcmurdcgtbvpkhbkpirhysrpcrntetacyfvgjivhaxgpqhbjahruuejdmaghoaquhiafjqaionbrjbjksxaezosxqmncejjptcksnoq";
-  std::string rstr = Reverse(str);
-  str = str + "$" + rstr;
-  LOG(INFO) << str;
-  LOG(INFO) << BuildString(str);
-  str = "bbbbb";
-  str = str + "$" + str;
-  LOG(INFO) << BuildString(str);
-  // LOG(INFO) << lengthOfLongestSubstring(str);
+  std::string str = "abcabcbb";
+  // std::string rstr = Reverse(str);
+  // str = str + "$" + rstr;
+  // LOG(INFO) << str;
+  // LOG(INFO) << BuildString(str);
+  // str = "bbbbb";
+  // str = str + "$" + str;
+  // LOG(INFO) << BuildString(str);
+  LOG(INFO) << lengthOfLongestSubstring(str);
   return 0;
 }

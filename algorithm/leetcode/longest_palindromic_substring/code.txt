@@ -1,0 +1,172 @@
+// Copyright 2013 Jike Inc. All Rights Reserved.
+// Author: Liqiang Guo(guoliqiang@jike.com)
+// I just want to GH to hss~
+// Date  : 2013-09-20 15:24:22
+// File  : code.cc
+// Brief :
+
+// O(n * log(n)) using suffix array
+
+// height[i] >= height[i - 1] -1 (i is the subscript of string:, 1,2...)
+// "abcdf"
+//  height[cdf] >= height[bcdf] - 1
+//  Proof: if height[bcdf] = 0 abosul
+//
+void Height(int * height_, int * rank_, int * sa_, std::string & str_) {
+  int j = 0;
+  for (int i = 1; i < str_.size(); i++) {
+    if (rank_[i] == 1) continue;
+    while (str_[i + j] ==
+           str_[sa_[rank_[i] - 1] + j] &&
+           sa_[rank_[i] - 1] + j < str_.size()) {
+      j++;
+    }
+    height_[rank_[i]] = j;
+    if (j > 0) j--;
+  }
+}
+
+void BucketSort(int j, int * sum_, int * sa_, int * rank_, std::string & str_) {
+  int size = str_.size();
+  int * tsa = new int[size];
+  memset(tsa, 0, size * sizeof(tsa[0]));
+  memset(sum_, 0, 0xFFFF * sizeof(sum_[0]));
+
+  // when i + j > size the rank_[i + j]] value is 0
+  for (int i = 1; i < size; i++) {
+    sum_[rank_[i + j]]++;
+  }
+
+  // i must begin from 1
+  // sum_[0] is usefull becuase of rank_[i + j] can be 0.
+  for (int i = 1; i < 0xFFFF; i++) {
+    sum_[i] += sum_[i - 1];
+  }
+
+  // sort using the second key
+  for (int i = size - 1; i >= 1; i--) {
+    tsa[sum_[rank_[i + j]]--] = i;
+  }
+  // tsa is the result after sorting using second key
+
+  memset(sum_, 0, 0xFFFF * sizeof(sum_[0]));
+  for (int i = 1; i < size; i++) {
+    sum_[rank_[i]]++;
+  }
+  for (int i = 1; i < 0xFFFF; i++) {
+    sum_[i] += sum_[i - 1];
+  }
+  // sort using the first key
+  for (int i = size - 1; i > 0; i--) {
+    sa_[sum_[rank_[tsa[i]]]--] = tsa[i];
+  }
+  delete [] tsa;
+}
+
+std::string Palindrome(int * height_, int * rank_,
+                       int * sa_, std::string & str_) {
+  int index = 0;
+  int rs = 0;
+  for (int i = 1; i < str_.size(); i++) {
+    if (rs < height_[i]) {
+      int tmp = str_.size() / 2;
+      int foo1 = sa_[i];
+      int foo2 = sa_[i-1];
+      if (foo1 > tmp && foo2 > tmp) continue;
+      if (foo1 < tmp && foo2 < tmp) continue;
+      if (foo1 > tmp) foo1 -= tmp;
+      if (foo2 > tmp) foo2 -= tmp;
+      if (foo1 + foo2 + height_[i] -2 != tmp -1) continue;
+      
+      
+      rs = height_[i];
+      index = i;
+    }
+  }
+  return str_.substr(sa_[index], rs);
+}
+
+std::string BuildString(std::string & str) {
+  std::string str_;
+  str_.resize(str.size() + 1);
+  for (int i = 0; i < str.size(); i++)
+    str_[i + 1] = str[i];
+
+  int size = str_.size();
+  int * sa_ = new int[size];
+  int * rank_ = new int[size * 2];
+  int * sum_ = new int[0xFFFF];
+  int * trank = new int[size];
+  int * height_ = new int[size];
+
+  memset(sa_, 0, sizeof(int) * size);
+  memset(rank_, 0, sizeof(int) *size * 2);
+  memset(sum_, 0, sizeof(int) * 0xFFFF);
+  memset(height_, 0, sizeof(int) * size);
+
+  for (int i = 1; i< size; i++) {
+    trank[i]= str_[i];
+  }
+  for (int i = 1; i < size; i++) {
+    sum_[static_cast<int>(trank[i])]++;
+  }
+  for (int i = 2; i < 0xFF; i++) {
+    sum_[i] += sum_[i - 1];
+  }
+
+  for (int i = size - 1; i >= 1; i--) {
+    sa_[sum_[static_cast<int>(trank[i])]--] = i;
+  }
+
+  // build first rank and sa
+  // at begin rank may have same values.
+  rank_[sa_[1]] = 1;
+  int p = 1;
+  for (int i = 2; i < size; i++) {
+    if (trank[sa_[i]] != trank[sa_[i - 1]]) p++;
+    rank_[sa_[i]] = p;
+  }
+  for (int j = 1; j < size; j *= 2) {
+    BucketSort(j, sum_, sa_, rank_, str_);
+    trank[sa_[1]] = 1;
+    p = 1;
+    for (int i = 2; i < size; i++) {
+      if ((rank_[sa_[i]] != rank_[sa_[i-1]]) ||
+          (rank_[sa_[i] + j ] != rank_[sa_[i - 1] + j])) {
+        p++;
+      }
+      trank[sa_[i]] = p;
+    }
+    for (int i = 1; i < size; i++) {
+      rank_[i] = trank[i];
+    }
+  }
+  Height(height_, rank_, sa_, str_);
+  std::string rs = Palindrome(height_, rank_, sa_, str_);
+  delete [] height_;
+  delete [] sum_;
+  delete [] sa_;
+  delete [] rank_;
+  delete [] trank;
+  return rs;
+}
+
+std::string Reverse(const std::string & str) {
+  std::string rs;
+  for (int i = str.size() - 1; i >= 0; i--) {
+    rs.append(&str[i], 1);
+  }
+  return rs;
+}
+
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        string foo = s + "$" + Reverse(s);
+        return BuildString(foo);
+        
+    }
+};
