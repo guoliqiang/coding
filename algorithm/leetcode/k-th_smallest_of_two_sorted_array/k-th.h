@@ -54,6 +54,13 @@ type FindKthSmallest(std::vector<type> & a, std::vector<type> & b,
   return FindKthSmallest(&a[0], a.size(), &b[0], b.size(), k, MAX, MIN);
 }
 
+int FindKthSmallestWrapper(int * a, int m, int * b, int n, int k) {
+  int * foo = NULL;
+  if (m == 0) return FindKthSmallest<int>(foo, 0, b, n, k, 0x7fffffff, 0x80000000);
+  if (n == 0) return FindKthSmallest<int>(a, m, foo, 0, k, 0x7fffffff, 0x80000000);
+  return FindKthSmallest<int>(a, m, b, n, k, 0x7fffffff, 0x80000000);
+}
+
 }  // namespace algorithm
 
 #endif  //  __KTH_H_

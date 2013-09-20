@@ -7,6 +7,7 @@
 
 #include "../public/suffix_array.h"
 
+
 namespace util {
 
 int SuffixArray::DiffSubStringNum() {
@@ -56,16 +57,18 @@ void SuffixArray::BucketSort(int j) {
   int size = str_.size();
   int * tsa = new int[size];
   memset(tsa, 0, size * sizeof(tsa[0]));
-  memset(sum_, 0, 0xFF * sizeof(sum_[0]));
+  memset(sum_, 0, LEN * sizeof(sum_[0]));
 
   // when i + j > size the rank_[i + j]] value is 0
   for (int i = 1; i < size; i++) {
+    CHECK(rank_[i + j] >= 0 && rank_[i + j] < LEN);
+    // the check may find LEN is not enough
     sum_[rank_[i + j]]++;
   }
 
   // i must begin from 1
-  // sum_[0] is usefull
-  for (int i = 1; i < 0xFF; i++) {
+  // sum_[0] is usefull, because of rank_[i + j] may be zero.
+  for (int i = 1; i < LEN; i++) {
     sum_[i] += sum_[i - 1];
   }
 
@@ -80,11 +83,11 @@ void SuffixArray::BucketSort(int j) {
   // }
   // std::cout << std::endl;
 
-  memset(sum_, 0, 0xFF * sizeof(sum_[0]));
+  memset(sum_, 0, LEN * sizeof(sum_[0]));
   for (int i = 1; i < size; i++) {
     sum_[rank_[i]]++;
   }
-  for (int i = 1; i < 0xFF; i++) {
+  for (int i = 1; i < LEN; i++) {
     sum_[i] += sum_[i - 1];
   }
   // sort using the first key
@@ -95,7 +98,8 @@ void SuffixArray::BucketSort(int j) {
 }
 
 void SuffixArray::Build() {
-  char * trank = new char[str_.size()];
+  int * trank = new int[str_.size()];
+  // the character num may be lagger than 0xff
   int size = str_.size();
 
   for (int i = 1; i< size; i++) {
@@ -104,7 +108,7 @@ void SuffixArray::Build() {
   for (int i = 1; i < size; i++) {
     sum_[static_cast<int>(trank[i])]++;
   }
-  for (int i = 2; i < 0xFF; i++) {
+  for (int i = 2; i < LEN; i++) {
     sum_[i] += sum_[i - 1];
   }
 
@@ -140,6 +144,7 @@ void SuffixArray::Build() {
     }
     for (int i = 1; i < size; i++) {
       rank_[i] = trank[i];
+      CHECK(rank_[i] >= 0);
     }
   }
 
@@ -152,7 +157,9 @@ void SuffixArray::Build() {
 // height[i] >= height[i - 1] -1 (i is the subscript of string:, 1,2...)
 // "abcdf"
 //  height[cdf] >= height[bcdf] - 1
-//  Proof:
+//  Proof: if height[bcdf] == 0 abosolutely.
+//
+//  Note: In final the subscript of height is the rank value.
 //
 void SuffixArray::Height() {
   int j = 0;

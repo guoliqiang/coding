@@ -18,6 +18,8 @@
 #include "base/public/string_util.h"
 #include "math.h"
 
+#define LEN 0xFFFF
+
 namespace util {
 
 class SuffixArray {
@@ -35,8 +37,8 @@ class SuffixArray {
     rank_.assign(str_.size() * 2, 0);
     sa_.assign(str_.size(), 0);
     height_.assign(str_.size(), 0);
-    sum_ = new int[0xFF];
-    memset(sum_, 0, 0xff * sizeof(int));
+    sum_ = new int[LEN];
+    memset(sum_, 0, LEN * sizeof(int));
 
     int foo = pow(2, log(str_.size()) / log(2) + 1);
     rmq_ = new int[foo];
