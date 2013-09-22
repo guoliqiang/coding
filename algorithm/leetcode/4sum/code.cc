@@ -49,10 +49,10 @@ void FourSum(std::vector<int> & sum, int target, std::set<std::vector<int> > * r
   }
 }
 
-std::vector<std::vector<int> > FourSum(std::vector<int> & sum, int target) {
+std::vector<std::vector<int> > FourSum(std::vector<int> & num, int target) {
   std::set<std::vector<int> > foo;
   std::vector<std::vector<int> > rs;
-  FourSum(sum, target, &foo);
+  FourSum(num, target, &foo);
   for (std::set<std::vector<int> >::iterator i = foo.begin(); i != foo.end(); i++) {
     rs.push_back(*i);
   }
