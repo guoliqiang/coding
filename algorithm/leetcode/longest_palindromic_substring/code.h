@@ -6,6 +6,7 @@
 // Brief : Manacher’s Algorithm
 //         http://leetcode.com/2011/11/longest-palindromic-substring-part-ii.html
 //         better doc: http://larrylisblog.net/WebContents/images/LongestPalindrom.pdf
+//         cmolexity :O(n) 
 
 /*
  *  origin str:
@@ -38,7 +39,8 @@
  *  if i >= right_center_bound:
  *     p[i] = 1
  *     p[i]值可能小于实际值，因此接下来需要对p[i]向两边扩展
- *
+ *  
+ *  right_center_bound要一直维持在当前的最大值时.
  *
  */ 
 
