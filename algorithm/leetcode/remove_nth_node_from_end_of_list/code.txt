@@ -1,0 +1,40 @@
+/*
+Run Status: Accepted!
+Program Runtime: 8 milli secs
+Progress: 7/7 test cases passed.
+
+Run Status: Accepted!
+Program Runtime: 40 milli secs
+Progress: 207/207 test cases passed.
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *removeNthFromEnd(ListNode *head, int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        ListNode * ptr1 = head;
+        ListNode * ptr2 = head;
+        int tmp = n;
+        while (tmp) {
+            ptr1 = ptr1->next;
+            tmp--;
+        }
+        if (ptr1 == NULL) return head->next;
+        while (ptr1->next != NULL) {
+            ptr1 = ptr1->next;
+            ptr2 = ptr2->next;
+        }
+        ptr2->next = ptr2->next->next;
+        return head;
+        
+    }
+};
