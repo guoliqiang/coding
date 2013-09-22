@@ -73,11 +73,15 @@ ListNode * SwapPairs(ListNode * head) {
   head->next = foo;
   head = pre;
   pre = head->next;
-  
+
   while (foo != NULL) {
     ListNode * swap1 = foo;
     ListNode * swap2 = foo->next;
-    if (swap2 == NULL) break;
+    if (swap2 == NULL) {
+      HERE(INFO);
+      LOG(INFO) << foo->val;
+      break;
+    }
     foo = foo->next->next;
 
     pre->next = swap2;
@@ -103,6 +107,7 @@ int main(int argc, char** argv) {
   foo.push_back(3);
   Out(SwapPairs(MakeList(foo)));
 
+  return 0;
   foo.clear();
   foo.push_back(1);
   Out(SwapPairs(MakeList(foo)));

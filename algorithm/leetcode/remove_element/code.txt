@@ -1,0 +1,34 @@
+
+/*
+Run Status: Accepted!
+Program Runtime: 8 milli secs
+Progress: 22/22 test cases passed.
+Run Status: Accepted!
+Program Runtime: 40 milli secs
+Progress: 112/112 test cases passed.
+*/
+/*
+一定要条理清晰，在不增加时间复杂度的前提下
+多写几行代码是有必要的
+
+*/
+class Solution {
+public:
+    int removeElement(int A[], int n, int elem) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int i = 0;
+        int j = n - 1;
+        while (i < j) {
+            while (i < n && A[i] != elem) i++;
+            while (j >= 0 && A[j] == elem) j--;
+            if (i < j) {
+                swap(A[i], A[j]);
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (A[i] == elem) return i;
+        }
+        return n;
+    }
+};
