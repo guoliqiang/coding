@@ -106,14 +106,13 @@ void Next(const char * pattern, std::vector<int> & next) {
     int k = next[0];
     int i = 0;
     while (i < size) {
-      if (k == -1 || pattern[i] == pattern[k]) {
-        i++;
-        k++;
-        if (pattern[i] == pattern[k]) next[i] = next[k];
-        else next[i] = k;
-      } else {
+      while (k >=0 && pattern[k] != pattern[i]){
         k = next[k];
       }
+      k++;
+      i++;
+      if (pattern[i] == pattern[k]) next[i] = next[k];
+      else next[i] = k;
     }
   }
   LOG(INFO) << "next:" << JoinVector(next);
