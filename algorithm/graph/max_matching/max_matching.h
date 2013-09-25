@@ -35,6 +35,12 @@
 // 带权二分图
 // 在带权二分图的所有匹配中，使匹配边权
 // 值之和最大的匹配。
+//
+// 带权二分图最大匹配  == 最大费用流
+// 在匹配书尽可能多的前提下，找权重和最大的。
+//
+// 带权二分图最小匹配  == 最小费用流
+// 在匹配数尽可能多的前提下，找权重和最小的。
 
 #ifndef  __MAX_MATCHING_H_
 #define  __MAX_MATCHING_H_
@@ -111,11 +117,11 @@ int Hungarian(std::vector<std::vector<int> > & matrix,
         if (i % 2 == 0) {
           CHECK((*max_matching)[foo1][foo2] == 0);
           CHECK((*max_matching)[foo2][foo1] == 0);
-          SetMatrix(*max_matching, foo1, foo2, 1);
+          SetMatrixDouble(*max_matching, foo1, foo2, 1);
         } else {
           CHECK((*max_matching)[foo1][foo2] == 1);
           CHECK((*max_matching)[foo2][foo1] == 1);
-          SetMatrix(*max_matching, foo1, foo2, 0);
+          SetMatrixDouble(*max_matching, foo1, foo2, 0);
         }
       }  // for
     }  // if
@@ -126,12 +132,32 @@ int Hungarian(std::vector<std::vector<int> > & matrix,
 bool Search(std::vector<std::vector<int> > & matrix,
             std::vector<int> & used,
             std::vector<int> & link,
-            int n) {
+            int n, bool first = true,
+            std::vector<int> * visited = NULL) {
+  // used 为使用过的点
+  // visited为增广路径中的点，used点可能仅包含当前点（只使用过一个点）
+  // 这样的点不构成增广路径，其不会出现的visited表中
+  if (used[n] == 1) return false;
+  used[n] = 1;
+  if (!first && visited != NULL) (*visited)[n] = 1;
+  
   for (int i = 0; i < matrix.size(); i++) {
     if (!used[i] && matrix[n][i]) {
+      // LOG(INFO) << "n:" << n <<" i:" << i
+      //           << " first:" << first << " link:" << link[i]
+      //           << " matrix[n][i]" << matrix[n][i];
+      if (first && link[i] == n) {
+        LOG(INFO) << "find:" << n << " link[" << i << "]:" << link[i];
+        continue;
+      } else {
+        if (visited != NULL) (*visited)[n] = 1;
+      }
+
+      if (visited != NULL) (*visited)[i] = 1;
       used[i] = 1;
+      
       if (link[i] == -1 ||
-          Search(matrix, used, link, link[i])) {
+          Search(matrix, used, link, link[i], false, visited)) {
         link[i] = n;
         // modify link one time <==> remove the edge in the mathced result
         //                           and add a new edge
@@ -160,10 +186,49 @@ int Hungarian(std::vector<std::vector<int> > & matrix,
   return match_count;
 }
 
-// TODO (guoliqiang) 
-// 从左边开始找出所有未成功找的增广路径，标记这些路径中的点
+
+// 如果最大匹配M覆盖了所有的点，那么显然图中所有路径已经被覆盖。
+// 否则从左边未匹配的点开始找出所有未成功找的增广路径，标记这些路径中的点
 // set = 左边标记过的点  +  右边没有标记过的点
-void FindMinCoverSet() {}
+void FindMinCoverSet(std::vector<std::vector<int> > & matrix,
+                     std::vector<int> & left,std::vector<int>* min_set) {
+  min_set->clear();
+  std::vector<int> link;  // 其实是right link
+  std::vector<int> used;
+  std::vector<int> visited(matrix.size(), 0);
+  int match_count = Hungarian(matrix, left, &link);
+  if (match_count * 2 == matrix.size()) {
+    // 直接返回link中的点即可
+    for (int i = 0; i < link.size(); i++) {
+      if (link[i] != -1) min_set->push_back(i);
+    }
+    return;
+  }
+  std::vector<int> left_link;
+  left_link.assign(matrix.size(), -1);
+  
+  for (int i = 0; i< link.size(); i++) {
+    if (link[i] != -1) {
+      left_link[link[i]] = i;
+    }
+  }
+
+  // LOG(INFO) << "link:" << JoinVector(link);
+  for (int i = 0; i < left.size(); i++) {
+    if (left_link[i] != -1) continue;
+    used.clear();
+    used.assign(matrix.size(), 0);
+    CHECK(!Search(matrix, used, link, left[i], true, &visited));
+    // LOG(INFO) << "used:" << JoinVector(used);
+    // LOG(INFO) << "visted:" << JoinVector(visited);
+  }
+  for (int i = 0; i < matrix.size(); i++) {
+    if (std::find(left.begin(), left.end(), i) != left.end() &&
+        visited[i]) min_set->push_back(i);
+    else if (std::find(left.begin(), left.end(), i) == left.end() && 
+             !visited[i]) min_set->push_back(i);
+  }
+}
 
 }  // namespace algorithm
 
@@ -211,6 +276,11 @@ void FindMinCoverSet() {}
 // 
 //
 // O(n^3)
+//
+// if you want to compute the min weighted bipartite matching,
+// you can not use -1 * weightd directly, because A = max(...) will
+// be zer0, you should use MAX + 1 - weighted instead.
+//
 namespace algorithm {
 
 bool KMSearch(std::vector<std::vector<int> > & matrix,
@@ -267,8 +337,9 @@ void KM(std::vector<std::vector<int> > & matrix,  // n * n  row = A col = B
   std::vector<int> A(matrix.size(), 0);  // left
   std::vector<int> B(matrix.size(), 0);  // right
   for (int i = 0; i < matrix.size(); i++) {
+    // LOG(INFO) << JoinVector(matrix[i]);
     for (int j = 0; j < matrix.size(); j++) {
-      if(matrix[i][j] > A[i]) A[i] = matrix[i][j];
+      if(matrix[i][j] > A[i])  A[i] = matrix[i][j];
     }
   }
   for (int i = 0; i < matrix.size(); i++) {
@@ -278,15 +349,17 @@ void KM(std::vector<std::vector<int> > & matrix,  // n * n  row = A col = B
     slack.clear();  // Note: slack 的含义仅限于本次的交错树中
     slack.assign(matrix.size(), 0x7fffffff);
     while (true) {
+      // LOG(INFO) << "A:" << JoinVector(A);
+      // LOG(INFO) << "B:" << JoinVector(B);
       // LOG(INFO) << "sack:" << JoinVector(slack);
       usedy.clear();
       usedy.assign(matrix.size(), 0);
       usedx.clear();
       usedx.assign(matrix.size(), 0);
       if (KMSearch(matrix, usedx, usedy, *link, A, B, slack, i)) {
-        // LOG(INFO) << "usedx:" << JoinVector(usedx);
-        // LOG(INFO) << "usedy:" << JoinVector(usedy);
-        // LOG(INFO) << "slack:" << JoinVector(slack);
+         // LOG(INFO) << "usedx:" << JoinVector(usedx);
+         // LOG(INFO) << "usedy:" << JoinVector(usedy);
+         // LOG(INFO) << "slack:" << JoinVector(slack);
         break;
       }
       int d = 0x7fffffff;

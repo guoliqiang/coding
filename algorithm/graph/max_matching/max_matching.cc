@@ -13,11 +13,11 @@ int main(int argc, char** argv) {
   std::vector<std::vector<int> > max_matching;
   AdjaMatrix(matrix, 6);
   AdjaMatrix(max_matching, 6);
-  SetMatrix(matrix, 0, 1);
-  SetMatrix(matrix, 0, 3);
-  SetMatrix(matrix, 2, 3);
-  SetMatrix(matrix, 2, 5);
-  SetMatrix(matrix, 1, 4);
+  SetMatrixDouble(matrix, 0, 1);
+  SetMatrixDouble(matrix, 0, 3);
+  SetMatrixDouble(matrix, 2, 3);
+  SetMatrixDouble(matrix, 2, 5);
+  SetMatrixDouble(matrix, 1, 4);
   std::vector<int> left;
   left.push_back(0);
   left.push_back(2);
@@ -28,6 +28,10 @@ int main(int argc, char** argv) {
   std::vector<int> link;
   Hungarian(matrix, left, &link);
   LOG(INFO) << JoinVector(link);
+  
+  std::vector<int> min_set;
+  FindMinCoverSet(matrix, left, &min_set);
+  LOG(INFO) << "min_set:" << JoinVector(min_set);
 
   link.clear();
   matrix.clear();

@@ -1,0 +1,42 @@
+// Copyright 2013 Jike Inc. All Rights Reserved.
+// Author: Liqiang Guo(guoliqiang@jike.com)
+// I just want to GH to hss~
+// Date  : 2013-09-25 19:48:35
+// File  : code.cc
+// Brief :
+/*
+ * Run Status: Accepted!
+ * Program Runtime: 16 milli secs
+ * Progress: 40/40 test cases passed.
+ * Run Status: Accepted!
+ * Program Runtime: 56 milli secs
+ * Progress: 88/88 test cases passed.
+ *
+ * */
+
+#include "base/public/logging.h"
+
+namespace algorithm {
+int Jump(int * a, int n) {
+  std::vector<int> foo(n, 0x7fffffff);
+  foo[0] = 0;
+  for (int i = 0; i < n; i++) {
+    if (i != 0 && a[i] < a[i - 1]) continue;  // 用于加速，否则会T
+    for (int j = 1; j <= a[i]; j++) {
+      if (i + j < n && foo[i] != 0x7fffffff &&
+          foo[i + j] > foo[i] + 1) foo[i + j] = foo[i] + 1;
+    }
+  }
+  return foo[n - 1];
+}
+
+}  // namespace algorithm
+
+using namespace algorithm;
+
+int main(int argc, char** argv) {
+  int A[] = {0};
+  int size = sizeof(A) / sizeof(int);
+  LOG(INFO) << Jump(A, size);
+  return 0;
+}
