@@ -60,6 +60,17 @@ bool LetterK(ListNode * head, int k) {
   return true;
 }
 
+// 这个最简单
+void ReverseS(ListNode * h) {
+  ListNode * pre = NULL;
+  while (h != NULL) {
+    ListNode * foo = h->next;
+    h->next = pre;
+    pre = h;
+    h = foo;
+  }
+}
+
 // 这个函数debug了半天，这也是一个题目
 void Reverse(ListNode * h, ListNode * t) {
   if (h->next == NULL) return;
