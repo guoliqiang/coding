@@ -17,6 +17,7 @@
  * */
 
 #include "base/public/common_head.h"
+#include "../ojbst/ojbst.h"
 
 namespace algorithm {
 
@@ -43,10 +44,167 @@ std::vector<int> Inorder(TreeNode * root) {
 
 }  // namespace algorithm
 
+
+// http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html
+// no recursive and without stack!!!  NB
+// threading binary tree (线索二叉树)
+
+namespace morris_traversal {
+using namespace algorithm;
+
+// 遍历左子树前，先让左子树中序遍历的最后
+// 一个节点（一定是叶子节点）的右指针指向自己
+// 这样在遍历结束左子树后可以回到当前节点
+
+void InOrder(TreeNode * root) {
+  if (root == NULL) return;
+  
+  while (root != NULL) {
+    if (root->left == NULL) {
+      LOG(INFO) << root->val;
+      root = root->right;
+    } else {
+      TreeNode * foo = root->left;
+      while (foo->right != NULL && foo->right != root) {
+        foo = foo->right;
+      }
+      if (foo->right == NULL) {
+        foo->right = root;
+        root = root->left;
+      } else {
+        foo->right = NULL;
+        LOG(INFO) << root->val;
+        root = root->right;
+      }
+    }
+  }
+}
+
+void PreOrder(TreeNode * root) {
+  if (root == NULL) return;
+  
+  while (root != NULL) {
+    if (root->left == NULL) {
+      LOG(INFO) << root->val;
+      root = root->right;
+    } else {
+      TreeNode * foo = root->left;
+      while (foo->right != NULL && foo->right != root) {
+        foo = foo->right;
+      }
+      if (foo->right == NULL) {
+        foo->right = root;
+        LOG(INFO) << root->val;
+        root = root->left;
+      } else {
+        foo->right = NULL;
+        root = root->right;
+      }
+    }
+  }
+}
+
+/*
+
+     dummy
+     a
+   b   c
+
+先输出b
+进而输出c a
+
+*/
+
+void PostOrderSub(TreeNode * from, TreeNode * to) {
+  if (from == to) {
+    LOG(INFO) << from->val;
+  } else {
+    TreeNode * bak = to->right;
+
+    //将最右侧的treenode的right都指向其parent
+    TreeNode * pre = from;
+    TreeNode * foo = from->right;
+    while (foo != NULL) {
+      if (foo == to) {
+        foo->right = pre;
+        break;
+      }
+      TreeNode * tmp = foo->right;
+      foo->right = pre;
+      pre = foo;
+      foo = tmp;
+    }
+
+    // visit
+    foo = to;
+    while (foo != NULL) {
+      if (foo == from) {
+        LOG(INFO) << foo->val;
+        break;
+      }
+      LOG(INFO) << foo->val;
+      foo = foo->right;
+    }
+
+    // 修改回去
+    pre = to;
+    foo = to->right;
+    while (foo != NULL) {
+      if (foo == from) {
+        foo->right = pre;
+        break;
+      }
+      TreeNode * tmp = foo->right;
+      foo->right = pre;
+      pre = foo;
+      foo = tmp;
+    }
+
+    to->right = bak;
+
+  }
+}
+
+void PostOrder(TreeNode * root) {
+  if (root == NULL) return;
+  // 因为算法只输出左子树，所以需要将整个二叉树
+  // 作为一个虚拟节点的左子树
+  TreeNode dummy;
+  dummy.left = root;
+  root = &dummy;
+
+  while (root != NULL) {
+    if (root ->left == NULL) {
+      root = root->right;
+    } else {
+      TreeNode * foo = root->left;
+      while (foo->right != NULL && foo->right != root) {
+        foo = foo->right;
+      }
+      if (foo->right == NULL) {
+        foo->right = root;
+        root = root->left;
+      } else {
+        PostOrderSub(root->left, foo);
+        foo->right = NULL;
+        root = root->right;
+      }
+    }
+  }
+}
+
+}  // namespace morris_trversal
+
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
-
+  std::string str = "1,2,3";
+  morris_traversal::InOrder(Make(str));
+  HERE(INFO);
+  morris_traversal::PreOrder(Make(str));
+  HERE(INFO);
+  morris_traversal::PostOrder(Make(str));
+  InOrder(Make(str));
   return 0;
 }
