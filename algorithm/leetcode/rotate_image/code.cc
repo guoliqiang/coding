@@ -18,6 +18,7 @@
 #include <iostream>
 #include "base/public/logging.h"
 
+
 namespace algorithm {
 
 void RotateSub(std::vector<std::vector<int> > & v, int idx, int n) {
@@ -53,6 +54,50 @@ void Out(std::vector<std::vector<int> > & v) {
 
 }  // namesapce algorithm
 
+
+// http://hawstein.com/posts/1.6.html
+
+/*
+ * 顺时针旋转90度方法：1. 交换主对角线元素
+ *                     2. 交换第j列与第n-1-j列的元素
+ * 
+ * 逆时针旋转90度方法：1. 交换主对角线元素
+ *                     2. 交换第i行与第n-1-i行的元素
+ *
+ * */
+
+namespace NB {
+using namespace std;
+// clockwise
+void Rotate(vector<vector<int> > &matrix) {
+  int n = matrix.size();
+  for (int i = 0; i < n/2; ++i) {
+    for (int j = i; j < n-1-i; ++j){
+      int t = matrix[i][j];
+      matrix[i][j] = matrix[n-1-j][i];
+      matrix[n-1-j][i] = matrix[n-1-i][n-1-j];
+      matrix[n-1-i][n-1-j] = matrix[j][n-1-i];
+      matrix[j][n-1-i] = t;
+    }
+  }
+}
+
+// unclockwise
+void RotateR(std::vector<std::vector<int> > & v) {
+  for (int i = 0; i < v.size(); i++) {
+    for (int j = i + 1; j < v.size(); j++) {
+      std::swap(v[i][j], v[j][i]);
+    }
+  }
+  for (int i = 0; i < v.size() / 2; i++) {
+    for (int j = 0; j < v.size(); j++) {
+      std::swap(v[i][j], v[v.size() - 1 - i][j]);
+    }
+  }
+}
+
+}  // namespce NB
+
 using namespace algorithm;
 
 
@@ -68,7 +113,7 @@ int main(int argc, char** argv) {
   }
   Out(matrix);
   HERE(INFO);
-  Rotate(matrix);
+  NB::RotateR(matrix);
   Out(matrix);
   return 0;
 }
