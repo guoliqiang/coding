@@ -28,6 +28,7 @@ public:
             ptr1 = ptr1->next;
             tmp--;
         }
+        // 因为输入的ｎ保证是有效的
         if (ptr1 == NULL) return head->next;
         while (ptr1->next != NULL) {
             ptr1 = ptr1->next;

@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithem/ms100/max_min_stack
+PROJ_NAME=algorithm/ms100/max_min_stack
 
 
 all:

@@ -15,32 +15,31 @@
  *
  * */
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+// 感觉已经是相当不错的写法了
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode(int x) : val(x), next(NULL) {}
+};
+
 class Solution {
-public:
-    ListNode *deleteDuplicates(ListNode *head) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        ListNode * rs = NULL;
-        ListNode ** pre = &rs;
-        while (head != NULL) {
-            ListNode * t = head->next;
-            while (t != NULL && t->val == head->val) t= t->next;
-            if (t == head->next) {
-              *pre = head;
-              pre = &(head->next);
-            }
-            head = t;
-        }
-        *pre = NULL;
-        return rs;
-    }
+ public:
+   ListNode *deleteDuplicates(ListNode *head) {
+     // Start typing your C/C++ solution below
+     // DO NOT write int main() function
+     ListNode * rs = NULL;
+     ListNode ** pre = &rs;
+     while (head != NULL) {
+       ListNode * t = head->next;
+       while (t != NULL && t->val == head->val) t= t->next;
+       if (t == head->next) {
+         *pre = head;
+         pre = &(head->next);
+       }
+       head = t;
+     }
+     *pre = NULL;
+     return rs;
+   }
 };
 

@@ -28,6 +28,33 @@
 
 using namespace util;  // NOLINT
 
+
+// 大众解法, 时间复杂度高，多次遍历二叉树
+namespace algorithm {
+template <typename type>
+bool Find(Node<type> * root, Node<type> * a) {
+  if (root == NULL) return false;
+  if (root == a) return true;
+  if(Find(root->left, a)) return true;
+  return Find(root->right, a);
+}
+
+template <typename type>
+Node<type> * LCABadVersion(Node<type> * root, Node<type> * a, Node<type> * b) {
+  if (root == a && root == b) return root;
+  bool l_a = Find(root->left, a);
+  bool l_b = Find(root->left, b);
+  bool r_a = Find(root->right, a);
+  bool r_b = Find(root->right, b);
+
+  if (l_a && r_b || l_b && r_a) return root;
+  if (l_a && l_b) return LCABadVersion(root->left, a, b);
+  if (r_a && r_b) return LCABadVersion(root->right, a, b);
+  return NULL;
+}
+
+}  // namespace algorithm
+
 namespace algorithm {
 
 template <typename type>
@@ -88,6 +115,9 @@ Node<type> * LCA(Node<type> * root, Node<type> * a, Node<type> * b) {
   return LCASub(root, a, b, &flag_a, &flag_b);
 }
 
+
+// 单对的LCA问题用这种解法比较好
+// 由于记录了深度，可以直接计算出节点间的距离
 template <typename type>
 void LCA2Sub(Node<type> * root, Node<type> * a, Node<type> * b,
              int * flag_a, int * flag_b, std::map<int, Node<type> *> &m,

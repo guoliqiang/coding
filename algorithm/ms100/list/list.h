@@ -209,6 +209,31 @@ int CircleLen(Node<type> * h) {
 //
 // 结论2：
 // 第一次相遇的地点向前走len-z步正好到达circle point点（可惜z无法求得）
+//
+//　所以设两个指针一个指向链表头一个指向第一次相遇点，两个同时向前移动
+//　两个指针相遇点就是circle point 点
+//
+// 另一种推到方式:
+// slow 到达circle point 点时， fast距离circle point点的offset为ｋ
+// （即当前权，fast指针从circle point点开始计算走过的步数）
+// 则slow fast在圈内第一次相遇点为还差ｋ步走到circle point的点
+//
+// 证明：
+// 设此点距离circle point为ｙ则
+// 2 * (len - y) = len + (len - k - y)
+// y = k
+//
+// 在第一次相遇点有：
+// (m + len - k) * 2 = m + x*len + k + len + (len - 2k)
+// => m = xlen + k
+// 同样可以得出相同的结论:第一次相遇的地点向前走k步正好到达circle point点（可惜k无法求得）
+//
+//
+//
+// 求环的长度可以有一个简单的方法，slow 和　fast 第一次相遇时开始计数
+// 第二次相遇时的计数值就是环的长度，这种方法不用计算出circle point
+// 就能求出环的长度
+//
 
 template <typename type>
 Node<type>* CirclePoint(Node<type> * h) {

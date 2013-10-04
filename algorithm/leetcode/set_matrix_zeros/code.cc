@@ -62,6 +62,8 @@ void SetZero(std::vector<std::vector<int> > & v) {
  * the first row used to mark if the coloum is needed to set zero?
  * the first coloum used to mark if the row is needed to set zer0?
  *
+ * 大众解法：http://hawstein.com/posts/1.7.html
+ * 　　　　　开辟了两个数组col和row,遍历矩阵两次
  * */
 
 namespace algorithm {

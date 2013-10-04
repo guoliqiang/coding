@@ -17,4 +17,3 @@ opt:
 
 
 clean:
-	rm -rf find_sub_tree

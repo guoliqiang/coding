@@ -5,14 +5,11 @@
 // File  : code.cc
 // Brief :
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode(int x) : val(x), next(NULL) {}
+};
 
 class Solution {
 public:
@@ -40,3 +37,22 @@ public:
         return head;
     }
 };
+
+namespace NB {
+
+ListNode * DeleteDup(ListNode * head) {
+  ListNode ** v= &head;
+  ListNode * pre = NULL;
+  ListNode * t = head;
+  while (t != NULL) {
+    if (pre == NULL || t->val != pre->val) {
+      *v = t;
+      v = &((*v)->next);
+    }
+    pre = t;
+    t = t->next;
+  }
+  *v = NULL;  // bug fix.
+  return head;
+}
+}  // namespace NB

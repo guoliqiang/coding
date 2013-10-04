@@ -13,9 +13,12 @@
 using namespace algorithm;  // NOLINT
 
 int main(int argc, char** argv) {
+  NB::MaxMinStack<int> nb;
   MaxMinStack<int> mmstack;
   for (int i = 0; i < 10; i++) {
-    mmstack.push(random() % 100);
+    int t = random() % 100;
+    mmstack.push(t);
+    nb.Push(t);
   }
 
   LOG(INFO) << mmstack.size();
@@ -23,6 +26,11 @@ int main(int argc, char** argv) {
     LOG(INFO) << mmstack.top() << " " << mmstack.max() << " "
               << mmstack.min();
     mmstack.pop();
+    LOG(INFO) << nb.Top() << " " << nb.Max() << " "
+              << nb.Min();
+    nb.Pop();
   }
+
+  LOG(INFO) << "size:" << nb.Size();
   return 0;
 }
