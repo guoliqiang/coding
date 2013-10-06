@@ -91,15 +91,12 @@ bool BinarySearchR2(int * a, int b, int e, int t) {
 }
 
 // loop version
-// 这个版本少用
 bool BinarySearchL1(int * a, int n, int t) {
   int b = 0;
   int e = n - 1;
   if (b > e) return false;
 
-  while (b <= n) {
-    if (b == e) return a[b] == t;
-    // Note，因为如果没有这条语句 b = e = 0 会出现死循环
+  while (b <= e) {  // bug fix
     int mid = b + (e - b) / 2;
     if (a[mid] == t) return true;
     else {
