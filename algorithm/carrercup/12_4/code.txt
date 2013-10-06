@@ -1,0 +1,8 @@
+You have an array with all the numbers from 1 to N, where N is at most 32,000. The array may have duplicate entries and you do not know what N is. With only 4KB of memory available, how would you print all duplicate elements in the array?
+
+有一个数组，里面的数在1到N之间，N最大为32000.数组中可能有重复的元素(即有的元素 存在2份)，你并不知道
+N是多少。给你4KB的内存，你怎么把数组中重复的元素打印出来。
+
+
+我们有4KB的内存，一共有4 * 210 * 8位，大于32000，所以我们可以用Bit Map 来做这道题目。题目很简单，不过我们可以把代码
+写得漂亮一些。 我们可以写一个Bit Map类来完成基本的位操作。
