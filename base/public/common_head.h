@@ -11,10 +11,13 @@
 #include <vector>
 #include <map>
 #include <set>
+#include <list>
 #include <queue>
 #include <iostream>
+#include <fstream>
 #include <stack>
 #include <algorithm>
+#include <bitset>
 #include <math.h>
 #include "base/public/logging.h"
 #include "base/public/string_util.h"

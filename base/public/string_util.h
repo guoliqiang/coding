@@ -902,11 +902,10 @@ std::string JoinMatrix(T * v, const std::string & sep = "\t",
                        const std::string & sep2 = "\n",
                        const std::string & begin = "\n") {
   if(!v || v->size() == 0) return "";
-  int n = v->begin()->size();
   std::stringstream s;
   s << begin;
   for (int i = 0; i < v->size(); i++) {
-    for (int j = 0; j < n; j++) {
+    for (int j = 0; j < (*v)[i].size(); j++) {
       if (j!= 0) s << sep << (*v)[i][j];
       else s << (*v)[i][j];
     }
