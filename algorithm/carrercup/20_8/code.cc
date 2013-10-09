@@ -5,6 +5,10 @@
 // File  : code.cc
 // Brief :
 
+// http://www.cs.uku.fi/~kilpelai/BSA05/lectures/slides04.pdf
+// 时间复杂度为：O(m+kn+z)
+// 其中：m是目标串S的长度，k是模式串个数，n是模式串平均长度，z是S 中出现的模式串数量
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -87,7 +91,7 @@ void Match(std::string & str, Node * root, std::set<std::string> & v) {
     if (e == str.size()) {
       b++;
       e = b;
-      t = root;
+      t = root;  // bug fixed: add this line.
       continue;
     }
 
