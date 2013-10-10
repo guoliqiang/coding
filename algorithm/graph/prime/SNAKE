@@ -1,0 +1,4 @@
+cc_binary(name = 'prime',
+          srcs = ['prime.cc'],
+          deps = ['//base/internal:base']
+          )
