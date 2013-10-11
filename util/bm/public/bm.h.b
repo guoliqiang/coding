@@ -52,9 +52,7 @@ class BM {
  private:
   void BuildBMBC() {
     for (int i = 0; i < pattern_.size(); i++) {
-      // 每个出现在串中的字符，最靠右出现的那个才能拿来使用
-      // 记录其距离字符串末尾的距离
-      if (bmBc_.count(pattern_[i])) {
+      if (bmBc_.count(pattern[i])) {
         bmBc_[pattern_[i]] = pattern_.size() - i - 1;
       } else {
         bmBc_.insert(std::make_pair(pattern_[i], pattern_.size() - i - 1));
@@ -84,14 +82,13 @@ class BM {
     for (int i = 0; i < size; i++) {
       bmGs_[i] = size;
     }
-    
-    // 找最长的后缀
+
+    int j = 0;
     for (int i = size - 1; i >= 0; i--) {
       if (suffix_[i] == i + 1) {
-        for (int j = 0; j < size - 1 - i; j++) {
-          bmGs_[j] = size - i - 1;
+        for (; j < size - 1 - i; j++) {
+          if (bmGs_[j] == size) bmGs_[j] = size - i - 1;
         }
-        break;
       }
     }
 

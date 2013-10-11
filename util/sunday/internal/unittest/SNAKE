@@ -1,0 +1,4 @@
+cc_binary(name = 'sunday_unittest',
+           srcs = ['sunday_unittest.cc'],
+           deps = ['//util/suffix_array/internal:suffix_array']
+           )
