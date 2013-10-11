@@ -22,7 +22,7 @@ type FindKthSmallest(type * a, int m, type * b, int n, int k,
   CHECK(m >= 0 && n >= 0);
   CHECK(k > 0 && k <= (m + n));
   int i = static_cast<int>(static_cast<double>(m) / (m + n) * (k - 1));
-  int j = k - 1 - i;
+  int j = k - 1 - i;  // bug fixed
   CHECK(i >= 0 && i <= m) << "i:" << i << " j:" << j << " m:" << m;
   CHECK(j >= 0 && j <= n) << "i:" << i << " j:" << j << " n:" << n;
 

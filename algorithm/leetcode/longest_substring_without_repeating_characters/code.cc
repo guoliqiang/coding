@@ -321,10 +321,8 @@ int lengthOfLongestSubstring(std::string s) {
 
 
 
-/*
+namespace NB {
 // official answer
-// not very understand
-
 int lengthOfLongestSubstring(std::string s) {
   int n = s.length();
   int i = 0, j = 0;
@@ -333,16 +331,13 @@ int lengthOfLongestSubstring(std::string s) {
   while (j < n) {
     if (exist[static_cast<int>(s[j])]) {
       maxLen = std::max(maxLen, j-i);
-      LOG(INFO) << j << " : " << s[j] << ":" << maxLen << " j - i:" << j - i << " i:" << i;
       while (s[i] != s[j]) {
         exist[static_cast<int>(s[i])] = false;
         i++;
       }
-      LOG(INFO) << "[i]:" << i;
       i++;
       j++;
     } else {
-      LOG(INFO) << j << " : [" << s[j] << "] set as true";
       exist[static_cast<int>(s[j])] = true;
       j++;
     }
@@ -350,7 +345,7 @@ int lengthOfLongestSubstring(std::string s) {
   maxLen = std::max(maxLen, n-i);
   return maxLen;
 }
-*/
+}  // namespace NB
 
 /*
 std::string Reverse(std::string & str) {

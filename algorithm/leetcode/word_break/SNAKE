@@ -1,0 +1,5 @@
+cc_binary(name = 'code',
+          srcs = ['code.cc'],
+          deps = ['//base/internal:base'],
+          cflags = ['-std=c++0x']
+          )

@@ -16,7 +16,7 @@
  *    ^  #  a  #  b  #  c  #  b  #  a  #  b  #  b  #  $
  *  p:0  1  2  1  2  1  6  1  2  1  2  1  2  3  2  1  0
  *
- *  p[i] = 1 + len(i左侧与i右侧‘相同’的字符串)
+ *  p[i] = 1 + len(i左侧与i右侧‘相同’的字符串)  // 注意P[i]最小值为1
  *  e.g. p[6] = 1 + len("#a#b#") because of "#a#b#" '=' "#b#a#"
  *
  *  --------------------------------------------------------------
@@ -53,7 +53,7 @@
 namespace algorithm {
 
 std::string PreProcess(std::string & str) {
-  if (str.size() == 0) return "^$";
+  if (str.size() == 0) return "^$";  // Note
   std::string rs = "^";
   for (int i = 0; i< str.length(); i++) {
     rs.append("#");
@@ -76,6 +76,7 @@ std::string LongestPalindrome(std::string & str_i) {
   for (int i = 1; i < str.size() - 1; i++) {
     int mirror_i = 2 * center_index - i;
     p[i] =  (center_right_bound_index > i) ? std::min(p[mirror_i], center_right_bound_index - i) : 1;
+    // 此时p[i] 最小为1
     while (str[i - p[i]] == str[i + p[i]]) p[i]++;
     if (p[i] > max_value) {
       max_value = p[i];
