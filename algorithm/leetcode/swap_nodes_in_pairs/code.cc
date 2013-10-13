@@ -97,6 +97,34 @@ ListNode * SwapPairs(ListNode * head) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+using namespace algorithm;
+class Solution {
+public:
+    ListNode *swapPairs(ListNode *head) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        ListNode * rs = head;
+        if (head != NULL && head->next != NULL) rs = head->next;
+        ListNode * pre = NULL;
+        while (head != NULL) {
+            ListNode * next = head->next;
+            if (next == NULL) {
+                if (pre != NULL) pre->next = head;
+                pre = head;
+                break;
+            }
+            ListNode * nnext = next->next;
+            if (pre != NULL) pre->next = next;
+            next->next = head;
+            pre = head;
+            head = nnext;
+        }
+        if (pre != NULL) pre->next = NULL;
+        return rs;
+    }
+};
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<int> foo;

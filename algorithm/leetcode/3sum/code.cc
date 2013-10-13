@@ -122,6 +122,32 @@ std::vector<std::vector<int> > tsum(std::vector<int> & v) {
   return rs;
 }
 
+namespace twice {
+using namespace std;    
+vector<vector<int> > ThreeSum(vector<int> &num) {
+  std::sort(num.begin(), num.end());
+  std::set<std::vector<int> > rs;
+  int n = num.size();
+  for (int i = 0; i < n - 2; i++) {  // NOTE*** if num.size()  = 0; num.size() - 2 will be a large number
+    int b = i + 1;
+    int e = n - 1;
+    while (b < e) {
+      int threesum = num[i] + num[b] + num[e];
+      if (threesum == 0) {
+        std::vector<int> foo;
+        foo.push_back(num[i]);
+        foo.push_back(num[b]);
+        foo.push_back(num[e]);
+        rs.insert(foo);
+        b++;
+      } else if (threesum < 0) b++;
+      else e--;
+    }
+  }
+  return std::vector<std::vector<int> >(rs.begin(), rs.end());
+}
+}  // twice
+
 int main(int argc, char** argv) {
   std::vector<int> foo;
   foo.push_back(-1);
@@ -130,9 +156,12 @@ int main(int argc, char** argv) {
   foo.push_back(2);
   foo.push_back(-1);
   foo.push_back(-4);
-  std::vector<std::vector<int> > rs = tsum(foo);
+  foo.clear();
+  std::vector<std::vector<int> > rs; //  = tsum(foo);
+  rs = twice::ThreeSum(foo);
   for (int i = 0; i < rs.size(); i++) {
     LOG(INFO) << JoinVector(rs[i]);
   }
+  foo.clear();
   return 0;
 }

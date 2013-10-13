@@ -22,6 +22,7 @@
  * */
 
 namespace algorithm {
+
 int ThreeSumClosest(std::vector<int> & num, int target) {
   std::sort(num.begin(), num.end());
   int min = 0x7fffffff;
@@ -43,6 +44,28 @@ int ThreeSumClosest(std::vector<int> & num, int target) {
   return rs;
 }
 }  // namespace algorithm
+
+namespace twice {
+using namespace std;
+
+int threeSumClosest(vector<int> &num, int target) {
+  std::sort(num.begin(), num.end());
+  int n = num.size();
+  int min = num[0] + num[1] + num[2];
+  for (int i = 0; i < n - 2; i++) {
+    int b = i + 1;
+    int e = n - 1;
+    while (b < e) {
+      int sum = num[i] + num[b] + num[e];
+      if (sum == target) return sum;
+      else if (sum > target) e--;
+      else b++;
+      if (abs(sum - target) < abs(min - target)) min = sum;
+    }
+  }
+  return min;
+}
+}  // namespace twice
 
 using namespace algorithm;
 

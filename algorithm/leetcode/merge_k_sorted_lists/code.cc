@@ -20,6 +20,7 @@
 #include <iostream>
 #include "base/public/logging.h"
 #include "base/public/string_util.h"
+#include "base/public/common_head.h"
 
 namespace algorithm {
 
@@ -150,6 +151,40 @@ ListNode * MakeList(std::vector<int> & v) {
 }
 
 }  // namespace algorithm
+
+namespace twice {
+using namespace std;
+using namespace algorithm;
+class Cmp{
+ public:
+  // 这个定义的priority queue居然是最小堆
+  // priority queue 的第三个参数需要研究下
+  bool operator ()(const ListNode * p1, const ListNode * p2) const {
+    return p1->val > p2->val;
+  }
+};
+
+class Solution {
+public:
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        ListNode * root = NULL;
+        ListNode ** tail = &root;
+        std::priority_queue<ListNode*, std::vector<ListNode*>, Cmp> queue;
+        for (int i = 0; i < lists.size(); i++) {
+            if (lists[i] != NULL) queue.push(lists[i]);
+        }
+        while (!queue.empty()) {
+            ListNode * t = queue.top();
+            queue.pop();
+            *tail = t;
+            tail = &((*tail)->next);
+            if (t->next != NULL) queue.push(t->next);
+        }
+        return root;
+    }
+};
+}  // namespace twice
 
 using namespace algorithm;
 

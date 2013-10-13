@@ -31,6 +31,51 @@ int divide(int dividend, int divisor) {
 
 }  // namespace algorithm
 
+namespace twice {
+long long int Divi(long long int dividend, long long int divisor) {
+  if (divisor > dividend) return 0;
+  if (divisor == dividend) return 1;
+  long long int num = 1;
+  long long int t = divisor;
+  while ((t * 2) < dividend) {
+      t *= 2;
+      num *= 2;
+  }
+  return num += Divi(dividend - t, divisor);
+  
+}
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        bool minus = ((dividend ^ divisor) >> 31) ? true : false;
+        int re = Divi(fabs(dividend), fabs(divisor));
+        return minus ? -re : re;
+    }
+};
+}  // namespace twice
+
+namespace NB {
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        long long a = fabs((double)dividend);;
+        long long b = fabs((double)divisor);
+
+        long long ret = 0;
+        while (a >= b) {
+            long long c = b;
+            for (int i = 0; a >= c; ++i, c <<= 1) {
+                a -= c;
+                ret += 1 << i;
+            }
+        }
+
+        return ((dividend^divisor)>>31) ? (-ret) : (ret);
+    }
+};
+}  // namespace NB
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

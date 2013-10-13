@@ -38,6 +38,26 @@ int SearchBigger(int * a, int n, int t) {
 
 }  // namespace algorithm
 
+namespace twice {
+int BSearch(int A[], int n, int t) {
+  int b = 0;
+  int e = n;
+  while (b < e) {
+      int mid = b + (e - b) / 2;
+      if (A[mid] < t) b = mid + 1;
+      else e = mid;
+  }
+  return b;
+}
+class Solution {
+public:
+    int searchInsert(int A[], int n, int target) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        return BSearch(A, n, target);
+    }
+};
+}  // namespace twice
+
 using namespace algorithm;
 
 

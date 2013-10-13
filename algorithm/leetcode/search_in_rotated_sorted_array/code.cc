@@ -7,6 +7,49 @@
 
 #include "base/public/logging.h"
 
+namespace NB {
+int BSearch(int A[], int n, int t) {
+  int b = 0;
+  int e = n - 1;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (A[mid] == t) return mid;
+    else {
+      if (A[mid] > A[e]) {  // 先判断mid在那部分
+        if (t > A[e] && t < A[mid]) e = mid - 1;
+        else b = mid + 1;
+      } else {
+        if (t <= A[e] && t > A[mid]) b = mid + 1;  // Note here
+        else e = mid - 1;
+      }
+    }
+  }
+  return -1;
+}
+
+// wrong
+// TODO (guoliqiang) to fix it
+int BSearch2(int A[], int n, int t) {
+    int b = 0;
+    int e = n - 1;
+    while (b <= e) {
+        int mid = b + (e - b) / 2;
+        if (A[mid] == t) return mid;
+        else {
+           if (t > A[e]) {
+             if (A[mid] > A[e] && t < A[mid]) e = mid - 1;
+             else b = mid + 1;
+           } else {
+              // wrong here
+              if (A[mid] <= A[e] && t > A[mid]) b = mid + 1;
+              else e = mid - 1;
+           }
+        }
+    }
+    return -1;
+}
+}  // namespace NB
+
 /*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs

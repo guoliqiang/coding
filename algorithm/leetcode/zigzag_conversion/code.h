@@ -36,4 +36,33 @@ std::string zigzag(std::string text, int n) {
 }
 }  // namespace algorithm
 
+namespace twice {
+
+string Convert(string s, int row) {
+  if (row <= 1) return s;
+  int idx = 0;
+  bool flag = true;
+  std::vector<std::string> v(row, std::string(""));
+  for (int i = 0; i < s.size(); i++) {
+    v[idx].append(&s[i], 1);
+    if (flag) {
+      idx++;
+      if (idx == row) {
+        idx -= 2;
+        flag = !flag;
+      }
+    } else {
+      idx--;
+      if (idx == -1) {
+        idx += 2;
+        flag = !flag;
+      }
+    }
+  }
+  std::string rs = "";
+  for (int i = 0; i < row; i++) rs += v[i];
+  return rs;
+}
+}  // namespace twice
+
 #endif  //__CODE_H_

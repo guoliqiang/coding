@@ -10,7 +10,7 @@
 #include <algorithm>
 
 // recursive solution
-
+namespace NB {
 bool isPalindrome(int x, int &y) {
   if (x < 0) return false;
   if (x == 0) return true;
@@ -23,6 +23,9 @@ bool isPalindrome(int x, int &y) {
     return false;
   }
 }
+
+}  // namespace NB
+
 bool isPalindrome(int x) {
   // return isPalindrome(x, x);
   // Start typing your C/C++ solution below
@@ -46,6 +49,18 @@ bool isPalindrome(int x) {
   return !foo;
 }
 
+namespace twice {
+bool isPalindrome(int x) {
+  if (x < 0) return false;
+  int t = x;
+  int r = 0;
+  while (t) {
+    r = r * 10 + t % 10;
+    t /= 10;
+  }
+  return r == x;
+}
+}  // namespace twice
 
 int main(int argc, char** argv) {
   LOG(INFO) << isPalindrome(2112);

@@ -142,6 +142,52 @@ ListNode *reverseKGroup(ListNode *head, int k) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace algorithm;
+
+class Solution {
+public:
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        ListNode * rs = head;
+        ListNode * pre = head;
+        int tk = k - 1;
+        while (tk && pre != NULL && pre->next != NULL) {
+            pre = pre->next;
+            tk--;
+        }
+        if (tk == 0) rs = pre;
+        pre = NULL;
+        
+        while (head != NULL) {
+            ListNode * t = head;
+            tk = k - 1;
+            while (tk && t->next != NULL) {
+                t = t->next;
+                tk--;
+            }
+            if (tk > 0) {
+                if (pre != NULL) pre->next = head;
+                break;
+            } else {
+                ListNode * tpre = NULL;
+                while (head != t) {
+                    ListNode * foo = head->next;
+                    head->next = tpre;
+                    tpre = head;
+                    head = foo;
+                }
+                head = t->next;
+                t->next = tpre;
+                if (pre != NULL) pre->next = t;
+                else pre = t;
+                while (pre->next != NULL) pre = pre->next;
+            }
+        }
+        return rs;
+    }
+};
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<int> foo;

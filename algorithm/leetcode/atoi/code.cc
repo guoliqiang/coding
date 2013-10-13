@@ -49,6 +49,41 @@
     }
 
 
+namespace twice {
+// 注意判断越界的情况有两种
+// 1. 加着加着t变为负数
+// 2. (t* 10) / 10 != t
+
+int Atoi(const char * ptr) {
+  while (*ptr != '\0' && (*ptr == ' ' || *ptr == '\t')) ptr++;
+  bool minus = false;
+  if (*ptr == '\0') return 0;
+  else if (*ptr == '-') {
+      minus = true;
+      ptr++;
+  } else if (*ptr == '+') {
+      ptr++;
+  }
+  
+  int t = 0;
+  while (*ptr != '\0') {
+      if (*ptr >= '0' && *ptr <= '9') { 
+        int foo = t;
+        t *= 10;
+        if (t / 10 != foo) {
+            t = -1;
+            break;
+        }
+        t += (*ptr - '0');
+      } else break;
+      if (t < 0) break;
+      ptr++;
+  }
+  if (t < 0) return minus ? INT_MIN : INT_MAX;
+  return minus ? -t : t;
+}
+}  // namespace twice
+
 int main(int argc, char** argv) {
   std::string str = "    10522545459";
   LOG(INFO) << atoi(str.c_str());

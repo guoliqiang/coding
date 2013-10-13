@@ -16,3 +16,21 @@ public:
         return rs;
     }
 };
+
+namespace twice {
+class Solution {
+public:
+    int reverse(int x) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        bool minus = x < 0 ? true : false;
+        if (minus) x *= -1;
+        int rs = 0;
+        while (x) {
+            rs = rs * 10 + x % 10;
+            x /= 10;
+        }
+        if (minus) return -rs;
+        return rs;
+    }
+};
+}  // namespace twice

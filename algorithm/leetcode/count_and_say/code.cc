@@ -50,6 +50,46 @@ std::string CountAndSay(int n) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+
+void Say(int k, int n, std::string & str) {
+  if (k == n) return;
+  else {
+      std::string foo = "";
+      char ch = str[0];
+      int count = 1;
+      for (int i = 1; i < str.size(); i++) {
+          if (str[i] == ch) count++;
+          else {
+              foo.push_back(count + '0');
+              foo.push_back(ch);
+              ch = str[i];
+              count = 1;
+          }
+      }
+      foo.push_back(count + '0');
+      foo.push_back(ch);
+      str = foo;
+      Say(k + 1, n, str);
+  }
+}
+
+std::string Say(int n) {
+    std::string rs = "1";
+    Say(1, n, rs);
+    return rs;
+}
+
+class Solution {
+public:
+    string countAndSay(int n) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        return Say(n);
+    }
+};
+}  // namespace twice
+
 int main(int argc, char** argv) {
   LOG(INFO) << CountAndSay(3);
   LOG(INFO) << CountAndSay(5);

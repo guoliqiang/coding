@@ -23,13 +23,12 @@ public:
         // DO NOT write int main() function
         ListNode * ptr1 = head;
         ListNode * ptr2 = head;
-        int tmp = n;
-        while (tmp) {
+        while (n) {
             ptr1 = ptr1->next;
-            tmp--;
+            n--;
         }
         // 因为输入的ｎ保证是有效的
-        if (ptr1 == NULL) return head->next;
+        if (ptr1 == NULL) return head->next;  // Note bug fixed
         while (ptr1->next != NULL) {
             ptr1 = ptr1->next;
             ptr2 = ptr2->next;

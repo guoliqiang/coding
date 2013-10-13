@@ -93,6 +93,43 @@ std::vector<std::vector<int> > CombinationSum(std::vector<int> candi, int n) {
 
 using namespace algorithm;
 
+namespace twice {
+
+using namespace std;
+
+void Combine(std::vector<int> & num, int target, int k, std::vector<int> & path,
+             std::set<std::vector<int> > & rs, int cur) {
+  if (k == num.size()) {
+      int t = 0;
+      std::vector<int> foo;
+      for (int i = 0; i < path.size(); i++) {
+          if (path[i] == 1) {
+              t += num[i];
+              foo.push_back(num[i]);
+          }
+          if (t >= target) break;
+      }
+      if (t == target) rs.insert(foo);
+  } else {
+      for (int i = 0; i < 2; i++) {
+          path[k] = i;
+          if (cur + path[k] * num[k] > target) continue;
+          Combine(num, target, k + 1, path, rs, cur + path[k] * num[k]);
+      }
+  }
+}
+class Solution {
+public:
+    vector<vector<int> > combinationSum2(vector<int> &num, int target) {
+        std::sort(num.begin(), num.end());
+        std::set<std::vector<int> > tmp;
+        std::vector<int> path(num.size(), 0);
+        Combine(num, target, 0, path, tmp, 0);
+        return std::vector<std::vector<int> > (tmp.begin(), tmp.end());
+    }
+};
+}  // namespace twice
+
 
 int main(int argc, char** argv) {
   std::vector<int> candi;

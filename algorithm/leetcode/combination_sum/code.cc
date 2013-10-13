@@ -109,6 +109,31 @@ std::vector<std::vector<int> > CombinationSum(std::vector<int> candi, int n) {
 
 using namespace algorithm;
 
+namespace twice {
+void Combine(std::vector<int> & num, int target, int k, int cur, std::vector<int> path, std::set<std::vector<int> > &rs) {
+  if (k == num.size() || cur == target) {
+      if (cur == target) rs.insert(path);
+  } else {
+      while (cur <= target) {
+          Combine(num, target, k + 1, cur, path, rs);
+          cur += num[k];
+          path.push_back(num[k]);
+      }
+  }
+}
+class Solution {
+public:
+    vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        std::sort(candidates.begin(), candidates.end());
+        std::vector<int> path;
+        std::set<std::vector<int> > tmp;
+        Combine(candidates, target, 0, 0, path, tmp);
+        return std::vector<std::vector<int> >(tmp.begin(), tmp.end());
+    }
+};
+}  // namespace twice
+
 
 int main(int argc, char** argv) {
   std::vector<int> candi;

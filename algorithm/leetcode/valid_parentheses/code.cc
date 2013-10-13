@@ -38,6 +38,25 @@ bool IsValid(std::string s) {
 }
 }  // namespace algorithm
 
+namespace twice {
+bool isValid(string s) {
+  std::stack<char> foo;
+  for (int i = 0; i < s.size(); i++) {
+    if (s[i] == ')' || s[i] == '}' || s[i] == ']') {
+      if (foo.empty()) return false;
+      char ch = foo.top();
+      foo.pop();
+      if (s[i] == ')' && ch != '(') return false;
+      if (s[i] == '}' && ch != '{') return false;
+      if (s[i] == ']' && ch != '[') return false;
+    } else {
+      foo.push(s[i]);
+    }
+  }
+  return foo.empty();
+}
+}  // namespace twice
+
 int main(int argc, char** argv) {
 
   return 0;

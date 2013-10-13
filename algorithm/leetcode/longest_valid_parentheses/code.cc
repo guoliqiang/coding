@@ -95,6 +95,26 @@ int LongestValidParentheses(std::string & str) {
 }
 }
 
+namespace twice {
+int Longest(std::string s) {
+  std::stack<int> stack;
+  int max = 0;
+  for (int i = 0; i < s.size(); i++) {
+      if (s[i] == ')') {
+          if (stack.empty() || s[stack.top()] != '(') stack.push(i);
+          else {
+              stack.pop();
+              if (stack.empty()) max = std::max(max, i + 1);
+              else max = std::max(max, i - stack.top());
+          }
+      } else {
+          stack.push(i);
+      }
+  }
+  return max;
+}
+}  // namesapce twice
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

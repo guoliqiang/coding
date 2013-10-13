@@ -169,18 +169,77 @@ const char * KMP(const char * str, const char * pattern) {
 
 }
 
+namespace twice {
+
+void Next(const char * pattern, std::vector<int> &next) {
+  int n = strlen(pattern);
+  next.resize(n, 0);
+  next[0] = -1;
+  int i = 0;
+  int t = next[i];  // 必须在while循环外定义，否则优化时，如果有个值是-1，就出错了
+  while(i < n - 1) {
+      while (t >= 0 && pattern[t] != pattern[i]) t = next[t];
+      t++;
+      i++;
+      if (pattern[i] == pattern[t]) next[i] = next[t];
+      else next[i] = t; 
+   }
+}
+void Next(const char * pattern, std::vector<int> &next) {
+  int n = strlen(pattern);
+  next.resize(n, 0);
+  next[0] = -1;
+  int i = 0;
+  while(i < n - 1) {
+      int t = next[i];  // 不使用优化，t可以定义在循环内,因为不使用优化时只有next[0] == -1
+                        // 其它的都不可能为-1
+      while (t >= 0 && pattern[t] != pattern[i]) t = next[t];
+      t++;
+      i++;
+      next[i] = t; 
+   }
+}
+
+const char * KMP(const char * str, const char * pattern) {
+    int len = strlen(str);
+    int n = strlen(pattern);
+    if (n == 0) return str;
+    std::vector<int> next;
+    Next(pattern, next);
+    LOG(INFO) << JoinVector(next);
+    int i = 0;
+    int j = 0;
+    while (i < len) {
+        LOG(INFO) << "i:" << i << " j :" << j;
+        if (str[i] == pattern[j]) {
+            i++;
+            j++;
+        } else {
+            j = next[j];
+        }
+        if (j == -1) {
+            j++;
+            i++;
+        }
+        if (j == n) return &(str[i - n]);
+    }
+    return NULL;
+}
+}  // namespace twice
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-  std::string str = "aaa";
-  std::string pattern = "aaa";
+  std::string str = "mississippi";
+  std::string pattern = "issip";
+  /*
   if (BM(str.c_str(), pattern.c_str()) != NULL) {
     LOG(INFO) << "find at " << BM(str.c_str(), pattern.c_str());
   } else {
     LOG(INFO) << "not find";
   }
-
-  if (KMP(str.c_str(), pattern.c_str()) != NULL) {
+  */
+  if (twice::KMP(str.c_str(), pattern.c_str()) != NULL) {
     LOG(INFO) << "KMP find at " << KMP(str.c_str(), pattern.c_str());
   } else {
     LOG(INFO) << "KMP not find";

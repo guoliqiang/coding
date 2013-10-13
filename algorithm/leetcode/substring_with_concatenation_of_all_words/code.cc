@@ -185,6 +185,54 @@ std::vector<int> FindSubString(std::string & str, std::vector<std::string> & v) 
 }
 }  // namespace best
 
+namespace twice {
+using namespace std;
+class Solution {
+public:
+    vector<int> findSubstring(string S, vector<string> &L) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        std::vector<int> rs;
+        std::map<std::string, int> tmp;
+        std::map<std::string, int> dict;
+        for (int i = 0; i < L.size(); i++) {
+            if (dict.count(L[i]))dict[L[i]]++;
+            else dict[L[i]] = 1;
+        }
+        
+        int m = L.size() > 0 ? L[0].size(): 0;
+        if (S.size() < m) return rs;
+        for (int k = 0; k < m; k++) {
+            int b = k;
+            int e = k;
+            for (int i = 0; i < L.size(); i++) {
+              tmp[L[i]] = 0;
+            }
+            int cnt = 0;
+            while (e <= S.size() - m) {
+              std::string t = S.substr(e, m);
+              if (tmp.count(t)) {
+                  if (tmp[t] < dict[t]) cnt++;
+                  tmp[t] += 1;
+              };
+              if (cnt == L.size()) {
+                  while(true) {
+                      std::string sub = S.substr(b, m);
+                      if (!tmp.count(sub)) b += m;
+                      else if (tmp[sub] > dict[sub]) {
+                          b += m;
+                          tmp[sub]--;
+                      } else break;
+                  }
+                  if (e - b + m== L.size() * m) rs.push_back(b);
+              }
+              e += m;
+            }
+        }
+        return rs;
+    }
+};
+}  // namespace twice
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
