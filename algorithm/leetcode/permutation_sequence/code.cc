@@ -52,6 +52,7 @@ std::string GetPermutation(int n, int k) {
   }
   // 程序中下标是从0开始的
   // 对于取模/除以 某个返回的需求 下表必须从0开始
+  // Note here***
   GetKPermutation(v, 0, k - 1);
   std::string rs = "";
   for (int i = 0; i < v.size(); i++) {

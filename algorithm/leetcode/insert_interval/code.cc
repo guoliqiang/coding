@@ -107,6 +107,29 @@ std::vector<Interval> Insert(std::vector<Interval> & v, Interval & k) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+bool Cmp(const Interval & a, const Interval & b) {
+  return a.start < b.start;
+}
+    vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        intervals.push_back(newInterval);
+        std::sort(intervals.begin(), intervals.end(), Cmp);
+        std::vector<Interval> rs;
+        Interval pre = intervals[0];
+        for (int i = 1; i < intervals.size(); i++) {
+            if (intervals[i].start <= pre.end) {
+              if (intervals[i].end > pre.end) pre.end = intervals[i].end;
+            } else {
+                rs.push_back(pre);
+                pre = intervals[i];
+            }
+        }
+        rs.push_back(pre);
+        return rs;
+    }
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<Interval> foo;

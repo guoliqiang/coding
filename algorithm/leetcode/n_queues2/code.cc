@@ -23,6 +23,8 @@
 #include <iostream>
 #include "base/public/logging.h"
 
+// 普通的回溯方法会T
+// 这个方法check的次数会少
 namespace algorithm {
 
 bool Check(std::vector<int> & num, int k) {

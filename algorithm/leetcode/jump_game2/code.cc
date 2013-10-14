@@ -15,6 +15,7 @@
  * */
 
 #include "base/public/logging.h"
+#include "base/public/common_head.h"
 
 namespace algorithm {
 int Jump(int * a, int n) {
@@ -30,13 +31,27 @@ int Jump(int * a, int n) {
   return foo[n - 1];
 }
 
+int DP(int A[], int n) {
+  std::vector<int> dp(n, -1);
+  dp[0] = 0;
+  int max = 0;
+  for (int i = 0; i < n; i++) {
+    for (int j = max + 1; j <= std::min(n - 1, A[i] + i); j++) {
+        dp[j] = dp[i] + 1;
+    }
+    max = std::max(max, A[i] + i);
+  }
+  return dp[n - 1];
+}
+
 }  // namespace algorithm
 
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-  int A[] = {0};
+  int A[] = {1, 2, 0, 1};
   int size = sizeof(A) / sizeof(int);
   LOG(INFO) << Jump(A, size);
+  LOG(INFO) << DP(A, size);
   return 0;
 }

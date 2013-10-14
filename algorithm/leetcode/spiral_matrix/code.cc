@@ -91,17 +91,50 @@ void Out(std::vector<std::vector<int> > & v) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;    
+    vector<int> SpiralOrder(vector<vector<int> > &matrix) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        std::vector<int> rs;
+        if (matrix.size() == 0) return rs;
+        int bx = 0;
+        int ex = matrix.size() - 1;
+        int by = 0;
+        int ey = matrix[0].size() - 1;
+        while (bx <= ex && by <= ey) {
+            for (int i = by; i < ey; i++) rs.push_back(matrix[bx][i]);
+            for (int i = bx; i < ex; i++) rs.push_back(matrix[i][ey]);
+            if (bx == ex) {
+                rs.push_back(matrix[ex][ey]);
+                break;
+            }
+            if (by == ey) {
+                rs.push_back(matrix[ex][by]);
+                break;
+            }  // 只有一行或一列时特殊处理
+            for (int i = ey; i > by; i--) rs.push_back(matrix[ex][i]);
+            for (int i = ex; i > bx; i--) rs.push_back(matrix[i][by]);
+            bx++;
+            ex--;
+            by++;
+            ey--;
+        }
+        return rs;
+    }
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<std::vector<int> > matrix;
   std::vector<int> foo;
-  int n = 4;
+  int n = 2;
   for (int i = 0 ; i < n; i++) {
     foo.push_back(i);
   }
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 1; i++) {
     matrix.push_back(foo);
   }
+  /*
   matrix.clear();
   foo.clear();
   foo.push_back(1);
@@ -143,7 +176,8 @@ int main(int argc, char** argv) {
   foo.push_back(10);
   matrix.push_back(foo);
   Out(matrix);
-  std::vector<int> rs = SpiralOrder(matrix);
+  */
+  std::vector<int> rs = twice::SpiralOrder(matrix);
   LOG(INFO) << JoinVector(rs);
   return 0;
 }

@@ -50,9 +50,31 @@ std::vector<std::vector<int> > GenerateMatrix(int n) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+    vector<vector<int> > generateMatrix(int n) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        std::vector<std::vector<int> > matrix(n, std::vector<int>(n, 0));
+        int start = 0;
+        int end = n - 1;
+        int num = 1;
+        while (start < end) {
+            for (int i = start; i < end; i++) matrix[start][i] = num++;
+            for (int i = start; i < end; i++) matrix[i][end] = num++;
+            for (int i = end; i > start; i--) matrix[end][i] = num++;
+            for (int i = end; i > start; i--) matrix[i][start] = num++;
+            start++;
+            end--;
+        }
+        if (start == end) matrix[start][start] = num;
+        return matrix;
+    }
+}  // namespace twice
+
 
 int main(int argc, char** argv) {
-  std::vector<std::vector<int> > rs = GenerateMatrix(0);
+  // std::vector<std::vector<int> > rs = GenerateMatrix(0);
+  std::vector<std::vector<int> > rs = twice::generateMatrix(4);
   LOG(INFO) << JoinMatrix(&rs);
   return 0;
 }

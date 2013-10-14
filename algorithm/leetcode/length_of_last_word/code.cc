@@ -49,6 +49,23 @@ int length(const char * s) {
 }
 }
 
+namespace twice {
+   int lengthOfLastWord(const char *s) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        int pre = 0;
+        int cur = 0;
+        while (*s != '\0') {
+            if (*s == ' ') {
+                if (cur != 0) pre = cur;
+                cur = 0;
+            } else cur++;
+            s++;
+        }
+        if (cur != 0) return cur;
+        return pre;
+    }
+}  // namespace twice
+
 using namespace algorithm;
 
 

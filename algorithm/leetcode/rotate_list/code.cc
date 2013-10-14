@@ -4,7 +4,8 @@
 // Date  : 2013-09-26 16:44:32
 // File  : code.cc
 // Brief :
-
+//
+// if (-1)  == if (true)
 /*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
@@ -38,7 +39,7 @@ int Length(ListNode * head) {
 ListNode * RotateRight(ListNode * head, int k) {
   int len = Length(head);
   if (len == 0) return head;
-  k %= len;
+  k %= len;  // Note len == 0 出core
   if (k == 0) return head;
   ListNode * p1 = head;
   ListNode * p2 = head;

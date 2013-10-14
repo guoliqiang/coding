@@ -46,6 +46,33 @@ bool CanJump(int * a, int n) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+bool DP(int A[], int n) {
+  int max = 0;
+  std::vector<bool> dp(n, false);
+  dp[0] = true;
+  for (int i = 0; i < n; i++) {
+      if (dp[i] == false) break;
+      if (A[i] + i > max) {
+          for (int j = max; j <= std::min(n - 1, A[i] + i); j++) dp[j] = true;
+          max = A[i] + i;
+      }
+  }
+  return dp[n - 1];
+}
+bool DP2(int A[], int n) {
+  std::vector<bool> dp(n, false);
+  dp[0] = true;
+  int i = 0;
+  while (i < n) {
+      for (int j = i; j <= std::min(n - 1, A[i] + i); j++) dp[j] = true;
+      i = A[i] + i;
+      if (A[i] == 0) break;
+  }
+  return dp[n - 1];
+}
+}  // namespace twice
 
 int main(int argc, char** argv) {
   // int A[] = {2,3,1,1,4};

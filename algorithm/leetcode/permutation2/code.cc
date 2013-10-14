@@ -17,7 +17,7 @@
 
 #include <vector>
 #include <set>
-#include "base/public/logging.h"
+#include "base/public/common_head.h"
 #include "base/public/string_util.h"
 
 namespace algorithm {
@@ -54,6 +54,43 @@ std::vector<std::vector<int> > Permute(std::vector<int> & num) {
 
 using namespace algorithm;
 
+namespace twice {
+void Permutation(std::vector<int> & vec, std::vector<int> & used, std::vector<int> & path,
+                 int cur, int cnt, std::vector<std::vector<int> > & rs) {
+  if (cur == cnt){
+      rs.push_back(path);
+  }
+  for (int i = 0; i < vec.size(); i++) {
+      if (used[i] > 0) {
+          used[i]--;
+          path.push_back(vec[i]);
+          Permutation(vec, used, path, cur + 1, cnt, rs);
+          used[i]++;
+          path.pop_back();
+      }
+  }
+}
+
+std::vector<std::vector<int> > Permutation(std::vector<int> & num) {
+    std::map<int, int> tmap;
+    for(int i = 0; i < num.size(); i++) {
+        if (tmap.count(num[i])) tmap[num[i]]++;
+        else tmap[num[i]] = 1;
+    }
+    std::vector<int> vec;
+    std::vector<int> used;
+    int cnt = 0;
+    for (std::map<int, int>::iterator i = tmap.begin(); i != tmap.end(); i++) {
+        vec.push_back(i->first);
+        used.push_back(i->second);
+        cnt += i->second;
+    }
+    std::vector<int> path;
+    std::vector<std::vector<int> > rs;
+    Permutation(vec, used, path, 0, cnt, rs);
+    return rs;
+}
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<int> num;

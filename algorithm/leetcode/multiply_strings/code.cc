@@ -47,11 +47,44 @@ std::string Multiply(std::string & s1, std::string &s2) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+    string multiply(string num1, string num2) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if (num1 == "0" || num2 == "0") return "0";
+        int len1 = num1.size();
+        int len2 = num2.size();
+        std::string rs(len1 + len2 + 1, '0');
+        int idx = rs.size() - 1;
+        for (int i = len1 - 1; i >= 0; i--) {
+            int carry = 0;
+            int cur = idx;
+            for (int j = len2 - 1; j >=  0; j--) {
+                int t = (num2[j] - '0') * (num1[i] - '0') + carry + (rs[cur] - '0');
+                carry = t / 10;
+                t %= 10;
+                rs[cur--] = '0' + t;
+            }
+            while(carry) {
+                int t = carry + (rs[cur] - '0');
+                carry = t / 10;
+                t %= 10;
+                rs[cur--] = '0' +t;
+            }
+            idx--;
+        }
+        int i = 0;
+        while (rs[i] == '0') i++;
+        return rs.substr(i);
+    }
+}  // namespace 
+
 int main(int argc, char** argv) {
   std::string s1;
   std::string s2;
-  s1 = "0";
-  s2 = "0";
-  LOG(INFO) << Multiply(s1, s2);
+  s1 = "98";
+  s2 = "9";
+  // LOG(INFO) << Multiply(s1, s2);
+  LOG(INFO) << twice::multiply(s1, s2);
   return 0;
 }
