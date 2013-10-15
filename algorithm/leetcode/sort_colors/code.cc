@@ -50,6 +50,22 @@ void SortColors(int * a, int n) {
 
 using namespace algorithm;
 
+namespace twice {
+void Sort(int A[], int n) {
+  int b = -1;
+  int e = n;
+  for (int i = 0; i < n; i++) {
+      if (A[i] == 0 && i > b + 1) {
+          std::swap(A[++b], A[i]);
+          i--;
+      } else if (A[i] == 2 && i < e - 1) {
+          std::swap(A[--e], A[i]);
+          i--;
+      }
+  }
+}
+}  // namespace twice
+
 
 int main(int argc, char** argv) {
   int A[] = {2, 1, 1, 1, 0, 0, 2};

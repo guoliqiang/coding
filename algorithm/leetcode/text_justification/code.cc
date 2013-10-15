@@ -84,6 +84,10 @@ std::vector<std::string> FullJustify(std::vector<std::string> & words, int l) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+  
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<std::string> words;
@@ -95,7 +99,7 @@ int main(int argc, char** argv) {
   words.push_back("text");
   words.push_back("justification");
   int l = 16;
-  std::vector<std::string> rs = FullJustify(words, l);
+  std::vector<std::string> rs = twice::FullJustify(words, l);
 
   for (int i = 0; i < rs.size(); i++) {
     LOG(INFO) << rs[i];

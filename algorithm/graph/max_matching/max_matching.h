@@ -147,10 +147,8 @@ bool Search(std::vector<std::vector<int> > & matrix,
       //           << " first:" << first << " link:" << link[i]
       //           << " matrix[n][i]" << matrix[n][i];
       if (first && link[i] == n) {
-        LOG(INFO) << "find:" << n << " link[" << i << "]:" << link[i];
+        // LOG(INFO) << "find:" << n << " link[" << i << "]:" << link[i];
         continue;
-      } else {
-        if (visited != NULL) (*visited)[n] = 1;
       }
 
       if (visited != NULL) (*visited)[i] = 1;

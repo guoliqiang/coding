@@ -78,6 +78,52 @@ std::string  MiniWindow(std::string & str, std::string & t) {
 
 }  // namespace algorithm
 
+namespace twice {
+std::string MinWindow(std::string & s, std::string & t) {
+  std::map<char, int> dict;
+  std::map<char, int> tmap;
+  for (int i = 0; i < t.size(); i++) {
+      if (dict.count(t[i])) dict[t[i]]++;
+      else dict[t[i]] = 1;
+      tmap[t[i]] = 0;
+  }
+  int b = 0;
+  int e = 0;
+  int cur = 0;
+  int min = INT_MAX;
+  std::string rs = "";
+  while (e < s.size()) {
+      char ch = s[e];
+      if (!dict.count(ch)) {
+          e++;
+          continue;
+      }
+      if (tmap[ch] < dict[ch]) {
+        cur++;
+      }
+      tmap[ch]++;
+      if (cur == t.size()) {
+          while (true) {
+            if (!dict.count(s[b])) b++;
+            else {
+              if (tmap[s[b]] > dict[s[b]]) {
+                  tmap[s[b]]--;
+                  b++;
+              }
+              else break;
+            }
+          }
+          if (e - b + 1 < min) {
+              min = e - b + 1;
+              rs = s.substr(b, e - b + 1);
+          }
+      }
+      e++;
+  }
+  return rs;
+}
+}  // namespace twice
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

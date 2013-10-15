@@ -43,6 +43,22 @@ bool SearchMatrix(std::vector<std::vector<int> > & v, int t) {
 
 using namespace algorithm;
 
+// 杨氏矩阵
+// 之前关于杨氏矩阵的理解有出入，杨氏矩阵可以按二叉树进行搜索
+// 但不能显示的画出这颗二叉树
+// [
+//   [1,   3,  5,  7],
+//   [10, 11, 16, 20],
+//   [23, 30, 34, 50]
+// ]
+//
+// 杨氏矩阵的描述：
+// １. 每行从小到大排列，每列从小到大排列
+// ２．Integers in each row are sorted from left to right.
+// 　　The first integer of each row is greater than the last integer of the previous row.
+namespace twice {
+
+}
 
 int main(int argc, char** argv) {
   std::vector<std::vector<int> > v (1, std::vector<int> (4, 0));

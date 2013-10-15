@@ -68,6 +68,32 @@ std::vector<std::vector<int> > Combine(int n, int k) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+
+void Trace(std::vector<int> & path, int n, int k, int cur, std::vector<std::vector<int> > & rs) {
+  if (cur == n) {
+      if (path.size() == k) rs.push_back(path);
+  } else {
+      Trace(path, n, k, cur + 1, rs);
+      if (path.size() < k) {
+          path.push_back(cur + 1);
+          Trace(path, n, k, cur + 1, rs);
+          path.pop_back();
+      }
+  }
+}
+class Solution {
+public:
+    vector<vector<int> > combine(int n, int k) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        std::vector<int> path;
+        std::vector<std::vector<int> > rs;
+        Trace(path, n, k, 0, rs);
+        return rs;
+    }
+};
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<std::vector<int> > foo = Combine(4, 4);

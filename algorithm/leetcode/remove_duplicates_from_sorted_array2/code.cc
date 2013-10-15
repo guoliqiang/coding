@@ -63,11 +63,55 @@ int RemoveDuplicates(int * a, int n) {
 
 using namespace algorithm;
 
+namespace twice {
+int Remove(int A[], int n) {
+  int first = 0;
+  int second = 0;
+  int k = -1;
+  for (int i = 0; i < n; i++) {
+      if (i == 0) first = A[i];
+      else if (i == 1) second = A[i];
+      else {
+          if (A[i] != A[i - 1] || A[i] != A[i - 2]) {
+              k++;
+              A[k] = A[i];
+          }
+      }
+  }
+  k += 2;
+  for (int i = k; i > 1; i--) {
+      A[i] = A[i - 2];
+  }
+  A[1] = second;
+  A[0] = first;
+  return k + 1;
+}
+}  // namespace twice
+
+namespace NB {
+int Remove(int A[], int n) {
+  int slow = 1;
+  int fast = 2;
+  int last = n > 0 ? A[0] : 0;
+  while (fast < n) {
+    if (A[fast] != last) {
+      last = A[slow];
+      A[++slow] = A[fast];
+    } else {
+      last = A[fast - 1];
+    }
+    fast++;
+  }
+  return n <= 2 ? n : slow + 1;
+}
+}  // namespace NB
 
 int main(int argc, char** argv) {
-  int A[] = {1, 2};
+  int A[] = {1, 1, 1, 2, 3};
   int size = sizeof(A) / sizeof(int);
-  int rs = RemoveDuplicates(A, size);
+  // int rs = RemoveDuplicates(A, size);
+  // int rs = twice::Remove(A, size);
+  int rs = NB::Remove(A, size);
   LOG(INFO) << rs;
   for (int i = 0; i < rs; i++) {
     LOG(INFO) << A[i];

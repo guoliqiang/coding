@@ -18,6 +18,12 @@
 
 namespace algorithm {
 
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode(int x) : val(x), next(NULL) {}
+};
+
 /*
  * 多看优秀的代码，真好～
  * disscuss 的代码质量很好
@@ -79,6 +85,26 @@ ListNode * MergeTwoList(ListNode * l1, ListNode * l2) {
 
 using namespace algorithm;
 
+namespace twice {
+class Solution {
+public:
+    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        ListNode * head = NULL;
+        ListNode ** tail = &head;
+        while (l1!= NULL && l2 != NULL) {
+            *tail = l1->val < l2->val ? l1 : l2;
+            if (*tail == l1) l1 = l1->next;
+            else l2 = l2->next;
+            tail = &((*tail)->next);
+        }
+        if (l1 != NULL) *tail = l1;
+        else *tail = l2;
+        return head;
+    }
+};
+}  // namespace twice
 
 int main(int argc, char** argv) {
 

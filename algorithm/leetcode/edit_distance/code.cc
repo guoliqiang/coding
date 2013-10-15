@@ -46,7 +46,7 @@ int MinDistance(std::string word1, std::string word2) {
   if (word1.size() == 0 || word2.size() == 0)
     return std::max(word1.size(), word2.size());
  
- word1.insert(word1.begin(), ' ');
+  word1.insert(word1.begin(), ' ');
   word2.insert(word2.begin(), ' ');
   std::vector<std::vector<int> > dp(word1.size(), std::vector<int>(word2.size(), 0));
   DP(dp, word1, word2);
@@ -57,6 +57,29 @@ int MinDistance(std::string word1, std::string word2) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+
+int DP(string & word1, string & word2)  {
+  word1 = " " + word1;
+  word2 = " " + word2;
+  int m = word1.size();
+  int n = word2.size();
+  std::vector<std::vector<int> > dp(m, std::vector<int>(n, 0));
+  dp[0][0] = 0;
+  for (int i = 1; i < n; i++) dp[0][i] = i;
+  for (int i = 1; i < m; i++) dp[i][0] = i;
+  for (int i = 1; i < m; i++) {
+      for (int j = 1; j < n; j++) {
+          if (word1[i] == word2[j])
+            dp[i][j] = std::min(dp[i - 1][j - 1], std::min(dp[i - 1][j], dp[i][j - 1]) + 1);
+          else
+            dp[i][j] = std::min(dp[i - 1][j - 1] + 1, std::min(dp[i - 1][j], dp[i][j - 1]) + 1);
+      }
+  }
+  return dp[m - 1][n - 1];
+}
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::string word1;

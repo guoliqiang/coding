@@ -49,6 +49,32 @@ std::vector<std::vector<int> > Subsets(std::vector<int> & v) {
 
 }  // namespace algorithm
 
+namespace twice {
+using namespace std;
+
+void Trace(std::vector<int> & s, std::vector<int> & path, int k, std::vector<std::vector<int> > & rs) {
+  if (k == s.size()) {
+      rs.push_back(path);
+  } else {
+      Trace(s, path, k + 1, rs);
+      path.push_back(s[k]);
+      Trace(s, path, k + 1, rs);
+      path.pop_back();
+  }
+}
+class Solution {
+public:
+    vector<vector<int> > subsets(vector<int> &S) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        std::sort(S.begin(), S.end());
+        std::vector<std::vector<int> > rs;
+        std::vector<int> path;
+        Trace(S, path, 0, rs);
+        return rs;
+    }
+};
+}  // namespace twice
+
 using namespace algorithm;
 
 

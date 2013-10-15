@@ -56,6 +56,7 @@ bool ExistNew(std::vector<std::vector<char> > & board,
   return false;
 }
 
+// 这种后判断的写法，递归次数多，也会超时
 bool Exist(std::vector<std::vector<char> > & v,
            std::string & word,
            int i, int j, int k,
