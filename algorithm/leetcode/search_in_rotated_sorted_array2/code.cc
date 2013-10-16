@@ -35,7 +35,7 @@ bool BSearch (int * a, int b, int e, int t) {
      else
        return BSearch(a, mid + 1, e, t);
   } else if (a[mid] < a[e]) {
-    if (t <= a[e] && t > a[mid])
+    if (t <= a[e] && t > a[mid])  // Note here is <=
       return BSearch(a, mid + 1, e, t);
      else
        return BSearch(a, b, mid - 1, t);

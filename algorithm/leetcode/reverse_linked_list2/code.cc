@@ -108,6 +108,35 @@ ListNode * Reverse(ListNode * head, int m, int n) {
 
 using namespace algorithm;
 
+namespace twice {
+class Solution {
+public:
+    ListNode *reverseBetween(ListNode *head, int m, int n) {
+        ListNode * rs = head;
+        ListNode * pre = NULL;
+        int i = m - 1;
+        for (int j = 0; j < i; j ++){
+            pre = head;
+            head = head->next;
+        }
+        i = n - m;
+        ListNode * thead = NULL;
+        ListNode * tail = NULL;
+        for (int j = 0; j < i; j++) {
+            ListNode * next = head->next;
+            head->next = tail;
+            tail = head;
+            if (thead == NULL) thead = tail;
+            head = next;
+        }
+        if (thead != NULL) thead->next = head->next;
+        if (pre != NULL) pre->next = head;
+        if (tail != NULL) head->next = tail;
+        if (pre == NULL) return head;
+        return rs;
+    }
+};
+}
 
 int main(int argc, char** argv) {
   std::vector<int> foo;

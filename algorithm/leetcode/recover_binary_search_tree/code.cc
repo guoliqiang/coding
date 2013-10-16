@@ -305,6 +305,41 @@ void RecoverTreeM2(TreeNode * root) {
 
 using namespace algorithm;
 
+namespace twice {
+void MidOrder(TreeNode * root) {
+  if (root == NULL) return;
+  TreeNode * pre = NULL;
+  TreeNode * first = NULL;
+  TreeNode * second = NULL;
+  
+  while (root != NULL) {
+      if (root->left == NULL) {
+          if (pre != NULL && pre->val > root->val) {
+              if (first == NULL) first = pre;
+              second = root;
+          }
+          pre = root;
+          root = root->right;
+      } else {
+          TreeNode * t = root->left;
+          while (t->right != NULL && t->right != root) t = t->right;
+          if (t->right == NULL) {
+              t->right = root;
+              root = root->left;
+          } else {
+              if (pre != NULL && pre->val > root->val) {
+                  if (first == NULL) first = pre;
+                  second = root;
+              }
+              pre = root;
+              t->right = NULL;
+              root = root->right;
+          }
+      }
+  }
+  if (first != NULL && second != NULL) std::swap(first->val, second->val);
+}
+}  // namespace  twice
 
 int main(int argc, char** argv) {
   std::string str = "0,1";

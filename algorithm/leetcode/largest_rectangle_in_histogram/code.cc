@@ -105,6 +105,27 @@ int LargestRetangleArea(std::vector<int>height) {
 
 using namespace algorithm;
 
+namespace twice {
+int Largest(std::vector<int> height) {
+    height.push_back(0);
+    int max = 0;
+    std::stack<int> stack;
+    int i = 0;
+    while (i < height.size()) {   // bug fixed
+        if (stack.empty() || height[i] >= height[stack.top()]) {
+            stack.push(i);
+            i++;
+        } else {
+            int t = stack.top();
+            stack.pop();
+            int tmax = stack.empty() ? height[t] * i : height[t] * (i - stack.top() - 1);
+            max = std::max(max, tmax);
+        }
+    }
+    return max;
+}
+}  // namespace twice
+
 int main(int argc, char** argv) {
   std::vector<int> foo;
   foo.push_back(4);

@@ -28,7 +28,7 @@ void MakeFromOjString(std::string & str, TreeNode * p) {
   str = (left == str) ? "" : str.substr(str.find_first_of(',') + 1);
   std::string right = (str.find(',') != std::string::npos) ?  str.substr(0, str.find_first_of(',')) : str;
   str = (right == str) ? "" : str.substr(str.find_first_of(',') + 1);
-  LOG(INFO) << "left:" << left << " right:" << right << " root:" << p->val;
+  // LOG(INFO) << "left:" << left << " right:" << right << " root:" << p->val;
   if (left != "#" && !left.empty()) {
     p->left = new TreeNode(left[0] - '0');
     MakeFromOjString(str, p->left);
@@ -97,6 +97,13 @@ void PreOrder(TreeNode * root) {
   std::cout << root->val << std::endl;
   PreOrder(root->left);
   PreOrder(root->right);
+}
+template <typename T>
+void PostOrder(T * root) {
+  if (root == NULL) return;
+  PostOrder(root->left);
+  PostOrder(root->right);
+  std::cout << root->val << std::endl;
 }
 
 template <typename T>

@@ -46,16 +46,73 @@ std::vector<std::vector<int> > SubsetWithDup(std::vector<int> & s) {
 
 }  // namespace algorithm
 
+namespace twice {
+void Trace(std::vector<int> & vec, std::vector<int> & used, std::vector<int> & path,
+           std::vector<std::vector<int> > &rs, int k) {
+  rs.push_back(path);
+  for (int i = k; i < vec.size(); i++) {
+      if(used[i] > 0) {
+          used[i]--;
+          path.push_back(vec[i]);
+          Trace(vec, used, path, rs, i);  // bug fixed: Note here is i not k
+          path.pop_back();
+          used[i]++;
+      }
+  }
+}
+
+std::vector<std::vector<int> > Trace(std::vector<int> & s) {
+    std::map<int, int> tmap;
+    for (int i = 0; i < s.size(); i++) {
+        if (tmap.count(s[i])) tmap[s[i]]++;
+        else tmap[s[i]] = 1;
+    }
+    std::vector<int> vec;
+    std::vector<int> used;
+    for (std::map<int, int>::iterator i = tmap.begin(); i != tmap.end(); i++) {
+        vec.push_back(i->first);
+        used.push_back(i->second);
+    }
+    tmap.clear();
+    std::vector<int> path;
+    std::vector<std::vector<int> > rs;
+    Trace(vec, used, path, rs, 0);
+    return rs;
+}
+}  // namespace twice
+
 using namespace algorithm;
 
+namespace NB {
+using namespace std;
+
+void Trace(std::vector<int> & vec, std::vector<int> & path, std::vector<std::vector<int> > & rs, int k) {
+  rs.push_back(path);
+  for (int i = k; i < vec.size(); i++) {
+    if (i != k && vec[i] == vec[i - 1]) continue;
+    path.push_back(vec[i]);
+    Trace(vec, path, rs, i + 1);
+    path.pop_back();
+  }
+}
+std::vector<std::vector<int> > Trace(std::vector<int> & vec) {
+  std::sort(vec.begin(), vec.end());
+  std::vector<int> path;
+  std::vector<std::vector<int> > rs;
+  Trace(vec, path, rs, 0);
+  return rs;
+}
+}  // namespace NB
 
 int main(int argc, char** argv) {
   std::vector<int> foo;
+  foo.push_back(0);
+  foo.push_back(0);
   foo.push_back(1);
-  foo.push_back(2);
-  foo.push_back(2);
-  std::vector<std::vector<int> > rs = SubsetWithDup(foo);
+  std::vector<std::vector<int> > rs = NB::Trace(foo);
+  // std::vector<std::vector<int> > rs = twice::Trace(foo);
 
   LOG(INFO) << JoinMatrix(&rs);
+  LOG(INFO) << rs.size();
   return 0;
 }

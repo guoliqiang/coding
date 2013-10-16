@@ -34,6 +34,7 @@ void DPNew(std::string & str1, std::string & str2,
       for (int j = 0; j < n - k; j++) {
         for (int l = 0; l < k; l++) {
           // i ~ i+k 与 j～j+k, 从i或j走k步
+          // 这个解释好
           if ((dp[i][j][l] && dp[i + l + 1][j + l + 1][k - l - 1]) ||
               (dp[i][j + k - l][l] && dp[i + l + 1][j][k - l - 1])) {
             dp[i][j][k] = true;

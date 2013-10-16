@@ -176,6 +176,62 @@ void PreOrder(TreeNode * p) {
 
 using namespace algorithm;
 
+namespace twice {
+using namespace std;
+
+std::vector<TreeNode *> Make(int v, std::vector<TreeNode *> & vec, bool right) {
+   std::vector<TreeNode *> rs;
+   for (int i = 0; i < vec.size(); i++) {
+       TreeNode * t = new TreeNode(v);
+       if (right) t->right = vec[i];
+       else t->left = vec[i];
+       rs.push_back(t);
+   }
+   return rs;
+ }
+ 
+ std::vector<TreeNode*> Make(int v, std::vector<TreeNode*> & left, std::vector<TreeNode*> right) {
+     std::vector<TreeNode*> rs;
+     for (int i = 0; i < left.size(); i++) {
+         for (int j = 0; j < right.size(); j++) {
+             TreeNode * t = new TreeNode(v);
+             t->left = left[i];
+             t->right = right[j];
+             rs.push_back(t);
+         }
+     }
+     return rs;
+ }
+ 
+ std::vector<TreeNode*> Generate(int n) {
+   if (n == 0) {
+       std::vector<TreeNode *> tmp;
+       tmp.push_back(NULL);
+       return tmp;
+   }
+   
+   std::vector<std::vector<std::vector<TreeNode *> > > dp(n, std::vector<std::vector<TreeNode* > >(n, std::vector<TreeNode*>()));
+   for (int k = 0; k < n; k++) {
+       for (int j = 0; j < n - k; j++) {
+           if (k == 0) dp[j][j + k].push_back(new TreeNode(j + 1));
+           else {
+               for (int l = j; l <= j + k; l++) {
+                   std::vector<TreeNode *> foo;
+                   if (l == j) {
+                       foo = Make(l + 1, dp[j + 1][j + k], true);
+                   } else if (l == j + k) {
+                       foo = Make(l + 1, dp[j][j + k - 1], false);
+                   } else {
+                       foo = Make(l + 1, dp[j][l - 1], dp[l + 1][j + k]);
+                   }
+                   dp[j][j + k].insert(dp[j][j + k].end(), foo.begin(), foo.end());
+               }
+           }
+       }
+   }
+   return dp[0][n - 1];
+ }
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<TreeNode *> rs = TreesNew(3);

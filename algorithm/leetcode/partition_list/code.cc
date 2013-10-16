@@ -9,6 +9,7 @@
  * 链表题目思考三种解决方法 简化编程难度
  * 1. 增加guard节点
  * 2.定义只想指针的指针
+ *
 */
 /**
  * Definition for singly-linked list.
@@ -18,6 +19,7 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// 这个办法当初是怎么想出来的？？？
 class Solution {
 public:
     ListNode *partition(ListNode *head, int x) {

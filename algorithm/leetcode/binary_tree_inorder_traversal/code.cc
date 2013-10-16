@@ -21,7 +21,7 @@
 
 namespace algorithm {
 
-std::vector<int> Inorder(TreeNode * root) {
+std::vector<int> InorderIterator(TreeNode * root) {
   std::vector<int> rs;
   std::stack<TreeNode*> stack;
   TreeNode * tmp = root;
@@ -37,6 +37,53 @@ std::vector<int> Inorder(TreeNode * root) {
     while (tmp != NULL) {
       stack.push(tmp);
       tmp = tmp->left;
+    }
+  }
+  return rs;
+}
+
+std::vector<int> PreOrderIterator(TreeNode * root) {
+  std::vector<int> rs;
+  std::stack<TreeNode*> stack;
+  while (root != NULL) {
+    rs.push_back(root->val);
+    stack.push(root);
+    root = root->left;
+  }
+  while (!stack.empty()) {
+    TreeNode * t = stack.top();
+    stack.pop();
+    t = t->right;
+    while (t != NULL) {
+      rs.push_back(t->val);
+      stack.push(t);
+      t = t->left;
+    }
+  }
+  return rs;
+}
+
+std::vector<int> PostOrderIterator(TreeNode * root) {
+  std::vector<int> rs;
+  std::stack<TreeNode*> stack;
+  std::set<TreeNode *> visited;
+  while (root != NULL) {
+    stack.push(root);
+    root = root->left;
+  }
+  while (!stack.empty()) {
+    TreeNode * t = stack.top();
+    stack.pop();
+    if (visited.count(t)) {
+      rs.push_back(t->val);
+    } else {
+      visited.insert(t);
+      stack.push(t);
+      t = t->right;
+      while (t != NULL) {
+        stack.push(t);
+        t = t->left;
+      }
     }
   }
   return rs;
@@ -199,12 +246,17 @@ using namespace algorithm;
 
 
 int main(int argc, char** argv) {
-  std::string str = "1,2,3";
+  std::string str = "1,2,3,#,#,4,5";
   morris_traversal::InOrder(Make(str));
   HERE(INFO);
   morris_traversal::PreOrder(Make(str));
   HERE(INFO);
   morris_traversal::PostOrder(Make(str));
   InOrder(Make(str));
+  HERE(INFO);
+  PostOrder(Make(str));
+  HERE(INFO);
+  std::vector<int> rs = PostOrderIterator(Make(str));
+  LOG(INFO) << JoinVector(rs);
   return 0;
 }

@@ -73,3 +73,54 @@ public:
         return IsValidBST(root);
     }
 };
+
+
+namespace twice {
+// 这种方法是错误的
+bool IsValidBST(TreeNode * root) {
+  if (root == NULL) return true;
+  if (!IsValidBST(root->left)) return false;
+  if (!IsValidBST(root->right)) return false;
+  if (root->left != NULL && root->left->val >= root->val) return false;
+  if (root->right != NULL && root->right->val <= root->val) return false;
+  return true;
+}
+
+// 基于线索二叉树，注意最后返回，因为中间返回时那颗二叉树
+// 还没有被还原
+class Solution {
+public:
+    bool isValidBST(TreeNode *root) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if (root == NULL) return true;
+        TreeNode * pre = NULL;
+        bool rs = true;
+        while (root != NULL) {
+            if (root->left == NULL) {
+                if (pre != NULL && pre->val >= root->val) {
+                    rs = false;
+                    // 不能return false
+                }
+                pre = root;
+                root = root->right;
+            } else {
+                TreeNode * t = root->left;
+                while (t->right != NULL && t->right != root) t = t->right;
+                if (t->right == NULL) {
+                    t->right = root;
+                    root = root->left;
+                } else {
+                    if (pre != NULL && pre->val >= root->val) {
+                        rs = false;
+                    }
+                    pre = root;
+                    t->right = NULL;
+                    root = root->right;
+                }
+            }
+        }
+        return rs;
+    }
+};
+
+}
