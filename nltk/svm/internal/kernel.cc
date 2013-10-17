@@ -4,6 +4,7 @@
 // Date  : 2013-09-08 00:16:12
 // File  : kernel.cc
 // Brief :
+
 #include "../public/kernel.h"
 
 namespace nltk {

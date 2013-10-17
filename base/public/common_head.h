@@ -19,8 +19,10 @@
 #include <algorithm>
 #include <bitset>
 #include <math.h>
+#include <cstdio>
+#include <cstring>
 #include "base/public/logging.h"
+#include "base/public/util.h"
 #include "base/public/string_util.h"
-
 
 #endif  // __COMMOM_HEAD_H_

@@ -19,5 +19,13 @@ inline T min(const T & a, const T & b) {
   return (a < b) ? a : b;
 }
 
+template <class T>
+inline void swap(T & a, T & b) {
+  if (&a == &b) return;  // bug fix
+  a ^= b;
+  b ^= a;
+  a ^= b;
+}
+
 };
 #endif  //  __UTIL_H_

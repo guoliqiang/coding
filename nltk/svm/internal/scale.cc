@@ -10,7 +10,6 @@
 #define INF HUGE_VAL
 #define TAU 1e-12
 
-
 namespace nltk {
 namespace svm {
 

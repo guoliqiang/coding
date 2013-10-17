@@ -4,6 +4,7 @@
 // Date  : 2013-09-07 22:59:15
 // File  : cache.cc
 // Brief :
+
 #include "../public/cache.h"
 
 namespace nltk {

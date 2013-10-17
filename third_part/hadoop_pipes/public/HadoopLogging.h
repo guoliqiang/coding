@@ -4,6 +4,11 @@
 
 // Simplified version of Google's logging.
 
+// Note: the scope of variable without name (e.g. Foo().Out)
+//       is currend statement, so HPLOG(INFO) << something can
+//       be written info file sucessfully, even the core occur
+//       after this statement (HPLOG(INFO))
+
 #ifndef HADOOP_LOGGING_H__
 #define HADOOP_LOGGING_H__
 
@@ -59,6 +64,7 @@ class HPLogMessage {
   HPLogMessage(const char* file, int line, int fd = 1) : flushed_(false), fd_(fd) {
     stream() << file << ":" << line << ": ";
   }
+
   void Flush() {
     stream() << "\n";
     std::string s = str_.str();
@@ -66,6 +72,7 @@ class HPLogMessage {
     if(write(fd_, s.data(), n) < 0) {}  // shut up gcc
     flushed_ = true;
   }
+
   ~HPLogMessage() {
     if (!flushed_) {
       Flush();

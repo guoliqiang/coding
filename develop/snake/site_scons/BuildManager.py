@@ -229,7 +229,7 @@ class BuildManager(object):
         Util.Abort('exec failed: %s.' % command)
       self.lang_builders_.append((lang, lang_builder))
       registers = lang_builder.GetSnakeRegisterers()
-      #cc_binary cc_library
+      #cc_binary cc_library  thrift_library
       for r in registers:
         self.builders_[r] = lang_builder
       lang_builder.GenerateEnv(self.env_)

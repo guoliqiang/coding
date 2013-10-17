@@ -140,6 +140,7 @@ int32 HammingDistance(const uint64_t & a, const uint64_t &b) {
 }
 
 // 这个函数还可以优化
+// http://en.wikipedia.org/wiki/Hamming_weight
 int HammingDistanceFast(const uint64_t & simhash_value1,
                         const uint64_t & simhash_value2) {
   uint64_t count = simhash_value1 ^ simhash_value2;
@@ -150,8 +151,8 @@ int HammingDistanceFast(const uint64_t & simhash_value1,
   uint64_t e = 0x0000ffff0000ffff;
   uint64_t f = 0x00000000ffffffff;
 
-  count = (count & a) + ((count>>1) & a);
-  count = (count & b) + ((count>>2) & b);
+  count = (count & a) + ((count>>1) & a);  // 相邻两位保存的是之前中1的个数
+  count = (count & b) + ((count>>2) & b);  // 相邻四位保存的之前四位中1的个数
   count = (count & c) + ((count>>4) & c);
   count = (count & d) + ((count>>8) & d);
   count = (count & e) + ((count>>16) & e);

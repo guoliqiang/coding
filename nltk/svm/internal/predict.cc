@@ -4,6 +4,7 @@
 // Date  : 2013-09-08 13:16:12
 // File  : predict.cc
 // Brief :
+
 #include "../public/predict.h"
 #include "../public/scale.h"
 namespace nltk {

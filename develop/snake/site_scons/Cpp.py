@@ -51,7 +51,7 @@ def GetCppInclude(obj):
   result.append(Path.AddBaseDir('third_part/boost/include'))
   if obj.has_thrift_dep:
     result.append(Path.GetThriftOutPath())
-    result.append(Path.AddBaseDir('third_part/libevent'))
+    result.append(Path.AddBaseDir('third_part/libevent/include'))
     result.append(Path.AddBaseDir('third_part/thrift/include'))
   if obj.has_proto_dep:
     result.append(Path.GetProtoOutPath())

@@ -4,6 +4,7 @@
 // Date  : 2013-09-08 01:05:04
 // File  : model.cc
 // Brief :
+
 #include "../public/model.h"
 
 namespace nltk {
