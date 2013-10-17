@@ -36,7 +36,36 @@ bool IsSymmetric(TreeNode * root) {
 
 }  // namespace algorithm
 
+namespace twice {
 using namespace algorithm;
+
+bool Mirror2(TreeNode * root1, TreeNode * root2) {
+    std::stack<std::pair<TreeNode *, TreeNode *> > stack;
+    while (root1 && root2) {
+        if (root1->val != root2->val) return false;
+        stack.push(std::make_pair(root1, root2));
+        root1 = root1->left;
+        root2 = root2->right;
+    }
+    if (root1 != NULL || root2 != NULL) return false;
+    while (!stack.empty()) {
+        std::pair<TreeNode *, TreeNode *> t = stack.top();
+        stack.pop();
+        root1 = t.first->right;
+        root2 = t.second->left;
+        while (root1 && root2) {
+          if (root1->val != root2->val) return false;
+          stack.push(std::make_pair(root1, root2));
+          root1 = root1->left;
+          root2 = root2->right;
+        }
+        if (root1 != NULL || root2 != NULL) return false;
+    }
+    return true;
+}
+}  // namespace twice
+using namespace algorithm;
+
 
 
 int main(int argc, char** argv) {

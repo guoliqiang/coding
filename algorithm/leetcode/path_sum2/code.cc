@@ -26,7 +26,7 @@ void PathSum(TreeNode * root, int sum, int * tsum,
   path.push_back(root->val);
   if (root->left == NULL && root->right == NULL && *tsum == sum) {
     rs.push_back(path);
-  }
+  }  // 测试数据中有负数
   PathSum(root->left, sum, tsum, path, rs);
   PathSum(root->right, sum, tsum, path, rs);
   *tsum -= root->val;

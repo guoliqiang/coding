@@ -49,7 +49,28 @@ int MiniTotal(std::vector<std::vector<int> > & v) {
 
 }  // namespace algorithm
 
+namespace twice {
+int DP(std::vector<std::vector<int> > & matrix) {
+  int n = matrix.size();
+  for (int i = 1; i < n; i++) {
+      for (int j = 0; j <= i; j++) {
+          if (j == 0) matrix[i][j] += matrix[i - 1][j];
+          else if (j == i) {
+              matrix[i][j] += matrix[i - 1][j - 1];
+          } else {
+              matrix[i][j] += std::min(matrix[i - 1][j - 1], matrix[i - 1][j]);
+          }
+      }
+  }
+  int min = INT_MAX;
+  for (int i = 0; i < n; i++) {
+      min = std::min(min, matrix[n - 1][i]);
+  }
+  return min;
+}
+}  // namespace twice
 using namespace algorithm;
+
 
 
 int main(int argc, char** argv) {

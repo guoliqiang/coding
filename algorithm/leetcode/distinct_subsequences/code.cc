@@ -23,6 +23,8 @@
 
 namespace algorithm {
 
+// dp[i][j] 的含义　s[0 ~ i]中有多少个不同的子序列 == t[0 ~ j]
+
 void DP(std::string & s, std::string & t, std::vector<std::vector<int> > & dp) {
   int m = t.size();
   int n = s.size();

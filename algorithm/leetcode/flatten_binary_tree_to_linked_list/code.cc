@@ -16,8 +16,10 @@
 
 #include "../ojbst/ojbst.h"
 
+// 这个方法当初是如何想到的？？
 namespace algorithm {
 
+// pre 保存前序遍历的最后一个节点
 void Flatten(TreeNode * root, TreeNode * & pre, TreeNode ** v) {
   if (root == NULL) return;
   pre = root;
