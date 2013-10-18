@@ -45,6 +45,8 @@ int LadderLength(string start, string end, unordered_set<string> &dict) {
       for (int j = 0; j < 26; ++j) {
         string t = s;
         t[i] = 'a' + j;
+        // 因为每条边的权值相当于1,所以可以直接返回
+        // 否则需要比较大小
         if (t == end) return ret + 2;
         if (dict.find(t) != dict.end() &&
             visited.find(t) == visited.end()) {

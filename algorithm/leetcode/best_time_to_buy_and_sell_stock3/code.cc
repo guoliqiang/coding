@@ -45,6 +45,30 @@ int MaxProfit(std::vector<int> & v) {
 }
 }  // namespace NB
 
+namespace twice {
+
+int DP(std::vector<int> & v) {
+  int n = v.size();
+  if (n == 0) return 0;
+  std::vector<int> dp(n, 0);
+  int min = v[0];
+  dp[0] = 0;
+  for (int i = 1; i < n; i++) {
+      min = std::min(min, v[i]);
+      dp[i] = std::max(dp[i - 1], v[i] - min);
+  }
+  int rs = 0;
+  int max = v[n - 1];
+  for (int i = n - 1; i >= 0; i--) {
+     max = std::max(max, v[i]);
+     int t = max - v[i];
+     if (i != 0) t += dp[i - 1];
+     rs = std::max(rs, t);
+  }
+  return rs;
+}
+
+}  // namespace twice
 
 namespace algorithm {
 

@@ -187,9 +187,51 @@ std::vector<std::vector<std::string> > DFS(const std::string & str) {
 using namespace algorithm;
 
 
+namespace twice {
+void DP(std::string & s, std::vector<std::vector<int> > & dp) {
+  int n = s.size();
+  for (int i = 0; i < n; i++) {
+      for (int j = i; j >= 0; j--) {
+          if (j == i) dp[i][j] = 1;
+          else if (j == i - 1) {
+            dp[i][j] = s[i] == s[j] ? 1 : 0;
+          } else {
+              dp[i][j] = dp[i - 1][j + 1] && s[i] == s[j] ? 1 : 0;
+          }
+      }
+  }
+}
+
+void Trace(std::string & s, std::vector<std::string> & path, 
+           std::vector<std::vector<int> > & dp, std::vector<std::vector<std::string> > & rs, int k) {
+    if (k < 0) {
+        rs.push_back(std::vector<std::string>(path.rbegin(), path.rend()));
+    } else {
+        for (int i = k; i >= 0; i--) {
+            if (dp[k][i] == 1) {
+                path.push_back(s.substr(i, k - i + 1));
+                Trace(s, path, dp, rs, i - 1);
+                path.pop_back();
+            }
+        }
+    }
+}
+
+std::vector<std::vector<std::string> > Partition(std::string & s) {
+    int n = s.size();
+    std::vector<std::vector<int> > dp(n, std::vector<int>(n, 0));
+    DP(s, dp);
+    std::vector<std::string> path;
+    std::vector<std::vector<std::string> > rs;
+    Trace(s, path, dp, rs, n - 1);
+    return rs;
+}
+}  // namespace twice
+
 int main(int argc, char** argv) {
-  std::string str = "abbab";
-  std::vector<std::vector<std::string> > rs = Partition(str);
+  std::string str = "bb";
+  // std::vector<std::vector<std::string> > rs = Partition(str);
+  std::vector<std::vector<std::string> > rs = twice::Partition(str);
   LOG(INFO) << JoinMatrix(&rs);
   rs = DFS(str);
   LOG(INFO) << JoinMatrix(&rs);
