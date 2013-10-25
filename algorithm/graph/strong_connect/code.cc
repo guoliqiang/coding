@@ -37,6 +37,7 @@
 //
 //   整个Tarjan算法跑下来就可以完成强连通分支的求解了。
 
+// 下面算法是针对有向图的，无向图直接dfs既可以
 #include "base/public/common_head.h"
 
 namespace algorithm {
