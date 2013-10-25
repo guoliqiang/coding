@@ -19,11 +19,14 @@ _verbose = int(ARGUMENTS.get('verbose', '1'))
 def GetIp(ifname):
   """get the ip of host"""
   s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-  return socket.inet_ntoa(fcntl.ioctl(s.fileno(),
-                                      0x8915,  # SIOCGIFADDR
-                                      struct.pack('256s', ifname[:15])
-                                     )[20:24]
-                         )
+  try:
+    return socket.inet_ntoa(fcntl.ioctl(s.fileno(),
+                                        0x8915,  # SIOCGIFADDR
+                                        struct.pack('256s', ifname[:15])
+                                       )[20:24]
+                           )
+  except:
+    return ""
 
 def Log(msg, v = 0):
   """print log info"""
