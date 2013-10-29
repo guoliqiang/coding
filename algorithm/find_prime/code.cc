@@ -68,6 +68,23 @@ std::vector<int> Eratosthenes(int n) {
   return rs;
 }
 
+// http://blog.csdn.net/morewindows/article/details/7347459
+std::vector<int> EratosthenesOpt(int n) {
+  std::vector<bool> v(n, true);
+  std::vector<int> rs;
+  v[0] = v[1] = false;
+  for (int i = 2; i < n; i++) {
+    if (v[i] == true) {
+      rs.push_back(i);
+    }
+    for (int j = 0; j < rs.size(); j++) {
+      v[rs[j] * i] = false;
+      if (i % rs[j] == 0) break;
+    }
+  }
+  return rs;
+}
+
 /*
  * 目前最快的算法，没有看证明过程
  * http://cr.yp.to/primegen.html 开源代码
