@@ -5,6 +5,31 @@
 // File  : code.cc
 // Brief :
 
+
+// 平面最近点对
+// http://blog.csdn.net/zhulei19931019/article/details/9362087
+// jlu模板上的代码只需要对y排序一次
+
+
+// 高维数据,选择的时候，要选出n - 1维每一维距离mid都在dm中的点. 
+// 论文：http://wenku.baidu.com/view/2061b121ccbff121dd3683c9.html1
+// 排序时按照y轴z轴...的次序
+//
+// O(nlog(n)log(n))
+//
+// 点是动态加入的情况
+// KD树 http://blog.csdn.net/qll125596718/article/details/8426458
+// 每加入一个点重新计算一次
+// (KD树：求指定点的最近k邻)
+//
+// 高维空间最近点对问题的ε网算法 王晓东，傅清祥,福州大学
+// http://wenku.baidu.com/link?url=Q7x1fNT-2sJc3boC7A4vihshpEwpDahVYKnEEw-TZ1JAMj8FkQT3iT489Q7sJc7xfLLzHi0jo7k9IeSos6frElCrMa3S9xvg5La4QtmXHs7
+//
+
+// 平面最远点对
+// 1. 先求凸包
+// 2. 再求凸包的直径
+
 #include "base/public/common_head.h"
 #include "../base/base.h"
 
@@ -12,93 +37,83 @@ namespace algorithm {
 
 const int MAX = 1000;
 Point vec[MAX];
-int index[MAX];
-int temp[MAX];
+int index_x[MAX];
+int index_y[MAX];
 
 
-bool Cmp(int a, int b) {
+bool Cmpx(int a, int b) {
   return (vec[a].x < vec[b].x) ||
          (vec[a].x == vec[b].x && vec[a].y < vec[b].y);
 }
 
-// 0~ m-1  m ~ n
-void Merge(int * v, int n, int m) {
-  memset(temp, 0 , sizeof(temp));
-  int k = 0;
-  
-  int i = n;
-  int j = m - 1;
-  while (i >= m && j >= 0) {
-    if (vec[v[i]].y > vec[v[j]].y) {
-      temp[k++] = v[i];
-      i--;
-    } else {
-      temp[k++] = v[j];
-      j--;
-    }
-    // LOG(INFO) << "tmp[" << k -1 << "]:" << temp[k - 1];
-  }
-  while (i >= m) {
-    temp[k++] = v[i];
-    i--;
-  }
-  for (int l = k - 1; l >= 0; l--) {
-    v[++j] = temp[l];
-  }
-  HERE(INFO);
-  for (int i = 0; i <= n; i++) {
-    LOG(INFO) << v[i] << ":[" << vec[v[i]].x << "," << vec[v[i]].y << "]";
-  }
-  HERE(INFO);
+bool Cmpy(int a, int b) {
+  return (vec[a].y < vec[b].y) ||
+         (vec[a].y == vec[b].y && vec[a].x < vec[b].x);
 }
 
 double Closest(int * v, int n) {
-  if (n <= 0) {
-    return 0;
-  }
-  if (n == 1) {
+  if (n <= 1) return 0;
+  if (n == 2) {
     int t = Distance(vec[v[0]], vec[v[1]]);
-    if (vec[v[0]].y > vec[v[1]].y) std::swap(v[0], v[1]);
     return t;
   }
-  if (n == 2) {
+  if (n == 3) {
     double t = Distance(vec[v[0]], vec[v[1]]);
     t = std::min(t, Distance(vec[v[1]], vec[v[2]]));
     t = std::min(t, Distance(vec[v[0]], vec[v[2]]));
-    // 冒泡排序
-    for (int i = 0; i < 2; i++) {
-      for (int j = 0; j < 2; j++) {
-        if (vec[v[j]].y > vec[v[j + 1]].y) std::swap(v[j], v[j + 1]);
-      }
-    }
     return t;
   }
-  int mid = (n + 1) / 2;
-  double dml = Closest(v, mid - 1);
+  int mid = n / 2;
+  // 二分过程中需要保证左右两部分元素要么元素数相同，要么元素数差1
+  double dml = Closest(v, mid);
   double dmr = Closest(v + mid, n - mid);
   double dm = std::min(dml, dmr);
-  // LOG(INFO) << "left:" << dml << " right:" << dmr << " min:" << dm;
-  Merge(v, n, mid);
+  
+  // 选出mid左右距离在dm之内的点，只有在这个子集内
+  // 按y排序后，每个点最多和它之后的6个点比较就能
+  // 判断出有没有更小的距离,如果有重复的点，比较
+  // 的次数可能多于六个
+  //
+  // 比如当前距离当前点距离小于dm的一定在一个长度为dm，宽度为2dm的矩形
+  // 中，分成相等的六块（2 * 3,因为分成4块无法证明），根据鸽巢原理，如果
+  // 存在多于6个点在这个矩形中，必有两个点处于同一个小块中，其距离回小于dm
+  int k = 0;
+  int * ptr = index_y;
   for (int i = 0; i < n; i++) {
-    for (int j = i + 1; j < n && vec[v[j]].y - vec[v[i]].y < dm; j++) {
-      dm = std::min(dm, Distance(vec[v[j]], vec[v[i]]));
+    if (abs(vec[v[i]].x - vec[v[mid]].x) < dm) ptr[k++] = v[i];
+  }
+  std::sort(ptr, ptr + k, Cmpy);
+  for (int i = 0; i < k; i++) {
+     LOG(INFO) << "(" << vec[ptr[i]].x << "," << vec[ptr[i]].y << ")";
+  }
+  HERE(INFO);
+  
+  for (int i = 0; i < k; i++) {
+    for (int j = i + 1; j < k && vec[ptr[j]].y - vec[ptr[i]].y < dm; j++) {
+      double t = Distance(vec[ptr[j]], vec[ptr[i]]);
+      // if (t < dm) LOG(INFO) << "find min " << t << " " << vec[ptr[j]].x << ","
+      //                       << vec[ptr[j]].y << " " << vec[ptr[i]].x << " " 
+      //                       << vec[ptr[i]].y;
+      dm = std::min(dm, t);
     }
   }
   return dm;
 }
 
 double Read(std::vector<Point> & v) {
-  memset(index, 0, sizeof(index));
-  for (int i = 0; i < v.size(); i++) {
+  memset(index_x, 0, sizeof(index_x));
+  memset(index_y, 0, sizeof(index_y));
+  int n = v.size();
+  for (int i = 0; i < n; i++) {
     vec[i] = v[i];
-    index[i] = i;
+    index_x[i] = i;
   }
-  int * ptr = index;
-  std::sort(ptr, ptr + v.size(), Cmp);
-  for (int i = 0; i < v.size(); i++) {
+  int * ptr = index_x;
+  std::sort(ptr, ptr + n, Cmpx);
+  for (int i = 0; i < n; i++) {
     LOG(INFO) << "[" << vec[ptr[i]].x << "," << vec[ptr[i]].y << "]";
   }
-  return Closest(ptr, v.size() - 1);
+  return Closest(ptr, n);
 }
 
 }  // namespace algorithm

@@ -18,6 +18,18 @@ struct Point {
 double Distance(const Point & a, const Point & b) {
   return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
+
+Point Sub(const Point & a, const Point & b) {
+  return Point(a.x - b.x, a.y - b.y);
+}
+
+Point Add(const Point & a, const Point & b) {
+  return Point(a.x + b.x, a.y + b.y);
+}
+
+double Cross(const Point & a, const Point & b) {
+  return a.x * b.y - a.y * b.x;
+}
 }  // namespace algorithm
 
 #endif  // __BASE_H_

@@ -43,20 +43,12 @@
  *
  * */
 #include "base/public/common_head.h"
+#include "../base/base.h"
 
 namespace algorithm {
-struct Point{
-  int x;
-  int y;
-  Point(int xi = 0, int yi = 0) : x(xi), y(yi){}
-};
 
 std::vector<Point> stack;
 
-// 两点间距离的平方
-int Distance(const Point & a, const Point & b) {
-  return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
-}
 
 /*  判断 base->a->b 是不是左旋转
 
@@ -123,10 +115,44 @@ void Read() {
 }
 }  // namespace algorithm
 
+
+// 凸包相关算法，如凸包间的最小（最大）距离
+// http://cgm.cs.mcgill.ca/~orm/rotcal.frame.html
+namespace algorithm {
+// 凸包直径
+// 旋转卡壳算法
+// http://www.cppblog.com/staryjy/archive/2009/11/19/101412.html
+
+// 0 ~n -1 按逆时针的顺序存储在v中
+double RotatingCalipers(std::vector<Point> v) {
+  int n = v.size();
+  v.push_back(v[0]);
+  double rs = 0;
+  int last = 1;
+  for (int i = 0; i < n; i++) {
+    Point t = Sub(v[i + 1], v[i]);
+    while (Cross(t, Sub(v[last + 1], v[last])) > 0) {
+      last = (last + 1) % n;
+    }
+    double foo = std::max(Distance(v[i], v[last]), Distance(v[i + 1], v[last + 1]));
+    rs = std::max(rs, foo);
+  }
+  return rs;
+}
+}  // namespace algorithm
+
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
+  std::vector<Point> v;
+  v.push_back(Point(2, 0));
+  v.push_back(Point(-2, 0));
+  v.push_back(Point(0, 2));
+  v.push_back(Point(-1, -2));
+  v.push_back(Point(1, -2));
+  LOG(INFO) << RotatingCalipers(v);
+  return 0;
   Read();
   int n = Graham();
   for (int i = 0; i <= n; i++) {
