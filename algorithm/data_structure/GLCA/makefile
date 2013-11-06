@@ -3,8 +3,8 @@
 # Date  : 2013-09-09 15:26:45
 
 
-WORK_ROOT=../..
-PROJ_NAME=algorithm/josephus
+WORK_ROOT=../../..
+PROJ_NAME=algorithm/data_structure/GLCA
 
 
 all:

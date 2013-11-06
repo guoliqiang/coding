@@ -27,6 +27,21 @@ int BSearch1(std::vector<int> & v, int k) {
   return b;
 }
 
+/*
+ * 可以返回第一个等于或稍微小于k的数
+ * */
+int BSearch1_1(std::vector<int> & v, int k) {
+  int b = 0;
+  int e = v.size();
+  if (b == e) return -1;
+  while (b < e) {
+    int mid = b + (e - b + 1) / 2;
+    if (v[mid] <= k) b = mid;
+    else e = mid - 1;
+  }
+  return b;
+}
+
 int BSearch2(std::vector<int> & v, int k) {
   int b = 0;
   int e = v.size() - 1;
@@ -39,6 +54,20 @@ int BSearch2(std::vector<int> & v, int k) {
   return b;
 }
 
+/*
+ * 这个逻辑貌似实现不了(返回等于或稍微小于k的数)
+ * */
+int BSearch2_2(std::vector<int> & v, int k) {
+  int b = 0;
+  int e = v.size() - 1;
+  if (b > e) return -1;
+  while (b <= e) {
+    int mid = b + (e - b + 1) / 2;
+    if (v[mid] < k) b = mid + 1;
+    else e = mid - 1;
+  }
+  return b;
+}
 /*
  * BSearch3 BSearch4
  * 循环结束时如果发现k，返回k下一个元素的下标
@@ -216,9 +245,9 @@ int main(int argc, char** argv) {
   v.push_back(9);
   v.push_back(10);
   v.push_back(12);
-  /*
-  LOG(INFO) << BSearch1(v, 14);
-  LOG(INFO) << BSearch2(v, 14);
+  LOG(INFO) << BSearch1(v, 7);
+  LOG(INFO) << BSearch1_1(v, 7);
+  LOG(INFO) << BSearch2(v, 7);
   LOG(INFO) << BSearch3(v, 14);
   LOG(INFO) << BSearch4(v, 14);
   
@@ -226,7 +255,7 @@ int main(int argc, char** argv) {
   LOG(INFO) << BSearch2(v, 8);
   LOG(INFO) << BSearch3(v, 8);
   LOG(INFO) << BSearch4(v, 8);
-  */
+  
   v.clear();
   v.push_back(2);
   v.push_back(1);
