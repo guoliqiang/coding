@@ -5,6 +5,13 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * 判断两个词是不是变位词的方法，有两种，如下：
+ * 1. n * long(n)
+ * 2. O(n) 但需要而外的空间辅助
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

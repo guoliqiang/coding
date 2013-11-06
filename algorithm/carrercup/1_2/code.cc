@@ -24,6 +24,13 @@ void swap(T & a, T & b) {
   a = a^b;
 }
 
+template <typename T>
+void swap2(T & a, T & b) {
+  a = a - b;
+  b = a + b;
+  a = b - a;
+}
+
 
 void Reverse(char * ptr) {
   int len = strlen(ptr);
