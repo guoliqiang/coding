@@ -7,6 +7,7 @@
 
 /*
  * Write code to remove duplicates from an unsorted linked list.
+ * 1.使用hashmap
  * FOLLOW UP
  * How would you solve this problem if a temporary buffer is not allowed?
  * 
@@ -22,6 +23,9 @@ struct ListNode {
  ListNode(int v = 0) : val(v), next(NULL) {}
 };
 
+/*
+ * 对于有序链表
+ * */
 ListNode * RemoveDup(ListNode * head) {
   ListNode ** tail = &head;
   ListNode * t = head;
@@ -38,6 +42,28 @@ ListNode * RemoveDup(ListNode * head) {
   return head;
 }
 
+/*
+ * 无序链表
+ * 不能排序，会破话数据。
+ * */
+
+ListNode * RemoveDup2(ListNode * head) {
+  ListNode * rs = head;
+  while (head != NULL) {
+    ListNode * pre = head;
+    ListNode * t = head->next;
+    while (t != NULL) {
+      if (t->val == head->val) {
+        pre->next = t->next;
+      } else {
+        pre = t;
+      }
+      t = t->next;
+    }
+  }
+  return rs;
+}
+
 }  // namespace algorithm
 using namespace algorithm;
 
@@ -47,6 +73,14 @@ int main(int argc, char** argv) {
   head->next = new ListNode(1);
   head->next->next = new ListNode(2);
   ListNode * t = RemoveDup(head);
+  
+  head = new ListNode(10);
+  head->next = new ListNode(2);
+  head->next->next = new ListNode(10);
+  head->next->next->next = new ListNode(-2);
+  head->next->next->next->next = new ListNode(2);
+  t = RemoveDup(head);
+  
   while (t != NULL) {
     LOG(INFO) << t->val;
     t = t->next;

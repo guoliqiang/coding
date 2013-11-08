@@ -24,7 +24,9 @@ int MinCostMaxFlow(int source, int target, int * sum_cost) {
       flow[i][j] = matrix[i][j];
     }
   }
-
+  /*
+   * 在图上做DP
+   * */
   while (true) {
     for (int i = 0; i < N; i++) weight[i] = INT_MAX;
     memset(pre, 0, sizeof(pre));

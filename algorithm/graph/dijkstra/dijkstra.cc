@@ -8,6 +8,41 @@
 #include "base/public/common_head.h"
 #include "../base/graph.h"
 
+namespace NB {
+const int INF = 0x3f3f3f3f;
+
+void dijkstra(std::vector<std::vector<int> > matrix, int source,
+              std::vector<int> & dist, std::vector<int> & path) {
+  int n = matrix.size();
+  dist.resize(n, INF);
+  path.resize(n, -1);
+  std::vector<bool> visited(n, false);
+  
+  dist[source] = 0;  // 初始化只有这一个就可以了
+  
+  for (int j = 0; j < n; j++) {  // note begin from 0
+    int min = INF;
+    int idx = -1;
+    for (int i = 0; i < n; i++) {
+      if (visited[i] == false && dist[i] < min) {
+        min = dist[i];
+        idx = i;
+      }
+    }
+    if (idx == -1) break;
+    visited[idx] = true;
+    for (int i = 0; i < n; i++) {
+      if (matrix[idx][i] > 0 && dist[i] > dist[idx] + matrix[idx][i]) {
+        dist[i] = dist[idx] + matrix[idx][i];
+        path[i] = idx;
+      }
+    }
+  }
+}
+
+}  // namespace NB
+
+
 namespace graph {
 
 void Dijkstra(std::vector<std::vector<int> > matrix, int source,
@@ -18,7 +53,7 @@ void Dijkstra(std::vector<std::vector<int> > matrix, int source,
   std::vector<bool> visited(n, false);
   // 初始化
   for (int i = 0; i < n; i++) {
-    if (matrix[source][i] > 0) {
+    if (matrix[source][i] > 0 && (dist[i] == -1 || dist[i] < matrix[source][i])) {  // bug fixed, 如果没有dist[i] < matrix[source][i]，poj上2449无法AC
       dist[i] = matrix[source][i];
       path[i] = source;
     }

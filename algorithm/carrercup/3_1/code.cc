@@ -16,6 +16,55 @@ namespace algorithm {
  * http://hawstein.com/posts/3.1.html
  * */
 
+struct Node {
+  int val;
+  int pre;
+  bool used;
+  Node() : val(-1), pre(-1), used(false){}
+};
+
+class MultiStack {
+ public:
+  MultiStack() {
+    top[0] = -1;
+    top[1] = -1;
+    top[2] = -1;
+    cur = 0;
+    data.resize(10);
+  }
+
+  void Push(int id, int val) {
+    LOG(INFO) << "push " << id << ":" << val;
+    data[cur].val = val;
+    data[cur].pre = top[id];
+    data[cur].used = true;
+    top[id] = cur;
+    // 找到第一个空闲位置
+    while (cur < data.size() && data[cur].used) cur++;
+    if (cur == data.size()) data.resize(data.size() * 2);
+  }
+
+  int Top(int id) {
+    if (top[id] == -1) return -1;
+    return data[top[id]].val;
+  }
+
+  void Pop(int id) {
+    if (top[id] == -1) return;
+    data[top[id]].used = false;
+    top[id] = data[top[id]].pre;
+  }
+
+  bool Empty(int id) {
+    return top[id] == -1;
+  }
+
+  int top[3];
+  int cur;
+  std::vector<Node> data;
+};
+
+
 class Stack {
  public:
   Stack(std::vector<int> * v_i, int last_i) : v(v_i), last(last_i) {}
@@ -56,11 +105,26 @@ int main(int argc, char** argv) {
   Stack s1(&foo, 0);
   Stack s2(&foo, 1);
   Stack s3(&foo, 2);
+  MultiStack bs;
   for (int i = 0; i < 10; i++) {
-    s1.Push(i * 10 + i);
-    s2.Push(i * 20 + i);
-    s3.Push(i * 30 + i);
+    // s1.Push(i * 10 + i);
+    // s2.Push(i * 20 + i);
+    // s3.Push(i * 30 + i);
+    bs.Push(i % 3, i);
   }
+  for (int i = 0; i < 3; i++) {
+    while (!bs.Empty(i)) {
+      LOG(INFO) << i << " : " << bs.Top(i);
+      bs.Pop(i);
+    }
+    if (i == 1) {
+      for (int j = 0; j < 10; j++) {
+        bs.Push(j % 3, j);
+      }
+    }
+  }
+  return 0;
+  
   while (!s1.Empty()) {
     LOG(INFO) << s1.Top();
     s1.Pop();

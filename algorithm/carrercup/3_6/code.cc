@@ -4,6 +4,11 @@
 // Date  : 2013-10-03 18:52:29
 // File  : code.cc
 // Brief :
+/*
+ * Write a program to sort a stack in ascending order.
+ * You should not make any assump-tions about how the stack is implemented.
+ * The following are the only functions that should be used to write this program: push | pop | peek | isEmpty.
+ * */
 //
 // 这个思路比较有意思
 // http://hawstein.com/posts/3.6.html

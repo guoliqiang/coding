@@ -5,6 +5,18 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Implement an algorithm to delete a node in the middle of a single linked list, 
+ * given only access to that node.
+ *
+ * EXAMPLE
+ *
+ * Input: the node ‘c’ from the linked list a->b->c->d->e Result: nothing is returned,
+ * but the new linked list looks like a->b->d->e
+ *
+ * 当要删除的元素为最后一个元素时，只能通过设定特殊标志位来处理，因为没有提供head指针。
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

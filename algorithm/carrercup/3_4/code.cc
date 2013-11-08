@@ -6,6 +6,17 @@
 // Brief :
 // http://hawstein.com/posts/3.4.html
 
+/* In the classic problem of the Towers of Hanoi, you have 3 rods
+ * and N disks of different sizes which can slide onto any tower.
+ * The puzzle starts with disks sorted in ascending order of size
+ * from top to bottom (e.g., each disk sits on top of an even larger one).
+ * You have the following constraints: 
+ * (A) Only one disk can be moved at a time. 
+ * (B) A disk is slid off the top of one rod onto the next rod. 
+ * © A disk can only be placed on top of a larger disk. 
+ * Write a program to move the disks from the first rod to the last using Stacks.
+ * */
+
 
 #include "base/public/common_head.h"
 
@@ -64,6 +75,7 @@ void MoveIte(std::stack<int> & f, std::stack<int> & m, std::stack<int> & t, int 
       t.from->pop();
     } else {
       // bug fix: push的顺序要与递归调用的顺序相反
+      // 多次调用递归函数的入栈方式.
       stack.push(Node(t.mid, t.from, t.to, t.n - 1));
       stack.push(Node(t.from, t.mid, t.to, 1));
       stack.push(Node(t.from, t.to, t.mid, t.n - 1));

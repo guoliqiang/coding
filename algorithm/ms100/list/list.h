@@ -5,6 +5,10 @@
 // File  : list.h
 // Brief :
 
+/*
+ * 有环链表问题
+ * */
+
 #ifndef  __LIST_H_
 #define  __LIST_H_
 

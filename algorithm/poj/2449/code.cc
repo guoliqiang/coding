@@ -1,155 +1,331 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
 // I just want to GH to hss~
-// Date  : 2013-10-11 09:31:32
+// Date  : 2013-11-08 00:14:45
 // File  : code.cc
 // Brief :
-/*
- * A* 算法，可能有环
- * 如果可以没有环，感觉可以使用floyd算法
- * http://blog.sciencenet.cn/blog-5422-538894.html
- * http://blog.csdn.net/zhjchengfeng5/article/details/7858194
- *
- * T , I do not know why?
- *
- * 先找出第1短的，第二短的一定是在第一短的路径上出来的两外的某个分支，
- * 因此只需要找出哪个分支到目标最短即可，对于目前从来没有经过的点，其到
- * 目标的距离一定大于这个分支.
- *
- * */
+// MLE
 
-#include "base/public/common_head.h"
+#include "base/public/common_ojhead.h"
 
-namespace algorithm {
+// AC Accepted  7476K 282MS
+namespace NB {
 
-void Dijkstra(std::vector<std::vector<int> > & matrix, int source, std::vector<int> & dist) {
-  int n = matrix.size();
-  dist.resize(n, INT_MAX);
-  std::vector<bool> visited(n, false);
-  for (int i = 0; i < n; i++) {
-    if (matrix[source][i] > 0) dist[i] = matrix[source][i];
+const int INF = 0x3f3f3f3f;
+using namespace std;
+
+const int MAXN = 1005;
+const int MAXM = 200100;
+  
+struct Ed{
+  int v;
+  int c;
+  int nxt;  
+} Edge[MAXM];  
+  
+int head[MAXN];  
+int tail[MAXN];  
+int dis[MAXN];
+int vis[MAXN];
+int cnt[MAXN];
+
+struct Node {  
+  int v;
+  int d;
+  Node (int iv, int id) : v(iv), d(id){}
+  bool operator < (const Node &a) const { 
+    return a.d + dis[a.v] < d + dis[v];
+  }  
+};
+  
+void Dijstra(int n, int s, int t) {  
+  memset(vis, 0, sizeof(vis));  
+  for (int i = 0; i <= n; i++) dis[i] = INF;
+  dis[t] = 0;  
+
+  for(int i = 0; i < n; i++ ) {  
+    int min = INF;  
+    int k = -1;  
+    for(int j = 0; j < n; j++) {  
+      if (vis[j] == false && min > dis[j]) {
+         min = dis[j];
+         k = j;
+      }
+    }  
+    if (k == -1) break;  
+    vis[k] = true;  
+    for (int j = tail[k]; j != -1; j = Edge[j].nxt) {  
+       int v = Edge[j].v;  
+       if (dis[v] > dis[k] + Edge[j].c) dis[v] = dis[k] + Edge[j].c;  
+    }  
+  }  
+}  
+  
+int Astar(int n, int s, int t, int K) {  
+  std::priority_queue<Node>queue;  
+  memset(cnt,0,sizeof(cnt));  
+  queue.push(Node(s, 0));  
+  while(!queue.empty()) {  
+    Node cur = queue.top();  
+    queue.pop();  
+    cnt[cur.v]++;  
+    if(cnt[cur.v] > K) continue;  
+    if(cnt[t] == K) return cur.d;  
+    for (int i =head[cur.v]; i != -1; i = Edge[i].nxt) {  
+      queue.push(Node(Edge[i].v, cur.d + Edge[i].c));
+    }  
+  }  
+  return -1;  
+}  
+  
+void Read() {  
+  int n,m;  
+  while(scanf("%d %d", &n, &m)!=EOF ) {  
+    int u,v,c;  
+    memset(head, -1, sizeof(head));  
+    memset(tail, -1, sizeof(tail));  
+    for (int i = 0; i < m; i++) {  
+      scanf("%d %d %d",&u,&v,&c );  
+      Edge[(i << 1) + 0].v = v - 1;
+      Edge[(i << 1) + 0].c = c;
+      Edge[(i << 1) + 0].nxt = head[u - 1];
+      head[u - 1] = (i << 1) + 0;
+
+      Edge[(i << 1) + 1].v = u - 1;
+      Edge[(i << 1) + 1].c = c;
+      Edge[(i << 1) + 1].nxt = tail[v - 1];
+      tail[v - 1] = (i << 1) + 1;
+    }  
+    int s,t,k;  
+    scanf("%d %d %d",&s,&t,&k );  
+    s -= 1;
+    t -= 1;
+    if(s == t) k++;  
+    Dijstra(n, s, t);  
+    printf( "%d\n", Astar(n, s, t, k));  
+  }  
+}
+  
+}  // namespace NB
+
+// MLE
+// 这个居然过不了，代码几乎和NB一模一样
+//
+namespace bak {
+
+const int MAXE = 200100;
+const int MAXN = 1010;
+const int INF = 0x3f3f3f3f;
+int N = 0;
+
+int S = 0;
+int T = 0;
+int K = 0;
+
+int dis[MAXN];
+int vis[MAXN];
+int cnt[MAXN];
+
+struct Edge {
+  int v;
+  int c;
+  int next;
+  Edge() : v(-1), c(0), next(-1) {}
+} E[MAXE];
+
+int NE = 0;
+int head[MAXN];
+int tail[MAXN];
+
+void Dijkstra() {
+  memset(vis, 0, sizeof(vis));
+  for (int i = 0; i < N; i++) dis[i] = INF;
+  dis[T] = 0;
+  for (int i = tail[T]; i != -1; i = E[i].next) {
+    if (dis[E[i].v] > E[i].c) {  // bug fixed  一定要判断，否则由于这道题的垃圾数据会造成WA，NB的写法很好
+      dis[E[i].v] = E[i].c;
+    };
   }
-  dist[source] = 0;
-  visited[source] = true;
-  for (int i = 1; i < n; i++) {
-    int u = -1;
-    int min = INT_MAX;
-    for (int i = 0; i < n; i++) {
-      if (visited[i] == false && dist[i] > min) {
-        min = dist[i];
-        u = i;
+  vis[T] = 1;
+  
+  for (int k = 1; k < N; k++) {
+    int min = INF;
+    int idx = -1;
+    for (int i = 0; i < N; i++) {
+      if (vis[i] == 0 && dis[i] < min) {
+        min = dis[i];
+        idx = i;
       }
     }
-    if (u == -1) break;
-    visited[u] = true;
-    // reatch here, dist[u] can not be INT_MAX
-    for (int i = 0; i < n; i++) {
-      if (visited[i] == false && matrix[u][i] > 0 && dist[i] > dist[u] + matrix[u][i])
-        dist[i] = dist[u] + matrix[u][i];
+    if (idx == -1) break;
+    vis[idx] = 1;
+    for (int i = tail[idx]; i != -1 ; i = E[i].next) {
+      if (dis[E[i].v] > dis[idx] + E[i].c) {
+        dis[E[i].v] = dis[idx] + E[i].c;
+      }
     }
   }
 }
 
 struct Node {
+  int u;
   int val;
-  int len;
-  int h;
-
-  Node() {}
-  Node(int v, int l, int h_i) : val(v), len(l), h(h_i){}
-
-  bool operator < (const Node & a) const {
-    if (len + h == a.len + a.h) return len < a.len;  // Note
-    return len + h < a.len + a.h;
-  }
+  Node(int i_u, int i_val) : u(i_u), val(i_val) {}
 };
 
-int AStar(std::vector<std::vector<int> > & matrix, int start, int end, int k) {
-  if (start == end) k++;  // for poj specified
-  int n = matrix.size();
-  std::vector<std::vector<int> > tmatrix(n, std::vector<int>(n, 0));
-  // 需要反向
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) tmatrix[i][j] = matrix[j][i];
-  }
-  std::vector<int> dist;
-  Dijkstra(tmatrix, end, dist);
-  if (dist[start] == INT_MAX) return -1;
+bool operator < (const Node & x, const Node & y) {
+  return (x.val + dis[x.u]) < (y.val + dis[y.u]);
+}
+
+int AStar() {
+  memset(cnt, 0, sizeof(cnt));
+  Dijkstra();
   std::priority_queue<Node> queue;
-  queue.push(Node (start, 0, dist[start]));
-  int cnt = 0;
+  queue.push(Node(S, 0));
   while (!queue.empty()) {
     Node t = queue.top();
     queue.pop();
-    if (t.val == end) cnt++;
-    if (cnt == k) return t.len;
-    for (int i = 0; i < n; i++) {
-      if (matrix[t.val][i] > 0 && dist[i] != INT_MAX) {
-        queue.push(Node(i, t.len + matrix[t.val][i], dist[i]));
-      }
+    cnt[t.u]++;
+    if (cnt[t.u] > K) continue;
+    if (cnt[T] == K) return t.val;  // 防止死循环
+    for (int i = head[t.u]; i != - 1; i = E[i].next) {
+      queue.push(Node(E[i].v, t.val + E[i].c));
     }
   }
   return -1;
 }
-
-int AStar(std::vector<std::vector<int> > & matrix, std::vector<std::vector<int> > & tmatrix,
-          int start, int end, int k) {
-  if (start == end) k++;  // for poj specified
-  
-  int n = matrix.size();
-  std::vector<int> dist;
-  Dijkstra(tmatrix, end, dist);
-  if (dist[start] == INT_MAX) return -1;
-  
-  std::priority_queue<Node> queue;
-  queue.push(Node (start, 0, dist[start]));
-  int cnt = 0;
-  while (!queue.empty()) {
-    Node t = queue.top();
-    queue.pop();
-    if (t.val == end) cnt++;
-    if (cnt == k) return t.len;
-    for (int i = 0; i < n; i++) {
-      if (matrix[t.val][i] > 0 && dist[i] != INT_MAX) {
-        queue.push(Node(i, t.len + matrix[t.val][i], dist[i]));
-      }
-    }
-  }
-  return -1;
-}
-
-void ReadFromConsole() {
-  int n = 0;
-  int m = 0;
-  std::cin >> n >> m;
-  std::vector<std::vector<int> > matrix(n, std::vector<int>(n, 0));
-  std::vector<std::vector<int> > tmatrix(n, std::vector<int>(n, 0));
+void Read() {
+  int n, m;
+  scanf("%d%d", &n, &m);
+  getchar();
+  N = n;
+  NE = m;
+  memset(head, -1, sizeof(head));
+  memset(tail, -1, sizeof(tail));
   for (int i = 0; i < m; i++) {
-    int i1 = 0;
-    int i2 = 0;
-    int v = 0;
-    std::cin >> i1 >> i2 >> v;
-    matrix[i1 - 1][i2 - 1] = v;
-    tmatrix[i2 - 1][i1 - 1] = v;
+    int a, b, t;
+    scanf("%d%d%d", &a, &b, &t);
+    getchar();
+    E[(i << 1) + 0].v = b - 1;
+    E[(i << 1) + 0].c = t;
+    E[(i << 1) + 0].next = head[a - 1];
+    head[a - 1] = (i << 1) + 0;
+    
+    E[(i << 1) + 1].v = a - 1;
+    E[(i << 1) + 1].c = t;
+    E[(i << 1) + 1].next = tail[b - 1];
+    tail[b - 1] = (i << 1) + 1;
   }
-  int start = 0;
-  int end = 0;
-  int k = 0;
-  std::cin >> start >> end >> k;
-  std::cout << AStar(matrix, tmatrix, start - 1, end - 1, k);
+  scanf("%d%d%d", &S, &T, &K);
+  S -= 1;
+  T -= 1;
+  if (S == T) K++;
+  printf("%d\n", AStar());
 }
 
+}  // namespace bak
+
+
+// MLE
+namespace algorithm {
+const int MAXN = 1009;
+const int INF = 0x3f3f3f3f;
+int N = 0;
+
+int matrix[MAXN][MAXN];
+int tmatrix[MAXN][MAXN];
+
+int S = 0;
+int T = 0;
+int K = 0;
+
+int dis[MAXN];
+int vis[MAXN];
+int cnt[MAXN];
+
+void Dijkstra(int source) {
+  memset(vis, 0, sizeof(vis));
+  for (int i = 0; i < N; i++) {
+    if (i == source) dis[i] = 0;
+    else if (tmatrix[source][i] > 0) dis[i] = tmatrix[source][i];
+    else dis[i] = INF;
+  }
+  vis[source] = 1;
+  for (int k = 1; k < N; k++) {
+    int min = INF;
+    int idx = -1;
+    for (int i = 0; i < N; i++) {
+      if (vis[i] == 0 && dis[i] < min) {
+        min = dis[i];
+        idx = i;
+      }
+    }
+    if (idx == -1) break;
+    vis[idx] = 1;
+    for (int i = 0; i < N; i++) {
+      if (tmatrix[idx][i] > 0 && dis[i] > dis[idx] + tmatrix[idx][i]) {
+        dis[i] = dis[idx] + tmatrix[idx][i];
+      }
+    }
+  }
+}
+
+struct Node {
+  int u;
+  int val;
+  Node(int i_u, int i_val) : u(i_u), val(i_val) {}
+};
+
+bool operator < (const Node & x, const Node & y) {
+  return (x.val + dis[x.u]) < (y.val + dis[y.u]);
+}
+
+int AStar() {
+  memset(cnt, 0, sizeof(cnt));
+  Dijkstra(T);
+  std::priority_queue<Node> queue;
+  queue.push(Node(S, 0));
+  while (!queue.empty()) {
+    Node t = queue.top();
+    queue.pop();
+    cnt[t.u]++;
+    if (cnt[t.u] > K) continue;
+    if (cnt[T] == K) return t.val;  // 防止死循环
+    for (int i = 0; i < N; i++) {
+      if (matrix[t.u][i] > 0) {
+        queue.push(Node(i, t.val + matrix[t.u][i]));
+      }
+    }
+  }
+  return -1;
+}
+
+void Read() {
+  int n, m;
+  scanf("%d%d", &n, &m);
+  getchar();
+  N = n;
+  memset(matrix, 0, sizeof(matrix));
+  memset(tmatrix, 0, sizeof(tmatrix));
+  for (int i = 0; i < m; i++) {
+    int a, b, t;
+    scanf("%d%d%d", &a, &b, &t);
+    getchar();
+    matrix[a - 1][b - 1] = t;
+    tmatrix[b - 1][a - 1] = t;
+  }
+  scanf("%d%d%d", &S, &T, &K);
+  S -= 1;
+  T -= 1;
+  if (S == T) K++;
+  printf("%d\n", AStar());
+}
 }  // namespace algorithm
 
 using namespace algorithm;
 
-
 int main(int argc, char** argv) {
-  int n = 2;
-  std::vector<std::vector<int> > matrix(n, std::vector<int>(n, 0));
-  matrix[0][1] = 5;
-  matrix[1][0] = 4;
-  LOG(INFO) << AStar(matrix, 0, 1, 2);
-  ReadFromConsole();
+  FROMFILE;
+  NB::Read();
   return 0;
 }
