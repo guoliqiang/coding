@@ -12,6 +12,10 @@
  *
  * T , I do not know why?
  *
+ * 先找出第1短的，第二短的一定是在第一短的路径上出来的两外的某个分支，
+ * 因此只需要找出哪个分支到目标最短即可，对于目前从来没有经过的点，其到
+ * 目标的距离一定大于这个分支.
+ *
  * */
 
 #include "base/public/common_head.h"
@@ -64,6 +68,7 @@ int AStar(std::vector<std::vector<int> > & matrix, int start, int end, int k) {
   if (start == end) k++;  // for poj specified
   int n = matrix.size();
   std::vector<std::vector<int> > tmatrix(n, std::vector<int>(n, 0));
+  // 需要反向
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) tmatrix[i][j] = matrix[j][i];
   }
