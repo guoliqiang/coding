@@ -5,6 +5,12 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Given a sorted (increasing order) array, write an algorithm to create a binary tree with minimal height.
+ * 
+ * and or a sorted list.
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

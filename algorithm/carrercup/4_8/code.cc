@@ -4,7 +4,11 @@
 // Date  : 2013-10-04 00:37:54
 // File  : code.cc
 // Brief :
-
+/*
+ * You are given a binary tree in which each node contains a value.
+ * Design an algorithm to print all paths which sum up to that value.
+ * Note that it can be any path in the tree – it does not have to start at the root.
+ * */
 #include "base/public/common_head.h"
 
 namespace algorithm {

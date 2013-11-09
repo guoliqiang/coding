@@ -5,10 +5,58 @@
 // File  : code.cc
 // Brief :
 // 其实是bfs但没有用queue
+/*
+ * Given a binary search tree, design an algorithm which creates a linked list of all the nodes at 
+ * each depth (i.e., if you have a tree with depth D, you’ll have D linked lists).
+ * */
 
 #include "base/public/common_head.h"
 
+namespace NB {
+struct TreeNode {
+  int val;
+  TreeNode * left;
+  TreeNode * right;
+  TreeNode * next;
+};
+
+void ToList(std::vector<TreeNode *> & heads) {
+  TreeNode * foo = heads.back();
+  TreeNode * pre = NULL;
+  while (foo != NULL) {
+    if (foo->left != NULL) {
+      if(pre != NULL) {
+        pre->next = foo->left;
+      } else {
+        heads.push_back(foo->left);
+      }
+      pre = foo->left;
+    }
+
+    if (foo->right != NULL) {
+      if(pre != NULL) {
+        pre->next = foo->right;
+      } else {
+        heads.push_back(foo->right);
+      }
+      pre = foo->right;
+    }
+
+    foo = foo->next;
+  }
+  if (pre != NULL) ToList(heads);
+}
+
+std::vector<TreeNode *> ToList(TreeNode * root) {
+  std::vector<TreeNode*> heads;
+  heads.push_back(root);
+  ToList(heads);
+  return heads;
+}
+}  // namespace NB
+
 namespace algorithm {
+
 struct TreeNode {
   int val;
   TreeNode * left;

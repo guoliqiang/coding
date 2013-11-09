@@ -140,6 +140,7 @@ void LCA2Sub(Node<type> * root, Node<type> * a, Node<type> * b,
     m.insert(std::make_pair(l, root));
   }
   LCA2Sub(root->left, a, b, flag_a, flag_b, m, l);
+  if (*flag_a + *flag_b == 2) return;
   if (*flag_a + *flag_b == 1) {
     m.insert(std::make_pair(l, root));
   }
@@ -190,6 +191,7 @@ void Tarjan(Node<type> * root,
   if (root->left != NULL) {
     uf.Union(root, root->left, true);
   }
+
   Tarjan(root->right, query, uf, visited, rs);
   if (root->right != NULL) {
     uf.Union(root, root->right, true);

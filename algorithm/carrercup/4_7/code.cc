@@ -6,6 +6,9 @@
 // Brief :
 
 /*
+ * You have two very large binary trees: T1, with millions of nodes, and T2, with hundreds of nodes.
+ * Create an algorithm to decide if T2 is a subtree of T1
+ * 
  * http://hawstein.com/posts/4.7.html
  * 答案是暴力搜索，但我认为可以利用数的高度缩小以下搜索范围
  * 因为树多一层，节点最多可以增加上一层节点数的两倍，缩小一层

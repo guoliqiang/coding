@@ -4,10 +4,14 @@
 // Date  : 2013-10-03 21:12:53
 // File  : code.cc
 // Brief :
-
+/*
+ * Given a directed graph, design an algorithm to find out whether there is a route between two nodes.
+ * */
 #include "base/public/common_head.h"
 
 namespace algorithm {
+
+// deep first search
 bool DFS(std::vector<std::vector<int> > & adja,
          std::set<int> & visited,
          int from, int to) {
@@ -18,6 +22,25 @@ bool DFS(std::vector<std::vector<int> > & adja,
     if (adja[from][i] > 0 &&
         !visited.count(i) &&
         DFS(adja, visited, i, to)) return true; 
+  }
+  return false;
+}
+
+// brand first search
+bool BFS(std::vector<std::vector<int> > & adja, std::set<int> & visited, int from, int to) {
+  std::queue<int> queue;
+  queue.push(from);
+  visited.insert(from);
+  while (!queue.empty()) {
+    int t = queue.front();
+    queue.pop();
+    if (t == to) return true;
+    for (int i = 0; i < adja.size(); i++) {
+      if (adja[t][i] > 0 && !visited.count(i)) {
+        queue.push(i);
+        visited.insert(i);
+      }
+    }
   }
   return false;
 }
