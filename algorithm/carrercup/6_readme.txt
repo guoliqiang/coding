@@ -8,6 +8,8 @@ http://hawstein.com/posts/brain-teasers.html
   (3 + 1) / (3 / 6) =8
 
 6.2
+poj2411
+
 There is an 8x8 chess board in which two diagonally opposite corners have been cut
 off. You are given 31 dominos, and a single domino can cover exactly two squares.
 Can you use the 31 dominos to cover the entire board? Prove your answer (by provid-
@@ -107,7 +109,7 @@ Prove that your solution is correct.
 给你2个鸡蛋，设计方案找出N，并且保证在最坏情况下， 最小化鸡蛋下落的次数。
 
 
-  们先假设最坏情况下，鸡蛋下落次数为x，即我们为了找出N，一共用鸡蛋做了x次的实验。 那么，
+  我们先假设最坏情况下，鸡蛋下落次数为x，即我们为了找出N，一共用鸡蛋做了x次的实验。 那么，
   我们第一次应该在哪层楼往下扔鸡蛋呢？先让我们假设第一次是在第y层楼扔的鸡蛋， 如果第一
   个鸡蛋在第一次扔就碎了，我们就只剩下一个鸡蛋，要用它准确地找出N， 只能从第一层向上，一层
   一层的往上测试，直到它摔坏为止，答案就出来了。 由于第一个鸡蛋在第y层就摔破了， 所以最坏的
@@ -140,6 +142,10 @@ Prove that your solution is correct.
   The puzzle of eggs and floors
   http://www.usvishakh.net/umesh/p2.pdf
 
+  /*
+  假设已经存在一个最优查找序列，再在此序列下所有情况，最环的试探次数都是x.
+  */
+
 6.6
   There are one hundred closed lockers in a hallway. A man begins by opening all one
   hundred lockers. Next, he closes every second locker. Then he goes to every third
@@ -157,7 +163,11 @@ Prove that your solution is correct.
   那么第i把锁会被改变3次，分别是在第a，b，c次操作的时候。 这样一来，对于第i把锁，
   如果能被i整除的数有奇数个， 那么它最后的状态一定打开的，否则则是关闭的。
   问题就转换为1到100的数中， 哪些数能整除的数的个数有奇数个。而，一个数i如果能整除a， 那么它也可以整除i/a，
-  这样一来，一个数能整除的数总是成对出现， 为了使个数是奇数，这里面一定要有一对是相等的，即a = i/a，
+  这样一来，一个数能整除的数总是成对出现， 为了使个数是奇数，这里面一定要有一对是相等的(只能有一对)，即a = i/a，
   也就是：i = a2， 所以，最后开着的锁就是编号为完全平方数的锁，即：
   1, 4, 9, 16, 25, 36, 49, 64, 81, 100
   一共有10把锁是打开着的.
+
+  /*
+  约数个数是奇数的数。
+  */

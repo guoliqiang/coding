@@ -6,6 +6,15 @@
 // Brief :
 
 /*
+ * An array A[1…n] contains all the integers from 0 to n except for one number which is missing.
+ * In this problem, we cannot access an entire integer in A with a single operation.
+ * The elements of A are represented in binary, and the only operation we can use to access them
+ * is “fetch the jth bit of A[i]”, which takes constant time. Write code to find the missing integer.
+ * Can you do it in O(n) time?
+ *
+ * */
+
+/*
  * 来自于book的solution
  * */
 
@@ -18,7 +27,7 @@ bool Fetch(std::vector<int> & a, int i, int j) {
 }
 
 int FindMissing(std::vector<int> & a, int n) {
-  if (n == 32) return 0;
+  if (n == 32 || a.size() == 0) return 0;
   std::vector<int> odd;
   std::vector<int> even;
   for (int i = 0; i < a.size(); i++) {
@@ -26,9 +35,9 @@ int FindMissing(std::vector<int> & a, int n) {
     else even.push_back(a[i]);
   }
   if (odd.size() >= even.size()) {
-    return FindMissing(even, n + 1) << 1 | 0;
+    return FindMissing(even, n + 1) << 1 | 0;  // 缺的数在偶数中，所以用even递归
   } else {
-    return FindMissing(odd, n + 1) << 1 | 1;
+    return FindMissing(odd, n + 1) << 1 | 1;  // 缺的数在奇数中，所以用old递归
   }
 }
 

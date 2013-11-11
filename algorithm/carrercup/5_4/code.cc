@@ -5,6 +5,10 @@
 // File  : code.cc
 // Brief :
 /*
+ * Explain what the following code does: ((n & (n-1)) == 0).
+ *
+ * */
+/*
  * n & (n - 1)  == 0 when the 1 bit only one in n
  * else n & (n - 1) != 0
  * */

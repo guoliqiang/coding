@@ -13,6 +13,7 @@
 
 #include "base/public/common_head.h"
 
+// 增广路径是没有环的
 
 namespace algorithm {
 

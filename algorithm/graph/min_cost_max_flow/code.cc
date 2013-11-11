@@ -15,6 +15,7 @@ int N;
 int cost[MAX][MAX];
 int pre[MAX];
 int weight[MAX];
+int visited[MAX];  // 用于加速,避免队列中存在多个同一个点
 
 int MinCostMaxFlow(int source, int target, int * sum_cost) {
   int rs = 0;
@@ -26,21 +27,28 @@ int MinCostMaxFlow(int source, int target, int * sum_cost) {
   }
   /*
    * 在图上做DP
+   * 每次最小单位流量下的费用
    * */
   while (true) {
     for (int i = 0; i < N; i++) weight[i] = INT_MAX;
     memset(pre, 0, sizeof(pre));
+    memset(visited, 0, sizeof(visited));
     std::queue<int> queue;
     queue.push(source);
     weight[source] = 0;
+    visited[source] = 1;
     while (!queue.empty()) {
       int t = queue.front();
       queue.pop();
+      visited[t] = 0;  // 说明已经从队列中出来了
       for (int i = 0; i < N; i++) {
         if (flow[t][i] > 0 && weight[i] > weight[t] + cost[t][i]) {
           pre[i] = t;
-          queue.push(i);
           weight[i] = weight[t] + cost[t][i];
+          if (visited[i] == 0) {  // 若等于1，说明其还在队列中，不用加入
+            queue.push(i);
+            visited[i] = 1;
+          }
         }
       }
     }

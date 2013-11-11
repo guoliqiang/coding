@@ -6,6 +6,11 @@
 // Brief :
 
 /*
+ * Write a function to determine the number of bits required to convert integer A to integer B. Input: 31, 14 Output: 2
+ *
+ * */
+
+/*
  * 求解１的个数还有一个更快的方法
  * 见软连接中的文件
  * */

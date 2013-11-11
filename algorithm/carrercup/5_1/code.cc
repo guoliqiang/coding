@@ -6,10 +6,18 @@
 // Brief :
 
 /*
+ * You are given two 32-bit numbers, N and M, and two bit positions, i and j.
+ * Write a method to set all bits between i and j in N equal to M (e.g., M becomes
+ * a substring of N located at i and starting at j). EXAMPLE: Input:
+ * N = 10000000000, M = 10101, i = 2, j = 6 Output: N = 10001010100
+ *
+ * */
+
+/*
  * 一个有符号数，如果它的最高位为1，它右移若干位后到达位置i，
  * 那么最高位到第i位之间全是1.
  *
- * 个无符号数，如果它的最高位为1，它右移若干位后到达位置i，
+ * 一个无符号数，如果它的最高位为1，它右移若干位后到达位置i，
  * 那么最高位到第i位之间全是0
  *
  * http://hawstein.com/posts/5.1.html
@@ -23,7 +31,7 @@ void Convert(int m, int i, int j, int * n) {
    i = std::min(31, std::max(i, 0));
    j = std::min(31, std::max(j, 0));
    if (i > j) std::swap(i, j);
-   int t = (1 << j) + ((1 << j) - 1) -  ((1 << i) - 1);
+   int t = (1 << j) + ((1 << j) - 1) -  ((1 << i) - 1);  // 将int任意i～j之间的bit设置为1的方法, nb
    *n = (*n) ^ (t & (*n)) ^ (t & m);  // bug fixed
 }
 

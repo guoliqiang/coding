@@ -4,6 +4,11 @@
 // Date  : 2013-10-04 15:51:44
 // File  : code.cc
 // Brief :
+//
+/*
+ * Given an integer, print the next smallest and next largest number
+ * that have the same number of 1 bits in their binary representation.
+ * */
 
 #include "base/public/common_head.h"
 
