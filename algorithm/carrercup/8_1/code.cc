@@ -5,9 +5,9 @@
 // File  : code.cc
 // Brief :
 
-/*
+/*  Write a method to generate the nth Fibonacci number.
  * n = 50时　递归版本就很慢了，另fibonacci数很容易超出int的表示范围
- * 直接数学计算，其值等于catalan数　C(2n, n) / (n + 1)  Note: f(0) = 1 f(1) = 1 f(2) = 2
+ *
  * */
 
 #include "base/public/common_head.h"

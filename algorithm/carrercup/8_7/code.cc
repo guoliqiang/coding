@@ -6,6 +6,11 @@
 // Brief :
 
 /*
+ * Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5 cents) and pennies (1 cent), 
+ * write code to calculate the number of ways of representing n cents.
+ * */
+
+/*
  * dp[i][j]的定义与０－１背包问题不同
  * dp[i][j]:前ｊ个中价值正好等于ｉ
  * */

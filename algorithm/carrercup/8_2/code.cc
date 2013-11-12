@@ -5,6 +5,20 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Imagine a robot sitting on the upper left hand corner of an NxN grid.
+ * The robot can only move in two directions: right and down.
+ * How many possible paths are there for the robot?
+ * FOLLOW UP
+ * Imagine certain squares are “off limits”, such that the robot can not step on them.
+ * Design an algorithm to get all possible paths for the robot.
+ *
+ *
+ * 如果从ｎ＊ｎ的左下不跨越对角线走到右上，而且只能向左或向上移动，其不同路径数为catlan数.
+ * 左走相当于进栈，上走相当于出栈
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

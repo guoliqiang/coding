@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Write a method that returns all subsets of a set.
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -55,7 +60,7 @@ void Trace(std::vector<int> & v) {
 void Trace3(std::vector<int> & v) {
   int n = 1 << v.size();
   for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
+    for (int j = 0; j < v.size(); j++) {
       if ((i & 1 << j) != 0) std::cout << v[j] << " ";
     }
     std::cout << std::endl;

@@ -5,7 +5,9 @@
 // File  : code.cc
 // Brief :
 
-/*
+/* 
+ * Write a method to compute all permutations of a string.
+ *
  * 朴素思路的代码见：
  * http://hawstein.com/posts/8.4.html
  * 代码写的比较复杂了
