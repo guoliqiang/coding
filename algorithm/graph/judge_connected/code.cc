@@ -5,6 +5,19 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * 判断一个有向图是不是单向连通的（弱连通的） poj2762
+ * 1.找出多有强连通分量
+ * 2.缩点，即一个极大强连通分量一个图
+ * 3.缩点后的图一定是DAG(directed acyclic graph)有向无环图，如果此图中入度为０的点只有一个
+ * 　则原图是可能弱连通的，否则不是
+ * 4.对于入度为０的只有一个点的情况，在缩点后的图中，从此点开始DFS，看是否能够遍历到所有的点，
+ * 　如果是则原图才为弱连通图，这个步骤是为了剔除分叉的情况，在存在分叉的情况下，两个叉之间是
+ * 　无法到达的。
+ *
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -31,7 +44,7 @@ bool ConnectedUFind(std::vector<std::vector<int> > & matrix) {
       if (matrix[i][j] > 0) Merge(v, i, j);
     }
   }
-  int root = v[0];
+  int root = Find(v, 0);
   for (int i = 1; i < n; i++) {
     if (root != Find(v, i)) return false;
   }

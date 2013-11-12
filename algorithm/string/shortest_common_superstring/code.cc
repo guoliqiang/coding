@@ -13,10 +13,10 @@ void Next(std::string & pattern, std::vector<int> & next) {
   int n = pattern.size();
   next.resize(n, 0);
   next[0] = -1;
-  if (n == 1) return;
-  next[1] = 0;
-  int k = next[1];
-  for (int i = 1; i < n; i++) {
+  int i = 0;
+  int k = next[i];
+  while (i < n - 1) {
+  // for (int i = 1; i < n; i++) {
     while (k >= 0 && pattern[i] != pattern[k]) k = next[k];
     i++;
     k++;
@@ -62,7 +62,8 @@ int ShortestCommon(std::string & str1, std::string & str2) {
     t1 = len2;
     // LOG(INFO) << "find";
   } else {
-    if (i > 0) t1 = i;
+    // if (i > 0) t1 = i;
+    t1 = i;
   }
 
   // find str1 in str2;
@@ -70,7 +71,8 @@ int ShortestCommon(std::string & str1, std::string & str2) {
     t2 = len1;
     // LOG(INFO) << "find";
   } else {
-    if (i > 0) t2 = i;
+    // if (i > 0) t2 = i;
+    t2 = i;
   }
   LOG(INFO) << "t1:" << t1 << " t2:" << t2;
   return len1 + len2 - std::max(t1, t2);

@@ -1,0 +1,7 @@
+1
+5
+TCGG
+GCAG
+CCGC
+GATC
+ATCG

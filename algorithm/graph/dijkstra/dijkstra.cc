@@ -5,6 +5,20 @@
 // File  : dijkstra.cc
 // Brief :
 
+/*
+ * 相关问题：
+ * 1. 求出图中指定两点的最短路长度.(方法类似与求最大流的增广路径，基于一个stack)
+ * 2. 求出图中指定两点所有最短路径，最短路劲可能不只一条. （记录路径长度，回溯）
+ * 3. 在图上做DP问题，如最小费用流.
+ *
+ * leetcode 的wordladder问题
+ *
+ * 以上问题都基于队列，可以在寻找最短路上最DP
+ *
+ * 求出经过所有点一次的最短路是tsp问题；可以经过点任意次是floyd+tsp
+ *
+ * */
+
 #include "base/public/common_head.h"
 #include "../base/graph.h"
 

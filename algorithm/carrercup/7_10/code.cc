@@ -23,6 +23,7 @@ struct RefCount {
   int count;
 };
 
+// 浅拷贝的应用
 template <typename type>
 class SmartPtr {
  public:
@@ -37,7 +38,7 @@ class SmartPtr {
       delete ref_;
     }
   }
-
+  // 这是拷贝构造不用swap
   SmartPtr(const SmartPtr<type> & v) {
     object_ = v.object_;
     ref_ = v.ref_;
@@ -45,8 +46,8 @@ class SmartPtr {
   }
 
   SmartPtr<type> * operator = (const SmartPtr<type> & v) {
-    // 这个trick大大简化了代码
     if (object_ == v.object_) return this;
+    // 这个trick大大简化了代码, 通过调用tmp的析构函数实现
     {
       SmartPtr<type> tmp;
       Swap(this, &tmp);

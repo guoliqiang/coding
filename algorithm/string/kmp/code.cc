@@ -16,10 +16,10 @@ void Next(std::string & pattern, std::vector<int> & next) {
   int n = pattern.size();
   next.resize(n, 0);
   next[0] = -1;
-  if (n == 1) return;
-  next[1] = 0;
-  int k = next[1];
-  for (int i = 1; i < n; i++) {
+  int i = 0;
+  int k = next[i];
+  while (i < n - 1) {
+  // for (int i = 1; i < n; i++) {  // bug
     while (k >= 0 && pattern[i] != pattern[k]) 
       k = next[k];
     i++;

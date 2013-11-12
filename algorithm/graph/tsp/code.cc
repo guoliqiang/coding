@@ -49,7 +49,7 @@ int Hamilton() {
       if (dp[t.s + (1 << i)][i] == 0) dp[t.s + (1 << i)][i] = dp[t.s][t.i] + dis[t.i][i];
       else dp[t.s + (1 << i)][i] = std::min(dp[t.s + (1 << i)][i], dp[t.s][t.i] + dis[t.i][i]);
       // LOG(INFO) << "dp[" << (t.s + (1 << i)) <<"][" << i << "]" << dp[t.s + (1 << i)][i];
-      queue.push(Info(t.s + (1 << i), i));
+      if (t.s + (1 << i) != (1 << N) - 1) queue.push(Info(t.s + (1 << i), i));
     }
   }
   int res = INF;

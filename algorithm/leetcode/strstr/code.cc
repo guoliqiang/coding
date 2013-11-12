@@ -171,6 +171,7 @@ const char * KMP(const char * str, const char * pattern) {
 
 namespace twice {
 
+//　最简单写法
 void Next(const char * pattern, std::vector<int> &next) {
   int n = strlen(pattern);
   next.resize(n, 0);
@@ -223,6 +224,8 @@ const char * KMP(const char * str, const char * pattern) {
         }
         if (j == n) return &(str[i - n]);
     }
+    // 如果str的长度小于等于pattern的长度，ｊ最后的大小可以表示出
+    // str末尾与pattern开头有几个字符是匹配的
     return NULL;
 }
 }  // namespace twice
