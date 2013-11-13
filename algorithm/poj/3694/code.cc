@@ -6,6 +6,11 @@
 // Brief :
 // http://www.cnblogs.com/kakamilan/archive/2012/07/10/2583903.html
 
+/*
+ * Accepted 12180K  3235MS
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -42,7 +47,9 @@ void DFS(int deepth, int ifather, int cur) {
       }
     } else {
       // 因为有重边 重边算一条, 必须有 min
-      lowu[cur] = std::min(lowu[cur], dfn[t]);
+      // lowu[cur] = std::min(lowu[cur], dfn[t]);
+      lowu[cur] = std::min(lowu[cur], lowu[t]);
+      // 这两种都能accept
     }
   }
 }
@@ -87,7 +94,7 @@ void LCA(int x, int y) {
 }
 
 void ReadConsole() {
-  freopen("test.txt", "r", stdin);
+  // freopen("test.txt", "r", stdin);
   int num = 1;
   while (scanf("%d %d", &N, &M) == 2 && (M + N)) {
     sum = 0;
