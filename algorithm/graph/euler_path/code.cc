@@ -26,10 +26,13 @@
  * 现在的问题就变成了：我该改变哪些边，可以让每个点出 = 入？构造网络流模型。首先，有向边是不能改变方向的，
  * 要之无用，删。一开始不是把无向边定向了吗？定的是什么向，就把网络构建成什么样，边长容量上限1。另新建s(源点)和t(目的点)。
  * 对于入 > 出的点u，连接边(u, t)、容量为x，对于出 > 入的点v，连接边(s, v)，容量为x（注意对不同的点x不同）。之后，察看是
- * 否有满流的分配。有就是能有欧拉回路，没有就是没有。欧拉回路是哪个？查看流值分配，将所有流量非 0（上陂那么，没和s、t连接
- * 的点怎么办？和s连接的条件是出 > 入，和t连接的条件是入 > 出，那么这个既没和s也没和t连接的点，自然早在开始就已经满足入 = 出了。
- * 那么在网络流过程中，这些点属于“中间点”。我们知道中间点流量不允许有累积的，这样，进去多少就出来多少
+ * 否有满流的分配。有就是能有欧拉回路，没有就是没有。欧拉回路是哪个？查看流值分配，将所有流量非 0
+ * （上限是1，流值不是0就是1）的边反向，就能得到每点入度 = 出度的欧拉图。
  * 
+ * 由于是满流，所以每个入 > 出的点，都有x条边进来，将这些进来的边反向，OK，入 = 出了
+ * 。对于出 > 入的点亦然。那么，没和s、t连接的点怎么办？和s连接的条件是出 > 入，和t连接的条件是入 > 出，那么这个既没和s也没和t连接的点，
+ * 自然旱这样，混合图欧拉回路问题，解了。
+ *
  * .欧拉路径存在性的判定
  *
  * 一无向图
@@ -161,8 +164,19 @@ void DFS(std::vector<std::vector<int> > & matrix,
   }
 }
 
-// 弗罗莱(Fleury)算法
+// 弗罗莱(Fleury)算法(针对有向图或无向图，或经过处理后的混合图)
 // http://blog.163.com/zhoumhan_0351/blog/static/39954227200982051154725/
+// http://www.cnblogs.com/Lyush/archive/2013/04/22/3036659.html
+//    Fleury算法：
+//       任取v0∈V(G)，令P0=v0；
+//       设Pi=v0e1v1e2…ei vi已经行遍，按下面方法从中选取ei+1：
+//       （a）ei+1与vi相关联；
+//       （b）除非无别的边可供行遍，否则ei+1不应该为Gi=G-{e1,e2, …, ei}中的桥（所谓桥是一条删除后使连通图不再连通的边）；
+//       （c）当（b）不能再进行时，算法停止。
+//
+//
+// 实现时不用显示的找出各个桥边
+//
 void EulerSinglePath(std::vector<std::vector<int> > & matrix,
                      std::vector<int> & path, bool directed = true) {
   int n = matrix.size();
@@ -194,6 +208,10 @@ void EulerSinglePath(std::vector<std::vector<int> > & matrix,
   std::vector<std::vector<bool> > visited(n, std::vector<bool>(n, false));
   std::stack<int> stack;
   stack.push(b);
+  /*
+   * 如果先访问了割边，倒序输出时正好最后走桥，
+   * 如果就是最后访问割边，可以直接遍历完整个回路，倒序输出即可.
+   * */
   while (!stack.empty()) {
     int t = stack.top();
     int bridge = 1;
@@ -212,8 +230,25 @@ void EulerSinglePath(std::vector<std::vector<int> > & matrix,
   }
 }
 
+
 }//  namespace algorithm
 
+
+namespace NB {
+// poj 2337
+void Felury(std::vector<std::vector<int> > & matrix, int key,
+            std::vector<std::vector<int> > & visited,
+            std::stack<std::pair<int, int> > & stack) {
+  for (int i = 0; i < matrix.size(); i++) {
+    if (matrix[key][i] > 0 && visited[key][i] == 0) {
+      visited[key][i] = 1;
+      Felury(matrix, i, visited, stack);
+      stack.push(std::make_pair(key, i));
+    }
+  }
+}
+// stack保存的就是路径，栈顶的为第一个路径
+}  // namespace NB
 
 using namespace algorithm;
 

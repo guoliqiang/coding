@@ -1,0 +1,191 @@
+// Copyright 2013 Jike Inc. All Rights Reserved.
+// Author: Liqiang Guo(guoliqiang@jike.com)
+// I just want to GH to hss~
+// Date  : 2013-11-13 19:10:49
+// File  : code.cc
+// Brief :
+
+/*
+ * 单词作为边，节点是26个字符，这样的构图才是可以用
+ * 欧拉路来做的
+ *
+ * */
+
+#include "base/public/common_ojhead.h"
+
+namespace algorithm {
+const int MAXN = 30;
+const int MAXM = 1010;
+const int N = MAXN;
+int M = 0;
+int head[MAXN];
+int begin = 0;
+
+struct Edge {
+  int u;
+  int v;
+  int val;
+  int next;
+  int visited;
+} E[MAXM];
+
+int in[MAXN];
+int out[MAXN];
+int root[MAXN];
+
+std::string dict[MAXM];
+int result[MAXM];
+std::stack<int> stack;
+
+int find(int k) {
+  if (root[k] == k) return root[k];
+  return root[k] = find(root[k]);
+}
+
+void unit(int x, int y) {
+  int tx = find(x);
+  int ty = find(y);
+  root[tx] = root[ty];
+}
+
+
+bool Connect() {
+  for (int i = 0; i < N; i++) root[i] = i;
+  
+  for (int i = 0; i < N; i++) {
+    for (int j = head[i]; j != -1; j = E[j].next) {
+      int u = E[j].u;
+      int v = E[j].v;
+      unit(v, u);
+    }
+  }
+  
+  int r = -1;
+  for (int i = 0; i < N; i++) {
+    if (head[i] != -1) {
+      if (r == -1) r = find(i);
+      else if (r != find(i)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+void DFS(int k) {
+  for(int i = head[k]; i != -1; i = E[i].next) {
+    if (E[i].visited == 0) {
+      E[i].visited = 1;
+      stack.push(i);
+      DFS(E[i].v);
+    }
+  }
+}
+
+void Felury() {
+  int zero = 0;
+  int in_one = 0;
+  int out_one_idx = 0;
+  int out_one = 0;
+  int other = 0;
+  
+  for (int i = 0; i < N; i++) {
+    if (in[i] == out[i]) zero++;
+    else if (in[i] == out[i] + 1) {
+      in_one++;
+    } else if (in[i] + 1 == out[i]) {
+      out_one++;
+      out_one_idx = i;
+    } else {
+      other++;
+    }
+  }
+  if (other) {
+    printf("***\n");
+    return;
+  }
+  if (in_one == 0 && out_one == 0) {
+    out_one_idx = begin;
+  } else if (in_one == 1 && out_one == 1) {
+  } else {
+    printf("***\n");
+    return;
+  }
+  while (!stack.empty()) stack.pop();
+
+  int tail = 0;
+  int t = head[out_one_idx];
+  do {
+    int bridge = 1;
+    for (int i = t; i != -1; i = E[i].next) {
+      if (E[i].visited == 0) {
+        bridge = 0;
+      }
+    }
+    if (bridge == 0) {
+      DFS(E[t].u);
+    } else {
+      if (!stack.empty()) {
+        result[tail++] = stack.top();
+        stack.pop();
+      }
+    }
+    t = stack.empty() ? -1 : stack.top();
+  } while (!stack.empty());
+
+  for (int i = tail - 1; i > 0; i--) {
+    printf("%s.", dict[E[result[i]].val].c_str());
+  }
+  printf("%s\n", dict[E[result[0]].val].c_str());
+}
+
+void Read() {
+  int c = 0;
+  scanf("%d", &c);
+  getchar();
+  for (int i = 0; i < c; i++) {
+    int n = 0;
+    scanf("%d", &n);
+    getchar();
+    char temp[25];
+    for (int j = 0; j < n; j++) {
+      scanf("%s", temp);
+      dict[j] = std::string(temp);
+    }
+    std::sort(dict, dict + n);
+    memset(head, -1, sizeof(head));
+    memset(in, 0, sizeof(in));
+    memset(out, 0, sizeof(out));
+    memset(result, -1, sizeof(result));
+    int l = 0;
+    for (int j = n - 1; j >= 0; j--) {
+      int u = dict[j][0] - 'a';
+      int v = dict[j][dict[j].size() - 1] - 'a';
+      E[l].u = u;
+      E[l].v = v;
+      E[l].val = j;
+      E[l].visited = 0;
+      E[l].next = head[u];
+      head[u] = l++;
+      in[v]++;
+      out[u]++;
+      begin = head[u];
+    }
+    M = l;
+    if (!Connect()) {
+      printf("***\n");
+    } else {
+      Felury();
+    }
+  }
+}
+
+}  // namespace algorithm
+
+using namespace algorithm;
+
+int main(int argc, char** argv) {
+  FROMFILE;
+  Read();
+  return 0;
+}

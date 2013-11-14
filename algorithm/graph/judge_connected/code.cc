@@ -49,6 +49,14 @@ bool ConnectedUFind(std::vector<std::vector<int> > & matrix) {
     if (root != Find(v, i)) return false;
   }
   return true;
+  /*
+   * 另一种方式
+   * int cnt = 0;
+   * for (int i = 0; i < n; i++) {
+   *   if (i == FInd(v, i)) cnt++;
+   * }
+   * return cnt == 1;
+   * */
 }
 
 void ConnectedDFS(std::vector<std::vector<int> > & matrix,

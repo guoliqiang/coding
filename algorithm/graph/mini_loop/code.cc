@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * 基于floyd求最小环
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -32,8 +37,11 @@ void MiniLoop() {
   }
   int MIN = INF;
   for (int k = 0; k < N; k++) {
-    for (int i = 0; i < N; i++) {
-      for (int j = i + 1; j < N; j++) {
+    // 此时的dis[i][j]表示，ｉ到ｊ的最短路，但这个最短路中件的节点只能是[0, k -1] (k是当前轮迭代值)
+    
+    // 求环中最大点是k的最小环
+    for (int i = 0; i < k; i++) {
+      for (int j = i + 1; j < k; j++) {
         if (matrix[i][k] > 0 && matrix[k][j] > 0 && MIN > dis[i][j] + matrix[i][k] + matrix[k][j]) {
           MIN = dis[i][j] + matrix[i][k] + matrix[k][j];
           cnt = 0;
@@ -51,7 +59,7 @@ void MiniLoop() {
       for (int j = 0; j < N; j++) {
         if (dis[i][j] > dis[i][k] + dis[k][j]) {
           dis[i][j] = dis[i][k] + dis[k][j];
-          pre[i][j] = pre[k][j];
+          pre[i][j] = pre[k][j];  // 单源最短路，用数组保存path即可，进而floyd用数组保存即可
         }
       }
     }

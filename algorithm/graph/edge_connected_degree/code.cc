@@ -4,7 +4,7 @@
 // Date  : 2013-10-14 21:30:43
 // File  : code.cc
 // Brief :  TODO(guoliqiang) debug poj1966 一直ＷＡ
-// 最少去掉多少条边，能是图变得不连通
+// 最少去掉多少条边，能是图变得不连通 (可以看出：这样的图，如果存在桥边，结果就为1)
 // 边连通度  ==  最小割  == 最大流
 
 // 若G为无向图：
@@ -78,6 +78,7 @@ int EdgeConnectedDegree() {
   }
   int tmp = rs;
   // 循环删除边看是否回影响最大流
+  // 如果有影响，说明此点是割边
   memset(cut, 0, sizeof(cut));
   for (int i = 0; i < n && tmp; i++) {
     for (int j = 0; j < n && tmp; j++) {

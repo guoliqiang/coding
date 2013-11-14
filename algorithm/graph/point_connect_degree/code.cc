@@ -25,6 +25,10 @@
 // 2 ．指定一个源点 A" ，枚举汇点B'，求 A" 到 B' 的最大流 F ，
 //   　注意　Ａ'' B' 是说他们来自于不同的两个点
 
+/*
+ * 另外一个问题，一个图添加多少边后变的双向连通，见find_edge_point
+ * */
+
 #include "base/public/common_head.h"
 #include <stdio.h>
 namespace algorithm {

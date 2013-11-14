@@ -1,169 +1,108 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
 // I just want to GH to hss~
-// Date  : 2013-10-15 19:37:18
+// Date  : 2013-11-14 02:15:35
 // File  : code.cc
 // Brief :
-// WA
 
-#include "base/public/common_head.h"
+/*  Accepted  240K  47MS
+ * */
+
+#include "base/public/common_ojhead.h"
 
 namespace algorithm {
-const int MAX = 55;
+const int MAXN = 55 * 2;
 int N = 0;
-int M = 0;
-int matrix[MAX][MAX] = {{0}};
-int flow[MAX][MAX] = {{0}};
-int pre[MAX] = {0};
-int visited[MAX] = {0};
+int matrix[MAXN][MAXN];
+int flow[MAXN][MAXN];
+int pre[MAXN];
+int visited[MAXN];
 
-int MaxFlow(int source, int target) {
-  for (int i = 0; i < 2 *N; i++) {
-    for (int j = 0; j < 2 * N; j++) {
-      flow[i][j] = matrix[i][j];
-    }
+int MaxFlow(int s, int t) {
+  memset(flow, 0, sizeof(flow));
+  memset(pre, -1, sizeof(pre));
+  int n = N * 2;
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) flow[i][j] = matrix[i][j];
   }
   int rs = 0;
   while (true) {
-    memset(pre, 0, sizeof(pre));
     memset(visited, 0, sizeof(visited));
     std::queue<int> queue;
-    queue.push(source);
-    visited[source] = 1;
+    queue.push(s);
+    visited[s] = 1;
     while (!queue.empty()) {
-      int t = queue.front();
+      int cur = queue.front();
       queue.pop();
-      if (t == target) break;
-      for (int i = 0; i < 2 * N; i++) {
-        if (visited[i] == 0 && flow[t][i] > 0) {
+      if (cur == t) break;
+      for (int i = 0; i < n; i++) {
+        if (flow[cur][i] > 0 && visited[i] == 0) {
           visited[i] = 1;
-          pre[i] = t;
+          pre[i] = cur;
           queue.push(i);
         }
       }
     }
-    if (visited[target] == 0) break;
-    int min = INT_MAX;
-    for (int i = target; i != source; i = pre[i]) {
+    if (visited[t] == 0) break;
+    int min = INF;
+    for (int i = t; i != s; i = pre[i]) {
       min = std::min(min, flow[pre[i]][i]);
     }
-    for (int i = target; i != source; i = pre[i]) {
+    for (int i = t; i != s; i = pre[i]) {
       flow[pre[i]][i] -= min;
       flow[i][pre[i]] += min;
     }
-    if (rs != INT_MAX) {
-      if (min == INT_MAX) rs = INT_MAX;
-      else rs += min;
-    }
+    rs += min;
   }
   return rs;
 }
 
-void ReadFromConsole() {
-  freopen("test.txt", "r", stdin);
-  while(scanf("%d %d", &N, &M) != EOF) {
-    // LOG(INFO) << "N:" << N << " M :" << M;
-    if (N == 1 && M == 0) {
+
+void Read() {
+  int n, m;
+  while (scanf("%d %d*c", &n, &m) != EOF) {
+    if (n == 1 && m == 0) {
       printf("1\n");
       continue;
     }
-    if (M == 0) {
+    if (m == 0) {
       printf("0\n");
       continue;
     }
+    N = n;
     memset(matrix, 0, sizeof(matrix));
-    int source = -1;
-    for (int i = 0; i < M; i++) {
+    int source = 0;
+    for (int i = 0; i < m; i++) {
       while (getchar() != '(');
-      int x = 0;
-      int y = 0;
-      scanf("%d,%d", &x, &y);
-      matrix[x][N + x] = 1;
-      matrix[y][N + y] = 1;
-      matrix[N + x][y] = INT_MAX;
-      matrix[N + y][x] = INT_MAX;
-      if (source == -1) source = N + x;
+      int u, v;
+      scanf("%d,%d", &u, &v);
+      matrix[u][n + u] = matrix[v][n + v] = 1;
+      matrix[N + u][v] = matrix[N + v][u] = INF;
+      source = N + u;
     }
-    while (getchar() != '\n');
-    int min = INT_MAX;
+    getchar();
+    int flow = INF;
+    int target = 0;
     for (int i = 0; i < N; i++) {
       if (i + N == source) continue;
       int t = MaxFlow(source, i);
-      // LOG(INFO) << source << "~" << i << ":" << t;
-      min = std::min(min, t);
+      if (t < flow) {
+        flow = t;
+        target = i;
+      }
     }
-    if (min == INT_MAX) {
-      printf("%d\n", N);
-    } else {
-      printf("%d\n", min);
-    }
+    if (flow == INF) printf("%d\n", n);
+    else printf("%d\n", flow);
   }
 }
 
-// 并求出点割集合
-// 逐一删除某个点形成的边，最大流变小，次点为割点
-// http://yzmduncan.iteye.com/blog/1163170
-void ReadFromConsole2() {
-  freopen("test.txt", "r", stdin);
-  while(scanf("%d %d", &N, &M) != EOF) {
-    if (N == 1 && M == 0) {
-      printf("1\n");
-      continue;
-    }
-    if (M == 0) {
-      printf("0\n");
-      continue;
-    }
-    memset(matrix, 0, sizeof(matrix));
-    int source = -1;
-    for (int i = 0; i < M; i++) {
-      while (getchar() != '(');
-      int x = 0;
-      int y = 0;
-      scanf("%d,%d", &x, &y);
-      matrix[x][N + x] = 1;
-      matrix[y][N + y] = 1;
-      matrix[N + x][y] = INT_MAX;
-      matrix[N + y][x] = INT_MAX;
-      if (source == -1) source = N + x;
-    }
-    while (getchar() != '\n');
-    int min = INT_MAX;
-    int min_t = -1;
-    for (int i = 0; i < N; i++) {
-      if (i + N == source) continue;
-      int t = MaxFlow(source, i);
-      if (t < min) {
-        min_t = t;
-        min = t;
-      }
-    }
-    if (min == INT_MAX) {
-      printf("%d\n", N);
-    } else {
-      printf("%d\n", min);
-      for (int k = 0; k < N && min; k++) {
-        if (k == min_t || k == source - N) continue;
-        if (matrix[k][N + k] == 1) {
-          matrix[k][N + k] = 0;
-          int tmp = MaxFlow(source, min_t);
-          if (tmp < min) {
-            LOG(INFO) << "cut point " << k;
-            min--;
-          } else {
-            matrix[k][N + k] = 1;
-          }
-        }
-      }
-    }
-  }
-}
 }  // namespace algorithm
+
 
 using namespace algorithm;
 
-
 int main(int argc, char** argv) {
-  ReadFromConsole();
+  FROMFILE;
+  Read();
   return 0;
 }

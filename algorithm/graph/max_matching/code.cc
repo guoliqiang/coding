@@ -10,7 +10,7 @@
 namespace algorithm {
 
 static const int MAX = 100;    // 左右中最大的点个数
-bool matrix[MAX][MAX];  // 邻接矩阵
+bool matrix[MAX][MAX];  // 伪邻接矩阵，和通常的邻接矩阵不同matrix[i][i] 是有意义的：表示左边ith与右边ith有没有关系
 bool visited[MAX] = {false};
 int link_r[MAX] = {-1};  // out : right ->left
 int link_l[MAX] = {-1};  // out : left -> right
@@ -32,7 +32,8 @@ bool Search(int n) {
 int MaxMatch() {
   int rs = 0;
   for (int i = 0; i < MAX; i++) {
-    memset(visited, 0, sizeof(visited));
+    memset(visited, 0, sizeof(visited));  // 当前轮不能找已经找过的点
+    // if (link_l[i] != -1) continue;　　这个条件是不用判断的
     if (Search(i)) rs++;
   }
   return rs;
