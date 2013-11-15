@@ -37,22 +37,26 @@ namespace algorithm {
 const int MAX = 1000;
 int N = 0;
 int matrix[MAX][MAX];
-int order[MAX]; // order[i] 顶点i在完美序列中排在第几位
-int val[MAX];   // val[i]   完美序列中排在第i位的是哪个节点
+int order[MAX];
+int val[MAX];
+// order[i]     顶点i在完美序列中排在第几位
+// val[i]   完美序列中排在第i位的是哪个节点
 int num[MAX];
 
 void MSC() {
   memset(order, 0xff, sizeof(order));
   memset(val, 0xff, sizeof(val));
   memset(num, 0, sizeof(num));
-  for (int i = N - 1; i >= 0; i--) {
+  for (int i = N - 1; i >= 0; i--) {  // i 表示需要，不表示点，因为完美序列需要倒着找出来
     int j = 0;
-    while (order[j] >= 0) j++;
+    while (order[j] >= 0) j++;  // 找到一个在集合B中的点, 将j是点的编号
     for (int k = j + 1; k < N; k++) {
       if (order[k] == -1 && num[k] > num[j]) j = k;
     }
+    // 找到一个在集合B中，且与集合A中相邻最多的点j
     order[j] = i;
     val[i] = j;
+    // 更新相邻计数
     for (int k = 0; k < N; k++) {
       if (matrix[j][k] > 0) num[k]++;
     }
