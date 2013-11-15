@@ -8,7 +8,10 @@
 #ifndef  __UTIL_H_
 #define  __UTIL_H_
 
+#include <string>
+
 namespace base {
+
 template <class T>
 inline T max(const T & a, const T & b) {
   return (a > b) ? a : b;
@@ -25,6 +28,19 @@ inline void swap(T & a, T & b) {
   a ^= b;
   b ^= a;
   a ^= b;
+}
+
+template<class T>
+std::string ToBinary(T a) {
+  std::string rs = "";
+  int num = 0;
+  while (a) {
+    if (a & 1) rs.insert(rs.begin(), '1');
+    else rs.insert(rs.begin(), '0');
+    a >>= 1;
+    if ((++num) % 4 == 0) rs.insert(rs.begin(), ' ');
+  }
+  return rs;
 }
 
 };
