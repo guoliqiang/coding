@@ -1,65 +1,38 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
 // I just want to GH to hss~
-// Date  : 2013-11-15 02:47:12
+// Date  : 2013-11-14 22:46:03
 // File  : code.cc
 // Brief :
-
-/*
- *  还是TLE
- * */
 
 #include "base/public/common_ojhead.h"
 
 namespace algorithm {
-
 const int MAXN = 365 + 2 + 2 + 1000;
-
-int head[MAXN];
-int visited[MAXN];
-int pre[MAXN];
-int id[MAXN];
-int du[MAXN];
-
+int D = 0;
+int G = 0;
+// 0 ~ 999 : girl
+// 1000 ~ 1364 : day
+// 1365 : st
+// 1366 : sd
+// 1367 : sst
+// 1368 : ssd
 int st = 1365;
 int sd = 1366;
 int sst = 1367;
 int ssd = 1368;
 
-
-struct Node {
-  int v;
-  int f;
-  int next;
-  int down;
-  Node(int _v = 0, int _f = 0) : v(_v), f(_f){};
-} Edge[1000000];
-
-int tail = 0;
-std::vector<int> result;
-
-// 保证 0，1是一对边
-void Add(int u, int v, int c1, int c2, int d) {
-  Edge[tail].v = v;
-  Edge[tail].f = c1;
-  Edge[tail].next = head[u];
-  Edge[tail].down = d;
-  head[u] = tail++;
-
-  Edge[tail].v = u;
-  Edge[tail].f = c2;
-  Edge[tail].next = head[v];
-  Edge[tail].down = d;
-  head[v] = tail++;
-}
+int flow[MAXN][MAXN];
+int du[MAXN];
+int down[MAXN][MAXN];
+int visited[MAXN];
+int pre[MAXN];
 
 int MaxFlow(int source, int target) {
-  // LOG(INFO) << "source:" << source << " target:" << target;
   int rs = 0;
   while (true) {
     memset(visited, 0, sizeof(visited));
     memset(pre, 0, sizeof(pre));
-    memset(id, 0, sizeof(id));
     std::queue<int> queue;
     queue.push(source);
     visited[source] = 1;
@@ -67,25 +40,23 @@ int MaxFlow(int source, int target) {
       int cur = queue.front();
       queue.pop();
       if (cur == target) break;
-      for (int i = head[cur]; i != -1; i = Edge[i].next) {
-        int v = Edge[i].v;
-        if (Edge[i].f > 0 && visited[v] == 0) {
-          // LOG(INFO) << cur << "~" << v << " : " << Edge[i].f;
-          visited[v] = 1;
-          queue.push(v);
-          pre[v] = cur;
-          id[v] = i;
+      for (int i = 0; i < MAXN; i++) {
+        if (flow[cur][i] > 0 && visited[i] == 0) {
+          visited[i] = 1;
+          queue.push(i);
+          pre[i] = cur;
         }
       }
     }
+
     if (visited[target] == 0) break;
     int min = INF;
     for (int i = target; i != source; i = pre[i]) {
-      min = std::min(min, Edge[id[i]].f);
+      min = std::min(min, flow[pre[i]][i]);
     }
     for (int i = target; i != source; i = pre[i]) {
-      Edge[id[i]].f -= min;
-      Edge[id[i] ^ 1].f += min;
+      flow[pre[i]][i] -= min;
+      flow[i][pre[i]] += min;
     }
     rs += min;
   }
@@ -96,60 +67,59 @@ void Read() {
   int day, girl;
   while (scanf("%d%d", &day, &girl) != EOF) {
     getchar();
-    tail = 0;
-    memset(head, -1, sizeof(head));
+    D = day;
+    G = girl;
+    memset(flow, 0, sizeof(flow));
     memset(du, 0, sizeof(du));
-    result.clear();
+    memset(down, 0, sizeof(down));
     for (int i = 0; i < girl; i++) {
       int t = 0;
       scanf("%d", &t);
-      getchar();
-      // i女孩，最少拍t张，最多INF
-      Add(i, sd, INF - t, 0, t);
       du[sd] += t;
       du[i] -= t;
+      down[i][sd] = t;
+      flow[i][sd] = INF - t;  // i女孩，最少拍t张，最多INF
     }
     for (int i = 0; i < day; i++) {
       int n1, n2;
       scanf("%d%d", &n1, &n2);
       getchar();
-      Add(st, 1000 + i, n2, 0, 0); // 每天最多拍n2个，最少0个
-
+      flow[st][1000 + i] = n2;  // 每天最多拍n2个, 最少0个
       for (int j = 0; j < n1; j++) {
         int id, low, up;
         scanf("%d%d%d", &id, &low, &up);
         getchar();
-        Add(1000 + i, id, up - low, 0, low);
-        // id女孩第i天最多拍up张，最少拍low张
+        down[1000 + i][id] = low;
+        flow[1000 + i][id] = up - low;  // id女孩第i天最多拍up张，最少拍low张
         du[id] += low;
         du[1000 + i] -= low;
-        result.push_back(tail - 1);
       }
     }
-    Add(sd, st, INF, 0, 0);
+    flow[sd][st] = INF;
     int full = 0;
     for (int i = 0; i < MAXN; i++) {
       if (du[i] > 0) {
-        Add(sst, i, du[i], 0, 0);
+        flow[sst][i] = du[i];
         full += du[i];
-      } else if (du[i] < 0) {
-        Add(i, ssd, -du[i], 0, 0);
-      }
+      } else if (du[i] < 0) flow[i][ssd] = -du[i];
     }
     int t = MaxFlow(sst, ssd);
-    LOG(INFO) << "first:" << t;
     if (t != full) {
       printf("-1\n");
     } else {
+      flow[sd][st] = 0;
       t = MaxFlow(st, sd);
       printf("%d\n", t);
-      for (int j = 0; j < result.size(); j++) {
-        printf("%d\n", Edge[result[j]].f + Edge[result[j]].down);
+      for (int l1 = 0; l1 < day; l1++) {
+        for (int l2 = 0; l2 < girl; l2++) {
+          printf("%d\n", flow[l2][1000 + l1] + down[1000 + l1][l2]);
+        }
       }
     }
     printf("\n");
   }
 }
+
 }  // namespace algorithm
 
 using namespace algorithm;
