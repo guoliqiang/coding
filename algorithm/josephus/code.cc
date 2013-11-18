@@ -27,14 +27,36 @@ int Josephus(int n, int m, int k) {
   return (Josephus(n - 1, m, k - 1) + m) % n;
 }
 
+int JosephusLast(int n, int m) {
+  int r = 0;
+  for (int i = 1; i <= n; i++) {
+    r = (r + m) % i;
+  }
+  return r;
+}
+
+// 计算当前删除的元素处于当前串的第几个，从0开始编号
+// 当前删除的是第j个，则下一个删除的元素要往前循环移动m个
+//
+void JosephusSequence(int n, int m) {
+  int j = 0;
+  for (int i = 0; i < n; i++) {
+    j = (j + (m - 1)) % (n - i);
+    LOG(INFO) << j << " of " << (n - i);
+  }
+}
+
 }  // namespace algorithm
 
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
+  JosephusSequence(5, 2);
+  return 0;
   for (int i = 1; i <= 5; i++) {
     LOG(INFO) << Josephus(5, 2, i) + 1;
   }
+
   return 0;
 }

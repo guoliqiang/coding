@@ -21,6 +21,14 @@ int tag = 0;
 int cnt = 0;
 int stop = 0;
 
+int matrix2[MAX][MAX];
+int queue[MAX];
+int du[MAX];
+int tail = 0;
+int ans[MAX];
+int ans2[MAX];
+int other[MAX];
+
 void Tarjan(int k) {
   dfn[k] = low[k] = cnt++;
   stack[stop++] = k;
@@ -77,6 +85,51 @@ void Read(std::vector<std::vector<int> > & v) {
     for (int j = 0; j < N; j++) {
       matrix[i][j] = v[i][j];
     }
+  }
+}
+
+// 有问题
+void answer() {
+  memset(matrx2, 0, sizeof(matrix2));
+  memset(du, 0, sizeof(du));
+  memset(ans, 0, sizeof(ans));
+  memset(ans2, 0, sizeof(ans2));
+  memset(other, 0, sizeof(other));
+  for (int i = 0; i < N / 2; i++) {
+    other[id[i]] = id[N / 2 + i];
+    other[id[N / 2 + i]] = id[i];
+  }
+
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      if (matrix[i][j] <= 0) continue;
+      if(id[i] != id[j]) {
+        matrix2[id[i]][id[j]] = 1;
+        du[id[j]]++;
+      }
+    }
+  }
+  // toporder
+  for (int i = 0; i < tag; i++) {
+    if (du[i] == 0) queue[tail++] = i;
+  }
+  int k = 0;
+  while (k < tail) {
+    int t = queue[k++];
+    if (ans2[t] == 0) {
+      ans2[t] = 1;
+      ans2[other[t]] = -1; // 删除点，因为是按拓扑排序遍历的，省去了删除前驱的步骤
+    }
+    for (int j = 0; j < tag; j++) {
+      if (matrix2[t][j] > 0) {
+        du[j]--;
+        if (du[j] == 0) queue[tail++] = j;
+      }
+    }
+  }
+
+  for (int i = 0; i < N; i++) {
+    if (ans2[id[i]] == 1) ans[i] = 1;
   }
 }
 

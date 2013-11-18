@@ -5,6 +5,8 @@
 // File  : code.cc
 // Brief :
 
+// poj 1113
+
 /*
  * 给定平面上的一个点集，找出一个最小点集顺次连结形成一个凸多边形，使得点集中的点皆在此多边形内或
  * 此多边形上，这个凸多边形就是给定点集的二维凸包.
@@ -41,6 +43,12 @@
  *   / i
  *
  *
+ * 补充平面上任意多边形面积计算公式：
+ * http://blog.csdn.net/hemmingway/article/details/7814494
+ *
+ * 由于，是平面，z轴为0，因此其z轴上的长度就是两个向量叉积的长度,因为
+ * 此时的叉积的结果是垂直于平面的
+ *
  * */
 #include "base/public/common_head.h"
 #include "../base/base.h"
@@ -75,6 +83,25 @@ std::vector<Point> stack;
 // 向量c的大小为|a|*|b| * sin(a, b),方向符合右手法则
 // 
 // 可以更具c向量在z轴上的方向确定是不是左旋转
+//
+// 叉积计算公式
+// a = ax * i + ay * j + az * k
+// b = bx * i + by * j + bz * k
+//
+// x   y   z
+// ax  ay  az
+// bx  by  bz
+//
+// a 叉 b = (ay*bz - az*by) * i
+//         +(ax*bz - az*bx) * j
+//         +(ax*by - ay*bx) * k
+//
+// 右手法则：
+// 一个简单的确定满足“右手定则”的结果向量的方向的方法是这样的：若坐标系是满足右手定则的，
+// 当右手的四指从a以不超过180度的转角转向b时，竖起的大拇指指向是c的方向。
+//
+//  计算 a  - base 叉 b - base
+//  判断 base->b->a 是不是左旋转
 bool LeftRotate(const Point & a, const Point & b, const Point & base, int * rs = NULL) {
   int t = (a.x - base.x) * (b.y - base.y)  - (a.y - base.y) * (b.x - base.x);
   if (rs != NULL) *rs = t;
@@ -90,7 +117,7 @@ bool Cmp1(const Point & a, const Point & b) {
 // 极角相同时按p0px的长度排序
 bool Cmp2(const Point & a, const Point & b) {
   int cross = -1;
-  if (LeftRotate(a, b, stack[0], &cross)) return true;
+  if (LeftRotate(b, a, stack[0], &cross)) return true;
   if (cross == 0) return Distance(a, stack[0]) < Distance(b, stack[0]);
   return false;
 }
@@ -102,6 +129,7 @@ int Graham() {
   // 至少3个点才能组成一个多边形
   int top = 2;
   for (int i = 3; i < stack.size(); i++) {
+    // 如果top - 1, top, i, 是右旋转的，说明top点是不需要的
     while (top > 1 && !LeftRotate(stack[top], stack[i], stack[top - 1])) top--;
     stack[++top] = stack[i];
   }

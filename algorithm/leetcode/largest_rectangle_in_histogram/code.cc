@@ -53,7 +53,7 @@ int largestRectArea(vector<int> &h) {
     int i = 0, m = 0;
     h.push_back(0);
     // trick 末尾加0，最后一次循环不用写了
-    while(i < h.size()) {
+    while(i < h.size()) {  // 写成for的形式，要注意在else部分i-- 见poj3494
         if(p.empty() || h[p.top()] <= h[i])
             p.push(i++);
         else {
@@ -111,7 +111,7 @@ int Largest(std::vector<int> height) {
     int max = 0;
     std::stack<int> stack;
     int i = 0;
-    while (i < height.size()) {   // bug fixed
+    while (i < height.size()) {   // bug fixed, 注意写成for的形式有个trick需要注意，见poj3494
         if (stack.empty() || height[i] >= height[stack.top()]) {
             stack.push(i);
             i++;

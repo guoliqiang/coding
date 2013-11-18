@@ -30,6 +30,7 @@
 // 1. 先求凸包
 // 2. 再求凸包的直径
 
+// poj 3714
 #include "base/public/common_head.h"
 #include "../base/base.h"
 

@@ -1,0 +1,10 @@
+4 2
+Tom 2
+Jack 4
+Mary -1
+Sam 1
+4 2
+Tom 2
+Jack 4
+Mary -1
+Sam 1

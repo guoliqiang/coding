@@ -5,6 +5,10 @@
 // File  : code.cc
 // Brief :
 
+/*
+ *  poj3494
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -21,6 +25,7 @@ int MaxVec(std::vector<int> v) {
       stack.pop();
       int foo = stack.empty() ?  t * i : t * (i - stack.top() - 1);
       rs = std::max(rs, foo);
+      i--;  // bug fixed
     }
   }
   return rs;

@@ -39,6 +39,8 @@
 5. 垂心----垂线的交点, 计算公式如下：
    3 * (c / 2 / sqrt(1 - cosC * cosC))
 
+
+
  * */
 
 namespace algorithm {

@@ -6,6 +6,8 @@
 // Brief :
 //
 
+// poj 3518
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -73,12 +75,17 @@ std::vector<int> EratosthenesOpt(int n) {
   std::vector<bool> v(n, true);
   std::vector<int> rs;
   v[0] = v[1] = false;
+  // 这个循环还使用于每个素数都需要剔除起k倍的数
   for (int i = 2; i < n; i++) {
     if (v[i] == true) {
       rs.push_back(i);
     }
     for (int j = 0; j < rs.size(); j++) {
-      v[rs[j] * i] = false;
+      if (rs[j] * i < n) v[rs[j] * i] = false;
+      else break;
+      // 2 * 6 = 12, 12剔除， 3 * 6 = 18，18不是在这里剔除的，
+      // 是在2 * 9，也就是每个合数，是有起最小的素约数剔除的
+      // 18必然在扫描到i= 18前剔除，因为在i=9的时候就执行了
       if (i % rs[j] == 0) break;
     }
   }

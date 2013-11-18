@@ -86,7 +86,9 @@ bool Fibonnaci(int n) {  // n > 1
 }
 
 /*
+ * poj 1067
 威佐夫博奕（Wythoff Game）
+http://blog.sina.com.cn/s/blog_727d57100100ql6e.html
 http://blog.csdn.net/mdj67887500/article/details/2829898
 问题描述：有两堆各若干个物品，两个人轮流从某一堆或同时从两堆中取同样多的物品，规定每次至少取一个，多者不限，最后取光者得胜。
 这种情况下是颇为复杂的。我们用（ak，bk）（ak ≤ bk ,k=0，1，2，...,n)表示两堆物品的数量并称其为局势，如果甲面对(0,0)，
