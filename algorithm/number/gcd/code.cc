@@ -5,6 +5,7 @@
 // File  : code.cc
 // Brief : http://www.cppblog.com/superKiki/archive/2011/03/20/116785.html
 
+// poj3979
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -57,7 +58,7 @@ int kGcd(int x, int y) {
  *   
  *   若已经计算出a' * x' + b' * y' = gcd(a', b') (其中gcd(a', b') === gcd(a, b))
  *   b * x' + (a - a / b * b) * y' = gcd
- *   a * y' + b * (x' - a / b) * y' = gcd
+ *   a * y' + b * (x' - a / b * y') = gcd
  *   => x = y'  y = x' - a / b * y'
  *
  *   补充：关于使用扩展欧几里德算法解决不定方程的办法
@@ -123,7 +124,7 @@ int nLcm(std::vector<int> v) {
  *  4) 假设方程ax≡b(mod n)有解，x0是该方程的任意一个解，则该方程对模n恰好有d个不同的解，
  *     分别为：xi = x0 + i(n/d) (i=1,2,……,d-1).
  * */
-bool ModDeq(int a, int b, int n, int t) {
+bool ModDeq(int a, int b, int n, int &t) {
   t = Gcd(a, n);
   LOG(INFO) << "gcd:" << t;
   int foo = t;
@@ -134,7 +135,13 @@ bool ModDeq(int a, int b, int n, int t) {
     int x = 0;
     int y = 0;
     exGcd(a, n, x, y);
-    t = (x * (b / t)) % n;
+    /*
+     * 最小的非负t
+     */
+    int q = n / foo;
+    t = (x * (b / t) % q + q) % q;
+    
+    // 输出所有的值
     for (int i = 0; i < foo; i++) {
       LOG(INFO) << i << ":" << t + i * n / foo;
     }
@@ -158,7 +165,39 @@ bool ModDeq(int a, int b, int n, int t) {
  * 
  * 其实结果可以为上值  + k * (m1*m2*m3)
  *
- * 若m1 m2 m3不两两互素，无解，因为 假设m1, m3不互素， 则 gcd(m2 * m1, m3) == 1不成立
+ *
+ *
+ *
+ * 若m1 m2 m3不两两互素,只能一对一对求解,poj2891
+ *
+ * m '=' r1(%a1)
+ * m '=' r2(%a2)
+ * m '=' r3(%a3)
+ * .....
+ *
+ * 先考虑前两个
+ * m = r1 + a1*x1 
+ * m = r2 + a2*x2
+ *
+ * 代入
+ * r1 + a1 * x1 = r2 + a2 * x2
+ * ==>
+ * a1 * x1 = a2 * x2 + r2 - r1
+ * ==>
+ * a1 * x1 '=' (r2 - r1)(%a2)
+ * 
+ * 若(r2 - r1) % gcd(a1, a2) != 0 则无解
+ *
+ * 利用模线性方程方法可以得到x1,求得m = x1 * a1 + r1
+ *
+ * 令a1 = a1 * a2 / gcd(a1, a2)
+ *   r1 = m
+ * 
+ * 得到新的
+ * m '=' r1(%a1)
+ * 符合这个公式的m能同时满足前两个公式的要求，进而
+ * 用第三个式子代替第二个式子继续求解
+ *
  *
  * */
 
@@ -207,9 +246,10 @@ int main(int argc, char** argv) {
   LOG(INFO) << kGcd(16, 15);
   */
   int t = 0;
-  if (ModDeq(27, 6, 3, t)) {
+  if (ModDeq(3, 6, 27, t)) {
     LOG(INFO) << t;
   }
+  return 0;
   std::vector<int> m;
   std::vector<int> b;
   m.push_back(3);

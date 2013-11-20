@@ -15,7 +15,7 @@
  * 无论怎样翻转或旋转都不会变换成其它图。
  * 根据Burnside定理，等价类的个数（也就是不同染色的结果数，旋转或翻转后一样的图属于同一个等价类）
  * 等于：
- * sum(群中每个元素不动点个数)　／　群的大小
+ * sum(当前变换中不动点个数)　／　群的大小(==可以变换的种数)
  *
  *
  * polya定理进一步简化了上述计算步骤：
@@ -39,6 +39,7 @@ int gcd(int x, int y) {
   return y == 0 ? x : gcd(y, x % y);
 }
 
+// poj 1286
 int polya(int s, int c) {
   std::vector<long long int> p(s + 1, 0);
   // p[i] 存储 pow(c, i)
@@ -55,6 +56,7 @@ int polya(int s, int c) {
   // 　　　　　此时共s / 2 个
   // 　　　　　沿着平分多有点的对称线翻转：s /2
   // 　　　　　此时共 s / 2 个
+  // 此时循环节显然为 s/2 + 1, 因为对于abc,沿b与圆心连线翻转后的置换可能是这样的(ac)(b)
   long long count = s & 1 ? s * p[s / 2 + 1] :
                     s / 2 * (p[s / 2] + p[s / 2 + 1]);
   // LOG(INFO) << count;
