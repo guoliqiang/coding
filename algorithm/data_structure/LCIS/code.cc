@@ -7,6 +7,11 @@
 
 /*
  * 最长公共递增子序列（不是子串）
+ * hdu1423
+ *
+ * 子序列：可以不连续
+ * 子串：必须连续
+ *
  * */
 #include "base/public/common_head.h"
 

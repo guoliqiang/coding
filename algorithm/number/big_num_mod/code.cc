@@ -12,6 +12,7 @@ namespace algorithm {
 // Note: (m1 * m2) % n = ((m1 % n) * (m2 % n)) % n
 //       m1^m2 % n = ((m1 % n) ^ m2) % n 此题不用这个公式
 // http://baike.baidu.com/view/2385246.htm
+// 基于快速求幂算法
 
 long long int Mod(long long int a, long long int b, long long int c) {
   a %= c;

@@ -14,7 +14,8 @@
  * 查询：O(1)
  * 空间复杂度： O(n^2)
  *
- *
+ * 
+ * poj1330
  * 感觉tarjan更好写，比rmq更直接,rmq可以使用稀疏矩阵节约内存
  *
  * */
@@ -64,7 +65,11 @@ void DFS() {
   }
   memset(visited, 0, sizeof(visited));
   memset(lcs, 0xff, sizeof(lcs));
-  DFS(0);
+  DFS(0);  // 如果是有向图的话，输入要是一个入度为0的节点
+  // 如果图不保证连通
+  // for (int i = 0; i < N; i++) {
+  //   if (visited[i] == 0) DFS(i);
+  // }
 }
 
 int Get(int x, int y) {

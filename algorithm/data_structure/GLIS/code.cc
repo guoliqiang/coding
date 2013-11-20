@@ -79,8 +79,8 @@ int GLSI(std::vector<int> & v) {
   std::vector<int> dp(v.size(), 0);
   int size = 0;
   for (int i = 0; i < v.size(); i++) {
-    // int t = BsearchI(&dp[0], size, v[i]);  // 递增序列
-    // int t = BsearchEI(&dp[0], size, v[i]); // 不减序列
+    // int t = BsearchI(&dp[0], size, v[i]);  // 不减序列
+    // int t = BsearchEI(&dp[0], size, v[i]); // 递增序列
     // int t = BsearchED(&dp[0], size, v[i]);  // 递减序列
     int t = BsearchD(&dp[0], size, v[i]);      // 不增序列
     // LOG(INFO) << t;

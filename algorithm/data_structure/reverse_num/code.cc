@@ -5,6 +5,8 @@
 // File  : code.cc
 // Brief :
 
+// poj2299
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

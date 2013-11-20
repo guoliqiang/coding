@@ -93,6 +93,12 @@ S(p, k) = 0 when k == 0
 S(p, 2) = (2 ^ p - 2) / 2
 S(p, p - 1) = C(n, 2)
 
+// 在mod运算下 (TODO poj1430)
+// http://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Parity
+// http://blog.163.com/lyt9469@126/blog/static/1704423582011314113648213/
+s（n，k）=c（z，w）（mod 2） z=n-ceil（（k+1）/2）;   w=floor（（k-1）/2）;  ceil 向上取整，floor向下取整
+
+组合数C(N,K)为奇数当且仅当N and K=k.
 
 
 // bell数
@@ -137,3 +143,4 @@ S(p, p - 1) = C(n, 2)
    S1(p, 0) = 0
    S1(1, 1) = 1
 
+//

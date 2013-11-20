@@ -8,7 +8,7 @@
 #include "base/public/common_head.h"
 
 namespace algorithm {
-// 手动开平方根
+// 手动开平方根,求平方根整数部分
 // http://wenku.baidu.com/view/8e4088a7f524ccbff121845f
 std::string SqrtByHand(std::string & str) {
   int n = str.size();
@@ -76,12 +76,36 @@ void Sqrt(const char * str) {
   }
   std::cout << std::endl;
 }
+
+
+// 牛顿迭代法求平方根,返回的是准确的平方根
+// http://blog.csdn.net/dawnbreak/article/details/3308413
+// x = (x + n/x) / 2
+// 设r是f(x) = 0的根，选取x0作为r初始近似值，过点（x0,f(x0)）做曲线y = f(x)的切线L
+// L的方程为y = f(x0)+f'(x0)(x-x0)，求出L与x轴交点的横坐标 x1 = x0-f(x0)/f'(x0)，称x1为r的一次近似值。
+// 
+// 也可以这样理解：
+// x  > sqrt(n) 时，由于除以2的效果，其会被缩小
+// x  < sqrt(n) 时，由于加n/2的效果，其会被放大
+// x == sqrt(n) 时，其值不变
+//
+double Newton(double n) {
+  double rs = 1;
+  while (fabs(rs * rs - n) > 1e-9) {
+    rs = (rs + n / rs) / 2;
+  }
+  return rs;
+}
+
+// leetcode中利用二分查找搜索平方根整数部分
 }  // namespace algorithm
 
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
+  LOG(INFO) << Newton(2);
+  return 0;
   std::string str = "1156";
   // LOG(INFO) << str << ":" << SqrtByHand(str);
   str = "10000";

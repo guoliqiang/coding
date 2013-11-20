@@ -12,7 +12,7 @@ namespace algorithm {
 // 第二类stirling数
 // 把从1到p标号的p个球放到k个无区别的盒子里，要求每个盒子里至少有一个小球，
 // 问不同的放法？
-// S(p, k) = S(p - 1, k - 1) + k *S(p - 1a, k)
+// S(p, k) = S(p - 1, k - 1) + k *S(p - 1, k)
 int Stirling2(int n, int k) {
   if (k > n) return 0;
   std::vector<std::vector<int> > dp(n + 1, std::vector<int>(k + 1, 0));
@@ -45,6 +45,7 @@ void Stirling2(int n, int k, std::vector<std::vector<int> > & dp) {
   }
 }
 
+// poj1671
 // bell数的计算基于第二类stirling数
 // 基数为n的集合的划分方法的数目.
 // B(n) = sum(S(n, k))  (1<=k<=n)
@@ -61,7 +62,7 @@ int Bell(int n) {
 
 // 第一类stirling数
 // 将p个物体排成k个非空循环排列的方法数？
-// S(p, k) = S(p - 1, k - 1) + (p - 1) * (p - 1, k)
+// S(p, k) = S(p - 1, k - 1) + (p - 1) * S(p - 1, k)
 int Stirling(int n, int k) {
   if (k > n || n == 0) return 0;
   std::vector<std::vector<int> > dp(n + 1, std::vector<int>(k + 1, 0));

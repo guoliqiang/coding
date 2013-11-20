@@ -10,6 +10,7 @@
 
 namespace algorithm {
 
+// poj1401
 int ZeroNum(int n) {
   int rs = 0;
   while (n) {
@@ -19,12 +20,15 @@ int ZeroNum(int n) {
   return rs;
 }
 
+// poj1604
+
 // 5替换成1后阶乘的末尾
 int a[] = {1, 1, 2, 6, 4, 4, 4, 8, 4, 6};
 // 保留５的阶乘的末尾
 int b[] = {1, 1, 2, 6, 4, 2, 2, 4, 2, 8};
 // １～１0  11 ~ 20 21 ~ 30　．．．　中先把５的倍数提取了出来
 //　先算这些数的阶乘末尾值，由于其每个段需要提取出两个２出来和提取出来的５
+//  不用担心10中存留的2，这个会在递归中被考虑到。
 //　组成10, 可以看到 （（1 * 2 * 3 * 4 * 1 * 6 * 7 * 8 * 9） / 4） % 10 = 4
 // 　所以这些段，末尾值为　４　＊ 4 * 4 * 4  .. 
 //  (之所以除以4后余4，是因为由a知道，最末数为6，而这个阶乘是能被4整除的，所以结果一定是4, 或 9，而结果一定不是奇数，所以必然是4)
@@ -41,7 +45,7 @@ int Last(std::string str) {
   // LOG(INFO) << "str:" << str;
   int n = str.size();
   int tail = str[n - 1] - '0';
-  if (tail < 5) tail = a[tail];
+  if (tail < 5) tail = a[tail]; // or tail = b[tail]
   else {
     tail = b[tail];
   }

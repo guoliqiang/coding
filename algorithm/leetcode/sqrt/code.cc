@@ -13,6 +13,7 @@
  * Program Runtime: 44 milli secs
  * Progress: 1016/1016 test cases passed.
  *
+ * 如果是字符串存储的很大的数，只能是手动开平方根方法  见number/sqrt
  * */
 
 #include "base/public/common_head.h"
