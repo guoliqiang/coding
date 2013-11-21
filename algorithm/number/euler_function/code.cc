@@ -104,7 +104,8 @@ void BestEular() {
   }
 }
 
-//
+// 试除法
+// 效率低，但好写
 int SingleEular(int n) {
   int rs = n;
   for (int i = 2; i < (int) sqrt(n * 1.0) + 1; i++) {

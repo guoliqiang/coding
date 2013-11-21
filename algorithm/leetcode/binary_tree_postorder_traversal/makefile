@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/leetcode/4sum
+PROJ_NAME=algorithm/leetcode/binary_tree_postorder_traversal
 
 
 all:

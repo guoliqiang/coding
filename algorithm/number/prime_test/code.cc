@@ -31,9 +31,10 @@
 namespace algorithm {
 
 // 快速求解 (a * b) % n
-// 例如: b = 1011101 那么a * b mod n = (a * 1000000 mod n + a * 10000 mod n + a * 1000 mod n + a * 100 mod n + a * 1 mod n) mod n 
+// 例如: b = 1011101 
+// 那么a * b mod n = (a * 1000000 mod n + a * 10000 mod n + a * 1000 mod n + a * 100 mod n + a * 1 mod n) mod n 
 
-int Mod(int a, int b, int n) {
+int MultiMod(int a, int b, int n) {
   int tmp = 0;
   while (b) {
     if (b & 1) tmp = (tmp + a) % n;
@@ -46,11 +47,11 @@ int Mod(int a, int b, int n) {
 // 快速求解 (a ^ b) % n
 // b =110
 // (a^b) % n  = (a^(2^2) % n * a^(2^1) % n) %n
-int Mod2(int a, int b, int n) {
+int PowMod(int a, int b, int n) {
   int tmp = 1;
   while (b) {
-    if (b & 1) tmp = (tmp * a) % n;
-    a = (a * a) % n;
+    if (b & 1) tmp = MultiMod(a, tmp, n);
+    a = (a * a) % n; // 用快速的
     b >>= 1;
   }
   return tmp;
@@ -132,7 +133,7 @@ MR素数测试可以将费马小定理和MR工作结合起来使用，只有全�
 即如果2^(n -1) % n == 1,我们还可以验证2 ^((n - 1) / 2) % n 是不是等于1或n-1
 实现时是反过来进行的
 
-poj1811
+poj1811中的代码比较详细
 
  * */ 
 
@@ -149,13 +150,13 @@ namespace algorithm {
 bool Prime(int a, int n) {
   int t = 0;
   int u = n - 1;
-  while (u & 1 == 0) {
+  while ((u & 1) == 0) {
     t++;
     u >>= 1;
   }
-  int pre = (int)pow(a, u) % n;
+  int pre = PowMod(a, u, n);; // 不能使用系统的可能越界
   for (int i = 0; i < t; i++) {
-    int cur = (pre * pre) % n;
+    int cur = MultiMod(pre, pre, n);  // 可以使用上面的快速方法
     if (cur == 1 && pre != 1 && pre != n - 1) {  // 违反Miller和Rabin的工作
       return false;// 至少会被验证一次，最有一次
     }
