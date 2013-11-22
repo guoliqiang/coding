@@ -5,6 +5,26 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * A circus is designing a tower routine consisting of people standing atop one another’s shoulders.
+ * For practical and aesthetic reasons, each person must be both shorter and lighter than the person below him or her.
+ * Given the heights and weights of each person in the circus,
+ * write a method to compute the largest possible number of people in such a tower.
+ *
+ * EXAMPLE:
+ *
+ * Input (ht, wt群人往上叠，每个人都踩在另一个人的肩膀上。 要求上面的人要比
+ * 下面的人矮而且比下面的人轻。给出每个人的身高和体重， 写一个函数计算叠罗汉节目中最多可以叠多少人？
+ *
+ * 例子：
+ *
+ * 输入(身高 体重)：(65, 100) (70, 150) (56, 90) (75, 190) (60, 95) (68, 110)
+ *
+ * 输出：最多可叠人数：6 （从上到下是：(56, 90) (60,95) (65,100) (68,110) (70,150) (75,190)）
+ *
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -147,12 +167,13 @@ int LSI(std::vector<int> & v) {
       path = dp;
     }
   }
-  /*
+  // 输出一个结果
   for (int i = 1; i <= len; i++) {
-    std::cout << path[i] << " ";
+    std::cout << path[i] << "/" << dp[i] << " ";
   }
   std::cout << std::endl;
-  */
+  // 如果向输出所有的结果，需要在dp[b] = v[i];的时候不能覆盖之前的数
+  // 然后回溯方式寻找,这样可以减少回溯的范围
   return len;
 }
 
@@ -202,6 +223,7 @@ int LSI2(std::vector<int> & v) {
 
 
 
+// 求的是递增，输出时要反过来
 namespace algorithm {
 bool Cmp(const std::pair<int, int> & a1, const std::pair<int, int> & a2) {
   if (a1.first == a2.first) return a1.second < a2.second;
@@ -245,6 +267,7 @@ int main(int argc, char** argv) {
   v.push_back(9);
   v.push_back(10);
   v.push_back(12);
+  /*
   LOG(INFO) << BSearch1(v, 7);
   LOG(INFO) << BSearch1_1(v, 7);
   LOG(INFO) << BSearch2(v, 7);
@@ -255,7 +278,7 @@ int main(int argc, char** argv) {
   LOG(INFO) << BSearch2(v, 8);
   LOG(INFO) << BSearch3(v, 8);
   LOG(INFO) << BSearch4(v, 8);
-  
+  */
   v.clear();
   v.push_back(2);
   v.push_back(1);

@@ -5,8 +5,9 @@
 // File  : code.cc
 // Brief :
 
-/*  Write a method to generate the nth Fibonacci number.
- * n = 50时　递归版本就很慢了，另fibonacci数很容易超出int的表示范围
+/* Write a method to generate the nth Fibonacci number.
+ * n = 50 时　递归版本就很慢了，另fibonacci数很容易超出int的表示范围, 也是在n = 50左右时，
+ * 就会越界
  *
  * */
 
@@ -14,12 +15,14 @@
 
 namespace algorithm {
 
+// 递归版本
 int FibonacciR(int n) {
   if (n <= 0) return 0;
   if (n == 1|| n == 2) return 1;
   return FibonacciR(n - 1) + FibonacciR(n - 2);
 }
 
+// DP版本
 int FibonacciDP(int n) {
   if (n <= 0) return 0;
   if (n == 1 || n == 2) return 1;
@@ -39,9 +42,11 @@ std::vector<int> Multiply(std::vector<int> & v1, std::vector<int> &v2) {
   return rs;
 }
 
+// 快速版本
 int FibonacciBest(int n) {
   if (n <= 0) return 0;
   if (n == 1 || n == 2) return 1;
+  // note：rs初始化为单位矩阵
   std::vector<int> rs(4, 0);
   rs[0] = 1;
   rs[3] = 1;
@@ -49,7 +54,7 @@ int FibonacciBest(int n) {
   base[0] = base[1] = base[2] = 1;
   n -= 2;
   while (n) {
-    if (n % 2) rs = Multiply(rs, base);
+    if ((n & 1) == 1) rs = Multiply(rs, base);
     base = Multiply(base, base);
     n >>= 1;
   }
@@ -62,8 +67,8 @@ using namespace algorithm;
 
 
 int main(int argc, char** argv) {
-  int n = 50;
-  LOG(INFO) << FibonacciR(n);
+  int n = 48;
+  // LOG(INFO) << FibonacciR(n);
   LOG(INFO) << " " << FibonacciDP(n);
   LOG(INFO) << " " << FibonacciBest(n);
   return 0;

@@ -40,8 +40,9 @@ int BSearch2(int A[], int n, int t) {
              if (A[mid] > A[e] && t < A[mid]) e = mid - 1;
              else b = mid + 1;
            } else {
-              // wrong here
-              if (A[mid] <= A[e] && t > A[mid]) b = mid + 1;
+              // 分的类还不够详细
+              // A[mid] > A[e] && t <= A[e] 此时应该b = mid + 1
+              if (A[mid] <= A[e] && t > A[mid] && t <= A[e]) b = mid + 1;
               else e = mid - 1;
            }
         }

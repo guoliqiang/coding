@@ -5,6 +5,13 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * 原文：
+ * Write a method to sort an array of strings so that all the anagrams are next to each other.
+ * 译文：
+ * 写一个函数对字符串数组排序，使得所有的变位词都相邻。
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -30,12 +37,17 @@ void Sort(std::vector<std::string> & v) {
         flag = true;
       }
     }
+    i++;  // bug fixed, add this line
   }
 }
 }  // namespace algorithm
 
 namespace NB {
 
+// 不用担心出现"XMX" "YXX" "MXX"
+// 因为"XMX" "MXX"与"YXX"的比较一定是相同的
+// 所以其要么全在"YXX"的左侧，要么全在"YXX"的右侧
+//
 bool Cmp(std::string s1, std::string s2) {
   std::sort(s1.begin(), s1.end());
   std::sort(s2.begin(), s2.end());
@@ -54,16 +66,13 @@ using namespace algorithm;
 int main(int argc, char** argv) {
   std::vector<std::string> foo;
   foo.push_back("axyz");
-  foo.push_back("abc");
   foo.push_back("yzax");
   foo.push_back("bac");
   foo.push_back("zyxa");
-  foo.push_back("fg");
-  foo.push_back("gf");
   foo.push_back("a");
-  foo.push_back("ab");
-  // Sort(foo);
-  NB::Sort(foo);
+  foo.push_back("abc");
+  Sort(foo);
+  // NB::Sort(foo);
   LOG(INFO) << JoinVector(foo);
   return 0;
 }

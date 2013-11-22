@@ -8,6 +8,8 @@
 #ifndef  __BASE_H_
 #define  __BASE_H_
 
+#define ESP  0.00001
+
 namespace algorithm {
 struct Point {
   double x;
@@ -30,6 +32,11 @@ Point Add(const Point & a, const Point & b) {
 double Cross(const Point & a, const Point & b) {
   return a.x * b.y - a.y * b.x;
 }
+
+double Corss(const Point & a, const Point & b, const Point & c) {
+  return Cross(Sub(b, a), Sub(c, b));
+}
+
 }  // namespace algorithm
 
 #endif  // __BASE_H_

@@ -8,6 +8,8 @@
 /*
  *  Implement an algorithm to print all valid (e.g., properly opened and closed) combinations of n-pairs of parentheses. 
  *  EXAMPLE: input: 3 (e.g., 3 pairs of parentheses) output: ()()(), ()(()), (())(), ((()))
+ *
+ *  等于catlan数 C(2n, n) / (n + 1)
  * */
 
 #include "base/public/common_head.h"

@@ -8,6 +8,14 @@ m和n最小公倍数
    return q
 
 
+int gcd(int m, int n) {
+  if (!m) return n;
+  if (!n) return m;
+  return gcd(n, m % n);
+}
+// 最小公倍数:
+m * n / gcd(m, n)
+
 10.1
 You have a basketball hoop and someone says that you can play 1 of 2 games.
 Game #1: You get one shot to make the hoop.
@@ -49,6 +57,9 @@ Given two lines on a Cartesian plane, determine whether the two lines would inte
 和直线在y轴上的截距来表示直线的话， 这种情况怎么表示？接着是其它一般的情况，斜率不相等时，两
 直线相交， 但我们不能假设斜率是整数，如果是浮点数，表示两个数不相等是让它们作差， 然后它们的
 差大于一个足够小的数epsilon(一般为0.000001)。
+
+判断叉积是不是0，如果是0再判断是否重合，不重合则不相交
+// TODO guoliqiang 实现相关算法
 
 10.5
 

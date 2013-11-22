@@ -5,6 +5,14 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * 原文：
+ *
+ * Given a matrix in which each row and each column is sorted, write a method to find an element in it.
+ * 译文：
+ * 给出一个矩阵，其中每一行和每一列都是有序的，写一个函数在矩阵中找出指定的数。
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

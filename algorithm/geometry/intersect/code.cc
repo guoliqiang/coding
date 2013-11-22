@@ -10,8 +10,8 @@
 #include "../base/base.h"
 
 namespace algorithm {
-bool Inter(const Point & a, const Point & b,
-           const Point & c, const Point & d) {
+bool SegmentInter(const Point & a, const Point & b,
+                  const Point & c, const Point & d) {
   // 快速排斥实验
   if (std::min(a.x, b.x) > std::max(c.x, d.x) ||
       std::min(a.y, b.y) > std::max(c.y, d.y) ||
@@ -19,13 +19,24 @@ bool Inter(const Point & a, const Point & b,
       std::min(c.y, d.y) > std::max(a.y, b.y)) return false;
   // 跨立实验，也就是分别验证一个线段的两个点是不是分别处于
   // 另一条线段所在直线的两侧，基于叉积实现
-  // 如果处理两侧的话 a -> c -> b   a - >  d -> b 一个是左旋转，
+  // 如果处于两侧的话 a -> c -> b   a - >  d -> b 一个是左旋转，
   // 另一个是右旋转
   int h = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
   int i = (b.x - a.x) * (d.y - a.y) - (b.y - a.y) * (d.x - a.x);
   int j = (d.x - c.x) * (a.y - c.y) - (d.y - c.y) * (a.x - c.x);
   int k = (d.x - c.x) * (b.y - c.y) - (d.y - c.y) * (b.x - c.x);
   return h * i <= 0 && j * k <= 0;
+}
+
+bool LineInter(const Point & a, const Point & b,
+               const Point & c, const Point & d) {
+  double temp = Cross(Sub(a, b), Sub(c, d));
+  if (temp >= ESP) return true;
+  else {
+    double temp2 = Cross(Sub(b, a), Sub(c, b));
+    if (temp2 < ESP) return true;  // 重合
+    else return false;
+  }
 }
 }  // namespace algorithm
 

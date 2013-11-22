@@ -152,6 +152,26 @@ ListNode * MakeList(std::vector<int> & v) {
 
 }  // namespace algorithm
 
+namespace algorithm {
+class Cmp {
+ public:
+  bool operator ()(const int & a, const int & b) const {
+    // return a < b; // 最大堆
+    return a > b;  // 最小堆
+  }
+};
+
+void PriorityQ() {
+  std::priority_queue<int, std::vector<int>, Cmp> queue;
+  for (int i = 0; i < 10; i++) queue.push(i);
+  while (!queue.empty()) {
+    int t = queue.top();
+    queue.pop();
+    LOG(INFO) << t;
+  }
+}
+}  // namespace algorithm
+
 namespace twice {
 using namespace std;
 using namespace algorithm;
@@ -166,29 +186,31 @@ class Cmp{
 
 class Solution {
 public:
-    ListNode *mergeKLists(vector<ListNode *> &lists) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        ListNode * root = NULL;
-        ListNode ** tail = &root;
-        std::priority_queue<ListNode*, std::vector<ListNode*>, Cmp> queue;
-        for (int i = 0; i < lists.size(); i++) {
-            if (lists[i] != NULL) queue.push(lists[i]);
-        }
-        while (!queue.empty()) {
-            ListNode * t = queue.top();
-            queue.pop();
-            *tail = t;
-            tail = &((*tail)->next);
-            if (t->next != NULL) queue.push(t->next);
-        }
-        return root;
+  ListNode *mergeKLists(vector<ListNode *> &lists) {
+    // Note: The Solution object is instantiated only once and is reused by each test case.
+    ListNode * root = NULL;
+    ListNode ** tail = &root;
+    std::priority_queue<ListNode*, std::vector<ListNode*>, Cmp> queue;
+    for (int i = 0; i < lists.size(); i++) {
+      if (lists[i] != NULL) queue.push(lists[i]);
     }
+    while (!queue.empty()) {
+      ListNode * t = queue.top();
+      queue.pop();
+      *tail = t;
+      tail = &((*tail)->next);
+      if (t->next != NULL) queue.push(t->next);
+    }
+    return root;
+  }
 };
 }  // namespace twice
 
 using namespace algorithm;
 
 int main(int argc, char** argv) {
+  PriorityQ();
+  return 0;
   std::vector<ListNode*> foo;
   std::vector<int> v;
   v.clear();

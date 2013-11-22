@@ -6,8 +6,11 @@
 // Brief :
 
 /*
- * Write an algorithm to print all ways of arranging eight queens on a chess board so that none of them share the same row, column or diagonal.
- *
+ * Write an algorithm to print all ways of arranging eight queens on a chess board
+ * so that none of them share the same row, column or diagonal.
+ * 
+ * 比常见的回溯写法效率高，因为从一开始就确定出，每个皇后必然在不同的列上，一行只能
+ * 有一个皇后.
  * */
 
 #ifndef  __EIGHT_QUEUE_H_
@@ -56,6 +59,7 @@ int Queue() {
   return rs;
 }
 
+// best
 void TraceBack2(std::vector<int> & queue,
                 int n, int * rs) {
   if (n == 8) {

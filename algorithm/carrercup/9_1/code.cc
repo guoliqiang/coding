@@ -5,6 +5,13 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * 原文：
+ * You are given two sorted arrays, A and B, and A has a large enough buffer at the end to hold B. Write a method to merge B into A in sorted order.
+ * 译文：
+ * A和B是两个有序数组(假设为递增序列)，而且A的长度足以放下A和B中所有的元素， 写一个函数将数组B融入数组A，并使其有序。
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -27,9 +34,10 @@ void Merge(int * a, int m, int * b, int n) {
 // 平均感觉在n*log(n)
 void Merge2(int * a, int m, int * b, int n) {
   for (int i = 0; i < m; i++) {
-    if (a[i] > b[0]) {
+    if (a[i] > b[0]) {  // 只需要和b[0]比较即可
       std::swap(a[i], b[0]);
     }
+    // 保证交换后b仍然是有序的
     for (int i = 0; i < n - 1; i++) {
       if (b[i] > b[i + 1]) std::swap(b[i], b[i + 1]);
     }

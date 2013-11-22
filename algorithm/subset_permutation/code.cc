@@ -8,14 +8,15 @@
 #include "base/public/common_head.h"
 
 namespace algorithm {
+// 按顺序选，根据第一次选择分类.
 void UnrepeatCombination(std::vector<int> & num, std::vector<int> & used,
                          std::vector<int> & path, int k) {
   LOG(INFO) << JoinVector(path);  // Note 每次都输出
-  for (int i = k; i < num.size(); i++) {
-    if (used[i] > 0) {
+  for (int i = k; i < num.size(); i++) {  // 因为需要按次序选择，因此只能从i之后的开始选
+    if (used[i] > 0) {  // 如果某个元素重复了3次，结果中含有两个，这两个必然是前两个，不可能是后两个或第一与第三个
       used[i]--;
       path.push_back(num[i]);
-      UnrepeatCombination(num, used, path, i);
+      UnrepeatCombination(num, used, path, i);  // 因为i可能还有未被选择的元素，因此需要从i开始迭代
       path.pop_back();
       used[i]++;
     }
@@ -40,7 +41,7 @@ void UnrepeatCombination(std::vector<int> & num) {
 
 void UnrepeatPermutation(std::vector<int> & num, std::vector<int> & used,
                          std::vector<int> & path, int cnt, int sum) {
-  if (cnt == sum) {
+  if (cnt == sum) {  // path.size() == sum
     LOG(INFO) << JoinVector(path);
   }
   // 利用used标记是不是可以被选出来，所以不可能会有重复

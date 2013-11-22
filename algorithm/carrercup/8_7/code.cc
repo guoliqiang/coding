@@ -8,11 +8,13 @@
 /*
  * Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5 cents) and pennies (1 cent), 
  * write code to calculate the number of ways of representing n cents.
+ *
+ * 还可以求最少的硬币数量（DP）
  * */
 
 /*
  * dp[i][j]的定义与０－１背包问题不同
- * dp[i][j]:前ｊ个中价值正好等于ｉ
+ * dp[i][j]:前ｊ个中价值正好等于ｉ,背包问题是前i中重量不超过j的最大收益
  * */
 
 #include "base/public/common_head.h"
@@ -21,6 +23,9 @@ namespace NB {
 // 有序选择
 // 选完10后，不能选比10大的，只能选比10小的
 // http://hawstein.com/posts/8.7.html
+// 按数序选保证不重复，还可以增加剪枝操作
+
+// 不是那种依据dp结果进行Trace,而是DFS, subset
 void Trace(int n, std::vector<int> & cent, std::vector<int> & path, int k) {
   if (n == 0) {
     std::map<int, int> tmap;
