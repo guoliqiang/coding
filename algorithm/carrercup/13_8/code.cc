@@ -5,6 +5,12 @@
 // File  : code.cc
 // Brief :
 
+/*
+ *  Write a method that takes a pointer to a Node structure as a parameter and
+ *  returns a complete copy of the passed-in data structure.
+ *  The Node structure contains two pointers to other Node structures.
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -23,10 +29,19 @@ void Copy(Node * root, Node ** p) {
   Copy(root->a2, &((*p)->a2));
 }
 
+
 Node * Copy(Node * root) {
   Node * rs = NULL;
   Copy(root, &rs);
   return rs;
+}
+
+Node * Copy2(Node * root) {
+  if (root == NULL) return NULL;
+  Node * ptr = new Node(root->val);
+  ptr->a1 = Copy2(root->a1);
+  ptr->a2 = Copy2(root->a2);
+  return ptr;
 }
 }  // namespace algorithm
 

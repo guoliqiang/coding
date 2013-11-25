@@ -6,7 +6,8 @@ What is the significance of the keyword “volatile” in C?
 
 解答
 
-volatile的意思是"易变的"，因为访问寄存器比访问内存要快得多， 所以编译器一般都会做减少存取内存的优化。volatile 这个关键字会提醒编译器，它声明的变量随时可能发生变化(在外部被修改)， 因此，与该变量相关的代码不要进行编译优化，以免出错。
+volatile的意思是"易变的"，因为访问寄存器比访问内存要快得多， 所以编译器一般都会做减少存取内存的优化
+volatile 这个关键字会提醒编译器，它声明的变量随时可能发生变化(在外部被修改)， 因此，与该变量相关的代码不要进行编译优化，以免出错。
 
 声明一个volatile变量：
 
@@ -23,7 +24,9 @@ int* volatile x;
 
 volatile int * volatile x;
 int volatile * volatile x;
-volatile在声明上的使用和const是一样的。volatile在*号左边， 修饰的是指针所指物；在*号右边修饰的是指针。
+volatile在声明上的使用和const是一样的。
+// Note:
+volatile在*号左边， 修饰的是指针所指物；在*号右边修饰的是指针。
 
 用volatile修饰的变量相关的代码不会被编译器优化，那么它有什么好处呢？ 来看下面的例子：
 
@@ -47,3 +50,4 @@ void Fn(void){
 
 http://blog.csdn.net/tigerjibo/article/details/7427366
 
+// const 函数可以修改类成员变量的关键字是mutable，不要搞混。

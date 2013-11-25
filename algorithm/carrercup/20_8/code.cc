@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Given a string s and an array of smaller strings T, design a method to search s for each small string in T.
+ * AC自动机
+ * */
+
 // http://www.cs.uku.fi/~kilpelai/BSA05/lectures/slides04.pdf
 // 时间复杂度为：O(m+kn+z)
 // 其中：m是目标串S的长度，k是模式串个数，n是模式串平均长度，z是S 中出现的模式串数量
@@ -33,7 +38,7 @@ void Build(const std::string & word, int i, Node * root) {
 }
 
 Node * Build(std::set<std::string> words) {
-  Node * root = new Node();
+  Node * root = new Node(); // 虚拟根节点
   for (std::set<std::string>::iterator i = words.begin();
        i != words.end(); i++) {
     if ((*i).size() != 0) Build(*i, 0, root);

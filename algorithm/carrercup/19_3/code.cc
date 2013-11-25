@@ -5,6 +5,10 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Write an algorithm which computes the number of trailing zeros in n factorial.
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -50,12 +54,22 @@ int ZeroNum2(int n) {
   return n / 5 + ZeroNum2(n / 5);
 }
 
+// 自己常写的形式
+int ZeroNum3(int n) {
+  int rs = 0;
+  while (n) {
+    n /= 5;
+    rs += n;
+  }
+  return rs;
+}
+
 }  // namespace NB
 
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
-  LOG(INFO) << ZeroNum(100) << " " << NB::ZeroNum(100) << " " << NB::ZeroNum2(100);
+  LOG(INFO) << ZeroNum(100) << " " << NB::ZeroNum(100) << " " << NB::ZeroNum2(100) << " " << NB::ZeroNum3(100);
   return 0;
 }

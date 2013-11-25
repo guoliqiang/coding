@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Numbers are randomly generated and passed to a method.
+ * Write a program to find and maintain the median value as new values are generated.
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -53,8 +58,8 @@ namespace NB {
 // NB http://hawstein.com/posts/20.9.html
 // http://www.cnblogs.com/flyoung2008/articles/2136485.html
 // priority queue是基于heap实现的
-std::priority_queue<int, std::vector<int>, std::less<int> > left_heap;
-std::priority_queue<int, std::vector<int>, std::greater<int> > right_heap;
+std::priority_queue<int, std::vector<int>, std::less<int> > left_heap;  // 最大堆
+std::priority_queue<int, std::vector<int>, std::greater<int> > right_heap;  // 最小堆
 
 double Median(int v) {
   if (left_heap.size() == 0) left_heap.push(v);

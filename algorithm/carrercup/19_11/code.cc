@@ -5,11 +5,16 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Design an algorithm to find all pairs of integers within an array which sum to a specified value.
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
 
-// O(n * log(n))
+// O(n * log(n)), 因为需要先排序
 // O(1)
 std::vector<std::pair<int, int> > Find(std::vector<int> v, int k) {
   std::sort(v.begin(), v.end());

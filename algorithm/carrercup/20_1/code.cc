@@ -5,10 +5,17 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Write a function that adds two numbers. You should not use + or any arithmetic operators.
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
 
+// 递归版本好写
+// a, b 可以是负数
 int Add(int a, int b) {
   if (b == 0) return a;
   int t = a ^ b;
@@ -16,6 +23,15 @@ int Add(int a, int b) {
   return Add(t, c);
 }
 
+int Add2(int a, int b) {
+  int rs = a ^ b;
+  int c = (a & b) << 1;
+  while (c) {
+    rs ^= c;
+    c = (rs & c) << 1;
+  }
+  return rs;
+}
 }  // namespace algorithm
 
 namespace NB {
@@ -33,7 +49,7 @@ namespace NB {
  *
  * */
 int Add(int a, int b) {
-  char * p = reinterpret_cast<char *>(a);
+  char * p = reinterpret_cast<char *>(a);  // 因为sizeof(char) = 1
   return (long)(&(p[b]));
 }
 

@@ -6,6 +6,11 @@
 // Brief :
 
 /*
+ * Design a method to find the frequency of occurrences of any given word in a book.
+ *
+ * */
+
+/*
  * 这道题目和19.2是一个思路。如果只需要查询一次， 那就直接做；如果要多次查询，而且
  * 要查询各种不同的单词，那就先预处理一遍， 接下来就只需要用O(1)的时间进行查询。
  *

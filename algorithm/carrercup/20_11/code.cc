@@ -5,6 +5,16 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Imagine you have a square matrix, where each cell is filled with either black or white.
+ * Design an algorithm to find the maximum subsquare such that all four borders are filled with black pixels.
+ * 注意：只是限定了4个边，并未对矩形内元素的值做限定. 暴力搜索+剪枝
+ * 
+ * 如果求4个边是1，矩形内是0的最大矩形呢？ 使用类似于最大1矩阵的方法,需要存储
+ * 当前位置以上连续的1和0的行数
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace wrong {

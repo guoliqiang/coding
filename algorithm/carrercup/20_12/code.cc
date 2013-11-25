@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Given an NxN matrix of positive and negative integers,
+ * write code to find the submatrix with the largest possible sum. 
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -37,6 +42,9 @@ int MaxMatrix(std::vector<std::vector<int> > & v) {
   }
   return max;
 }
+
+// TODO: guoliqiang
+// 用树形数组计算A[0][0]~A[i][j]的值 log(n), 但是没有下面的方法快
 
 }  // namespace algorithm
 

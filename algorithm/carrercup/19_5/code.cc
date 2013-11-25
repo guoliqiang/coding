@@ -5,6 +5,23 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * The Game of Master Mind is played as follows:
+ *
+ * The computer has four slots containing balls that are red (R ), yellow (Y), 
+ * green (G) or blue (B). For example, the computer might have RGGB (e.g., 
+ * Slot #1 is red, Slots #2 and #3 are green, Slot #4 is blue).
+ *
+ * You, the user, are trying to guess the solution. You might, for example, guess YRGB.
+ * When you guess the correct color for the correct slot, you get a “hit”.
+ * If you guess returns the number of hits and pseudo hits.
+ * For example, the guess YRGB has 2 hits and one pseudo hit.
+ *
+ * For each guess, you are told the number of hits and pseudo-hits. 
+ * Write a method that, given a guess and a solution, returns the number of hits and pseudo hits.
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -22,6 +39,23 @@ std::pair<int, int> Hint(std::string & guss, std::string & solution) {
         }
       }
     }
+  }
+  return rs;
+}
+
+/*
+ * 思想很好，利用bitset快速判断
+ * */
+
+std::pair<int, int> HintFast(std::string & guss, std::string & solution) {
+  int mask = 0;
+  for (int i = 0; i < solution.size(); i++) {
+    mask |= 1 << (solution[i] - 'A');
+  }
+  std::pair<int, int> rs = std::make_pair(0, 0);
+  for (int i = 0; i < guss.size(); i++) {
+    if (guss[i] == solution[i]) rs.first++;
+    else if (mask & (1 << (guss[i] - 'A'))) rs.second++;
   }
   return rs;
 }

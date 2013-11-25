@@ -5,13 +5,24 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Describe an algorithm to find the largest 1 million numbers in 1 billion numbers. 
+ * Assume that the computer memory can hold all one billion numbers.
+ *
+ * 因为可以全部载入内存，所以可以用快速排序的思想来做，O(n)的时间复杂度.
+ *
+ * 如果是海量数据，基于一个大小为m的堆，时间复杂度为O(n * log(m))
+ * */
+
 #include "base/public/common_head.h"
 
 namespace NB {
 
-/* *期望*时间负载度O(n),需要改变输入数组元素的位置
- * 
+/* *期望*时间负载度O(n),(O(n)时间复杂度证明见:http://blog.csdn.net/v_JULY_v/article/details/6370650)
+ * 需要改变输入数组元素的位置
+ *  
  * 基于快速排序分划的想法
+ *
  * */
 void TopMinK(std::vector<int> &v, int b, int e, int k) {
   if (e - b + 1 <= k) return;

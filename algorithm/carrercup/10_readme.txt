@@ -40,7 +40,9 @@ There are three ants on different vertices of a triangle. What is the probabilit
 (between any two or all of them) if they start walking on the sides of the triangle?
 Similarly find the probability of collision with ‘n’ ants on an ‘n’ vertex polygon.
 
-首先，题目中没有提到蚂蚁运动的速度，所以认为它们的速度一样， 不会发生一只蚂蚁追上另一只蚂蚁的情况(面试时可以向面试官确认一下)。 对于任何1只蚂蚁，它有2条边可以选择来走。不会发生冲突的情况是， 所有的蚂蚁都顺时针走或是逆时针走，剩下的情况都是会冲突的。所以，冲突的概率为：
+首先，题目中没有提到蚂蚁运动的速度，所以认为它们的速度一样， 不会发生一只蚂蚁追上另一只蚂蚁的情况
+(面试时可以向面试官确认一下)。 对于任何1只蚂蚁，它有2条边可以选择来走。不会发生冲突的情况是， 所有
+的蚂蚁都顺时针走或是逆时针走，剩下的情况都是会冲突的。所以，冲突的概率为：
 
 p = 1 - 2 * (1/2)^3 = 3/4
 对于n只蚂蚁在n边形上，道理是一样的：

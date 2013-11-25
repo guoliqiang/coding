@@ -70,17 +70,17 @@ Semaphore s_a(0);
 Semaphore s_b(0);
 Semaphore s_c(1);  // 这个太trick了
 A {
-    s_c.acquire(1);
-    /***/
-    s_a.release(1);
+    s_c.acquire(1);  // c--
+    /***/ 
+    s_a.release(1);  // a++
 }
 B {
-    s_a.acquire(1);
+    s_a.acquire(1);  // a--
     /****/
-    s_b.release(1);
+    s_b.release(1);  // b++
 }
 C {
-    s_b.acquire(1);
+    s_b.acquire(1); // b--
     /******/
-    s_c.release(1);
+    s_c.release(1); // c++
 }

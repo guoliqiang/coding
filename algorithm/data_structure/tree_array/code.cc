@@ -9,6 +9,8 @@
  * 树状数组，以log(n)的负载度维护一个A[1] ~ A[k]的查询与修改
  * 额外空间为n，如果使用完全二叉树维护的话，额外空间的消耗为2*n
  * http://www.java3z.com/cwbwebhome/article/article1/1369.html?id=4804
+ *
+ * 注意数组下边要从1开始
  * */
 
 #include "base/public/common_head.h"

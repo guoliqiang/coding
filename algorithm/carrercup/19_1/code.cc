@@ -5,9 +5,15 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Write a function to swap a number in place without temporary variables.
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
+
+// 必须有if判断，否则交换同一个变量会出错
 
 template<typename T>
 void Swap(T & a, T & b) {
@@ -23,6 +29,12 @@ void Swap2(T & a, T & b) {
   b = a - b;
   a = a - b;
   b = a + b;
+  /*  or
+   *  a = a - b;
+   *  b = a + b;
+   *  a = b - a;
+   *
+   * */
 }
 
 }  // namespace algorithm

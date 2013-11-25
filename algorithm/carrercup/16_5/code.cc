@@ -11,7 +11,7 @@
 // 端（Big-End）剥开还是小的一端（Little-End）剥开而争论，争论的双方分别被称为
 // Big-endians和Little-endians。
 //
-// 可以理解为从内存底地址往高低值走，先遇到的是数据的高位（大端）还是地位（小端）
+// 可以理解为从内存底地址往高低值走，先遇到的是数据的高位（大端）还是底位（小端）
 
 #include "base/public/common_head.h"
 

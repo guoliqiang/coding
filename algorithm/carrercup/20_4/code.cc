@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Write a method to count the number of 2s between 0 and n.
+ *
+ * */
+
 #include "base/public/logging.h"
 #include <math.h>
 
@@ -76,7 +81,7 @@ using namespace algorithm;
 
 
 int main(int argc, char** argv) {
-  int n = 999;
+  int n = 899;
   LOG(INFO) << TwoNum(n) << " " << TwoNumFool(n) << " " << NB::Num(n, 2);
   return 0;
 }

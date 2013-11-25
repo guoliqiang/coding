@@ -105,12 +105,13 @@ void Next(const char * pattern, std::vector<int> & next) {
   if (size > 1) {
     int k = next[0];
     int i = 0;
-    while (i < size) {
+    while (i < size) {  // 不能用for
       while (k >=0 && pattern[k] != pattern[i]){
         k = next[k];
       }
       k++;
       i++;
+      if (i == size) break; // bug fixed
       if (pattern[i] == pattern[k]) next[i] = next[k];
       else next[i] = k;
     }
@@ -178,7 +179,7 @@ void Next(const char * pattern, std::vector<int> &next) {
   next[0] = -1;
   int i = 0;
   int t = next[i];  // 必须在while循环外定义，否则优化时，如果有个值是-1，就出错了
-  while(i < n - 1) {
+  while(i < n - 1) {  // note : n- 1  or add break
       while (t >= 0 && pattern[t] != pattern[i]) t = next[t];
       t++;
       i++;
@@ -186,7 +187,8 @@ void Next(const char * pattern, std::vector<int> &next) {
       else next[i] = t; 
    }
 }
-void Next(const char * pattern, std::vector<int> &next) {
+
+void NextOp(const char * pattern, std::vector<int> &next) {
   int n = strlen(pattern);
   next.resize(n, 0);
   next[0] = -1;

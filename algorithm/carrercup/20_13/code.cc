@@ -5,6 +5,13 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Given a dictionary of millions of words, give an algorithm to find the largest possible
+ * rectangle of letters such that every row forms a word (reading left to right) and every
+ * column forms a word (reading top to bottom).
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -70,6 +77,7 @@ bool CheckPrefix(std::vector<std::string> & v, Node * root) {
 }
 
 bool MakeRetangle(std::set<std::string> & v, Node * root, std::vector<std::string> & path, int n) {
+  // 此时trie树中word的长度都为n，因此当n == 0 时，其是出现的完整的单词
   if (n == 0) return true;
   for (std::set<std::string>::iterator i = v.begin(); i != v.end(); i++) {
     path.push_back(*i);

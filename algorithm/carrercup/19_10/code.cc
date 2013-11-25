@@ -6,6 +6,14 @@
 // Brief :
 // NB http://hawstein.com/posts/19.10.html
 
+/*
+ * Write a method to generate a random number between 1 and 7, given a method that generates a random number
+ * between 1 and 5 (i.e., implement rand7() using rand5()). 
+ *
+ * 问题延伸：
+ * 给你一个随机生成a到b的函数， 用它去实现一个随机生成c到d的函数。
+ * */
+
 #include <time.h>
 #include "base/public/common_head.h"
 
@@ -33,7 +41,10 @@ namespace NB {
  *  k * (rand_k() - 1) + rand_k();
  * 构造rand_k^3
  *  k^2 * (rand_k() - 1) + k * (rand_k() - 1) + rand_k()
- *  
+ * 
+ * 注意 rand() + rand() 与 rand() * rand()产生的都不是等概率，比如
+ * 1 * 6 = 6 *１ = 2 * 3 = 3 * 2 = 6;
+ * rand5() * rand5() 产生的不是1~25的等概率
  *
  * */
 int rand5() {
@@ -42,7 +53,7 @@ int rand5() {
 
 int rand7() {
   int x = ~(1 << 31);
-  while (x > 21) {
+  while (x > 21) {  // 1~21
     x = 5 * (rand5() - 1) + rand5();
   }
   return x % 7 + 1;
@@ -58,6 +69,24 @@ int rand7G() {
   int x = ~(1 << 31);
   while (x > 7 * ( t / 7)) {
     int tmp = 0;
+    /*
+     * 随机选择每一维，pow是每一维内一个元素含有多少个数字(偏移)
+     *
+     *
+     * 5*5*5 [0]
+     *       5*5 [0]  
+     *            5 [0]
+     *            5 [1]
+     *            ...
+     *       5*5 [1]
+     *       ....
+     * 5*5*5[1]
+     *
+     *
+     * 等概率的先选择5*5*5然后等概率的选择5*5，然后等概率的选择5
+     *
+     * http://hawstein.com/posts/19.10.html 上计算Randa^3的公式是错误的
+     * */
     for (int j = 0; j < num; j++) tmp += pow(5, j + 1);
     x = tmp * (rand5() - 1) + rand5();
   }

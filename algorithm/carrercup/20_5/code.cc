@@ -6,6 +6,14 @@
 // Brief :
 
 /*
+ * You have a large text file containing words. Given any two words,
+ * find the shortest distance (in terms of number of words) between them in the file.
+ * Can you make the searching operation in O(1) time?
+ * What about the space complexity for your solution?
+ *
+ * */
+
+/*
  * 如果想做到O(1)，先算出来，在用hash保存
  * 两个键值作为key的hash trick可以有：
  * 1.链接时key1_key2始终保持key1 < key2，查询时也要按此方式链接
@@ -16,13 +24,17 @@
 
 namespace algorithm {
 
+/*
+ * 包含words的min window的模板
+ *
+ * */
 int Min(std::vector<std::string> & page, std::vector<std::string> & words) {
   std::map<std::string, int> dict;
   std::map<std::string, int> tmap;
   int count = 0;
   int b = 0;
   int e = 0;
-  int min = page.size();
+  int min = INT_MAX;
   
   for (int i = 0; i < words.size(); i++) {
     if (tmap.count(words[i])) dict[words[i]]++;

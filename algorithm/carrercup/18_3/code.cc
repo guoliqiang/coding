@@ -36,6 +36,10 @@ base::Mutex LightSingleton<T>::mu;
 template <typename T>
 T * LightSingleton<T>::object = NULL;
 
+/*
+ * 如果想让Foo更合理，需要将Foo的构造和拷贝构造赋值私有，
+ * 然后声明 LightSingleton<Foo> 为 Foo的friend class
+ * */
 class Foo {
  public:
   static Foo * GetInstance() {

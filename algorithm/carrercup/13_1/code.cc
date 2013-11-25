@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Write a method to print the last K lines of an input file using C++.
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 /*

@@ -5,9 +5,16 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Write a method to randomly generate a set of m integers from an array of size n.
+ * Each element must have equal probability of being chosen.
+ *
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
+// 在不给定n大小情况下的方法：
 // special case : m == 1
 // 第i个出现在结果中，其概率为
 // m/i * i/(i +1) * (i + 1) / (i + 2) *...* (n-1)/n
@@ -47,7 +54,8 @@ void SelectShuff(std::vector<int> &v, int m) {
 /* http://m.blog.csdn.net/blog/huagong_adu/7617498
  * 第一个元素被选择的概率为 m/n
  * 第二个元素被选择的概率为：
- * (m - 1) / (n - 1) * m / n  + (n - m) / n * m / n -1
+ *   [(m - 1) / (n - 1)] * [m / n]  // 第一个元素被选中
+ * + [m / n -1] * [(n - m) / n]     // 第一个元素未被选中
  * = m/n
  *
  * 所有元素被选择的概率均为m/n
@@ -56,6 +64,7 @@ void SelectShuff(std::vector<int> &v, int m) {
 std::vector<int> SelectKunuth(std::vector<int> & v, int m) {
   std::vector<int> rs;
   int n = v.size();
+  // 可以保证总能选出m个元素
   for (int i = 0; i < v.size(); i++) {
     if (rand() % (n - i) < m) {
       rs.push_back(v[i]);
@@ -64,6 +73,8 @@ std::vector<int> SelectKunuth(std::vector<int> & v, int m) {
   }
   return rs;
 }
+
+// 这个方法最容易记忆
 // 时间负载度之和m有关
 // 这个算法的主要问题是，如果抛弃已存在的元素的次数过多，相当于多次产生随机数并进行集合操作，
 // 性能将明显下降。比如当n=100而m=99，取第99个元素时，算法“闭着眼睛乱猜整数，直到偶然碰上正确的那个为止”
@@ -85,6 +96,8 @@ std::set<int> SelectSets(int n, int m) {
  * S中已有的4个值以及10本身。因此，元素10以5/10的正确概率被放入S中。
  *
  * 我的证明
+ * 
+ * 倒数第一个被选中的概率：1/n + (m - 1)/n = n/m
  *
  * 倒数第二个数被选中的概率为：
  * 倒数第二次选择时就被选中  (m - 1)/ (n - 1)   +
@@ -94,6 +107,9 @@ std::set<int> SelectSets(int n, int m) {
  * 依次递归
  *
  * 证明完毕
+ *
+ * 相当于先给每个位置都找好一个备胎，这样一定能选出m个数，
+ * 关键是选择更好的元素概率+不得不选择备胎的概率 = m/n
  *
  * */
 

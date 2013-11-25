@@ -10,7 +10,7 @@
 namespace algorithm {
 
 struct RefCount {
-  RefCount(int v = 0) : count(v){}
+  RefCount(int v = 1) : count(v){}
   void Increment() {
     count++;
   }
@@ -28,33 +28,32 @@ template <typename type>
 class SmartPtr {
  public:
   SmartPtr(type * v = NULL) : object_(v) {
-     ref_ = (v == NULL) ? new RefCount(0) : new RefCount(1);
+     ref_ = (v == NULL) ? NULL : new RefCount();  // bug fixed
   }
 
   ~SmartPtr() {
-    ref_->Decrement();
-    if (ref_->IsZero()) {
-      delete object_;
-      delete ref_;
+    if (ref_ != NULL) {  // bug fixed
+      ref_->Decrement();
+      if (ref_->IsZero()) {
+        delete object_;
+        delete ref_;
+      }
     }
   }
   // 这是拷贝构造不用swap
   SmartPtr(const SmartPtr<type> & v) {
     object_ = v.object_;
     ref_ = v.ref_;
-    ref_->Increment();
+    ref_->Increment();  // 只在这里调用increase
   }
 
   SmartPtr<type> * operator = (const SmartPtr<type> & v) {
     if (object_ == v.object_) return this;
     // 这个trick大大简化了代码, 通过调用tmp的析构函数实现
     {
-      SmartPtr<type> tmp;
-      Swap(this, &tmp);
-    }
-    object_ = v.object_;
-    ref_ = v.ref_;
-    ref_->Increment();
+      SmartPtr<type> tmp(v); // v的ref_++
+      Swap(this, &tmp); // 交换到this, this交换到tmp
+    }  // 释放tmp，也就是之前的this
     return this;
   }
 

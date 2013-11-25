@@ -5,6 +5,17 @@
 // File  : code.cc
 // Brief :
 
+/* Given two words of equal length that are in a dictionary,
+ * write a method to transform one word into another word by changing only one letter at a time.
+ * The new word you get in each step must be in the dictionary.
+ * EXAMPLE:
+ * Input: DAMP, LIKE
+ * Output: DAMP -> LAMP -> LIMP -> LIME -> LIKE
+ * 
+ * 还可以问求最短的,相当于图上给定两点求两点间的最短距离。
+ * 下面的做法因为多次调用Distance，比较满，leetcode的word ladder,直接查找速度会快
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

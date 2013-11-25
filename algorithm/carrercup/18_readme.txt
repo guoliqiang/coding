@@ -1,8 +1,8 @@
 Deadlock Conditions
-1.   Mutual Exclusion: Only one process can use a resource at a given time.
-2.   Hold and Wait: Processes already holding a resource can request new ones.
-3.   No Preemption: One process cannot forcibly remove another process’ resource.
-4.   Circular Wait: Two or more processes form a circular chain where each process is wait-
+1.   (资源独占)Mutual Exclusion: Only one process can use a resource at a given time.
+2.   (请求保持)Hold and Wait: Processes already holding a resource can request new ones.
+3.   (不可剥夺)No Preemption: One process cannot forcibly remove another process’ resource.
+4.   (循环等待)Circular Wait: Two or more processes form a circular chain where each process is wait-
     ing on another resource in the chain.
 
 Deadlock Prevention
@@ -27,8 +27,12 @@ What’s the difference between a thread and a process?
 线程是进程的一个特定执行路径。当一个线程修改了进程中的资源， 它的兄弟线程可以立即看到这种变化。
 
 以下是分点小结：
-进程是系统进行资源分配的基本单位，有独立的内存地址空间； 线程是CPU调度的基本单位，没有单独地址空间，有独立的栈，局部变量，寄存器， 程序计数器等。
-创建进程的开销大，包括创建虚拟地址空间等需要大量系统资源； 创建线程开销小，基本上只有一个内核对象和一个堆栈。
+进程是系统进行资源分配的基本单位，有独立的内存地址空间；
+线程是CPU调度的基本单位，没有单独地址空间，有独立的栈，局部变量，寄存器， 程序计数器等。
+
+创建进程的开销大，包括创建虚拟地址空间等需要大量系统资源；
+创建线程开销小，基本上只有一个内核对象和一个堆栈。
+
 一个进程无法直接访问另一个进程的资源；同一进程内的多个线程共享进程的资源。
 进程切换开销大，线程切换开销小；进程间通信开销大，线程间通信开销小。
 线程属于进程，不能独立执行。每个进程至少要有一个线程，成为主线程

@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Write a program to find the longest word made of other words in a list of words.
+ * EXAMPLE Input: test, tester, testertest, testing, testingtester Output: testingtester
+ * */
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -22,7 +27,7 @@ bool Cmp(const std::string & a, const std::string & b) {
 }
 
 std::string Find(std::vector<std::string> v) {
-  std::sort(v.begin(), v.end(), Cmp);
+  std::sort(v.begin(), v.end(), Cmp);  // 这个排序可以起到剪枝的作用
   for (int i = 0; i < v.size(); i++) {
     std::set<std::string> t(v.begin() + i + 1, v.end());
     if (CanForm(v[i], t)) return v[i];
