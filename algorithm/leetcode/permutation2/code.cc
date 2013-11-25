@@ -30,6 +30,9 @@ void PermuteSub(std::vector<int> & num, int n, std::set<std::vector<int> > * rs)
     // 所以改用set保存结果了
     for (int i = n; i < num.size(); i++) {
       if(i != n && num[i] == num[n]) {
+        // 注意这种方法不能剔除干净，自己记忆中这个算法是可以的，一定要改过来
+        // 原因是两个相同的元素虽然没有交换，但m<=>a，m'<=>b 等同于：m <=> b, m' <=> a
+        // 求有重复元素的subset与permutation一定要用jlu的模板
         continue;
       } else {
         std::swap(num[n], num[i]);
