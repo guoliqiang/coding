@@ -6,6 +6,19 @@
 // Brief :
 
 /*
+Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
+If the number of nodes is not a multiple of k then left-out nodes in the end should remain as it is.
+You may not alter the values in the nodes, only nodes itself may be changed.
+Only constant memory is allowed.
+
+For example,
+Given this linked list: 1->2->3->4->5
+For k = 2, you should return: 2->1->4->3->5
+For k = 3, you should return: 3->2->1->4->5
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 29/29 test cases passed.
@@ -142,50 +155,106 @@ ListNode *reverseKGroup(ListNode *head, int k) {
 
 using namespace algorithm;
 
+namespace third {
+
+// 截取前k的模板,如果可以提取出k个，其首尾指针存储于rs中，返回true，否则
+// 返回false
+bool Split(ListNode * & head, int k, std::pair<ListNode *, ListNode *> & rs) {
+  rs.first = head;
+  ListNode * temp = head;
+  
+  k -= 1;
+  while (k && temp != NULL && temp->next != NULL) {
+    temp = temp->next;
+    k--;
+  }
+  if (k > 0 || temp == NULL) return false; // 当输入为1，temp为NULL时用到temp==NULL逻辑
+  
+  head = temp->next;
+  temp->next = NULL;
+  rs.second = temp;
+  return true;
+}
+
+// Reverse 模板
+std::pair<ListNode *, ListNode *> Reverse(ListNode * head) {
+  ListNode * h = NULL;
+  ListNode * t = NULL;
+  while (head != NULL) {
+    ListNode * temp = head->next;
+    if (h == NULL) h = head;
+    head->next = t;
+    t = head;
+    head = temp;
+  }
+  return std::make_pair(t, h);
+}
+
+ListNode * ReverseK(ListNode * head, int k) {
+  ListNode * rs = NULL;
+  std::pair<ListNode*, ListNode *> split;
+  std::pair<ListNode*, ListNode *> list;
+  if (Split(head, k, split) == false) return head;
+  else rs = split.second;
+  
+  list = Reverse(split.first);
+  ListNode * pre = list.second;
+  while (head != NULL && Split(head, k, split)) {
+    list = Reverse(split.first);
+    pre->next = list.first;
+    pre = list.second;
+  }
+  pre->next = head;
+  return rs;
+}
+
+}  // namespace third
+
 namespace twice {
 using namespace algorithm;
 
 class Solution {
-public:
-    ListNode *reverseKGroup(ListNode *head, int k) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        ListNode * rs = head;
-        ListNode * pre = head;
-        int tk = k - 1;
-        while (tk && pre != NULL && pre->next != NULL) {
-            pre = pre->next;
-            tk--;
-        }
-        if (tk == 0) rs = pre;
-        pre = NULL;
-        
-        while (head != NULL) {
-            ListNode * t = head;
-            tk = k - 1;
-            while (tk && t->next != NULL) {
-                t = t->next;
-                tk--;
-            }
-            if (tk > 0) {
-                if (pre != NULL) pre->next = head;
-                break;
-            } else {
-                ListNode * tpre = NULL;
-                while (head != t) {
-                    ListNode * foo = head->next;
-                    head->next = tpre;
-                    tpre = head;
-                    head = foo;
-                }
-                head = t->next;
-                t->next = tpre;
-                if (pre != NULL) pre->next = t;
-                else pre = t;
-                while (pre->next != NULL) pre = pre->next;
-            }
-        }
-        return rs;
+ public:
+  ListNode *reverseKGroup(ListNode *head, int k) {
+    if (head == NULL) return head;
+    ListNode * rs = head;
+    ListNode * pre = head;
+    // 在list中截取前k个的模板,当k>0时，不够k个
+    int tk = k - 1;
+    while (tk && pre != NULL && pre->next != NULL) {
+      pre = pre->next;
+      tk--;
     }
+    if (tk == 0) rs = pre;
+    pre = NULL;
+        
+    while (head != NULL) {
+      ListNode * t = head;
+      tk = k - 1;
+      while (tk && t->next != NULL) {
+        t = t->next;
+        tk--;
+      }
+      if (tk > 0) {
+        if (pre != NULL) pre->next = head;
+        break;
+      } else {
+        ListNode * tpre = NULL;
+        while (head != t) {
+          ListNode * foo = head->next;
+          head->next = tpre;
+          tpre = head;
+          head = foo;
+        }
+        head = t->next;
+        t->next = tpre;
+        if (pre != NULL) pre->next = t;
+        else pre = t;
+        while (pre->next != NULL) pre = pre->next;
+      }
+    }
+    return rs;
+  }
 };
 }  // namespace twice
 
@@ -199,7 +268,8 @@ int main(int argc, char** argv) {
   foo.push_back(4);
   foo.push_back(5);
   foo.push_back(6);
-  Out(reverseKGroup(MakeList(foo), 4));
+  // Out(reverseKGroup(MakeList(foo), 4));
+  Out(third::ReverseK(MakeList(foo), 1));
   return 0;
   /*
   foo.clear();

@@ -4,6 +4,24 @@
 // Date  : 2013-09-24 20:00:06
 // File  : code.cc
 // Brief :
+
+/*
+Given a set of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
+
+The same repeated number may be chosen from C unlimited number of times.
+
+Note:
+All numbers (including target) will be positive integers.
+Elements in a combination (a1, a2, … , ak) must be in non-descending order. (ie, a1 ≤ a2 ≤ … ≤ ak).
+The solution set must not contain duplicate combinations.
+
+For example, given candidate set 2,3,6,7 and target 7, 
+A solution set is: 
+[7] 
+[2, 2, 3]
+
+*/
+
 /*
  * 0 - 1 背包问题
  *
@@ -114,13 +132,27 @@ void Combine(std::vector<int> & num, int target, int k, int cur, std::vector<int
   if (k == num.size() || cur == target) {
       if (cur == target) rs.insert(path);
   } else {
-      while (cur <= target) {
-          Combine(num, target, k + 1, cur, path, rs);
-          cur += num[k];
-          path.push_back(num[k]);
-      }
+    while (cur <= target) {
+      Combine(num, target, k + 1, cur, path, rs);
+      cur += num[k];
+      path.push_back(num[k]);
+    }
   }
 }
+
+// 这种方式更优雅
+void Combine2(std::vector<int> & num, int target, int k, int cur, std::vector<int> & path, std::set<std::vector<int> > &rs) {
+  if (cur == target) rs.insert(path);
+  else if (cur > target) return;
+  else {
+    for (int i = k; i < num.size(); i++) {
+      path.push_back(num[i]);
+      Combine2(num, target, i, cur + num[i], path, rs); // 有数序选择，不会重复
+      path.pop_back();
+    }
+  }
+}
+
 class Solution {
 public:
     vector<vector<int> > combinationSum(vector<int> &candidates, int target) {

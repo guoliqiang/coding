@@ -5,6 +5,20 @@
 // File  : code.cc
 // Brief :
 
+/*
+Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0?
+Find all unique triplets in the array which gives the sum of zero.
+
+Note:
+Elements in a triplet (a,b,c) must be in non-descending order. (ie, a ≤ b ≤ c)
+The solution set must not contain duplicate triplets.
+    For example, given array S = {-1 0 1 2 -1 -4},
+
+    A solution set is:
+    (-1, 0, 1)
+    (-1, -1, 2)
+*/
+
 #include <map>
 #include <set>
 #include <algorithm>
@@ -123,12 +137,12 @@ std::vector<std::vector<int> > tsum(std::vector<int> & v) {
 }
 
 namespace twice {
-using namespace std;    
-vector<vector<int> > ThreeSum(vector<int> &num) {
+std::vector<std::vector<int> > ThreeSum(std::vector<int> &num) {
   std::sort(num.begin(), num.end());
   std::set<std::vector<int> > rs;
   int n = num.size();
-  for (int i = 0; i < n - 2; i++) {  // NOTE*** if num.size()  = 0; num.size() - 2 will be a large number
+  for (int i = 0; i < n - 2; i++) {
+  // NOTE*** if num.size()  = 0; num.size() - 2 will be a large number
     int b = i + 1;
     int e = n - 1;
     while (b < e) {

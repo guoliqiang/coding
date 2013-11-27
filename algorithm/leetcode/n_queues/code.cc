@@ -6,6 +6,31 @@
 // Brief :
 
 /*
+The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+
+
+
+Given an integer n, return all distinct solutions to the n-queens puzzle.
+
+Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
+
+For example,
+There exist two distinct solutions to the 4-queens puzzle:
+
+[
+ [".Q..",  // Solution 1
+  "...Q",
+  "Q...",
+  "..Q."],
+
+  ["..Q.",  // Solution 2
+   "Q...",
+   "...Q",
+   ".Q.."]
+]
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 16 milli secs
  * Progress: 5/5 test cases passed.
@@ -23,6 +48,8 @@
 
 namespace algorithm {
 
+// 八皇后问题的最优实现方式,迭代和check的
+// 次数都是最少的
 bool Check(std::vector<int> & num, int k) {
   for (int i = 0; i < k; i++) {
     if (num[i] == num[k]) return false;

@@ -6,6 +6,14 @@
 // Brief :
 
 /*
+ * Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+ *
+ * For example, given n = 3, a solution set is:
+ *
+ * "((()))", "(()())", "(())()", "()(())", "()()()"
+ * */
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 3/3 test cases passed.
@@ -13,6 +21,7 @@
  * Program Runtime: 28 milli secs
  * Progress: 8/8 test cases passed.
  * */
+
 
 #include <vector>
 #include <set>
@@ -65,10 +74,12 @@ namespace official {
  * Program Runtime: 16 milli secs
  * Progress: 8/8 test cases passed.
  *
+ * 总的个数是catlan数 C(2n, n) / (n + 1)
  * */
 
 void Generate(int n, int l, int r,
-              std::string path, std::vector<std::string> * rs) {
+              std::string path,
+              std::vector<std::string> * rs) {
   if (l == n) {
     rs->push_back(path.append(n - r, ')'));
   } else {

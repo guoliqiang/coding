@@ -9,6 +9,11 @@
 //         cmolexity :O(n) 
 
 /*
+ * Given a string S, find the longest palindromic substring in S.
+ * You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
+ * */
+
+/*
  *  origin str:
  *    abcbabb
  *  changed str:
@@ -75,9 +80,11 @@ std::string LongestPalindrome(std::string & str_i) {
   int max_value = 0;
   for (int i = 1; i < str.size() - 1; i++) {
     int mirror_i = 2 * center_index - i;
+    // 注意只需要和center_right_bound_index比较即可判断出有没有越界
+    // center 一定小于i
     p[i] =  (center_right_bound_index > i) ? std::min(p[mirror_i], center_right_bound_index - i) : 1;
     // 此时p[i] 最小为1
-    while (str[i - p[i]] == str[i + p[i]]) p[i]++;
+    while (str[i - p[i]] == str[i + p[i]]) p[i]++;  // 不用担心越界，因为预处理可以保证不会越界
     if (p[i] > max_value) {
       max_value = p[i];
       max_index = i;
@@ -91,7 +98,10 @@ std::string LongestPalindrome(std::string & str_i) {
   LOG(INFO) << max_index << ":" << max_value;
   return  max_value > 0 ?
           str_i.substr((max_index - max_value + 2) / 2 - 1, max_value - 1) : "";
+  // 改变后的数组与原数组下表的对应关系 i'/ 2 - 1 = i 
 }
+
+
 
 }  // namespace algorithm
 

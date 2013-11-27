@@ -6,6 +6,11 @@
 // Brief :
 
 /*
+Implement pow(x, n).
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 28 milli secs
  * Progress: 299/299 test cases passed.
@@ -29,7 +34,7 @@ double Pow(double x, int n) {
   double rs = 1;
   double foo = x;
   while (k) {
-    if (k & 0x1) rs *= foo;
+    if (k & 1) rs *= foo;
     foo *= foo;
     k >>= 1;
   }
@@ -38,10 +43,51 @@ double Pow(double x, int n) {
 
 }  // namespace algorithm
 
+namespace twice {
+
+// n 必须非负
+double Pow(double x, long long n) {
+  double rs = 1;
+  double tmp = x;
+  while (n) {
+      if (n & 1) rs *= tmp;
+      tmp *= tmp;
+      n >>= 1;
+  }
+  return rs;
+}
+
+// n 可以是负数
+double Pow2(double x, int n) {
+  double rs = 1;
+  double tmp = x;
+  while (n) {
+    if (n & 1) rs *= tmp;
+    tmp *= tmp;
+    n /= 2;  // 用除法不用考虑越界问题了，因为-1/2 = 0
+  }
+  return rs;
+}
+
+class Solution {
+ public:
+  double pow(double x, int n) {
+    // Note: The Solution object is instantiated only once and is reused by each test case.
+    double t =  Pow2(x, n);
+    // or
+    // double t =  Pow(x, fabs(n));
+    return n < 0 ? 1.0 / t : t;
+  }
+};
+}  // namespace twice
+
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
+  twice::Solution s;
+  LOG(INFO) << s.pow(2, 10);
+  return 0;
   LOG(INFO) << Pow(-1, -2147483648);
   // 负数取反后越界
   int foo = -2147483648;

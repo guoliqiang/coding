@@ -6,6 +6,20 @@
 // Brief :
 
 /*
+Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+
+For example,
+Given the following matrix:
+
+[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+You should return [1,2,3,6,9,8,7,4,5].
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 21/21 test cases passed.
@@ -93,35 +107,33 @@ using namespace algorithm;
 
 namespace twice {
 using namespace std;    
-    vector<int> SpiralOrder(vector<vector<int> > &matrix) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        std::vector<int> rs;
-        if (matrix.size() == 0) return rs;
-        int bx = 0;
-        int ex = matrix.size() - 1;
-        int by = 0;
-        int ey = matrix[0].size() - 1;
-        while (bx <= ex && by <= ey) {
-            for (int i = by; i < ey; i++) rs.push_back(matrix[bx][i]);
-            for (int i = bx; i < ex; i++) rs.push_back(matrix[i][ey]);
-            if (bx == ex) {
-                rs.push_back(matrix[ex][ey]);
-                break;
-            }
-            if (by == ey) {
-                rs.push_back(matrix[ex][by]);
-                break;
-            }  // 只有一行或一列时特殊处理
-            for (int i = ey; i > by; i--) rs.push_back(matrix[ex][i]);
-            for (int i = ex; i > bx; i--) rs.push_back(matrix[i][by]);
-            bx++;
-            ex--;
-            by++;
-            ey--;
-        }
-        return rs;
+vector<int> SpiralOrder(vector<vector<int> > &matrix) {
+  std::vector<int> rs;
+  if (matrix.size() == 0) return rs;
+  int bx = 0;
+  int ex = matrix.size() - 1;
+  int by = 0;
+  int ey = matrix[0].size() - 1;
+  while (bx <= ex && by <= ey) {
+    for (int i = by; i < ey; i++) rs.push_back(matrix[bx][i]);
+    for (int i = bx; i < ex; i++) rs.push_back(matrix[i][ey]);
+    if (bx == ex) {
+      rs.push_back(matrix[ex][ey]);
+      break;
     }
+    if (by == ey) {
+      rs.push_back(matrix[ex][by]);
+      break;
+    }  // 只有一行或一列时特殊处理
+    for (int i = ey; i > by; i--) rs.push_back(matrix[ex][i]);
+    for (int i = ex; i > bx; i--) rs.push_back(matrix[i][by]);
+    bx++;
+    ex--;
+    by++;
+    ey--;
+  }
+  return rs;
+}
 }  // namespace twice
 
 int main(int argc, char** argv) {

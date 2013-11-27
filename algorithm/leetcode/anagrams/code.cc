@@ -6,6 +6,15 @@
 // Brief :
 
 /*
+Given an array of strings, return all groups of strings that are anagrams.
+
+Note: All inputs will be in lower-case.
+
+Discuss
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 17/17 test cases passed.
@@ -42,6 +51,19 @@ std::vector<std::string> Anagrams(std::vector<std::string> & v) {
 }
 }  // namespace algorithm
 
+namespace twice {
+// 如果所有的输出用这个排序即可
+bool Cmp(std::string s1, std::string s2) {
+  std::sort(s1.begin(), s1.end());
+  std::sort(s2.begin(), s2.end());
+  return s1 < s2;
+}
+std::vector<std::string> Anagrams(std::vector<std::string> & v) {
+  std::sort(v.begin(), v.end(), Cmp);
+  return v;
+}
+}  // namespace twice
+
 using namespace algorithm;
 
 
@@ -52,8 +74,7 @@ int main(int argc, char** argv) {
   foo.push_back("eat");
   foo.push_back("tea");
   foo.push_back("m");
-  foo.push_back("");
-  foo.push_back("");
   LOG(INFO) << JoinVector(Anagrams(foo));
+  // LOG(INFO) << JoinVector(twice::Anagrams(foo));
   return 0;
 }

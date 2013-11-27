@@ -4,6 +4,11 @@
 // Date  : 2013-09-23 15:58:29
 // File  : code.cc
 // Brief :
+
+/*
+Divide two integers without using multiplication, division and mod operator.
+*/
+
 #include <algorithm>
 #include <cmath>
 #include "base/public/logging.h"
@@ -32,6 +37,24 @@ int divide(int dividend, int divisor) {
 }  // namespace algorithm
 
 namespace twice {
+
+long long int DiviR(long long dividend, long long int divisor) {
+  if (divisor > dividend) return 0;
+  if (divisor == dividend) return 1;
+  int rs = 0;
+  while (dividend >= divisor) {
+    long long int num = 1;
+    long long int t = divisor;
+    while ((t * 2) < dividend) {
+      t *= 2;
+      num *= 2;
+    }
+    rs += num;
+    dividend -= t;
+  }
+  return rs;
+}
+
 long long int Divi(long long int dividend, long long int divisor) {
   if (divisor > dividend) return 0;
   if (divisor == dividend) return 1;
@@ -45,13 +68,12 @@ long long int Divi(long long int dividend, long long int divisor) {
   
 }
 class Solution {
-public:
-    int divide(int dividend, int divisor) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        bool minus = ((dividend ^ divisor) >> 31) ? true : false;
-        int re = Divi(fabs(dividend), fabs(divisor));
-        return minus ? -re : re;
-    }
+ public:
+   int divide(int dividend, int divisor) {
+     bool minus = ((dividend ^ divisor) >> 31) ? true : false;
+     int re = Divi(fabs(dividend), fabs(divisor));
+     return minus ? -re : re;
+  }
 };
 }  // namespace twice
 

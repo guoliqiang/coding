@@ -4,6 +4,16 @@
 // Date  : 2013-09-17 21:34:29
 // File  : code.cc
 // Brief :
+
+/*
+There are two sorted arrays A and B of size m and n respectively. Find the median of the two sorted arrays. 
+The overall run time complexity should be O(log (m+n)).
+
+此问题对于一个数组，如果数组是排完序的，直接返回，如果是无序的数组
+基于快速排序的算法时间复杂度是O(n)
+
+*/
+
 #include "code.h"
 #include "../k-th_smallest_of_two_sorted_array/k-th.h"
 using namespace algorithm;
@@ -22,12 +32,20 @@ int FindK(int * a, int m, int * b, int n, int k) {
   if (ai >= bj_1 && ai <= bj) return ai;
   if (bj >= ai_1 && bj <= ai) return bj;
   if (ai < bj_1) {
-    return FindK(a + i + 1, m - i - 1, b, j, k - i - 1);  // 不可能是b[j], b[j] 被排除掉, 可反证
+    return FindK(a + i + 1, m - i - 1, b, j, k - i - 1);  // 不可能是a[i], b[j] 被排除掉, 可反证
   } else {
     return FindK(a, i, b + j + 1, n - j - 1, k - j - 1);
   }
 }
+
+double FindMedianSortedArrays(int A[], int m, int B[], int n) {
+  int t = (m + n) / 2;
+  double rs = 0;
+  if ((m + n) %2  == 1) rs = FindK(A, m, B, n, t + 1);
+  else rs = (FindK(A, m, B, n, t) + FindK(A, m, B, n, t + 1)) / (double)(2);
+  return rs;
 }
+}  // namespace twice  
 
 int main(int argc, char** argv) {
   int a[] = {100001};

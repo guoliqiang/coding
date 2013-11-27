@@ -11,6 +11,21 @@
 #include "base/public/string_util.h"
 
 /*
+Given an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target?
+Find all unique quadruplets in the array which gives the sum of target.
+
+Note:
+Elements in a quadruplet (a,b,c,d) must be in non-descending order. (ie, a ≤ b ≤ c ≤ d)
+The solution set must not contain duplicate quadruplets.
+    For example, given array S = {1 0 -1 0 -2 2}, and target = 0.
+
+    A solution set is:
+    (-1,  0, 0, 1)
+    (-2, -1, 1, 2)
+    (-2,  0, 0, 2)
+ * */
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 15/15 test cases passed.
@@ -22,11 +37,11 @@
  * */
 
 namespace algorithm {
-
+// O(n^3)
 void FourSum(std::vector<int> & sum, int target, std::set<std::vector<int> > * rs) {
   rs->clear();
   std::vector<int> quadruplet;
-  std::sort(sum.begin(), sum.end());
+  std::sort(sum.begin(), sum.end());  // must sort, std::sort 是快排
   for (int i = 0; i < sum.size(); i++) {
     for (int j = i + 1; j < sum.size(); j++) {
       int k = j + 1;

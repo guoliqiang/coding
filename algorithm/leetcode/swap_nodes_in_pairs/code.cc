@@ -6,6 +6,16 @@
 // Brief :
 
 /*
+Given a linked list, swap every two adjacent nodes and return its head.
+
+For example,
+Given 1->2->3->4, you should return the list as 2->1->4->3.
+
+Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 6/6 test cases passed.
@@ -101,29 +111,30 @@ namespace twice {
 using namespace std;
 using namespace algorithm;
 class Solution {
-public:
-    ListNode *swapPairs(ListNode *head) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        ListNode * rs = head;
-        if (head != NULL && head->next != NULL) rs = head->next;
-        ListNode * pre = NULL;
-        while (head != NULL) {
-            ListNode * next = head->next;
-            if (next == NULL) {
-                if (pre != NULL) pre->next = head;
-                pre = head;
-                break;
-            }
-            ListNode * nnext = next->next;
-            if (pre != NULL) pre->next = next;
-            next->next = head;
-            pre = head;
-            head = nnext;
-        }
-        if (pre != NULL) pre->next = NULL;
-        return rs;
+ public:
+  ListNode *swapPairs(ListNode *head) {
+    ListNode * rs = head;
+    if (head != NULL && head->next != NULL) rs = head->next;
+    
+    ListNode * pre = NULL;
+    while (head != NULL) {
+       ListNode * next = head->next;
+       if (next == NULL) {
+         if (pre != NULL) pre->next = head;
+           pre = head;
+           break;
+       }
+       ListNode * nnext = next->next;
+       if (pre != NULL) pre->next = next;
+       next->next = head;
+       pre = head;
+       head = nnext;
     }
+    if (pre != NULL) pre->next = NULL;
+    return rs;
+  }
 };
+
 }  // namespace twice
 
 int main(int argc, char** argv) {

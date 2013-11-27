@@ -4,6 +4,25 @@
 // Date  : 2013-09-24 20:00:06
 // File  : code.cc
 // Brief :
+
+/*
+Given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
+
+Each number in C may only be used once in the combination.
+
+Note:
+All numbers (including target) will be positive integers.
+Elements in a combination (a1, a2, … , ak) must be in non-descending order. (ie, a1 ≤ a2 ≤ … ≤ ak).
+The solution set must not contain duplicate combinations.
+For example,given candidate set 10,1,2,7,6,1,5 and target 8, 
+A solution set is: 
+[1, 7] 
+[1, 2, 5] 
+[2, 6] 
+[1, 1, 6]
+
+*/
+
 /*
  * 0 - 1 背包问题
  *
@@ -118,13 +137,34 @@ void Combine(std::vector<int> & num, int target, int k, std::vector<int> & path,
       }
   }
 }
+
+void Combine2(std::vector<int> & num, int target, int k, std::vector<int> & path,
+             std::set<std::vector<int> > & rs, int cur) {
+  LOG(INFO) << JoinVector(path);
+  if (cur == target) {
+    rs.insert(path);
+    return;
+  } else if (cur > target || k == num.size()) return;
+  else {
+    Combine2(num, target, k + 1, path, rs, cur);
+    path.push_back(num[k]);
+    Combine2(num, target, k + 1, path, rs, cur + num[k]);
+    path.pop_back();
+  }
+}
+
 class Solution {
 public:
     vector<vector<int> > combinationSum2(vector<int> &num, int target) {
         std::sort(num.begin(), num.end());
         std::set<std::vector<int> > tmp;
-        std::vector<int> path(num.size(), 0);
-        Combine(num, target, 0, path, tmp, 0);
+        // method1:
+        // std::vector<int> path(num.size(), 0);
+        // Combine(num, target, 0, path, tmp, 0);
+        
+        // method2:
+        std::vector<int> path;
+        Combine2(num, target, 0, path, tmp, 0);
         return std::vector<std::vector<int> > (tmp.begin(), tmp.end());
     }
 };
@@ -133,15 +173,19 @@ public:
 
 int main(int argc, char** argv) {
   std::vector<int> candi;
-  candi.push_back(10);
-  candi.push_back(1);
+  // candi.push_back(10);
+  candi.push_back(2);
+  /*
   candi.push_back(2);
   candi.push_back(7);
   candi.push_back(6);
   candi.push_back(1);
   candi.push_back(5);
-  int n = 8;
-  std::vector<std::vector<int> > rs = CombinationSum(candi, n);
+  */
+  int n = 1;
+  twice::Solution s;
+  // std::vector<std::vector<int> > rs = CombinationSum(candi, n);
+  std::vector<std::vector<int> > rs = s.combinationSum2(candi, n);
   for (int i = 0; i < rs.size(); i++) {
     LOG(INFO) << JoinVector(rs[i]);
   }

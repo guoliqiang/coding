@@ -4,6 +4,13 @@
 // Date  : 2013-09-22 13:07:38
 // File  : code.cc
 // Brief :
+
+/*
+ * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+ * The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+ *
+ * */
+
 /*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
@@ -39,7 +46,8 @@ bool IsValid(std::string s) {
 }  // namespace algorithm
 
 namespace twice {
-bool isValid(string s) {
+
+bool isValid(std::string s) {
   std::stack<char> foo;
   for (int i = 0; i < s.size(); i++) {
     if (s[i] == ')' || s[i] == '}' || s[i] == ']') {

@@ -6,6 +6,13 @@
 // Brief :
 
 /*
+ * Given a string, find the length of the longest substring without repeating characters. 
+ * For example, the longest substring without repeating letters for "abcabcbb" is "abc", 
+ * which the length is 3. For "bbbbb" the longest substring is "b", with the length of 1.
+ *
+ * */
+
+/*
 #include<string>
 #include<set>
 
@@ -295,7 +302,8 @@ int Build(std::string & str) {
 
 
 /*
- * O(n) 140ms uisng dp 
+ * O(n) 140ms uisng dp
+ * 这个好写
  *
  */
 int lengthOfLongestSubstring(std::string s) {
@@ -310,7 +318,7 @@ int lengthOfLongestSubstring(std::string s) {
   for (int i = 1; i< s.size(); i++) {
     // LOG(INFO) << s[i] << " :" <<  foo[s[i]];
     if (!foo.count(s[i]))  foo[s[i]] = -1;
-    if (i - foo[s[i]] - 1> dp[i - 1]) dp[i] = dp[i - 1] +1;
+    if (i - foo[s[i]] > dp[i - 1] + 1) dp[i] = dp[i - 1] +1;
     else dp[i] = i - foo[s[i]];
     if (dp[i] > rs) rs = dp[i];
     foo[s[i]] = i;
@@ -323,6 +331,8 @@ int lengthOfLongestSubstring(std::string s) {
 
 namespace NB {
 // official answer
+// i始终指向合法串开始的位置
+// exit表示从i开始字母s[i]有米有出现过
 int lengthOfLongestSubstring(std::string s) {
   int n = s.length();
   int i = 0, j = 0;
@@ -330,7 +340,7 @@ int lengthOfLongestSubstring(std::string s) {
   bool exist[256] = { false };
   while (j < n) {
     if (exist[static_cast<int>(s[j])]) {
-      maxLen = std::max(maxLen, j-i);
+      maxLen = std::max(maxLen, j - i); // 合法串为：i ～ j - 1, 最大值必然出现在边界处
       while (s[i] != s[j]) {
         exist[static_cast<int>(s[i])] = false;
         i++;
@@ -342,9 +352,10 @@ int lengthOfLongestSubstring(std::string s) {
       j++;
     }
   }
-  maxLen = std::max(maxLen, n-i);
+  maxLen = std::max(maxLen, n-i); // 最后一个合法串
   return maxLen;
 }
+
 }  // namespace NB
 
 /*

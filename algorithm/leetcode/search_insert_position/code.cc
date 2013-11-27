@@ -4,6 +4,20 @@
 // Date  : 2013-09-24 15:11:50
 // File  : code.cc
 // Brief :
+
+/*
+Given a sorted array and a target value, return the index if the target is found.
+If not, return the index where it would be if it were inserted in order.
+You may assume no duplicates in the array.
+
+Here are few examples.
+[1,3,5,6], 5 → 2
+[1,3,5,6], 2 → 1
+[1,3,5,6], 7 → 4
+[1,3,5,6], 0 → 0
+
+*/
+
 #include "base/public/logging.h"
 
 namespace algorithm {
@@ -39,22 +53,35 @@ int SearchBigger(int * a, int n, int t) {
 }  // namespace algorithm
 
 namespace twice {
+
+int BSearch2(int A[], int n, int t) {
+  int b = 0;
+  int e = n - 1;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (A[mid] < t) b = mid + 1;
+    else e = mid - 1;
+  }
+  return b;
+}
+
 int BSearch(int A[], int n, int t) {
   int b = 0;
   int e = n;
   while (b < e) {
-      int mid = b + (e - b) / 2;
-      if (A[mid] < t) b = mid + 1;
-      else e = mid;
+    int mid = b + (e - b) / 2;
+    if (A[mid] < t) b = mid + 1;
+    else e = mid;
   }
   return b;
 }
+
 class Solution {
-public:
-    int searchInsert(int A[], int n, int target) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        return BSearch(A, n, target);
-    }
+ public:
+  int searchInsert(int A[], int n, int target) {
+    // Note: The Solution object is instantiated only once and is reused by each test case.
+    return BSearch(A, n, target);
+  }
 };
 }  // namespace twice
 

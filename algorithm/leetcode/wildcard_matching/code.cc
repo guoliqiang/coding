@@ -6,6 +6,28 @@
 // Brief : http://blog.sina.com.cn/s/blog_691161ed0101953v.html
 //         http://discuss.leetcode.com/questions/222/wildcard-matching
 
+/*
+Implement wildcard pattern matching with support for '?' and '*'.
+
+'?' Matches any single character.
+'*' Matches any sequence of characters (including the empty sequence).
+
+The matching should cover the entire input string (not partial).
+
+The function prototype should be:
+bool isMatch(const char *s, const char *p)
+
+Some examples:
+isMatch("aa","a") → false
+isMatch("aa","aa") → true
+isMatch("aaa","aa") → false
+isMatch("aa", "*") → true
+isMatch("aa", "a*") → true
+isMatch("ab", "?*") → true
+isMatch("aab", "c*a*b") → false
+
+*/
+
 #include <iostream>
 #include "base/public/logging.h"
 
@@ -103,13 +125,15 @@ bool DPMem(const char * s, const char * p, int ** dp) {
     for (int j = 0; j < s_len; j++) {
       if (*(p + i) == '*') {
         if (j == 0) {
-          dp[flag][j] = dp[!flag][j];  // 在* 出现在pattern第一个字符时会起作用
+          dp[flag][j] = dp[!flag][j];  // 相当于*匹配空
           continue;
         }
+        // 右边是1也设置为1
         dp[flag][j] = (dp[!flag][j] + dp[flag][j - 1] >= 1 ? 1 : 0);
       } else {
         if (j == 0) {
           dp[flag][j] = 0;  // 此时dp[i][0]无用
+          // 即使当前p为？其值也为0，因为其要匹配一个字符，儿当前的空已经被p中第一个空匹配上了
           continue;
         }
         if (*(p + i) == '?' || *(p + i) == *(s + j)) 
@@ -123,7 +147,10 @@ bool DPMem(const char * s, const char * p, int ** dp) {
   return dp[!flag][s_len - 1];
 }
 
+
+
 bool IsMatchingDPMem(std::string s, std::string p) {
+  // 必须加两个空字符，否则逻辑太复杂
   s.insert(s.begin(), ' ');
   p.insert(p.begin(), ' ');
   int * * dp = new int * [2];

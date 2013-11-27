@@ -6,6 +6,11 @@
 // Brief :
 
 /*
+Follow up for N-Queens problem.
+Now, instead outputting board configurations, return the total number of distinct solutions.
+
+*/
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 5/5 test cases passed.

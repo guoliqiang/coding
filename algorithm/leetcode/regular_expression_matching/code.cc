@@ -6,6 +6,47 @@
 // Brief :
 //
 
+/*
+ * Implement regular expression matching with support for '.' and '*'.
+ *
+ * '.' Matches any single character.
+ * '*' Matches zero or more of the preceding element.
+ *
+ * The matching should cover the entire input string (not partial).
+ *
+ * The function prototype should be:
+ * bool isMatch(const char *s, const char *p)
+ *
+ * Some examples:
+ * isMatch("aa","a") → false
+ * isMatch("aa","aa") → true
+ * isMatch("aaa","aa") → false
+ * isMatch("aa", "a*") → true
+ * isMatch("aa", ".*") → true
+ * isMatch("ab", ".*") → true
+ * isMatch("aab", "c*a*b") → true
+ *
+ *
+ * 另一个类似的问题:
+ * '?' Matches any single character.
+ * '*' Matches any sequence of characters (including the empty sequence).
+ *
+ * The matching should cover the entire input string (not partial).
+ *
+ * The function prototype should be:
+ * bool isMatch(const char *s, const char *p)
+ *
+ * Some examples:
+ * isMatch("aa","a") → false
+ * isMatch("aa","aa") → true
+ * isMatch("aaa","aa") → false
+ * isMatch("aa", "*") → true
+ * isMatch("aa", "a*") → true
+ * isMatch("ab", "?*") → true
+ * isMatch("aab", "c*a*b") → false
+ *
+ * */
+
 #include "base/public/logging.h"
 
 /*  ac vertion
@@ -101,23 +142,24 @@ bool Match(const char * str, const char * pattern, const char * str_b) {
 }
 
 namespace twice {
+// best version
 bool IsMatch(const char * s, const char * p) {
   if (*s == '\0' && *p == '\0') return true;
   if (*p == '\0') return false;
   if (*(p + 1)== '*' && IsMatch(s, p + 2)) return true;
   
   if (*p == '.' && *s != '\0') {  // 含义 . 能匹配任何字符但不能匹配'\0'
-      return IsMatch(s + 1, p + 1);
+    return IsMatch(s + 1, p + 1);
   } else if (*p == '*') {
-      if (IsMatch(s, p + 1)) return true;
-      if (*s == *(p - 1) || ( *s != '\0' && *(p - 1) == '.')) // 同理 . 能匹配任何字符但不能匹配'\0'
-        return IsMatch(s + 1, p);
-      
-      return false;
+    if (IsMatch(s, p + 1)) return true;
+    if (*s == *(p - 1) || (*s != '\0' && *(p - 1) == '.')) { // 同理 . 能匹配任何字符但不能匹配'\0'
+      return IsMatch(s + 1, p);
+    }
+    return false;
   } else if (*p == *s) {
-      return IsMatch(s + 1, p + 1);
+    return IsMatch(s + 1, p + 1);
   } else {
-      return false;
+    return false;
   }
 }
 }  // namespace twice

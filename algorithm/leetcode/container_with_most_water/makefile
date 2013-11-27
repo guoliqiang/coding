@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/leetcode/max_area
+PROJ_NAME=algorithm/leetcode/container_with_most_water
 
 
 all:
@@ -17,4 +17,3 @@ opt:
 
 
 clean:
-	rm -rf find_sub_tree

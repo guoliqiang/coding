@@ -5,6 +5,21 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Given a roman numeral, convert it to an integer.
+ *
+ * Input is guaranteed to be within the range from 1 to 3999.
+ *
+ * 个位数举例
+ * Ⅰ 1,Ⅱ 2, Ⅲ 3, Ⅳ 4, Ⅴ 5, Ⅵ 6, Ⅶ  7, Ⅷ 8, Ⅸ 9
+ * 十位数举例
+ * Ⅹ 10, XX 20 XXX 30, XL,40, L 50, LX 60, LXX 70,  LXXX 80, XC 90 
+ * 百位数举例
+ * C 100, CC 200, CCC 300, CD 400, D 500, DC 600, DCC 700, DCCC 800, CM 900
+ * 千位数举例
+ * M 1000, MM 2000, MMM 3000
+ * */
+
 #include <map>
 #include "base/public/logging.h"
 
@@ -14,10 +29,11 @@ const char * ten[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"
 // begin with X L
 const char * hundred[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
 // beign with C D
-const char * thourand[] = {"", "M", "MM", "MMM", "MMM"};
+const char * thourand[] = {"", "M", "MM", "MMM" };
 // beign with M
 
 const char * * ptr[] = {bit, ten, hundred, thourand};
+
 std::map<std::string, int> roman;
 
 void BuildMap() {

@@ -12,6 +12,11 @@
 #include "base/public/string_util.h"
 
 /*
+Implement strStr().
+Returns a pointer to the first occurrence of needle in haystack, or null if needle is not part of haystack.
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 16/16 test cases passed.
@@ -53,6 +58,7 @@ const char * BM(const char * str, const char * pattern) {
 
   for (int i = p_len - 2; i >= 0; i --) {
     if (suffix[i] == i + 1) {
+      // debug
       for (int j = p_len - 1 - (i + 1); j >= 0; j--) {
         gs[j] = p_len - 1 - i;
       }
@@ -66,6 +72,7 @@ const char * BM(const char * str, const char * pattern) {
 
   int k = 0;
   while (k <= s_len - p_len) {
+    // 注意每次都是从末尾开始匹配的
     int m = 0;
     while (m < p_len &&
            str[k + p_len - 1 - m] == pattern[p_len - 1 - m]) {
@@ -74,7 +81,7 @@ const char * BM(const char * str, const char * pattern) {
     if (m == p_len) return &str[k];
     int foo = p_len - m;
     if (bc.count(str[k + p_len - 1 - m])) {
-      foo = p_len - 1 -m - bc[str[k + p_len - 1 - m]];
+      foo = p_len - 1 - m - bc[str[k + p_len - 1 - m]];
     }
     int move = std::max(gs[p_len - 1 - m], foo);
     k += move;

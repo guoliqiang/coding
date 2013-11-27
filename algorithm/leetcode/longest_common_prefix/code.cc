@@ -6,6 +6,11 @@
 // Brief :
 
 /*
+ * Write a function to find the longest common prefix string amongst an array of strings.
+ *
+ * */
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 20/20 test cases passed.
@@ -47,6 +52,32 @@ std::string LongestCommnPrefix(std::vector<std::string> & v) {
 }// namespace algorithm
 
 using namespace algorithm;
+
+namespace twice {
+class Solution {
+ public:
+  std::string longestCommonPrefix(std::vector<std::string> &strs) {
+    if (strs.size() == 0) return "";
+    std::vector<const char *> v;
+    for (int i = 0; i < strs.size(); i++) {
+      v.push_back(strs[i].c_str());
+    }
+    bool flag = true;
+    while (flag) {
+      for (int i = 1; i < v.size(); i++) {
+        if (*(v[0]) != *(v[i]++)) {
+          flag = false;
+          break;
+         }
+      }
+      v[0]++;
+      if (*(v[0] - 1) == '\0') flag = false;
+    } 
+    int len = v[0] - strs[0].c_str() - 1;
+    return strs[0].substr(0, len);
+  }
+};
+}  // namespace twice
 
 
 int main(int argc, char** argv) {

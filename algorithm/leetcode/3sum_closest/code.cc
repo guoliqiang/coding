@@ -10,6 +10,15 @@
 #include "base/public/logging.h"
 
 /*
+Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target.
+Return the sum of the three integers. You may assume that each input would have exactly one solution.
+For example, given array S = {-1 2 1 -4}, and target = 1.
+
+The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+
+* */
+
+/*
  * 
  * Run Status: Accepted!
  * Program Runtime: 0 milli secs
@@ -23,6 +32,7 @@
 
 namespace algorithm {
 
+// O(n^2)
 int ThreeSumClosest(std::vector<int> & num, int target) {
   std::sort(num.begin(), num.end());
   int min = 0x7fffffff;

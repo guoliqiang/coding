@@ -5,6 +5,20 @@
 // File  : code.h
 // Brief :
 
+/*
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this:
+(you may want to display this pattern in a fixed font for better legibility)
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+And then read line by line: "PAHNAPLSIIGYIR"
+Write the code that will take a string and make this conversion given a number of rows:
+
+string convert(string text, int nRows);
+convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
+*/
+
 #ifndef  __CODE_H_
 #define  __CODE_H_
 
@@ -38,7 +52,7 @@ std::string zigzag(std::string text, int n) {
 
 namespace twice {
 
-string Convert(string s, int row) {
+std::string Convert(std::string s, int row) {
   if (row <= 1) return s;
   int idx = 0;
   bool flag = true;

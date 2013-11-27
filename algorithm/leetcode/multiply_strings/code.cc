@@ -6,6 +6,12 @@
 // Brief :
 
 /*
+Given two numbers represented as strings, return multiplication of the numbers as a string.
+Note: The numbers can be arbitrarily large and are non-negative.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 11/11 test cases passed.
@@ -49,35 +55,34 @@ using namespace algorithm;
 
 namespace twice {
 using namespace std;
-    string multiply(string num1, string num2) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        if (num1 == "0" || num2 == "0") return "0";
-        int len1 = num1.size();
-        int len2 = num2.size();
-        std::string rs(len1 + len2 + 1, '0');
-        int idx = rs.size() - 1;
-        for (int i = len1 - 1; i >= 0; i--) {
-            int carry = 0;
-            int cur = idx;
-            for (int j = len2 - 1; j >=  0; j--) {
-                int t = (num2[j] - '0') * (num1[i] - '0') + carry + (rs[cur] - '0');
-                carry = t / 10;
-                t %= 10;
-                rs[cur--] = '0' + t;
-            }
-            while(carry) {
-                int t = carry + (rs[cur] - '0');
-                carry = t / 10;
-                t %= 10;
-                rs[cur--] = '0' +t;
-            }
-            idx--;
-        }
-        int i = 0;
-        while (rs[i] == '0') i++;
-        return rs.substr(i);
+string multiply(string num1, string num2) {
+  if (num1 == "0" || num2 == "0") return "0";
+  int len1 = num1.size();
+  int len2 = num2.size();
+  std::string rs(len1 + len2 + 1, '0');
+  int idx = rs.size() - 1;
+  for (int i = len1 - 1; i >= 0; i--) {
+    int carry = 0;
+    int cur = idx;
+    for (int j = len2 - 1; j >=  0; j--) {
+      int t = (num2[j] - '0') * (num1[i] - '0') + carry + (rs[cur] - '0');
+      carry = t / 10;
+      t %= 10;
+      rs[cur--] = '0' + t;
     }
-}  // namespace 
+    while (carry) {
+      int t = carry + (rs[cur] - '0');
+      carry = t / 10;
+      t %= 10;
+      rs[cur--] = '0' + t;
+    }
+    idx--;
+  }
+  int i = 0;
+  while (rs[i] == '0') i++;
+  return rs.substr(i);
+}
+}  // namespace  twice
 
 int main(int argc, char** argv) {
   std::string s1;

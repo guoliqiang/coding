@@ -3,6 +3,12 @@
 // I just want to GH to hss~
 // Date  : 2013-09-17 20:12:34
 // File  : code.h
+
+/*
+ * There are two sorted arrays A and B of size m and n respectively. Find the median of the two sorted arrays.
+ * The overall run time complexity should be O(log (m+n)).
+ * */
+
 // Brief :
 //     m0 m1 m2 m3       len = 4   len/2 = 2
 //           |

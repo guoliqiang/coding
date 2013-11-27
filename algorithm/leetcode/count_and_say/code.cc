@@ -4,6 +4,20 @@
 // Date  : 2013-09-24 19:38:06
 // File  : code.cc
 // Brief :
+
+/*
+The count-and-say sequence is the sequence of integers beginning as follows:
+1, 11, 21, 1211, 111221, ...
+
+1 is read off as "one 1" or 11.
+11 is read off as "two 1s" or 21.
+21 is read off as "one 2, then one 1" or 1211.
+Given an integer n, generate the nth sequence.
+
+Note: The sequence of integers will be represented as a string.
+
+*/
+
 #include "stdio.h"
 #include "base/public/logging.h"
 
@@ -56,22 +70,22 @@ using namespace std;
 void Say(int k, int n, std::string & str) {
   if (k == n) return;
   else {
-      std::string foo = "";
-      char ch = str[0];
-      int count = 1;
-      for (int i = 1; i < str.size(); i++) {
-          if (str[i] == ch) count++;
-          else {
-              foo.push_back(count + '0');
-              foo.push_back(ch);
-              ch = str[i];
-              count = 1;
-          }
+    std::string foo = "";
+    char ch = str[0];
+    int count = 1;
+    for (int i = 1; i < str.size(); i++) {
+      if (str[i] == ch) count++;
+      else {
+        foo.push_back(count + '0');
+        foo.push_back(ch);
+        ch = str[i];
+        count = 1;
       }
-      foo.push_back(count + '0');
-      foo.push_back(ch);
-      str = foo;
-      Say(k + 1, n, str);
+    }
+    foo.push_back(count + '0');
+    foo.push_back(ch);
+    str = foo;
+    Say(k + 1, n, str);
   }
 }
 
@@ -84,8 +98,7 @@ std::string Say(int n) {
 class Solution {
 public:
     string countAndSay(int n) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        return Say(n);
+      return Say(n);
     }
 };
 }  // namespace twice

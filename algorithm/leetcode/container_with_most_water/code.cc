@@ -5,6 +5,14 @@
 // File  : code.cc
 // Brief :
 
+/*
+ * Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). 
+ * n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). 
+ * Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+ *
+ * Note: You may not slant the container.
+ * */
+
 #include "base/public/logging.h"
 #include <vector>
 #include <algorithm>
@@ -67,6 +75,7 @@ int MaxArea(std::vector<int> & h) {
   int max = 0;
   while (b <= e) {
     max = std::max(max, (e - b) * std::min(h[b], h[e]));
+    // 每次都是从小的那端开始扩展
     if (h[b] < h[e]) {
       int foo = b;
       while (foo <= e && h[foo] <= h[b]) foo++;

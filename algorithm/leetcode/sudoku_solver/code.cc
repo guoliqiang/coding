@@ -6,6 +6,14 @@
 // Brief :
 
 /*
+
+Write a program to solve a Sudoku puzzle by filling the empty cells.
+Empty cells are indicated by the character '.'.
+You may assume that there will be only one unique solution.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 780 milli secs
  * Progress: 5/5 test cases passed.

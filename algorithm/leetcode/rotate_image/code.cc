@@ -5,6 +5,14 @@
 // File  : code.cc
 // Brief :
 /*
+You are given an n x n 2D matrix representing an image.
+Rotate the image by 90 degrees (clockwise).
+Follow up:
+Could you do this in-place?
+
+*/
+
+/*
  *Run Status: Accepted!
  Program Runtime: 8 milli secs
  Progress: 3/3 test cases passed.

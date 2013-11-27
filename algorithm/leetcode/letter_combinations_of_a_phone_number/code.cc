@@ -4,6 +4,19 @@
 // Date  : 2013-09-22 10:57:02
 // File  : code.cc
 // Brief :
+
+/*
+ *Given a digit string, return all possible letter combinations that the number could represent.
+
+ A mapping of digit to letters (just like on the telephone buttons) is given below.
+
+
+ Input:Digit string "23"
+ Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+ Note:
+ Although the above answer is in lexicographical order, your answer could be in any orde.
+ * */
+
 #include <algorithm>
 #include <vector>
 #include "base/public/logging.h"
@@ -109,6 +122,26 @@ vector<string> letterCombinations(string digits) {
   return ans;
 }
 }  // other
+
+// 直接回溯
+// 之前求subset是二元，这个就是多元的.
+namespace twice {
+std::string phone[] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+void Trace(std::string digits, int k, std::string & path, std::vector<std::string> & rs) {
+  if (k == digits.size()) {
+    rs.push_back(path);
+  } else {
+    int j = digits[k] - '0';
+    for (int i = 0; i < phone[j].size(); i++) {
+      path.push_back(phone[j][i]);
+      Trace(digits, k + 1, path, rs);
+      // path.pop_back();  // pop_back() 可以在leetcode上编译通过
+      path.erase(path.size() - 1);
+    }
+  }
+}
+}  // namespace twice
 
 using namespace algorithm;
 
