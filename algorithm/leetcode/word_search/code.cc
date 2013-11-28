@@ -6,6 +6,24 @@
 // Brief :
 
 /*
+Given a 2D board and a word, find if the word exists in the grid.
+The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells
+are those horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+For example,
+Given board =
+[
+  ["ABCE"],
+  ["SFCS"],
+  ["ADEE"]
+]
+word = "ABCCED", -> returns true,
+word = "SEE", -> returns true,
+word = "ABCB", -> returns false.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 30/30 test cases passed.
@@ -139,6 +157,43 @@ bool Exist(std::vector<std::vector<char> > & board,
 }
 
 }  // namesapce algorithm
+
+namespace third {
+bool ExistT(std::vector<std::vector<char> > & v, std::string & word, int i, int j, int k) {
+  if (k == word.size() - 1) return true;
+
+  char ch = v[i][j];
+  bool rs = false;
+  v[i][j] = '#';
+  // up
+  if (i != 0 && v[i - 1][j] != '#' && v[i - 1][j] == word[k + 1])
+    rs = ExistT(v, word, i - 1, j, k + 1); 
+  // down
+  if (!rs && i != v.size() - 1 && v[i + 1][j] != '#' && v[i + 1][j] == word[k + 1])
+    rs = ExistT(v, word, i + 1, j, k + 1); 
+  // left
+  if (!rs && j != 0 && v[i][j - 1] != '#' && v[i][j - 1] == word[k + 1])
+    rs = ExistT(v, word, i, j - 1, k + 1); 
+  // right
+  if (!rs && j != v[0].size() - 1 && v[i][j + 1] != '#' && v[i][j + 1] == word[k + 1])
+    rs = ExistT(v, word, i, j + 1, k + 1); 
+
+  v[i][j] = ch; 
+  return rs; 
+}
+bool ExistT(std::vector<std::vector<char> > & board,
+              std::string & word) {
+  int m = board.size();
+  int n = (m == 0) ? 0 : board[0].size();
+  if (m == 0 || n == 0 || word.size() == 0) return false;
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      if (board[i][j] == word[0] && ExistT(board, word, i, j, 0)) return true;
+    }
+  }
+  return false;
+}
+}  // namespace third
 
 using namespace algorithm;
 

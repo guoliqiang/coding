@@ -6,6 +6,19 @@
 // Brief :
 
 /*
+Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
+You may assume that the intervals were initially sorted according to their start times.
+
+Example 1:
+Given intervals [1,3],[6,9], insert and merge [2,5] in as [1,5],[6,9].
+
+Example 2:
+Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] in as [1,2],[3,10],[12,16].
+
+This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 20/20 test cases passed.
@@ -112,7 +125,8 @@ using namespace std;
 bool Cmp(const Interval & a, const Interval & b) {
   return a.start < b.start;
 }
-    vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
+//O(n*log(n))
+vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
         // Note: The Solution object is instantiated only once and is reused by each test case.
         intervals.push_back(newInterval);
         std::sort(intervals.begin(), intervals.end(), Cmp);
@@ -130,6 +144,31 @@ bool Cmp(const Interval & a, const Interval & b) {
         return rs;
     }
 }  // namespace twice
+
+namespace third {
+// O(n)
+std::vector<Interval> Insert(std::vector<Interval> &intervals, Interval newInterval) {
+  intervals.push_back(newInterval);
+  int n = intervals.size();
+  for (int i = n - 1; i > 0; i--) {
+    if (intervals[i - 1].start > intervals[i].start)
+      std::swap(intervals[i - 1], intervals[i]);
+    else break;
+  }
+  std::vector<Interval> rs;
+  Interval pre = intervals[0];
+  for (int i = 1; i < n; i++) {
+    if (intervals[i].start <= pre.end) pre.end = std::max(pre.end, intervals[i].end);
+    else {
+      rs.push_back(pre);
+      pre = intervals[i];
+    }
+  }
+  rs.push_back(pre);
+  return rs;
+}
+
+}  // namespace third
 
 int main(int argc, char** argv) {
   std::vector<Interval> foo;

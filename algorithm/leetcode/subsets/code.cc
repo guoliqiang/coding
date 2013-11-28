@@ -6,6 +6,26 @@
 // Brief :
 
 /*
+Given a set of distinct integers, S, return all possible subsets.
+Note:
+Elements in a subset must be in non-descending order.
+The solution set must not contain duplicate subsets.
+For example,
+If S = [1,2,3], a solution is:
+
+[
+  [3],
+  [1],
+  [2],
+  [1,2,3],
+  [1,3],
+  [2,3],
+  [1,2],
+  []
+]
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 16 milli secs
  * Progress: 6/6 test cases passed.
@@ -52,26 +72,26 @@ std::vector<std::vector<int> > Subsets(std::vector<int> & v) {
 namespace twice {
 using namespace std;
 
-void Trace(std::vector<int> & s, std::vector<int> & path, int k, std::vector<std::vector<int> > & rs) {
+void Trace(std::vector<int> & s, std::vector<int> & path,
+           int k, std::vector<std::vector<int> > & rs) {
   if (k == s.size()) {
-      rs.push_back(path);
+    rs.push_back(path);
   } else {
-      Trace(s, path, k + 1, rs);
-      path.push_back(s[k]);
-      Trace(s, path, k + 1, rs);
-      path.pop_back();
+    Trace(s, path, k + 1, rs);
+    path.push_back(s[k]);
+    Trace(s, path, k + 1, rs);
+    path.pop_back();
   }
 }
 class Solution {
-public:
-    vector<vector<int> > subsets(vector<int> &S) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        std::sort(S.begin(), S.end());
-        std::vector<std::vector<int> > rs;
-        std::vector<int> path;
-        Trace(S, path, 0, rs);
-        return rs;
-    }
+ public:
+  std::vector<std::vector<int> > subsets(std::vector<int> &S) {
+    std::sort(S.begin(), S.end());
+    std::vector<std::vector<int> > rs;
+    std::vector<int> path;
+    Trace(S, path, 0, rs);
+    return rs;
+  }
 };
 }  // namespace twice
 

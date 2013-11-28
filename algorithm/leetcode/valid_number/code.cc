@@ -6,6 +6,19 @@
 // Brief :
 
 /*
+Validate if a given string is numeric.
+Some examples:
+"0" => true
+" 0.1 " => true
+"abc" => false
+"1 a" => false
+"2e10" => true
+Note: It is intended for the problem statement to be ambiguous.
+You should gather all requirements up front before implementing one.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 36 milli secs
  * Progress: 1479/1479 test cases passed.

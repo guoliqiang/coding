@@ -6,6 +6,15 @@
 // Brief :
 
 /*
+Given two binary strings, return their sum (also a binary string).
+For example,
+a = "11"
+b = "1"
+Return "100".
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 8/8 test cases passed.
@@ -39,6 +48,7 @@ std::string AddBinarySimple(std::string & a, std::string & b) {
   
 }
 
+// 最初写的好复杂
 std::string AddBinary(std::string & a, std::string & b) {
   std::string rs = "";
 

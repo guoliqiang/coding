@@ -5,6 +5,17 @@
 // File  : code.cc
 // Brief :
 /*
+Given an array of non-negative integers, you are initially positioned at the first index of the array.
+Each element in the array represents your maximum jump length at that position.
+Determine if you are able to reach the last index.
+
+For example:
+A = [2,3,1,1,4], return true.
+
+A = [3,2,1,0,4], return false.
+
+*/
+/*
  * Run Status: Accepted!
  * Program Runtime: 4 milli secs
  * Progress: 29/29 test cases passed.
@@ -61,6 +72,7 @@ bool DP(int A[], int n) {
   }
   return dp[n - 1];
 }
+
 bool DP2(int A[], int n) {
   std::vector<bool> dp(n, false);
   dp[0] = true;
@@ -69,6 +81,18 @@ bool DP2(int A[], int n) {
       for (int j = i; j <= std::min(n - 1, A[i] + i); j++) dp[j] = true;
       i = A[i] + i;
       if (A[i] == 0) break;
+  }
+  return dp[n - 1];
+}
+
+bool DP3(int A[], int n) {
+  int max = 0;
+  std::vector<bool> dp(n, false);
+  dp[0] = true;
+  for (int i = 0; i < n; i++) {
+      if (dp[i] == false) continue;
+      for (int j = max; j <= std::min(n - 1, A[i] + i); j++) dp[j] = true;
+      max = std::max(max, A[i] + i);
   }
   return dp[n - 1];
 }

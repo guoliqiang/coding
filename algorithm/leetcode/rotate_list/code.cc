@@ -5,6 +5,14 @@
 // File  : code.cc
 // Brief :
 //
+/*
+Given a list, rotate the list to the right by k places, where k is non-negative.
+
+For example:
+Given 1->2->3->4->5->NULL and k = 2,
+return 4->5->1->2->3->NULL.
+
+*/
 // if (-1)  == if (true)
 /*
  * Run Status: Accepted!
@@ -81,6 +89,34 @@ ListNode * Build(std::vector<int> & v) {
 }
 
 }  // namespace algorithm
+
+namespace twice {
+ListNode *RotateRight(ListNode *head, int k) {
+  ListNode * ptr1 = head;
+  int n = 0;
+  while (ptr1 != NULL) {
+    n++;
+    ptr1 = ptr1->next;
+  }
+  if (n == 0) return head;
+  k %= n;
+  // 保证 0 < k < n
+  ptr1 = head;
+  ListNode * ptr2 = head;
+  while (k) {
+    k--;
+    ptr1 = ptr1->next;
+  }
+  while (ptr1->next != NULL) {
+    ptr1 = ptr1->next;
+    ptr2 = ptr2->next;
+  }
+  ptr1->next = head;
+  head = ptr2->next;
+  ptr2->next = NULL;
+  return head;
+}
+}  // namespace twice
 
 using namespace algorithm;
 

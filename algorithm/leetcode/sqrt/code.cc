@@ -6,6 +6,13 @@
 // Brief :
 
 /*
+Implement int sqrt(int x).
+
+Compute and return the square root of x.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 16/16 test cases passed.
@@ -49,45 +56,39 @@ int Sqrt(int x) {
 using namespace algorithm;
 
 namespace twice {
-    int sqrt(int x) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        int b = 0;
-        int e = x / 2 + 1;
-        int rs = 0;
-        while (b <= e) {
-            long long mid = b + (e - b) / 2;  // 防止越界　bug fixed
-            if (mid * mid <= x && (mid + 1) * (mid + 1) > x) {
-                rs = mid;
-                break;
-            } else {
-                if (mid * mid < x) b = mid + 1;
-                else e = mid - 1;
-            }
-        }
-        return rs;
+int sqrt(int x) {
+  int b = 0;
+  int e = x / 2 + 1;
+  int rs = 0;
+  while (b <= e) {
+    long long mid = b + (e - b) / 2;  // 防止越界　bug fixed
+    if (mid * mid <= x && (mid + 1) * (mid + 1) > x) {
+      rs = mid;
+      break;
+    } else {
+      if (mid * mid < x) b = mid + 1;
+      else e = mid - 1;
     }
+  }
+  return rs;
+}
 
-    int sqrt2(int x) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        if (x <= 1) return x;  // bug fixed
-        int b = 0;
-        int e = x / 2 + 1;  // 或者　e = x  e == x /2  error!!
-        int rs = 0;
-        while (b <= e) {
-            int mid = b + (e - b) / 2;
-            if (mid == 0) {
-                break;
-            }
-            if (mid <= x / mid &&  mid + 1 > x / (mid + 1)) {
-                rs = mid;
-                break;
-            } else {
-                if (mid < x / mid) b = mid + 1;
-                else e = mid - 1;
-            }
-        }
-        return rs;
-    }
+int sqrt2(int x) {
+  if (x <= 1) return x;  // bug fixed, used for x == 1
+  int b = 0;
+  int e = x / 2 + 1;  // 或者　e = x  e == x / 2  error when x == 2!!
+  int rs = 0;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (mid == 0) break;
+    if (mid <= x / mid &&  mid + 1 > x / (mid + 1)) {
+      rs = mid;
+      break;
+    } else if (mid < x / mid) b = mid + 1;
+    else e = mid - 1;
+  }
+  return rs;
+}
 }  // namespace twice
 
 int main(int argc, char** argv) {

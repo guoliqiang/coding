@@ -6,6 +6,12 @@
 // Brief :
 
 /*
+Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+Note: You can only move either down or right at any point in time.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 10/10 test cases passed.
@@ -48,6 +54,27 @@ int MinPathSum(std::vector<std::vector<int> > & grid) {
 
 }  // namespace algorithm
 
+namespace twice {
+int DP(std::vector<std::vector<int> > & grid) {
+  int m = grid.size();
+  int n = m > 0 ? grid[0].size() : 0;
+  if (n == 0 || m == 0) return 0;
+  std::vector<std::vector<int> > dp(2, std::vector<int>(n, 0));
+  dp[0][0] = grid[0][0];
+  for (int i = 1; i < n; i++) dp[0][i] = dp[0][i - 1] + grid[0][i];
+  bool flag = false;
+  for (int i = 1; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      if (j == 0) dp[!flag][j] = dp[flag][j];
+      else dp[!flag][j] = std::min(dp[flag][j], dp[!flag][j - 1]);
+      dp[!flag][j] += grid[i][j];
+    }
+    flag = !flag;
+  }
+  return dp[flag][n - 1];
+}
+
+}  // namespace twice
 using namespace algorithm;
 
 

@@ -6,6 +6,31 @@
 // Brief :
 
 /*
+Given an array of words and a length L, format the text such that each line has exactly L characters and is fully (left and right) justified.
+You should pack your words in a greedy approach; that is, pack as many words as you can in each line. 
+Pad extra spaces ' ' when necessary so that each line has exactly L characters.
+
+Extra spaces between words should be distributed as evenly as possible.
+If the number of spaces on a line do not divide evenlymple", "of", "text", "justification."]
+L: 16.
+Return the formatted lines as:
+[
+   "This    is    an",
+   "example  of text",
+   "justification.  "
+]
+Note: Each word is guaranteed not to exceed L in length.
+
+click to show corner cases.
+
+Corner Cases:
+A line other than the last line might contain only one word. What should you do in this case?
+In this case, that line should be left-justified.
+
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 10/10 test cases passed.
@@ -86,48 +111,48 @@ using namespace algorithm;
 
 namespace twice {
 using namespace std;
-    vector<string> FullJustify(vector<string> &words, int L) {
-        if (L == 0) return words;
-        std::vector<std::string> rs;
-        int i = 0;
-        while (i < words.size()) {
-            int len = 0;
-            int b = i;
-            while (i < words.size() && len + words[i].size() + (b == i ? 0 : 1) <= L) {
-                len += words[i].size() + (b == i ? 0 : 1);
-                i++;
-            }
-            
-            int space = 0;
-            int left = 0;
-            if (i == words.size()) {
-                space = 0;
-                left = L - len;
-            } else {
-                space = (i - b == 1) ? 0 : (L - len) / (i - b - 1);
-                left = (i - b == 1) ? L - len : (L - len) % (i - b - 1);
-            }
-            std::string foo = "";
-            for (int j = b; j < i; j ++) {
-                if (j == b) {
-                    foo.append(words[j]);
-                } else {
-                    if (left && i != words.size()) {  // bug fixed
-                        foo.append(" ");
-                        left--;
-                    }
-                    for (int k = 0; k < space; k++) foo.append(" ");
-                    foo.append(" ");
-                    foo.append(words[j]);
-                }
-            }
-            if (i == words.size() || i  == b + 1) {
-                for (int k = 0; k < left; k++) foo.append(" ");
-            };
-            rs.push_back(foo);
-        }
-        return rs;
+std::vector<string> FullJustify(std::vector<string> &words, int L) {
+  if (L == 0) return words;
+  std::vector<std::string> rs;
+  int i = 0;
+  while (i < words.size()) {
+    int len = 0;
+    int b = i;
+    while (i < words.size() && len + words[i].size() + (b == i ? 0 : 1) <= L) {
+      len += words[i].size() + (b == i ? 0 : 1);
+      i++;
     }
+            
+    int space = 0;
+    int left = 0;
+    if (i == words.size()) {
+      space = 0;
+      left = L - len;
+    } else {
+      space = (i - b == 1) ? 0 : (L - len) / (i - b - 1);
+      left = (i - b == 1) ? L - len : (L - len) % (i - b - 1);
+    }
+    std::string foo = "";
+    for (int j = b; j < i; j ++) {
+      if (j == b) {
+          foo.append(words[j]);
+      } else {
+        if (left && i != words.size()) {  // bug fixed
+          foo.append(" ");
+          left--;
+        }
+        for (int k = 0; k < space; k++) foo.append(" ");
+        foo.append(" ");
+        foo.append(words[j]);
+      }
+    }
+    if (i == words.size() || i  == b + 1) {
+      for (int k = 0; k < left; k++) foo.append(" ");
+    };
+    rs.push_back(foo);
+  }
+  return rs;
+}
 }  // namespace twice
 
 int main(int argc, char** argv) {

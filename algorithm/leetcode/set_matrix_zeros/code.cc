@@ -5,6 +5,17 @@
 // File  : code.cc
 // Brief :
 
+/*
+Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in place.
+click to show follow up.
+Follow up:
+Did you use extra space?
+A straight forward solution using O(mn) space is probably a bad idea.
+A simple improvement uses O(m + n) space, but still not the best solution.
+Could you devise a constant space solution?
+
+*/
+
 #include "base/public/common_head.h"
 
 namespace wrong {
@@ -100,19 +111,46 @@ void SetZero(std::vector<std::vector<int> > & v) {
     for (int i = 0; i < m; i++) v[i][0] = 0;
   }
 }
+
+// ye~~
+void SetZero2(std::vector<std::vector<int> > & v) {
+  int m = v.size();
+  int n = m > 0 ? v[0].size() : 0;
+  if (m == 0 || n == 0) return;
+  int row0 = -1;
+  int col0 = -1;
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      if (v[i][j] != 0) continue;
+      if (i == 0) row0 = 0;
+      if (j == 0) col0 = 0;
+      if (i == 0 || j == 0) continue;
+      v[i][0] = 0;
+      v[0][j] = 0;
+    }
+  }
+  for (int i = m - 1; i >= 0; i--) {
+    for (int j = n - 1; j >= 0; j--) {
+      if (j == 0 && col0 == 0) v[i][j] = 0;
+      else if (i == 0 && row0 == 0) v[i][j] = 0;
+      else if (v[i][0] == 0 || v[0][j] == 0) v[i][j] = 0;
+    }
+  }
+}
+
 }  // namespace algorithm
 
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
-  std::vector<std::vector<int> > matrix(3, std::vector<int>(5, 1));
+  std::vector<std::vector<int> > matrix(2, std::vector<int>(3, 1));
   // matrix[2][3] = 0;
-  matrix[0][2] = 0;
+  matrix[1][0] = 0;
   matrix[1][2] = 0;
 
   LOG(INFO) << JoinMatrix(&matrix);
-  SetZero(matrix);
+  SetZero2(matrix);
   LOG(INFO) << JoinMatrix(&matrix);
   return 0;
 }

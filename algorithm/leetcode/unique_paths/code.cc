@@ -5,6 +5,19 @@
 // File  : code.cc
 // Brief :
 
+/*
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+How many possible unique paths are there?
+
+
+Above is a 3 x 7 grid. How many possible unique paths are there?
+
+Not  m and n will be at most 100.
+*/
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -120,6 +133,25 @@ int UniquePath(int m, int n) {
 }
 
 }  // namespace algorithm
+
+namespace twice {
+
+int DP(int m, int n) {
+  if (m == 0 || n == 0) return 0;
+  std::vector<std::vector<int> > dp(2, std::vector<int>(n, 0));
+  for (int i = 0; i < n; i++) dp[0][i] = 1;
+  bool flag = false;
+  for (int i = 1; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      if (j == 0) dp[!flag][j] = 1;
+      else dp[!flag][j] = dp[flag][j] + dp[!flag][j - 1];
+    }
+    flag = !flag;
+  }
+  return dp[flag][n - 1];
+}
+
+}  // namespace twice
 
 using namespace algorithm;
 

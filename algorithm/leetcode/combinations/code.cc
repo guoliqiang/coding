@@ -71,29 +71,45 @@ using namespace algorithm;
 namespace twice {
 using namespace std;
 
+// 套用成熟模板AC率高
 void Trace(std::vector<int> & path, int n, int k, int cur, std::vector<std::vector<int> > & rs) {
   if (cur == n) {
-      if (path.size() == k) rs.push_back(path);
+    if (path.size() == k) rs.push_back(path);
   } else {
+    Trace(path, n, k, cur + 1, rs);
+    if (path.size() < k) {
+      path.push_back(cur + 1);
       Trace(path, n, k, cur + 1, rs);
-      if (path.size() < k) {
-          path.push_back(cur + 1);
-          Trace(path, n, k, cur + 1, rs);
-          path.pop_back();
-      }
+      path.pop_back();
+    }
   }
 }
 class Solution {
-public:
-    vector<vector<int> > combine(int n, int k) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        std::vector<int> path;
-        std::vector<std::vector<int> > rs;
-        Trace(path, n, k, 0, rs);
-        return rs;
-    }
+ public:
+  vector<vector<int> > combine(int n, int k) {
+    std::vector<int> path;
+    std::vector<std::vector<int> > rs;
+    Trace(path, n, k, 0, rs);
+    return rs;
+  }
 };
 }  // namespace twice
+
+namespace third {
+void Trace(std::vector<int> & path, int n, int k, int cur,
+           std::vector<std::vector<int> > & rs) {
+  if (path.size() == k) {
+    rs.push_back(path);
+  } else {
+    for (int i = cur; i < n; i++) {
+      path.push_back(i + 1);
+      Trace(path, n, k, i + 1, rs);
+      path.pop_back();
+    }
+  }
+}
+
+}  // namespace third
 
 int main(int argc, char** argv) {
   std::vector<std::vector<int> > foo = Combine(4, 4);

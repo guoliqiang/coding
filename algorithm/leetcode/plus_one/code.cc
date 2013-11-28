@@ -6,6 +6,10 @@
 // Brief :
 
 /*
+Given a number represented as an array of digits, plus one to the number.
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 10/10 test cases passed.
@@ -44,6 +48,38 @@ std::vector<int> PlusOne(std::vector<int> & v) {
 }
 
 }  // namespace algorithm
+
+namespace twice {
+
+void Plus(std::vector<int> & digits, int i, int carry) {
+  if (carry == 0) return;
+  if (i < 0) {
+      digits.insert(digits.begin(), carry);
+  } else {
+      digits[i] += carry;
+      carry = digits[i] / 10;
+      digits[i] %= 10;
+      Plus(digits, i - 1, carry);
+  }
+}
+
+void PlusR(std::vector<int> & digits, int k) {
+  int n = digits.size();
+  int i = n - 1;
+  int carry = k;
+  while (carry) {
+    if (i < 0) {
+      digits.insert(digits.begin(), carry % 10);
+    } else {
+      carry = digits[i] + carry;
+      digits[i] = carry % 10;
+    }
+    i--;
+    carry /= 10;
+  }
+}
+
+}  // namespace twice
 
 using namespace algorithm;
 

@@ -6,6 +6,9 @@
 // Brief :
 //
 /*
+Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
+*/
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 9/9 test cases passed.
@@ -87,22 +90,20 @@ using namespace algorithm;
 
 namespace twice {
 class Solution {
-public:
-    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        ListNode * head = NULL;
-        ListNode ** tail = &head;
-        while (l1!= NULL && l2 != NULL) {
-            *tail = l1->val < l2->val ? l1 : l2;
-            if (*tail == l1) l1 = l1->next;
-            else l2 = l2->next;
-            tail = &((*tail)->next);
-        }
-        if (l1 != NULL) *tail = l1;
-        else *tail = l2;
-        return head;
+ public:
+  ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+    ListNode * head = NULL;
+    ListNode ** tail = &head;
+    while (l1!= NULL && l2 != NULL) {
+      *tail = l1->val < l2->val ? l1 : l2;
+      if (*tail == l1) l1 = l1->next;
+      else l2 = l2->next;
+      tail = &((*tail)->next);
     }
+    if (l1 != NULL) *tail = l1;
+    else *tail = l2;
+    return head;
+  }
 };
 }  // namespace twice
 

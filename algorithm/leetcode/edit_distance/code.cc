@@ -6,6 +6,16 @@
 // Brief :
 
 /*
+Given two words word1 and word2, find the minimum number of steps required to convert word1 to word2. (each operation is counted as 1 step.)
+You have the following 3 operations permitted on a word:
+
+a) Insert a character
+b) Delete a character
+c) Replace a character
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 23/23 test cases passed.
@@ -67,17 +77,45 @@ int DP(string & word1, string & word2)  {
   int n = word2.size();
   std::vector<std::vector<int> > dp(m, std::vector<int>(n, 0));
   dp[0][0] = 0;
+  // 无论当前值想不想等都是从三个值中找最小的
   for (int i = 1; i < n; i++) dp[0][i] = i;
   for (int i = 1; i < m; i++) dp[i][0] = i;
   for (int i = 1; i < m; i++) {
-      for (int j = 1; j < n; j++) {
-          if (word1[i] == word2[j])
-            dp[i][j] = std::min(dp[i - 1][j - 1], std::min(dp[i - 1][j], dp[i][j - 1]) + 1);
-          else
-            dp[i][j] = std::min(dp[i - 1][j - 1] + 1, std::min(dp[i - 1][j], dp[i][j - 1]) + 1);
+    for (int j = 1; j < n; j++) {
+      if (word1[i] == word2[j])
+        dp[i][j] = std::min(dp[i - 1][j - 1], std::min(dp[i - 1][j], dp[i][j - 1]) + 1);
+      else
+        dp[i][j] = std::min(dp[i - 1][j - 1] + 1, std::min(dp[i - 1][j], dp[i][j - 1]) + 1);
       }
   }
   return dp[m - 1][n - 1];
+}
+
+int DP2(std::string & word1, std::string & word2) {
+  word1 = " " + word1;
+  word2 = " " + word2;  // trick
+  int m = word1.size();
+  int n = word2.size();
+  
+  std::vector<std::vector<int> > dp(2, std::vector<int>(n, 0));
+  for (int i = 0; i < n; i++) dp[0][i] = i;
+  bool flag = false;
+  
+  for (int i = 1; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      if (j == 0) dp[!flag][j] = i;
+      else {
+        int t = std::min(dp[flag][j], dp[!flag][j - 1]) + 1;
+        if (word1[i] == word2[j]) {
+          dp[!flag][j] = std::min(dp[flag][j - 1], t);
+        } else {
+          dp[!flag][j] = std::min(dp[flag][j - 1] + 1, t);
+        }
+      }
+    }
+    flag = !flag;
+  }
+  return dp[flag][n - 1];
 }
 }  // namespace twice
 

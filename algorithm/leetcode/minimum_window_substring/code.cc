@@ -6,6 +6,22 @@
 // Brief :
 
 /*
+Given a string S and a string T, find the minimum window in S which will
+contain all the characters in T in complexity O(n).
+
+For example,
+S = "ADOBECODEBANC"
+T = "ABC"
+Minimum window is "BANC".
+
+Note:
+If there is no such window in S that covers all characters in T, return the emtpy string "".
+If there are multiple such windows, you are guaranteed that there will always be only one unique minimum window in S.
+
+最短摘要算法
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 43/43 test cases passed.
@@ -83,9 +99,9 @@ std::string MinWindow(std::string & s, std::string & t) {
   std::map<char, int> dict;
   std::map<char, int> tmap;
   for (int i = 0; i < t.size(); i++) {
-      if (dict.count(t[i])) dict[t[i]]++;
-      else dict[t[i]] = 1;
-      tmap[t[i]] = 0;
+    if (dict.count(t[i])) dict[t[i]]++;
+    else dict[t[i]] = 1;
+    tmap[t[i]] = 0;
   }
   int b = 0;
   int e = 0;
@@ -93,32 +109,30 @@ std::string MinWindow(std::string & s, std::string & t) {
   int min = INT_MAX;
   std::string rs = "";
   while (e < s.size()) {
-      char ch = s[e];
-      if (!dict.count(ch)) {
-          e++;
-          continue;
-      }
-      if (tmap[ch] < dict[ch]) {
-        cur++;
-      }
-      tmap[ch]++;
-      if (cur == t.size()) {
-          while (true) {
-            if (!dict.count(s[b])) b++;
-            else {
-              if (tmap[s[b]] > dict[s[b]]) {
-                  tmap[s[b]]--;
-                  b++;
-              }
-              else break;
-            }
-          }
-          if (e - b + 1 < min) {
-              min = e - b + 1;
-              rs = s.substr(b, e - b + 1);
-          }
-      }
+    char ch = s[e];
+    if (!dict.count(ch)) {
       e++;
+      continue;
+    }
+    if (tmap[ch] < dict[ch]) cur++;
+    tmap[ch]++;
+    if (cur == t.size()) {
+      while (true) {
+        if (!dict.count(s[b])) b++;
+        else {
+          if (tmap[s[b]] > dict[s[b]]) {
+            tmap[s[b]]--;
+            b++;
+          }
+          else break;
+        }
+      }
+      if (e - b + 1 < min) {
+        min = e - b + 1;
+        rs = s.substr(b, e - b + 1);
+      }
+    }
+    e++;
   }
   return rs;
 }
