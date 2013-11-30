@@ -6,6 +6,10 @@
 // Brief :
 
 /*
+Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing all ones and return its area.
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 47/47 test cases passed.
@@ -66,6 +70,48 @@ int MaximalRectangle(const std::vector<std::vector<char> > & v) {
 
 }  // namespace algorithm
 
+namespace twice {
+
+int Largest(std::vector<int> height) {
+  height.push_back(0);
+  int max = 0;
+  std::stack<int> stack;
+  int i = 0;
+  while (i < height.size()) {
+    if (stack.empty() || height[i] >= height[stack.top()]) {
+      stack.push(i);
+      i++;
+    } else {
+      int t = stack.top();
+      stack.pop();
+      int tmax = stack.empty() ? height[t] * i : height[t] * (i - stack.top() - 1);
+      max = std::max(max, tmax);
+    }
+  }
+  return max;
+}
+
+class Solution {
+ public:
+  int maximalRectangle(std::vector<std::vector<char> > &matrix) {
+    int m = matrix.size();
+    if (m == 0) return 0;
+    int n = matrix[0].size();
+        
+    int max = 0;
+    std::vector<int> lines(n, 0);
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        if (matrix[i][j] == '1') lines[j]++;
+        else lines[j] = 0;
+      }
+    max = std::max(max, Largest(lines));
+  }
+  return max;
+}
+
+};
+}  // namespace twice
 using namespace algorithm;
 
 int main(int argc, char** argv) {

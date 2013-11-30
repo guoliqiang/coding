@@ -6,6 +6,35 @@
 // Brief :
 
 /*
+Given n, generate all structurally unique BST's (binary search trees) that store values 1...n.
+
+For example,
+Given n = 3, your program should return all 5 unique BST's shown below.
+
+   1         3     3      2      1
+    \       /     /      / \      \
+     3     2     1      1   3      2
+    /     /       \                 \
+   2     1         2                 3
+confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on OJ.
+
+
+OJ's Binary Tree Serialization:
+The serialization of a binary tree follows a level order traversal, where '#' signifies a path terminator where no node exists below.
+
+Here's an example:
+   1
+  / \
+ 2   3
+    /
+   4
+    \
+     5
+The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 3/3 test cases passed.
@@ -233,8 +262,60 @@ std::vector<TreeNode *> Make(int v, std::vector<TreeNode *> & vec, bool right) {
  }
 }  // namespace twice
 
+// 这个好写
+namespace third {
+void Generate(int b, int e, std::vector<std::vector<std::vector<TreeNode *> > > & dp) {
+  if (b == e) {
+    dp[b][e].push_back(new TreeNode(b + 1));
+    return;
+  }
+
+  for (int i = b; i <= e; i++) {
+    if (i == b) {
+      if (dp[i + 1][e].size() == 0) Generate(i + 1, e, dp);
+      for (int j = 0; j < dp[i + 1][e].size(); j++) {
+        TreeNode * ptr = new TreeNode(b + 1);
+        ptr->right = dp[i + 1][e][j];
+        dp[b][e].push_back(ptr);
+      }
+    } else if (i == e) {
+      if (dp[b][i- 1].size() == 0) Generate(b, i - 1, dp);
+      for (int j = 0; j < dp[b][i - 1].size(); j++) {
+        TreeNode * ptr = new TreeNode(e + 1);
+        ptr->left = dp[b][i - 1][j];
+        dp[b][e].push_back(ptr);
+      }
+    } else {
+      if (dp[b][i - 1].size() == 0) Generate(b, i - 1, dp);
+      if (dp[i + 1][e].size() == 0) Generate(i + 1, e, dp);
+      for (int j = 0; j < dp[b][i - 1].size(); j++) {
+        for (int k = 0; k < dp[i + 1][e].size(); k++) {
+          TreeNode * ptr = new TreeNode(i + 1);
+          ptr->left = dp[b][i - 1][j];
+          ptr->right = dp[i + 1][e][k];
+          dp[b][e].push_back(ptr);
+        }
+      }
+    }
+  }
+}
+
+std::vector<TreeNode *> Generate(int n) {
+  if (n == 0) {
+    std::vector<TreeNode *> foo;
+    foo.push_back(NULL);
+    return foo;
+  }
+  std::vector<std::vector<std::vector<TreeNode*> > > dp(n, std::vector<std::vector<TreeNode *> > (n, std::vector<TreeNode*>()));
+  Generate(0, n - 1, dp);
+  return dp[0][n - 1];
+}
+} // namespace third
+
 int main(int argc, char** argv) {
-  std::vector<TreeNode *> rs = TreesNew(3);
+  // std::vector<TreeNode *> rs = TreesNew(3);
+  std::vector<TreeNode *> rs = third::Generate(3);
+  LOG(INFO) << rs.size();
   for (int i = 0; i < rs.size(); i++) {
     HERE(INFO);
     PreOrder(rs[i]);

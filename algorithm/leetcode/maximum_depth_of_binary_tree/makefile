@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/leetcode/4sum
+PROJ_NAME=algorithm/leetcode/maximum_depth_of_binary_tree
 
 
 all:

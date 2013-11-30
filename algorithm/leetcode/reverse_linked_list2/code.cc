@@ -6,6 +6,18 @@
 // Brief :
 
 /*
+Reverse a linked list from position m to n. Do it in-place and in one-pass.
+For example:
+Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+return 1->4->3->2->5->NULL.
+
+Note:
+Given m, n satisfy the following condition:
+1 ≤ m ≤ n ≤ length of list.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 4 milli secs
  * Progress: 24/24 test cases passed.
@@ -108,35 +120,62 @@ ListNode * Reverse(ListNode * head, int m, int n) {
 
 using namespace algorithm;
 
+namespace third {
+ListNode * Reverse(ListNode * head, int m, int n) {
+  ListNode * rs = head;
+  ListNode * pre = NULL;
+  for (int i = 1; i < m; i++) {
+    pre = head;
+    head = head->next;
+  }
+
+  ListNode * l_head = NULL;
+  ListNode * l_tail = NULL;
+  for (int i = 0; i < n - m + 1; i++) {
+    ListNode * next = head->next;
+    head->next = l_tail;
+    l_tail = head;
+    if (l_head == NULL) l_head = l_tail;
+    head = next;
+  }
+  if (pre != NULL) pre->next = l_tail;
+  l_head->next = head;
+  return pre == NULL ? l_tail : rs;
+}
+
+}  // namespace third
+
 namespace twice {
 class Solution {
-public:
-    ListNode *reverseBetween(ListNode *head, int m, int n) {
-        ListNode * rs = head;
-        ListNode * pre = NULL;
-        int i = m - 1;
-        for (int j = 0; j < i; j ++){
-            pre = head;
-            head = head->next;
-        }
-        i = n - m;
-        ListNode * thead = NULL;
-        ListNode * tail = NULL;
-        for (int j = 0; j < i; j++) {
-            ListNode * next = head->next;
-            head->next = tail;
-            tail = head;
-            if (thead == NULL) thead = tail;
-            head = next;
-        }
-        if (thead != NULL) thead->next = head->next;
-        if (pre != NULL) pre->next = head;
-        if (tail != NULL) head->next = tail;
-        if (pre == NULL) return head;
-        return rs;
+ public:
+  ListNode *reverseBetween(ListNode *head, int m, int n) {
+    ListNode * rs = head;
+    ListNode * pre = NULL;
+    int i = m - 1;
+    for (int j = 0; j < i; j++){
+      pre = head;
+      head = head->next;
     }
+    i = n - m;
+    ListNode * thead = NULL;
+    ListNode * tail = NULL;
+    for (int j = 0; j < i; j++) {
+      ListNode * next = head->next;
+      head->next = tail;
+      tail = head;
+      if (thead == NULL) thead = tail;
+      head = next;
+    }
+    // head还需要翻转
+    if (thead != NULL) thead->next = head->next;
+    if (pre != NULL) pre->next = head;
+    if (tail != NULL) head->next = tail;  // for case m == n
+
+    if (pre == NULL) return head;
+    return rs;
+  }
 };
-}
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<int> foo;

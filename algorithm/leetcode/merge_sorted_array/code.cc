@@ -6,6 +6,13 @@
 // Brief :
 
 /*
+Given two sorted integer arrays A and B, merge B into A as one sorted array.
+Note:
+You may assume that A has enough space to hold additional elements from B.
+The number of elements initialized in A and B are m and n respectively.
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 13/13 test cases passed.
@@ -19,10 +26,14 @@
 
 namespace algorithm {
 
-void MergeNB(int * a, int m, int *b, int n) {
-  while(n > 0){
-    if(m <= 0 || A[m - 1] < B[n - 1]) A[n + m - 1] = B[--n]; // []优先级高于++/--  从左到右
-    else A[n + m - 1] = A[--m];
+void MergeNB(int * a, int m, int * b, int n) {
+  while (n > 0){
+    if(m <= 0 || a[m - 1] < b[n - 1]) {
+      // 这种写法编译错误
+      // a[n + m - 1] = b[--n]; // []优先级高于++/--  从左到右
+    } else {
+      // a[n + m - 1] = a[--m];
+    }
   }
 }
 
@@ -38,14 +49,25 @@ void Merge(int * a, int m, int * b, int n) {
 }
 }  // namespace algorithm
 
+namespace twice {
+void Merge(int * a, int m, int * b, int n) {
+  int k = m + n - 1;
+  int i = m - 1;
+  int j = n - 1;
+  while (j >= 0) {
+    if (i < 0 || b[j] > a[i]) a[k--] = b[j--];
+    else a[k--] = a[i--];
+  }
+}
+}  // namespace twice
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
   int A[] = {0, 1, 2, 3, 0, 0, 0};
-  int B[] = {1};
-  Merge(A, 0, B, 1);
-  for (int i = 0; i < 1; i ++) {
+  int B[] = {2};
+  twice::Merge(A, 3, B, 1);
+  for (int i = 0; i < 4; i ++) {
     LOG(INFO) << A[i];
   }
   return 0;

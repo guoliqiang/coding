@@ -6,6 +6,14 @@
 // Brief :
 
 /*
+Follow up for "Remove Duplicates":
+What if duplicates are allowed at most twice?
+For example,
+Given sorted array A = [1,1,1,2,2,3],
+Your function should return length = 5, and A is now [1,1,2,2,3].
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 22/22 test cases passed.

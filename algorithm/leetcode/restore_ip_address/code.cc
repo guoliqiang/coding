@@ -6,6 +6,16 @@
 // Brief :
 
 /*
+Given a string containing only digits, restore it by returning all possible valid IP address combinations.
+
+For example:
+Given "25525511135",
+
+return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 24/24 test cases passed.
@@ -28,7 +38,6 @@ bool Bigger255(std::string & s) {
 
 void Trace(std::string & str, std::string path, int n, int len, std::vector<std::string> & rs) {
   if (n == 5) {
-    // LOG(INFO) << len << " " << str.size() << " " << path;
     if (len == str.size()) {
       rs.push_back(path.substr(0, path.size() - 1));
     }

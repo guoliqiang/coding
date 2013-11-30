@@ -6,6 +6,14 @@
 // Brief :
 
 /*
+Given preorder and inorder traversal of a tree, construct the binary tree.
+Note:
+You may assume that duplicates do not exist in the tree.
+
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 23/23 test cases passed.

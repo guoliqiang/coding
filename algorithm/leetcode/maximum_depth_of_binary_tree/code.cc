@@ -6,6 +6,12 @@
 // Brief :
 
 /*
+Given a binary tree, find its maximum depth.
+
+The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 12/12 test cases passed.

@@ -6,6 +6,41 @@
 // Brief :
 
 /*
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+For example, this binary tree is symmetric:
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+But the following is not:
+    1
+   / \
+  2   2
+   \   \
+   3    3
+Note:
+Bonus points if you could solve it both recursively and iteratively.
+
+confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on OJ.
+
+
+OJ's Binary Tree Serialization:
+The serialization of a binary tree follows a level order traversal, where '#' signifies a path terminator where no node exists below.
+
+Here's an example:
+   1
+  / \
+ 2   3
+    /
+   4
+    \
+     5
+The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 28/28 test cases passed.
@@ -40,28 +75,28 @@ namespace twice {
 using namespace algorithm;
 
 bool Mirror2(TreeNode * root1, TreeNode * root2) {
-    std::stack<std::pair<TreeNode *, TreeNode *> > stack;
+  std::stack<std::pair<TreeNode *, TreeNode *> > stack;
+  while (root1 && root2) {
+    if (root1->val != root2->val) return false;
+    stack.push(std::make_pair(root1, root2));
+    root1 = root1->left;
+    root2 = root2->right;
+  }
+  if (root1 != NULL || root2 != NULL) return false;
+  while (!stack.empty()) {
+    std::pair<TreeNode *, TreeNode *> t = stack.top();
+    stack.pop();
+    root1 = t.first->right;
+    root2 = t.second->left;
     while (root1 && root2) {
-        if (root1->val != root2->val) return false;
-        stack.push(std::make_pair(root1, root2));
-        root1 = root1->left;
-        root2 = root2->right;
+      if (root1->val != root2->val) return false;
+      stack.push(std::make_pair(root1, root2));
+      root1 = root1->left;
+      root2 = root2->right;
     }
     if (root1 != NULL || root2 != NULL) return false;
-    while (!stack.empty()) {
-        std::pair<TreeNode *, TreeNode *> t = stack.top();
-        stack.pop();
-        root1 = t.first->right;
-        root2 = t.second->left;
-        while (root1 && root2) {
-          if (root1->val != root2->val) return false;
-          stack.push(std::make_pair(root1, root2));
-          root1 = root1->left;
-          root2 = root2->right;
-        }
-        if (root1 != NULL || root2 != NULL) return false;
-    }
-    return true;
+  }
+  return true;
 }
 }  // namespace twice
 using namespace algorithm;

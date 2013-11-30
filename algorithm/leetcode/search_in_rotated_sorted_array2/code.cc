@@ -6,6 +6,13 @@
 // Brief :
 
 /*
+Follow up for "Search in Rotated Sorted Array":
+What if duplicates are allowed?
+Would this affect the run-time complexity? How and why?
+Write a function to determine if a given target is in the array.
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 110/110 test cases passed.
@@ -50,6 +57,26 @@ bool BSearch(int * a, int n, int t) {
 
 }  // namespace algorithm
 
+namespace twice {
+bool BSearch(int * A, int n, int t) {
+  int b = 0;
+  int e = n - 1;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (A[mid] == t) return true;
+    else if (A[mid] > A[e]) {
+      if (t > A[e] && t < A[mid]) e = mid - 1;
+      else b = mid + 1;
+    } else if (A[mid] < A[e]) {
+      if (t <= A[e] && t > A[mid]) b = mid + 1;
+      else e = mid - 1;
+    } else {
+      e--;
+    }
+  }
+  return false;
+}
+}  // namespace twice
 
 using namespace algorithm;
 

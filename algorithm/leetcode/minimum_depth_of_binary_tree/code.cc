@@ -6,6 +6,11 @@
 // Brief :
 
 /*
+Given a binary tree, find its minimum depth.
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 13/13 test cases passed.
@@ -36,6 +41,21 @@ int MinDeep(TreeNode * root) {
 }
 
 }  // namespace algorithm
+
+namespace twice {
+int MinDeep(TreeNode * root) {
+  if (root == NULL) return 0;
+  int min = 0;
+  if (root->left != NULL) {
+    min = MinDeep(root->left);
+  }
+  if (root->right != NULL) {
+    int t = MinDeep(root->right);
+    min = (min == 0) ? t : std::min(t, min);
+  }
+  return min + 1;
+}
+}  // namespace twice
 
 using namespace algorithm;
 
