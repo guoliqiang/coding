@@ -8,6 +8,12 @@
 #include "base/public/common_head.h"
 
 /*
+Given a linked list, determine if it has a cycle in it.
+Follow up:
+Can you solve it without using extra space?
+*/
+
+/*
  * 16 / 16 test cases passed.
  * Status: Accepted
  * Runtime: 72 ms
@@ -19,7 +25,7 @@ namespace algorithm {
 struct ListNode {
   int val;
   ListNode * next;
-  ListNode(int x) : val(x), next(NULL){}
+  ListNode(int x) : val(x), next(NULL) {}
 };
 
 bool HasCycle(ListNode * head) {

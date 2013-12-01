@@ -5,6 +5,19 @@
 // File  : code.cc
 // Brief :
 
+/*
+Given a binary tree, return the preorder traversal of its nodes' values.
+For example:
+Given binary tree {1,#,2,3},
+   1
+    \
+     2
+    /
+   3
+return [1,2,3].
+Note: Recursive solution is trivial, could you do it iteratively?
+*/
+
 #include "base/public/common_head.h"
 #include "../ojbst/ojbst.h"
 
@@ -48,6 +61,27 @@ std::vector<int> PreOrderTra(TreeNode * root) {
 
 using namespace algorithm;
 
+namespace twice {
+std::vector<int> PreOrderTra(TreeNode * root) {
+  std::vector<int> rs;
+  std::stack<TreeNode *> stack;
+  while (root != NULL) {
+    rs.push_back(root->val);
+    stack.push(root);
+    root = root->left;
+  }
+  while (!stack.empty()) {
+    TreeNode * foo = stack.top()->right;
+    stack.pop();
+    while (foo != NULL) {
+      rs.push_back(foo->val);
+      stack.push(foo);
+      foo = foo->left;
+    }
+  }
+  return rs;
+}
+}  // namespace twice
 
 int main(int argc, char** argv) {
 

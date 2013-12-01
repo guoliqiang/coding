@@ -6,6 +6,17 @@
 // Brief :
 
 /*
+Given a string S and a string T, count the number of distinct subsequences of T in S.
+A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the
+characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
+
+Here is an example:
+S = "rabbbit", T = "rabbit"
+
+Return 3.
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 21/21 test cases passed.
@@ -35,7 +46,7 @@ void DP(std::string & s, std::string & t, std::vector<std::vector<int> > & dp) {
     for (int j = 1; j < n; j++) {
       if (i > j) dp[i][j] = 0;
       else {
-        if (t[i] == s[j]) dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1];
+        if (t[i] == s[j]) dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1];  // 根据是不是需要删除s[j]分类
         else dp[i][j] = dp[i][j - 1];
       }
     }

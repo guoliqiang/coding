@@ -6,6 +6,36 @@
 // Brief :
 
 /*
+Given a binary tree, flatten it to a linked list in-place.
+
+For example,
+Given
+
+         1
+        / \
+       2   5
+      / \   \
+     3   4   6
+The flattened tree should look like:
+   1
+    \
+     2
+      \
+       3
+        \
+         4
+          \
+           5
+            \
+             6
+click to show hints.
+
+Hints:
+If you notice carefully in the flattened tree, each node's right child points to the next node of a pre-order traversal.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 4 milli secs
  * Progress: 27/27 test cases passed.
@@ -41,6 +71,28 @@ TreeNode * Flatten(TreeNode * root) {
 }  // namespace algorithm
 
 using namespace algorithm;
+
+// 这个更精简
+namespace twice {
+void Flatten(TreeNode * root, TreeNode * & pre) {  // pre must be reference
+  if (root == NULL) return;
+  if (pre != NULL) {
+    pre->right = root;
+    pre->left = NULL;
+  }
+  pre = root;
+  TreeNode * right = root->right; // right 必须备份，否在起值会在left递归中被覆盖
+  Flatten(root->left, pre);
+  Flatten(right, pre);
+}
+
+TreeNode * Flatten(TreeNode * root) {
+  TreeNode * pre = NULL;
+  Flatten(root, pre);
+  return root;
+}
+}  // namespace twice
+
 
 int main(int argc, char** argv) {
   std::string str = "1,#,2,4,3";

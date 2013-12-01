@@ -5,6 +5,18 @@
 // File  : code.cc
 // Brief :
 
+/*
+Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+
+For example,
+Given [100, 4, 200, 1, 3, 2],
+The longest consecutive elements sequence is [1, 2, 3, 4]. Return its length: 4.
+
+Your algorithm should run in O(n) complexity.
+
+
+*/
+
 
 /*
  *   -------          -------------              ---------------
@@ -38,10 +50,11 @@ int Merge(std::map<int, int> & dp, int left, int right) {
 }
 
 int LongestConsecutiveNB(std::vector<int> & num) {
-  std::map<int, int> dp;
+  std::map<int, int> dp;  // dp[i]表示以i开始的或结束的连续串的长度, 只有边界的值才是有意义的，所以可以判断出dp[i]
+                          //  表示的是开始位置还是结束位置
   int max =  1;
   for (int i = 0; i < num.size(); i++) {
-    if (dp.count(num[i])) continue;
+    if (dp.count(num[i])) continue;  // 精髓
     dp[num[i]] = 1;
     if (dp.count(num[i] - 1)) {
       max = std::max(Merge(dp, num[i] - 1, num[i]), max);
@@ -108,6 +121,35 @@ int LongestConsecutive(std::vector<int> & num) {
 
 using namespace algorithm;
 
+namespace twice {
+int LongestConsecutive(std::vector<int> & v) {
+  std::map<int, int> dp;
+  int max = 0;
+  for (int i = 0; i < v.size(); i ++) {
+    int t = v[i];
+    if (dp.count(t)) continue;
+    dp[t] = 1;
+    max = std::max(max, dp[t]);
+    if (dp.count(t - 1)) {
+      int low = t - dp[t - 1];
+      int len = dp[t - 1] + 1;
+      dp[low] = len;
+      dp[t] = len;
+      max = std::max(max, len);
+    }
+    if (dp.count(t + 1)) {
+      int low = t - dp[t] + 1;
+      int up = t + dp[t + 1];
+      int len = dp[t] + dp[t + 1];
+      dp[low] = len;
+      dp[up] = len;
+      max = std::max(max, len);
+    }
+  }
+  return max;
+}
+}  // namespace twice
+
 
 int main(int argc, char** argv) {
   std::vector<int> foo;
@@ -133,5 +175,6 @@ int main(int argc, char** argv) {
   foo.push_back(-3);
   LOG(INFO) << LongestConsecutive(foo);
   LOG(INFO) << LongestConsecutiveNB(foo);
+  LOG(INFO) << twice::LongestConsecutive(foo);
   return 0;
 }

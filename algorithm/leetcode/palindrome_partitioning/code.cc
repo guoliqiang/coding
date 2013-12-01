@@ -7,6 +7,21 @@
 
 #include "base/public/common_head.h"
 
+/*
+Given a string s, partition s such that every substring of the partition is a palindrome.
+
+Return all possible palindrome partitioning of s.
+
+For example, given s = "aab",
+Return
+
+  [
+    ["aa","b"],
+    ["a","a","b"]
+  ]
+
+*/
+
 namespace algorithm {
 
 /*
@@ -191,30 +206,30 @@ namespace twice {
 void DP(std::string & s, std::vector<std::vector<int> > & dp) {
   int n = s.size();
   for (int i = 0; i < n; i++) {
-      for (int j = i; j >= 0; j--) {
-          if (j == i) dp[i][j] = 1;
-          else if (j == i - 1) {
-            dp[i][j] = s[i] == s[j] ? 1 : 0;
-          } else {
-              dp[i][j] = dp[i - 1][j + 1] && s[i] == s[j] ? 1 : 0;
-          }
+    for (int j = i; j >= 0; j--) {
+      if (j == i) dp[i][j] = 1;
+      else if (j == i - 1) {
+        dp[i][j] = s[i] == s[j] ? 1 : 0;
+      } else {
+        dp[i][j] = dp[i - 1][j + 1] && s[i] == s[j] ? 1 : 0;
       }
+    }
   }
 }
 
 void Trace(std::string & s, std::vector<std::string> & path, 
            std::vector<std::vector<int> > & dp, std::vector<std::vector<std::string> > & rs, int k) {
-    if (k < 0) {
-        rs.push_back(std::vector<std::string>(path.rbegin(), path.rend()));
-    } else {
-        for (int i = k; i >= 0; i--) {
-            if (dp[k][i] == 1) {
-                path.push_back(s.substr(i, k - i + 1));
-                Trace(s, path, dp, rs, i - 1);
-                path.pop_back();
-            }
-        }
+  if (k < 0) {
+    rs.push_back(std::vector<std::string>(path.rbegin(), path.rend()));
+  } else {
+    for (int i = k; i >= 0; i--) {
+      if (dp[k][i] == 1) {
+        path.push_back(s.substr(i, k - i + 1));
+        Trace(s, path, dp, rs, i - 1);
+        path.pop_back();
+      }
     }
+  }
 }
 
 std::vector<std::vector<std::string> > Partition(std::string & s) {
@@ -228,14 +243,44 @@ std::vector<std::vector<std::string> > Partition(std::string & s) {
 }
 }  // namespace twice
 
+namespace third {
+// 递归中直接dp
+void Trace(std::string & s, std::vector<std::vector<int> > & dp,
+           std::vector<std::string> & path, std::vector<std::vector<std::string> > & rs, int k) {  
+  if (k >= s.size()) {
+    rs.push_back(path);
+    return;
+  }
+  for (int i = k; i < s.size(); i++) {
+    if (i == k) dp[k][i] = 1;
+    else if (i == k + 1) dp[k][i] = s[k] == s[i] ? 1 : 0;
+    else dp[k][i] = (dp[k + 1][i - 1] && s[k] == s[i]) ? 1 : 0;
+    if (dp[k][i]) {
+      path.push_back(s.substr(k, i - k + 1));
+      Trace(s, dp, path, rs, i + 1);
+      path.pop_back();
+    }
+  }
+}
+
+std::vector<std::vector<std::string> > Partition(std::string & s) {
+  int n = s.size();
+  std::vector<std::vector<int> > dp(n, std::vector<int>(n, 0));
+  std::vector<std::string> path;
+  std::vector<std::vector<std::string> > rs;
+  Trace(s, dp, path, rs, 0);
+  return rs;
+}
+}  // namespace third
+
 int main(int argc, char** argv) {
-  std::string str = "bb";
+  std::string str = "abb";
   // std::vector<std::vector<std::string> > rs = Partition(str);
   std::vector<std::vector<std::string> > rs = twice::Partition(str);
   LOG(INFO) << JoinMatrix(&rs);
   rs = DFS(str);
   LOG(INFO) << JoinMatrix(&rs);
-  rs = Partition2(str);
+  rs = third::Partition(str);
   LOG(INFO) << JoinMatrix(&rs);
   return 0;
 }

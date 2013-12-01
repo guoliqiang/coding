@@ -6,6 +6,20 @@
 // Brief :
 
 /*
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+For example,
+"A man, a plan, a canal: Panama" is a palindrome.
+"race a car" is not a palindrome.
+
+Note:
+Have you consider that the string might be empty? This is a good question to ask during an interview.
+
+For the purpose of this problem, we define empty string as valid palindrome.
+
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 4 milli secs
  * Progress: 27/27 test cases passed.
@@ -65,6 +79,24 @@ bool IsPalindrome2(std::string & s) {
 }  // namespace algorithm
 
 using namespace algorithm;
+
+namespace twice {
+
+bool Check(std::string & s) {
+  int b = 0;
+  int e = s.size() - 1;
+  while (b < e) {
+    if (Ignore(s[b])) b++;
+    else if (Ignore(s[e])) e--;
+    else if (Lower(s[b]) != Lower(s[e])) return false;
+    else {
+      b++;
+      e--;
+    }
+  }
+  return true;
+}
+}  // namespace twice
 
 
 int main(int argc, char** argv) {

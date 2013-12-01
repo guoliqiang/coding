@@ -5,6 +5,9 @@
 // File  : code.cc
 // Brief :
 
+/*
+Sort a linked list using insertion sort.
+*/
 
 #include "base/public/common_ojhead.h"
 #include "../ojlist/head.h"

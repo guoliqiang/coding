@@ -5,6 +5,20 @@
 // File  : code.cc
 // Brief :
 //
+
+/*
+Given a binary tree, find the maximum path sum.
+The path may start and end at any node in the tree.
+For example:
+Given the below binary tree,
+
+       1
+      / \
+     2   3
+Return 6.
+
+*/
+
 /*Run Status: Accepted!
  * Program Runtime: 8 milli secs
  * Progress: 20/20 test cases passed.
@@ -41,7 +55,7 @@ void PostOrder(TreeNode * root, int * max, int * rs) {
   if (tmax > *rs) *rs = tmax;
 
   *max = std::max(left_max, right_max);
-  *max = std::max(0, *max) + root->val;
+  *max = std::max(0, *max) + root->val;  // max表示以root为起始点的值最大的一条path对应的值
 }
 
 int MaxPathSum(TreeNode * root) {

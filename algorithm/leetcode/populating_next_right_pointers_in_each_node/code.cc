@@ -5,6 +5,38 @@
 // File  : code.cc
 // Brief :
 
+/*
+Given a binary tree
+
+    struct TreeLinkNode {
+      TreeLinkNode *left;
+      TreeLinkNode *right;
+      TreeLinkNode *next;
+    }
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+
+Note:
+
+You may only use constant extra space.
+You may assume that it is a perfect binary tree (ie, all leaves are at the same level, and every parent has two children).
+For example,
+Given the following perfect binary tree,
+         1
+       /  \
+      2    3
+     / \  / \
+    4  5  6  7
+After calling your function, the tree should look like:
+         1 -> NULL
+       /  \
+      2 -> 3 -> NULL
+     / \  / \
+    4->5->6->7 -> NULL
+
+*/
+
 /* Connect
  * Run Status: Accepted!
  * Program Runtime: 4 milli secs
@@ -63,6 +95,20 @@ void Connect2(TreeLinkNode * root) {
       LOG(INFO) << "here " << foo->val;
       foo->left->next = foo->right;
       if (foo->next != NULL) foo->right->next = foo->next->left;
+      foo = foo->next;
+    }
+    root = root->left;
+  }
+}
+
+void ConnectBest(TreeLinkNode * root) {
+  while (root && root->left) {
+    TreeLinkNode * pre = NULL;
+    TreeLinkNode * foo = root;
+    while (foo) {
+      foo->left->next = foo->right;
+      if (pre != NULL) pre->right->next = foo->left;
+      pre = foo;
       foo = foo->next;
     }
     root = root->left;
@@ -151,6 +197,30 @@ void SpecialInOrder(TreeLinkNode * root) {
 }  // namespace algorithm
 
 using namespace algorithm;
+
+namespace twice {
+void Connect(TreeLinkNode * root) {
+  while (root != NULL) {
+    TreeLinkNode * pre = NULL;
+    TreeLinkNode * next = NULL;
+    TreeLinkNode * foo = root;
+    while (foo != NULL) {
+      if (foo->left != NULL) {
+        if (pre != NULL) pre->next = foo->left;
+        pre = foo->left;
+        if (next == NULL) next = pre;
+      }
+      if (foo->right != NULL) {
+        if (pre != NULL) pre->next = foo->right;
+        pre = foo->right;
+        if (next == NULL) next = pre;
+      }
+      foo = foo->next;
+    }
+    root = next;
+  }
+}
+}  // namespace twice
 
 
 int main(int argc, char** argv) {

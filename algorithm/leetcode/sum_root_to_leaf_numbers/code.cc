@@ -6,6 +6,24 @@
 // Brief :
 
 /*
+Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
+
+An example is the root-to-leaf path 1->2->3 which represents the number 123.
+
+Find the total sum of all root-to-leaf numbers.
+
+For example,
+
+    1
+   / \
+  2   3
+The root-to-leaf path 1->2 represents the number 12.
+The root-to-leaf path 1->3 represents the number 13.
+
+Return the sum = 12 + 13 = 25.
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 10/10 test cases passed.
@@ -59,8 +77,25 @@ int SumNumber(TreeNode * root) {
 
 }  // namespce algorithm
 
+
 using namespace algorithm;
 
+namespace twice {
+void Trace(TreeNode * root, int cur, int & rs) {
+  cur = cur * 10 + root->val;
+  if (root->left == NULL && root->right == NULL) rs += cur;
+  if (root->left != NULL) Trace(root->left, cur, rs);
+  if (root->right != NULL) Trace(root->right, cur, rs);
+}
+
+int SumNumber(TreeNode * root) {
+  if (root == NULL) return 0;
+  int rs = 0;
+  int cur = 0;
+  Trace(root, cur, rs);
+  return rs;
+}
+}  //  namespace twice
 
 int main(int argc, char** argv) {
   std::string str = "5,3,2,7,0,6,#,#,#,0";
@@ -70,5 +105,6 @@ int main(int argc, char** argv) {
   PreOrder(t);
   LOG(INFO) << SumNumber(t);
   LOG(INFO) << 'A' - 'a';
+  LOG(INFO) << twice::SumNumber(t);
   return 0;
 }

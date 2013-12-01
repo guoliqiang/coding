@@ -6,6 +6,16 @@
 // Brief :
 
 /*
+Given an index k, return the kth row of the Pascal's triangle.
+
+For example, given k = 3,
+Return [1,3,3,1].
+
+Note:
+Could you optimize your algorithm to use only O(k) extra space?
+*/
+
+/*
  * Run Status: Accepted!
  * Program Runtime: 12 milli secs
  * Progress: 11/11 test cases passed.
