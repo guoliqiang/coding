@@ -5,6 +5,7 @@
 // File  : code2.cc
 // Brief :
 
+// tarjan强联通分量
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -80,6 +81,5 @@ int main(int argc, char** argv) {
   v[4][5] = 1;
   Read(v);
   Find();
- 
   return 0;
 }

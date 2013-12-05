@@ -64,7 +64,7 @@ int MaxClique(std::vector<std::vector<int> > & v) {
     for (int j = i + 1; j < N; j++) {
       if (matrix[i][j] > 0) stack[1][cnt++] = j;
     }
-    DFS(1, cnt); // Note begin from 1
+    DFS(1, cnt); // Note begin from 1, 0 其实是被ｉ占据了
     dp[i] = max_clique;
   }
   return max_clique;

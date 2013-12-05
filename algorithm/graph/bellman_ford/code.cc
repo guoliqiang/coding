@@ -6,6 +6,7 @@
 // Brief :
 // 在有边值为负数的情况下求单源最短路径
 // Note: 单源最短路径的定义并没有规定路径中只能经过某个点一次
+// 也可以判断是不是存在正权回路poj1860
 #include "base/public/common_head.h"
 
 namespace algorithm {

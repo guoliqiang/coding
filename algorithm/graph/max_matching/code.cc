@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+普通图的最小点／边覆盖可以转换成二分图最大匹配问题
+详细见　mini_edge_point_cover
+*/
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

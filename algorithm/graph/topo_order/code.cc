@@ -12,39 +12,31 @@ const int MAX = 1000;
 int N = 0;
 int count[MAX] = {0};
 int matrix[MAX][MAX] = {{0}};
+int queue[MAX] = {0};
 
-void TopoOrder() {
+bool TopoOrder() {
   memset(count, 0, sizeof(count));
+  memset(queue, 0, sizeof(queue));
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++) {
       if (matrix[i][j] > 0) count[j]++;
     }
   }
-  int top = -1;
+  int tail = 0;
   for (int i = 0; i < N; i++) {
     if (count[i] == 0) {
-      count[i] = top;
-      top = i;
+      queue[tail++] = i;
     }
   }
-  memset(count, 0, sizeof(count));
-  for (int i = 0; i < N; i++) {
-    if (top == -1) {
-      LOG(INFO) << "find circle";
-      break;
-    }
-    LOG(INFO) << "point : " << top;
-    top = count[top];
+  int k = 0;
+  while (k < tail) {
+    int t = queue[k++];
     for (int i = 0; i < N; i++) {
-      if (matrix[top][i] > 0) {
-        count[i]--;
-        if (count[i] == 0) {
-          count[i] = top;
-          top = i;
-        }
-      }
+      if (matrix[t][i] > 0) count[i]--;
+      if (count[i] == 0) queue[tail++] = i;
     }
   }
+  return tail == N ? true : false;
 }
 }  // namespace algorithm
 

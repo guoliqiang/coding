@@ -23,11 +23,11 @@ void FindBridgeDirected(std::vector<std::vector<int> > &matrix,
     if (dfsn[i] == -1) {
       FindBridgeDirected(matrix, lowu, dfsn, i, dfs_clock, bridge);
       lowu[cur] = std::min(lowu[cur], lowu[i]);
-      if (lowu[i] > dfsn[cur]) {
+      if (lowu[i] > dfsn[cur]) {  // lowu[i] > lowu[cur]　这种写法是错误的
         bridge.push_back(std::make_pair(cur, i));
       }
     } else {
-      // 两种写法都可以，第二章写法更有实际意义，其意义和tarjan一样
+      // 两种写法都可以，第二种写法更有实际意义，其意义和tarjan一样
       // 表示能到达的最低节点
       // lowu[cur] = std::min(lowu[cur], dfsn[i]);
       lowu[cur] = std::min(lowu[cur], lowu[i]);

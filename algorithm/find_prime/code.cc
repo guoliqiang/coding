@@ -60,6 +60,7 @@ std::vector<int> Eratosthenes(int n) {
   for (int i = 2; i * i <= n; i++) {
     if (v[i]) {
       // Note : can from i^2
+      // i * j (j < i是被小于ｊ的素数剔除的)
       for (int j = i; j * i <= n; j++) v[j * i] = false;
     }
   }
@@ -71,6 +72,7 @@ std::vector<int> Eratosthenes(int n) {
 }
 
 // http://blog.csdn.net/morewindows/article/details/7347459
+// 每个合数由这种形式唯一确定　x = a * b (a <= b and ａ是小于ｘ的最小的素数)
 std::vector<int> EratosthenesOpt(int n) {
   std::vector<bool> v(n, true);
   std::vector<int> rs;
@@ -86,6 +88,7 @@ std::vector<int> EratosthenesOpt(int n) {
       // 2 * 6 = 12, 12剔除， 3 * 6 = 18，18不是在这里剔除的，
       // 是在2 * 9，也就是每个合数，是有起最小的素约数剔除的
       // 18必然在扫描到i= 18前剔除，因为在i=9的时候就执行了
+      // 5 * 6 = 3 * 10 所以５*6 需要直接跳过
       if (i % rs[j] == 0) break;
     }
   }

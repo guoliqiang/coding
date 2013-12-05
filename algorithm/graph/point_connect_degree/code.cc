@@ -3,7 +3,7 @@
 // I just want to GH to hss~
 // Date  : 2013-10-15 17:18:59
 // File  : code.cc
-// TODO(guoliqiang) debug poj1966 WA
+// poj1966
 // Brief : http://www.cnblogs.com/dyllove98/archive/2013/07/25/3215003.html
 //         http://www.cnblogs.com/-hsz/archive/2012/07/24/2607375.html
 //
@@ -105,7 +105,7 @@ int UnDirected(std::vector<std::vector<int> > & v) {
   int rs = INT_MAX;
   int target = -1;
   for (int i = 0; i < n; i++) {
-    if (i + n == k) continue;
+    if (i + n == k) continue;  // 保证是不同的两个点
     int t = MaxFlow(k, i);
     if (t < rs) {
       rs = t;
@@ -117,8 +117,10 @@ int UnDirected(std::vector<std::vector<int> > & v) {
   } else {
     memset(cut, 0, sizeof(cut));
     int flow_value = rs;
+    // 此时ｓｔ一定不直接相邻，因为如果ｓｔ直接相邻rs = INT_MAX
+    // todo poj1815
     for (int i = 0; i < n && flow_value; i++) {
-      if (i == target || i == k - n) continue;
+      if (i == target || i == k - n) continue;  // 尝试删除处ｓｔ点外其它的每个点，因为最终要求的就是这种点有几个(想象一下原图)
       matrix[i][n + i] = 0;
       if (MaxFlow(k, target) < flow_value) {
         cut[i] = 1;

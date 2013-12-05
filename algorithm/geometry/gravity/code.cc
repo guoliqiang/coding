@@ -9,7 +9,7 @@
 #include "../base/base.h"
 
 /*
- * 三角形中心：
+ * 三角形重心：
  * x = (x1 + x2 + x3) / 3
  * y = (y1 + y2 + y3) / 3
  *
@@ -44,7 +44,7 @@
  * 这样就得到了N个三角形OP[i]P[i+1](其中点的顺序要为逆时针的),
  * 分别求出这N个三角形的重心Ci和面积Ai(注意此处面积是又向面积, 就是用叉乘求面积时保留其正负号)
  * 在求出A = A1+A2+...+AN(同样保留正负号的代数相加)
- * 最终重心C = sigma(Ai+Ci)/A;
+ * 最终重心C = sigma(Ai*Ci)/A;
  * 
  * 另一种做法：http://www.cnblogs.com/jbelial/archive/2011/08/08/2131165.html (不选原点)
  * */
@@ -62,7 +62,7 @@ Point Gravity(std::vector<Point> & v) {
   for (int i = 1; i < n; i++) {
     int t = v[i - 1].x * v[i].y - v[i - 1].y * v[i].x;
     area += (double)t * 0.5;
-    center.x += (v[i - 1].x + v[i].x) * t;  // 少乘了1/2（三角形的面积中）， 1/3（计算三角形的中心中）
+    center.x += (v[i - 1].x + v[i].x) * t;  // 少乘了1/2（三角形的面积中）， 1/3（计算三角形的重心中）
     center.y += (v[i - 1].y + v[i].y) * t;
   }
   int t = v[n - 1].x * v[0].y - v[n - 1].y * v[0].x;

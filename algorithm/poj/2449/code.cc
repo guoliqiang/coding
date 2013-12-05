@@ -69,7 +69,7 @@ int Astar(int n, int s, int t, int K) {
     Node cur = queue.top();  
     queue.pop();  
     cnt[cur.v]++;  
-    if(cnt[cur.v] > K) continue;  
+    if(cnt[cur.v] > K) continue; // 防止死循环，不联通时可能出现死循环
     if(cnt[t] == K) return cur.d;  
     for (int i =head[cur.v]; i != -1; i = Edge[i].nxt) {  
       queue.push(Node(Edge[i].v, cur.d + Edge[i].c));

@@ -88,9 +88,9 @@ std::vector<Point> stack;
 // a = ax * i + ay * j + az * k
 // b = bx * i + by * j + bz * k
 //
-// x   y   z
-// ax  ay  az
-// bx  by  bz
+//      x   y   z
+// a    ax  ay  az
+// b    bx  by  bz
 //
 // a 叉 b = (ay*bz - az*by) * i
 //         +(ax*bz - az*bx) * j
@@ -118,6 +118,8 @@ bool Cmp1(const Point & a, const Point & b) {
 bool Cmp2(const Point & a, const Point & b) {
   int cross = -1;
   if (LeftRotate(b, a, stack[0], &cross)) return true;
+  // cross == 0 表示三点在一条直线上，因为ａ，ｂ，stack[0]　是平面上的点，所以ｚ值的大小
+  // 可以表示出其长度
   if (cross == 0) return Distance(a, stack[0]) < Distance(b, stack[0]);
   return false;
 }

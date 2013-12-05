@@ -6,6 +6,7 @@
 // Brief : http://blog.sina.com.cn/s/blog_71ded6bf0100tn3d.html
 //         http://blog.sciencenet.cn/home.php?mod=space&uid=434885&do=blog&id=325398
 // 2-sat (2 satisfiability) 问题
+// poj3683
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -88,9 +89,15 @@ void Read(std::vector<std::vector<int> > & v) {
   }
 }
 
-// 有问题
+// 输出一个可行的结果
+// 1.缩点
+// 2.拓扑排序
+// 3.从拓扑排序的逆序开始遍历
+// 4.访问i，删除i'以及i'的前驱，直到队列中没有元素
+// 5.访问过的元素即为一个可行的结果
+
 void answer() {
-  memset(matrx2, 0, sizeof(matrix2));
+  memset(matrix2, 0, sizeof(matrix2));
   memset(du, 0, sizeof(du));
   memset(ans, 0, sizeof(ans));
   memset(ans2, 0, sizeof(ans2));
@@ -103,9 +110,9 @@ void answer() {
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++) {
       if (matrix[i][j] <= 0) continue;
-      if(id[i] != id[j]) {
-        matrix2[id[i]][id[j]] = 1;
-        du[id[j]]++;
+      if(id[i] != id[j]) {  // note add edge id[j] - > id[i]
+        matrix2[id[j]][id[i]] = 1;
+        du[id[i]]++;
       }
     }
   }
@@ -133,13 +140,6 @@ void answer() {
   }
 }
 
-
-// TODO 输出一个可行的结果
-// 1.缩点
-// 2.拓扑排序
-// 3.从拓扑排序的逆序开始遍历
-// 4.访问i，删除i'以及i'的前驱，直到队列中没有元素
-// 5.访问过的元素即为一个可行的结果
 
 }  // namesapce algorithm
 

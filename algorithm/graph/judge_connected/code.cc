@@ -13,9 +13,7 @@
  * 　则原图是可能弱连通的，否则不是
  * 4.对于入度为０的只有一个点的情况，在缩点后的图中，从此点开始DFS，看是否能够遍历到所有的点，
  * 　如果是则原图才为弱连通图，这个步骤是为了剔除分叉的情况，在存在分叉的情况下，两个叉之间是
- * 　无法到达的。
- *
- *
+ * 　无法到达的(是根据ＤＦＳ的深度判断的)。
  * */
 
 #include "base/public/common_head.h"
@@ -50,13 +48,13 @@ bool ConnectedUFind(std::vector<std::vector<int> > & matrix) {
   }
   return true;
   /*
-   * 另一种方式
-   * int cnt = 0;
-   * for (int i = 0; i < n; i++) {
-   *   if (i == FInd(v, i)) cnt++;
-   * }
-   * return cnt == 1;
-   * */
+  另一种方式
+  int cnt = 0;
+  for (int i = 0; i < n; i++) {
+    if (i == FInd(v, i)) cnt++;
+  }
+  return cnt == 1;
+  */
 }
 
 void ConnectedDFS(std::vector<std::vector<int> > & matrix,

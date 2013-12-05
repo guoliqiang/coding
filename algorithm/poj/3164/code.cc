@@ -34,6 +34,7 @@ type dis[M];
 int n;
 int m;
 
+// 缩点模板
 type Directed_MST(int root, int NV, int NE) {
   type ret = 0;
   while (true) {

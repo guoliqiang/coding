@@ -50,6 +50,9 @@ void Tarjan(int k) {
   }
 }
 
+// 可以根据深度判断出有没有分叉
+// 即从根节点可以联通到所有的点
+// 不需要visited变量,此时的图一定是无环图 
 bool DFS(int k, int deep) {
   if (deep == tag) return true;
   for (int i = 0; i < tag; i++) {

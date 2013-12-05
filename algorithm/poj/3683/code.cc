@@ -5,12 +5,13 @@
 // File  : code.cc
 // Brief :
 
+// Accepted 17944K  172MS
+
 #include "base/public/common_ojhead.h"
 
-// RE
 namespace algorithm {
 
-const int MAXN = 1001;
+const int MAXN = 1100;
 const int MAXM = 3000000;
 int N = 0;
 
@@ -21,13 +22,13 @@ int cnt2;
 
 struct edge{
   int from, to, next;
-} e[MAXM], e2[MAXN];
+} e[MAXM], e2[MAXM];
 
 void Insert1(int from, int to) {
-    e[cnt].from = from;
-    e[cnt].to = to; 
-    e[cnt].next = head[from];
-    head[from] = cnt++;
+   e[cnt].from = from;
+   e[cnt].to = to; 
+   e[cnt].next = head[from];
+   head[from] = cnt++;
 }
 void Insert2(int from, int to) {
     e2[cnt2].from = from;
@@ -85,7 +86,7 @@ void Build() {
 void Tarjan(int k) {
   dfsn[k] = low[k] = num++;
   stack[stop++] = k;
-  int min = N * 2 + 10;
+  int min = N * 2;
   for (int i = head[k]; i != -1; i = e[i].next) {
     int v = e[i].to;
     if (dfsn[v] == -1) {
@@ -99,11 +100,11 @@ void Tarjan(int k) {
     stop -= 1;
     while (stack[stop] != k) {
       id[stack[stop]] = tag;
-      low[stack[stop]] = N * 2 + 10;
+      low[stack[stop]] = N * 2;
       stop--;
     }
     id[k] = tag++;
-    low[k] = N * 2 + 10;
+    low[k] = N * 2;
   }
 }
 
@@ -213,7 +214,6 @@ void Read() {
 }  // namespace algorithm
 
 using namespace algorithm;
-// using namespace NB;
 
 int main(int argc, char** argv) {
   FROMFILE;

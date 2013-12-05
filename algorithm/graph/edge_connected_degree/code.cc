@@ -3,7 +3,7 @@
 // I just want to GH to hss~
 // Date  : 2013-10-14 21:30:43
 // File  : code.cc
-// Brief :  TODO(guoliqiang) debug poj1966 一直ＷＡ
+// Brief : poj1966 
 // 最少去掉多少条边，能是图变得不连通 (可以看出：这样的图，如果存在桥边，结果就为1)
 // 边连通度  ==  最小割  == 最大流
 
@@ -14,6 +14,7 @@
 // 1.     原G图中每条有向边容量为1
 // 2.     固定一个点为源点，枚举与汇点，求最大流max_flow，保留最小的max_flow即为图的边连通度。
 // 这里说的有向图的连通性是强连通
+// 注意固定源点(任意选)，遍历汇点
 
 #include "base/public/common_head.h"
 

@@ -114,24 +114,22 @@ int MSTWrapper(int r, std::vector<std::vector<int> > & v) {
 }  // namespace WA (wrong answer)
 
 namespace algorithm {
-
-#define type double
 const int INF = 0x3f3f3f3f;
 const int MAX = 100;
 
 struct Edge {
   int u;
   int v;
-  type c;
+  double c;
 } E[MAX * MAX];
 
 int to[MAX];
 int id[MAX];
 int vis[MAX];
-type dis[MAX];
+double dis[MAX];
 
-type MST(int root, int nv, int ne) {
-  type ret = 0;
+double MST(int root, int nv, int ne) {
+  double ret = 0;
   while(true) {
     for(int i = 0;i < nv; i++) dis[i] = INF;
     for(int i = 0;i < ne; i++){

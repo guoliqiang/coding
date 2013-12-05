@@ -41,7 +41,7 @@ void DFS(int deepth, int ifather, int cur) {
     if (dfn[t] == -1) {
       DFS(deepth + 1, cur, t);
       lowu[cur] = std::min(lowu[t], lowu[cur]);
-      if (lowu[t] > dfn[cur]) {
+      if (lowu[t] > dfn[cur]) {  // lowu[t] > lowu[cur] 这种写法是错误的
         sum++;
         is_bridge[t] = 1;
       }

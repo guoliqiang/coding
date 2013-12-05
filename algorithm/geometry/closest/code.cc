@@ -15,7 +15,7 @@
 // 论文：http://wenku.baidu.com/view/2061b121ccbff121dd3683c9.html1
 // 排序时按照y轴z轴...的次序
 //
-// O(nlog(n)log(n))
+// O(nlog(n)log(n))  // 因为需要在每次合并时排序　
 //
 // 点是动态加入的情况
 // KD树 http://blog.csdn.net/qll125596718/article/details/8426458

@@ -8,10 +8,10 @@
 // http://www.cnblogs.com/kane0526/archive/2013/04/05/3001108.html
 
 /*
- * 1.无源汇有上下界可行流
+ * 1.无源汇有上下界可行流 (sgu194)
  *   增设一个超级源点ss和一个超级终点dd
  *   du[i]=in[i]（i节点所有入流下界之和）-out[i]（i节点所有出流下界之和）。
- *
+ *   (和判断混合网络的是不是存在欧拉回路相反)
  *   当du[i]大于0的时候，st到i连一条流量为du[i]的边。
  *   // 在所有边都是下界流量时，i必须有du[i]的流进入，才能平衡
  *
@@ -22,7 +22,7 @@
  *   即st与sd相连的边全部是满流
  *   进而得到可行流（非最大流） : flow + 下界
  *  
- * 2. 有源汇有上下界的最大流
+ * 2. 有源汇有上下界的最大流 (此文件中的写法太复杂，简单版的见code3.cc)
  *    源点st，终点sd。超级源点ss，超级终点dd。
  *    首先判断是否存在满足所有边上下界的可行流，方法可以转化成无源汇有上下界的可行流问题。如下：
  *    
@@ -113,7 +113,8 @@ int MaxFlow(int source, int target) {
   return rs;
 }
 
-void MaxFlowWithBound(std::vector<std::vector<std::pair<int, int> > > & adj, int source, int target) {
+void MaxFlowWithBound(std::vector<std::vector<std::pair<int, int> > > & adj,
+                      int source, int target) {
   N = adj.size() + 2;
   memset(matrix, 0, sizeof(up));
   memset(low, 0, sizeof(low));
@@ -167,7 +168,6 @@ void MaxFlowWithBound(std::vector<std::vector<std::pair<int, int> > > & adj, int
   // 第一次最大流的结果 >= 这个值，因为可能存在ss -> sd -> st -> dd 流
   max_flow = 0;
   for (int i = 0; i < N; i++) max_flow += flow[source][i];
-  
   memset(matrix, 0, sizeof(matrix));
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++) {
@@ -224,7 +224,7 @@ int main(int argc, char** argv) {
   */
   adj[0][1].first = 10;
   adj[0][1].second = 0;
-  
+
   adj[0][2].first = 3;
   adj[0][2].second = 1;
   

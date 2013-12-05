@@ -33,6 +33,7 @@ int MinCostMaxFlow(int source, int target, int * sum_cost) {
     for (int i = 0; i < N; i++) weight[i] = INT_MAX;
     memset(pre, 0, sizeof(pre));
     memset(visited, 0, sizeof(visited));
+    // 可以用priority_queue
     std::queue<int> queue;
     queue.push(source);
     weight[source] = 0;
@@ -88,6 +89,5 @@ void Read(std::vector<std::vector<int> > & v, std::vector<std::vector<int> > vco
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-
   return 0;
 }

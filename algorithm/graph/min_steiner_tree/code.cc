@@ -6,6 +6,8 @@
 // Brief : http://blog.csdn.net/lwbaptx/article/details/7297840
 
 /*
+ * floyd + 状态压缩　
+ *
  * 一个图的最小生成树即这个图上所有点（设集合为G）生成的边权值和最小的树，我们可
  * 以知道这个树上任意两点是可到达的，这个可以用prime或者kruskal实现。下面，假如我
  * 们只要求G的一个真子集里面的所有点连通，那么我们发现一些边权是没有用的、可以去掉，
@@ -69,9 +71,11 @@ int Steiner() {
       dp[1 << i][j] = dis[id[i]][j];
     }
   }
-
+  // dp[i][j] 的值由两种情况产生
+  // １，j直接和ｉ集合相连
+  // ２，ｊ通过另一个点ｋ直接和ｉ集合相连
   for (int i = 0; i < top; i++) {
-     if ((i & (i - 1)) == 0) continue;
+     if ((i & (i - 1)) == 0) continue;  // ｉ集合只含有一个点
      memset(visited, 0, sizeof(visited));
      for (int k = 0; k < N; k++) {  // init
        for (int j = 0; j < i; j++) {
@@ -82,6 +86,7 @@ int Steiner() {
        }
      }
      // 因为c有可能和i集合不联通
+     // 修正dp[i][k]
      for (int j = 0; j < N; j++) {  // update
        // 每次选择最小值更新
        int c = 0;

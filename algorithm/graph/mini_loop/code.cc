@@ -7,6 +7,7 @@
 
 /*
  * 基于floyd求最小环
+ * 无向图求最小环
  *
  * */
 
@@ -40,6 +41,7 @@ void MiniLoop() {
     // 此时的dis[i][j]表示，ｉ到ｊ的最短路，但这个最短路中件的节点只能是[0, k -1] (k是当前轮迭代值)
     
     // 求环中最大点是k的最小环
+    // 注意是无向图,因此j可以从i+1开始循环
     for (int i = 0; i < k; i++) {
       for (int j = i + 1; j < k; j++) {
         if (matrix[i][k] > 0 && matrix[k][j] > 0 && MIN > dis[i][j] + matrix[i][k] + matrix[k][j]) {

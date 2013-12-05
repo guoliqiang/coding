@@ -6,7 +6,18 @@
 // Brief :
 
 // 有源汇的带上下界的最大流
-//
+
+/*
+ * 2. 有源汇有上下界的最大流
+ *    源点st，终点sd。超级源点ss，超级终点dd。
+ *    首先判断是否存在满足所有边上下界的可行流，方法可以转化成无源汇有上下界的可行流问题。如下：
+ *    
+ *    增设一条从d到s没有下界容量为无穷的边，那么原图就变成了一个无源汇的循环流图。接下来的事情一样，
+ *    超级源点ss连i（du[i]>0），i连超级汇点（du[i]<0）,对（ss，dd）进行一次最大流，
+ *    当maxflow等于所有(du[]>0)之和时，有可行流，否则没有。
+ *
+ *    当有可行流时，删除超级源点ss和超级终点dd，再对（s，d）进行一次最大流，此时得到的maxflow则为题目的解。
+*/
 
 #include "base/public/common_ojhead.h"
 
@@ -90,7 +101,7 @@ void Read(std::vector<std::vector<std::pair<int, int> > > & matrix) {
       flow[i][ssd] = -du[i];
     }
   }
-  flow[sd][st] = INF;
+  flow[sd][st] = INF;  
   OutFlow(n + 2);
   int t = MaxFlow(sst, ssd);
   LOG(INFO) << "first:" << t;

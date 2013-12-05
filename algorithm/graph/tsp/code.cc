@@ -13,6 +13,8 @@
  *  基于floyd结果构成的图上使用状态压缩。即虚拟任两个节点间都有连线，其长度为floyd算出
  *  来的结果。
  *
+ *  poj1699
+ *
  * */
 #include "base/public/common_head.h"
 
@@ -24,6 +26,7 @@ int N = 0;
 int matrix[MAX][MAX] = {{0}};
 int dis[MAX][MAX] = {{0}};
 int dp[1 << MAX][MAX];
+int flag[1 << MAX][MAX];
 
 struct Info{
   int s;
@@ -38,18 +41,22 @@ int Hamilton() {
     if (dis[0][i] < INF) {
       dp[(1 << i) + 1][i] = dis[0][i];
       queue.push(Info((1 << i) + 1, i));
+      flag[(1 << i) + 1][i] = 1;
     }
   }
   while (!queue.empty()) {
     Info t = queue.front();
     queue.pop();
+    flag[t.s][t.i] = 0;
     for (int i = 0; i < N; i++) {
       if (t.s & (1 << i) || dis[t.i][i] == INF) continue;
-      
-      if (dp[t.s + (1 << i)][i] == 0) dp[t.s + (1 << i)][i] = dp[t.s][t.i] + dis[t.i][i];
-      else dp[t.s + (1 << i)][i] = std::min(dp[t.s + (1 << i)][i], dp[t.s][t.i] + dis[t.i][i]);
-      // LOG(INFO) << "dp[" << (t.s + (1 << i)) <<"][" << i << "]" << dp[t.s + (1 << i)][i];
-      if (t.s + (1 << i) != (1 << N) - 1) queue.push(Info(t.s + (1 << i), i));
+      if (dp[t.s + (1 << i)][i] == 0 || dp[t.s + (1 << i)][i] > dp[t.s][t.i] + dis[t.i][i]) {
+        dp[t.s + (1 << i)][i] = dp[t.s][t.i] + dis[t.i][i];
+        if (flag[t.s + (1 << i)][i] == 0) {
+          queue.push(Info(t.s + (1 << i), i));
+          flag[t.s + (1 << i)][i] = 1;
+        }
+      }
     }
   }
   int res = INF;
@@ -150,7 +157,8 @@ int main(int argc, char** argv) {
   v[0][1] = v[1][0] = 1;
   v[1][2] = v[2][1] = 1;
   v[0][2] = v[2][0] = 100;
-  Read(v, true);
+  // Read(v, true);
+  Read(v, false);
   LOG(INFO) << Hamilton();
   // Trace();
   return 0;

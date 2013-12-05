@@ -7,7 +7,9 @@
 
 /*
  *  kmp algorithm
- *
+ *  时间复杂度Ｏ(|P|) + O((|T|))
+ *  其中O(|P|)是构建next数组的时间复杂度，O(|T|)是match的时间复杂度
+ *  因为构建next数组实质商也是调用模式匹配,因此其为线性时间复杂度
  * */
 #include "base/public/common_head.h"
 
@@ -37,6 +39,19 @@ bool Match(std::string & pattern, std::string & str) {
   Next(pattern, next);
   int i = 0;
   int j = 0;
+  /* 张铭书中的写法
+  if (m < n) return -1;
+  while (j < m && i < n) {
+    if (next[i] == -1 || str[j] == pattern[i]) {
+      i++;
+      j++;
+    } else {
+      i = next[i];
+    }
+  }
+  if (i >= n) return j - n;
+  else return -1;
+  */
   while (j < m) {  // bug fixed
     if (str[j] == pattern[i]) {
       i++;

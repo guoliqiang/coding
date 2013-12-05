@@ -35,6 +35,11 @@ int JosephusLast(int n, int m) {
   return r;
 }
 
+int JosephusLast2(int n, int m) {
+  if (n == 1) return 0;
+  return (JosephusLast2(n - 1, m) + m) % n;
+}
+
 // 计算当前删除的元素处于当前串的第几个，从0开始编号
 // 当前删除的是第j个，则下一个删除的元素要往前循环移动m个
 //

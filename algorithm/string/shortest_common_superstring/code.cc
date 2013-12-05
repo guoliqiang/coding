@@ -46,6 +46,7 @@ bool KMP(int & i, int & j, std::string & pattern, std::string & str) {
       j++;
     }
   }
+  // 此时的ｉ值可以表示出str末尾有几个字符是和pattern开头位置是匹配的
   return false;
 }
 

@@ -8,6 +8,10 @@
 /*
  * Accepted -784K 0MS
  *
+ * 正常的思路是满足上下界的流就是最小流（即反悔边的流量）,  之所以要先做一次最大流
+ * 是为了处理图存在有环的情况，解释见：http://www.cnblogs.com/kane0526/archive/2013/04/05/3001108.html
+ *
+ *
  * 而有源汇有上下界最小流问题则是：
  * 1.构造附加网络(不添加[t,s]边)
  * 2.对ss、tt求最大流 (因为有可能出现环)
@@ -121,7 +125,7 @@ void Read() {
     if (flag == false) {
       printf("impossible\n");
     } else {
-      printf("%d\n", INF - flow[sd][st]);
+      printf("%d\n", INF - flow[sd][st]);  // 反悔边的流量
     }
   }
 }

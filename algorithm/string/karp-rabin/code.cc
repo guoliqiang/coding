@@ -28,7 +28,7 @@ int KR(const char * pattern, const char * str) {
   int n = strlen(str);
   /*
    * 不能使用 d << (m - 1)
-   * 因为m - 1 > 31时，编译器回用 (m - 1) % 32进行移位操作
+   * 因为m - 1 > 31时，编译器会用 (m - 1) % 32进行移位操作
    * http://blog.csdn.net/VIPVIPVIP/article/details/6263690
    * */
   int d = 1;
