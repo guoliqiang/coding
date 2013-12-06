@@ -4,7 +4,7 @@
 // Date  : 2013-11-04 04:17:40
 // File  : code.cc
 // Brief :
-
+// poj 2389
 #include "base/public/common_head.h"
 
 namespace algorithm {

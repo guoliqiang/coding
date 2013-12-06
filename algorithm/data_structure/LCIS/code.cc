@@ -60,6 +60,7 @@ void DP(std::string & str1, std::string & str2) {
   }
 }
 
+// zoj 2432
 void DP(std::string & str1, std::string & str2, std::vector<int> & dp,
         std::vector<std::vector<int> > & path) {
   int m = str1.size();
@@ -74,22 +75,22 @@ void DP(std::string & str1, std::string & str2, std::vector<int> & dp,
     for (int j = 0; j < n; j++) {
       if (str2[j] == str1[i] && (k == -1 || dp[k] + 1 > dp[j])) {
         dp[j] = k == -1 ? 1 : dp[k] + 1;
-        path[i][j] = (i + 1) * n + k;
+        if (k != -1) path[i][j] = (i + 1) * n + k;
       }
       if (str2[j] < str1[i] && (k == -1 || dp[j] > dp[k])) k = j;
     }
   }
 }
-
+// zoj 2432代码 的trace不使用size
 void Trace(int k, int x, std::string & str2,
-           std::vector<std::vector<int> > & path) {
-  // LOG(INFO) << "k:" << k << " x:" << x;
+           std::vector<std::vector<int> > & path,
+           int size) {
+  if (size == 0) return;
   LOG(INFO) << "\"" << str2[k] << "\"";
-  if (k == 0) return;
   int t = path[x][k];
   k = t % str2.size();
   x = t / str2.size() - 1;
-  Trace(k, x, str2, path);
+  Trace(k, x, str2, path, size - 1);
 }
 
 int LSIC(std::string & str1, std::string & str2) {
@@ -104,7 +105,7 @@ int LSIC(std::string & str1, std::string & str2) {
       index = i;
     }
   }
-  Trace(index, str1.size() - 1, str2, path);
+  Trace(index, str1.size() - 1, str2, path, max);
   return max;
 }
 
@@ -114,8 +115,8 @@ using namespace algorithm;
 
 
 int main(int argc, char** argv) {
-  std::string str1 = "4312789";
-  std::string str2 = "7894321";
+  std::string str1 = "14250";
+  std::string str2 = "0124";
   LOG(INFO) << LSIC(str1, str2);
   return 0;
 }

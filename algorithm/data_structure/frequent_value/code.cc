@@ -18,7 +18,7 @@ struct Node {
   int first;
   int num;
   int b; // debug
-  int e; // debug`
+  int e; // debug
 } rmq[MAX];
 
 void Build(int index, int b, int e) {
@@ -66,6 +66,8 @@ void Build(int index, int b, int e) {
   }
 }
 
+// 注意要把整个数组的起始与结束位置传入进来，计算mid的时候，用的是
+// 这两个值
 std::pair<int, int> Query(int index, int b, int e, int qb, int qe) {
   if (qb == b && qe == e) {
     return std::make_pair(rmq[index].val, rmq[index].num);

@@ -5,6 +5,11 @@
 // File  : code.cc
 // Brief :
 
+/*
+注意:
+基于快速排序的算法时间复杂度是O(n)
+
+*/
 #include "base/public/common_head.h"
 
 namespace algorithm {
