@@ -6,7 +6,7 @@
 // Brief :
 
 /*
- * 树状数组，以log(n)的负载度维护一个A[1] ~ A[k]的查询与修改
+ * 树状数组，以log(n)的复杂度维护一个A[1] ~ A[k]的查询与修改
  * 额外空间为n，如果使用完全二叉树维护的话，额外空间的消耗为2*n
  * http://www.java3z.com/cwbwebhome/article/article1/1369.html?id=4804
  *
@@ -53,6 +53,7 @@ void Read(std::vector<int> & v) {
     data[i + 1] = v[i];
   }
   // c[i]表示data[i - 2^k + 1]到data[i]的和，而k则是i在二进制时末尾0的个数
+  // 下标从1开始
   for (int i = 1; i <= N; i++) {
     int t = 0;
     for (int j = i - Low(j) + 1; j <= i; j++) {

@@ -162,7 +162,7 @@ bool Prime(int a, int n) {
     }
     pre = cur;
   }
-  return pre == 1 ? true : false;
+  return pre == 1 ? true : false;  // 根据费马小定理判定
 }
 
 bool PrimeWrapper(int n, int s = 50) {
@@ -174,6 +174,7 @@ bool PrimeWrapper(int n, int s = 50) {
     // rand()只能随机产生[0, RAND_MAX)内的整数
     // 而且这个RAND_MAX只有32768直接%n的话永远也产生不了
     // [RAND-MAX, n)之间的数
+    // 循环尝试不同的底数
     if (Prime(a, n) == false) return false;
   }
   return true;

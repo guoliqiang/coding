@@ -159,7 +159,7 @@ double RotatingCalipers(std::vector<Point> v) {
   v.push_back(v[0]);
   double rs = 0;
   int last = 1;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++) {  // 由于前面的push这行不会越界
     Point t = Sub(v[i + 1], v[i]);
     while (Cross(t, Sub(v[last + 1], v[last])) > 0) {
       last = (last + 1) % n;

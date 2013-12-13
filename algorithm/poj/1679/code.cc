@@ -24,6 +24,51 @@ int pre[MAXN];
 int dis[MAXN];
 int visited[MAXN];
 
+// Accepted 284K  0MS
+int UniqueBest() {
+  memset(dp, 0, sizeof(dp));
+  memset(pre, -1, sizeof(pre));
+  memset(flag, 0, sizeof(flag));
+  memset(visited, 0, sizeof(visited));
+  for (int i = 0; i < N; i++) dis[i] = INF;
+  dis[0] = 0;
+  int rs = 0;
+  for (int i = 0; i < N; i++) {
+    int min = INF;
+    int index = -1;
+    for (int j = 0; j < N; j++) {
+      if (visited[j] == 0 && dis[j] < min) {
+        min = dis[j];
+        index = j;
+      }
+    }
+    if (index == -1) break;
+    if (index != 0) {
+      rs += matrix[pre[index]][index];
+      for (int j = 0; j < N; j++) {
+        if (visited[j] == 1) {
+          dp[index][j] = dp[j][index] = std::max(dp[j][pre[index]], matrix[pre[index]][index]);
+        }
+      }
+      flag[pre[index]][index] = flag[index][pre[index]] = 1;
+    }
+    visited[index] = 1;
+    for (int j = 0; j < N; j++) {
+      if (visited[j] == 0 && matrix[index][j] > 0 && dis[j] > matrix[index][j]) {
+        dis[j] = matrix[index][j];
+        pre[j] = index;
+      }
+    }
+  }
+
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      if (matrix[i][j] > 0 && flag[i][j] == 0 && dp[i][j] == matrix[i][j]) return -1;
+    }
+  }
+  return rs;
+}
+
 int Unique() {
   memset(visited, 0, sizeof(visited));
   memset(pre, -1, sizeof(pre));
@@ -98,7 +143,7 @@ void Read() {
       getchar();
       matrix[x - 1][y - 1] = matrix[y - 1][x - 1] = c;
     }
-    int t = Unique();
+    int t = Unique(); // or UniqueBest()
     if (t == -1) printf("Not Unique!\n");
     else printf("%d\n", t);
   }

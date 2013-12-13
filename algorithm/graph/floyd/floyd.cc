@@ -5,8 +5,39 @@
 // File  : floyd.cc
 // Brief :
 
-#include "base/public/common_head.h"
+#include "base/public/common_ojhead.h"
 #include "../base/graph.h"
+
+namespace algorithm {
+const int MAXN = 1000;
+int N;
+int matrix[MAXN][MAXN];
+int dis[MAXN][MAXN];
+int path[MAXN][MAXN];
+
+void Floyd() {
+  // 初始化
+  memset(path, 0, sizeof(path));
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      dis[i][j] = matrix[i][j] == 0 ? INF : matrix[i][j];
+      if (dis[i][j] != INF) path[i][j] = i;
+    }
+  }
+
+  for (int k = 0; k < N; k++) {
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (dis[i][j] > dis[i][k] + dis[k][j]) {
+          dis[i][j] = dis[i][k] + dis[k][j];
+          path[i][j] = path[k][j];
+        }
+      }
+    }
+  }
+}
+
+}  // namesapce algorithm
 
 namespace algorithm {
 // if rs[i][j] == INT_MAX then i，j之间没有通路

@@ -64,7 +64,7 @@ int polya(int s, int c) {
   for (int i = 1; i <= s; i++) {
     // LOG(INFO) << "count:" << count << " + p[gcd(" << i << ", " << s << ")]: p[" << gcd(i, s) << "]:" << p[gcd(i, s)];
     // gcd 是旋转ｉ后其置换的循环节
-    count += p[gcd(i, s)];
+    count += p[gcd(i, s)];  // i = s时，旋转s此即不动的情况
   }
   count /= 2 * s;
   // 2*s 不同置换的个数,情况1：旋转，情况2：翻转

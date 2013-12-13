@@ -9,9 +9,7 @@
  * Accepted 4096K 47MS
  * 
  * tarjan深度优先搜索
- *
  * low[id] 相同的点处于同一个强(双向)连通分量
- * 
  * 
  * */
 
@@ -35,7 +33,6 @@ void DFS(int k, int father) {
         DFS(i, k);
         low[k] = std::min(low[k], low[i]);
         if (low[i] > dfsn[k]) {
-          // LOG(INFO) << k << "~" << i;
           cnt++;
         }
       } else {
@@ -45,13 +42,23 @@ void DFS(int k, int father) {
   }
 }
 
+// Accepted 4128K 47MS
+void DFSBest(int k, int father) {
+  dfsn[k] = low[k] = num++;
+  for (int i = 0; i < N; i++) {
+    if (matrix[k][i] <= 0 || i == father) continue;
+    if (dfsn[i] == -1) DFS(i, k);
+    low[k] = std::min(low[k], low[i]);
+  }
+}
+
 int DFS() {
   num = 0;
   cnt = 0;
   memset(dfsn, -1, sizeof(dfsn));
   memset(low, -1, sizeof(low));
   memset(degree, 0, sizeof(degree));
-  DFS(0, -1);
+  DFSBest(0, -1);  // or DFS(0, -1)
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++) {
       if (matrix[i][j] > 0 && low[i] != low[j]) {
@@ -79,8 +86,6 @@ void Read() {
       getchar();
       matrix[u - 1][v - 1] = 1;
       matrix[v - 1][u - 1] = 1;
-      // LOG(INFO) << "matrix[" << u - 1 << "][" << v - 1 << "]:" << matrix[u - 1][v - 1];
-      // LOG(INFO) << "matrix[" << v - 1 << "][" << u - 1 << "]:" << matrix[v - 1][u - 1];
     }
     int t = DFS();
     printf("%d\n", t);

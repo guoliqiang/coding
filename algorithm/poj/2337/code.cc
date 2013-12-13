@@ -61,8 +61,6 @@ bool Key(int & key) {
   int in_num = 0;
   int out_num = 0;
   for (int i = 0; i < N; i++) {
-    // LOG(INFO) << "in[" << i << "]:" << in[i]
-    //           << " out[" << i << "]:" << out[i];
     if (used[i]) {
       if (in[i] == out[i]) continue;
       else if (in[i] - out[i] == 1) in_num++;

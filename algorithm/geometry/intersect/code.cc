@@ -33,7 +33,7 @@ bool LineInter(const Point & a, const Point & b,
   double temp = Cross(Sub(a, b), Sub(c, d));
   if (temp >= ESP) return true;
   else {
-    double temp2 = Cross(Sub(b, a), Sub(c, b));
+    double temp2 = Cross(Sub(b, a), Sub(c, b));  // 判断a b c 是不是在一条直线上
     if (temp2 < ESP) return true;  // 重合
     else return false;
   }
@@ -44,6 +44,5 @@ using namespace algorithm;
 
 
 int main(int argc, char** argv) {
-
   return 0;
 }

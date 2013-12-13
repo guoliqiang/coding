@@ -13,10 +13,7 @@ namespace algorithm {
 // poj1401
 int ZeroNum(int n) {
   int rs = 0;
-  while (n) {
-    rs += n / 5;
-    n /= 5;
-  }
+  while (n /= 5) rs += n;
   return rs;
 }
 

@@ -5,6 +5,7 @@
 // File  : code.cc
 // Brief : 又名 “稳定婚姻问题”
 // 唏嘘～～
+// 男子按照自己的顺序表白，女子按照自己的顺序接受，直到关系稳定为止.
 // http://www.matrix67.com/blog/archives/2976
 
 #include "base/public/common_head.h"

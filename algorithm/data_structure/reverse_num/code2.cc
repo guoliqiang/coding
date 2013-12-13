@@ -85,7 +85,7 @@ int Read(std::vector<int> & v) {
   int rs = 0;
   for (int i = 0; i < v.size(); i++) {
     int t = data[i].idx;
-    if (t < k) rs += Query(1, t + 1, k);
+    if (t < k) rs += Query(1, t + 1, k);  // 统计t+1 ～ k数的个数
     Update(1, t);
   }
   return rs;

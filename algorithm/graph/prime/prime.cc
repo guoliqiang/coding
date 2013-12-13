@@ -9,9 +9,11 @@
  * 1.清空生成树，任取一个顶点加入生成树
  * 2.在那些一个端点在生成树里，另一个端点不在生成树里的边中，选取一条权最小的边，将它和另一个端点加进生成树
  * 3.重复步骤2，直到所有的顶点都进入了生成树为止.
+ *
+ * poj2485
  * */
 
-#include "base/public/common_head.h"
+#include "base/public/common_ojhead.h"
 #include "../base/graph.h"
 
 namespace algorithm {
@@ -83,6 +85,43 @@ int Prime(std::vector<std::vector<int> > & matrix, int cur, std::vector<std::pai
     }
   }
   return sum;
+}
+}  // namespace algorithm
+
+namespace algorithm {
+const int MAXN = 1000;
+int N;
+int matrix[MAXN][MAXN];
+int dis[MAXN];
+int visited[MAXN];
+int pre[MAXN];
+
+int Prime(int source = 0) {
+  int rs = 0;
+  memset(visited, 0, sizeof(visited));
+  memset(pre, 0, sizeof(pre));
+  for (int i = 0; i < N; i++) dis[i] = INF;
+  dis[source] = 0;
+  for (int k = 0; k < N; k++) {  // note begin from 0
+    int min = INF;
+    int index = -1;
+    for (int i = 0; i < N; i++) {
+      if (visited[i] == 0 && dis[i] < min) {
+        min = dis[i];
+        index = i;
+      }
+    }
+    if (index == -1) break;
+    visited[index] = 1;
+    rs += dis[index];
+    for (int i = 0; i < N; i++) {
+      if (visited[i] == 0 && matrix[index][i] > 0 && dis[i] > matrix[index][i]) {
+        dis[i] = matrix[index][i];
+        pre[i] = index;
+      }
+    }
+  }
+  return rs;
 }
 }  // namespace algorithm
 

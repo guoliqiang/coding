@@ -29,7 +29,7 @@ int BellmanFord(int source) {
     else dis[i] = INF;
   }
   dis[source] = 0;
-  for (int k = 1; k < N; k++) {  // 这层是边的数目
+  for (int k = 2; k < N; k++) {  // 这层是边的数目
     for (int i = 0; i < N; i++) {
       for (int j = 0; j < N; j++) {
         if (matrix[i][j] != 0 && dis[j] > dis[i] + matrix[i][j]) {
@@ -42,6 +42,31 @@ int BellmanFord(int source) {
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++) {
       if (matrix[i][j] != 0 && dis[j] > dis[i] + matrix[i][j]) return 0;  // 存在负权回路
+    }
+  }
+  return 1;
+}
+
+int BellmanFord2(int source) {
+  for (int i = 0; i < N; i++) {
+    pre[i] = -1;
+    dis[i] = INF;
+  }
+  dis[source] = 0;
+
+  for (int k = 1; k < N; k++) {
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (matrix[i][j] > 0 && dis[j] > dis[i] + matrix[i][j]) {
+          dis[j] = dis[i] + matrix[i][j];
+          pre[j] = i;
+        }
+      }
+    }
+  }
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      if (matrix[i][j] > 0 && dis[j] > dis[i] + matrix[i][j]) return 0;
     }
   }
   return 1;

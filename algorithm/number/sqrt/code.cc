@@ -7,6 +7,13 @@
 
 #include "base/public/common_head.h"
 
+/*
+1156 = (30 + a)^2 = 900 + 30 * 2 * a + a^2
+==>
+256 = 3 * 20 * a + a^2 = (3 * 20 + a) * a
+==> a = 4
+*/
+
 namespace algorithm {
 // 手动开平方根,求平方根整数部分
 // http://wenku.baidu.com/view/8e4088a7f524ccbff121845f
@@ -32,7 +39,7 @@ std::string SqrtByHand(std::string & str) {
     // LOG(INFO) << "i:" << i << " r :" << r;
     rs.push_back('0' + i);
     if (b == n) break;
-    cur -= (r * 20 + i) * i;
+    cur -= (r * 20 + i) * i;  // 相当于新加入的数对当前的影响只有这么多
     r = r * 10 + i;  // 更新初商
     cur = cur * 100 + (str[b] - '0') * 10 + (str[b + 1] - '0');
     b += 2;
@@ -86,7 +93,7 @@ void Sqrt(const char * str) {
 // 
 // 也可以这样理解：
 // x  > sqrt(n) 时，由于除以2的效果，其会被缩小
-// x  < sqrt(n) 时，由于加n/2的效果，其会被放大
+// x  < sqrt(n) 时，由于加n/rs的效果，其会被放大
 // x == sqrt(n) 时，其值不变
 //
 double Newton(double n) {

@@ -13,6 +13,7 @@ namespace algorithm {
 // 这种code会很容易越界
 
 int Com(int  n, int m) {
+  if (m > n) return 0;   // bug fixed
   m = std::min(m, n - m);
   int rs = 1;
   int j = 2;

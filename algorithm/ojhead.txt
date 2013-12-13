@@ -11,5 +11,7 @@
 #include <math.h>
 #include <cstdio>
 #include <cstring>
-#define INF 0x3f3f3f3f
 
+#define INF 0x3f3f3f3f
+#define LL long long
+#define LLabs(x) ((x) < 0 ? -(x) : x)

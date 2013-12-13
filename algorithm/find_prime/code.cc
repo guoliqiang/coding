@@ -73,6 +73,7 @@ std::vector<int> Eratosthenes(int n) {
 
 // http://blog.csdn.net/morewindows/article/details/7347459
 // 每个合数由这种形式唯一确定　x = a * b (a <= b and ａ是小于ｘ的最小的素数)
+// 0, 1 既不是质数也不是合数
 std::vector<int> EratosthenesOpt(int n) {
   std::vector<bool> v(n, true);
   std::vector<int> rs;

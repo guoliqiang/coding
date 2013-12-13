@@ -6,10 +6,18 @@
 // Brief :
 
 /*
- * 图找割点，有向图和无向图的差别是，无向图递归时不要走到父节点的位置
- * http://www.cppblog.com/Icyflame/archive/2009/07/04/89231.html
+ * 无向图图找割点
+ * 求割顶(点), 只有无向图才有割点
+ * 
+ * 割点：
+ * 删除该点后图变的不联通。
+ * 
+ * 无向图需要删除多个点才能不连通，这些点的集合叫割顶集，一个无向图可能
+ * 有若干个割顶集，一般要求求最小的割定集（点连通度）
  *
- * 求割顶(点)
+ * 割点与割顶集的对应关系
+ * 那些只有一个点的割定集，就是割点。
+ *
  *
  * 割顶是去掉后让图不再连通的点。
  * 求割顶的算法在DFS遍历的算法上形成。
@@ -20,9 +28,10 @@
  * 2.其他点v是割顶  -------------  它有一个儿子u, 从u或者u的后代出发没有指向v祖先(不含v)的B边, 则删除v以后u和v的父亲不连通, 故为割顶。
  *
  *
- * tarjan 深度优先搜索是神器
+ * tarjan 深度优先搜索是神器 poj3352
  * http://www.cnblogs.com/rainydays/archive/2011/07/06/2099516.html
- * 定理，当把边的双连通分支缩点后形成了一个有向无环图，叶子（度为1的点）的个数为n，则需要在原图中添加(n + 1)/2条边，可以使原图变为没有桥的双连通图。
+ * 定理，当把边的双连通分支缩点后形成了一个有向无环图，叶子（度为1的点）的个数为n，
+ * 则需要在原图中添加(n + 1)/2条边，可以使原图变为没有桥的双连通图。
  * 怎么证明这个结论呢?
  * 具体办法为，首先在两个距离公共祖先最远的两个叶节点之间连接一条边，把这两个点
  * 到祖先的路径上所有点紧缩到成为一个环，因为一个形成的环必然是双连通的。然后再
@@ -42,15 +51,15 @@ int flag[MAXN] = {false};
 int num = 0;
 int root = 0;
 
-// 有向图
-void DFS(int k) {
+// 无向图
+void DFS(int k, int father) {
   dfsn[k] = low[k] = num++;
   int count = 0;
   for (int i = 0; i < N; i++) {
     if (matrix[k][i] > 0) {
       if (dfsn[i] == -1) {
         count++;
-        DFS(i);
+        DFS(i, k);
         low[k] = std::min(low[k], low[i]);
         if ((k == root && count >= 2) ||
             (k != root && low[i] >= dfsn[k])) flag[k] = true;  // 注意要和dfsn[k]比较非low[k]
@@ -63,27 +72,6 @@ void DFS(int k) {
             3 -- 4
             2是割点
           */
-      } else {
-        // 两种比较方式都可以
-        // low[k] = std::min(low[k], dfsn[i]);
-        low[k] = std::min(low[k], low[i]);
-      }
-    }
-  }
-}
-
-// 无向图
-void DFS(int k, int father) {
-  dfsn[k] = low[k] = num++;
-  int count = 0;
-  for (int i = 0; i < N; i++) {
-    if (matrix[k][i] > 0) {
-      if (dfsn[i] == -1) {
-        count++;
-        DFS(i, k);
-        low[k] = std::min(low[k], low[i]);
-        if ((k == root && count >= 2) ||
-            (k != root && low[i] >= dfsn[k])) flag[k] = true;
       } else {
         if (i != father) {
           // 两种比较方式都可以

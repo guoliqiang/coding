@@ -8,6 +8,45 @@
 #include "base/public/common_ojhead.h"
 
 namespace algorithm {
+const int MAXN = 1000;
+int N = 0;
+int visited[MAXN];
+int dis[MAXN];
+int path[MAXN];
+int matrix[MAXN][MAXN];
+
+void Dijstra(int s) {
+  for (int i = 0; i < N; i++) {
+    dis[i] = INF;
+    visited[i] = 0;
+  }
+  dis[s] = 0;
+  for (int i = 0; i < N; i++) {
+    int min = INF;
+    int index = -1;
+    for (int i = 0; i < N; i++) {
+      if (visited[i] == 0 && dis[i] < min) {
+        min = dis[i];
+        index = i;
+      }
+    }
+    if (index == -1) break;
+    visted[index] = 1;
+    for (int i = 0; i < N; i++) {
+      if (visted[i] == 0 && matrix[index][i] > 0 && dis[i] > dis[index] + matrxi[index][i]) {
+         dis[i] = dis[index] + matrix[index][i];
+         path[i] = index;
+      }
+    }
+  }
+}
+}  // namespace
+
+namespace algorithm {
+
+}  // namespace algorithm
+
+namespace algorithm {
 
 char * BM(char * s, char * p) {
   int slen = strlen(s);

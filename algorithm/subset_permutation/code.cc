@@ -5,6 +5,12 @@
 // File  : code.cc
 // Brief :
 
+/*
+在输入没有重复的时候，使用交换方式求得的permutation序列，可用next_permutation算法
+求得的序列是一致的，这个规律之前没有留意到 poj1833
+
+*/
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

@@ -7,6 +7,7 @@
 //         http://blog.sciencenet.cn/home.php?mod=space&uid=434885&do=blog&id=325398
 // 2-sat (2 satisfiability) 问题
 // poj3683
+
 #include "base/public/common_head.h"
 
 namespace algorithm {

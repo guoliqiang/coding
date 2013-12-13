@@ -39,7 +39,7 @@ int MaxMatch() {
   for (int i = 0; i < MAX; i++) {
     memset(visited, 0, sizeof(visited));  // 当前轮不能找已经找过的点
     // if (link_l[i] != -1) continue;　　这个条件是不用判断的
-    if (Search(i)) rs++;
+    if (Search(i)) rs++;  // 不用担心visited[i]没有赋值为1,因为此时还没有任何一个处于右侧的点链接到i
   }
   return rs;
 }

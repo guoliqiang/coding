@@ -52,7 +52,7 @@ void DFS() {
   }
 }
 
-// RMQ
+// RMQ (还可以用线段树)
 // dp[i][j]保存的是deep[i]开始2^j个数min值的下表
 void Build() {
   for (int i = 0; i < id; i++) {

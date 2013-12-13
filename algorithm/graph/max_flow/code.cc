@@ -9,8 +9,12 @@
 // 图的最大流等于其最小割
 
 // http://blog.csdn.net/kksleric/article/details/7429849
-// 怎样求割集（割边集合）：求完最大流后，在残留网络中从source开始dfs，被染色的为S，未被染色的为T，则边集[S,T]为割。
+// 怎样求割集（割边集合）：求完最大流后，在残留网络中从source开始dfs，
+// 被染色的为S，未被染色的为T，则边集[S,T]为割。
 // 不唯一
+// 
+// 方法二:
+// 删除边然后求最大流，如果流减小，则此边处于割边集合中
 //
 #include "base/public/common_head.h"
 

@@ -52,9 +52,7 @@ type Directed_MST(int root, int NV, int NE) {
       if (i == root) continue;
       if (dis[i] == inf)  return -1;
     }
-    /*
-    求环时要求除根节点以外的节点形成的环
-    */
+    // 求环时要求除根节点以外的节点形成的环
     int cntnode = 0;
     memset(ID, -1, sizeof(ID));
     memset(vis, -1, sizeof(vis));
@@ -65,7 +63,7 @@ type Directed_MST(int root, int NV, int NE) {
         vis[v] = i;
         v = to[v];
       }
-      if (v != root && vis[v] == i) {
+      if (v != root && vis[v] == i) {  //  两个条件必须都有
         for (int u = to[v]; u != v; u = to[u]) {
           ID[u] = cntnode;
         }

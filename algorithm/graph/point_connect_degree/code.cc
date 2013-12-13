@@ -7,6 +7,12 @@
 // Brief : http://www.cnblogs.com/dyllove98/archive/2013/07/25/3215003.html
 //         http://www.cnblogs.com/-hsz/archive/2012/07/24/2607375.html
 //
+//
+// 通俗点说，就是一个图G最少要去掉多少个点会变成非连通图或者平凡图。
+// 当然对于一个完全图来说Kn来说，它的连通度就是n-1(poj1966要返回n)。
+//
+// 平凡图：只含有一个独立点的图
+//
 // 点连通度：
 //　　求一个给定的无向图的点连通度，可以转换为求边连通度，怎么转换就如下所示：
 // 
@@ -17,10 +23,16 @@
 //   (2) 原 G 图中的每条边 e ＝ uv ，在 N 网中有两条弧 e’= u"v',e"=v"u' 与之对应， e' 弧容量为 ∞ ， e" 弧容量为 ∞
 //   (3)A” 为源顶点， B' 为汇顶点
 //    注意：弧是有向边
+//    u'--->u''--->v'--->v''
+//   /|\                 |
+//    |__________________|
+//
 //  若 G 为有向图：
 //    (1) 原 G 图中的每个顶点变成 N 网中的两个顶点 v’ 和 v” ，顶点 v' 至 v” 有一条弧连接，弧容量为 1
 //    (2) 原 G 图中的每条弧 e ＝ uv 变成一条有向轨 u'u"v'v" ，其中轨上的弧 u"v' 的容量为 ∞;
 //    (3)A” 为源顶点， B' 为汇顶点
+//    
+//    u'-->u''--->v'--->v''
 //
 // 2 ．指定一个源点 A" ，枚举汇点B'，求 A" 到 B' 的最大流 F ，
 //   　注意　Ａ'' B' 是说他们来自于不同的两个点
@@ -165,7 +177,7 @@ int Directed(std::vector<std::vector<int> > & v) {
     memset(cut, 0, sizeof(cut));
     int flow_value = rs;
     for (int i = 0; i < n && flow_value; i++) {
-      if (i == target || i == k - n) continue;
+      if (i == target || i == k - n) continue;  // 跳过源点和汇点，如果源点和汇点直接相连，rs == INT_MAX 在上面就已经返回了
       matrix[i][n + i] = 0;
       if (MaxFlow(k, target) < flow_value) {
         cut[i] = 1;

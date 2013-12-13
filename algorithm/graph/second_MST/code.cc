@@ -4,7 +4,7 @@
 // Date  : 2013-10-22 08:14:09
 // File  : code.cc
 // Brief : no directed graph
-
+// poj 1679
 #include "base/public/common_head.h"
 
 namespace algorithm {

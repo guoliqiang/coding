@@ -159,11 +159,10 @@ bool ModDeq(int a, int b, int n, int &t) {
  * 有解，且在模(m1 * m2 * m3) 的意义下唯一
  * 为：
  * M1 * b1 + M2 * b2 + M3* b3
- * 其中 M1为m2 m3的公倍数中最小的模 m1 等于1 的数（一定存在 (m2 * m3) * x '=' 1 (% m1),由前面的结论可知，一定存在）
+ * 其中 M1为m2 m3的公倍数中最小的模 m1 等于1 的数（一定存在 (m2 * m3) * y '=' 1 (% m1),由前面的结论可知，一定存在）
+ * (a * x '=' b (%n) 有没有解根据前面的结论：看b是不是可以整除gcd(a, n))
  * 其中 M2为m1 m3的公倍数中最小的模 m2 等于1 的数
  * 其中 M3为m1 m2的公倍数中最小的模 m3 等于1 的数
- * 
- * 其实结果可以为上值  + k * (m1*m2*m3)
  *
  *
  *
@@ -188,7 +187,8 @@ bool ModDeq(int a, int b, int n, int &t) {
  * 
  * 若(r2 - r1) % gcd(a1, a2) != 0 则无解
  *
- * 利用模线性方程方法可以得到x1,求得m = x1 * a1 + r1
+ * 利用模线性方程方法可以得到x1,求得m = c * x1 * a1 + r1
+ * 其中c = (r2 - r1) / gcd(a1, a2)
  *
  * 令a1 = a1 * a2 / gcd(a1, a2)
  *   r1 = m
@@ -201,6 +201,7 @@ bool ModDeq(int a, int b, int n, int &t) {
  *
  * */
 
+// 要求:m中的数两两互质
 int China(std::vector<int> & m, std::vector<int> &b) {
   int t = 1;
   int rs = 0;

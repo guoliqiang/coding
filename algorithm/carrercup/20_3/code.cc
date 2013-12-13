@@ -61,7 +61,7 @@ void SelectShuff(std::vector<int> &v, int m) {
  * 所有元素被选择的概率均为m/n
  * */
 // 时间负载度和n成正比,当n很大时效率比较低
-std::vector<int> SelectKunuth(std::vector<int> & v, int m) {
+std::vector<int> SelectKnuth(std::vector<int> & v, int m) {
   std::vector<int> rs;
   int n = v.size();
   // 可以保证总能选出m个元素

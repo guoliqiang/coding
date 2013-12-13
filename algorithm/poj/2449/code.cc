@@ -11,9 +11,6 @@
 // AC Accepted  7476K 282MS
 namespace NB {
 
-const int INF = 0x3f3f3f3f;
-using namespace std;
-
 const int MAXN = 1005;
 const int MAXM = 200100;
   
@@ -112,10 +109,8 @@ void Read() {
 // 这个居然过不了，代码几乎和NB一模一样
 //
 namespace bak {
-
 const int MAXE = 200100;
 const int MAXN = 1010;
-const int INF = 0x3f3f3f3f;
 int N = 0;
 
 int S = 0;
@@ -133,7 +128,6 @@ struct Edge {
   Edge() : v(-1), c(0), next(-1) {}
 } E[MAXE];
 
-int NE = 0;
 int head[MAXN];
 int tail[MAXN];
 
@@ -141,13 +135,6 @@ void Dijkstra() {
   memset(vis, 0, sizeof(vis));
   for (int i = 0; i < N; i++) dis[i] = INF;
   dis[T] = 0;
-  for (int i = tail[T]; i != -1; i = E[i].next) {
-    if (dis[E[i].v] > E[i].c) {  // bug fixed  一定要判断，否则由于这道题的垃圾数据会造成WA，NB的写法很好
-      dis[E[i].v] = E[i].c;
-    };
-  }
-  vis[T] = 1;
-  
   for (int k = 1; k < N; k++) {
     int min = INF;
     int idx = -1;
@@ -160,8 +147,10 @@ void Dijkstra() {
     if (idx == -1) break;
     vis[idx] = 1;
     for (int i = tail[idx]; i != -1 ; i = E[i].next) {
-      if (dis[E[i].v] > dis[idx] + E[i].c) {
-        dis[E[i].v] = dis[idx] + E[i].c;
+      int v = E[i].v;
+      int c = E[i].c;
+      if (vis[v] == 0 && dis[v] > dis[idx] + c) {
+        dis[v] = dis[idx] + c;
       }
     }
   }
@@ -171,11 +160,10 @@ struct Node {
   int u;
   int val;
   Node(int i_u, int i_val) : u(i_u), val(i_val) {}
+  bool operator < (const Node & x)  const {
+    return val + dis[u] < x.val + dis[x.u];
+  }
 };
-
-bool operator < (const Node & x, const Node & y) {
-  return (x.val + dis[x.u]) < (y.val + dis[y.u]);
-}
 
 int AStar() {
   memset(cnt, 0, sizeof(cnt));
@@ -194,12 +182,12 @@ int AStar() {
   }
   return -1;
 }
+
 void Read() {
   int n, m;
   scanf("%d%d", &n, &m);
   getchar();
   N = n;
-  NE = m;
   memset(head, -1, sizeof(head));
   memset(tail, -1, sizeof(tail));
   for (int i = 0; i < m; i++) {
@@ -229,7 +217,6 @@ void Read() {
 // MLE
 namespace algorithm {
 const int MAXN = 1009;
-const int INF = 0x3f3f3f3f;
 int N = 0;
 
 int matrix[MAXN][MAXN];

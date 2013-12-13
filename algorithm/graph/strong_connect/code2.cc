@@ -6,6 +6,7 @@
 // Brief :
 
 // tarjan强联通分量
+
 #include "base/public/common_head.h"
 
 namespace algorithm {
@@ -21,7 +22,19 @@ int stop = 0;
 int component_tag = 0;
 int cnt = 1;
 
+// 无向图双联通分量
+// low[]的编号即为连通分量的编号
+// poj3352
+void Tarjan(int r, int father) {
+  dfn[r] = low[r] = cnt++;
+  for (int i = 0; i < N; i++) {
+    if (matrix[r][i] <= 0 || i == father) continue;
+    if (dfn[i] == -1) Tarjan(i, r);
+    low[r] = std::min(low[i], low[r]);
+  }
+}
 
+// 有向图的极大强联通分量
 void Tarjan(int k) {
   dfn[k] = low[k] = cnt++;
   stack[stop++] = k;
@@ -60,7 +73,10 @@ void Read(std::vector<std::vector<int> > & v) {
 
 void Find() {
   for (int i = 0; i < N; i++) {
-    if (dfn[i] == -1) Tarjan(i);
+    if (dfn[i] == -1) {
+      Tarjan(i);  // 有向图
+      // Tarjan(i, -1)  // 无向图
+    }
   }
 }
 }  // namespace algorithm
