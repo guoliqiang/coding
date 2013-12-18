@@ -188,6 +188,7 @@ bool IsMatching(const char * s, const char * p) {
   return false;
 }
 
+
 bool IsMatchingWrapper(const char * s, const char * p) {
   int len = strlen(p);
   std::string pattern;
@@ -206,6 +207,33 @@ bool IsMatchingWrapper(const char * s, const char * p) {
 }
 }  // namespace algorithm
 
+
+namespace twice {
+bool IsMatch(std::string s, std::string p) {
+  s = ' ' + s;
+  p = ' ' + p;
+  int n = s.size();
+  int m = p.size();
+  std::vector<std::vector<int> > dp(2, std::vector<int>(n, 0));
+  bool flag = false;
+  dp[flag][0] = 1;
+  for (int i = 1; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      if (j == 0) {
+        if (p[i] == '*') dp[!flag][j] = dp[flag][j];
+        else dp[!flag][j] = 0;
+      } else {
+         if (p[i] == '?' || p[i] == s[j]) dp[!flag][j] = dp[flag][j - 1];
+         else if (p[i] == '*') dp[!flag][j] = std::max(dp[!flag][j - 1], dp[flag][j]);
+         else dp[!flag][j] = 0;
+      }
+    }
+    flag = !flag;
+  }
+  return dp[flag][n - 1];
+}
+}  // namespac twice
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
@@ -215,7 +243,7 @@ int main(int argc, char** argv) {
   s = "a";
   p = "a*";
   LOG(INFO) << s << " " << p << " " << IsMatchingWrapper(s.c_str(), p.c_str());
-  
+  return 0;
   s = "";
   p = "*";
   LOG(INFO) << s << " " << p << " " << IsMatchingWrapper(s.c_str(), p.c_str());

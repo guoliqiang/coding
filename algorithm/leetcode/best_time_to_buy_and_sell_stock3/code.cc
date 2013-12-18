@@ -161,13 +161,72 @@ int MaxProfit(std::vector<int> & v) {
 }
 }  // namespace algorithm
 
+// 可以抽象成：最大M段子段和问题
+namespace NB2 {
+// O(n^3) 会T
+int MaxMSeg(std::vector<int> v, int m) {
+  v.insert(v.begin(), 0);
+  m += 1;
+  int n = v.size();
+  std::vector<std::vector<int> > dp(m, std::vector<int>(n, 0));
+  for (int i = 1; i < m; i++) {
+    for (int j = i; j < n; j ++) {
+      if (i == j) dp[i][j] = dp[i - 1][j - 1] + v[j];
+      else {
+        dp[i][j] = dp[i][j - 1] + v[j];
+        for (int k = i - 1; k < j; k++) {
+          dp[i][j] = std::max(dp[i][j], dp[i - 1][k] + v[j]);
+        }
+      }
+    }
+  }
+  int max = 0;
+  for (int j = m - 1; j < n; j++) max = std::max(max, dp[m - 1][j]);
+  return max;
+}
+
+// O(n ^ 2)
+int MaxMSegBest(std::vector<int> v, int m) {
+  v.insert(v.begin(), 0);
+  m += 1;
+  int n = v.size();
+  std::vector<int> dp(n, 0);
+  std::vector<int> pre(n, 0);
+  for (int i = 1; i < m; i++) {
+    int max = INT_MIN;
+    for (int j = i; j < n; j++) {
+      if (j == i) dp[j] = pre[j - 1] + v[j];
+      else dp[j] = std::max(dp[j - 1], pre[j - 1]) + v[j];
+      pre[j - 1] = max;
+      max = std::max(max, dp[j]);
+    }
+    pre[n - 1] = max;
+  }
+  int rs = 0;
+  for (int i = m - 1; i < n; i++) {
+    rs = std::max(rs, dp[i]);
+  }
+  return rs;
+}
+
+int MaxProfit(std::vector<int> & v) {
+  std::vector<int> data;
+  for (int i = 1; i < v.size(); i++) {
+    data.push_back(v[i] - v[i - 1]);
+  }
+  int t = std::max(MaxMSegBest(data, 2), MaxMSegBest(data, 1));
+  return t;
+}
+}  // namespace NB2
+
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
   std::vector<int> foo;
-  /*
   foo.push_back(1);
+  foo.push_back(2);
+  /*
   foo.push_back(-1);
   foo.push_back(1);
   foo.push_back(2);
@@ -181,5 +240,6 @@ int main(int argc, char** argv) {
   */
   LOG(INFO) << MaxProfitNew(foo);
   LOG(INFO) << NB::MaxProfit(foo);
+  LOG(INFO) << NB2::MaxProfit(foo);
   return 0;
 }

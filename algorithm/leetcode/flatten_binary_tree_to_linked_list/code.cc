@@ -70,6 +70,29 @@ TreeNode * Flatten(TreeNode * root) {
 
 }  // namespace algorithm
 
+// 转换成中序链表形式
+namespace algorithm {
+void ToSortedList(TreeNode * root, TreeNode * & pre, TreeNode * & rs) {
+  if (root == NULL) return;
+  ToSortedList(root->left, pre, rs);
+  if (pre != NULL) {
+    pre->left = NULL;
+    pre->right = root;
+  }
+  pre = root;
+  if (rs == NULL) rs = pre;
+  ToSortedList(root->right, pre, rs);
+}
+
+TreeNode * ToSortedList(TreeNode * root) {
+  TreeNode * pre = NULL;
+  TreeNode * rs = NULL;
+  ToSortedList(root, pre, rs);
+  return rs;
+}
+
+}  // namespace algorithm
+
 using namespace algorithm;
 
 // 这个更精简
@@ -95,11 +118,12 @@ TreeNode * Flatten(TreeNode * root) {
 
 
 int main(int argc, char** argv) {
-  std::string str = "1,#,2,4,3";
+  std::string str = "1,#,2,4,3,5,6";
   // std::string str = "1,#,2";
   TreeNode * root = Make(str);
-  PreOrder(root);
-  Flatten(root);
+  InOrder(root);
+  // Flatten(root);
+  root = ToSortedList(root);
   while (root != NULL) {
     LOG(INFO) << root->val;
     root = root->right;

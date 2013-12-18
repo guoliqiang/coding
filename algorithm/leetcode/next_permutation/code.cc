@@ -44,6 +44,24 @@ class Solution {
 
 }  // namespace algorithm
 
+namespace twice {
+void NextP(std::vector<int> & num) {
+  int i = num.size() - 1;
+  while (i > 0 && num[i - 1] >= num[i]) i--;
+  int b, e;
+  if (i == 0) {
+    b = 0;
+    e = num.size() - 1;
+  } else {
+    int j = num.size() - 1;
+    while (num[j] <= num[i - 1]) j--;
+    std::swap(num[i - 1], num[j]);
+    b = i;
+    e = num.size() - 1;
+  }
+  while (b < e) std::swap(num[b++], num[e--]);
+}
+}  // namespace twice
 
 int main(int argc, char** argv) {
   return 0;

@@ -230,6 +230,7 @@ bool Cmp(const std::pair<int, int> & a1, const std::pair<int, int> & a2) {
   return a1.first < a2.first;
 }
 
+// 错误不能使用n*log(n)的算法，只能使用n^2算法，见nyoj16
 int Tower(std::vector<std::pair<int, int> > & v, std::vector<std::pair<int, int> >  & rs) {
   std::sort(v.begin(), v.end(),Cmp);
   std::vector<std::pair<int, int> > dp(v.size() + 1);

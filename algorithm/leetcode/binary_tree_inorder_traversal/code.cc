@@ -153,7 +153,7 @@ void InOrder(TreeNode * root) {
       } else {
         foo->right = NULL;
         LOG(INFO) << root->val;
-        root = root->right;
+        root = root->right;  // 注意要这里要走到右子树上来
       }
     }
   }

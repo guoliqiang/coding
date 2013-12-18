@@ -68,14 +68,17 @@ void Proc(TreeNode *root, TreeNode *&n1, TreeNode *&n2, TreeNode *&prev) {
  * */
 // 线索二叉树，详情见 binary_tree_inorder_traversal 题目下的code
 void MorrisInOrder(TreeNode * root, TreeNode * &n1, TreeNode *&n2, TreeNode *&prev) {
-  if(root == NULL) return;
-
   while (root != NULL) {
     if(root->left == NULL) {
       // visit
       if (prev != NULL && prev->val > root->val) {
         n2 = root;
         if (n1 == NULL) n1 = prev;
+        /*
+        if (n1 == NULL) n1 = prev;
+        else n2 = root;
+        这种写法不能处理被交换的节点相邻的情况，这种情况n2没有记录到值
+        */
       }
       prev = root;
 

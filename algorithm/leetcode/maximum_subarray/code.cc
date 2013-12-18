@@ -29,14 +29,12 @@ If you have figured out the O(n) solution, try coding another solution using the
 #include <vector>
 #include "base/public/logging.h"
 
-
 namespace algorithm {
 int MaxSubArray(int * a, int n) {
   std::vector<int> dp(n, 0);
   int index = 0;
   dp[0] = a[0];
   int max = dp[0];
-  
   for (int i = 1; i < n ; i++) {
     dp[i] = std::max(a[i], a[i] + dp[i - 1]);
     if (dp[i] > max) {
@@ -94,6 +92,20 @@ int DivideConquer(int * a, int n) {
 }
 
 }  // namespace algorithm
+
+
+
+namespace twice {
+int MaxSubArray(int A[], int n) {
+  int pre = A[0];
+  int rs = pre;
+  for (int i = 1; i < n; i++) {
+    pre = std::max(pre + A[i], A[i]);
+    rs = std::max(rs, pre);
+  }
+  return rs;
+}
+}  // namespace twice
 
 using namespace algorithm;
 

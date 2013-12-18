@@ -13,6 +13,10 @@ namespace algorithm {
 // 把从1到p标号的p个球放到k个无区别的盒子里，要求每个盒子里至少有一个小球，
 // 问不同的放法？
 // S(p, k) = S(p - 1, k - 1) + k *S(p - 1, k)
+
+/*
+'集合'内元素看作是相同的不重复划分，见wikioi 1039
+*/
 int Stirling2(int n, int k) {
   if (k > n) return 0;
   std::vector<std::vector<int> > dp(n + 1, std::vector<int>(k + 1, 0));

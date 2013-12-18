@@ -84,6 +84,26 @@ string multiply(string num1, string num2) {
 }
 }  // namespace  twice
 
+namespace third {
+std::string Multiply(std::string num1, std::string num2) {
+  std::string rs(num1.size() + num2.size() + 1, '0');
+  int idx = rs.size() - 1;
+  for (int i = num1.size() - 1; i >= 0; i--) {
+    int c = 0;
+    int k = idx--;
+    for (int j = num2.size() - 1; j >= 0 || c > 0; j--) {
+      if (j >= 0) c += (num2[j] - '0') * (num1[i] - '0');
+      c += rs[k] - '0';
+      rs[k--] = c % 10 + '0';
+      c /= 10;
+    }
+  }
+  int i = 0;
+  while (i < rs.size() - 1 && rs[i] == '0') i++;
+  return rs.substr(i);
+}
+}  // namespace third
+
 int main(int argc, char** argv) {
   std::string s1;
   std::string s2;

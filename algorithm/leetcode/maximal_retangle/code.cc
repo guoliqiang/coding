@@ -114,6 +114,45 @@ class Solution {
 }  // namespace twice
 using namespace algorithm;
 
+// DP vijos1055
+namespace NB {
+int MaxRectangle(std::vector<std::vector<char> > & matrix) {
+  int m = matrix.size();
+  int n = m == 0 ? 0: matrix[0].size();
+  std::vector<int> left(n, 0);    // 从左向右数第一个不小于height[i]的数的下表
+  std::vector<int> right(n, n);   // 从右向左数第一个不小于height[i]的数的下表
+  std::vector<int> height(n, 0);  // hegiht 多有数据为0，此时left right中的数，显然是符合定义的
+                                  // 余下的操作就是在height更新时保持left right的性质
+  
+  int max = 0;
+  for (int i = 0; i < m; i++) {
+    int l = 0;
+    int r = n;
+    for (int j = 0; j < n; j++) {
+      if (matrix[i][j] == '1') {
+        left[j] = std::max(l, left[j]);
+        height[j]++;
+      } else {
+        l = j + 1;
+        height[j] = 0;
+        // 根据left right的定义显然
+        left[j] = 0;
+        right[j] = n;
+      }
+    }
+    for (int j = n - 1; j>= 0; j--) {
+      if (matrix[i][j] == '1') {
+        right[j] = std::min(r, right[j]);
+        max = std::max(max, height[j] * (right[j] - left[j]));
+      } else {
+        r = j;
+      }
+    }
+  }
+  return max;
+}
+}  // namespace NB
+
 int main(int argc, char** argv) {
   std::vector<std::vector<char> > foo(4, std::vector<char>(4, '0'));
   foo[0][2] = '1';
@@ -125,6 +164,7 @@ int main(int argc, char** argv) {
   foo[3][2] = '1';
   foo[3][3] = '1';
   LOG(INFO) << MaximalRectangle(foo);
+  LOG(INFO) << NB::MaxRectangle(foo);
   return 0;
 }
 

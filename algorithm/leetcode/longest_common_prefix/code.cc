@@ -80,6 +80,24 @@ class Solution {
 }  // namespace twice
 
 
+namespace third {
+std::string LongestCommon(std::vector<std::string> & str) {
+  if (str.size() == 0) return "";
+  std::vector<const char *> ptr;
+  for (int i = 0; i < str.size(); i++) ptr.push_back(str[i].c_str());
+  while (true) {
+    int i = 1;
+    for (i = 1; i < ptr.size(); i++) {
+      if (*ptr[0] != *(ptr[i]++)) break;
+    }
+    if (i != ptr.size() || *ptr[0] == '\0') break;
+    ptr[0]++;
+  }
+  return str[0].substr(0, ptr[0] - str[0].c_str());
+}
+}  // namespace third
+
+
 int main(int argc, char** argv) {
   std::vector<std::string> v;
   v.push_back("a");

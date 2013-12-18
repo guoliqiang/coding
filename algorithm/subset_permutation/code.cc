@@ -15,6 +15,7 @@
 
 namespace algorithm {
 // 按顺序选，根据第一次选择分类.
+// 传入的k是循环的起始位置，不用理会常用方法的结束位置
 void UnrepeatCombination(std::vector<int> & num, std::vector<int> & used,
                          std::vector<int> & path, int k) {
   LOG(INFO) << JoinVector(path);  // Note 每次都输出
@@ -45,6 +46,7 @@ void UnrepeatCombination(std::vector<int> & num) {
   UnrepeatCombination(v, cnt, path, 0);
 }
 
+// 循环起始位置总是从0开始，传入的cnt是元素总的数目，不用理会传统方法的结束位置
 void UnrepeatPermutation(std::vector<int> & num, std::vector<int> & used,
                          std::vector<int> & path, int cnt, int sum) {
   if (cnt == sum) {  // path.size() == sum

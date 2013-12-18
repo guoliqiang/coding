@@ -86,6 +86,33 @@ std::vector<int> SearchRange(int * a, int n, int t) {
 
 }  // namespace algorithm
 
+namespace twice {
+std::vector<int> SearchRange(int A[], int n, int target) {
+  std::vector<int> rs(2, -1);
+  int b, e;
+  b = 0;
+  e = n - 1;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (A[mid] == target && (mid == 0 || A[mid - 1] < target)) {
+      rs[0] = mid;
+      break;
+    } else if (A[mid] >= target) e = mid - 1;
+    else b = mid + 1;
+  }
+  b = 0;
+  e = n - 1;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (A[mid] == target && (mid == e || A[mid + 1] > target)) {  // mid == n 也可以，但mid == e 更有实际意义
+      rs[1] = mid;
+      break;
+    } else if (A[mid] <= target) b = mid + 1;
+    else e = mid - 1;
+  }
+  return rs;
+}
+}  // namespace twice
 using namespace algorithm;
 
 int main(int argc, char** argv) {

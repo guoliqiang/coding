@@ -60,7 +60,7 @@ void DP(std::string & str1, std::string & str2) {
   }
 }
 
-// zoj 2432
+// zoj 2432 中的写法要比这个简单, str1, str2前面增加一个空格
 void DP(std::string & str1, std::string & str2, std::vector<int> & dp,
         std::vector<std::vector<int> > & path) {
   int m = str1.size();

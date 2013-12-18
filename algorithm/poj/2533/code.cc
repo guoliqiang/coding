@@ -15,7 +15,7 @@ namespace algorithm {
 const int MAXN = 1009;
 int N = 0;
 int data[MAXN];
-
+// O(n * log(n))
 int LCI() {
   int t = 0;
   for (int i = 0; i < N; i++) {
@@ -30,6 +30,25 @@ int LCI() {
     t = std::max(t, b);
   }
   return t + 1;
+}
+
+// O(n^2)
+int dp[MAXN];
+int LCI2() {
+  int rs = 0;
+  memset(dp, 0, sizeof(dp));
+  for (int i = 0; i < N; i++) {
+    if (i == 0) dp[i] = 1;
+    else {
+      int max = 0;
+      for (int j = 0; j < i; j++) {
+        if (data[j] < data[i]) max = std::max(max, dp[j]);
+      }
+      dp[i] = max + 1;
+    }
+    rs = std::max(rs, dp[i]);
+  }
+  return rs;
 }
 
 void Read() {

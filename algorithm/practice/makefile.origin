@@ -1,0 +1,6 @@
+# Copyright 2013 Liqiang Guo. All Rights Reserved.
+# Author: Liqiang Guo (guoliqiang2006@gmail.com)
+# Date  : 2013-12-17 11:43:22
+
+code : code.cc
+	g++ -o code code.cc

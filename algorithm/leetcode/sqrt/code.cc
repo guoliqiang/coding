@@ -91,6 +91,19 @@ int sqrt2(int x) {
 }
 }  // namespace twice
 
+namespace third {
+int Sqrt(int x) {
+  long long b = 0;
+  long long e = x;
+  while (b <= e) {
+    long long mid = b + (e - b) / 2;
+    if (mid * mid < x) b = mid + 1;
+    else e = mid - 1;
+  }
+  return b * b == x ? b : b - 1;
+}
+}  // namespace third
+
 int main(int argc, char** argv) {
   LOG(INFO) << Sqrt(2147395599);
   return 0;

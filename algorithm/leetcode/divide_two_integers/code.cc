@@ -7,6 +7,7 @@
 
 /*
 Divide two integers without using multiplication, division and mod operator.
+不能用除法
 */
 
 #include <algorithm>
@@ -45,9 +46,9 @@ long long int DiviR(long long dividend, long long int divisor) {
   while (dividend >= divisor) {
     long long int num = 1;
     long long int t = divisor;
-    while ((t * 2) < dividend) {
-      t *= 2;
-      num *= 2;
+    while ((t << 1) < dividend) {
+      t <<= 1;
+      num <<= 1;
     }
     rs += num;
     dividend -= t;
@@ -60,9 +61,9 @@ long long int Divi(long long int dividend, long long int divisor) {
   if (divisor == dividend) return 1;
   long long int num = 1;
   long long int t = divisor;
-  while ((t * 2) < dividend) {
-      t *= 2;
-      num *= 2;
+  while ((t << 1) < dividend) {
+      t <<= 1;
+      num <<= 1;
   }
   return num += Divi(dividend - t, divisor);
   
@@ -79,22 +80,21 @@ class Solution {
 
 namespace NB {
 class Solution {
-public:
-    int divide(int dividend, int divisor) {
-        long long a = fabs((double)dividend);;
-        long long b = fabs((double)divisor);
+ public:
+  int divide(int dividend, int divisor) {
+    long long a = fabs((double)dividend);;
+    long long b = fabs((double)divisor);
 
-        long long ret = 0;
-        while (a >= b) {
-            long long c = b;
-            for (int i = 0; a >= c; ++i, c <<= 1) {
-                a -= c;
-                ret += 1 << i;
-            }
-        }
-
-        return ((dividend^divisor)>>31) ? (-ret) : (ret);
+    long long ret = 0;
+    while (a >= b) {
+      long long c = b;
+      for (int i = 0; a >= c; ++i, c <<= 1) {
+        a -= c;
+        ret += 1 << i;
+      }
     }
+    return ((dividend^divisor)>>31) ? (-ret) : (ret);
+  }
 };
 }  // namespace NB
 

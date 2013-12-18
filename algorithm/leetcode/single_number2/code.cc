@@ -58,6 +58,25 @@ int SingleNumber2(int * A, int n) {
 
 using namespace algorithm;
 
+namespace twice {
+int SingleNumber(int A[], int n) {
+  int one = 0;
+  int two = 0;
+  for (int i = 0; i < n; i++) {
+    int three = two & A[i];
+    two |= (one & A[i]);
+    one |= A[i];
+    two ^= three;
+    one ^= three;
+    /* or
+    two &= ~three;
+    one &= ~three;
+    */
+  }
+  return one;
+}
+}  // namespace twice
+
 
 int main(int argc, char** argv) {
   int A[] = {3, 3, 3, 9};

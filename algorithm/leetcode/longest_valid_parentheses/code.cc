@@ -112,12 +112,10 @@ int Longest(std::string s) {
       if (stack.empty() || s[stack.top()] != '(') stack.push(i);
       else {
         stack.pop();
-        if (stack.empty()) max = std::max(max, i + 1);
-        else max = std::max(max, i - stack.top());
+        int foo = stack.empty() ? i + 1 : i - stack.top();
+        max = std::max(max, foo);
       }
-    } else {
-      stack.push(i);
-    }
+    } else stack.push(i);
   }
   return max;
 }

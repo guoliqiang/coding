@@ -53,7 +53,7 @@ std::string zigzag(std::string text, int n) {
 namespace twice {
 
 std::string Convert(std::string s, int row) {
-  if (row <= 1) return s;
+  if (row <= 1) return s;  // 这个必须特殊处理
   int idx = 0;
   bool flag = true;
   std::vector<std::string> v(row, std::string(""));

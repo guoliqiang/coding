@@ -85,6 +85,48 @@ int MaxPoints(std::vector<Point> & points) {
 
 using namespace algorithm;
 
+// n^2
+namespace NB {
+int GcdSub(int x, int y) {
+  if (!x) return y;
+  if (!y) return x;
+  return GcdSub(y, x % y);
+}
+
+// x == 0 时符号和y保持一致，否则和x保持一致
+int Gcd(int x, int y) {
+  int t = GcdSub(abs(x), abs(y));
+  if (x == 0) return y < 0 ? -t : t;
+  return x < 0 ? -t : t;
+}
+
+int MaxPoint(std::vector<Point> & v) {
+  int max = 0;
+  for (int i = 0; i < v.size(); i++) {
+    std::map<std::pair<int, int>, int> m;
+    int same = 1;
+    int cmax = 0;
+    for (int j = i + 1; j < v.size(); j++) {
+      int dx = v[j].x - v[i].x;
+      int dy = v[j].y - v[i].y;
+      int gcd = Gcd(dx, dy);
+      if (gcd == 0) {
+        same++;
+        continue;
+      }
+      dx /= gcd;
+      dy /= gcd;
+      std::pair<int, int> t = std::make_pair(dx, dy);
+      if (m.count(t)) m[t]++;
+      else m[t] = 1;
+      cmax = std::max(cmax, m[t]);
+    }
+    max = std::max(max, cmax + same);
+  }
+  return max;
+}
+}
+
 /*
  * (0,9),(138,429),(115,359),(115,359),(-30,-102),(230,709),(-150,-686),(-135,-613),(-60,-248),(-161,-481),(207,639),(23,79),(-230,-691),(-115,-341),(92,289),(60,336),(-105,-467),(135,701),(-90,-394),(-184,-551),(150,774)
  * */
