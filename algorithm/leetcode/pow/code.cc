@@ -41,6 +41,16 @@ double Pow(double x, int n) {
   return n >0 ? rs : 1.0 / rs;
 }
 
+double PowR(double x, int n) {
+  if (n == 0) return 1;
+  if (n == 1) return x;
+  if (n & 1) {
+    return x * PowR(x * x, n >> 1);
+  } else {
+    return Pow(x * x, n >> 1);
+  }
+}
+
 }  // namespace algorithm
 
 namespace twice {
@@ -85,6 +95,8 @@ using namespace algorithm;
 
 
 int main(int argc, char** argv) {
+  LOG(INFO) << PowR(2, 4);
+  return 0;
   twice::Solution s;
   LOG(INFO) << s.pow(2, 10);
   return 0;

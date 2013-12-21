@@ -4,19 +4,16 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/graph/tsp
+PROJ_NAME=algorithm/poj/1379
 
 
 all:
 	$(WORK_ROOT)/develop/snake/snake.sh t=*
 	if test $$? -ne 0; then exit 1; fi; \
   cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/code $(WORK_ROOT)/$(PROJ_NAME)/; \
-  cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/code2 $(WORK_ROOT)/$(PROJ_NAME)/; \
-  cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/code3 $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 
 opt:
 
 
 clean:
-	rm -rf find_sub_tree
