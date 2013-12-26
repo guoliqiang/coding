@@ -65,6 +65,55 @@ std::vector<std::vector<int> > PathSum(TreeNode * root, int sum) {
 
 using namespace algorithm;
 
+// 非递归
+// TODO
+namespace NB {
+struct Node {
+  TreeNode * v;
+  std::vector<int> path;
+  Node (TreeNode * t) : v(t) {}
+  void Add(Node & t, int val) {
+    path = t.path;
+    path.push_back(val);
+  }
+  int Sum() {
+    int rs = 0;
+    for (int i = 0; i < path.size(); i++) {
+      rs += path[i];
+    }
+    return rs;
+  }
+}
+
+std::vector<std::vector<int> > Path(TreeNode * root, int sum) {
+  srd::vector<std::vector<int> > rs;
+  std::vector<int> path;
+  int cur = 0;
+  std::stack<TreeNode *> stack;
+  while (root != NULL) {
+    stack.push(root);
+    cur += root->val;
+    path.push(root->val);
+    root = root->left;
+  }
+  while (!stack.empty()) {
+    TreeNode * t = stack.top();
+    if (t->right == NULL && cur == sum) {
+      rs.push_back(path);
+      cur -= t->val;
+      path.pop_back();
+    }
+    TreeNode * tmp = t->right;
+    while (tmp != NULL) {
+      stack.push(tmp);
+      cur += tmp->val;
+      tmp = tmp->left;
+    }
+  }
+  return rs;
+}
+
+}
 
 int main(int argc, char** argv) {
   return 0;

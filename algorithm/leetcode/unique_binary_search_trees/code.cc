@@ -54,6 +54,17 @@ void DP(std::vector<std::vector<int> > & dp) {
   // LOG(INFO) << JoinMatrix(&dp);
 }
 
+// dp[i] 表示i个节点组成的二叉树有几种
+int DpNB(int n) {
+  std::vector<int> dp(n + 1, 0);
+  dp[0] = 1;
+  for (int i = 1; i <= n; i++) {
+    dp[i] = 0;
+    for (int j = 0; j < i; j++) dp[i] += dp[j] * dp[i - j - 1];
+  }
+  return dp[n];
+}
+
 int NumTrees(int n) {
   if (n <= 0) return 0;
   std::vector<std::vector<int> > dp(n, std::vector<int>(n, 0));

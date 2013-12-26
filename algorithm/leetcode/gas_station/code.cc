@@ -24,6 +24,17 @@ The solution is guaranteed to be unique.
  * Submitted: 0 minutes ago
  * */
 
+/*
+分为三种情况：
+----|  max   |---  显然
+
+|max1| --- |max2|
+     i     j
+sum最大时只能是i或j时，如果是i起始位置计算出来一定是j
+                       如果是j起始位置也一定是j
+
+*/
+
 namespace algorithm {
 
 int Can(std::vector<int> & gas, std::vector<int> & cost) {

@@ -29,6 +29,7 @@ Could you optimize your algorithm to use only O(k) extra space?
 
 namespace algorithm {
 
+// 这个不容易出错 
 std::vector<int> GetRow(int idx) {
   std::vector<std::vector<int> > rs(2, std::vector<int>(idx + 1, 0));
   if (idx < 0) return rs[0];
@@ -50,7 +51,29 @@ std::vector<int> GetRow(int idx) {
 }  // namespace algorithm
 
 using namespace algorithm;
-
+namespace twice {
+// 注意pre的赋值，容易bug
+std::vector<int> Get(int n) {
+  std::vector<int> rs(n, 0);
+  if (n == 0) return rs;
+  for (int i = 0; i < n; i++) {
+    int pre = 0;
+    for (int j = 0; j < i + 1; j++) {
+      if (j == 0) {
+          rs[j] = 1;
+          pre = 1;
+      } else if (j == i) { 
+          rs[j] = 1;
+      } else {
+          int t = rs[j];
+          rs[j] += pre;
+          pre = t;
+      }
+    }
+  }
+  return rs;
+}
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::vector<int> rs = GetRow(2);

@@ -24,7 +24,7 @@ The maximum depth is the number of nodes along the longest path from the root no
 #include "../ojbst/ojbst.h"
 
 namespace algorithm {
-
+// 因为是取最大值，不用担心一个节点有左子树 无右子树的情况
 int MaxDepth(TreeNode * root) {
   if (root == NULL) return 0;
   int l = MaxDepth(root->left);

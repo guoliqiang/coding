@@ -5,12 +5,12 @@
 // File  : code.cc
 // Brief :
 // poj 2389
+// wikioi 3113
 #include "base/public/common_head.h"
 
 namespace algorithm {
-
-const int MAX = 1000;
-const int base = 10000;
+const int MAX = 100;
+const int base = 10;
 
 struct BInt{
   int ln;
@@ -24,11 +24,29 @@ struct BInt{
     }
   }
 
-  void Out() {
-    for (int i = ln - 1; i >= 0; i--) {
-      std::cout << v[i] << " ";
+  BInt(const char * str) {
+    memset(v, 0, sizeof(v));
+    ln = 0;
+    int t = 0;
+    while (pow(10, t) != base) t++;
+    int len = strlen(str);
+    for (int i = len - 1; i >= 0; i-= t) {
+      int foo = 0;
+      for (int j = i; j >= std::max(i - t + 1, 0); j--) {
+        foo = foo * 10 + str[j] - '0';
+      }
+      v[ln++] = foo;
     }
-    std::cout << std::endl;
+  }
+
+  void Out() {
+    if (ln == 0) printf("0");
+    else {
+      for (int i = ln - 1; i >= 0; i--) {
+        printf("%d", v[i]);
+      }
+    }
+    printf("\n");
   }
 
   //
@@ -81,6 +99,7 @@ struct BInt{
       res.v[res.ln++] = t % base;
       c = t / base;
     }
+    while (res.ln > 0 && res.v[res.ln - 1] == 0) res.ln--;
     return res;
   }
   // 调用者保证不会出现负数
@@ -114,6 +133,7 @@ struct BInt{
         c /= base;
       }
     }
+    while (res.ln > 0 && res.v[res.ln - 1] == 0) res.ln--;
     return res;
   }
   //
@@ -136,6 +156,12 @@ struct BInt{
     while (res.ln > 0 && res.v[res.ln - 1] == 0) res.ln--;
     return res;
   }
+  //
+  BInt operator % (const BInt & b) const {
+    BInt t = (*this) / b;
+    BInt rs = (*this) - t * b;
+    return rs;
+  }
 };
 
 }  // namespace algorithm
@@ -145,13 +171,15 @@ using namespace algorithm;
 
 int main(int argc, char** argv) {
   BInt a1(8996678);
-  BInt a2(9379923);
+  BInt a2(83);
   a1.Out();
   a2.Out();
   (a1 + a2).Out();
+  return 0;
   (a2 - a1).Out();
   (a2 * a1).Out();
   (a2 / 82).Out();
+  (a2 % 3).Out();
 
   LOG(INFO) << (a1 < a2);
   LOG(INFO) << (a1 <= a2);

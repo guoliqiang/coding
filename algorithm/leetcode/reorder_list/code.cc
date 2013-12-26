@@ -72,6 +72,56 @@ void ReorderList(ListNode * head) {
 
 using namespace algorithm;
 
+// 这个思路更清晰，split和reverse的写法都不错
+namespace twice {
+ListNode * Split(ListNode * head, int len) {
+  for (int i = 1; i < len; i++) {
+    head = head->next;
+  }
+  ListNode * rs = head->next;
+  head->next = NULL;
+  return rs;
+}
+
+ListNode * Reverse(ListNode * head) {
+  ListNode * tail = NULL;
+  while (head != NULL) {
+    ListNode * next = head->next;
+    head->next = tail;
+    tail = head;
+    head = next;
+  }
+  return tail;
+}
+
+void ReOrder(ListNode * head) {
+  int count = 0;
+  ListNode * tmp = head;
+  while (tmp != NULL) {
+    count++;
+    tmp = tmp->next;
+  }
+  if (count <= 1) return;
+  int len = (count + 1) / 2;
+  ListNode * l1 = head;
+  ListNode * l2 = Split(head, len);
+  l2 = Reverse(l2);
+  ListNode * rs = NULL;
+  ListNode ** pre = &rs;
+  while (l1 != NULL || l2 != NULL) {
+    if (l1 != NULL) {
+      *pre = l1;
+      pre = &((*pre)->next);
+      l1 = l1->next;
+    }
+    if (l2 != NULL) {
+      *pre = l2;
+      pre = &((*pre)->next);
+      l2 = l2->next;
+    }
+  }
+}
+}  // namespace twice
 
 int main(int argc, char** argv) {
   ListNode * head = new ListNode(1);

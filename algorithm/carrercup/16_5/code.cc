@@ -21,11 +21,12 @@ namespace algorithm {
 const int big_endian = 0;
 const int little_endian = 1;
 
+// 低位地址存储的是数字的高位，是大端
+// 低位地址存储的是数字的低位，是小端
 int BigLittleEndian() {
   short int t = 0x0001;
-  char * p = reinterpret_cast<char *>(&t);
-  return *p ? big_endian : little_endian;
-  return 0;
+  char * p = reinterpret_cast<char *>(&t);  // p是t的低位地址
+  return *p ? little_endian : big_endian;
 }
 
 std::string BigLittle() {

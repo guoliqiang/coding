@@ -100,9 +100,90 @@ int MinCut(std::string & str) {
 
 using namespace algorithm;
 
+/*
+这种树形dp赋值方式
+-
+--
+---
+----
+------
+-------
+*/
+namespace twice {
+int MinCut(std::string s) {
+  int n = s.size();
+  std::vector<std::vector<int> > dp(n, std::vector<int>(n, 0));
+  std::vector<int> dp2(n, 0);
+  for (int i = 0; i < n; i++) dp2[i] = i;
+  for (int i = 0; i < n; i++) {
+    for (int j = i; j >= 0; j--) {
+      if (j == i) dp[j][i] = 1;
+      else if (j == i - 1) dp[j][i] = s[j] == s[i] ? 1 : 0;
+      else {
+        if (dp[j + 1][i - 1] && s[j] == s[i]) dp[j][i] = 1;
+        else dp[j][i] = 0;
+      }
+      if (dp[j][i]) {
+        if (j == 0) dp2[i] = 0;
+        else dp2[i] = std::min(dp2[i], dp2[j - 1] + 1);
+      }
+    }
+  }
+  return dp2[n - 1];
+}
+}  // namespace twice
+
+/*
+此种树形dp赋值方式
+   -
+     -
+       -
+   --
+    --
+     --
+
+这种方式两次dp不能写到同一个循环里面
+*/
+namespace third {
+int MinCut(std::string & s) {
+  int n = s.size();
+  std::vector<std::vector<int> > dp(n, std::vector<int>(n, 0));
+  std::vector<int> dp2(n, 0);
+  // for (int i = 0; i < n; i++) dp2[i] = i;
+  
+  for (int k = 0; k < n; k++) {
+    for (int i = 0; i < n - k; i++) {
+      if (k == 0) dp[i][i + k] = 1;
+      else if (k == 1) dp[i][i + k] = s[i] == s[i + k] ? 1 : 0;
+      else {
+        if (s[i] == s[i + k] && dp[i + 1][i + k - 1]) dp[i][i + k] = 1;
+      }
+     /* 
+      if (dp[i][k]) {
+        if (i == 0) dp2[i + k] = 0;
+        else {
+          dp2[i + k] = std::min(dp2[i + k], dp2[i - 1] + 1);
+        }
+      }
+     */
+    }
+  }
+  for (int i = 0; i < n; i++) {
+    dp2[i] = i;
+    for (int j = i; j >= 0; j--) {
+      if (dp[j][i]) {
+          if (j == 0) dp2[i] = 0;
+          else dp2[i] = std::min(dp2[i], dp2[j - 1] + 1);
+      }
+    }
+  }
+  return dp2[n - 1];
+}
+}
 
 int main(int argc, char** argv) {
   std::string str = "efe";
+  // int b = str.size() - 1;
   LOG(INFO) << MinCut(str);
   return 0;
 }

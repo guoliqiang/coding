@@ -55,7 +55,7 @@ RandomListNode * CopyRandomList(RandomListNode * node) {
     t->next = t->next->next;
     t = t->next;
   }
-  *tail = NULL;
+  // *tail = NULL;  // 可以省略
   return head;
 }
 

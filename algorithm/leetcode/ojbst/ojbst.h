@@ -19,6 +19,59 @@ struct TreeNode {
  TreeNode(int x = 0): val(x), left(NULL), right(NULL) {}
 };
 
+// 类似于二分查找，找稍大于或等于k的数
+void FindGESub(TreeNode * root, TreeNode * & rs, int k) {
+  if (root == NULL) return;
+  if (root->val == k) {
+    rs = root;
+  } else if (root->val > k) {
+    if (rs == NULL || rs->val > root->val) rs = root;
+    FindGESub(root->left, rs, k);
+  } else {
+    FindGESub(root->right, rs, k);
+  }
+}
+
+TreeNode * FindGE(TreeNode * root, int k) {
+  TreeNode * rs = NULL;
+  FindGESub(root, rs, k);
+  return rs;
+}
+
+// 交换树的左右
+void Swap(TreeNode * root) {
+  if (root == NULL) return;
+  Swap(root->left);
+  Swap(root->right);
+  std::swap(root->left, root->right);
+}
+struct SNode {
+  TreeNode * ptr;
+  int flag;
+  SNode(TreeNode * p, int f) : ptr(p), flag(f){}
+};
+void SwapIte(TreeNode * root) {
+  std::stack<SNode> stack;
+  while (root != NULL) {
+    stack.push(SNode(root, 1));
+    root = root->left;
+  }
+  while (!stack.empty()) {
+    SNode & t = stack.top();
+    if (t.flag == 2) {
+      stack.pop();
+      std::swap(t.ptr->left, t.ptr->right);
+    } else {
+      t.flag++;
+      TreeNode * tmp = t.ptr->right;
+      while (tmp != NULL) {
+        stack.push(SNode(tmp, 1));
+        tmp = tmp->left;
+      }
+    }
+  }
+}
+
 //{1,2,3,#,#,4,#,#,5}
 void MakeFromOjString(std::string & str, TreeNode * p) {
   if (str.size() == 0) {

@@ -101,12 +101,98 @@ void Out(std::vector<std::vector<std::string> > & v) {
 
 }  // namespace algorithm
 
+// 非递归实现，fb的一道面试题目
+namespace twice {
+bool Next(std::vector<int> & v) {
+  int i = v.size() - 1;
+  while (i > 0 && v[i - 1] > v[i]) i--;
+  if (i == 0) return false;
+  
+  int j = v.size() - 1;
+  while (v[j] < v[i - 1]) j--;
+  std::swap(v[j], v[i - 1]);
+  j = v.size() - 1;
+  while (i < j) {
+    std::swap(v[i++], v[j--]);
+  }
+  return true;
+}
+
+bool Check(std::vector<int> & v) {
+  for (int i = 0; i < v.size(); i++) {
+    for (int j = i + 1; j < v.size(); j++) {
+      if (abs(i - j) == abs(v[i] - v[j])) return false;
+    }
+  }
+  return true;
+}
+
+std::vector<std::vector<std::string> > NQueues(int n) {
+  std::vector<std::vector<std::string> > rs;
+  std::vector<int> v(n, 0);
+  for (int i = 0; i < n; i++) v[i] = i + 1;
+  while (true) {
+    if (Check(v)) {
+      std::vector<std::string> foo(n, "");
+      for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+          if (j + 1 == v[i]) foo[i].push_back('Q');
+          else foo[i].push_back('.');
+        }
+      }
+      rs.push_back(foo);
+    }
+    if (Next(v) == false) break;
+  }
+  return rs;
+}
+
+}  // namspace twice
+
+// 回溯版本的非递归实现
+namespace third {
+bool Check(std::vector<int> & v, int k) {
+  for (int i = 0; i < k; i++) {
+    if (abs(v[i] - v[k])  == abs(i - k) || v[i] == v[k]) return false;
+  }
+  return true;
+}
+
+std::vector<std::vector<std::string> > NQueues(int n) {
+  std::vector<std::vector<std::string> > rs;
+  std::vector<int> v(n, 0);
+  int k = 0;
+  while (k >= 0) {
+    v[k]++;
+    while(v[k]<= n && Check(v, k) == false) v[k]++;
+    if (v[k] <= n) {
+      if (k == n - 1) {
+        std::vector<std::string> foo(n, "");
+        for (int i = 0; i < n; i++) {
+          for (int j = 0; j < n; j++) {
+            if (v[i] == j + 1) foo[i].push_back('Q');
+            else foo[i].push_back('.');
+          }
+        }
+        rs.push_back(foo);
+      } else {
+        k++;
+        v[k] = 0;
+      }
+    } else {
+      k--;
+    }
+  }
+  return rs;
+}
+}  // namespace third
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-  std::vector<std::vector<std::string> > rs = NQueues(8);
+  std::vector<std::vector<std::string> > rs = third::NQueues(8);
   Out(rs);
-  LOG(INFO) << JoinMatrix(&rs);
+  // LOG(INFO) << JoinMatrix(&rs);
   LOG(INFO) << rs.size();
   return 0;
 }

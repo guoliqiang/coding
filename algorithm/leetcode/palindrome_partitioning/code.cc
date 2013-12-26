@@ -220,6 +220,7 @@ void DP(std::string & s, std::vector<std::vector<int> > & dp) {
 void Trace(std::string & s, std::vector<std::string> & path, 
            std::vector<std::vector<int> > & dp, std::vector<std::vector<std::string> > & rs, int k) {
   if (k < 0) {
+    // 不能修改path，因为path的序列会在pop时用到
     rs.push_back(std::vector<std::string>(path.rbegin(), path.rend()));
   } else {
     for (int i = k; i >= 0; i--) {
@@ -245,6 +246,7 @@ std::vector<std::vector<std::string> > Partition(std::string & s) {
 
 namespace third {
 // 递归中直接dp
+// 好NB的写法
 void Trace(std::string & s, std::vector<std::vector<int> > & dp,
            std::vector<std::string> & path, std::vector<std::vector<std::string> > & rs, int k) {  
   if (k >= s.size()) {
@@ -273,6 +275,43 @@ std::vector<std::vector<std::string> > Partition(std::string & s) {
 }
 }  // namespace third
 
+namespace four {
+void Trace(std::string & s, std::vector<std::vector<int> > & dp, std::vector<std::string> & path,
+           std::vector<std::vector<std::string> > & rs, int k) {
+  if (k < 0) {
+    rs.push_back(std::vector<std::string>(path.rbegin(), path.rend()));
+  } else {
+    for (int i = k; i >= 0; i--) {
+      if (dp[i][k]) {
+        std::string t = s.substr(i, k - i + 1);
+        path.push_back(t);
+        Trace(s, dp, path, rs, i - 1);
+        path.pop_back();
+      }
+    }
+  }
+}
+
+// 现在怎么觉得树形dp这种写法更好理解呢
+std::vector<std::vector<std::string> > Dp(std::string & s) {
+  int n = s.size();
+  std::vector<std::vector<int> > dp(n, std::vector<int>(n, 0));
+  for (int k = 0; k < n; k++) { // 长度
+    for (int i = 0; i < n - k; i++) {
+      if (k == 0) dp[i][i + k] = 1;
+      else if (k == 1) dp[i][i + k] = s[i] == s[i + k] ? 1 : 0;
+      else {
+        if (s[i] == s[i + k] && dp[i + 1][i + k - 1]) dp[i][i + k] = 1;
+      }
+    }
+  }
+  std::vector<std::vector<std::string> > rs;
+  std::vector<std::string> path;
+  Trace(s, dp, path, rs, n - 1);
+  return rs;
+}
+
+}  // namespace four
 int main(int argc, char** argv) {
   std::string str = "abb";
   // std::vector<std::vector<std::string> > rs = Partition(str);

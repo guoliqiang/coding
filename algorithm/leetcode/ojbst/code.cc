@@ -11,8 +11,15 @@ using namespace algorithm;
 
 
 int main(int argc, char** argv) {
-  std::string str = "0,1";
-  InOrder(Make(str));
-  PreOrder(Make(str));
+  std::string str = "2,1,7,#,#,4,#,#,6";
+  TreeNode * root = Make(str);
+  
+  LOG(INFO) << "in order:";
+  InOrder(root);
+  LOG(INFO) << "pre order:";
+  PreOrder(root);
+  HERE(INFO);
+  TreeNode * rs = FindGE(root, 3);
+  if (rs != NULL) LOG(INFO) << rs->val;
   return 0;
 }

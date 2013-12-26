@@ -220,7 +220,7 @@ ListNode * Merge(ListNode* l1, ListNode* l2, ListNode ** pre){
 }
 
 ListNode* Split(ListNode* h, int len){
-  for (int i = 1; i < len && h!=NULL; i++){
+  for (int i = 1; i < len && h != NULL; i++){
     h = h->next;
   }
   if(!h) return NULL;
@@ -246,7 +246,6 @@ ListNode *SortList(ListNode *head) {
       l2 = Split(t, len);
       t = Split(l2, len);
       ListNode* tail = Merge(l1, l2, pre);
-      tail->next = t;
       pre = &(tail->next);
    }
  }
@@ -254,18 +253,69 @@ ListNode *SortList(ListNode *head) {
 }
 }  // namespace NNB
 
+namespace third {
+ListNode * Merge(ListNode * l1, ListNode * l2, ListNode * * pre) {
+  ListNode * last = NULL;
+  while (l1 != NULL || l2 != NULL) {
+    if (l1 == NULL) {
+      *pre = l2;
+      l2 = l2->next;
+    } else if (l2 == NULL) {
+      *pre = l1;
+      l1 = l1->next;
+    } else if (l1->val < l2->val) {
+      *pre = l1;
+      l1 = l1->next;
+    } else {
+      *pre = l2;
+      l2 = l2->next;
+    }
+    last = *pre;
+    pre = &((*pre)->next);
+  }
+  return last;
+}
+
+ListNode * Split(ListNode * root, int len) {
+  ListNode * tmp = root;
+  for (int i = 1; i < len && tmp != NULL; i++) {
+    tmp = tmp->next;
+  }
+  if (tmp == NULL) return NULL;
+  ListNode * rs = tmp->next;
+  tmp->next = NULL;
+  return rs;
+}
+
+ListNode * MergeSort(ListNode * head) {
+  ListNode * tmp = head;
+  int count = 0;
+  while (tmp != NULL) {
+    count++;
+    tmp = tmp->next;
+  }
+  for (int len = 1; len < count; len *= 2) {
+    ListNode * t = head;
+    ListNode ** pre = &head;
+    while (t != NULL) {
+      ListNode * l1 = t;
+      ListNode * l2 = Split(l1, len);
+      t = Split(l2, len);
+      ListNode * tail = Merge(l1, l2, pre);
+      pre = &(tail->next);
+    }
+  }
+  return head;
+}
+}  // namespace third
 
 int main(int argc, char** argv) {
   std::vector<int> v;
-  v.push_back(10);
-  v.push_back(4);
-  v.push_back(0);
-  v.push_back(56);
-  v.push_back(58);
-  v.push_back(3);
+  v.push_back(2);
+  v.push_back(1);
   ListNode * head = Build(v);
   Out(head);
-  head = NNB::SortList(head);
+  head = third::MergeSort(head);
   HERE(INFO);
   Out(head);
   return 0;

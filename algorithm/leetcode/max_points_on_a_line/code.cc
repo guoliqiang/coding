@@ -100,6 +100,10 @@ int Gcd(int x, int y) {
   return x < 0 ? -t : t;
 }
 
+/*
+y = dy/dx * x + b
+*/
+
 int MaxPoint(std::vector<Point> & v) {
   int max = 0;
   for (int i = 0; i < v.size(); i++) {

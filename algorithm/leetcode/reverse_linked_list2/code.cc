@@ -28,14 +28,13 @@ Given m, n satisfy the following condition:
  * */
 
 #include "base/public/common_head.h"
-
-namespace algorithm {
-
 struct ListNode {
   int val;
   ListNode * next;
   ListNode(int x) : val(x), next(NULL) {}
 };
+
+namespace algorithm {
 
 void Out(ListNode * root) {
   while (root) {
@@ -118,7 +117,6 @@ ListNode * Reverse(ListNode * head, int m, int n) {
 
 }  // nemespace algorithm
 
-using namespace algorithm;
 
 namespace third {
 ListNode * Reverse(ListNode * head, int m, int n) {
@@ -177,6 +175,50 @@ class Solution {
 };
 }  // namespace twice
 
+// 这种写法不容易出错
+namespace four {
+ListNode * Split(ListNode * head, int k) {
+  ListNode * tmp = head;
+  for (int i = 1; i < k ; i++) {
+    tmp = tmp->next;
+  }
+  ListNode * rs = tmp->next;
+  tmp->next = NULL;
+  return rs;
+}
+
+ListNode * Reverse(ListNode * head) {
+  ListNode * tail = NULL;
+  while (head != NULL) {
+    ListNode * next = head->next;
+    head->next = tail;
+    tail = head;
+    head = next;
+  }
+  return tail;
+}
+
+ListNode * Reverse(ListNode * head, int m, int n) {
+  if (m == n) return head;
+  ListNode * last = Split(head, n);
+  if (m == 1) {
+    ListNode * t = Reverse(head);
+    head->next = last;
+    return t;
+  } else {
+    ListNode * b = Split(head, m - 1);
+    ListNode * e = Reverse(b);
+    b->next = last;
+    ListNode * tmp = head;
+    while (tmp->next != NULL) tmp = tmp->next;
+    tmp->next = e;
+    return head;
+  }
+}
+
+}  // namespace four
+
+using namespace algorithm;
 int main(int argc, char** argv) {
   std::vector<int> foo;
   foo.push_back(1);
