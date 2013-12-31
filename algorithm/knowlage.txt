@@ -1,0 +1,2 @@
+1.
+string.find() 于 strstr都是M*N的朴素算法，随机输入的话，比KMP快
