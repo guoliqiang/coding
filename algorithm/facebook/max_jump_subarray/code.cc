@@ -41,13 +41,12 @@ int main(int argc, char** argv) {
   FROMFILE;
   // -50,7,11,2,-1,3,4
   std::vector<int> v;
-  v.push_back(-50);
-  v.push_back(7);
-  v.push_back(11);
+  v.push_back(1);
   v.push_back(2);
-  v.push_back(-1);
   v.push_back(3);
   v.push_back(4);
+  v.push_back(5);
+  v.push_back(6);
   LOG(INFO) << Dp(v);
   return 0;
 }
