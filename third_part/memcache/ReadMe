@@ -1,0 +1,1 @@
+./configure --prefix=/home/guoliqiang/icoding/coding/third_part/memcache/ --with-libevent=/home/guoliqiang/icoding/coding/third_part/libevent/
