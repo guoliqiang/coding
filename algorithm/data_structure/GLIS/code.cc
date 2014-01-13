@@ -75,7 +75,7 @@ int BsearchD(int * ptr, int n, int k) {
   }
   return b;
 }
-
+// 没有输出找到的序列
 int GLSI(std::vector<int> & v) {
   std::vector<int> dp(v.size(), 0);
   int size = 0;
@@ -98,20 +98,52 @@ int GLSI(std::vector<int> & v) {
 
 using namespace algorithm;
 
+namespace NB {
+std::vector<int> LIS(std::vector<int> & v) {
+  int n = v.size();
+  std::vector<int> dp(n, 0);
+  std::vector<int> tmp;
+  for (int i = 0; i < v.size(); i++) {
+    int b = 0;
+    int e = tmp.size() - 1;
+    while (b <= e) {
+      int mid = b + (e - b) / 2;
+      if (tmp[mid] < v[i]) b = mid + 1;
+      else e = mid - 1;
+    }
+    if (b == tmp.size()) tmp.push_back(v[i]);
+    else tmp[b] = v[i];
+    dp[i] = b + 1;
+  }
+  int size = tmp.size();
+  int idx = n;
+  std::vector<int> rs;
+  while (size > 0) {
+    if (dp[idx] == size) {
+      rs.insert(rs.begin(), v[idx]);
+      size--;
+    }
+    idx--;
+  }
+  return rs;
+}
+}  // namespace NB
 
 int main(int argc, char** argv) {
   std::vector<int> vec;
-  vec.push_back(3);
-  vec.push_back(2);
-  vec.push_back(2);
-  vec.push_back(2);
-  vec.push_back(2);
-  vec.push_back(1);
-  vec.push_back(4);
-  vec.push_back(6);
-  vec.push_back(2);
+  //  1 2 3 8 10 5 6 7 12 9 4 0
+  // 8 9 1 2 3 4 5 10
   vec.push_back(8);
-  LOG(INFO) << GLSI(vec);
+  vec.push_back(9);
+  vec.push_back(1);
+  vec.push_back(2);
+  vec.push_back(3);
+  vec.push_back(4);
+  vec.push_back(5);
+  vec.push_back(10);
+  // LOG(INFO) << GLSI(vec);
+  std::vector<int> rs = NB::LIS(vec);
+  LOG(INFO) << JoinVector(rs);
   return 0;
   
   

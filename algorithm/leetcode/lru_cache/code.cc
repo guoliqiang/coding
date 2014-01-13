@@ -11,6 +11,8 @@ Design and implement a data structure for Least Recently Used (LRU) cache. It sh
 get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
 set(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the 
 
+nice code：
+https://code.google.com/p/concurrentlinkedhashmap/wiki/Design
 */
 
 /*
@@ -74,6 +76,11 @@ class LRUCache{
 
   void Update(int key) {
     keys_.splice(keys_.begin(), keys_, key_iterator_[key]);  // 目的list是第二个参数, 记住
+    /* or
+    keys_.erase(tmap[key]);
+    keys_.push_front(key);
+    key_iterator_[key] = keys_.begin();
+    */
   }
  
 

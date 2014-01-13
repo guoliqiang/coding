@@ -44,7 +44,7 @@ int ExpectMin(std::vector<std::vector<int> > & young) {
   int rs = young[0][0];
   int m = young.size();
   int n = (m == 0) ? 0 : young[0].size();
-  young[0][0] = young[m - 1][n - 1];
+  young[0][0] = young[m - 1][n - 1];  // 注意是用最大的值直接覆盖最小的值后重新build
   ReBuild(young, 0, 0);
   return rs;
 }

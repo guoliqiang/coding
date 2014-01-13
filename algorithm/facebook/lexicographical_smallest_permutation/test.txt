@@ -1,0 +1,10 @@
+3
+3 1 2
+NNY
+NNN
+YNN
+3
+3 2 1
+NYN
+YNY
+NYN

@@ -125,6 +125,27 @@ int Atoi(const char * str) {
 }
 }  // namespace third
 
+namespace four {
+int Atoi(const char * ptr) {
+  long long rs = 0;
+  bool minus = false;
+  while (*ptr == ' ') ptr++;
+  if (*ptr == '-') {
+    minus = true;
+    ptr++;
+  } else if (*ptr == '+') ptr++;
+  while (*ptr >= '0' && *ptr <= '9') {
+    rs = rs * 10 + *ptr - '0';
+    ptr++;
+    if (rs > INT_MAX) break;
+  }
+  if (minus) rs *= -1;
+  if (rs > INT_MAX) return INT_MAX;
+  if (rs < INT_MIN) return INT_MIN;
+  return rs; 
+}
+}  // namespace four
+
 int main(int argc, char** argv) {
   std::string str = "    10522545459";
   LOG(INFO) << atoi(str.c_str());

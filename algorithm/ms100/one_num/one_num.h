@@ -14,7 +14,7 @@ namespace algorithm {
 
 int onenum(int i) {
   int rs = 0;
-  while (i) {
+  while (i != 0) { // worng i > 0
    rs++;
    i &= i-1;
   }
@@ -25,6 +25,7 @@ bool ispow(int i) {
   return (i & (i-1)) == 0 ? true : false;
 }
 
+// O(1)
 int onenum2(uint64_t i) {
   uint64_t a = 0x5555555555555555;
   uint64_t b = 0x3333333333333333;

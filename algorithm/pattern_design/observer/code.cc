@@ -9,6 +9,9 @@
 观察着模型，适用于发布-订阅需求(publis - subscribe)
 比如fb和renren登录的时候都能看到好友的最近的更新信息
 这种情况每个user即是观察着又是目标
+
+fb目前采用的是memcache
+http://www.careercup.com/question?id=14712676
 */
 
 #include "base/public/common_ojhead.h"

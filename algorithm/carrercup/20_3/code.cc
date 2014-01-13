@@ -123,6 +123,18 @@ std::set<int> SelectFloyd(int n, int m) {
   return rs;
 }
 
+// 完美洗牌算法
+// http://www.careercup.com/question?id=102744
+// shuffle an array of size n such that each element has 1/n probability to remain in its original spot. The best solution has O(n) complexity.
+// proof: 总数为N!
+//        一个数位于某个特定位置的数量为 (N - 1)!
+//        pro = (N - 1)! / N! = 1 / N
+void KnuthShuffle(std::vector<int> & vec) {
+  for (int i = 0; i < vec.size(); i++) {
+    int t = rand() % (vec.size() - i);
+    std::swap(vec[i], vec[t]);
+  }
+}
 
 }  // namespace algorithm
 

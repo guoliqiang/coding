@@ -165,6 +165,49 @@ bool IsScramble(std::string & str1, std::string & str2) {
 
 using namespace algorithm;
 
+namespace twice {
+bool Dp(std::string & s1, std::string & s2) {
+  if (s1.size() != s2.size()) return false;
+  int n = s1.size();
+  std::vector<std::vector<std::vector<int> > > dp(n, std::vector<std::vector<int> >(n, std::vector<int>(n, 0)));
+  for (int k = 0; k < n; k++) {
+    for (int i = 0; i < n - k; i++) {
+      for (int j = 0; j < n - k; j++) {
+        if (k == 0) dp[i][j][k] = s1[i] == s2[j] ? 1 : 0;
+        else {
+          for (int l = 0; l < k; l++) {
+            if (dp[i][j][l] == 1 && dp[i + l + 1][j + l + 1][k - l - 1] == 1) dp[i][j][k] = 1;
+            if (dp[i][j + k - l][l] == 1 && dp[i + l + 1][j][k - l - 1] == 1) dp[i][j][k] = 1;
+          }
+        }
+      }
+    }
+  }
+  return dp[0][0][n - 1];
+}
+
+// MLE
+bool Dp2(std::string & s1, std::string & s2) {
+  if (s1.size() != s2.size()) return false;
+  int n = s1.size();
+  std::vector<std::vector<std::vector<std::vector<int> > > > dp(n, std::vector<std::vector<std::vector<int> > >
+  (n, std::vector<std::vector<int> >(n, std::vector<int>(n, 0))));
+  for (int k = 0; k < n; k++) {
+    for (int i = 0; i < n - k; i++) {
+      for (int j = 0; j < n - k; j++) {
+        if (k == 0) dp[i][i + k][j][j + k] = s1[i] == s2[j] ? 1 : 0;
+        else {
+          for (int l = 0; l < k; l++) {
+            if (dp[i][i + l][j][j + l] == 1 && dp[i + l + 1][i + k][j + l + 1][j + k]) dp[i][i + k][j][j + k] = 1;
+            if (dp[i][i + l][j + k - l][j + k] == 1 && dp[i + l + 1][i + k][j][j + k - l - 1] == 1) dp[i][i + k][j][j + k] = 1;
+          }
+        }
+      }
+    }
+  }
+  return dp[0][n - 1][0][n - 1];
+}
+}  // namespace twice
 
 int main(int argc, char** argv) {
   std::string str1 = "abc";

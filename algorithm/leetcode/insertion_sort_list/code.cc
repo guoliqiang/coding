@@ -80,6 +80,36 @@ ListNode * InsertSort(ListNode * head) {
 
 }  // namespace algorithm
 
+namespace twice {
+ListNode * Insert(ListNode * head, ListNode * t) {
+  ListNode * pre = NULL;
+  ListNode * cur = head;
+  while (cur != NULL && cur->val < t->val) {
+    pre = cur;
+    cur = cur->next;
+  }
+  if (pre == NULL) {
+    t->next = cur;
+    return t;
+  } else {
+    pre->next = t;
+    t->next = cur;
+    return head;
+  }
+}
+
+ListNode * InsertSort(ListNode * head) {
+  ListNode * rs = NULL;
+  while (head != NULL) {
+    ListNode * next = head->next;
+    head->next = NULL;
+    rs = Insert(rs, head);
+    head = next;
+  }
+  return rs;
+}
+}  // namespace twice
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

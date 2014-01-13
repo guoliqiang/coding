@@ -72,6 +72,7 @@ int MaximalRectangle(const std::vector<std::vector<char> > & v) {
 
 namespace twice {
 
+// O(n) 因为每个位置最多进栈一次处栈一次
 int Largest(std::vector<int> height) {
   height.push_back(0);
   int max = 0;

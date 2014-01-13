@@ -13,6 +13,8 @@
  * 注意数组下边要从1开始
  * */
 
+// http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=lowestCommonAncestor
+// RMQ tutorial from topcoder
 #include "base/public/common_head.h"
 
 // 一维树状数组

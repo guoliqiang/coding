@@ -42,23 +42,50 @@ int MinDeep(TreeNode * root) {
 
 }  // namespace algorithm
 
+
 namespace twice {
-int MinDeep(TreeNode * root) {
+int MinDeep2(TreeNode * root) {
   if (root == NULL) return 0;
   int min = 0;
   if (root->left != NULL) {
-    min = MinDeep(root->left);
+    min = MinDeep2(root->left);
   }
   if (root->right != NULL) {
-    int t = MinDeep(root->right);
+    int t = MinDeep2(root->right);
     min = (min == 0) ? t : std::min(t, min);
   }
   return min + 1;
 }
 }  // namespace twice
 
-using namespace algorithm;
 
+// 相对于递归方式效率更高，因为遇到第一个leaf节点就返回了
+// http://www.careercup.com/question?id=4476686
+namespace third {
+int MinDepth(TreeNode * root) {
+  if (root == NULL) return 0;
+  std::queue<TreeNode *> queue;
+  queue.push(root);
+  queue.push(NULL);
+  int rs = 1;
+  while (!queue.empty()) {
+    TreeNode * t = queue.front();
+    queue.pop();
+    if (t == NULL) {
+      rs++;
+      queue.push(NULL);
+    } else {
+      if (t->left == NULL && t->right == NULL) break;
+      if (t->left != NULL) queue.push(t->left);
+      if (t->right != NULL) queue.push(t->right);
+    }
+  }
+  return rs;
+}
+}  // namespace third
+
+
+using namespace algorithm;
 
 int main(int argc, char** argv) {
 

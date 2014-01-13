@@ -104,6 +104,19 @@ double Newton(double n) {
   return rs;
 }
 
+// 直接二分查找
+double Sqrt(double n) {
+  double b = 0;
+  double e = n;
+  while (fabs(e - b) > 1e-9) {
+    double mid = b + (e - b) / 2;
+    if (fabs(n - mid * mid) < 1e-9) return mid;
+    else if (mid * mid > n) e = mid;
+    else b = mid;
+  }
+  return b;
+}
+
 // leetcode中利用二分查找搜索平方根整数部分
 }  // namespace algorithm
 
@@ -112,6 +125,7 @@ using namespace algorithm;
 
 int main(int argc, char** argv) {
   LOG(INFO) << Newton(2);
+  LOG(INFO) << Sqrt(2);
   return 0;
   std::string str = "1156";
   // LOG(INFO) << str << ":" << SqrtByHand(str);

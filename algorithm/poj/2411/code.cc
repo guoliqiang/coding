@@ -39,11 +39,13 @@ int M = 0;
 
 std::vector<int> state[1 << MAXN];
 long long dp[MAXM + 2][1 << MAXN];  // int can not be accepted
+long long dp2[1 << MAXN];
 
 void State(int s1, int s2, int k) {
   if (k >= N) {
-    if (s1 < (1 << N) && s2 < (1 << N)) {
-      state[s1].push_back(s2);
+    // if (s1 < (1 << N) && s2 < (1 << N)) {
+    if (k == N) {
+     state[s1].push_back(s2);
     }
   } else {
     // 对于上一行到下一行的转移，规定上一行一定填满
@@ -52,7 +54,7 @@ void State(int s1, int s2, int k) {
     State((s1 << 1 | 0), (s2 << 1 | 1), k + 1);
     // 上面是0(竖放的下半截),下面是1（肯定不能是0）
     State((s1 << 1 | 1), (s2 << 1 | 0), k + 1);
-    // 上面横放，下面横放
+    // 上面横放，下面横放或竖放, 两种情况状态相同，次数也相同，并不是两种状态次数之和
     State((s1 << 2 | 3), (s2 << 2 | 3), k + 2);
   }
 }
@@ -77,6 +79,45 @@ long long DP() {
   return dp[M + 1][(1 << N) - 1];  // 封底
 }
 
+
+void Next(long long s, int k, int cur, std::vector<long long> & rs) {
+  if (k == N) {
+    rs.push_back(cur);
+  } else {
+    int t = s & 1;
+    if (t == 0) Next(s >> 1, k + 1, cur << 1 | 1, rs);
+    else Next(s >> 1, k + 1, cur << 1 | 0, rs);
+    if (k + 1 < N) {
+      t = s & 3;
+      if (t == 3) Next(s >> 2, k + 2, cur << 2 | 3, rs);
+    }
+  }
+}
+
+std::vector<long long> Next(long long s) {
+  std::vector<long long> rs;
+  Next(s, 0, 0, rs);
+  return rs;
+}
+
+long long DP2() {
+  std::queue<std::pair<long long, long long> > queue;
+  queue.push(std::make_pair(0, 1));
+  for (int i = 0; i <= M; i++) {
+    memset(dp2, 0, sizeof(dp2));
+    while (!queue.empty()) {
+      std::pair<long long, long long> t = queue.front();
+      queue.pop();
+      std::vector<long long> foo = Next(t.first);
+      for (int i = 0; i < foo.size(); i++) dp2[foo[i]] += t.second;
+    }
+    for (int j = 0; j < (1 << N); j++) {
+      if (dp2[j] != 0) queue.push(std::make_pair(j, dp2[j]));
+    }
+  }
+  return dp2[(1 << N) - 1];
+}
+
 void Read() {
   int n = 0;
   int m = 0;
@@ -84,7 +125,8 @@ void Read() {
     M = m;
     N = n;
     for (int i = 0; i < (1 << MAXN); i++) state[i].clear();
-    printf("%lld\n", DP());
+    // printf("%lld\n", DP());  // AC
+    printf("%lld\n", DP2());    // AC
   }
 }
 

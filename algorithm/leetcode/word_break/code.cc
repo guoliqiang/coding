@@ -43,6 +43,7 @@ bool DP(const std::string & s, std::unordered_set<std::string> & dict) {
 
 /*
  * 会T
+ * 直接深度优先搜索会T
  * */
 bool WordBreak(const std::string & s, std::unordered_set<std::string> & dict) {
   if (dict.count(s)) return true;

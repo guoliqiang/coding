@@ -231,6 +231,7 @@ bool Cmp(const std::pair<int, int> & a1, const std::pair<int, int> & a2) {
 }
 
 // 错误不能使用n*log(n)的算法，只能使用n^2算法，见nyoj16
+// 因为存在体重或身高一样的case
 int Tower(std::vector<std::pair<int, int> > & v, std::vector<std::pair<int, int> >  & rs) {
   std::sort(v.begin(), v.end(),Cmp);
   std::vector<std::pair<int, int> > dp(v.size() + 1);

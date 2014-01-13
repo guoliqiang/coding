@@ -219,6 +219,36 @@ int MaxProfit(std::vector<int> & v) {
 }
 }  // namespace NB2
 
+namespace NB3 {
+int Dp(std::vector<int> & v, int k) {
+  v.insert(v.begin(), 0);
+  int n = v.size();
+  k += 1;
+  int rs = 0;
+  std::vector<int> pre(n, 0);
+  std::vector<int> dp(n, 0);
+  for (int i = 1; i < k; i++) {
+    int max = INT_MIN;
+    for (int j = i; j < n; j++) {
+      dp[j] = std::max(dp[j - 1], pre[j - 1]) + v[j];
+      pre[j - 1] = max;
+      max = std::max(max, dp[j]);
+      rs = std::max(rs, dp[j]);
+    }
+    pre[n - 1] = max;  // 这一行可以省略
+  }
+  return rs;
+}
+
+int MaxProfit(std::vector<int> & price) {
+  std::vector<int> v;
+  for (int i = 1; i < price.size(); i++) {
+    v.push_back(price[i] - price[i - 1]);
+  }
+  return Dp(v, 2);
+}
+}  // namespace NB3
+
 using namespace algorithm;
 
 

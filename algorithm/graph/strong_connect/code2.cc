@@ -25,6 +25,11 @@ int cnt = 1;
 // 无向图双联通分量
 // low[]的编号即为连通分量的编号
 // poj3352
+// 双连通图：在无向图连通图中，如果删除该图中的任意一点和依附它的边，不改变图的连通性，则称该图为双连通的无向图。
+//           由上述定义可知，双连通分量中，每两个结点之间至少有两条不同的路径可以相互到达。
+
+// 无向图联通分量（不同于双联通分量, 直接DFS即可，从一个点dfs到的点都处于同一个联通分量中）
+// http://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29
 void Tarjan(int r, int father) {
   dfn[r] = low[r] = cnt++;
   for (int i = 0; i < N; i++) {

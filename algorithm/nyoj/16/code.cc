@@ -36,7 +36,24 @@ int Dp() {
   }
   return rs;
 }
-
+// wrong 由于存在长度和宽度是一样的case
+int Dp2() {
+  std::sort(data, data + N, Cmp);
+  int size = 0;
+  for (int i = 0; i < N; i++) {
+    int b = 0;
+    int e = size - 1;
+    while (b <= e) {
+      int mid = b + (e - b) / 2;
+      if (data[mid].l < data[i].l) b = mid + 1;
+      else e = mid - 1;
+    }
+    data[b] = data[i];
+    if (b == size) size++;
+  }
+  for (int i = 0; i < size; i++) LOG(INFO) << data[i].w << " " << data[i].l;
+  return size;
+}
 
 void Read() {
   int T = 0;
@@ -52,7 +69,7 @@ void Read() {
       data[i].w = std::min(w, l);
       data[i].l = std::max(w, l);
     }
-    int t = Dp();
+    int t = Dp2();
     printf("%d\n", t);
   }
 }
@@ -115,7 +132,7 @@ using namespace algorithm;
 
 int main(int argc, char** argv) {
   FROMFILE;
-  // Read();
-  NB::Read();
+  Read();
+  // NB::Read();
   return 0;
 }

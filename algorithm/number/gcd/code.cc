@@ -94,6 +94,7 @@ int nGcd(std::vector<int> v) {
 }
 
 // 最小公倍数
+// LCM = Least Common Multiple
 int Lcm(int x, int y) {
   return x * y / Gcd(x, y);
 }

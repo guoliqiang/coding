@@ -99,8 +99,39 @@ bool Mirror2(TreeNode * root1, TreeNode * root2) {
   return true;
 }
 }  // namespace twice
-using namespace algorithm;
 
+namespace third {
+using namespace algorithm;
+bool IsSym(TreeNode * root1, TreeNode * root2) {
+  std::stack<std::pair<TreeNode *, TreeNode *> > stack;
+  while (root1 != NULL || root2 != NULL) {
+    if (root1 == NULL || root2 == NULL || root1->val != root2->val) return false;
+    stack.push(std::make_pair(root1, root2));
+    root1 = root1->left;
+    root2 = root2->right;
+  }
+  while (!stack.empty()) {
+    std::pair<TreeNode *, TreeNode *> t = stack.top();
+    stack.pop();
+    TreeNode * r1 = t.first->right;
+    TreeNode * r2 = t.second->left;
+    while (r1 != NULL || r2 != NULL) {
+      if (r1 == NULL || r2 ==NULL || r1->val != r2->val) return false;
+      stack.push(std::make_pair(r1, r2));
+      r1 = r1->left;
+      r2 = r2->right;
+    }
+  }
+  return true;
+}
+
+bool IsSym(TreeNode * root) {
+  if (root == NULL) return true;
+  return IsSym(root->left, root->right);
+}
+}  // namespace third
+
+using namespace algorithm;
 
 
 int main(int argc, char** argv) {
