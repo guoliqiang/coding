@@ -19,6 +19,7 @@ int Overlap(const std::pair<int, int> & x, const std::pair<int, int> & y) {
   return t < 0 ? 0 : t;
 }
 
+// 不能有完全覆盖的interal，否则剔除大的interval，只保留小的，因为满足小的一定能满足大的interval
 std::vector<std::pair<int, int> > EventSchedule(std::vector<std::pair<int, int> > & vec, int t) {
   std::vector<std::pair<int, int> > rs;
   std::sort(vec.begin(), vec.end(), Cmp);
