@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/pattern_design/observer
+PROJ_NAME=algorithm/pattern_design/iterator
 
 
 all:

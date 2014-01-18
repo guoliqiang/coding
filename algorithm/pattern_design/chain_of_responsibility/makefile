@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/pattern_design/observer
+PROJ_NAME=algorithm/pattern_design/chain_of_responsibility
 
 
 all:
