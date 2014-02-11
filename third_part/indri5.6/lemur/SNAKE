@@ -1,0 +1,19 @@
+cc_library(name = 'lemur_contri',
+           srcs = [
+                   'compress.c',
+                   'fn_f.c',
+                   'SHA1.cpp',
+                   'keyfilecode.c',
+                   'keyprint.c',
+                   'lemur-compat.cpp',
+                   'string-set.c',
+                   'fileio.c',  
+                   'Keyfile.cpp',    
+                   'RVLCompress.cpp',
+                   'SortMergeTextFiles.cpp'
+                  ],
+           deps = [], 
+           copt = ['no_style_check']
+           )
+
+

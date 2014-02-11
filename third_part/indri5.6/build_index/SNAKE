@@ -1,0 +1,33 @@
+cc_binary(name = 'build_index',
+           srcs = [
+                   'IndriBuildIndex.cpp'
+                  ],
+           deps = [
+                   '//third_part/indri5.6:indri_lib',
+                  ], 
+           copt = ['no_style_check', 'no_Werror'],
+           cflags = ['-Wno-reorder',
+                     '-Wno-unused-variable',
+                     '-DINDRI_STANDALONE=1',
+                     '-DHAVE_LIBM=1',
+                     '-DHAVE_LIBPTHREAD=1',
+                     '-DHAVE_NAMESPACES=',
+                     '-DISNAN_IN_NAMESPACE_STD=',
+                     '-DHAVE_FSEEKO=1',
+                     '-DSTDC_HEADERS=1',
+                     '-DHAVE_SYS_TYPES_H=1',
+                     '-DHAVE_SYS_STAT_H=1',
+                     '-DHAVE_STDLIB_H=1',
+                     '-DHAVE_STRING_H=1',
+                     '-DHAVE_MEMORY_H=1',
+                     '-DHAVE_STRINGS_H=1',
+                     '-DHAVE_INTTYPES_H=1',
+                     '-DHAVE_STDINT_H=1',
+                     '-DHAVE_UNISTD_H=1',
+                     '-DHAVE_EXT_ATOMICITY_H=1',
+                     '-DP_NEEDS_GNU_CXX_NAMESPACE=1',
+                     '-DHAVE_MKSTEMP=1'
+                     '-DHAVE_MKSTEMPS=1'
+                     '-DNDEBUG=1']
+           )
+
