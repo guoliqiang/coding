@@ -5,6 +5,10 @@
 // File  : code.cc
 // Brief :
 
+/*
+indri 下atmoic.hpp + ref_ptr.hpp thread_safe版本
+*/
+#include "ref_ptr.h"
 #include "base/public/common_head.h"
 
 namespace algorithm {
