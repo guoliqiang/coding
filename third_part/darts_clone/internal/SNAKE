@@ -1,0 +1,21 @@
+cc_binary(name = 'darts_benchmark',
+           srcs = ['darts_benchmark.cc',
+                  ],
+            deps = [
+                   '//base/internal:base'
+                   ]
+           )
+cc_binary(name = 'darts',
+           srcs = ['darts.cc',
+                  ],
+            deps = [
+                   '//base/internal:base'
+                   ]
+           )
+cc_binary(name = 'mkdarts',
+           srcs = ['mkdarts.cc',
+                  ],
+            deps = [
+                   '//base/internal:base'
+                   ]
+           )
