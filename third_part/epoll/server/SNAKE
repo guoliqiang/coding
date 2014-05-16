@@ -1,0 +1,7 @@
+cc_binary(name='ependingpool_server',
+          srcs = ['server.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/epoll/internal:ependingpool'
+                  ]
+           )
