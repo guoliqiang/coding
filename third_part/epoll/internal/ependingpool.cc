@@ -7,19 +7,27 @@
 #include "base/public/logging.h"
 #include "base/public/net.h"
 
+DEFINE_int32(DEF_CONN_TIMEO, 500, "");
+DEFINE_int32(DEF_READ_TIMEO, 500, "");
+DEFINE_int32(DEF_WRITE_TIMEO, 500, "");
+DEFINE_int32(DEF_EPOLL_TIMEO, 500, "");
+DEFINE_int32(DEF_MAX_SOCK, 500, "");
+DEFINE_int32(DEF_QUEUE_LEN, 500, "");
+
+
 ependingpool::ependingpool() {
   m_sock_len = 0;
   m_free_thr = 0;
   m_listen_fd = -1;
 
-  m_conn_timeo = DEF_CONN_TIMEO;
-  m_read_timeo = DEF_READ_TIMEO;
-  m_write_timeo = DEF_WRITE_TIMEO;
+  m_conn_timeo = FLAGS_DEF_CONN_TIMEO;
+  m_read_timeo = FLAGS_DEF_READ_TIMEO;
+  m_write_timeo = FLAGS_DEF_WRITE_TIMEO;
   m_min_timeo = m_read_timeo;
 
-  m_ep_timeo = DEF_EPOLL_TIMEO;
-  m_queue_len = DEF_QUEUE_LEN;
-  m_sock_num = DEF_MAX_SOCK;
+  m_ep_timeo = FLAGS_DEF_EPOLL_TIMEO;
+  m_queue_len = FLAGS_DEF_QUEUE_LEN;
+  m_sock_num = FLAGS_DEF_MAX_SOCK;
 
   m_insert_item_sock_thrsafe = 0;
   m_least_last_update = INT_MAX;
@@ -29,28 +37,19 @@ ependingpool::ependingpool() {
   pthread_mutex_init(&m_insert_sock, NULL);
 
   queue_create(m_queue_len);
-
   m_ay_sock = (sock_item_t *)calloc((size_t)m_sock_num, sizeof(sock_item_t));
-  if (NULL == m_ay_sock) {
-    LOG(FATAL) << "calloc m_ay_sock fail";
-  }
+  CHECK(NULL != m_ay_sock) << "calloc m_ay_sock fail";
+
   m_ay_events = (struct epoll_event *)calloc((size_t)m_sock_num,
-      sizeof(struct epoll_event));      /**< epoll数组 */
-  if (NULL == m_ay_events) {
-    LOG(FATAL) << "calloc m_ay_events fail";
-  }
+                 sizeof(struct epoll_event));
+  CHECK(NULL != m_ay_events) << "calloc m_ay_events fail";
+
   m_epfd = epoll_create(m_sock_num);
-  for (int i = 0; i < SOCK_EVENT_NUM; ++i) {
-    m_callbacklist[i] = NULL;
-  }
+  for (int i = 0; i < SOCK_EVENT_NUM; ++i) m_callbacklist[i] = NULL;
   m_todo_event_callback = NULL;
   pool_run = 1;
 }
 
-/**
- * @brief pending_pool析构函数
- * 这里会把所有未关闭的资源关闭
- **/
 ependingpool::~ependingpool() {
   if (m_epfd > 0) close(m_epfd);
   if (m_ay_sock) {
@@ -64,13 +63,10 @@ ependingpool::~ependingpool() {
   if (m_ay_events) free(m_ay_events);
   queue_destroy();
 }
-/**
- * @brief 设置监听句柄
- * @param [in] lis_fd   : 需要监听的listen 句柄
- * @return  设置成功与否
- * @retval   -1 设置失败 0 设置成功
- * @author baonh
- **/
+// @brief 设置监听句柄
+// @param [in] lis_fd   : 需要监听的listen 句柄
+// @return  设置成功与否
+// @retval   -1 设置失败 0 设置成功
 int ependingpool::set_listen_fd(int lis_fd) {
   if (lis_fd <= 0) {
     LOG(INFO) << "invalid listen fd:" << lis_fd;
@@ -114,17 +110,14 @@ int ependingpool::set_todo_event_ex(event_callback_ex_t* callback, void *user_ar
 
 int ependingpool::get_queue_len() {
   int len = m_put - m_get;
-  if (len < 0) {
-    len += m_queue_len;
-  }
+  if (len < 0) len += m_queue_len;
   return len;
 }
 
 int ependingpool::set_sock_num(int num) {
   if (num <= 0) {
     LOG(WARNING) << "invalid socket number " << num
-                 << " sock_num keep unchanged "
-                 << m_sock_num;
+                 << " sock_num keep unchanged " << m_sock_num;
     return -1;
   }
   if (m_ay_sock) {
@@ -133,10 +126,7 @@ int ependingpool::set_sock_num(int num) {
   }
   m_sock_num = num;
   m_ay_sock = (sock_item_t *)calloc((size_t)m_sock_num, sizeof(sock_item_t));
-  if (!m_ay_sock) {
-    LOG(WARNING) << "m_ay_sock calloc memory failed " << errno;
-    return -1;
-  }
+  CHECK (NULL != m_ay_sock) << "m_ay_sock calloc memory failed " << errno;
 
   if (m_epfd > 0) {
     while (close(m_epfd) < 0 && errno == EINTR) {};
@@ -149,10 +139,7 @@ int ependingpool::set_sock_num(int num) {
   }
 
   m_ay_events = (struct epoll_event *)calloc((size_t)m_sock_num, sizeof(struct epoll_event));
-  if (NULL == m_ay_events) {
-    LOG(WARNING) << "m_ay_events calloc memory failed " << errno;
-    return -1;
-  }
+  CHECK(NULL != m_ay_events) << "m_ay_events calloc memory failed " << errno;
 
   m_epfd = epoll_create(m_sock_num);
   if (m_epfd < 0) {
@@ -210,11 +197,9 @@ int ependingpool::get_read_timeo() {
   return m_read_timeo;
 }
 
-
 int ependingpool::get_write_timeo() {
   return m_write_timeo;
 }
-
 
 int ependingpool::set_epoll_timeo(int timeo) {
   if (timeo < 0) {
@@ -236,17 +221,13 @@ int ependingpool::get_free_thread() {
 
 int ependingpool::get_offset() {
   int ret;
-  if (NULL == m_ay_sock) {
-    return -1;
-  }
+  if (NULL == m_ay_sock) return -1;
   for (int i = 0; i < m_sock_len; ++i) {
     if (NOT_USED == m_ay_sock[i].sock_status) {
       return i;
     }
   }
-  if (m_sock_len >= m_sock_num) {
-    return -1;
-  }
+  if (m_sock_len >= m_sock_num) return -1;
   ret = m_sock_len++;
   return ret;
 }
@@ -258,28 +239,23 @@ int ependingpool::insert_item(int sock) {
   }
   int current_offset = 0;
   int safe = m_insert_item_sock_thrsafe;
-  if (safe) {
-    pthread_mutex_lock(&m_insert_sock);  
-  }
-  current_offset = get_offset(); /**< 获取sock池中空闲位置       */
-  //获取失败
+  if (safe) pthread_mutex_lock(&m_insert_sock);
+  // 获取sock池中空闲位置
+  current_offset = get_offset();
+  // 获取失败
   if (-1 == current_offset) {
     LOG(WARNING) << "insert socket" << sock << " fail, socket array[max_size:"
                  << m_sock_num << "] overflow.";
-    if (safe) {
-      pthread_mutex_unlock(&m_insert_sock);
-    }
+    if (safe) pthread_mutex_unlock(&m_insert_sock);
     return -1;
   }
-  //设置sock状态
+  // 设置sock状态
   m_ay_sock[current_offset].last_active = time(NULL);
   m_ay_sock[current_offset].sock = sock;
   m_ay_sock[current_offset].sock_status = READY;
   LOG(INFO) << "socket " << sock << " inserted into sock array[offset:"
             << current_offset << "] [sock_len:" << m_sock_len << "].";
-  if (safe) {
-    pthread_mutex_unlock(&m_insert_sock);
-  }
+  if (safe) pthread_mutex_unlock(&m_insert_sock);
   return current_offset;
 }
 
@@ -300,19 +276,11 @@ int ependingpool::is_run() {
   return pool_run;
 }
 
-/*
- * 获取已经准备好的sock
- * @brief 从已就绪队列中获取已经就绪的sock
- * @param [in/out] offset   : int*
- * @param [in/out] sock   : int * 实际使用的句柄
- * @return  int 
- * @retval   
- * @see 
- * @note 
- * @author baonh
- **/
+// @brief 从已就绪队列中获取已经就绪的sock
+// @param [in/out] offset   : int*
+// @param [in/out] sock   : int * 实际使用的句柄
+// @return  int
 int ependingpool::fetch_item(int *handle, int *sock) {
-
   int fetch_handle = -1;
   int fetch_sock;
   int ret = -1;
@@ -320,9 +288,8 @@ int ependingpool::fetch_item(int *handle, int *sock) {
     return -1;
   }
   pthread_mutex_lock(&m_mutex);
-
   ++m_free_thr;
-  //队列为空的时候
+  // 队列为空的时候
   while (queue_empty() && pool_run) {
     struct timeval now;
     struct timespec timeout;
@@ -336,19 +303,16 @@ int ependingpool::fetch_item(int *handle, int *sock) {
     LOG(INFO) << "pool is stop";
     goto failure;
   }
-  //获取句柄
+  // 获取句柄
   if (queue_pop(&fetch_handle) < 0) {
     LOG(WARNING) << "get invalid handle [" << fetch_handle << "] from queue.";
     goto failure;
   }
-
   fetch_sock = m_ay_sock[fetch_handle].sock;
-
   if (fetch_sock < 0) {
-    LOG(FATAL) << "get invalid socket " << fetch_sock << " from queue.";
+    LOG(WARNING) << "get invalid socket " << fetch_sock << " from queue.";
     goto failure;
   }
-
   if (m_ay_sock[fetch_handle].sock_status != BUSY) {
     LOG(WARNING) << "get error handle " << fetch_handle
                  << "socket" << fetch_sock << " from queue, status is "
@@ -360,9 +324,8 @@ int ependingpool::fetch_item(int *handle, int *sock) {
   }
   *handle = fetch_handle;
   *sock = fetch_sock;
-  if (0 == pool_run) {
-    goto failure;
-  }
+  if (0 == pool_run) goto failure;
+
   pthread_mutex_unlock(&m_mutex);
   LOG(INFO) << "handle:" << fetch_handle << " socket : "
             << fetch_sock << " geted, head="
@@ -384,12 +347,13 @@ int ependingpool::fetch_item(int *handle, int *sock) {
         clear_item(fetch_handle);
         break;
       default:
-                LOG(WARNING) << "SOCK_FETCH callback return unknown ret:" << ret;
+        LOG(WARNING) << "SOCK_FETCH callback return unknown ret:" << ret;
         reset_item(fetch_handle, false);
         break;
     }
   }
   return ret;
+
 failure:
   pthread_mutex_unlock(&m_mutex);
   *handle = -1;
@@ -406,14 +370,13 @@ int ependingpool::fetch_item(int *handle, int *sock, long long *staytime) {
   if (ret != -1 && *handle >= 0) {
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    *staytime = (long long)(tv.tv_sec-m_ay_sock[*handle].queue_time.tv_sec)*1000000LL
-      + (tv.tv_usec-m_ay_sock[*handle].queue_time.tv_usec);  
+    *staytime = (long long)(tv.tv_sec - m_ay_sock[*handle].queue_time.tv_sec) * 1000000LL
+                + (tv.tv_usec-m_ay_sock[*handle].queue_time.tv_usec);
   }
   return ret;
 }
 
-int ependingpool::close_ready_socket()
-{
+int ependingpool::close_ready_socket() {
   LOG(INFO) << "close ready socket m_sock_len:" << m_sock_len;
   int ready = 0;
   for (int i = 0; i < m_sock_len; ++i) {
@@ -441,7 +404,8 @@ int ependingpool::waitforstop(int timeout) {
   gettimeofday(&tv_old, NULL);
   while (1) {
     gettimeofday(&tv, NULL);
-    if ((tv.tv_sec - tv_old.tv_sec)*1000L + (tv.tv_usec - tv_old.tv_usec)/1000L > timeout) {
+    if ((tv.tv_sec - tv_old.tv_sec) * 1000L +
+        (tv.tv_usec - tv_old.tv_usec) / 1000L > timeout) {
       break;
     }
     check_item();
@@ -451,7 +415,7 @@ int ependingpool::waitforstop(int timeout) {
   }
   int close_sock = close_ready_socket();
   LOG(INFO) << "close socket num is " << close_sock
-             << ", queue_len is " << get_queue_len();
+            << ", queue_len is " << get_queue_len();
   return 0;
 }
 
@@ -462,7 +426,7 @@ int ependingpool::clear_item(int handle) {
     return -1;
   }
   if (NULL == m_ay_sock) {
-    LOG(FATAL) << "reset_item invalid m_ay_sock.";
+    LOG(WARNING) << "reset_item invalid m_ay_sock.";
     return -1;
   }
   if (NOT_USED == m_ay_sock[handle].sock_status) {
@@ -474,7 +438,7 @@ int ependingpool::clear_item(int handle) {
     LOG(WARNING) << "invalid handle:" << handle << " sock :" << sock;
     return -1;
   }
-  //不判断epoll del成功与否,这种错误没有影响
+  // 不判断epoll del成功与否,这种错误没有影响
   pool_epoll_offset_del(handle);
   if (m_callbacklist[SOCK_CLEAR] != NULL) {
     m_callbacklist[SOCK_CLEAR](m_ay_sock[handle].sock, (void**)(&m_ay_sock[handle].arg));
@@ -483,7 +447,6 @@ int ependingpool::clear_item(int handle) {
   m_ay_sock[handle].sock = -1;
   m_ay_sock[handle].sock_status = NOT_USED;
   return 0;
-
 }
 
 int ependingpool::reset_item(int handle, bool keep_alive) {
@@ -506,14 +469,14 @@ int ependingpool::reset_item(int handle, bool keep_alive) {
     LOG(WARNING) << "invalid handle:" << handle << " sock :" << sock;
     return -1;
   }
-  if (!(keep_alive && pool_run)) {  //不保持连接
+  if (!(keep_alive && pool_run)) { // 不保持连接
     // 关闭句柄
     LOG(INFO) << "close sock:" << sock;
     if (m_callbacklist[SOCK_CLEAR] != NULL) {
       m_callbacklist[SOCK_CLEAR](m_ay_sock[handle].sock, (void**)(&m_ay_sock[handle].arg));
       m_ay_sock[handle].arg = NULL;
     }
-    while ((ret = close(sock)) < 0 && errno == EINTR) {};
+    while ((ret = close(sock)) < 0 && errno == EINTR) { };
     if (ret < 0) {
       LOG(WARNING) << "close socket handle:" << handle << " failed, "
                    << "sock:" << sock << " errno:" << errno;
@@ -521,44 +484,41 @@ int ependingpool::reset_item(int handle, bool keep_alive) {
     }
     m_ay_sock[handle].sock = -1;
     m_ay_sock[handle].sock_status = NOT_USED;
-  } else {    // keep alive
+  } else { // keep alive
     m_ay_sock[handle].last_active = time(NULL);
     m_ay_sock[handle].sock_status = READY;
     pool_epoll_offset_mod(handle, EPOLLIN | EPOLLHUP | EPOLLERR | EPOLLONESHOT);
   }
-  // EPPOOLLOG(UL_LOG_DEBUG, "socket %d handle %d, reseted, %s",
-  //     sock, handle, (keep_alive) ? "alive" : "closed");
   return 0;
 }
 
 int ependingpool::fetch_handle_arg(int handle, void **arg) {
   if (handle < 0 || handle >= m_sock_len) {
-    // EPPOOLLOG(UL_LOG_WARNING, "invalid handle %d.", handle);
+    LOG(WARNING) << "invalid handle :" << handle;
     return -1;
   }
   if (NULL == m_ay_sock) {
-    // EPPOOLLOG(UL_LOG_FATAL, "reset_item invalid m_ay_sock.");
+    LOG(FATAL) << "reset_item invalid m_ay_sock.";
     return -1;
   }
   *arg = m_ay_sock[handle].arg;
   return 0;
 }
 
-
 int ependingpool::write_reset_item(int handle) {
   if (handle < 0 || handle >= m_sock_len) {
-    // EPPOOLLOG(UL_LOG_WARNING, "invalid handle %d.", handle);
+    LOG(WARNING) << "invalid handle : " << handle;
     return -1;
   }
   if (NULL == m_ay_sock) {
-    // EPPOOLLOG(UL_LOG_FATAL, "reset_item invalid m_ay_sock.");
-    return -1;  
+    LOG(FATAL) << "reset_item invalid m_ay_sock.";
+    return -1;
   }
   if (NOT_USED == m_ay_sock[handle].sock_status) {
-    // EPPOOLLOG(UL_LOG_WARNING, "no found socket in handle %d.", handle);
+    LOG(WARNING) << "no found socket in handle :" << handle;
     return 0;
   }
-  // EPPOOLLOG(UL_LOG_DEBUG, "write rest handle[%d]", handle);
+  LOG(INFO) << "write rest handle:" << handle;
   m_ay_sock[handle].last_active = time(NULL);
   m_ay_sock[handle].sock_status = WRITE_BUSY;
   pool_epoll_offset_mod(handle, EPOLLOUT | EPOLLHUP | EPOLLERR);
@@ -579,7 +539,7 @@ int ependingpool::insert_item_sock(int sock, void *arg, int flags) {
   offset = insert_item(sock);
   if (offset < 0) {
     if (m_callbacklist[SOCK_INSERTFAIL] != NULL) {
-      m_callbacklist[SOCK_INSERTFAIL](sock, NULL); 
+      m_callbacklist[SOCK_INSERTFAIL](sock, NULL);
     }
     return -1;
   }
@@ -588,7 +548,7 @@ int ependingpool::insert_item_sock(int sock, void *arg, int flags) {
   } else {
     if (m_callbacklist[SOCK_INIT] != NULL) {
       if (m_callbacklist[SOCK_INIT](sock, (void**)(&(m_ay_sock[offset].arg))) < 0) {
-                // EPPOOLLOG(UL_LOG_WARNING, "SOCK_INIT callback return < 0");
+        LOG(WARNING) << "SOCK_INIT callback return < 0";
         clear_item(offset);
         return -1;
       }
@@ -603,7 +563,7 @@ int ependingpool::insert_item_sock(int sock, void *arg, int flags) {
     if (arg != NULL) {
       m_ay_sock[offset].arg = NULL;
     }
-    // EPPOOLLOG(UL_LOG_WARNING, "epoll_del offset[%d] error", offset);
+    LOG(WARNING) << "epoll_del offset:" << offset << " error";
     clear_item(offset);
     return -1;
   }
@@ -613,32 +573,29 @@ int ependingpool::insert_item_sock(int sock, void *arg, int flags) {
 void ependingpool::do_read_event(int offset) {
   int ret = 0;
   if (offset < 0 || offset >= m_sock_len) {
-    // EPPOOLLOG(UL_LOG_WARNING, "invalid offset %d.", offset);
+    LOG(WARNING) << "invalid offset:" << offset;
     return;
   }
   ++m_read_socket_num;
   if (m_callbacklist[SOCK_READ] != NULL) {
-    // EPPOOLLOG(UL_LOG_DEBUG, "run read callback..., arg [%p]", 
-    //     m_ay_sock[offset].arg);
+    LOG(INFO) << "run read callback..., arg :" << m_ay_sock[offset].arg;
     if (READ_BUSY != m_ay_sock[offset].sock_status) {
       m_ay_sock[offset].last_active = time(NULL);
       m_ay_sock[offset].sock_status = READ_BUSY;
     }
     ret = m_callbacklist[SOCK_READ](m_ay_sock[offset].sock,
-        (void**)(&m_ay_sock[offset].arg));
-  } else {
-    ret = 0;
-  }
+                                    (void**)(&m_ay_sock[offset].arg));
+  } else ret = 0;
+
   switch (ret) {
     case 0:
       ret = queue_in(offset);
-      if (0 == ret) {
-        break;
-      }
-      // EPPOOLLOG(UL_LOG_WARNING, "queue_in offset[%d] error[%d] sock[%d]", offset, ret, m_ay_sock[offset].sock);
+      if (0 == ret) break;
+      LOG(WARNING) << "queue_in offset:" << offset
+                   << " error:" << ret << " sock:" << m_ay_sock[offset].sock;
       if (m_callbacklist[SOCK_QUEUEFAIL] != NULL) {
         ret = m_callbacklist[SOCK_QUEUEFAIL](m_ay_sock[offset].sock,
-            (void**)(&m_ay_sock[offset].arg));
+                                             (void**)(&m_ay_sock[offset].arg));
       }
       switch (ret) {
         case 0:
@@ -648,21 +605,20 @@ void ependingpool::do_read_event(int offset) {
           clear_item(offset);
           break;
         default:
-          // EPPOOLLOG(UL_LOG_WARNING, "SOCK_QUEUEFAIL callback return ret[%d], sock[%d]", ret, m_ay_sock[offset].sock);
+          LOG(WARNING) << "SOCK_QUEUEFAIL callback return ret:" << ret
+                       << ", sock:" << m_ay_sock[offset].sock;
           reset_item(offset, false);
           break;
       }
       break;
-
     case 1:
-      // EPPOOLLOG(UL_LOG_DEBUG, "read no end ret[%d], sock reset to EPOLLIN",ret);
+      LOG(INFO) << "read no end ret:" << ret << ", sock reset to EPOLLIN";
       pool_epoll_offset_mod(offset, EPOLLIN | EPOLLHUP | EPOLLERR |
-          EPOLLONESHOT);
+                            EPOLLONESHOT);
       break;
     case 2:
       if (m_callbacklist[SOCK_TODO] != NULL) {
-        // EPPOOLLOG(UL_LOG_DEBUG, "read call success, not put into epoll, call"
-        //    "SOCK_TODO");
+        LOG(INFO) << "read call success, not put into epoll, call SOCK_TODO";
         m_ay_sock[offset].sock_status = BUSY;
         ret = m_callbacklist[SOCK_TODO](m_ay_sock[offset].sock,
             (void**)(&m_ay_sock[offset].arg));
@@ -682,34 +638,32 @@ void ependingpool::do_read_event(int offset) {
       }
 
       switch (ret) {
-        case 0: 
-          write_reset_item(offset); 
+        case 0:
+          write_reset_item(offset);
           break;
-        case 1: 
-          reset_item(offset, true); 
+        case 1:
+          reset_item(offset, true);
           break;
         case 2:
-          clear_item(offset); 
+          clear_item(offset);
           break;
         case 3:
           break;
-        default: 
-          // EPPOOLLOG(UL_LOG_WARNING, "call back SOCK_TODO run result is err[%d]",ret);
+        default:
+          LOG(WARNING) << "call back SOCK_TODO run result is err:" << ret;
           reset_item(offset, false);
           break;
       }
       break;
-
     case 3:
-      // EPPOOLLOG(UL_LOG_DEBUG, "read end call clear item");
+      LOG(INFO) << "read end call clear item";
       clear_item(offset);
       break;
     default:
-      // EPPOOLLOG(UL_LOG_WARNING, "read call error [%d]", ret);
+      LOG(WARNING) << "read call error :" << ret;
       reset_item(offset, false);
       break;
   }
-
 }
 
 void ependingpool::do_write_event(int offset) {
@@ -727,9 +681,7 @@ void ependingpool::do_write_event(int offset) {
     }
     ret = m_callbacklist[SOCK_WRITE](m_ay_sock[offset].sock,
         (void**)(&m_ay_sock[offset].arg));
-  } else {
-    ret = 0;
-  }
+  } else ret = 0;
   switch (ret) {
     case 0:
       LOG(INFO) << "write end sock, close sock:" << m_ay_sock[offset].sock;
@@ -739,7 +691,7 @@ void ependingpool::do_write_event(int offset) {
       LOG(INFO) << "write no end ret, continue";
       break;
     case 2:
-      LOG(INFO) << "write end sock, no close sock:" << m_ay_sock[offset].sock);
+      LOG(INFO) << "write end sock, no close sock:" << m_ay_sock[offset].sock;
       reset_item(offset, false);
       break;
     case 3:
@@ -754,18 +706,18 @@ void ependingpool::do_write_event(int offset) {
 }
 
 int ependingpool::check_item() {
-  //先检查超时事件
+  // 先检查超时事件
   check_time_out();
-  //等待epoll事件;
+  // 等待epoll事件;
   int num = pool_epoll_wait(m_ep_timeo);
-  if (num <= 0) { //没有触发事件
+  if (num <= 0) { // 没有触发事件
     return num;
   }
   int offset = -1;
   m_read_socket_num = 0;
   m_write_socket_num = 0;
   for (int i = 0; i < num; i++) {
-    //如果是监听端口则accept出来
+    // 如果是监听端口则accept出来
     if (m_ay_events[i].data.fd == -1 && m_listen_fd > 0) {
       int work_sock = accept_sock();
       if (work_sock < 0) {
@@ -776,12 +728,11 @@ int ependingpool::check_item() {
         while (close(work_sock) < 0 && errno == EINTR) {};
         LOG(WARNING) << "insert_item_sock work_sock:" << work_sock << " fail";
       }
-
     } else if (m_ay_events[i].data.fd >= 0) {
       offset = m_ay_events[i].data.fd;
-      //检查发生的事件
+      // 检查发生的事件
       LOG(INFO) << "events handle is :" << offset;
-      if (m_ay_events[i].events & EPOLLHUP) { //断开
+      if (m_ay_events[i].events & EPOLLHUP) {  // 断开
         LOG(WARNING) << "socket: " << m_ay_sock[offset].sock << " closed by peer.";
         reset_item(offset, false);
       } else if (m_ay_events[i].events & EPOLLERR) {  // 出错
@@ -802,7 +753,7 @@ int ependingpool::check_item() {
 
 int ependingpool::accept_sock() {
   int work_sock = -1;
-  //用户定义的回调函数
+  // 用户定义的回调函数
   if (m_callbacklist[SOCK_ACCEPT] != NULL) {
     work_sock = m_callbacklist[SOCK_ACCEPT](m_listen_fd, NULL);
     if (work_sock < 0) {
@@ -811,10 +762,9 @@ int ependingpool::accept_sock() {
     }
     return work_sock;
   }
-
   // accept connection
   work_sock = base::TcpAccept(m_listen_fd, NULL, NULL);
-  if (work_sock < 0) {// accept failed.
+  if (work_sock < 0) {  // accept failed.
     LOG(WARNING) << "accept sock fail";
     return -1;
   }
@@ -825,19 +775,19 @@ int ependingpool::accept_sock() {
 int ependingpool::queue_in(int offset) {
   if (!pool_run) {
     LOG(WARNING) << "pool is stop";
-    return -1;  
+    return -1;
   }
   int sock = m_ay_sock[offset].sock;
-  if (m_ay_sock[offset].sock_status != READY && 
+  if (m_ay_sock[offset].sock_status != READY &&
       m_ay_sock[offset].sock_status != READ_BUSY) {
     LOG(WARNING) << "status of socket " << sock << "offset "
                  << offset << " is not ready!";
     return -1;
   }
   pthread_mutex_lock(&m_mutex);
-  //sock放入就绪队列
+  // sock放入就绪队列
   int ret = queue_push(offset);
-  if (ret < 0) { //放入失败
+  if (ret < 0) {  // 放入失败
     LOG(WARNING) << "queue overflow socket" << sock << ", queue len "
                  << m_queue_len;
     pthread_mutex_unlock(&m_mutex);
@@ -868,34 +818,20 @@ int ependingpool::queue_create(int queue_size) {
     return -1;
   }
   return 0;
-  
 }
 int ependingpool::queue_push(int val) {
-  if (NULL == m_ay_ready) {
-    return -1;
-  }
-  if (queue_full()) {
-    return -1;
-  }
+  if (NULL == m_ay_ready) return -1;
+  if (queue_full()) return -1;
   m_ay_ready[m_put] = val;
-  if (++m_put >= m_queue_len) {
-    m_put = 0;
-  }
+  if (++m_put >= m_queue_len) m_put = 0;
   return 0;
 }
 
 int ependingpool::queue_pop(int *val) {
-  if (NULL == m_ay_ready) {
-    return -1;
-  }
-  if (queue_empty()) {
-    return -1;
-  }
+  if (NULL == m_ay_ready) return -1;
+  if (queue_empty()) return -1;
   *val = m_ay_ready[m_get];
-
-  if (++m_get >= m_queue_len) {
-    m_get = 0;
-  }
+  if (++m_get >= m_queue_len) m_get = 0;
   return 0;
 }
 
@@ -904,7 +840,7 @@ int ependingpool::queue_empty() {
 }
 
 int ependingpool::queue_full() {
-  int pos = m_put + 1; 
+  int pos = m_put + 1;
   if (pos >= m_queue_len) {
     pos -= m_queue_len;
   }
@@ -947,7 +883,7 @@ int ependingpool::check_time_out() {
                        << ", m_conn_timeo:" << m_conn_timeo << ", current_time:" << current_time;
           if (m_callbacklist[SOCK_LISTENTIMEOUT] != NULL) {
             m_callbacklist[SOCK_LISTENTIMEOUT](m_ay_sock[i].sock,
-                (void**)(&m_ay_sock[i].arg));
+                                               (void**)(&m_ay_sock[i].arg));
           }
           reset_item(i, false);
           continue;
@@ -964,7 +900,7 @@ int ependingpool::check_time_out() {
                        << ", m_conn_timeo:" << m_conn_timeo << ", current_time:" << current_time;
           if (m_callbacklist[SOCK_READTIMEOUT] != NULL) {
             m_callbacklist[SOCK_READTIMEOUT](m_ay_sock[i].sock,
-                (void**)(&m_ay_sock[i].arg));
+                                             (void**)(&m_ay_sock[i].arg));
           }
           reset_item(i, false);
           continue;
@@ -981,7 +917,7 @@ int ependingpool::check_time_out() {
                        << " m_conn_timeo:" << m_conn_timeo << ", current_time:" << current_time;
           if (m_callbacklist[SOCK_WRITETIMEOUT] != NULL) {
             m_callbacklist[SOCK_WRITETIMEOUT](m_ay_sock[i].sock,
-                (void**)(&m_ay_sock[i].arg));
+                                              (void**)(&m_ay_sock[i].arg));
           }
           reset_item(i, false);
           continue;
@@ -998,11 +934,11 @@ int ependingpool::check_time_out() {
         last_active_offset = i;
         break;
       default:
-        LOG_(WARNING) << "unknow status " << m_ay_sock[i].sock_status;
+        LOG(WARNING) << "unknow status " << m_ay_sock[i].sock_status;
         break;
     }
   }
-  //为保证多线程insert的安全, m_sock_len不减少
+  // 为保证多线程insert的安全, m_sock_len不减少
   if (!m_insert_item_sock_thrsafe) {
     m_sock_len = last_active_offset + 1;
   }
@@ -1021,29 +957,21 @@ int ependingpool::pool_epoll_wait(int timeout) {
   }
   while (1) {
     nfds = epoll_wait(m_epfd, m_ay_events, m_sock_num, timeout);
-    if (nfds < 0 && errno == EINTR) {
-      continue;
-    }
-    if (nfds < 0) {
-      LOG(WARNING) << "epoll_wait failed. errno:" << errno;
-    }
+    if (nfds < 0 && errno == EINTR) continue;
+    if (nfds < 0) LOG(WARNING) << "epoll_wait failed. errno:" << errno;
     break;
   }
   return nfds;
 }
 
 int ependingpool::pool_epoll_offset_add(int offset, int events) {
-  if (offset < 0) {
-    return -1;
-  }
+  if (offset < 0) return -1;
   int ret = pool_epoll_add(m_ay_sock[offset].sock, offset, events);
   return ret;
 }
 
 int ependingpool::pool_epoll_offset_del(int offset) {
-  if (offset < 0) {
-    return -1;
-  }
+  if (offset < 0) return -1;
   int ret = pool_epoll_del(m_ay_sock[offset].sock, offset);
   return ret;
 }
@@ -1083,9 +1011,7 @@ int ependingpool::pool_epoll_del(int sock, int fd) {
 }
 
 int ependingpool::pool_epoll_offset_mod(int offset, int event) {
-  if (offset < 0) {
-    return -1;
-  }
+  if (offset < 0) return -1;
   int ret = pool_epoll_mod(m_ay_sock[offset].sock, offset, event);
   return ret;
 }
