@@ -1,0 +1,9 @@
+cc_binary(name = 'mcpack_unittest',
+           srcs = [
+                   'mcpack_unittest.cc'
+                  ],
+            deps = [
+                   '//base/internal:base',
+                   '//third_part/mcpack/internal:mcpack'
+                   ],
+            )

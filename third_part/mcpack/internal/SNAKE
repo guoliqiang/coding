@@ -1,0 +1,17 @@
+cc_library(name = 'mcpack',
+           srcs = [
+                   'mc_pack2.cc',
+                   'mc_pack_c.cc',
+                   'mc_pack_core.cc',
+                   'mc_pack_cpp.cc',
+                   'mc_pack_extend.cc',
+                   'mc_pack_factory.cc',
+                   'mc_pack_json.cc',
+                   'mc_pack_json_gbk.cc',
+                   'mc_pack_text.cc'
+                  ],
+            deps = [
+                   '//base/internal:base',
+                   ],
+            copt = ['no_style_check']
+            )
