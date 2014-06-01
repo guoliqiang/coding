@@ -3,6 +3,7 @@
 
 #include "typelist.h"
 #include <string.h>
+#include "base/public/logging.h"
 
 class reverse_allocator {
   size_t buf_size;
@@ -31,19 +32,33 @@ class reverse_allocator {
     const unsigned int index = (sizeof(T) + 7) / 8;
     if (index < sizeof(freelist)/sizeof(freelist[0]) &&
         freelist[index] != 0) {
+      VLOG(3) << "malloc from freelist!";
       T * tmp = (T *)freelist[index];
+      VLOG(3) << "malloc memory address:" << tmp;
       freelist[index] = *(T * *)freelist[index];
+      VLOG(3) << "array index:" << index << " is set as:" << freelist[index];
       return tmp;
-    } else return (T *)malloc(sizeof(T));
+    } else {
+      VLOG(3) << "normal malloc!";
+      return (T *)malloc(sizeof(T));
+    }
   }
-
+  /*
+   * 利用数据块的开始位置构建了一个列表
+   * */
   template<typename T>
   inline void free(T * ptr) {
+    VLOG(3) << "want to free " << ptr;
     const unsigned int index = (sizeof(T) + 7) / 8;
     if(index < sizeof(freelist) / sizeof(freelist[0])) {
       T * tmp = (T *)freelist[index];
+      VLOG(3) << "array index:" << index << " before value:" << tmp;
       freelist[index] = (T *)ptr;
-      *(T * * )ptr = tmp;
+      VLOG(3) << "array index:" << index << "now value:" << freelist[index];
+      *(T * *)ptr = tmp;
+      VLOG(3) << "now ptr value is :" << ptr;
+    } else {
+      VLOG(3) << "not do any thing for :" << ptr;
     }
   }
 };
