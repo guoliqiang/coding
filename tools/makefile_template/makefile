@@ -16,8 +16,10 @@ LIBFLAGS = -L../../.snake/dbg/base/internal/ -lbase \
 BIN_DIR = ./bin
 SOURCE_DIR = ./internal
 
+foo_sources = foo.cc
+
 all:
-	$(CXX) -o $(BIN_DIR)/foo $(SOURCE_DIR)/foo.cc $(CXXFLAGS) $(INCPATH) $(LIBFLAGS)
+	$(CXX) -o $(BIN_DIR)/foo $(SOURCE_DIR)/$(foo_sources) $(CXXFLAGS) $(INCPATH) $(LIBFLAGS)
 
 clean:
 	rm -rf $(BIN_DIR)
