@@ -1,0 +1,6 @@
+cc_library(name='hc_cache',
+           srcs = ['hc_cache.cc'],
+           deps = [
+                  '//base/internal:base'
+                  ]
+           )
