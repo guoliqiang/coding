@@ -12,6 +12,7 @@
 #include <list>
 #include "base/public/basictypes.h"
 #include "base/public/logging.h"
+#include "base/public/mutex.h"
 #include "file/public/file.h"
 #include "file/public/file_posix.h"
 
@@ -30,6 +31,7 @@ class DiskCache {
     block_num_ = block_num;
     block_size_ = block_size;
     file_ = NULL;
+    realtime_flush_ = true;
     if (file::File::Exists(path_)) file::File::DeleteRecursively(path_);
     CHECK((file_ = fopen(path_.c_str(), "w+b")) != NULL)
         << "open file " << path << " error!";
@@ -41,7 +43,13 @@ class DiskCache {
     if (file::File::Exists(path_)) file::File::DeleteRecursively(path_);
   }
 
+  void SetRealtimeFlush(bool flush) {
+    base::MutexLock lock(&mutex_);
+    realtime_flush_ = flush;
+  }
+
   bool GetData(const key_type & key, std::string * data = NULL) {
+    base::MutexLock lock(&mutex_);
     MagicCheck();
     if (!key_map_.count(key)) {
       VLOG(5) << "not find key:" << key;
@@ -70,6 +78,7 @@ class DiskCache {
   }
 
   bool SetData(const key_type & key, const std::string & data) {
+    base::MutexLock lock(&mutex_);
     MagicCheck();
     if (key_map_.count(key)) {
       if (UpdateData(key, data)) LruUpdateKey(key);
@@ -119,7 +128,7 @@ class DiskCache {
       fwrite(data.c_str() + data.size() - node.last_block_offset, 1, node.last_block_offset, file_);
       node.used_block.push_back(b);
       VLOG(5) << "write block:" << b << " for:" << key;
-      fflush(file_);
+      if(realtime_flush_) fflush(file_);
       return true;
     }
   }
@@ -181,6 +190,8 @@ class DiskCache {
   std::string path_;
   int block_num_;
   int block_size_;
+  bool realtime_flush_;
+  base::Mutex mutex_;
 };
 }  // namespace cache
 #endif  // __DISK_CACHE_H_
