@@ -8,7 +8,7 @@
 
 namespace curl {
 
-CurlWrapper::CurlWrapper(int size /*=5000*/) {
+CurlWrapper::CurlWrapper(int size /*=500000*/) {
   CHECK((buffer_ = new char[size]) != NULL)
       << "allocate memory error!";
   buffer_size_ = size;
@@ -29,8 +29,8 @@ bool CurlWrapper::HttpPost(const std::string & url,
     const std::string & data, int64 timeout, std::string * rs) {
   rs->clear();
   if (HttpPost(url, data, timeout) == false) return false;
-  std::string tmp(buffer_);
-  rs->swap(tmp);
+  rs->resize(result_size_);
+  memcpy(&(rs->at(0)), buffer_, result_size_);
   return true;
 }
 
@@ -55,8 +55,8 @@ bool CurlWrapper::HttpGet(const std::string & url, int64 timeout,
     std::string * rs) {
   rs->clear();
   if (HttpGet(url, timeout) == false) return false;
-  std::string tmp(buffer_);
-  rs->swap(tmp);
+  rs->resize(result_size_);
+  memcpy(&(rs->at(0)), buffer_, result_size_);
   return true;
 }
 
