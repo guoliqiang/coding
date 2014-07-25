@@ -9,6 +9,7 @@
 #include "base/public/common_ojhead.h"
 
 // AC Accepted  7476K 282MS
+// http://www.redblobgames.com/pathfinding/a-star/introduction.html
 namespace NB {
 
 const int MAXN = 1005;
