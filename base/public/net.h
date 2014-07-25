@@ -5,6 +5,7 @@
 #define BASE_NET_H_
 
 #include <sys/socket.h>
+#include <string>
 
 namespace base {
 
@@ -78,6 +79,8 @@ int TcpRecvLen(int sock, void *buf, int size, int timeout);
 // 1,发送完毕，返回size
 // 2,发送失败，返回-1
 int TcpSend(int sock, const void *buffer, int size);
+
+bool TcpClientIpPort(int sock, std::string * ip, int * port);
 
 }  // namespace base
 

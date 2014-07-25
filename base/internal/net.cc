@@ -353,4 +353,16 @@ int TcpSend(int sock, const void *buffer, int size) {
   return size;
 }
 
+bool TcpClientIpPort(int sock, std::string * ip, int * port) {
+  struct sockaddr_in addr;
+  int len = sizeof(addr);
+  if (!getpeername(sock, (struct sockaddr *)&addr, (socklen_t*)&len)) {
+    char char_ip[50] = {0};
+    inet_ntop(AF_INET, &addr.sin_addr, char_ip, sizeof(char_ip));
+    *ip = std::string(char_ip);
+    *port = ntohs(addr.sin_port);
+    return true;
+  }
+  return false;
+}
 }  //  namespace base

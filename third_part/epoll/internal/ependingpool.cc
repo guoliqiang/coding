@@ -768,6 +768,12 @@ int ependingpool::accept_sock() {
     LOG(WARNING) << "accept sock fail";
     return -1;
   }
+  int client_port = 0;
+  std::string client_ip;
+  if (base::TcpClientIpPort(work_sock, &client_ip, &client_port)) {
+    LOG(INFO) << "connect from client " << client_ip << ":"
+              << client_port << " in socket :" << work_sock;
+  }
   LOG(INFO) << "accept:" << work_sock << " success";
   return work_sock;
 }
