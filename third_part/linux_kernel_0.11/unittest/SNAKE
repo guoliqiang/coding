@@ -1,0 +1,8 @@
+cc_binary(name = 'fs_test',
+           srcs = ['fs_test.cc'],
+           deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  '//file/internal:file',
+                  ]
+           )
+
