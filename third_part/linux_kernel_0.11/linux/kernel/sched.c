@@ -185,8 +185,7 @@ repeat:	current->state = TASK_INTERRUPTIBLE;
 		tmp->state=0;
 }
 
-void wake_up(struct task_struct **p)
-{
+void wake_up(struct task_struct **p) {
 	if (p && *p) {
 		(**p).state=0;
 		*p=NULL;

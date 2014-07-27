@@ -7,11 +7,13 @@
 #include "base/public/logging.h"
 #include "third_part/testing/gtest/include/gtest/gtest.h"
 
+// http://wenku.baidu.com/link?url=LXUP6BM5wp9H-aJj8NE61vUXq-
+// 7R3JfPRNZfE0FBftMLiTJtNjefSFBtgO20pMp8JEgmeVYh3_NUscjoGgJCNZjgZ2XrOtmJX4HaDAxjZFq
 #define clear_block(addr, size) \
 __asm__ __volatile__("cld\n\t" \
   "rep\n\t" \
   "stosl" \
-  ::"a" (0), "c" (size/4), "D" ((long) (addr)))
+  ::"a" (0), "c" (size/4), "D" (reinterpret_cast<int64>(addr)))
 
 #define set_bit(nr, addr) ({\
 register int res ; \

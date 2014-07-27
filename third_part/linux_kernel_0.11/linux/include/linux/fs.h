@@ -1,32 +1,29 @@
-/*
- * This file has definitions for some important file table
- * structures etc.
- */
+// This file has definitions for some important file table
+// structures etc.
 
 #ifndef _FS_H
 #define _FS_H
 
 #include <sys/types.h>
 
-/* devices are as follows: (same as minix, so we can use the minix
- * file system. These are major numbers.)
- *
- * 0 - unused (nodev)
- * 1 - /dev/mem
- * 2 - /dev/fd
- * 3 - /dev/hd
- * 4 - /dev/ttyx
- * 5 - /dev/tty
- * 6 - /dev/lp
- * 7 - unnamed pipes
- */
+// devices are as follows: (same as minix, so we can use the minix
+// file system. These are major numbers.)
+//
+// 0 - unused (nodev)
+// 1 - /dev/mem
+// 2 - /dev/fd
+// 3 - /dev/hd
+// 4 - /dev/ttyx
+// 5 - /dev/tty
+// 6 - /dev/lp
+// 7 - unnamed pipes
 
 #define IS_SEEKABLE(x) ((x)>=1 && (x)<=3)
 
 #define READ 0
 #define WRITE 1
-#define READA 2		/* read-ahead - don't pause */
-#define WRITEA 3	/* "write-ahead" - silly, but somewhat useful */
+#define READA 2		// read-ahead - don't pause
+#define WRITEA 3	// "write-ahead" - silly, but somewhat useful
 
 void buffer_init(long buffer_end);
 
@@ -66,13 +63,13 @@ __asm__("incl %0\n\tandl $4095,%0"::"m" (head))
 typedef char buffer_block[BLOCK_SIZE];
 
 struct buffer_head {
-	char * b_data;			/* pointer to data block (1024 bytes) */
-	unsigned long b_blocknr;	/* block number */
-	unsigned short b_dev;		/* device (0 = free) */
+	char * b_data;			       // pointer to data block (1024 bytes)
+	unsigned long b_blocknr;	 // block number
+	unsigned short b_dev;		   // device (0 = free)
 	unsigned char b_uptodate;
-	unsigned char b_dirt;		/* 0-clean,1-dirty */
-	unsigned char b_count;		/* users using this block */
-	unsigned char b_lock;		/* 0 - ok, 1 -locked */
+	unsigned char b_dirt;		   // 0-clean,1-dirty
+	unsigned char b_count;		 // users using this block
+	unsigned char b_lock;		   // 0 - ok, 1 -locked
 	struct task_struct * b_wait;
 	struct buffer_head * b_prev;
 	struct buffer_head * b_next;
@@ -81,15 +78,16 @@ struct buffer_head {
 };
 
 struct d_inode {
-	unsigned short i_mode;
-	unsigned short i_uid;
-	unsigned long i_size;
-	unsigned long i_time;
-	unsigned char i_gid;
-	unsigned char i_nlinks;
-	unsigned short i_zone[9];
+	unsigned short i_mode;  // 文件类型和属性(rwx位)
+	unsigned short i_uid;   // user id
+	unsigned long i_size;   // file size
+	unsigned long i_time;   // modify time
+	unsigned char i_gid;    // group id of file owner
+	unsigned char i_nlinks; // link number
+	unsigned short i_zone[9];  // 0~6 direct, 7 indirect, 8 double indrect
 };
 
+// inode in memory
 struct m_inode {
 	unsigned short i_mode;
 	unsigned short i_uid;
@@ -98,7 +96,7 @@ struct m_inode {
 	unsigned char i_gid;
 	unsigned char i_nlinks;
 	unsigned short i_zone[9];
-/* these are in memory also */
+  // these are in memory also
 	struct task_struct * i_wait;
 	unsigned long i_atime;
 	unsigned long i_ctime;
@@ -113,34 +111,13 @@ struct m_inode {
 	unsigned char i_update;
 };
 
+// 用于文件句柄与i节点之间建立关系
 struct file {
 	unsigned short f_mode;
 	unsigned short f_flags;
-	unsigned short f_count;
-	struct m_inode * f_inode;
+	unsigned short f_count;  // 文件句柄
+	struct m_inode * f_inode;  // 对应的i节点
 	off_t f_pos;
-};
-
-struct super_block {
-	unsigned short s_ninodes;
-	unsigned short s_nzones;
-	unsigned short s_imap_blocks;
-	unsigned short s_zmap_blocks;
-	unsigned short s_firstdatazone;
-	unsigned short s_log_zone_size;
-	unsigned long s_max_size;
-	unsigned short s_magic;
-/* These are only in memory */
-	struct buffer_head * s_imap[8];
-	struct buffer_head * s_zmap[8];
-	unsigned short s_dev;
-	struct m_inode * s_isup;
-	struct m_inode * s_imount;
-	unsigned long s_time;
-	struct task_struct * s_wait;
-	unsigned char s_lock;
-	unsigned char s_rd_only;
-	unsigned char s_dirt;
 };
 
 struct d_super_block {
@@ -152,6 +129,28 @@ struct d_super_block {
 	unsigned short s_log_zone_size;
 	unsigned long s_max_size;
 	unsigned short s_magic;
+};
+
+struct super_block {
+	unsigned short s_ninodes;
+	unsigned short s_nzones;
+	unsigned short s_imap_blocks;
+	unsigned short s_zmap_blocks;
+	unsigned short s_firstdatazone;
+	unsigned short s_log_zone_size;
+	unsigned long s_max_size;
+	unsigned short s_magic;
+  // These are only in memory
+	struct buffer_head * s_imap[8];
+	struct buffer_head * s_zmap[8];
+	unsigned short s_dev;
+	struct m_inode * s_isup;
+	struct m_inode * s_imount;
+	unsigned long s_time;
+	struct task_struct * s_wait;
+	unsigned char s_lock;
+	unsigned char s_rd_only;
+	unsigned char s_dirt;
 };
 
 struct dir_entry {
