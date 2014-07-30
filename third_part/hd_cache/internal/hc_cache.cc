@@ -124,7 +124,7 @@ int hc_free_cache(hc_cache *pcache) {
 // @param sign [pointer to the 64bit sign of the item]
 // @param last_pos [pointer to the tail of hash chain]
 // @return: the pointer to the pos
-inline u_int *hc_hash_getpos(hc_cache* pcache, u_int *sign, u_int *last_pos) {
+inline u_int * hc_hash_getpos(hc_cache * pcache, u_int * sign, u_int * last_pos) {
   CHECK(pcache != NULL);
   CHECK(sign != NULL);
   CHECK(last_pos != NULL);
@@ -132,7 +132,7 @@ inline u_int *hc_hash_getpos(hc_cache* pcache, u_int *sign, u_int *last_pos) {
   u_int * ptmppos;  // the pointer to the sign, which will return
   hc_indexnode * pin;
   // calculate hash entry of the hash table
-  hashentry = (sign[0]+sign[1]) % pcache->hashtable.hashnum;
+  hashentry = (sign[0] + sign[1]) % pcache->hashtable.hashnum;
   // check the node exist in the cache or not;
   ptmppos = pcache->hashtable.table + hashentry;
   while (*ptmppos != HC_NULL) {
@@ -188,7 +188,7 @@ static int hc_removefile(hc_cache *pcache) {
     pcache->rs_head = pos;
     // modify file entry
     fin->entry = pin->right;
-    // modyfy node info 
+    // modyfy node info
     pin->before = HC_NULL;
     pin->left = HC_NULL;
     pin->right = HC_NULL;
@@ -245,7 +245,7 @@ static int hc_removenum(hc_cache *pcache, int num) {
       return hc_removefile(pcache);
     }
     CHECK(0 == fin->node_num_inlist);
-    if (fin->status == NEED_DELETE && fin->thread_in_read == 0) {     
+    if (fin->status == NEED_DELETE && fin->thread_in_read == 0) {
       if (fin->handle >= 0) {
         close(fin->handle);
         fin->handle = -1;
@@ -255,9 +255,9 @@ static int hc_removenum(hc_cache *pcache, int num) {
       fin->tail = HC_NULL;
       fin->free_size = pcache->filelist.file_size;
       fin->est_time = 0;
-      pcache->filelist.oldest_offset = 
+      pcache->filelist.oldest_offset =
         (pcache->filelist.oldest_offset+1) % pcache->filelist.file_num;
-    } else if (fin->status == USING_IN_READ) {     
+    } else if (fin->status == USING_IN_READ) {
       fin->status = NEED_DELETE;
     }
     LOG(INFO) << "hc_cache deleted empty file :" << offset;
@@ -326,7 +326,7 @@ static int hc_removenum(hc_cache *pcache, int num) {
       fin->tail = HC_NULL;
       fin->free_size = pcache->filelist.file_size;
       fin->est_time = 0;
-      pcache->filelist.oldest_offset = 
+      pcache->filelist.oldest_offset =
         (pcache->filelist.oldest_offset+1) % pcache->filelist.file_num;
     } else if (fin->status != NEED_DELETE) {
       CHECK(USING_IN_READ == fin->status);
@@ -353,13 +353,13 @@ static int hc_writeitem(hc_cache *pcache, void *pdata, u_int size) {
   if (fin->status != USING_IN_WRITE) {  //  如果处于最新位置的文件不可写
     if (NOT_USE == fin->status) {  // 查看该文件是否未被使用
       sprintf(pathname, "%s.%d", pcache->file_name, offset);// 生成文件名
-      if ((fin->handle = open(pathname, O_CREAT | O_RDWR, 
+      if ((fin->handle = open(pathname, O_CREAT | O_RDWR,
               S_IRUSR | S_IWUSR)) < 0) {  // 以可读写,非截断的方式打开文件
         LOG(ERROR) << "open file" << pathname << " failure!";
         return RT_ERROR_GENERAL_ERROR;
       }
       // 占位
-      if (pwrite(fin->handle, &tmp, sizeof(char),  
+      if (pwrite(fin->handle, &tmp, sizeof(char),
           pcache->filelist.file_size - sizeof(char)) != sizeof(char)) {
         LOG(ERROR) << "pwrite() error!";
         close(fin->handle);  // 占位失败,需要关闭socket
@@ -426,11 +426,11 @@ static int hc_writeitem(hc_cache *pcache, void *pdata, u_int size) {
   CHECK(fin->handle >= 0);
   if ((num = pwrite(fin->handle, (void*)pdata, size,
       pcache->filelist.file_size - fin->free_size)) != size) {
-    LOG(ERROR) << "pwrite() error! size=" << size << " num=" << num; 
+    LOG(ERROR) << "pwrite() error! size=" << size << " num=" << num;
     return RT_ERROR_GENERAL_ERROR;
   }
   return RT_NOTICE_PROCESSED;
-}  
+}
 
 // @brief [add a item to hc_cache]
 // @param pcache [pointer of the hc_cache]
@@ -475,7 +475,7 @@ int hc_additem(hc_cache *pcache, u_int *sign, void *pdata, u_int size) {
     curpos = pcache->rs_head;
     pcache->rs_head = HC_NULL;
   }
-  hc_indexnode *pin = &(pcache->nodelist[curpos]);
+  hc_indexnode * pin = &(pcache->nodelist[curpos]);
   ret = hc_writeitem(pcache, pdata, size);
   if (ret != RT_NOTICE_PROCESSED) {  // pin未使用，将该节点放回回收栈
     pin->next = pcache->rs_head;
@@ -515,12 +515,12 @@ int hc_additem(hc_cache *pcache, u_int *sign, void *pdata, u_int size) {
   // update newest file information
   if (HC_NULL == fin->entry) {
     CHECK(0 == fin->node_num_inlist);
-    fin->entry = curpos;  // entry      
+    fin->entry = curpos;  // entry
   }
   fin->tail = curpos;  // tail
   fin->free_size -= size;  // free_size
-  ++fin->node_num_inlist;  // node_num_inlis
-  ++pcache->total_count;
+  fin->node_num_inlist++;  // node_num_inlis
+  pcache->total_count++;
   pcache->cache_stat.add_count++;
   return RT_NOTICE_PROCESSED;
 }
@@ -533,7 +533,7 @@ int hc_additem(hc_cache *pcache, u_int *sign, void *pdata, u_int size) {
 // @param fact_size [output the fact size of the seeked item if fact_size != NULL]
 // @param click_time [output the number of the item seekd if click_time != NULL]
 // @return: RT_NOTICE_PROCESSED for success, others for failure
-int hc_seekitem(hc_cache *pcache, u_int * sign, 
+int hc_seekitem(hc_cache *pcache, u_int * sign,
                 void *pdata, u_int size, u_int *fact_size, int *click_time) {
   CHECK(pcache != NULL);
   CHECK(sign != NULL);
@@ -564,7 +564,7 @@ int hc_seekitem(hc_cache *pcache, u_int * sign,
                <<  pin->length << " of the node!";
     return RT_NOTICE_NONE_PROCESSED;
   }
-  CHECK((pin->pos_offset + pin->length) 
+  CHECK((pin->pos_offset + pin->length)
         <= (pcache->filelist.file_size - fin->free_size));  // 总长度不应越界
   CHECK(fin->status != NOT_USE);  // 状态不能为 NOT_USED
   CHECK(fin->handle >= 0);
@@ -575,7 +575,7 @@ int hc_seekitem(hc_cache *pcache, u_int * sign,
       LOG(ERROR) << "read error: " << strerror(errno);
       return RT_ERROR_GENERAL_ERROR;
     } else {
-      LOG(ERROR) << "read size notmatch:" << size << "!=" << num; 
+      LOG(ERROR) << "read size notmatch:" << size << "!=" << num;
       return RT_ERROR_GENERAL_ERROR;
     }
   }
@@ -833,7 +833,7 @@ int hc_clean_cache(hc_cache *pcache) {
       close(pcache->filelist.files[i].handle);
       pcache->filelist.files[i].handle = -1;
     }
-    pcache->filelist.files[i].status = 
+    pcache->filelist.files[i].status =
       (i < INITIAL_OLDEST_OFFSET ? NOT_USE : NEED_DELETE);
     pcache->filelist.files[i].entry = HC_NULL;
     pcache->filelist.files[i].tail = HC_NULL;
@@ -853,7 +853,7 @@ int hc_clean_cache(hc_cache *pcache) {
     pcache->nodelist[j].right = HC_NULL;
   }
   // 清理hashtable
-  memset(pcache->hashtable.table, 0xff, 
+  memset(pcache->hashtable.table, 0xff,
       pcache->hashtable.hashnum*sizeof(u_int));
   // 清理hc_cache
   pcache->rs_head = HC_NULL;
@@ -910,7 +910,7 @@ int hc_dump_cache(hc_cache* pcache, char *file_name) {
     CHECK(fwrite(sign, sizeof(sign), 1, fp) >= 1);
     // write filelist with signature
     CHECK(fwrite(pcache->filelist.files, sizeof(hc_file), pcache->filelist.file_num, fp)
-        >= (u_int)pcache->filelist.file_num); 
+        >= (u_int)pcache->filelist.file_num);
     creat_sign_mds64((char*)pcache->filelist.files, sizeof(hc_file) * pcache->filelist.file_num, &sign[0], &sign[1]);
     CHECK(fwrite(sign, sizeof(sign), 1, fp) >= 1);
     fclose(fp);
@@ -946,7 +946,7 @@ hc_cache* hc_load_cache(char *file_name, time_t max_interval) {
     return NULL;
   }
   // read cache head and verify signature
-  CHECK((cache = (hc_cache*)malloc(1 * sizeof(hc_cache))) != NULL); 
+  CHECK((cache = (hc_cache*)malloc(1 * sizeof(hc_cache))) != NULL);
   memset(cache, 0, sizeof(*cache));
   CHECK(fread(&head_buf_len, sizeof(int), 1, fp) >= 1);
   CHECK(fread(head_buf, head_buf_len, 1, fp) >= 1);
@@ -1031,7 +1031,7 @@ int hc_cache_clean_expired_files(hc_cache * cache, int * expired_file_offset) {
     fin->status = NEED_DELETE;
     *expired_file_offset = cache->filelist.oldest_offset;
     if ((ret = hc_removefile(cache)) == RT_NOTICE_PROCESSED) {
-      // NOTE: A little bit tricky here. Temporarily mark the file as NEED_PHYSICAL_DELETE. 
+      // NOTE: A little bit tricky here. Temporarily mark the file as NEED_PHYSICAL_DELETE.
       // The file will be marked as NOT_USE later after the file is physically deleted.
       cache->filelist.files[*expired_file_offset].status = NEED_PHYSICAL_DELETE;
     }

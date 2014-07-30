@@ -1,7 +1,7 @@
 //  linux/fs/inode.c
 //  (C) 1991  Linus Torvalds
 
-#include <string.h> 
+#include <string.h>
 #include <sys/stat.h>
 
 #include <linux/sched.h>
