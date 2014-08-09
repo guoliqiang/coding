@@ -12,7 +12,6 @@
 // invalidate changed floppy-disk-caches.
 
 #include <stdarg.h>
- 
 #include <linux/config.h>
 #include <linux/sched.h>
 #include <linux/kernel.h>
@@ -145,7 +144,7 @@ static inline void insert_into_queues(struct buffer_head * bh) {
 
 static struct buffer_head * find_buffer(int dev, int block) {		
 	struct buffer_head * tmp;
-	for (tmp = hash(dev,block); tmp != NULL; tmp = tmp->b_next) {
+	for (tmp = hash(dev,  block); tmp != NULL; tmp = tmp->b_next) {
 		if (tmp->b_dev==dev && tmp->b_blocknr==block) return tmp;
   }
 	return NULL;
@@ -159,7 +158,7 @@ static struct buffer_head * find_buffer(int dev, int block) {
 struct buffer_head * get_hash_table(int dev, int block) {
 	struct buffer_head * bh;
 	for (; ;) {
-		if (!(bh=find_buffer(dev,block))) return NULL;
+		if (!(bh=find_buffer(dev, block))) return NULL;
 		bh->b_count++;
 		wait_on_buffer(bh);
 		if (bh->b_dev == dev && bh->b_blocknr == block) {
@@ -184,8 +183,7 @@ repeat:
 		if (tmp->b_count) continue;
 		if (!bh || BADNESS(tmp)<BADNESS(bh)) {
 			bh = tmp;
-			if (!BADNESS(tmp))
-				break;
+			if (!BADNESS(tmp)) break;
 		}
   // and repeat until we find something good
 	} while ((tmp = tmp->b_next_free) != free_list);
@@ -226,10 +224,9 @@ void brelse(struct buffer_head * buf) {
 
 // bread() reads a specified block and returns the buffer that contains
 // it. It returns NULL if the block was unreadable.
-struct buffer_head * bread(int dev,int block) {
+struct buffer_head * bread(int dev, int block) {
 	struct buffer_head * bh;
-
-	if (!(bh=getblk(dev,block))) {
+	if (!(bh=getblk(dev, block))) {
 		panic("bread: getblk returned NULL\n");
   }
 	if (bh->b_uptodate) return bh;

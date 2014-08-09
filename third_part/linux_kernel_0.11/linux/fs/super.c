@@ -15,7 +15,7 @@ void wait_for_keypress(void);
 
 // set_bit uses setb, as gas doesn't recognize setc
 
-#define set_bit(bitnr,addr) ({ \
+#define set_bit(bitnr, addr) ({ \
 register int __res ; \
 __asm__("bt %2,%3;setb %%al":"=a" (__res):"a" (0),"r" (bitnr),"m" (*(addr))); \
 __res; })
@@ -48,7 +48,7 @@ struct super_block * get_super(int dev) {
 	struct super_block * s;
 	if (!dev) return NULL;
 	s = 0 + super_block;
-	while (s < NR_SUPER+super_block)
+	while (s < NR_SUPER + super_block)
 		if (s->s_dev == dev) {
 			wait_on_super(s);
 			if (s->s_dev == dev) return s;
@@ -114,10 +114,10 @@ static struct super_block * read_super(int dev) {
 	for (i = 0; i < Z_MAP_SLOTS; i++) s->s_zmap[i] = NULL;
 	block = 2;
 	for (i = 0 ; i < s->s_imap_blocks ; i++)
-		if ((s->s_imap[i]=bread(dev,block))) block++;
+		if ((s->s_imap[i] = bread(dev, block))) block++;
 		else break;
 	for (i = 0; i < s->s_zmap_blocks ; i++)
-		if ((s->s_zmap[i]=bread(dev,block))) block++;
+		if ((s->s_zmap[i]=bread(dev, block))) block++;
 		else break;
 	if (block != 2 + s->s_imap_blocks + s->s_zmap_blocks) {
 		for(i = 0; i < I_MAP_SLOTS; i++) brelse(s->s_imap[i]);
@@ -200,7 +200,7 @@ int sys_mount(char * dev_name, char * dir_name, int rw_flag) {
 }
 
 void mount_root(void) {
-	int i,free;
+	int i, free;
 	struct super_block * p;
 	struct m_inode * mi;
 
@@ -218,21 +218,21 @@ void mount_root(void) {
 		p->s_wait = NULL;
 	}
 	if (!(p=read_super(ROOT_DEV))) panic("Unable to mount root");
-	if (!(mi=iget(ROOT_DEV,ROOT_INO))) panic("Unable to read root i-node");
+	if (!(mi=iget(ROOT_DEV, ROOT_INO))) panic("Unable to read root i-node");
 	mi->i_count += 3 ;	// NOTE! it is logically used 4 times, not 1
 	p->s_isup = p->s_imount = mi;
 	current->pwd = mi;
 	current->root = mi;
-	free=0;
-	i=p->s_nzones;
-	while (-- i >= 0) {
-		if (!set_bit(i&8191,p->s_zmap[i>>13]->b_data)) free++;
-  }
-	printk("%d/%d free blocks\n\r",free,p->s_nzones);
 	free = 0;
-	i = p->s_ninodes+1;
+	i = p->s_nzones;
 	while (-- i >= 0) {
-		if (!set_bit(i&8191,p->s_imap[i>>13]->b_data)) free++;
+		if (!set_bit(i & 8191, p->s_zmap[i >> 13]->b_data)) free++;
   }
-	printk("%d/%d free inodes\n\r",free,p->s_ninodes);
+	printk("%d/%d free blocks\n\r",free, p->s_nzones);
+	free = 0;
+	i = p->s_ninodes + 1;
+	while (-- i >= 0) {
+		if (!set_bit(i & 8191, p->s_imap[i >> 13]->b_data)) free++;
+  }
+	printk("%d/%d free inodes\n\r",free, p->s_ninodes);
 }
