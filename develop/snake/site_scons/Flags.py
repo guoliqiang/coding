@@ -4,6 +4,7 @@ LOCAL_SNAKE_DIR = '/usr/local/snake'
 
 DISTCC_HOSTS = 'third_part/distcc/bin/distcc_hosts.txt'
 DISTCC_BIN = 'third_part/distcc/bin/distcc'
+CCACHE_BIN = 'third_part/ccache/bin/ccache g++'
 
 BUILDING_INFO_IN = 'develop/building_info.h.in'
 BUILDING_INFO_OUT = 'develop/building_info.h'

@@ -68,6 +68,7 @@ class CppBuilder(LanguageBuilder):
     self._distcc_log = ARGUMENTS.get('distcc_log',
                                      '%s/distcc_log' % Flags.SNAKE_OUT)
     self._use_distcc = ARGUMENTS.get('use_distcc', 'on')
+    self._use_ccache = ARGUMENTS.get('use_ccache', 'off')
     self._lib_name_map = {}
     self._source_files = set()
     self._checked_dir = set()
@@ -266,7 +267,10 @@ class CppBuilder(LanguageBuilder):
 
     CXX_value = env['CXX']
     if (not self._use_distcc == 'on'):
-      CXX_value = 'g++'
+      if (self._use_ccache == 'on'):
+        CXX_value = Flags.CCACHE_BIN
+      else:
+        CXX_value = 'g++'
 
     if obj.build_type_ in ['cc_binary']:
       print Util.BuildMessage(target)
@@ -313,7 +317,9 @@ class CppBuilder(LanguageBuilder):
       targets += '%s' % b
     content = content.replace('BD_TARGET', targets)
     path = os.path.join(Path.GetOutputDir(), Flags.BUILDING_INFO_OUT)
+    Util.Log(path)
     Util.MkDir(os.path.dirname(path))
+    Util.Log(content)
     open(path, 'w').write(content)
 
   def Finish(self, env):
