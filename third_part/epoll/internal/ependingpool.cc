@@ -962,6 +962,8 @@ int ependingpool::pool_epoll_wait(int timeout) {
     return -1;
   }
   while (1) {
+    // epool_wait return the ready event count those are save in
+    // m_ay_events.
     nfds = epoll_wait(m_epfd, m_ay_events, m_sock_num, timeout);
     if (nfds < 0 && errno == EINTR) continue;
     if (nfds < 0) LOG(WARNING) << "epoll_wait failed. errno:" << errno;
