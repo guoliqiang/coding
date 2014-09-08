@@ -1,0 +1,1 @@
+nteventlogappendertestcase.o: nt/nteventlogappendertestcase.cpp

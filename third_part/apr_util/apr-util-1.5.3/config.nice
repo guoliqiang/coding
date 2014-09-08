@@ -1,0 +1,8 @@
+#! /bin/sh
+#
+# Created by configure
+
+"./configure" \
+"--prefix=/home/guoliqiang/git-coding/coding/third_part/apr_util/" \
+"--with-apr=/home/guoliqiang/git-coding/coding/third_part/apr/" \
+"$@"

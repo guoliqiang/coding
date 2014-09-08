@@ -1,0 +1,13 @@
+prefix=/home/guoliqiang/git-coding/coding/third_part/apr_util/
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+APRUTIL_MAJOR_VERSION=1
+includedir=${prefix}/include/apr-${APRUTIL_MAJOR_VERSION}
+
+Name: APR Utils
+Description: Companion library for APR
+Version: 1.5.3
+# assume that apr-util requires libapr of same major version
+Requires: apr-1
+Libs: -L${libdir} -laprutil-${APRUTIL_MAJOR_VERSION}  /home/guoliqiang/git-coding/coding/third_part/apr_util/apr-util-1.5.3/xml/expat/libexpat.la
+Cflags: -I${includedir}
