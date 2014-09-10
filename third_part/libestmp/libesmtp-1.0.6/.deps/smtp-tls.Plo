@@ -1,0 +1,17 @@
+smtp-tls.lo: smtp-tls.c config.h libesmtp-private.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stddef.h libesmtp.h \
+ message-source.h concatenate.h auth-client.h
+
+config.h:
+
+libesmtp-private.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stddef.h:
+
+libesmtp.h:
+
+message-source.h:
+
+concatenate.h:
+
+auth-client.h:
