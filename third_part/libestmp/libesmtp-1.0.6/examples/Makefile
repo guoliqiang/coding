@@ -1,9 +1,8 @@
-
 OBJECTS = mail-file.o
-LIBESMTP = `libesmtp-config --libs`
-CFLAGS := $(CFLAGS) -std=c99 -pedantic -O2 -g -W -Wall `libesmtp-config --cflags`
+LIBESMTP =-pthread -L../../lib -lesmtp -L../../../openssl/lib/ -lssl -lcrypto -L../../../libtool/lib -lltdl -ldl
+CFLAGS := $(CFLAGS) -std=c99 -pedantic -O2 -g -W -Wall -I../../include -I../../../openssl/include
 
-all: mail-file-a mail-file-so
+all: mail-file-a
 
 mail-file-a: $(OBJECTS)
 	$(CC) -g -static $(OBJECTS) $(LIBESMTP) -o mail-file-a

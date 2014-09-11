@@ -11,7 +11,10 @@ hmacmd5.lo: hmacmd5.c ../config.h /usr/include/string.h \
  /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/pthreadtypes.h hmacmd5.h md5.h
+ /usr/include/bits/pthreadtypes.h hmacmd5.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/md5.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/e_os2.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/opensslconf.h
 
 ../config.h:
 
@@ -69,4 +72,8 @@ hmacmd5.lo: hmacmd5.c ../config.h /usr/include/string.h \
 
 hmacmd5.h:
 
-md5.h:
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/md5.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/e_os2.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/opensslconf.h:

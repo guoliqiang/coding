@@ -1,0 +1,10 @@
+cc_binary(name = 'email_sender',
+           srcs = ['email_sender.cc', 'pool.cc', 'aprinitializer.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//file/internal:file',
+                  '//libs/third_part/libesmtp:esmtp',
+                  '//libs/third_part/apr:apr-1'
+                  ]
+           )
+

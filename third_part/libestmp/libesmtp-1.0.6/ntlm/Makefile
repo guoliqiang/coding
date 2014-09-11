@@ -103,9 +103,9 @@ CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -pthread -std=c99 -pedantic -g -O2
 CPP = gcc -E
-CPPFLAGS = 
-CRAMMD5_LIBS = 
-CRAMMD5_LTLIBOBJS =  md5.lo
+CPPFLAGS = -I/home/guoliqiang/git-coding/coding/third_part/openssl/include 
+CRAMMD5_LIBS = -lcrypto
+CRAMMD5_LTLIBOBJS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -117,7 +117,7 @@ ECHO_N = -n
 ECHO_T = 
 EGREP = /bin/grep -E
 EXEEXT = 
-EXTRA_CFLAGS =          -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes         -Wstrict-prototypes -Wnested-externs -Wpointer-arith         -Wbad-function-cast -Wcast-align
+EXTRA_CFLAGS =          -Wall -fPIC -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes         -Wstrict-prototypes -Wnested-externs -Wpointer-arith         -Wbad-function-cast -Wcast-align
 FGREP = /bin/grep -F
 GREP = /bin/grep
 INSTALL = /usr/bin/install -c
@@ -126,10 +126,10 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS = -pthread 
+LDFLAGS = -L/home/guoliqiang/git-coding/coding/third_part/openssl/lib -pthread 
 LIBESMTP_VERSION = 7:6:1
 LIBOBJS = 
-LIBS =  -ldl 
+LIBS = -lssl -lcrypto  -ldl 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIBTOOL_DEPS = ./ltmain.sh
 LIB_AGE = 1
@@ -161,10 +161,10 @@ PTHREAD_CFLAGS = -pthread
 PTHREAD_LDFLAGS = -pthread
 PTHREAD_LIBS = 
 RANLIB = ranlib
-RPM_BUILDREQUIRES = 
-RPM_OPENSSL = 
-RPM_OPENSSLDEVEL = 
-RPM_REQUIRES = 
+RPM_BUILDREQUIRES = BuildRequires:
+RPM_OPENSSL = openssl >= %{openssl}
+RPM_OPENSSLDEVEL = openssl-devel >= %{openssl}
+RPM_REQUIRES = Requires:
 SASL_PLUGINS = login plain crammd5
 SED = /bin/sed
 SET_MAKE = 
@@ -226,7 +226,7 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 INCLUDES = -I.
-AM_CFLAGS = -pthread -std=c99 -pedantic -g -O2          -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes         -Wstrict-prototypes -Wnested-externs -Wpointer-arith         -Wbad-function-cast -Wcast-align
+AM_CFLAGS = -pthread -std=c99 -pedantic -g -O2          -Wall -fPIC -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes         -Wstrict-prototypes -Wnested-externs -Wpointer-arith         -Wbad-function-cast -Wcast-align
 lib_LTLIBRARIES = sasl-ntlm.la
 sasl_ntlm_la_SOURCES = client-ntlm.c ntlmdes.c ntlmstruct.c ntlm.h
 sasl_ntlm_la_LDFLAGS = -module -avoid-version 

@@ -48,7 +48,7 @@
 #define HAVE_INTTYPES_H 1
 
 /* Set when -lcrypto from OpenSSL is available */
-/* #undef HAVE_LIBCRYPTO */
+#define HAVE_LIBCRYPTO 1
 
 /* Define to 1 if you have the `lwres' library (-llwres). */
 /* #undef HAVE_LIBLWRES */
@@ -199,7 +199,7 @@
 #define USE_SASL 1
 
 /* Build with support for SMTP STARTTLS extension */
-/* #undef USE_TLS */
+#define USE_TLS 1
 
 /* Enable support for sendmail XUSR extension */
 #define USE_XUSR 1

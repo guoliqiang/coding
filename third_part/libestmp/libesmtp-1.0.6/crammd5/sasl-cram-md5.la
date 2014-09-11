@@ -17,7 +17,7 @@ old_library='sasl-cram-md5.a'
 inherited_linker_flags=' -pthread'
 
 # Libraries that this one depends upon.
-dependency_libs=' -ldl'
+dependency_libs=' -L/home/guoliqiang/git-coding/coding/third_part/openssl/lib -lssl -lcrypto -ldl'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

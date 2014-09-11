@@ -10798,7 +10798,7 @@ fi
 
 if test "$GCC" = "yes" -a "$enable_more_warnings" != "no"; then
         EXTRA_CFLAGS="$EXTRA_CFLAGS \
-        -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes \
+        -Wall -fPIC -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes \
         -Wstrict-prototypes -Wnested-externs -Wpointer-arith \
         -Wbad-function-cast -Wcast-align"
 fi

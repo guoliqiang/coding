@@ -14,8 +14,11 @@ client-crammd5.lo: client-crammd5.c ../config.h /usr/include/assert.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
- /usr/include/bits/stdlib.h hmacmd5.h md5.h ../auth-client.h \
- ../auth-plugin.h
+ /usr/include/bits/stdlib.h hmacmd5.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/md5.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/e_os2.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/opensslconf.h \
+ ../auth-client.h ../auth-plugin.h
 
 ../config.h:
 
@@ -83,7 +86,11 @@ client-crammd5.lo: client-crammd5.c ../config.h /usr/include/assert.h \
 
 hmacmd5.h:
 
-md5.h:
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/md5.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/e_os2.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/opensslconf.h:
 
 ../auth-client.h:
 

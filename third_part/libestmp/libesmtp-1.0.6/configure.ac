@@ -83,11 +83,11 @@ if test "$GCC" = "yes" -a "$enable_more_warnings" != "no"; then
         EXTRA_CFLAGS="$EXTRA_CFLAGS \
         -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes \
         -Wstrict-prototypes -Wnested-externs -Wpointer-arith \
-        -Wbad-function-cast -Wcast-align"
+        -Wbad-function-cast -Wcast-align -fPIC"
 fi
 if test "$GCC" = "yes" -a "$enable_more_warnings" = "picky"; then
         EXTRA_CFLAGS="$EXTRA_CFLAGS -fno-builtin -W -Werror -Wwrite-strings \
-        		-Wcast-qual"
+        		-Wcast-qual -fPIC"
 fi
 
 AC_ARG_ENABLE([isoc],

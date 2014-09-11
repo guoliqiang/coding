@@ -69,7 +69,7 @@ while test $# -gt 0; do
        	;;
 
     --libs)
-       	echo -pthread -L${exec_prefix}/lib -lesmtp  -ldl  
+       	echo -pthread -L${exec_prefix}/lib -lesmtp -lssl -lcrypto  -ldl  
        	;;
 
     --plugindir)

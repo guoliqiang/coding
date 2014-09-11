@@ -19,8 +19,52 @@ smtp-api.lo: smtp-api.c config.h \
  /usr/include/errno.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- api.h libesmtp-private.h libesmtp.h message-source.h concatenate.h \
- auth-client.h headers.h
+ api.h libesmtp-private.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ssl.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/e_os2.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/opensslconf.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/comp.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/crypto.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/stdio2.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/stack.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/safestack.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/opensslv.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ossl_typ.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/symhacks.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/bio.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/x509.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/buffer.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/evp.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/objects.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/obj_mac.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/asn1.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/bn.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ec.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ecdsa.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ecdh.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/rsa.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/dsa.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/dh.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/sha.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/x509_vfy.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/lhash.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/pkcs7.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/pem.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/pem2.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/hmac.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/kssl.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ssl2.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ssl3.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/tls1.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/dtls1.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/pqueue.h \
+ /usr/include/sys/time.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ssl23.h \
+ /home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/srtp.h \
+ libesmtp.h message-source.h concatenate.h auth-client.h headers.h
 
 config.h:
 
@@ -105,6 +149,102 @@ missing.h:
 api.h:
 
 libesmtp-private.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ssl.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/e_os2.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/opensslconf.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/comp.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/crypto.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/bits/stdio2.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/stack.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/safestack.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/opensslv.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ossl_typ.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/symhacks.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/bio.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/x509.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/buffer.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/evp.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/objects.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/obj_mac.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/asn1.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/bn.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ec.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ecdsa.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ecdh.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/rsa.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/dsa.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/dh.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/sha.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/x509_vfy.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/lhash.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/pkcs7.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/pem.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/pem2.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/hmac.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/kssl.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ssl2.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ssl3.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/tls1.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/dtls1.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/pqueue.h:
+
+/usr/include/sys/time.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/ssl23.h:
+
+/home/guoliqiang/git-coding/coding/third_part/openssl/include/openssl/srtp.h:
 
 libesmtp.h:
 
