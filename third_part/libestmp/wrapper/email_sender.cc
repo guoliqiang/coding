@@ -56,6 +56,7 @@ class SMTPSession {
       auth_set_interact_cb(authctx, authinteract, (void*) this);
 
       if (*user || *pwd) {
+        LOG(INFO)  << "auth";
         smtp_auth_set_context(session, authctx);
       }
     }
@@ -251,8 +252,9 @@ class SMTPMessage {
 
 int main(int argc, char** argv) {
   Pool p;
-  SMTPSession session("127.0.0.1", 25, "", "", p);
-  SMTPMessage message(session, "guoliqiang2006@126.com", "guoliqiang2006@126.com", "", "","test", "test", p); 
+  SMTPSession session("smtp.126.com", 25, "guoliqiang2006@126.com", "2384551", p);
+  SMTPMessage message(session, "guoliqiang2006@126.com",
+                      "guoliqiang2006@gmail.com", "guoliqiang2006@126.com", "","Hello", "HelloWord", p); 
   session.send(p);
   return 0;
 }
