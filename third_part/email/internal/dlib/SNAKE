@@ -1,0 +1,23 @@
+cc_library(name = 'dlib',
+           srcs = ['dhash.c',
+                   'dlist.c',
+                   'dnet.c',
+                   'dstrbuf.c',
+                   'dutil.c',
+                   'dvector.c'
+                   ],
+           deps = [
+                  '//libs/third_part/openssl:ssl',
+                  '//libs/third_part/openssl:crypto',
+                  ],
+           libs=[
+                 'm',
+                 'nsl'
+                 ],
+           cflags = [
+                     '-DHAVE_CONFIG_H',
+                     '-DHAVE_LIBSSL',
+                     '-Ithird_part/openssl/include'
+                     ]
+           )
+
