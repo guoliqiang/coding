@@ -1,0 +1,9 @@
+cc_binary(name = 'geohash_unittest',
+           srcs = [
+                   'geohash_unittest.cc'
+                  ],
+         deps = [
+                '//third_part/geohash/internal:geohash',
+                ],
+         )
+

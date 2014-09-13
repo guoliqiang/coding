@@ -1,0 +1,9 @@
+cc_library(name = 'geohash',
+           srcs = [
+                   'geohash.cc'
+                  ],
+         deps = [
+                '//base/internal:base',
+                ],
+         )
+
