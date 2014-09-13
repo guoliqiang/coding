@@ -41,8 +41,6 @@
 #define SOUTH 2
 #define WEST 3
 
-#define LENGTH_OF_DEGREE  111100  // meters
-
 typedef struct IntervalStruct {
   double high;
   double low;
@@ -72,11 +70,10 @@ static const char * odd_neighbors[] = {
 static const char *even_borders[] = {"prxz", "bcfguvyz", "028b", "0145hjnp"};
 static const char *odd_borders[] = {"bcfguvyz", "prxz", "0145hjnp", "028b"};
 
-int index_for_char(char c, const char *string) {
+int IndexForChar(char c, const std::string & str) {
   int index = -1;
-  int string_amount = strlen(string);
-  for (int i = 0; i < string_amount; i++) {
-    if (c == string[i]) {
+  for (int i = 0; i < str.size(); i++) {
+    if (c == str[i]) {
       index = i;
       break;
     }
@@ -84,40 +81,30 @@ int index_for_char(char c, const char *string) {
   return index;
 }
 
-char* get_neighbor(const char *hash, int direction) {
-  int hash_length = strlen(hash);
+std::string GetNeighbor(const std::string & hash, int direction) {
+  int hash_length = hash.size();
   char last_char = hash[hash_length - 1];
   int is_odd = hash_length % 2;
 
   const char ** border = is_odd ? odd_borders : even_borders;
   const char ** neighbor = is_odd ? odd_neighbors : even_neighbors;
 
-  char * base = (char *)malloc(sizeof(char) * 1);
-  base[0] = '\0';
-  strncat(base, hash, hash_length - 1);
+  std::string base = hash.substr(0, hash_length - 1);
 
-  if (index_for_char(last_char, border[direction]) != -1) {
-    base = get_neighbor(base, direction);
+  if (IndexForChar(last_char, border[direction]) != -1) {
+    base = GetNeighbor(base, direction);
   }
 
-  int neighbor_index = index_for_char(last_char, neighbor[direction]);
+  int neighbor_index = IndexForChar(last_char, neighbor[direction]);
   last_char = char_map[neighbor_index];
-
-  char *last_hash = (char *)malloc(sizeof(char) * 2);
-  last_hash[0] = last_char;
-  last_hash[1] = '\0';
-  strcat(base, last_hash);
-  free(last_hash);
-
+  base.push_back(last_char);
   return base;
 }
 
-char * geohash_encode(double lat, double lng, int precision) {
+std::string GeohashEncode(double lat, double lng, int precision) {
   if (precision < 1 || precision > 12) precision = 6;
-  char* hash = NULL;
+  std::string hash;
   if (lat <= 90.0 && lat >= -90.0 && lng <= 180.0 && lng >= -180.0) {
-    hash = (char*)malloc(sizeof(char) * (precision + 1));
-    hash[precision] = '\0';
     precision *= 5.0;
     Interval lat_interval = {MAX_LAT, MIN_LAT};
     Interval lng_interval = {MAX_LONG, MIN_LONG};
@@ -142,7 +129,7 @@ char * geohash_encode(double lat, double lng, int precision) {
       } else interval->high = mid;
 
       if (!(i % 5)) {
-        hash[(i - 1) / 5] = char_map[hashChar];
+        hash.push_back(char_map[hashChar]);
         hashChar = 0;
       }
       is_even = !is_even;
@@ -151,19 +138,18 @@ char * geohash_encode(double lat, double lng, int precision) {
   return hash;
 }
 
-GeoCoord geohash_decode(const char *hash) {
+GeoCoord GeohashDecode(const std::string & hash) {
   GeoCoord coordinate = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-  if (hash) {
-    int char_amount = strlen(hash);
-    if (char_amount) {
+  if (!hash.empty()) {
+    if (!hash.empty()) {
       unsigned int char_mapIndex;
       Interval lat_interval = {MAX_LAT, MIN_LAT};
       Interval lng_interval = {MAX_LONG, MIN_LONG};
       Interval *interval;
 
       int is_even = 1;
-      for (int i = 0; i < char_amount; i++) {
-        char_mapIndex = index_for_char(hash[i], (char*)char_map);
+      for (int i = 0; i < hash.size(); i++) {
+        char_mapIndex = IndexForChar(hash[i], (char*)char_map);
         if (char_mapIndex < 0) break;
         // Interpret the last 5 bits of the integer
         for (int j = 0; j < 5; j++) {
@@ -189,24 +175,23 @@ GeoCoord geohash_decode(const char *hash) {
 }
 
 
-char ** geohash_neighbors(const char *hash) {
-  char** neighbors = NULL;
-  if (hash) {
+void GeohashNeighbors(const std::string & hash,
+                      std::vector<std::string> * rs) {
+  rs->clear();
+  if (!hash.empty()) {
     // N, NE, E, SE, S, SW, W, NW
-    neighbors = (char**)malloc(sizeof(char*) * 8);
-    neighbors[0] = get_neighbor(hash, NORTH);
-    neighbors[1] = get_neighbor(neighbors[0], EAST);
-    neighbors[2] = get_neighbor(hash, EAST);
-    neighbors[3] = get_neighbor(neighbors[2], SOUTH);
-    neighbors[4] = get_neighbor(hash, SOUTH);
-    neighbors[5] = get_neighbor(neighbors[4], WEST);
-    neighbors[6] = get_neighbor(hash, WEST);
-    neighbors[7] = get_neighbor(neighbors[6], NORTH);
+    rs->push_back(GetNeighbor(hash, NORTH));
+    rs->push_back(GetNeighbor(rs->at(0), EAST));
+    rs->push_back(GetNeighbor(hash, EAST));
+    rs->push_back(GetNeighbor(rs->at(2), SOUTH));
+    rs->push_back(GetNeighbor(hash, SOUTH));
+    rs->push_back(GetNeighbor(rs->at(4), WEST));
+    rs->push_back(GetNeighbor(hash, WEST));
+    rs->push_back(GetNeighbor(rs->at(6), NORTH));
   }
-  return neighbors;
 }
 
-GeoBoxDimension geohash_dimensions_for_precision(int precision) {
+GeoBoxDimension GeohashDimensionsForPrecision(int precision) {
   GeoBoxDimension dimensions = {0.0, 0.0};
   if (precision > 0) {
     int lat_times_to_cut = precision * 5 / 2;

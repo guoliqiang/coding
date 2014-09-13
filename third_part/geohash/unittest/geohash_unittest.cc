@@ -47,47 +47,49 @@ void checkHashes(const char* hash, const char* expected) {
   }
 }
 
-void checkNeighbors(char** neighbors, const char** expectedNeighbors) {
+void checkNeighbors(const std::vector<std::string> & neighbors,
+                    const char** expectedNeighbors) {
   for (int i = 0; i < 8; i++) {
-    if (strcmp(neighbors[i], expectedNeighbors[i]) != 0) {
+    if (strcmp(neighbors[i].c_str(), expectedNeighbors[i]) != 0) {
       printf("Error: Expected hash = %s at index %i. (%s)\n",
-             expectedNeighbors[i], i, neighbors[i]);
+             expectedNeighbors[i], i, neighbors[i].c_str());
     }
   }
 }
 
 int main() {
   // Decoder
-  GeoCoord coord = geohash_decode("ezs42");
+  GeoCoord coord = GeohashDecode("ezs42");
   GeoCoord expectedCoord = {42.60498046875, -5.60302734375,
                             42.626953125, -5.5810546875,
                             42.5830078125, -5.625};
   check_coords(coord, expectedCoord);
-  coord = geohash_decode("ezs42gx");
+  coord = GeohashDecode("ezs42gx");
   expectedCoord = (GeoCoord){42.602920532226562, -5.5817413330078125,
                              42.603607177734375, -5.581054687500000,
                              42.60223388671875, -5.582427978515625};
   check_coords(coord, expectedCoord);
-  coord = geohash_decode("9xj5smj4w40");
+  coord = GeohashDecode("9xj5smj4w40");
   expectedCoord = (GeoCoord){40.018140748143196, -105.27485780417919,
                              40.01814141869545, -105.27485713362694,
                              40.018140077590942, -105.27485847473145};
   check_coords(coord, expectedCoord);
   // Encoder
-  char* hash = geohash_encode(42.60498046875, -5.60302734375, 5);
-  checkHashes(hash, "ezs42");
+  std::string hash = GeohashEncode(42.60498046875, -5.60302734375, 5);
+  checkHashes(hash.c_str(), "ezs42");
 
-  hash = geohash_encode(40.018141, -105.274858, 12);
-  checkHashes(hash, "9xj5smj4w40m");
+  hash = GeohashEncode(40.018141, -105.274858, 12);
+  checkHashes(hash.c_str(), "9xj5smj4w40m");
 
-  hash = geohash_encode(40.018141, -105.274858, 2);
-  checkHashes(hash, "9x");
+  hash = GeohashEncode(40.018141, -105.274858, 2);
+  checkHashes(hash.c_str(), "9x");
 
-  hash = geohash_encode(40.018141, -105.274858, 0);
-  checkHashes(hash, "9xj5sm");
+  hash = GeohashEncode(40.018141, -105.274858, 0);
+  checkHashes(hash.c_str(), "9xj5sm");
 
   // Neighbors
-  char ** neighbors = geohash_neighbors("ezs42");
+  std::vector<std::string> neighbors;
+  GeohashNeighbors("ezs42", &neighbors);
   const char* expectedNeighbors[8] = {"ezs48", "ezs49", "ezs43", "ezs41",
                                       "ezs40", "ezefp", "ezefr", "ezefx"};
   checkNeighbors(neighbors, expectedNeighbors);
@@ -101,7 +103,7 @@ int main() {
   expectedNeighbors[6] = "9xj5smj4w40j";
   expectedNeighbors[7] = "9xj5smj4w40n";
 
-  neighbors = geohash_neighbors("9xj5smj4w40m");
+  GeohashNeighbors("9xj5smj4w40m", &neighbors);
   checkNeighbors(neighbors, expectedNeighbors);
   return 0;
 }

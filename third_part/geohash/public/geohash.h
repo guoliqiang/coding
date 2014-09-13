@@ -28,6 +28,9 @@
 #ifndef  __GEOHASH_H_
 #define  __GEOHASH_H_
 
+#include <string>
+#include <vector>
+
 // https://github.com/simplegeo/libgeohash
 // Metric in meters
 typedef struct GeoBoxDimensionStruct {
@@ -47,19 +50,20 @@ typedef struct GeoCoordStruct {
 
 // Creates a the hash at the specified precision. If precision is set to 0.
 // or less than it defaults to 12.
-char * geohash_encode(double lat, double lng, int precision);
+std::string GeohashEncode(double lat, double lng, int precision);
 
 // Returns the latitude and longitude used to create the hash along with
 // the bounding box for the encoded coordinate.
-GeoCoord geohash_decode(const char* hash);
+GeoCoord GeohashDecode(const std::string & hash);
 
 // Return an array of geohashes that represent the neighbors of the passed
 // in value. The neighbors are indexed as followed:
 // N, NE, E, SE, S, SW, W, NW
 // 0, 1,  2,  3, 4,  5, 6, 7
-char** geohash_neighbors(const char* hash);
+void GeohashNeighbors(const std::string & hash,
+                      std::vector<std::string> * rs);
 
 // Returns the width and height of a precision value.
-GeoBoxDimension geohash_dimensions_for_precision(int precision);
+GeoBoxDimension GeohashDimensionsForPrecision(int precision);
 
 #endif  // __GEOHASH_H_
