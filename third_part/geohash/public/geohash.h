@@ -31,14 +31,16 @@
 #include <string>
 #include <vector>
 
+namespace geohash {
+
 // https://github.com/simplegeo/libgeohash
 // Metric in meters
-typedef struct GeoBoxDimensionStruct {
+struct GeoBoxDimension {
   double height;
   double width;
-} GeoBoxDimension;
+};
 
-typedef struct GeoCoordStruct {
+struct GeoCoord {
   double latitude;
   double longitude;
   double north;
@@ -46,24 +48,28 @@ typedef struct GeoCoordStruct {
   double south;
   double west;
   GeoBoxDimension dimension;
-} GeoCoord;
+};
 
-// Creates a the hash at the specified precision. If precision is set to 0.
-// or less than it defaults to 12.
-std::string GeohashEncode(double lat, double lng, int precision);
+class GeohashTool {
+ public:
+  // Creates a the hash at the specified precision. If precision is set to 0.
+  // or less than it defaults to 12.
+  static std::string GeohashEncode(double lat, double lng, int precision);
 
-// Returns the latitude and longitude used to create the hash along with
-// the bounding box for the encoded coordinate.
-GeoCoord GeohashDecode(const std::string & hash);
+  // Returns the latitude and longitude used to create the hash along with
+  // the bounding box for the encoded coordinate.
+  static GeoCoord GeohashDecode(const std::string & hash);
 
-// Return an array of geohashes that represent the neighbors of the passed
-// in value. The neighbors are indexed as followed:
-// N, NE, E, SE, S, SW, W, NW
-// 0, 1,  2,  3, 4,  5, 6, 7
-void GeohashNeighbors(const std::string & hash,
-                      std::vector<std::string> * rs);
+  // Return an array of geohashes that represent the neighbors of the passed
+  // in value. The neighbors are indexed as followed:
+  // N, NE, E, SE, S, SW, W, NW
+  // 0, 1,  2,  3, 4,  5, 6, 7
+  static void GeohashNeighbors(const std::string & hash,
+                               std::vector<std::string> * rs);
 
-// Returns the width and height of a precision value.
-GeoBoxDimension GeohashDimensionsForPrecision(int precision);
+  // Returns the width and height of a precision value.
+  static GeoBoxDimension GeohashDimensionsForPrecision(int precision);
+};
 
+}  // namespace geohash
 #endif  // __GEOHASH_H_

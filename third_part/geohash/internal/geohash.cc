@@ -41,10 +41,12 @@
 #define SOUTH 2
 #define WEST 3
 
-typedef struct IntervalStruct {
+namespace geohash {
+
+struct Interval {
   double high;
   double low;
-} Interval;
+};
 
 
 // Normal 32 characer map used for geohashing
@@ -70,7 +72,7 @@ static const char * odd_neighbors[] = {
 static const char *even_borders[] = {"prxz", "bcfguvyz", "028b", "0145hjnp"};
 static const char *odd_borders[] = {"bcfguvyz", "prxz", "0145hjnp", "028b"};
 
-int IndexForChar(char c, const std::string & str) {
+static int IndexForChar(char c, const std::string & str) {
   int index = -1;
   for (int i = 0; i < str.size(); i++) {
     if (c == str[i]) {
@@ -81,7 +83,7 @@ int IndexForChar(char c, const std::string & str) {
   return index;
 }
 
-std::string GetNeighbor(const std::string & hash, int direction) {
+static std::string GetNeighbor(const std::string & hash, int direction) {
   int hash_length = hash.size();
   char last_char = hash[hash_length - 1];
   int is_odd = hash_length % 2;
@@ -101,7 +103,7 @@ std::string GetNeighbor(const std::string & hash, int direction) {
   return base;
 }
 
-std::string GeohashEncode(double lat, double lng, int precision) {
+std::string GeohashTool::GeohashEncode(double lat, double lng, int precision) {
   if (precision < 1 || precision > 12) precision = 6;
   std::string hash;
   if (lat <= 90.0 && lat >= -90.0 && lng <= 180.0 && lng >= -180.0) {
@@ -126,7 +128,9 @@ std::string GeohashEncode(double lat, double lng, int precision) {
       if (coord > mid) {
         interval->low = mid;
         hashChar |= 0x01;
-      } else interval->high = mid;
+      } else {
+        interval->high = mid;
+      }
 
       if (!(i % 5)) {
         hash.push_back(char_map[hashChar]);
@@ -138,7 +142,7 @@ std::string GeohashEncode(double lat, double lng, int precision) {
   return hash;
 }
 
-GeoCoord GeohashDecode(const std::string & hash) {
+GeoCoord GeohashTool::GeohashDecode(const std::string & hash) {
   GeoCoord coordinate = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
   if (!hash.empty()) {
     if (!hash.empty()) {
@@ -149,14 +153,16 @@ GeoCoord GeohashDecode(const std::string & hash) {
 
       int is_even = 1;
       for (int i = 0; i < hash.size(); i++) {
-        char_mapIndex = IndexForChar(hash[i], (char*)char_map);
+        char_mapIndex = IndexForChar(hash[i], char_map);
         if (char_mapIndex < 0) break;
         // Interpret the last 5 bits of the integer
         for (int j = 0; j < 5; j++) {
           interval = is_even ? &lng_interval : &lat_interval;
           double delta = (interval->high - interval->low) / 2.0;
-          if ((char_mapIndex << j) & 0x0010) interval->low += delta;
-          else interval->high -= delta;
+          if ((char_mapIndex << j) & 0x0010)
+            interval->low += delta;
+          else
+            interval->high -= delta;
           is_even = !is_even;
         }
       }
@@ -175,8 +181,8 @@ GeoCoord GeohashDecode(const std::string & hash) {
 }
 
 
-void GeohashNeighbors(const std::string & hash,
-                      std::vector<std::string> * rs) {
+void GeohashTool::GeohashNeighbors(const std::string & hash,
+                                   std::vector<std::string> * rs) {
   rs->clear();
   if (!hash.empty()) {
     // N, NE, E, SE, S, SW, W, NW
@@ -191,7 +197,7 @@ void GeohashNeighbors(const std::string & hash,
   }
 }
 
-GeoBoxDimension GeohashDimensionsForPrecision(int precision) {
+GeoBoxDimension GeohashTool::GeohashDimensionsForPrecision(int precision) {
   GeoBoxDimension dimensions = {0.0, 0.0};
   if (precision > 0) {
     int lat_times_to_cut = precision * 5 / 2;
@@ -205,3 +211,4 @@ GeoBoxDimension GeohashDimensionsForPrecision(int precision) {
   }
   return dimensions;
 }
+}  // namespace geohash
