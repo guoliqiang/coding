@@ -9,7 +9,6 @@ PROJ_NAME=third_part/geohash/internal
 
 all:
 	$(WORK_ROOT)/develop/snake/snake.sh t=*
-	#cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/email $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 opt:
 

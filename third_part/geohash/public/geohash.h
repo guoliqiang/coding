@@ -1,8 +1,7 @@
 /*
  *  geohash.h libgeohash
  *  Created by Derek Smith on 10/6/09.
- *  Copyright (c) 2010, SimpleGeo
- *  All rights reserved.
+ *  Copyright (c) 2010, SimpleGeo, All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
  *  modification, are permitted provided that the following conditions are met:
@@ -24,17 +23,17 @@
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  *  OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+// https://github.com/simplegeo/libgeohash
 
 #ifndef  __GEOHASH_H_
 #define  __GEOHASH_H_
 
 #include <string>
 #include <vector>
+#include "base/public/logging.h"
 
 namespace geohash {
 
-// https://github.com/simplegeo/libgeohash
-// Metric in meters
 struct GeoBoxDimension {
   double height;
   double width;
@@ -52,23 +51,23 @@ struct GeoCoord {
 
 class GeohashTool {
  public:
-  // Creates a the hash at the specified precision. If precision is set to 0.
+  // Creates a the hash at the specified precision. If precision is set to 0
   // or less than it defaults to 12.
   static std::string GeohashEncode(double lat, double lng, int precision);
-
   // Returns the latitude and longitude used to create the hash along with
   // the bounding box for the encoded coordinate.
   static GeoCoord GeohashDecode(const std::string & hash);
-
   // Return an array of geohashes that represent the neighbors of the passed
   // in value. The neighbors are indexed as followed:
   // N, NE, E, SE, S, SW, W, NW
   // 0, 1,  2,  3, 4,  5, 6, 7
   static void GeohashNeighbors(const std::string & hash,
                                std::vector<std::string> * rs);
-
   // Returns the width and height of a precision value.
   static GeoBoxDimension GeohashDimensionsForPrecision(int precision);
+
+ private:
+  DISALLOW_COPY_AND_ASSIGN(GeohashTool);
 };
 
 }  // namespace geohash

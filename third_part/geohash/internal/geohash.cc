@@ -1,8 +1,7 @@
 /*
  *  geohash.c libgeohash
  *  Created by Derek Smith on 10/6/09.
- *  Copyright (c) 2010, SimpleGeo
- *  All rights reserved.
+ *  Copyright (c) 2010, SimpleGeo, All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
  *  modification, are permitted provided that the following conditions are met:
@@ -25,10 +24,12 @@
  *  OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../public/geohash.h"
+#include "third_part/geohash/public/geohash.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
+namespace geohash {
 
 #define MAX_LAT 90.0
 #define MIN_LAT -90.0
@@ -41,16 +42,12 @@
 #define SOUTH 2
 #define WEST 3
 
-namespace geohash {
-
 struct Interval {
   double high;
   double low;
 };
-
-
 // Normal 32 characer map used for geohashing
-static char char_map[] =  "0123456789bcdefghjkmnpqrstuvwxyz";
+static char char_map[] = "0123456789bcdefghjkmnpqrstuvwxyz";
 
 // The follow character maps were created by Dave Troy and used
 // in his Javascript Geohashing library.
@@ -61,16 +58,14 @@ static const char * even_neighbors[] = {
                                  "14365h7k9dcfesgujnmqp0r2twvyx8zb",
                                  "238967debc01fg45kmstqrwxuvhjyznp"
                                 };
-
 static const char * odd_neighbors[] = {
                                 "bc01fg45238967deuvhjyznpkmstqrwx",
                                 "p0r21436x8zb9dcf5h7kjnmqesgutwvy",
                                 "238967debc01fg45kmstqrwxuvhjyznp",
                                 "14365h7k9dcfesgujnmqp0r2twvyx8zb"
                                 };
-
-static const char *even_borders[] = {"prxz", "bcfguvyz", "028b", "0145hjnp"};
-static const char *odd_borders[] = {"bcfguvyz", "prxz", "0145hjnp", "028b"};
+static const char * even_borders[] = {"prxz", "bcfguvyz", "028b", "0145hjnp"};
+static const char * odd_borders[] = {"bcfguvyz", "prxz", "0145hjnp", "028b"};
 
 static int IndexForChar(char c, const std::string & str) {
   int index = -1;
@@ -87,16 +82,12 @@ static std::string GetNeighbor(const std::string & hash, int direction) {
   int hash_length = hash.size();
   char last_char = hash[hash_length - 1];
   int is_odd = hash_length % 2;
-
   const char ** border = is_odd ? odd_borders : even_borders;
   const char ** neighbor = is_odd ? odd_neighbors : even_neighbors;
-
   std::string base = hash.substr(0, hash_length - 1);
-
   if (IndexForChar(last_char, border[direction]) != -1) {
     base = GetNeighbor(base, direction);
   }
-
   int neighbor_index = IndexForChar(last_char, neighbor[direction]);
   last_char = char_map[neighbor_index];
   base.push_back(last_char);
@@ -107,12 +98,12 @@ std::string GeohashTool::GeohashEncode(double lat, double lng, int precision) {
   if (precision < 1 || precision > 12) precision = 6;
   std::string hash;
   if (lat <= 90.0 && lat >= -90.0 && lng <= 180.0 && lng >= -180.0) {
-    precision *= 5.0;
+    precision *= 5;
     Interval lat_interval = {MAX_LAT, MIN_LAT};
     Interval lng_interval = {MAX_LONG, MIN_LONG};
-
-    Interval *interval;
-    double coord, mid;
+    Interval * interval;
+    double coord = 0;
+    double mid = 0;
     int is_even = 1;
     unsigned int hashChar = 0;
     for (int i = 1; i <= precision; i++) {
@@ -131,7 +122,6 @@ std::string GeohashTool::GeohashEncode(double lat, double lng, int precision) {
       } else {
         interval->high = mid;
       }
-
       if (!(i % 5)) {
         hash.push_back(char_map[hashChar]);
         hashChar = 0;
@@ -149,8 +139,7 @@ GeoCoord GeohashTool::GeohashDecode(const std::string & hash) {
       unsigned int char_mapIndex;
       Interval lat_interval = {MAX_LAT, MIN_LAT};
       Interval lng_interval = {MAX_LONG, MIN_LONG};
-      Interval *interval;
-
+      Interval * interval;
       int is_even = 1;
       for (int i = 0; i < hash.size(); i++) {
         char_mapIndex = IndexForChar(hash[i], char_map);
@@ -170,7 +159,6 @@ GeoCoord GeohashTool::GeohashDecode(const std::string & hash) {
           ((lat_interval.high - lat_interval.low) / 2.0);
       coordinate.longitude = lng_interval.high -
           ((lng_interval.high - lng_interval.low) / 2.0);
-
       coordinate.north = lat_interval.high;
       coordinate.east = lng_interval.high;
       coordinate.south = lat_interval.low;
@@ -179,7 +167,6 @@ GeoCoord GeohashTool::GeohashDecode(const std::string & hash) {
   }
   return coordinate;
 }
-
 
 void GeohashTool::GeohashNeighbors(const std::string & hash,
                                    std::vector<std::string> * rs) {
