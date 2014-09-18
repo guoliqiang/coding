@@ -1,0 +1,40 @@
+package test;
+
+message BuzzGeoInfo
+{
+	optional int64 buzz_id = 1;
+	optional double latitude = 2;
+	optional double longitude = 3;
+	optional int32 timestamp = 4;
+}
+
+message BuzzGeoReport
+{
+	optional bytes requestId = 1;
+	optional BuzzGeoInfo info = 2;
+}
+
+message BuzzGeoReportResponse
+{
+	optional bytes requestId = 1;
+	optional int32 error_no = 2;
+  optional bytes error_msg = 3;
+}
+
+message BuzzGeoFindNeighboursRequest
+{
+	optional bytes requestId = 1;
+	optional double latitude = 2;
+	optional double longitude = 3;
+  optional int32 cursor_pos = 4;
+  optional int32 offset = 5;
+}
+
+message BuzzGeoFindNeighboursRequestResponse
+{
+	optional bytes requestId = 1;
+	optional int32 error_no = 2;
+  optional bytes error_msg = 3;
+  repeated BuzzGeoInfo neighbours = 4;
+  optional int32 next_cursor_pos = 5;
+}
