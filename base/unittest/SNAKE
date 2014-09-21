@@ -63,3 +63,36 @@ cc_binary(name = 'heap_unittest',
                    '//base/internal:base',
                    ],
            )
+
+cc_binary(name = 'parallel_pool_unittest',
+           srcs = ['parallel_pool_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )
+
+cc_binary(name = 'thread_safe_unittest',
+           srcs = ['thread_safe_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )
+cc_binary(name = 'thread_local_unittest',
+           srcs = ['thread_local_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )
+
+cc_binary(name = 'time_limit_data_unittest',
+           srcs = ['time_limit_data_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   '//third_part/testing/gtest/src:gtest'
+                   ],
+           )
+
