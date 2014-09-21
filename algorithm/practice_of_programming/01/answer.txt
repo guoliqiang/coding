@@ -1,0 +1,80 @@
+Exercise 1-1
+TRUE == 0 and FALSE == 1 is contrary to the conventions of C. not_eof
+would be better named is_eof, with its value set to TRUE in this example.
+
+Exercise 1-2
+int lessequal(char *s, char *t) {
+  return strcmp(s, t) <= 0;
+}
+
+Exercise 1-4
+if (c != 'y' && c != 'Y') return;
+if (length > BUFSIZE) length = BUFSIZE;
+flag = !flag;
+quote = (*line == '"');
+bit = val & 1;
+
+Exercise 1-5
+There is no guarantee which of val and ch will be read first.
+
+Exercise 1-6
+1 1
+1 2
+2 1
+GCC 3.4.6 gives "2 1".
+
+Exercise 1-7
+if (!istty(stdin) && !istty(stdout) && !istty(stderr))
+  return 0;
+return retval;
+for (k = 0; k < 5; k++) {
+  scanf("%lf", &dx);
+  x += dx;
+}
+
+Exercise 1-8
+The loop increment happens at the top of the loop, so the loop goes from
+1 to total, not 0 to total - 1.
+
+The == operator checks equality of references, not string equality. The
+getName and userName methods presumably return strings.
+
+for (int count = 0; count < total; count++) {
+  if (this.getName(count).equals(nametable.userName()))
+    return true;
+}
+
+Exercise 1-9
+The entire macro body is not parenthesized. The macro argument c is not
+parenthesized. The macro argument c may be evaluated more than once. The
+?: operator is superfluous.
+
+Exercise 1-10
+#define FT2METER  0.3048
+#define METER2FT  (1.0 / FT2METER)
+#define MI2FT   5280.0
+#define MI2KM   (MI2FT * FT2METER / 1000.0)
+#define SQMI2SQKM (MI2KM * MI2KM)
+
+Exercise 1-11
+The comment or the code must be incorrect because the method returns
+void and the function says it returns a number.
+
+The comment is incomplete; the code actually tests for a even number or
+a number that is greater than MAX.
+
+The comment heading the function is fine. The other comments should
+refer to "line number" rather than "line counter" for consistency with
+the code and the header comment. The two identical comments "increment
+line counter" document two different things: increasing line_number by 1
+and increasing it by 2. The comments should be different to note the
+difference. However, the function is better written
+  void write_message()
+  {
+    fprintf(fout, "%d %s\n%d %s\n%d %s\n",
+      line_number + 1, HEADER,
+      line_number + 2, BODY,
+      line_number + 3, TRAILER);
+    line_number += 3;
+  }
+and then no comments are necessary.
