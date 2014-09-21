@@ -22,20 +22,16 @@ def InitSysPath():
   sys.path.append("../third_part/protobuf-2.6.0-py2.6.egg")
 
 def LocalTime():
-  """return local time"""
   return "%s" % time.strftime('%Y%m%d%H',time.localtime(time.time()))
 
 def MkDir(dir_path):
-  """helper method to create the dir if it does not exists."""
   if os.path.exists(dir_path):
     assert os.path.isdir(dir_path), '%s should be a directory!' % dir_path
   else:
     os.spawnlp(os.P_WAIT, 'mkdir', 'mkdir', '-p', dir_path)
 
 def ModeMatch(path, mode):
-  """the mod of path is equal with mode, note mode is decimal, eg 511 == 777"""
   filemode = stat.S_IMODE(os.stat(path).st_mode)
-  print filemode
   return filemode == mode
 
 def MatchOnePattern(file_path, pattern, group_num = 1):
@@ -48,7 +44,6 @@ def MatchOnePattern(file_path, pattern, group_num = 1):
   return result
 
 def Highlight(string, status, bold):
-  """highligting"""
   if not sys.stdout.isatty() or os.environ.get('TERM') == 'dumb':
     return string
   attr = []
@@ -72,7 +67,7 @@ def InitLog():
   if log_level == '':
     log_level = 'debug'
 
-  MkDir("./log")
+  MkDir('./log')
   logname = './log/log.' + LocalTime()
   handler = logging.FileHandler(logname)
   formatter = logging.Formatter('[%(levelname)s][%(asctime)s]\
@@ -96,7 +91,6 @@ def InitLog():
     logging.getLogger().setLevel(logging.NOSET)
 
 def Abort(msg):
-  """abort"""
   logging.critical(msg)
   s = inspect.stack()
   prefix = ''
