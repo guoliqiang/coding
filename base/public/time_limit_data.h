@@ -1,7 +1,5 @@
 // Copyright 2014 Liqiang Guo. All Rights Reserved.
 // Author: Liqiang Guo (guoliqiang2006@gmail.com)
-// I just want to GH to hss~
-// Date  : 2014-09-21 22:29:59
 // File  : time_limit_data.h
 // Brief :
 
@@ -9,18 +7,25 @@
 #define  __TIME_LIMIT_DATA_H_
 
 #include <map>
+#include <list>
 #include "shared_ptr.h"
 #include "time.h"
+#include "base/public/logging.h"
 
 namespace base {
 
+// not thread-safe
 template<typename KeyType, typename ValueType>
-class TimeLimitData {
- public:
+class TimeLimitKVData {
+ private:
   struct Node {
     Node(const ValueType & v, int valid_time) {
       value.reset(new ValueType(v));
       end_time = static_cast<int32_t>(time(NULL)) + valid_time;
+    }
+    Node() {
+      value.reset(NULL);
+      end_time = 0;
     }
 
     base::shared_ptr<ValueType> value;
@@ -43,21 +48,33 @@ class TimeLimitData {
   }
 
   void Begin() {
+    need_erase_key_.clear();
     cur_ = data_.begin();
     Next(false);
   }
 
   void Next(bool increase = true) {
-    if (increase) cur_++;
+    if (increase && !IsEnd()) {
+      cur_++;
+    }
     while(!IsEnd()) {
       if (cur_->second.end_time < static_cast<int32_t>(time(NULL))) {
-        cur_ = data_.erase(cur_);
+        need_erase_key_.push_back(cur_->first);
+        cur_++;
       } else break;
     }
   }
 
   bool IsEnd() {
-    return cur_ == data_.end();
+    if (cur_ == data_.end()) {
+      for (typename std::list<KeyType>::iterator i = need_erase_key_.begin();
+           i != need_erase_key_.end(); i++) {
+        data_.erase(*i);
+      }
+      need_erase_key_.clear();
+      return true;
+    }
+    return false;
   }
 
   base::shared_ptr<ValueType> CurrentValue() {
@@ -84,9 +101,20 @@ class TimeLimitData {
     return true;
   }
 
+  int32_t ImpreciseSize() {
+    return data_.size();
+  }
+
+  int32_t PreciseSize() {
+    int cnt = 0;
+    for (Begin(); !IsEnd(); Next()) cnt++;
+    return cnt;
+  }
+
  private:
   typename std::map<KeyType, Node>::iterator cur_;
   std::map<KeyType, Node> data_;
+  std::list<KeyType> need_erase_key_;
 };
 
 }  // namespace base
