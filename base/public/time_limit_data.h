@@ -11,9 +11,9 @@
 #include "shared_ptr.h"
 #include "time.h"
 #include "base/public/logging.h"
+#include "base/public/mutex.h"
 
 namespace base {
-
 // not thread-safe
 template<typename KeyType, typename ValueType>
 class TimeLimitKVData {
@@ -77,10 +77,10 @@ class TimeLimitKVData {
     return false;
   }
 
-  base::shared_ptr<ValueType> CurrentValue() {
+  std::pair<KeyType, base::shared_ptr<ValueType> > CurrentValue() {
     Next(false);
-    if (IsEnd()) return base::shared_ptr<ValueType>(NULL);
-    return cur_->second.value;
+    if (IsEnd()) return std::make_pair(KeyType(), base::shared_ptr<ValueType>(NULL));
+    return std::make_pair(cur_->first, cur_->second.value);
   }
 
   bool Add(const KeyType & key, const ValueType & value, int32_t valid_time) {
@@ -117,6 +117,52 @@ class TimeLimitKVData {
   std::list<KeyType> need_erase_key_;
 };
 
+template<typename KeyType, typename ValueType>
+class ThreadSafeTimeLimitKVData {
+ public:
+  base::shared_ptr<ValueType> Find(const KeyType & key) {
+    base::MutexLock lock(&mutex_);
+    return data_.Find();
+  }
+
+  bool Count(const KeyType & key) {
+    base::MutexLock lock(&mutex_);
+    return data_.Count();
+  }
+
+  bool Erase(const KeyType & key) {
+    base::MutexLock lock(&mutex_);
+    return data_.Erase();
+  }
+
+  bool EraseAll() {
+    base::MutexLock lock(&mutex_);
+    return data_.Erase();
+  }
+
+  int32_t ImpreciseSize() {
+    base::MutexLock lock(&mutex_);
+    return data_.ImpreciseSize();
+  }
+
+  int32_t PreciseSize() {
+    base::MutexLock lock(&mutex_);
+    return data_.PreciseSize();
+  }
+  void Data(std::vector<std::pair<KeyType, ValueType> > * all_valid_data) {
+    base::MutexLock lock(&mutex_);
+    all_valid_data->clear();
+    for (data_.Begin(); !data_.IsEnd(); data_.Next()) {
+      std::pair<KeyType, base::shared_ptr<ValueType> > v
+          = data_.CurrentValue();
+      if (v.second.get() != NULL) all_valid_data->push_back(v);
+    }
+  }
+
+ private:
+  base::Mutex mutex_;
+  base::TimeLimitKVData<KeyType, ValueType> data_;
+};
 }  // namespace base
 
 #endif  // __TIME_LIMIT_DATA_H_

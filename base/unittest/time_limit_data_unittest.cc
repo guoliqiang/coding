@@ -41,9 +41,10 @@ TEST(TimeLimitData, Iterator) {
   base::MilliSleep(3000);
   int cnt = 0;
   for (data.Begin(); !data.IsEnd(); data.Next()) {
-    base::shared_ptr<std::string> v = data.CurrentValue();
-    if (v.get() != NULL) {
-      CHECK(*v.get() == "value2");
+    std::pair<std::string, base::shared_ptr<std::string> > v =
+        data.CurrentValue();
+    if (v.second.get() != NULL) {
+      CHECK(*(v.second.get()) == "value2");
       cnt++;
     }
   }
@@ -55,12 +56,28 @@ TEST(TimeLimitData, IteratorEx) {
   data.Add("key1", "value1", 2);
   data.Add("key2", "value2", 4);
   base::MilliSleep(3000);
-  int cnt = 0;
   for (data.Begin(); !data.IsEnd(); data.Next()) {
     base::MilliSleep(2000);
-    base::shared_ptr<std::string> v = data.CurrentValue();
-    CHECK(v.get() == NULL);
+    std::pair<std::string, base::shared_ptr<std::string> >
+        v = data.CurrentValue();
+    CHECK(v.second.get() == NULL);
   }
-  CHECK(cnt == 0);
+}
+
+TEST(TimeLimitData, Int) {
+  base::TimeLimitKVData<int, int> data;
+  data.Add(1, 10, 2);
+  data.Add(2, 20, 4);
+  base::MilliSleep(3000);
+  int cnt = 0;
+  for (data.Begin(); !data.IsEnd(); data.Next()) {
+    std::pair<int, base::shared_ptr<int> >
+        v = data.CurrentValue();
+    if (v.second.get() != NULL) {
+      LOG(INFO) << v.first << " " << *v.second.get();
+      cnt++;
+    }
+  }
+  CHECK(cnt == 1) << cnt;
 }
 
