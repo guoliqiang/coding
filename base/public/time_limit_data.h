@@ -126,15 +126,17 @@ class TimeLimitKVDataThread : public base::Thread {
  public:
   TimeLimitKVDataThread(ThreadSafeTimeLimitKVData<KeyType, ValueType> * kv)
       : base::Thread() {
-    kv_data_ = kv; 
+    kv_data_ = kv;
   }
+
  protected:
   virtual void Run() {
     while (true) {
       sleep(60 * 60);  // an hour
-      kv_data_->PreciseSize();  // hack to clear expirated data
+      kv_data_->PreciseSize();  // hack to clear expiration data
     }
   }
+
  private:
   ThreadSafeTimeLimitKVData<KeyType, ValueType> * kv_data_;
 };

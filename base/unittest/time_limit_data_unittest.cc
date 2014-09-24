@@ -74,7 +74,6 @@ TEST(TimeLimitData, Int) {
     std::pair<int, base::shared_ptr<int> >
         v = data.CurrentValue();
     if (v.second.get() != NULL) {
-      LOG(INFO) << v.first << " " << *v.second.get();
       cnt++;
     }
   }
