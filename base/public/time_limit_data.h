@@ -12,6 +12,7 @@
 #include "time.h"
 #include "base/public/logging.h"
 #include "base/public/mutex.h"
+#include "base/public/thread.h"
 
 namespace base {
 // not thread-safe
@@ -117,52 +118,81 @@ class TimeLimitKVData {
   std::list<KeyType> need_erase_key_;
 };
 
-template<typename KeyType, typename ValueType>
-class ThreadSafeTimeLimitKVData {
+template <typename KeyType, typename ValueType>
+class ThreadSafeTimeLimitKVData;
+
+template <typename KeyType, typename ValueType>
+class TimeLimitKVDataThread : public base::Thread {
  public:
+  TimeLimitKVDataThread(ThreadSafeTimeLimitKVData<KeyType, ValueType> * kv)
+      : base::Thread() {
+    kv_data_ = kv; 
+  }
+ protected:
+  virtual void Run() {
+    while (true) {
+      sleep(60 * 60);  // an hour
+      kv_data_->PreciseSize();  // hack to clear expirated data
+    }
+  }
+ private:
+  ThreadSafeTimeLimitKVData<KeyType, ValueType> * kv_data_;
+};
+
+template<typename KeyType, typename ValueType>
+class ThreadSafeTimeLimitKVData : public TimeLimitKVData<KeyType, ValueType> {
+ public:
+  ThreadSafeTimeLimitKVData() {
+    thread_.reset(new TimeLimitKVDataThread<KeyType, ValueType>(this));
+    thread_->Start();
+  }
+
   base::shared_ptr<ValueType> Find(const KeyType & key) {
     base::MutexLock lock(&mutex_);
-    return data_.Find();
+    return TimeLimitKVData<KeyType, ValueType>::Find(key);
   }
 
   bool Count(const KeyType & key) {
     base::MutexLock lock(&mutex_);
-    return data_.Count();
+    return TimeLimitKVData<KeyType, ValueType>::Count(key);
   }
 
   bool Erase(const KeyType & key) {
     base::MutexLock lock(&mutex_);
-    return data_.Erase();
+    return TimeLimitKVData<KeyType, ValueType>::Erase(key);
   }
 
   bool EraseAll() {
     base::MutexLock lock(&mutex_);
-    return data_.Erase();
+    return TimeLimitKVData<KeyType, ValueType>::Erase();
   }
 
   int32_t ImpreciseSize() {
     base::MutexLock lock(&mutex_);
-    return data_.ImpreciseSize();
+    return TimeLimitKVData<KeyType, ValueType>::ImpreciseSize();
   }
 
   int32_t PreciseSize() {
     base::MutexLock lock(&mutex_);
-    return data_.PreciseSize();
+    return TimeLimitKVData<KeyType,  ValueType>::PreciseSize();
   }
   void Data(std::vector<std::pair<KeyType, ValueType> > * all_valid_data) {
     base::MutexLock lock(&mutex_);
     all_valid_data->clear();
-    for (data_.Begin(); !data_.IsEnd(); data_.Next()) {
+    for (TimeLimitKVData<KeyType, ValueType>::Begin();
+         !TimeLimitKVData<KeyType, ValueType>::IsEnd();
+         TimeLimitKVData<KeyType, ValueType>::Next()) {
       std::pair<KeyType, base::shared_ptr<ValueType> > v
-          = data_.CurrentValue();
+          = TimeLimitKVData<KeyType, ValueType>::CurrentValue();
       if (v.second.get() != NULL) all_valid_data->push_back(v);
     }
   }
 
  private:
   base::Mutex mutex_;
-  base::TimeLimitKVData<KeyType, ValueType> data_;
+  base::shared_ptr<base::TimeLimitKVDataThread<KeyType, ValueType> > thread_;
 };
+
 }  // namespace base
 
 #endif  // __TIME_LIMIT_DATA_H_

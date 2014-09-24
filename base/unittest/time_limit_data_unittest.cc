@@ -81,3 +81,12 @@ TEST(TimeLimitData, Int) {
   CHECK(cnt == 1) << cnt;
 }
 
+TEST(TimeLimitData, ThreadSafe) {
+  base::ThreadSafeTimeLimitKVData<int, int> data;
+  data.Add(1, 10, 2);
+  data.Add(2, 20, 5);
+  base::MilliSleep(3000);
+  CHECK(data.ImpreciseSize() == 2);
+  CHECK(data.PreciseSize() == 1);
+}
+
