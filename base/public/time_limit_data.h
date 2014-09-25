@@ -80,7 +80,9 @@ class TimeLimitKVData {
 
   std::pair<KeyType, base::shared_ptr<ValueType> > CurrentValue() {
     Next(false);
-    if (IsEnd()) return std::make_pair(KeyType(), base::shared_ptr<ValueType>(NULL));
+    if (IsEnd()) {
+      return std::make_pair(KeyType(), base::shared_ptr<ValueType>(NULL));
+    }
     return std::make_pair(cur_->first, cur_->second.value);
   }
 
