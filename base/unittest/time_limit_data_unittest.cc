@@ -80,6 +80,14 @@ TEST(TimeLimitData, Int) {
   CHECK(cnt == 1) << cnt;
 }
 
+TEST(TimeLimitData, GetDataAfterExpiration) {
+  base::TimeLimitKVData<int, int> data;
+  data.Add(1, 10, 1);
+  base::shared_ptr<int> v = data.Find(1);
+  base::MilliSleep(3000);
+  CHECK(v.get() != NULL);
+}
+
 TEST(TimeLimitData, ThreadSafe) {
   base::ThreadSafeTimeLimitKVData<int, int> data;
   data.Add(1, 10, 2);
