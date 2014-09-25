@@ -86,14 +86,35 @@ TEST(TimeLimitData, GetDataAfterExpiration) {
   base::shared_ptr<int> v = data.Find(1);
   base::MilliSleep(3000);
   CHECK(v.get() != NULL);
+  CHECK(data.PreciseSize() == 0);
 }
 
 TEST(TimeLimitData, ThreadSafe) {
   base::ThreadSafeTimeLimitKVData<int, int> data;
   data.Add(1, 10, 2);
   data.Add(2, 20, 5);
+  std::vector<std::pair<int, base::shared_ptr<int> > > all_valid_data;
+  data.Data(&all_valid_data);
+  CHECK(all_valid_data.size() == 2);
   base::MilliSleep(3000);
   CHECK(data.ImpreciseSize() == 2);
+  data.Data(&all_valid_data);
+  CHECK(all_valid_data.size() == 1);
   CHECK(data.PreciseSize() == 1);
+}
+
+TEST(TimeLimitData, ThreadSafeEx) {
+  base::ThreadSafeTimeLimitKVData<int, int> data;
+  data.Add(1, 10, 2);
+  data.Add(2, 20, 5);
+  base::MilliSleep(3000);
+  base::shared_ptr<int> v = data.Find(1);
+  CHECK(v.get() == NULL);
+  v = data.Find(2);
+  CHECK(v.get() != NULL);
+  CHECK(data.Count(1) == false);
+  CHECK(data.Count(2) == true);
+  data.EraseAll();
+  CHECK(data.ImpreciseSize() == 0);
 }
 

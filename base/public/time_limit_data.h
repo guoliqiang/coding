@@ -166,7 +166,7 @@ class ThreadSafeTimeLimitKVData : public TimeLimitKVData<KeyType, ValueType> {
 
   bool EraseAll() {
     base::MutexLock lock(&mutex_);
-    return TimeLimitKVData<KeyType, ValueType>::Erase();
+    return TimeLimitKVData<KeyType, ValueType>::EraseAll();
   }
 
   int32_t ImpreciseSize() {
@@ -178,7 +178,8 @@ class ThreadSafeTimeLimitKVData : public TimeLimitKVData<KeyType, ValueType> {
     base::MutexLock lock(&mutex_);
     return TimeLimitKVData<KeyType,  ValueType>::PreciseSize();
   }
-  void Data(std::vector<std::pair<KeyType, ValueType> > * all_valid_data) {
+  void Data(std::vector<std::pair<KeyType, base::shared_ptr<ValueType> > > *
+      all_valid_data) {
     base::MutexLock lock(&mutex_);
     all_valid_data->clear();
     for (TimeLimitKVData<KeyType, ValueType>::Begin();
