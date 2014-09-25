@@ -1,0 +1,10 @@
+cc_binary(name = 'code',
+          srcs = ['code.cc'],
+          deps = ['//base/internal:base']
+          )
+
+cc_binary(name = 'code2',
+          srcs = ['code2.cc'],
+          deps = ['//base/internal:base']
+          )
+

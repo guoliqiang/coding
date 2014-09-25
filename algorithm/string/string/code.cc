@@ -14,13 +14,17 @@ void StringTest() {
   for (int i = 0; i < str.size(); i++) LOG(INFO) << str[i];
   str.push_back('0');
   str.erase(str.size() - 1);
-  str.pop_back();
+  // str.pop_back();
+}
+void StringTest2() {
+  std::string str = "guoliqiang";
+  CHECK(false);
 }
 }  // namespace algorithm
 
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-  StringTest();
+  StringTest2();
   return 0;
 }

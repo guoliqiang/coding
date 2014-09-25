@@ -1,0 +1,122 @@
+// Copyright 2014 Liqiang Guo. All Rights Reserved.
+// Author: Liqiang Guo (guoliqiang2006@gmail.com)
+// I just want to GH to hss~
+// Date  : 2014-01-26 19:31:03
+// File  : code.cc
+// Brief :
+
+#include "base/public/common_ojhead.h"
+
+namespace algorithm {
+
+const int MAXN = 105;
+int M;
+
+struct Node {
+  int b;
+  int p;
+} data[MAXN][MAXN];
+
+int L[MAXN];
+
+struct MNode {
+  int max;
+  int min;
+  int smax;
+  int smin;
+} TB[MAXN], TP[MAXN];
+
+bool Cmp(const Node & x, const Node & y) {
+  return x.p > y.p;
+}
+
+void Build() {
+  memset(TB, 0, sizeof(TB));
+  memset(TP, 0, sizeof(TP));
+  for (int i = M - 1; i >= 0; i--) {
+    int tbmax = 0;
+    int tbmin = INF;
+    int tpmax = 0;
+    int tpmin = INF;
+    for (int j = 0; j < L[i]; j++) {
+      tbmax = std::max(tbmax, data[i][j].b);
+      tbmin = std::min(tbmin, data[i][j].b);
+      tpmax = std::max(tpmax, data[i][j].p);
+      tpmin = std::min(tpmin, data[i][j].p);
+    }
+    if (i == M - 1) {
+      TB[i].max = tbmax;
+      TB[i].min = tbmin;
+      TP[i].max = tpmax;
+      TP[i].min = tpmin;
+
+      TB[i].smax = tbmax;
+      TB[i].smin = tbmin;
+      TP[i].smax = tpmax;
+      TP[i].smin = tpmin;
+    } else {
+      TB[i].max = std::max(tbmax, TB[i - 1].max);
+      TB[i].min = std::min(tbmin, TB[i - 1].min);
+      TP[i].max = std::max(tpmax, TP[i - 1].max);
+      TP[i].min = std::min(tpmin, TP[i - 1].min);
+      
+      TB[i].smax = tbmax + TB[i - 1].max;
+      TB[i].smin = tbmin + TB[i - 1].min;
+      TP[i].smax = tpmax + TP[i - 1].max;
+      TP[i].smin = tpmin + TP[i - 1].min;
+    }
+  }
+}
+
+void Trace(int k, int minb, int sump, double & rs) {
+  if (k >= M) {
+    rs = std::max(rs, double(minb) / double(sump));
+  } else {
+    double tb = std::min(minb, TB[k].max);
+    double tp = sump + (M - k) * TP[k].min;
+    if (tb / tp < rs) return;
+    tp = sump + TP[k].smin;
+    if (tb / tp < rs) return;
+    for (int i = 0; i < L[k]; i++) {
+      Trace(k + 1, std::min(minb, data[k][i].b), sump + data[k][i].p, rs);
+    }
+  }
+}
+
+double Trace() {
+  double rs = 0;
+  Trace(0, INF, 0, rs);
+  return rs;
+}
+
+
+void Read() {
+  int c = 0;
+  scanf("%d", &c);
+  for (int k = 0; k < c; k++) {
+    memset(data, 0, sizeof(data));
+    memset(L, 0, sizeof(L));
+    scanf("%d", &M);
+    for (int i = 0; i < M; i++) {
+      scanf("%d", &(L[i]));
+      for (int j = 0; j < L[i]; j++) {
+        scanf("%d%d", &(data[i][j].b), &(data[i][j].p));
+        std::sort(&(data[i][0]), &(data[i][0]) + L[i], Cmp);
+      }
+    }
+    Build();
+    // double t = Dp();
+    double t = Trace();
+    printf("%.3f\n", t);
+  }
+}
+
+}  // namespace algorithm
+
+using namespace algorithm;
+
+int main(int argc, char** argv) {
+  FROMFILE;
+  Read();
+  return 0;
+}

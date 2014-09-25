@@ -41,6 +41,24 @@ void Qsort(std::vector<type> & v) {
   Qsort(v, 0, v.size() - 1);
 }
 
+template <typename type>
+void Qsort2(std::vector<type> & v, int b, int e) {
+  if (b >= e) return;
+  type foo = v[e];
+  int k = b - 1;
+  for (int i = b; i < e; i++) {
+    if (v[i] < foo) std::swap(v[++k], v[i]);
+  }
+  std::swap(v[++k], v[e]);
+  Qsort2(v, b, k - 1);
+  Qsort2(v, k + 1, e);
+}
+
+template <typename type>
+void Qsort2(std::vector<type> & v) {
+  if (v.size() == 0) return;
+  Qsort2(v, 0, v.size() - 1);
+}
 }  // namespace algorithm
 
 #endif  //  __QUIT_SORT_H_

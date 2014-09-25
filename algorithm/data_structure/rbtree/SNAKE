@@ -1,0 +1,6 @@
+cc_binary(name = 'code',
+          srcs = ['code.cc', 'misc.cc', 'stack.cc', 'red_black_tree.cc'],
+          deps = ['//base/internal:base'],
+          copt = ['no_Werror', 'no_style_check'],
+          cflags = ['-Wno-deprecated']
+          )
