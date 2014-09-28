@@ -1,0 +1,9 @@
+cc_binary(name='server',
+          srcs = [ 'server.cc' ],
+           deps = [
+                  '//third_part/serverl/internal:serverl',
+                  ],
+           cflags = [
+                     '-Ithird_part/libevent/include/'
+                    ],
+           )

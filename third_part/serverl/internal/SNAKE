@@ -1,0 +1,19 @@
+cc_library(name='serverl',
+           srcs = ['clientsock.cc',
+                   'protocal_package.cc',
+                   'workerqueuel.cc',
+                   'clientsock_manager.cc',
+                   'serverl.cc'
+                   ],
+           deps = [
+                  '//base/internal:base',
+                  '//libs/third_part/libevent:event',
+                  '//libs/third_part/libevent:event_core',
+                  '//libs/third_part/libevent:event_extra',
+                  '//libs/third_part/libevent:event_pthreads',
+                  ],
+           cflags = [
+                     '-Ithird_part/libevent/include/'
+                    ],
+           copt = ['no_style_check']
+           )
