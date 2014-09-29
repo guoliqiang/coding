@@ -34,7 +34,7 @@ class cqlist {
 
 public:
 	bool empty() {
-    return (head==tail);
+    return head == tail;
   }
 	bool full() {
     return (tail + 1) % cap == head;
@@ -68,8 +68,8 @@ public:
 public:
 	class iterator {
 	 public:
-		iterator():pos(0),ls(NULL) {}
-		iterator(int _pos, cqlist<T> *_ls):pos(_pos),ls(_ls){}
+		iterator() : pos(0), ls(NULL) {}
+		iterator(int _pos, cqlist<T> *_ls) : pos(_pos), ls(_ls) {}
 		iterator(const iterator& other) {
 			pos = other.pos;
 			ls = other.ls;
@@ -82,49 +82,49 @@ public:
 			return *this;
 		}
 
-		bool operator==(const iterator& other) {
+		bool operator == (const iterator& other) {
 			return (pos == other.pos && ls == other.ls);
 		}
 
-		bool operator!=(const iterator& other) {
+		bool operator != (const iterator& other) {
 			return (!this->operator ==(other));
 		}
 
-		//prefix ++
-		iterator& operator++() {
+		// prefix ++
+		iterator& operator ++ () {
 			pos ++;
 			pos %= ls->cap;
 			return *this;
 		}
 
-		//postfix ++
-		iterator& operator++(int) {
+		// postfix ++
+		iterator & operator ++ (int) {
 			iterator snapshot(*this);
 			pos ++;
 			pos %= ls->cap;
 			return snapshot;
 		}
 
-		//prefix --
-		iterator& operator--() {
+		// prefix --
+		iterator & operator -- () {
 			pos --;
 			if (pos < 0) pos = ls->cap-1;
 			return *this;
 		}
 
-		//postfix --
-		iterator& operator--(int) {
+		// postfix --
+		iterator & operator -- (int) {
 			iterator snapshot(*this);
 			pos --;
 			if (pos < 0) pos = ls->cap-1;
 			return snapshot;
 		}
 
-		T& operator*() {
+		T & operator * () {
 			return ls->elems[pos];
 		}
 
-		T& elem() {
+		T & elem() {
 			return ls->elems[pos];
 		}
 
@@ -140,13 +140,13 @@ public:
 	}
 
 	iterator end() {
-    return iterator(tail,this);
+    return iterator(tail, this);
 	}
 
  private:
-	T* elems;
+	T * elems;
 	size_t cap;
 	size_t head;
 	size_t tail;
 };
-#endif /* CQLIST_H_ */
+#endif // CQLIST_H_

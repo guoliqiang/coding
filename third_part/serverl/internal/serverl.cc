@@ -408,4 +408,3 @@ int ServerL::getClientSocketKeepaliveProbes() {
 int ServerL::getProtocol() {
 	return protocol;
 }
-
