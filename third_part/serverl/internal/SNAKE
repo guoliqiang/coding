@@ -1,8 +1,8 @@
 cc_library(name='serverl',
-           srcs = ['clientsock.cc',
+           srcs = ['client_sock.cc',
                    'protocal_package.cc',
-                   'workerqueuel.cc',
-                   'clientsock_manager.cc',
+                   'worker_queuel.cc',
+                   'client_sock_manager.cc',
                    'serverl.cc'
                    ],
            deps = [

@@ -1,7 +1,7 @@
 #ifndef _SERVERL_H_
 #define _SERVERL_H_
 
-#include "IPacketRouter.h"
+#include "packet_router.h"
 #include <stdint.h>
 #include <event2/event.h>
 #include <event2/bufferevent.h>
@@ -11,9 +11,9 @@
 #include <map>
 #include <vector>
 #include <string>
-#include "workerqueuel.h"
+#include "worker_queuel.h"
 #include <pthread.h>
-#include "clientsock_manager.h"
+#include "client_sock_manager.h"
 
 #define SERVERL_PROTOCOL_RAW 0
 #define SERVERL_PROTOCOL_MEMCACHED 1
@@ -22,7 +22,7 @@ class ServerL {
 public:
 	ServerL();
 	~ServerL();
-	void setPacketRouter(IPacketRouter* router);
+	void setPacketRouter(PacketRouter* router);
 	void setPort(uint16_t _port);
 	void setWorkerCount(int c);
 	void setWorkerReservedInitFunction(WorkerReservedInitFunction fn);
@@ -34,7 +34,7 @@ public:
     return m_evbase;
   }
 
-	IPacketRouter* getPacketRouter() {
+	PacketRouter* getPacketRouter() {
     return m_packetRouter;
   }
 
@@ -63,7 +63,7 @@ private:
 
 private:
 	uint16_t m_port;
-	IPacketRouter* m_packetRouter;
+	PacketRouter* m_packetRouter;
 	int m_nWorkerCount;
 
 	event_base *m_evbase;

@@ -1,7 +1,7 @@
 #ifndef _CLIENTSOCK_MANAGER_H_
 #define _CLIENTSOCK_MANAGER_H_
 
-#include "clientsock.h"
+#include "client_sock.h"
 #include <map>
 
 #define CLIENT_SOCK_MAX_COUNT 1000000

@@ -4,12 +4,12 @@
 #include <stdlib.h>
 #include <event2/event.h>
 #include <event2/bufferevent.h>
-#include "clientsock.h"
+#include "client_sock.h"
 #include "cqlist.h"
 #include "mpool.h"
 #include <string>
 #include <pthread.h>
-#include "IPacketRouter.h"
+#include "packet_router.h"
 #include <stdint.h>
 #include "base/public/logging.h"
 
@@ -23,11 +23,11 @@ typedef void (*SpecialJobCB)(void* param);
 typedef struct JobL {
 	ClientSock* sock;
 	JobFunction fn;
-	IPacketRouter* packetRouter;
+	PacketRouter* packetRouter;
 	uint64_t sockKeySnapshot;
 	SpecialJobCB specialCB;
 	void* specialParam;
-}jobl_t;
+} jobl_t;
 
 class WorkerQueueL {
  public:

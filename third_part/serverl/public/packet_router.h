@@ -1,18 +1,18 @@
-#ifndef _D5_IPacketRouter_H__
-#define _D5_IPacketRouter_H__
+#ifndef _PacketRouter_H__
+#define _PacketRouter_H__
 
 #include "protocal_package.h"
 
-class IPacketRouter {
+class PacketRouter {
  protected:
 	typedef uint64_t socketClientData_t;
 
  public:
-	virtual ~IPacketRouter(){}
+	virtual ~PacketRouter(){}
 
  public:
 	virtual void OnReceivePacket(socketClientData_t sClient,
                                const char * pData ,int nDataLen )=0;
 };
 
-#endif // _D5_IPacketRouter_H__
+#endif // _PacketRouter_H__
