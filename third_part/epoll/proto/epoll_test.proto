@@ -1,0 +1,20 @@
+// Copyright 2014 Liqiang Guo. All Rights Reserved.
+// Author: Liqiang Guo (guoliqiang2006@gmail.com)
+// Date  : 2014-10-04 17:09:00
+// File  : epoll_test.proto
+// Brief :
+
+package epoll;
+
+enum OpCode {
+  OPCODE = 0;
+}
+
+message Request {
+  optional string str = 1;
+}
+
+message Response {
+  optional string str = 1;
+}
+
