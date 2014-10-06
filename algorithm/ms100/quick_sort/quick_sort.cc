@@ -16,8 +16,8 @@ int main(int argc, char** argv) {
     foo.push_back(rand() % 100);
     bar.push_back(10);
   }
-  Qsort2(foo);
-  Qsort2(bar);
+  QsortIte(foo);
+  QsortIte(bar);
   LOG(INFO) << JoinVector(foo);
   LOG(INFO) << JoinVector(bar);
   return 0;

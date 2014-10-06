@@ -14,6 +14,7 @@
 #include "stdlib.h"
 #include "time.h"
 #include "base/public/logging.h"
+#include <stack>
 
 namespace algorithm {
 
@@ -58,6 +59,25 @@ template <typename type>
 void Qsort2(std::vector<type> & v) {
   if (v.size() == 0) return;
   Qsort2(v, 0, v.size() - 1);
+}
+
+template <typename type>
+void QsortIte(std::vector<type> & v) {
+  std::stack<std::pair<int, int> > stack;
+  stack.push(std::make_pair(0, v.size() - 1));
+  while(!stack.empty()) {
+    std::pair<int, int> cur = stack.top();
+    stack.pop();
+    if (cur.first >= cur.second) continue;
+    int k = cur.first - 1;
+    int partion = v[cur.second];
+    for (int i = cur.first; i < cur.second; i++) {
+      if (v[i] < partion) std::swap(v[++k], v[i]);
+    }
+    std::swap(v[++k], v[cur.second]);
+    stack.push(std::make_pair(cur.first, k - 1));
+    stack.push(std::make_pair(k + 1, cur.second));
+  }
 }
 }  // namespace algorithm
 
