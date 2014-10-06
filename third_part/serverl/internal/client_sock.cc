@@ -1,4 +1,4 @@
-#include "../public/clientsock.h"
+#include "../public/client_sock.h"
 #include <endian.h>
 #include <event2/event.h>
 #include <event2/buffer.h>
@@ -11,11 +11,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "base/public/logging.h"
-
-#define SOCK_READ_MEM_FIRST_LINE_ERROR(e) \
-do { err = e; \
-  goto _PROTO_READ_MEMCACHE_FIRSTLINE_DONE; \
-} while(0)
 
 uint64_t get_sock_ipport_key(uint32_t ip, uint16_t port) {
 	uint64_t k = port;
@@ -34,7 +29,6 @@ void fetch_ipport(uint64_t key, uint32_t* ip, uint16_t* port) {
 bool ClientSock::init() {
 	if (pthread_mutex_init(&m_refcount_mutex, NULL)) return false;
 	m_refcount = 0;
-	readStatusMemcached.status = CLIENTSOCK_READ_STATUS_MEM_WAIT_FIRSTLINE;
 	return true;
 }
 
@@ -120,8 +114,7 @@ int ClientSock::read(ProtocalPackege* req) {
 		goto _SOCK_READ_RELEASE_LOCK;
 	}
 
-	if (total_len > (uint32_t) req->getDataCap())
-	{
+	if (total_len > (uint32_t) req->getDataCap()) {
 		// request too long, maybe an error. just drain buffer
 		// need close socket??
 		evbuffer_drain(input, total_len);
@@ -144,28 +137,27 @@ int ClientSock::read(ProtocalPackege* req) {
 
 _SOCK_READ_RELEASE_LOCK:
 	bufferevent_unlock(this->m_ev);
-
 _SOCK_READ_END:
 	return rc;
 }
 
-bool ClientSock::write(const char * pData , int nDataLen)
-{
+bool ClientSock::write(const char * pData , int nDataLen) {
 	int r;
 	bool ret = false;
-
 	if (this->m_ev == NULL || this->m_fd < 0) {
-			// _warn("ClientSock(%p)::write, socket has bee revoked, ignore",this);
-			goto _SOCK_WRITE_END;
+	  LOG(WARNING) << "ClientSock " << this 
+                 << "::write, socket has bee revoked, ignore";
+	  goto _SOCK_WRITE_END;
 	}
-
 	bufferevent_lock(this->m_ev);
 	r = bufferevent_write(m_ev, pData, nDataLen);
-	if (0==r) ret = true;
-	else {
+	if (0 == r) {
+    ret = true;
+	} else {
 		ret = false;
-		// _warn("ClientSock[ip=%u, port=%u, fd=%d]::write bufferevent_write failed",
-	  //			this->m_ip, this->m_port, this->m_fd);
+		LOG(WARNING) << "ClientSock[ip=" << this->m_ip << ", port=" << this->m_port
+                 << ", fd=" << this->m_fd
+                 << "::write bufferevent_write failed";
 	}
 	bufferevent_unlock(this->m_ev);
 _SOCK_WRITE_END:
@@ -181,8 +173,7 @@ void ClientSock::incRefCount() {
 void ClientSock::decRefCount() {
 	pthread_mutex_lock(&m_refcount_mutex);
 	this->m_refcount --;
-	if (this->m_refcount==0 && this->m_needDestroy)
-	{
+	if (this->m_refcount==0 && this->m_needDestroy) {
 		// when refcount==0 and needDestroy flg is true,
     // we just notify the event_base that this ev can be removed
 		// the main event loop of libevent will unlock base_event before locking bufferevent

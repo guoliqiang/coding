@@ -8,10 +8,10 @@
 #include "../public/serverl.h"
 #include "base/public/logging.h"
 
-class PacketRouter : public IPacketRouter {
+class TestRouter : public PacketRouter {
  public:
-  PacketRouter() {};
-  virtual ~PacketRouter() {}
+  TestRouter() {};
+  virtual ~TestRouter() {}
   virtual void OnReceivePacket(socketClientData_t sClient,
                                const char * pData, int nDataLen) {
     LOG(INFO) << "get it";
@@ -24,7 +24,7 @@ void ClientTCPCloseCB(void* param) {
 }
 int main(int argc, char** argv) {
   g_serverl.setPort(30006);
-  g_serverl.setPacketRouter(new PacketRouter());
+  g_serverl.setPacketRouter(new TestRouter());
   g_serverl.setWorkerCount(10);
   g_serverl.setClientTcpDisconnectCB(ClientTCPCloseCB);
   g_serverl.start();

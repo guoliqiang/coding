@@ -369,7 +369,7 @@ void ServerL::setClientSocketKeepaliveParams(int offset,
 	m_sockKeepaliveProbes = probes;
 }
 
-void ServerL::setPacketRouter(IPacketRouter* router) {
+void ServerL::setPacketRouter(PacketRouter* router) {
 	m_packetRouter = router;
 }
 
@@ -408,4 +408,3 @@ int ServerL::getClientSocketKeepaliveProbes() {
 int ServerL::getProtocol() {
 	return protocol;
 }
-

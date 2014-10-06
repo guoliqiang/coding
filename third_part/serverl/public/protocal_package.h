@@ -24,4 +24,5 @@ class ProtocalPackege {
 	int datalen;
 	int cap;
 };
-#endif /* PROTOCAL_PACKAGE_H_ */
+
+#endif // PROTOCAL_PACKAGE_H_
