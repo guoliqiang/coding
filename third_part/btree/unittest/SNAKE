@@ -1,0 +1,32 @@
+cc_binary(name='btree_bench',
+          srcs = ['btree_bench.cc',
+                  'btree_test_flags.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  ],
+          cflags = ['-std=c++0x']
+          )
+
+cc_binary(name='btree_test',
+          srcs = ['btree_test.cc',
+                  'btree_test_flags.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  ],
+          cflags = ['-std=c++0x']
+          )
+
+cc_binary(name='safe_btree_test',
+          srcs = ['safe_btree_test.cc',
+                  'btree_test_flags.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  ],
+          cflags = ['-std=c++0x']
+          )
