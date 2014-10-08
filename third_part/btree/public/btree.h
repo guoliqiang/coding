@@ -1399,8 +1399,8 @@ class btree : public Params::key_compare {
   // return type of key_compare_checker() at compile time which we then check
   // against the sizeof of big_.
   COMPILE_ASSERT(
-      sizeof(key_compare_checker(key_compare_helper()(key_type(), key_type()))) ==
-      sizeof(big_),
+      sizeof(key_compare_checker(key_compare_helper()(key_type(), key_type())))
+      == sizeof(big_),
       key_comparison_function_must_return_bool);
 
   // Note: We insist on kTargetValues, which is computed from

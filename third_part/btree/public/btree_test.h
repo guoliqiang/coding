@@ -65,7 +65,8 @@ namespace btree {
 
 // Select the first member of a pair.
 template <class _Pair>
-struct select1st : public std::unary_function<_Pair, typename _Pair::first_type> {
+struct select1st : public std::unary_function<_Pair,
+    typename _Pair::first_type> {
   const typename _Pair::first_type& operator()(const _Pair& __x) const {
     return __x.first;
   }
@@ -225,7 +226,8 @@ class base_checker {
     iter_check(tree_res.second, checker_res.second);
     return tree_res;
   }
-  std::pair<const_iterator,const_iterator> equal_range(const key_type &key) const {
+  std::pair<const_iterator,const_iterator> equal_range(
+      const key_type &key) const {
     std::pair<typename CheckerType::const_iterator,
         typename CheckerType::const_iterator> checker_res =
         checker_.equal_range(key);

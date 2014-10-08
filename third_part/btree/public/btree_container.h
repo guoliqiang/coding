@@ -82,7 +82,8 @@ class btree_container {
   std::pair<iterator,iterator> equal_range(const key_type &key) {
     return tree_.equal_range(key);
   }
-  std::pair<const_iterator,const_iterator> equal_range(const key_type &key) const {
+  std::pair<const_iterator,const_iterator>
+      equal_range(const key_type &key) const {
     return tree_.equal_range(key);
   }
 

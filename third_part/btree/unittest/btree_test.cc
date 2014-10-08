@@ -33,7 +33,8 @@ template <typename K, int N>
 void MapTest() {
   typedef TestAllocator<K> TestAlloc;
   ASSERT_EQ(sizeof(btree_map<K, K>), sizeof(void*));
-  BtreeTest<btree_map<K, K, std::less<K>, std::allocator<K>, N>, std::map<K, K> >();
+  BtreeTest<btree_map<K, K, std::less<K>, std::allocator<K>, N>,
+      std::map<K, K> >();
   BtreeAllocatorTest<btree_map<K, K, std::less<K>, TestAlloc, N> >();
   BtreeMapTest<btree_map<K, K, std::less<K>, std::allocator<K>, N> >();
 }
@@ -84,7 +85,8 @@ void MultiMapTest() {
   ASSERT_EQ(sizeof(btree_multimap<K, K>), sizeof(void*));
   BtreeMultiTest<btree_multimap<K, K, std::less<K>, std::allocator<K>, N>,
       std::multimap<K, K> >();
-  BtreeMultiMapTest<btree_multimap<K, K, std::less<K>, std::allocator<K>, N> >();
+  BtreeMultiMapTest<btree_multimap<K, K, std::less<K>,
+      std::allocator<K>, N> >();
   BtreeAllocatorTest<btree_multimap<K, K, std::less<K>, TestAlloc, N> >();
 }
 
@@ -266,6 +268,5 @@ TEST(Btree, RangeCtorSanity) {
   EXPECT_EQ(1, tset.size());
   EXPECT_EQ(1, tmap.size());
 }
-
 } // namespace
 } // namespace btree

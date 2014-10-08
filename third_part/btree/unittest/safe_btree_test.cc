@@ -35,14 +35,16 @@ namespace {
 template <typename K, int N>
 void SetTest() {
   typedef TestAllocator<K> TestAlloc;
-  BtreeTest<safe_btree_set<K, std::less<K>, std::allocator<K>, N>, std::set<K> >();
+  BtreeTest<safe_btree_set<K, std::less<K>, std::allocator<K>, N>,
+      std::set<K> >();
   BtreeAllocatorTest<safe_btree_set<K, std::less<K>, TestAlloc, N> >();
 }
 
 template <typename K, int N>
 void MapTest() {
   typedef TestAllocator<K> TestAlloc;
-  BtreeTest<safe_btree_map<K, K, std::less<K>, std::allocator<K>, N>, std::map<K, K> >();
+  BtreeTest<safe_btree_map<K, K, std::less<K>, std::allocator<K>, N>,
+      std::map<K, K> >();
   BtreeAllocatorTest<safe_btree_map<K, K, std::less<K>, TestAlloc, N> >();
   BtreeMapTest<safe_btree_map<K, K, std::less<K>, std::allocator<K>, N> >();
 }
@@ -113,5 +115,5 @@ TEST(SafeBtree, Comparison) {
   EXPECT_TRUE(my_map != my_map_copy);
 }
 
-} // namespace
-} // namespace btree
+}  // namespace
+}  // namespace btree

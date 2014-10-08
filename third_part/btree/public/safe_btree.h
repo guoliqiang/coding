@@ -249,8 +249,10 @@ class safe_btree {
     return std::make_pair(iterator(this, p.first),
                      iterator(this, p.second));
   }
-  std::pair<const_iterator, const_iterator> equal_range(const key_type &key) const {
-    std::pair<tree_const_iterator, tree_const_iterator> p = tree_.equal_range(key);
+  std::pair<const_iterator, const_iterator> equal_range(
+      const key_type &key) const {
+    std::pair<tree_const_iterator, tree_const_iterator> p
+        = tree_.equal_range(key);
     return std::make_pair(const_iterator(this, p.first),
                      const_iterator(this, p.second));
   }
@@ -275,7 +277,8 @@ class safe_btree {
 
   // Insertion routines.
   template <typename ValuePointer>
-  std::pair<iterator, bool> insert_unique(const key_type &key, ValuePointer value) {
+  std::pair<iterator, bool> insert_unique(const key_type &key,
+      ValuePointer value) {
     std::pair<tree_iterator, bool> p = tree_.insert_unique(key, value);
     generation_ += p.second;
     return std::make_pair(iterator(this, p.first), p.second);
