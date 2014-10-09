@@ -47,24 +47,37 @@ class btree_container {
 
  public:
   // Default constructor.
-  btree_container(const key_compare &comp, const allocator_type &alloc)
-      : tree_(comp, alloc) {
-  }
+  btree_container(const key_compare &comp, const allocator_type & alloc)
+      : tree_(comp, alloc) {}
 
   // Copy constructor.
-  btree_container(const self_type &x)
-      : tree_(x.tree_) {
-  }
+  btree_container(const self_type &x) : tree_(x.tree_) {}
 
   // Iterator routines.
-  iterator begin() { return tree_.begin(); }
-  const_iterator begin() const { return tree_.begin(); }
-  iterator end() { return tree_.end(); }
-  const_iterator end() const { return tree_.end(); }
-  reverse_iterator rbegin() { return tree_.rbegin(); }
-  const_reverse_iterator rbegin() const { return tree_.rbegin(); }
-  reverse_iterator rend() { return tree_.rend(); }
-  const_reverse_iterator rend() const { return tree_.rend(); }
+  iterator begin() {
+    return tree_.begin();
+  }
+  const_iterator begin() const {
+    return tree_.begin();
+  }
+  iterator end() {
+    return tree_.end();
+  }
+  const_iterator end() const {
+    return tree_.end();
+  }
+  reverse_iterator rbegin() {
+    return tree_.rbegin();
+  }
+  const_reverse_iterator rbegin() const {
+    return tree_.rbegin();
+  }
+  reverse_iterator rend() {
+    return tree_.rend();
+  }
+  const_reverse_iterator rend() const {
+    return tree_.rend();
+  }
 
   // Lookup routines.
   iterator lower_bound(const key_type &key) {
@@ -102,21 +115,41 @@ class btree_container {
   }
 
   // Size routines.
-  size_type size() const { return tree_.size(); }
-  size_type max_size() const { return tree_.max_size(); }
-  bool empty() const { return tree_.empty(); }
-  size_type height() const { return tree_.height(); }
-  size_type internal_nodes() const { return tree_.internal_nodes(); }
-  size_type leaf_nodes() const { return tree_.leaf_nodes(); }
-  size_type nodes() const { return tree_.nodes(); }
-  size_type bytes_used() const { return tree_.bytes_used(); }
+  size_type size() const {
+    return tree_.size();
+  }
+  size_type max_size() const {
+    return tree_.max_size();
+  }
+  bool empty() const {
+    return tree_.empty();
+  }
+  size_type height() const {
+    return tree_.height();
+  }
+  size_type internal_nodes() const {
+    return tree_.internal_nodes();
+  }
+  size_type leaf_nodes() const {
+    return tree_.leaf_nodes();
+  }
+  size_type nodes() const {
+    return tree_.nodes();
+  }
+  size_type bytes_used() const {
+    return tree_.bytes_used();
+  }
   static double average_bytes_per_value() {
     return Tree::average_bytes_per_value();
   }
-  double fullness() const { return tree_.fullness(); }
-  double overhead() const { return tree_.overhead(); }
+  double fullness() const {
+    return tree_.fullness();
+  }
+  double overhead() const {
+    return tree_.overhead();
+  }
 
-  bool operator==(const self_type& x) const {
+  bool operator == (const self_type& x) const {
     if (size() != x.size()) {
       return false;
     }
@@ -128,17 +161,17 @@ class btree_container {
     return true;
   }
 
-  bool operator!=(const self_type& other) const {
+  bool operator != (const self_type& other) const {
     return !operator==(other);
   }
-
 
  protected:
   Tree tree_;
 };
 
 template <typename T>
-inline std::ostream& operator<<(std::ostream &os, const btree_container<T> &b) {
+inline std::ostream& operator << (std::ostream &os,
+    const btree_container<T> &b) {
   b.dump(os);
   return os;
 }
@@ -162,13 +195,11 @@ class btree_unique_container : public btree_container<Tree> {
   // Default constructor.
   btree_unique_container(const key_compare &comp = key_compare(),
                          const allocator_type &alloc = allocator_type())
-      : super_type(comp, alloc) {
-  }
+      : super_type(comp, alloc) {}
 
   // Copy constructor.
   btree_unique_container(const self_type &x)
-      : super_type(x) {
-  }
+      : super_type(x) {}
 
   // Range constructor.
   template <class InputIterator>
