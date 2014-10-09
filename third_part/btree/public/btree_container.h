@@ -13,8 +13,7 @@
 // limitations under the License.
 
 #ifndef UTIL_BTREE_BTREE_CONTAINER_H__
-#define UTIL_BTREE_BTREE_CONTAINER_H__
-
+#define UTIL_BTREE_BTREE_CONTAINER_H__ 
 #include <iosfwd>
 #include <utility>
 
@@ -267,34 +266,28 @@ class btree_map_container : public btree_unique_container<Tree> {
   // dereferenced. Used by operator[] to avoid constructing an empty data_type
   // if the key already exists in the map.
   struct generate_value {
-    generate_value(const key_type &k)
-        : key(k) {
-    }
-    value_type operator*() const {
+    generate_value(const key_type & k) : key(k) {}
+    value_type operator * () const {
       return std::make_pair(key, data_type());
     }
-    const key_type &key;
+    const key_type & key;
   };
 
  public:
   // Default constructor.
   btree_map_container(const key_compare &comp = key_compare(),
                       const allocator_type &alloc = allocator_type())
-      : super_type(comp, alloc) {
-  }
+      : super_type(comp, alloc) {}
 
   // Copy constructor.
-  btree_map_container(const self_type &x)
-      : super_type(x) {
-  }
+  btree_map_container(const self_type &x) : super_type(x) {}
 
   // Range constructor.
   template <class InputIterator>
   btree_map_container(InputIterator b, InputIterator e,
                       const key_compare &comp = key_compare(),
                       const allocator_type &alloc = allocator_type())
-      : super_type(b, e, comp, alloc) {
-  }
+      : super_type(b, e, comp, alloc) {}
 
   // Insertion routines.
   data_type& operator[](const key_type &key) {
@@ -321,13 +314,11 @@ class btree_multi_container : public btree_container<Tree> {
   // Default constructor.
   btree_multi_container(const key_compare &comp = key_compare(),
                         const allocator_type &alloc = allocator_type())
-      : super_type(comp, alloc) {
-  }
+      : super_type(comp, alloc) {}
 
   // Copy constructor.
   btree_multi_container(const self_type &x)
-      : super_type(x) {
-  }
+      : super_type(x) {}
 
   // Range constructor.
   template <class InputIterator>

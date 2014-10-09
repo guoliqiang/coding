@@ -64,18 +64,14 @@ class safe_btree_iterator {
   }
 
  public:
-  safe_btree_iterator()
-      : generation_(0),
-        key_(),
-        iter_(),
-        tree_(NULL) {
-  }
+  safe_btree_iterator() : generation_(0), key_(), iter_(), tree_(NULL) {}
+
   safe_btree_iterator(const iterator &x)
       : generation_(x.generation()),
         key_(x.key()),
         iter_(x.iter()),
-        tree_(x.tree()) {
-  }
+        tree_(x.tree()) {}
+
   safe_btree_iterator(Tree *tree, const Iterator &iter)
       : generation_(),
         key_(),
@@ -84,8 +80,12 @@ class safe_btree_iterator {
     update();
   }
 
-  Tree* tree() const { return tree_; }
-  int64_t generation() const { return generation_; }
+  Tree* tree() const {
+    return tree_;
+  }
+  int64_t generation() const {
+    return generation_;
+  }
 
   Iterator* mutable_iter() const {
     if (generation_ != tree_->generation()) {
@@ -197,14 +197,12 @@ class safe_btree {
   // Default constructor.
   safe_btree(const key_compare &comp, const allocator_type &alloc)
       : tree_(comp, alloc),
-        generation_(1) {
-  }
+        generation_(1) {}
 
   // Copy constructor.
   safe_btree(const self_type &x)
       : tree_(x.tree_),
-        generation_(1) {
-  }
+        generation_(1) {}
 
   iterator begin() {
     return iterator(this, tree_.begin());
@@ -349,8 +347,12 @@ class safe_btree {
   }
 
   // Access to the underlying btree.
-  btree_type* internal_btree() { return &tree_; }
-  const btree_type* internal_btree() const { return &tree_; }
+  btree_type * internal_btree() {
+    return &tree_;
+  }
+  const btree_type * internal_btree() const {
+    return &tree_;
+  }
 
   // Utility routines.
   void clear() {
@@ -371,22 +373,44 @@ class safe_btree {
   int64_t generation() const {
     return generation_;
   }
-  key_compare key_comp() const { return tree_.key_comp(); }
+  key_compare key_comp() const {
+    return tree_.key_comp();
+  }
 
   // Size routines.
-  size_type size() const { return tree_.size(); }
-  size_type max_size() const { return tree_.max_size(); }
-  bool empty() const { return tree_.empty(); }
-  size_type height() const { return tree_.height(); }
-  size_type internal_nodes() const { return tree_.internal_nodes(); }
-  size_type leaf_nodes() const { return tree_.leaf_nodes(); }
-  size_type nodes() const { return tree_.nodes(); }
-  size_type bytes_used() const { return tree_.bytes_used(); }
+  size_type size() const {
+    return tree_.size();
+  }
+  size_type max_size() const {
+    return tree_.max_size();
+  }
+  bool empty() const {
+    return tree_.empty();
+  }
+  size_type height() const {
+    return tree_.height();
+  }
+  size_type internal_nodes() const {
+    return tree_.internal_nodes();
+  }
+  size_type leaf_nodes() const {
+    return tree_.leaf_nodes();
+  }
+  size_type nodes() const {
+    return tree_.nodes();
+  }
+  size_type bytes_used() const {
+    return tree_.bytes_used();
+  }
   static double average_bytes_per_value() {
     return btree_type::average_bytes_per_value();
   }
-  double fullness() const { return tree_.fullness(); }
-  double overhead() const { return tree_.overhead(); }
+  double fullness() const {
+    return tree_.fullness();
+  }
+  double overhead() const {
+    return tree_.overhead();
+  }
 
  private:
   btree_type tree_;

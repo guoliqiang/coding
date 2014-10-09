@@ -61,21 +61,18 @@ class safe_btree_map : public btree_map_container<
   // Default constructor.
   safe_btree_map(const key_compare &comp = key_compare(),
                  const allocator_type &alloc = allocator_type())
-      : super_type(comp, alloc) {
-  }
+      : super_type(comp, alloc) {}
 
   // Copy constructor.
   safe_btree_map(const self_type &x)
-      : super_type(x) {
-  }
+      : super_type(x) {}
 
   // Range constructor.
   template <class InputIterator>
   safe_btree_map(InputIterator b, InputIterator e,
                  const key_compare &comp = key_compare(),
                  const allocator_type &alloc = allocator_type())
-      : super_type(b, e, comp, alloc) {
-  }
+      : super_type(b, e, comp, alloc) {}
 };
 
 template <typename K, typename V, typename C, typename A, int N>
