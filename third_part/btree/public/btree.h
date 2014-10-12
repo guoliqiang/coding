@@ -283,7 +283,6 @@ struct btree_common_params {
 
   enum {
     kTargetNodeSize = TargetNodeSize,
-
     // Available space for values.  This is largest for leaf nodes,
     // which has overhead no fewer than two pointers.
     kNodeValueSpace = TargetNodeSize - 2 * sizeof(void*),
@@ -510,11 +509,11 @@ class btree_node {
     // The array of child pointers. The keys in children_[i] are all less than
     // key(i). The keys in children_[i + 1] are all greater than key(i). There
     // are always count + 1 children.
-    btree_node *children[kNodeValues + 1];
+    btree_node * children[kNodeValues + 1];
   };
 
   struct root_fields : public internal_fields {
-    btree_node *rightmost;
+    btree_node * rightmost;
     size_type size;
   };
 
@@ -653,7 +652,7 @@ class btree_node {
   // binary search performed using plain compare.
   template <typename Compare>
   int binary_search_plain_compare(
-      const key_type &k, int s, int e, const Compare &comp) const {
+      const key_type & k, int s, int e, const Compare & comp) const {
     while (s != e) {
       int mid = (s + e) / 2;
       if (btree_compare_keys(comp, key(mid), k)) {
@@ -790,17 +789,9 @@ struct btree_iterator {
     const_node, const_reference, const_pointer> const_iterator;
   typedef btree_iterator<Node, Reference, Pointer> self_type;
 
-  btree_iterator()
-      : node(NULL),
-        position(-1) {}
-
-  btree_iterator(Node *n, int p)
-      : node(n),
-        position(p) {}
-
-  btree_iterator(const iterator &x)
-      : node(x.node),
-        position(x.position) {}
+  btree_iterator() : node(NULL), position(-1) {}
+  btree_iterator(Node *n, int p) : node(n), position(p) {}
+  btree_iterator(const iterator & x) : node(x.node), position(x.position) {}
 
   // Increment/decrement the iterator.
   void increment() {
@@ -820,38 +811,38 @@ struct btree_iterator {
   }
   void decrement_slow();
 
-  bool operator==(const const_iterator &x) const {
+  bool operator == (const const_iterator &x) const {
     return node == x.node && position == x.position;
   }
-  bool operator!=(const const_iterator &x) const {
+  bool operator != (const const_iterator &x) const {
     return node != x.node || position != x.position;
   }
 
   // Accessors for the key/value the iterator is pointing at.
-  const key_type& key() const {
+  const key_type & key() const {
     return node->key(position);
   }
-  reference operator*() const {
+  reference operator * () const {
     return node->value(position);
   }
-  pointer operator->() const {
+  pointer operator -> () const {
     return &node->value(position);
   }
 
-  self_type& operator++() {
+  self_type & operator ++ () {
     increment();
     return *this;
   }
-  self_type& operator--() {
+  self_type & operator -- () {
     decrement();
     return *this;
   }
-  self_type operator++(int) {
+  self_type operator ++ (int) {
     self_type tmp = *this;
     ++*this;
     return tmp;
   }
-  self_type operator--(int) {
+  self_type operator -- (int) {
     self_type tmp = *this;
     --*this;
     return tmp;
@@ -912,16 +903,12 @@ class btree : public Params::key_compare {
   // class optimization] for more details.
   template <typename Base, typename Data>
   struct empty_base_handle : public Base {
-    empty_base_handle(const Base &b, const Data &d)
-        : Base(b),
-          data(d) {}
+    empty_base_handle(const Base &b, const Data &d) : Base(b), data(d) {}
     Data data;
   };
 
   struct node_stats {
-    node_stats(ssize_t l, ssize_t i)
-        : leaf_nodes(l),
-          internal_nodes(i) {}
+    node_stats(ssize_t l, ssize_t i) : leaf_nodes(l), internal_nodes(i) {}
 
     node_stats& operator+=(const node_stats &x) {
       leaf_nodes += x.leaf_nodes;
@@ -1243,12 +1230,18 @@ class btree : public Params::key_compare {
 
  private:
   // Internal accessor routines.
-  node_type* root() { return root_.data; }
-  const node_type* root() const { return root_.data; }
-  node_type** mutable_root() { return &root_.data; }
+  node_type * root() {
+    return root_.data;
+  }
+  const node_type * root() const {
+    return root_.data;
+  }
+  node_type ** mutable_root() {
+    return &root_.data;
+  }
 
   // The rightmost node is stored in the root node.
-  node_type* rightmost() {
+  node_type * rightmost() {
     return (!root() || root()->leaf()) ? root() : root()->rightmost();
   }
   const node_type* rightmost() const {
@@ -1396,7 +1389,7 @@ class btree : public Params::key_compare {
   void internal_clear(node_type *node);
 
   // Dumps a node and all of its children to the specified ostream.
-  void internal_dump(std::ostream &os, const node_type *node, int level) const;
+  void internal_dump(std::ostream & os, const node_type *node, int level) const;
 
   // Verifies the tree structure of node.
   int internal_verify(const node_type *node,
@@ -1455,7 +1448,6 @@ class btree : public Params::key_compare {
                  node_space_assumption_incorrect);
 };
 
-////
 // btree_node methods
 template <typename P>
 inline void btree_node<P>::insert_value(int i, const value_type &x) {

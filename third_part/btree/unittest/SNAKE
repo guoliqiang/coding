@@ -30,3 +30,13 @@ cc_binary(name='safe_btree_test',
                   ],
           cflags = ['-std=c++0x']
           )
+
+cc_binary(name='btree_unittest',
+          srcs = ['btree_unittest.cc',
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  ],
+          cflags = ['-std=c++0x']
+          )

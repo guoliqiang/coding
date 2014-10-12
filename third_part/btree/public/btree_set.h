@@ -53,8 +53,7 @@ class btree_set : public btree_unique_container<
       : super_type(comp, alloc) {}
 
   // Copy constructor.
-  btree_set(const self_type &x)
-      : super_type(x) {}
+  btree_set(const self_type &x) : super_type(x) {}
 
   // Range constructor.
   template <class InputIterator>
@@ -89,12 +88,11 @@ class btree_multiset : public btree_multi_container<
  public:
   // Default constructor.
   btree_multiset(const key_compare &comp = key_compare(),
-                 const allocator_type &alloc = allocator_type())
+                 const allocator_type & alloc = allocator_type())
       : super_type(comp, alloc) {}
 
   // Copy constructor.
-  btree_multiset(const self_type &x)
-      : super_type(x) {}
+  btree_multiset(const self_type &x) : super_type(x) {}
 
   // Range constructor.
   template <class InputIterator>

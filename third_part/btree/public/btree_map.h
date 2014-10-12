@@ -58,8 +58,7 @@ class btree_map : public btree_map_container<
       : super_type(comp, alloc) {}
 
   // Copy constructor.
-  btree_map(const self_type &x)
-      : super_type(x) {}
+  btree_map(const self_type &x) : super_type(x) {}
 
   // Range constructor.
   template <class InputIterator>
@@ -99,21 +98,17 @@ class btree_multimap : public btree_multi_container<
   // Default constructor.
   btree_multimap(const key_compare &comp = key_compare(),
                  const allocator_type &alloc = allocator_type())
-      : super_type(comp, alloc) {
-  }
+      : super_type(comp, alloc) {}
 
   // Copy constructor.
-  btree_multimap(const self_type &x)
-      : super_type(x) {
-  }
+  btree_multimap(const self_type &x) : super_type(x) {}
 
   // Range constructor.
   template <class InputIterator>
   btree_multimap(InputIterator b, InputIterator e,
                  const key_compare &comp = key_compare(),
                  const allocator_type &alloc = allocator_type())
-      : super_type(b, e, comp, alloc) {
-  }
+      : super_type(b, e, comp, alloc) {}
 };
 
 template <typename K, typename V, typename C, typename A, int N>

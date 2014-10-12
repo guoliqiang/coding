@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #ifndef UTIL_BTREE_BTREE_CONTAINER_H__
-#define UTIL_BTREE_BTREE_CONTAINER_H__ 
+#define UTIL_BTREE_BTREE_CONTAINER_H__
 #include <iosfwd>
 #include <utility>
 
@@ -170,7 +170,7 @@ class btree_container {
 
 template <typename T>
 inline std::ostream& operator << (std::ostream &os,
-    const btree_container<T> &b) {
+    const btree_container<T> & b) {
   b.dump(os);
   return os;
 }
