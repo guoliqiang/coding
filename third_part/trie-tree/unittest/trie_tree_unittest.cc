@@ -34,7 +34,7 @@ TEST_F(TrieTreeUnittest, TestPutGet) {
 
   vf_->Put(key1, val1);
   vf_->Get(key1, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(1, result.size());
@@ -47,7 +47,7 @@ TEST_F(TrieTreeUnittest, TestPutGet) {
   r_set.clear();
   vf_->Put(key1, val2);
   vf_->Get(key1, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(2, result.size());
@@ -60,7 +60,7 @@ TEST_F(TrieTreeUnittest, TestPutGet) {
   r_set.clear();
   vf_->Put(key2, val2);
   vf_->Get(key2, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(1, result.size());
@@ -73,7 +73,7 @@ TEST_F(TrieTreeUnittest, TestPutGet) {
   r_set.clear();
   string key("www.test00");
   vf_->Get(key1, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(2, result.size());
@@ -100,7 +100,7 @@ TEST_F(TrieTreeUnittest, TestPutGet2) {
   EXPECT_EQ(2, result.size());
   EXPECT_EQ(true, vf_->Find(key));
 
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_TRUE(r_set.end() != r_set.find(val1));
@@ -141,7 +141,7 @@ TEST_F(TrieTreeUnittest, TestRemove) {
   vector<string> result;
   set<string> r_set;
   vf_->Get(key1, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(2, result.size());
@@ -155,7 +155,7 @@ TEST_F(TrieTreeUnittest, TestRemove) {
   string key("www.test00");
   vf_->Remove(key1, val1);
   vf_->Get(key, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(1, result.size());
@@ -182,7 +182,7 @@ TEST_F(TrieTreeUnittest, TestFullMatchGet) {
 
   vf_->Put(key1, val1);
   vf_->FullMatchGet(key1, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(1, result.size());
@@ -196,7 +196,7 @@ TEST_F(TrieTreeUnittest, TestFullMatchGet) {
   r_set.clear();
   vf_->Put(key1, val2);
   vf_->FullMatchGet(key1, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(2, result.size());
@@ -210,7 +210,7 @@ TEST_F(TrieTreeUnittest, TestFullMatchGet) {
   r_set.clear();
   vf_->Put(key2, val2);
   vf_->FullMatchGet(key2, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(1, result.size());
@@ -224,7 +224,7 @@ TEST_F(TrieTreeUnittest, TestFullMatchGet) {
   r_set.clear();
   string key("www.test00");
   vf_->FullMatchGet(key1, &result);
-  for(vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+  for (vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
     r_set.insert(*it);
   }
   EXPECT_EQ(2, result.size());

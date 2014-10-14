@@ -76,11 +76,11 @@ class TrieTree {
   }
   // return true if there is a matched string in tree
   bool FullMatchFind(const string16& key) const {
-    return Find(key, 0);
+    return FullMatchFind(key, 0);
   }
 
   bool FullMatchFind(const string& key) const {
-    return Find(key, 0);
+    return FullMatchFind(key, 0);
   }
   // return true if there is a matched string in tree
   bool FullMatchFind(const string16& key, int begin_pos) const {

@@ -1,0 +1,17 @@
+cc_binary(name='trie_tree_unittest',
+          srcs = ['trie_tree_unittest.cc',
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  ],
+          )
+
+cc_binary(name='trie_tree_unit_unittest',
+          srcs = ['trie_tree_unit_unittest.cc',
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  ],
+          )
