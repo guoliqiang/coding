@@ -1,9 +1,14 @@
 cc_library(name='da_trie',
            srcs=[
                  'da_trie.cc',
-                 'da_trie_string16.cc'
+                 'da_trie_string16.cc',
+                 'darts_core2.cc',
+                 'da_trie2.cc',
                 ],
            deps=[
-                '//base/internal:base'
+                '//base/internal:base',
+                '//file/internal:file',
+                '//third_part/crypto/internal:crypto',
+                '//third_part/progress_indicator/internal:progress_indicator',
                 ]
            )

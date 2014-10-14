@@ -1,0 +1,10 @@
+cc_binary(name='progress_indicator_unittest',
+          srcs = [
+                  'progress_indicator_unittest.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/progress_indicator/internal:progress_indicator',
+                  ],
+          )

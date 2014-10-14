@@ -2,7 +2,7 @@
 // Author: james@yunrang.com (Jun Min Gao)
 // Description:
 
-#include "util/double_array_trie/darts_core2.h"
+#include "third_part/double_array_trie/public/darts_core2.h"
 
 #include <vector>
 #include <cstring>
@@ -10,11 +10,10 @@
 #include <algorithm>
 #include <string>
 
-#include "base/logging.h"
-#include "base/yr.h"
-#include "base/string_util.h"
-#include "file/file.h"
-#include "util/progress_indicator/progress_indicator.h"
+#include "base/public/logging.h"
+#include "base/public/string_util.h"
+#include "file/public/file.h"
+#include "third_part/progress_indicator/public/progress_indicator.h"
 
 DEFINE_bool(darts2_sort_before_build, false, "");
 DEFINE_bool(darts2_smart_split_big, false, "");
@@ -490,7 +489,7 @@ void DoubleArrayCore2<StringT>::LikelyMatch(
 // 模板在cc文件，需要显示实例化
 template class DoubleArrayCore2<std::string>;
 template class DoubleArrayCore2<string16>;
-template size_t DoubleArrayCore2<string>::commonPrefixSearchDbg(
+template size_t DoubleArrayCore2<std::string>::commonPrefixSearchDbg(
     const char*,
     ResultPair*,
     size_t,

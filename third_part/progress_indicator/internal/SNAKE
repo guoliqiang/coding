@@ -1,0 +1,8 @@
+cc_library(name='progress_indicator',
+          srcs = [
+                  'progress_indicator.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  ],
+          )

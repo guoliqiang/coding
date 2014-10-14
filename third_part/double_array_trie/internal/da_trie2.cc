@@ -1,7 +1,7 @@
 // Copyright 2010 Yunrang Inc. All Rights Reserved.
 // Author: james@yunrang.com (Jun Min Gao)
 
-#include "util/double_array_trie/da_trie2.h"
+#include "third_part/double_array_trie/public/da_trie2.h"
 
 #include <utility>
 #include <string>
@@ -9,16 +9,15 @@
 #include <algorithm>
 #include <cstring>
 
-#include "base/logging.h"
-#include "base/yr.h"
-#include "base/hash.h"
-#include "base/utf_string_conversions.h"
-#include "base/string_util.h"
-#include "file/file.h"
-#include "util/crypto/md5.h"
+#include "base/public/logging.h"
+#include "base/public/hash.h"
+#include "base/public/utf_string_conversions.h"
+#include "base/public/string_util.h"
+#include "file/public/file.h"
+#include "third_part/crypto/public/md5.h"
 
 DEFINE_bool(da_trie2_enable_cache, false, "");
-DEFINE_string(da_trie2_cache_dir, "/tmp/.yr_da_trie2_cache", "");
+DEFINE_string(da_trie2_cache_dir, "/tmp/.da_trie2_cache", "");
 
 namespace util {
 using file::File;
@@ -30,8 +29,8 @@ static const char* kMagicTail = "\xEA\x95" "DARTS" "\x81\xE9";
 
 template <typename StringT>
 void DATrieBasic2<StringT>::Save(const std::string& filename) const {
-  string content(reinterpret_cast<const char*>(this->units_.data()),
-                 this->units_.size() * sizeof(Unit));
+  std::string content(reinterpret_cast<const char*>(this->units_.data()),
+                      this->units_.size() * sizeof(Unit));
   File::WriteStringToFileOrDie(kMagicHead, filename);
   File::AppendStringToFileOrDie(content, filename);
   File::AppendStringToFileOrDie(kMagicTail, filename);
@@ -39,7 +38,7 @@ void DATrieBasic2<StringT>::Save(const std::string& filename) const {
 
 template <typename StringT>
 void DATrieBasic2<StringT>::Load(const std::string& filename) {
-  string content;
+  std::string content;
   File::ReadFileToStringOrDie(filename, &content);
   CHECK(StartsWithASCII(content, kMagicHead, true)) << "Invalid file head!";
   CHECK(EndsWith(content, kMagicTail, true)) << "Invalid file tail!";
@@ -63,7 +62,7 @@ void DATrieBasic2<StringT>::BuildFrom(
   const base::hash_map<StringT, int> &map) {
   if (LoadFromCache()) return;
   // Sort first
-  vector<std::pair<StringT, int> > vec;
+  std::vector<std::pair<StringT, int> > vec;
   VLOG(2) << "Copy map...";
   vec.reserve(map.size());
   std::copy(map.begin(), map.end(), std::back_inserter(vec));
@@ -82,9 +81,9 @@ void DATrieBasic2<StringT>::BuildFrom(
 }
 
 template <typename StringT>
-void DATrieBasic2<StringT>::BuildFrom(const vector<StringT> &keys) {
+void DATrieBasic2<StringT>::BuildFrom(const std::vector<StringT> &keys) {
   base::hash_map<StringT, int> map;
-  for (typename vector<StringT>::const_iterator it = keys.begin();
+  for (typename std::vector<StringT>::const_iterator it = keys.begin();
       it < keys.end(); ++it) {
     map[*it] = 1;
   }
@@ -93,12 +92,12 @@ void DATrieBasic2<StringT>::BuildFrom(const vector<StringT> &keys) {
 
 template <typename StringT>
 void DATrieBasic2<StringT>::BuildFromSorted(
-    const vector<pair<StringT, int> >&pairs) {
+    const std::vector<std::pair<StringT, int> >&pairs) {
   VLOG(2) << "Prepare to build trie...";
   // Split keys and values
-  vector<const typename StringT::value_type*> keys(pairs.size());
-  vector<size_t> key_lens(pairs.size());
-  vector<int> values(pairs.size());
+  std::vector<const typename StringT::value_type*> keys(pairs.size());
+  std::vector<size_t> key_lens(pairs.size());
+  std::vector<int> values(pairs.size());
   size_t key_len_sum = 0;
   for (size_t i = 0; i < pairs.size(); i++) {
     keys[i] = pairs[i].first.c_str();
@@ -127,7 +126,7 @@ void DATrieBasic2<StringT>::BuildFromSorted(
       key_len_sum << ", Memory use: " << this->size() * 8 / 1024 << "K bytes.";
 
   if (FLAGS_da_trie2_enable_cache && !trie_source_files_.empty()) {
-    string cache_content(reinterpret_cast<const char*>(this->array()),
+    std::string cache_content(reinterpret_cast<const char*>(this->array()),
                          this->size() * 8);
     File::WriteStringToFileOrDie(trie_source_md5_, cached_file_);
     File::AppendStringToFileOrDie(cache_content, cached_file_);
@@ -138,14 +137,14 @@ void DATrieBasic2<StringT>::BuildFromSorted(
 template <typename StringT>
 bool DATrieBasic2<StringT>::LoadFromCache() {
   if (!FLAGS_da_trie2_enable_cache || trie_source_files_.empty()) return false;
-  string cache_name = Uint64ToString(
-      Fingerprint(JoinString(trie_source_files_, ' ')));
+  std::string cache_name = Uint64ToString(
+      base::Fingerprint(JoinString(trie_source_files_, ' ')));
   cached_file_ = FLAGS_da_trie2_cache_dir + "/" + cache_name;
 
   MD5Context ctx;
   crypto::MD5Init(&ctx);
   for (size_t i = 0; i < trie_source_files_.size(); ++i) {
-    string content;
+    std::string content;
     File::ReadFileToStringOrDie(trie_source_files_[i], &content);
     crypto::MD5Update(&ctx,
                       reinterpret_cast<const unsigned char*>(content.data()),
@@ -153,14 +152,14 @@ bool DATrieBasic2<StringT>::LoadFromCache() {
   }
   MD5Digest digest;
   crypto::MD5Final(&digest, &ctx);
-  string md5 = crypto::MD5DigestToBase16(digest);
+  std::string md5 = crypto::MD5DigestToBase16(digest);
 
   trie_source_md5_ = md5;
   if (!File::Exists(FLAGS_da_trie2_cache_dir)) {
     File::CreateDir(FLAGS_da_trie2_cache_dir, 0700);
   }
   if (File::Exists(cached_file_)) {
-    string cache_content;
+    std::string cache_content;
     File::ReadFileToStringOrDie(cached_file_, &cache_content);
     if (0 == std::strncmp(md5.data(), cache_content.data(), md5.size())) {
       this->clear();

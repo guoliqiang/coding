@@ -1,0 +1,32 @@
+cc_binary(name='da_trie2_unittest',
+          srcs = [
+                  'da_trie2_unittest.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/double_array_trie/internal:da_trie',
+                  ],
+          )
+
+cc_binary(name='da_trie_string16_unittest',
+          srcs = [
+                  'da_trie_string16_unittest.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/double_array_trie/internal:da_trie',
+                  ],
+          )
+
+cc_binary(name='da_trie_unittest',
+          srcs = [
+                  'da_trie_unittest.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/double_array_trie/internal:da_trie',
+                  ],
+          )

@@ -12,9 +12,9 @@
 #include <cstdio>
 #include <algorithm>
 
-#include "base/logging.h"
-#include "base/basictypes.h"
-#include "base/string16.h"
+#include "base/public/logging.h"
+#include "base/public/basictypes.h"
+#include "base/public/string16.h"
 
 namespace darts {
 

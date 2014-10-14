@@ -17,9 +17,9 @@
 #include <algorithm>
 #include <utility>
 
-#include "base/logging.h"
-#include "base/hash_tables.h"
-#include "util/double_array_trie/darts_core2.h"
+#include "base/public/logging.h"
+#include "base/public/hash_tables.h"
+#include "third_part/double_array_trie/public/darts_core2.h"
 
 namespace util {
 

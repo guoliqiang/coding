@@ -4,10 +4,10 @@
 #include <string>
 #include <vector>
 
-#include "base/flags.h"
-#include "base/hash_tables.h"
-#include "testing/gtest/include/gtest/gtest.h"
-#include "util/double_array_trie/da_trie2.h"
+#include "base/public/flags.h"
+#include "base/public/hash_tables.h"
+#include "third_part/testing/gtest/include/gtest/gtest.h"
+#include "third_part/double_array_trie/public/da_trie2.h"
 
 DEFINE_bool(run_bench, false, "");
 
