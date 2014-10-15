@@ -1,4 +1,4 @@
-/* Copyright (C) 2010. sparkling.liang@hotmail.com. All rights reserved. */
+// Copyright (C) 2010. sparkling.liang@hotmail.com. All rights reserved.
 
 #include "../public/util_rbtree.h"
 #include "base/public/basictypes.h"
