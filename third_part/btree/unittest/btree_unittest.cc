@@ -18,3 +18,20 @@ TEST(Btree, Simple) {
   EXPECT_EQ(1, (std::is_convertible<SubA, Base>::value));
   EXPECT_NE(1, (std::is_convertible<ClassB, Base>::value));
 }
+
+class Empty {};
+class EmptyOther {};
+class EmptyTwo : public Empty {};
+class EmptyThree : public EmptyTwo {};
+class TestEmpty : public Empty, public EmptyOther {};
+class TestEmptyOther {
+  public:
+   Empty e1;
+   EmptyOther e2;
+};
+
+TEST(Btree, Empty) {
+  LOG(INFO) << sizeof(Empty) << " " << sizeof(EmptyTwo)
+            << " " << sizeof(EmptyThree);
+  LOG(INFO) << sizeof(TestEmpty) << " " << sizeof(TestEmptyOther);
+}
