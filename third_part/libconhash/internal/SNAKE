@@ -1,0 +1,12 @@
+cc_library(name='conhash',
+          srcs = [
+                  'conhash.cc',
+                  'conhash_inter.cc',
+                  'conhash_util.cc',
+                  'md5.cc',
+                  'util_rbtree.cc'
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  ],
+          )

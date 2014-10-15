@@ -1,7 +1,7 @@
-
 /* Copyright (C) 2010. sparkling.liang@hotmail.com. All rights reserved. */
 
-#include "util_rbtree.h"
+#include "../public/util_rbtree.h"
+#include "base/public/basictypes.h"
 
 /* the NULL node of tree */
 #define _NULL(rbtree) (&((rbtree)->null))
@@ -293,6 +293,7 @@ void rbtree_delete_fixup(util_rbtree_t *rbtree, util_rbtree_node_t *node)
             if(w == 0)
             {
                 int t = 4;
+                ignore_result(t);
             }
             if(util_rbt_isred(w))
             {

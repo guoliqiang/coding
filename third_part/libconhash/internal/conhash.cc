@@ -1,8 +1,7 @@
-
 /* Copyright (C) 2010. sparkling.liang@hotmail.com. All rights reserved. */
 
-#include "conhash.h"
-#include "conhash_inter.h"
+#include "../public/conhash.h"
+#include "../public/conhash_inter.h"
 
 struct conhash_s* conhash_init(conhash_cb_hashfunc pfhash)
 {
@@ -101,10 +100,10 @@ const struct node_s* conhash_lookup(const struct conhash_s *conhash, const char 
     /* calc hash value */
     hash = conhash->cb_hashfunc(object);
     
-    rbnode = util_rbtree_lookup(&(conhash->vnode_tree), hash);
+    rbnode = util_rbtree_lookup(const_cast<util_rbtree_t*>(&(conhash->vnode_tree)), hash);
     if(rbnode != NULL)
     {
-        struct virtual_node_s *vnode = rbnode->data;
+        struct virtual_node_s *vnode = (virtual_node_s*)rbnode->data;
         return vnode->node;
     }
     return NULL;

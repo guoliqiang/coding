@@ -1,8 +1,8 @@
 
 /* Copyright (C) 2010. sparkling.liang@hotmail.com. All rights reserved. */
 
-#include "conhash_inter.h"
-#include "conhash.h"
+#include "../public/conhash_inter.h"
+#include "../public/conhash.h"
 
 /* 
  * the default hash function, using md5 algorithm
@@ -74,7 +74,7 @@ void __conhash_del_replicas(struct conhash_s *conhash, struct node_s *node)
         rbnode = util_rbtree_search(&(conhash->vnode_tree), hash);
         if(rbnode != NULL)
         {
-            vnode = rbnode->data;
+            vnode = (virtual_node_s*)rbnode->data;
             if((vnode->hash == hash) && (vnode->node == node))
             {
                 conhash->ivnodes--;
@@ -95,7 +95,7 @@ util_rbtree_node_t *__conhash_get_rbnode(struct node_s *node, long hash)
         rbnode->data = malloc(sizeof(struct virtual_node_s));
         if(rbnode->data != NULL)
         {
-            struct virtual_node_s *vnode = rbnode->data;
+            struct virtual_node_s *vnode = (virtual_node_s*)rbnode->data;
             vnode->hash = hash;
             vnode->node = node;
         }
@@ -111,7 +111,7 @@ util_rbtree_node_t *__conhash_get_rbnode(struct node_s *node, long hash)
 void __conhash_del_rbnode(util_rbtree_node_t *rbnode)
 {
     struct virtual_node_s *node;
-    node = rbnode->data;
+    node = (virtual_node_s*)rbnode->data;
     free(node);
     free(rbnode);
 }

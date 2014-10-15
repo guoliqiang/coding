@@ -1,0 +1,9 @@
+cc_binary(name='sample',
+          srcs = ['sample.cc',
+                 ],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/libconhash/internal:conhash',
+                  ],
+          )
