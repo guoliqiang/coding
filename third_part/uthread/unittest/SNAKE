@@ -1,0 +1,64 @@
+cc_binary(name='test1',
+          srcs = ['test1.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread',
+                  ]
+           )
+
+cc_binary(name='test2',
+          srcs = ['test2.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread',
+                  ]
+           )
+cc_binary(name='test3',
+          srcs = ['test3.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread',
+                  ]
+           )
+cc_binary(name='test4',
+          srcs = ['test4.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread',
+                  ]
+           )
+cc_binary(name='test5',
+          srcs = ['test5.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread',
+                  ]
+           )
+cc_binary(name='test6',
+          srcs = ['test6.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread',
+                  ]
+           )
+cc_binary(name='test7',
+          srcs = ['test7.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread',
+                  ]
+           )
+cc_binary(name='test8',
+          srcs = ['test8.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread',
+                  ]
+           )
+cc_binary(name='test9',
+          srcs = ['test9.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread',
+                  ]
+           )

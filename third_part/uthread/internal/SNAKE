@@ -1,0 +1,9 @@
+cc_library(name='uthread',
+           srcs = ['ustack.cc',
+                   'uswap.cc',
+                   'uthread.cc'
+                  ],
+           deps = [
+                  '//base/internal:base'
+                  ]
+           )

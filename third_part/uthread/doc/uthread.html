@@ -1,0 +1,430 @@
+<html>
+	<head>
+		<title>uthread - A user mode threading library</title>
+		<style type="text/css">
+			body, table {
+				font-family: verdana, arial, helvetica;
+				font-size: 10pt;
+			}
+
+			code {
+				color: green;
+			}
+
+			div.example {
+				margin-left: 5em;
+				margin-top: 2ex;
+				margin-bottom: 2ex
+			}
+
+			div.api {
+				margin-top:1ex;
+				margin-left: 5em;
+				margin-bottom: 4ex;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Uthread, a user mode threading library</h2>
+		
+		<span style="color: silver"> &nbsp; &mdash; <i><a style="color: silver"
+					href="mailto:wim dot couwenberg at gmail dot
+					com?subject=uthread">Wim Couwenberg</a>, Sun 30 September
+				2007</i> </span>
+
+		<p> This file describes version 0.2 of the uthread library.
+
+		<ol>
+		<li><a href="#section1">Before we begin...</a>
+		<li><a href="#section2">Introduction to user mode threading</a>
+		<li><a href="#section3">Supported platforms</a>
+		<li><a href="#section4">Mixing system threads and user threads</a>
+		<li><a href="#section5">The API</a>
+		<li><a href="#section6">Build instructions</a>
+		<li><a href="#section7">References</a>
+		<li><a href="#section8">License</a>
+		</ol>
+
+		<a name="section1"/>
+		<h3>Before we begin...</h3>
+
+		<p> The uthread library was my pet project for the 2006 holidays
+		period.  I am aware that other approaches exist (see the references
+		section below).  It was a pleasant and enlightening pastime.  Getting
+		uthread to run under several operating systems and processor
+		architectures taught me a thing or two (PowerPC basics for instance).
+		I am also pleased with the result.  The API is kept small and to the
+		point and the whole library is tiny (around 1400 lines of code
+		according to a simple &ldquo;wc -l&rdquo;).
+
+		<a name="section2"/>
+		<h3>Introduction to user mode threading</h3>
+
+		<p> The uthread library offers user mode threading support.  User mode
+		threads also go by the names &ldquo;cooperative threads&rdquo;,
+		&ldquo;coroutines&rdquo; or &ldquo;fibers&rdquo;.  Unlike (pre-emptive)
+		system threads, user mode threads are implemented entirely in user mode
+		so the operating system kernel is not involved in scheduling user mode
+		threads.  The main advantages of this are:
+
+		<ol>
+			<li> Faster context switching between threads
+			<li> Easier synchronisation of threads
+		</ol>
+
+		<p> Thread switching in user mode does not need scheduling support from
+		the kernel.  Basically all that it takes is swapping the contents of
+		some CPU registers with values that were saved earlier in another
+		thread context.  Just to get an idea of the cost of context switching:
+		on my 2 GHz core duo processor, running OS X 10.4, uthread achieves
+		about seven million thread switches per second!  (And that's just using
+		one core, as will be explained later.)
+
+		<p> The uthread library allows to create multiple user threads within
+		each system thread.  That means that each system thread executes the
+		code for each and every user thread that was created in it.  The kernel
+		remains unaware of the fact that a system thread is divided into
+		several user threads though. This unawareness has a few consequences.
+
+		<ol>
+			<li> User thread switches are not automatic (pre-emptive) but must
+			be invoked explicitly. The uthread library functions
+			<code>uthread_run</code>, <code>uthread_wait</code> and
+			<code>uthread_yield</code> take care of this.
+			<li> A user thread should never block.  If a user thread makes a
+			blocking call (e.g. perform synchronous I/O or wait for an external
+			event) then all user threads in the same system thread are blocked.
+			<li> Synchronisation between user threads (in the same kernel
+			thread) is easy.  Since a user thread must explicitly yield to
+			allow other user threads to run, there's almost no need to
+			synchronize operations.  Suppose that a user thread wants to
+			increment a counter by retrieving it, add one to its value and then
+			store the counter again.  For a user thread this procedure is safe,
+			while for a system thread the access to the counter must be
+			protected by a mutex, since another system thread might get
+			scheduled and access the same counter in between retrieving and
+			storing it.  Of course, user threads running in <i>different</i>
+			system threads still need synchronization.
+			<li> All user threads within the same system thread execute on the
+			same processor (or core).  The operating system assigns kernel
+			threads to a fixed processor or core and thereby all user threads
+			that are created in that system thread.
+		</ol>
+
+		<a name="section3"/>
+		<h3>Supported platforms</h3>
+	   
+		<p> The uthread library is available for Windows starting from Windows
+		98, 32-bit OS X (both ppc and i386, tested on 10.4 Tiger) and operating
+		systems that support <a
+			href="http://opengroup.org/onlinepubs/007908799/xsh/ucontext.h.html">ucontext</a>,
+		which should include all major Linux distributions for i386
+		architectures.
+		
+		<p> Context switching is implemented with <a
+			href="http://msdn2.microsoft.com/en-us/library/ms682661.aspx">fibers</a>
+		(Windows), <a
+			href="http://developer.apple.com/documentation/Darwin/Reference/ManPages/man3/_setjmp.3.html">_setjmp</a>
+		and <a
+			href="http://developer.apple.com/documentation/Darwin/Reference/ManPages/man3/_longjmp.3.html">_longjmp</a>
+		(OS X, both architectures) or <a
+			href="http://opengroup.org/onlinepubs/007908799/xsh/ucontext.h.html">ucontext</a>
+		(others). 
+
+		<p> To allocate aligned memory for extra stacks uthread uses an
+		anonymous <a
+			href="http://www.opengroup.org/onlinepubs/000095399/functions/mmap.html">mmap</a>
+		(OS X and Linux) or <a
+			href="http://www.gnu.org/software/libc/manual/html_node/Aligned-Memory-Blocks.html">memalign</a>
+		(GNU).  For Windows the stacks don't need to be allocated explicitly
+		since this is already taken care of by the fiber API.
+
+		<p> The uthread library uses thread local storage facilities from <a
+			href="http://opengroup.org/onlinepubs/007908799/xsh/pthread.h.html">pthread</a>
+		on systems other than Windows to maintain per system thread state.  The
+		fiber API takes care of thread local storage on Windows.  I'd rather
+		not depend on pthread at all but I'm not sure how I can rely on other
+		possibly cheaper mechanisms (like the <code>__thread</code> directive
+		of gcc) purely based on compile time conditional checks.
+
+		<p> If you got uthread to run on other platforms or have any other
+		generally useful tips that could improve uthread then please <a
+			href="mailto:wim dot couwenberg at gmail dot com">let me know</a>. 
+
+		<a name="section4"/>
+		<h3>Mixing system threads and user threads</h3>
+
+		The uthread library and native threading models (like pthread or
+		Windows threads) can be used together in the same process.  Any native
+		system thread can be turned into a "user thread universe" (by the
+		<code>uthread_init</code>) call.  You can create any number of user
+		threads in each such universe.  Remember that all user threads in the
+		same universe are running in the <i>same</i> system thread.  (Which is
+		exactly the point of user mode threading.)
+
+		<p> The uthread library is fully reantrant but, surprisingly, not
+		thread safe.  A uthread object created in one system thread (universe)
+		must as a rule not be used by any other system thread.  The only
+		exception to this rule is the <code>uthread_event_broadcast</code>
+		call.  Any system thread can broadcast an event that was created in
+		another system thread.  However, the access to the event must be
+		synchronised explicitly (by a mutex or semaphore) between system
+		threads in that case.  The uthread library does not synchronise any
+		call by itself. 
+
+		<a name="section5"/>
+		<h3>The API</h3>
+
+		The following types and functions are declared in the public interface
+		header file <code>uthread.h</code>.  This is the only header file you
+		need to include to use the uthread library.
+
+		<p> <code>typedef struct uthread_t *uthread_h;</code>
+		<div class="api">
+			The type <code>uthread_h</code> is used as an opaque object handle.
+			An object can be a thread, an event or a queue.
+		</div>
+
+		<code>typedef void (*uthread_func_t)(void *args);</code>
+		<div class="api">
+			The type <code>uthread_func_t</code> is the signature of a function
+			that can be executed in a new user thread.
+		</div>
+
+		<code>UTHREAD_API void uthread_init(void);</code>
+		<div class="api">
+			This function must be called in any system thread that wants to use
+			the uthread library.  It turns the system thread into a main user
+			thread.  <code>uthread_init</code> can be called in any number of
+			system threads, each with their own main user thread. The uthread
+			library can then be used in the system thread until
+			<code>uthread_exit</code> is called from the main user thread.
+		</div>	
+
+		<code>UTHREAD_API int uthread_wait(uthread_h object);</code>
+		<div class="api">
+			Makes the calling user thread wait for an object to become signaled
+			or until the object is closed.  The object must have been created
+			in the caller's system thread.  A user thread is signaled when its
+			start function finishes execution.  The thread handle is <i>not</i>
+			implicitly closed, unless the thread exited with a call to
+			<code>uthread_exit</code>.  An event is signaled when
+			<code>uthread_event_broadcast</code> is called for that event and
+			becomes non-signaled again after scheduling all its waiting
+			threads.  A queue is signaled if and only if an observed state
+			change is available in the queue.  Use
+			<code>uthread_queue_get</code> to retrieve the change.
+
+			<p> If the object is already signaled then the effect is the same
+			as calling <code>uthread_yield</code>, i.e. execution can still be
+			interrupted in favour of other scheduled threads.
+			
+			<p> A call to <code>uthread_wait</code> will never block the
+			underlying system thread.  If no other user thread is scheduled for
+			execution then one of two things can happen: If
+			<code>uthread_wait</code> is called from the main user thread, then
+			it returns immediately with a result
+			<code>UTHREAD_NONSIGNALED</code>.  If it is called from another
+			user thread, then execution is forced back to the main thread.  In
+			that case, the main thread gets a <code>UTHREAD_NONSIGNALED</code>
+			result if it was blocked on a <code>uthread_wait</code> or
+			<code>uthread_run</code> call.		
+
+			<p> <code>uthread_wait</code> returns
+			<code>UTHREAD_NONSIGNALED</code> if the thread was released while
+			the object was non-signaled, <code>UTHREAD_SIGNALED</code> if the
+			object was signaled and <code>UTHREAD_CLOSED</code> if the object
+			was closed.  If <code>uthread_wait</code> returns
+			<code>UTHREAD_CLOSED</code> then the object handle is no longer
+			valid.
+		</div>
+
+		<code>UTHREAD_API void uthread_close(uthread_h object);</code>
+		<div class="api">
+			Closes the object handle.  The object handle cannot be used after
+			it has been closed.  The object must have been created in the
+			caller's system thread.  Any <code>uthread_wait</code> call
+			blocking on this object will return with a
+			<code>UTHREAD_CLOSED</code> result.
+		</div>
+
+		<code>UTHREAD_API int uthread_run(void);</code>
+		<div class="api">
+			This function can only be called in a main user thread.  It
+			suspends the main user thread until all other user threads (in the
+			same system thread) are either signaled or suspended in a wait.  A
+			user thread is signaled if its start function finished.  If no
+			other user threads remain or all remaining user threads are
+			signaled then the return value is <code>UTHREAD_SIGNALED</code>.
+			If at least one other user thread is suspended then the return
+			value is <code>UTHREAD_NONSIGNALED</code>. 
+		</div>
+
+		<code>UTHREAD_API uthread_h uthread_create(int stack_size, uthread_func_t start_func, void *args);</code>
+		<div class="api">
+			Create a new user thread.  If <code>stack_size</code> is positive
+			then a stack of at least that size in bytes is created for the
+			thread.  If <code>stack_size</code> is zero then a default stack
+			size is chosen (1 Mb for Windows, 16K for other systems).  The new
+			thread will not execute immediately but it is scheduled for
+			execution.  When it becomes active for the first time it starts
+			executing <code>start_func</code> with argument <code>args</code>.
+			The returned object handle will get signaled when
+			<code>start_func</code> returns.  Calling <code>uthread_exit</code>
+			in the new user thread will unconditionally stop execution and
+			close the thread handle.  A user thread (except the main thread)
+			can close its own handle, which has the same effect as calling
+			<code>uthread_exit</code>.
+		</div>
+
+		<code>UTHREAD_API void uthread_exit(void);</code>
+		<div class="api">
+			When called from the main thread this will uncoditionally free all
+			threads, events and queues that were created in the same system
+			thread.  The uthread library cannot be used in that system thread
+			until <code>uthread_init</code> is called again.  (<i>Caveat: for
+				Windows systems prior to XP, <code>uthread_init</code> can only
+				be called once for each system thread.</i>)
+
+			<p> When called from a thread other than the main thread it
+			interrupts the execution of that thread and closes its handle.  The
+			<code>uthread_exit</code> call does not return.  If no other
+			threads are scheduled to execute then execution is forced back to
+			the main thread.
+		</div>
+
+		<code>UTHREAD_API uthread_h uthread_self(void);</code>
+		<div class="api">
+			Returns the calling thread's handle or <code>NULL</code> if called
+			in the main thread.  Note that <code>NULL</code> is not a valid
+			thread handle, so you cannot wait for it or close it.
+		</div>
+
+		<code>UTHREAD_API void uthread_yield(void);</code>
+		<div class="api">
+			If other threads are scheduled to execute then this call switches
+			execution to another thread.  If no other threads are scheduled
+			then this call returns immediately.
+		</div>
+
+		<code>UTHREAD_API uthread_h uthread_event_create(void);</code>
+		<div class="api">
+			Create a new event object.  The object can only be used in calls
+			from the same system thread that created it.  An event handle can
+			be close with <code>uthread_close</code>.
+		</div>
+
+		<code>UTHREAD_API void uthread_event_broadcast(uthread_h event);</code>
+		<div class="api">
+			Set the event's state to signaled.  All threads that are waiting
+			for this event are scheduled to execute, after which the event's
+			state is set to non-signaled again.  This function can be called
+			from another system thread than the one in which the event was
+			created.  In that case the access to the event must be synchronised
+			between the two system threads.  The uthread library itseld does
+			not synchronise this call for you.
+		</div>
+
+		<code>UTHREAD_API uthread_h uthread_queue_create(void);</code>
+		<div class="api">
+			Create a new queue object.  Other objects that were created in the
+			same system thread can be added to a queue to be watched for state
+			changes (when the object is signaled or closed).  After such a
+			state change, the object is removed from the queue.  Observed
+			changes can be retrieved via <code>uthread_queue_get</code>.  An
+			object can be added multiple times to a queue.  In that case a
+			state change for that object is also reported multiple times. The
+			created queue object can only be used from the caller's system
+			thread.  Close the queue handle with <code>uthread_close</code> if
+			it is no longer needed.
+		</div>
+
+		<code>UTHREAD_API void uthread_queue_add(uthread_h queue, uthread_h object);</code>
+		<div class="api">
+			Add and object to be watched by the queue.  Both the queue and the
+			object to add must have been created in the caller's system thread.
+			When an object that is added to the queue gets signaled or is
+			closed then the object is removed from the queue and the change is
+			obtainable via <code>uthread_queue_get</code>.  A queue is signaled
+			precisely if observed changes are available.
+		</div>
+
+		<code>UTHREAD_API int uthread_queue_get(uthread_h queue, uthread_h *object, int *state);</code>
+		<div class="api">
+			Obtain state change information for an object that was added to the
+			queue with <code>uthread_queue_add</code>.  If no information is
+			available then this call returns 0.  Otherwise the object handle
+			for which a change is reported is placed in <code>*object</code>
+			and the changed state of the object is placed in
+			<code>*state</code>.  The state can be
+			<code>UTHREAD_SIGNALED</code> or <code>UHTREAD_CLOSED</code>.  If
+			the state is <code>UTHREAD_CLOSED</code> then the object handle was
+			closed and is no longer valid.  Otherwise, if you want to watch the
+			object again you should add it to the queue with
+			<code>uthread_queue_add</code>.
+		</div>
+
+		<code>UTHREAD_API void uthread_queue_reset(uthread_h queue);</code>
+		<div class="api">
+			Reset the queue.  All objects will be removed from the queue and
+			any available state change information is flushed.  The queue will
+			be in the same state as if it had been just created with
+			<code>uthread_queue_create</code>.
+		</div>
+
+		<a name="section6"/>
+		<h3>Build instructions</h3>
+
+		The source files to compile for Windows are <code>uthread.c</code> and
+		<code>uswap.c</code>.  (The file <code>ustack.c</code> is not needed
+		since fibers allocate their own stack.)  If you want to build a DLL
+		then define the macro <code>UTHREAD_EXPORT</code> and compile with the
+		appropriate compiler switches.  Make sure that the
+		<code>_WIN32_WINNT</code> macro is defined to a value that is
+		appropriate for your Windows platform (at least <code>0x0400</code>).
+		See <a
+			href="http://msdn2.microsoft.com/en-us/library/aa383745.aspx">MSDN</a>
+		for more information.
+		
+		<p> For other systems compile <code>uthread.c</code>,
+		<code>uswap.c</code> and <code>ustack.c</code>.  If you want to build a
+		shared library, dynamic library or bundle then define the macro
+		<code>UTHREAD_EXPORT</code>.  This will export only the public symbols
+		when you use a gcc version that supports the visibility attribute.
+		Enable pthread support for thread local storage.
+
+		<p> To compile without assertions define the macro <code>NDEBUG</code>.
+		To compile with a custom assertion macro either define
+		<code>uthread_assert</code> accordingly or adjust the
+		<code>uassert.h</code> header file.
+
+		<a name="section7"/>
+		<h3>References</h3>
+
+		Here are some other interesting links related to the subject.
+
+		<ol>
+			<li>Edgar Toernig, <i><a
+					href="http://www.goron.de/~froese/coro/">CORO</a></i>
+			<li>Steve Dekorte, <i><a
+					href="http://www.dekorte.com/projects/opensource/libCoroutine/">libCoroutine</a>,
+				a small, portable coroutine implementation</a></i>
+		<li>Ralf S. Engelschall, <i><a
+				href="http://www.gnu.org/software/pth/">GNU Pth</a>,  The GNU
+			Portable Threads</i>
+		<li>Russ Cox, <i><a
+				href="http://swtch.com/plan9port/man/man3/thread.html">thread</a>
+			section from <a href="http://swtch.com/plan9port/">Plan 9 from User
+				Space</a></i>
+		<li><i><a
+				href="http://msdn2.microsoft.com/en-us/library/ms682661.aspx">Fibers</a>
+			entry on MSDN</i>
+	</ol>
+
+		<a name="section8"/>
+		<h3>License</h3>
+
+		The uthread library is distributed under the liberal MIT license as
+		stated in the file &ldquo;COPYRIGHT&rdquo;.
+	</body>
+</html>
