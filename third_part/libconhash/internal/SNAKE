@@ -9,4 +9,5 @@ cc_library(name='conhash',
           deps = [
                   '//base/internal:base',
                   ],
+          copt = ['no_style_check']
           )

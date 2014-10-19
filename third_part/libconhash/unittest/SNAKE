@@ -1,5 +1,5 @@
-cc_binary(name='sample',
-          srcs = ['sample.cc',
+cc_binary(name='conhash_unittest',
+          srcs = ['conhash_unittest.cc',
                  ],
           deps = [
                   '//base/internal:base',
