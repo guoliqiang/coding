@@ -1,3 +1,11 @@
+cc_binary(name='uthread_unittest',
+          srcs = ['uthread_unittest.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/wrapper:uthread',
+                  ]
+           )
+
 cc_binary(name='test1',
           srcs = ['test1.cc'],
           deps = [

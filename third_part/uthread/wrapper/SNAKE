@@ -1,0 +1,9 @@
+cc_library(name='uthread',
+           srcs = [
+                   'uthread.cc'
+                  ],
+           deps = [
+                  '//base/internal:base',
+                  '//third_part/uthread/internal:uthread'
+                  ]
+           )
