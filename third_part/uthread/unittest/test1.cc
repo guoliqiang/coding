@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "../public/uthread.h"
 
+using namespace uthread;
+
 void func(void *arg)
 {
 	printf("executing func, message is \"%s\"\n", (const char *)arg);

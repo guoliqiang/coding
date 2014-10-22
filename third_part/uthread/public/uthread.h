@@ -7,6 +7,8 @@
 // website: http://members.chello.nl/~w.couwenberg/uthread.html
 // See the copyright notice at the end of this file.
 
+namespace uthread {
+
 // uthread_state_t
 enum {
 	UTHREAD_NONSIGNALED,
@@ -37,4 +39,5 @@ void uthread_queue_add(uthread_h queue, uthread_h object);
 int uthread_queue_get(uthread_h queue, uthread_h *object, int *state);
 void uthread_queue_reset(uthread_h queue);
 
+}  // namespace uthread
 #endif

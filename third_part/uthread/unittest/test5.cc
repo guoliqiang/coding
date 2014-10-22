@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "../public/uthread.h"
 
+using namespace uthread;
 struct func_arg
 {
 	const char *name;

@@ -1,6 +1,6 @@
-
 #include <stdlib.h>
 #include "../public/uthread.h"
+using namespace uthread;
 
 #define SWITCHES 10000000
 

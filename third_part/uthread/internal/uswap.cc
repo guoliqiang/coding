@@ -1,26 +1,29 @@
 // Platform specific execution context swapping routines.
 // See the copyright notice in uthread.h.
 
-#include "../public/uswap.h"
 #include <pthread.h>
-#include "../public/ustack.h"
+#include "third_part/uthread/public/uswap.h"
+#include "third_part/uthread/public/ustack.h"
+#include "base/public/logging.h"
+
+namespace uthread {
 
 static pthread_key_t uthread_key;
+static pthread_once_t once = PTHREAD_ONCE_INIT;
 
-static void uthread_init_key(void) {
+static void uthread_init_key() {
   pthread_key_create(&uthread_key, NULL);
 }
 
-void * uthread_context_data(void) {
+void * uthread_context_data() {
   return pthread_getspecific(uthread_key);
 }
 
-void uthread_context_exit(void) {
+void uthread_context_exit() {
   pthread_setspecific(uthread_key, NULL);
 }
 
 void uthread_context_init(uthread_context_t *self, void *data) {
-  static pthread_once_t once = PTHREAD_ONCE_INIT;
   self->uc_stack.ss_sp = NULL;
   self->uc_stack.ss_size = 0;
   pthread_once(&once, uthread_init_key);
@@ -47,3 +50,5 @@ void uthread_context_jump(uthread_context_t *other) {
 void uthread_context_close(uthread_context_t *other) {
   uthread_free_stack(other->uc_stack.ss_sp, other->uc_stack.ss_size);
 }
+
+}  // namespace uthread

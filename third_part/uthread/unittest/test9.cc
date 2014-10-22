@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "../public/uthread.h"
 
+using namespace uthread;
 static void func(void *arg)
 {
 	(void)arg;

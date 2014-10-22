@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "../public/uthread.h"
 
+using namespace uthread;
 static int smash = 0;
 
 static void ping(void *arg)
