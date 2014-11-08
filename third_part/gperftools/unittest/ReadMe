@@ -1,0 +1,11 @@
+Analyzing Text Output
+Text mode has lines of output that look like this:
+   14   2.1%  17.2%       58   8.7% std::_Rb_tree::find
+Here is how to interpret the columns:
+
+1. Number of profiling samples in this function
+2. Percentage of profiling samples in this function
+3. Percentage of profiling samples in the functions printed so far
+4. Number of profiling samples in this function and its callees
+5. Percentage of profiling samples in this function and its callees
+6. Function name
