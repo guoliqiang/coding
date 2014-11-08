@@ -1,0 +1,14 @@
+
+cc_binary(name='profile_unittest',
+          srcs = ['profile_unittest.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//libs/third_part/gperftools_http:ghttpd',
+                  '//libs/third_part/gperftools:profiler',
+                  '//libs/third_part/gperftools:tcmalloc',
+                  '//libs/third_part/libunwind:unwind',
+                  ],
+          cflags = [
+                    '-I/home/guoliqiang/git-coding/coding/third_part/gperftools/include'
+                   ]
+           )
