@@ -149,7 +149,7 @@ class CppBuilder(LanguageBuilder):
     env['LINK'] = 'g++'
     cc_flags = ('-m64 -fPIC -Wall -Werror -Wwrite-strings -Wno-sign-compare -g '
                 '-Wuninitialized -Wno-error=deprecated-declarations ')
-    # these is just for using proftools                                                                                                        
+    # these is just for using proftools
     cc_flags += ('-fno-builtin-malloc -fno-builtin-free -fno-builtin-realloc '
                  '-fno-builtin-calloc -fno-builtin-cfree -fno-builtin-memalign '
                  '-fno-builtin-posix_memalign -fno-builtin-valloc '
@@ -299,7 +299,7 @@ class CppBuilder(LanguageBuilder):
                                  CPPPATH = cpp_path,
                                  CCFLAGS = cc_flags,
                                  CXX = CXX_value)
-   
+
   def _GenerateBuildingInfo(self, env):
     content = open(Path.AddBaseDir(Flags.BUILDING_INFO_IN)).read()
     content = content.replace('BD_TIME', 'Local Time:%s' % Util.LocalTime())

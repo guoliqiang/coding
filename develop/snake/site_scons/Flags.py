@@ -16,3 +16,7 @@ STATIC_SNAKE_PREFIX = '//libs/SNAKE'
 THRIFT_OUT = 'thrift-out'
 
 PROTO_OUT = 'proto-out'
+
+PYINSTALLER_CONFIURE = '//third_part/pyinstaller-1.5.1/Configure.py'
+PYINSTALLER_MAKER = '//third_part/pyinstaller-1.5.1/Makespec.py'
+PYINSTALLER_BUILDER = '//third_part/pyinstaller-1.5.1/Build.py'

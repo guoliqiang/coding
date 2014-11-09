@@ -1,0 +1,5 @@
+#!/home/guoliqiang/git-coding/coding/third_part/python/bin/python2.7
+
+from idlelib.PyShell import main
+if __name__ == '__main__':
+    main()

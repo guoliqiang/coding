@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/pyi_optik
+END
+help.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/pyi_optik/help.py
+END
+option.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/pyi_optik/option.py
+END
+errors.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/pyi_optik/errors.py
+END
+textwrap.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/pyi_optik/textwrap.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/pyi_optik/__init__.py
+END
+option_parser.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/pyi_optik/option_parser.py
+END

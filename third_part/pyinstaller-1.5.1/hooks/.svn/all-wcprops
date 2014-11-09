@@ -1,0 +1,623 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks
+END
+hook-reportlab.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-reportlab.py
+END
+hook-pywintypes.py
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-pywintypes.py
+END
+hook-DateTime.py
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-DateTime.py
+END
+hook-DateTime.mxDateTime.py
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-DateTime.mxDateTime.py
+END
+hook-parser.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-parser.py
+END
+hook-paste.exceptions.reporter.py
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-paste.exceptions.reporter.py
+END
+hook-cx_Oracle.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-cx_Oracle.py
+END
+hook-pywinauto.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-pywinauto.py
+END
+hook-PyQt4.uic.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.uic.py
+END
+hook-xml.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.py
+END
+hook-django.contrib.py
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.contrib.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/__init__.py
+END
+hook-PyQt4.Qt.py
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.Qt.py
+END
+hook-PIL.Image.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PIL.Image.py
+END
+hook-pygments.lexers.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-pygments.lexers.py
+END
+hook-PyQt4.QtGui.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtGui.py
+END
+hook-email.message.py
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-email.message.py
+END
+hook-PyQt4.QtCore.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtCore.py
+END
+hook-PyQt4.QtNetwork.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtNetwork.py
+END
+hook-PyQt4.phonon.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.phonon.py
+END
+hook-xml.dom.html.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.dom.html.py
+END
+hook-xml.dom.html.HTMLDocument.py
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.dom.html.HTMLDocument.py
+END
+hook-PIL.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PIL.py
+END
+hook-OpenGL.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-OpenGL.py
+END
+hook-django.db.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.db.py
+END
+hook-kinterbasdb.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-kinterbasdb.py
+END
+hook-_sre.py
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-_sre.py
+END
+hook-pyexpat.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-pyexpat.py
+END
+hook-PIL.SpiderImagePlugin.py
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PIL.SpiderImagePlugin.py
+END
+hook-reportlab.pdfbase._fontdata.py
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-reportlab.pdfbase._fontdata.py
+END
+hook-time.py
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-time.py
+END
+hook-pywinauto.tests.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-pywinauto.tests.py
+END
+hook-win32com.py
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-win32com.py
+END
+hook-django.db.backends.oracle.py
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.db.backends.oracle.py
+END
+hook-django.db.backends.mysql.py
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.db.backends.mysql.py
+END
+hook-django.contrib.sessions.py
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.contrib.sessions.py
+END
+hook-psycopg2.py
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-psycopg2.py
+END
+hook-_elementtree.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-_elementtree.py
+END
+hook-cPickle.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-cPickle.py
+END
+hook-regex.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-regex.py
+END
+hook-iu.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-iu.py
+END
+hook-xml.dom.ext.reader.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.dom.ext.reader.py
+END
+hook-xml.etree.cElementTree.py
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.etree.cElementTree.py
+END
+shared_PIL_Image.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/shared_PIL_Image.py
+END
+hook-lxml.etree.py
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-lxml.etree.py
+END
+hook-matplotlib.backends.py
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-matplotlib.backends.py
+END
+hook-PyQt4.Qwt5.py
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.Qwt5.py
+END
+hook-pyodbc.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-pyodbc.py
+END
+hook-pythoncom.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-pythoncom.py
+END
+django-import-finder.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/django-import-finder.py
+END
+hook-Image.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-Image.py
+END
+hookutils.py
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hookutils.py
+END
+hook-carchive.py
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-carchive.py
+END
+hook-PyQt4.Qt3Support.py
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.Qt3Support.py
+END
+hook-PyQt4.QtSql.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtSql.py
+END
+hook-django.core.cache.py
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.core.cache.py
+END
+hook-PyQt4.uic.port_v3.py
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.uic.port_v3.py
+END
+hook-matplotlib.numerix.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-matplotlib.numerix.py
+END
+hook-reportlab.pdfbase.py
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-reportlab.pdfbase.py
+END
+hook-django.db.backends.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.db.backends.py
+END
+hook-codecs.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-codecs.py
+END
+hook-win32ui.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-win32ui.py
+END
+hook-django.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.py
+END
+hook-sqlalchemy.py
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-sqlalchemy.py
+END
+hook-django.core.management.py
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.core.management.py
+END
+hook-PyQt4.QtTest.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtTest.py
+END
+shared_PIL_SpiderImagePlugin.py
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/shared_PIL_SpiderImagePlugin.py
+END
+hook-SpiderImagePlugin.py
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-SpiderImagePlugin.py
+END
+hook-encodings.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-encodings.py
+END
+hook-PyQt4.QtWebKit.py
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtWebKit.py
+END
+hook-anydbm.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-anydbm.py
+END
+hook-dns.rdata.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-dns.rdata.py
+END
+hook-xml.dom.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.dom.py
+END
+hook-PyQt4.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.py
+END
+hook-distutils.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-distutils.py
+END
+hook-PyQt4.QtSvg.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtSvg.py
+END
+hook-qt.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-qt.py
+END
+hook-PyQt4.QtXml.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtXml.py
+END
+hook-pygments.styles.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-pygments.styles.py
+END
+hook-xml.sax.saxexts.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.sax.saxexts.py
+END
+hook-lxml.objectify.py
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-lxml.objectify.py
+END
+hook-mako.codegen.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-mako.codegen.py
+END
+hook-PyQt4.uic.port_v2.py
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.uic.port_v2.py
+END
+hook-xml.dom.domreg.py
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.dom.domreg.py
+END
+hook-xml.sax.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.sax.py
+END
+hook-PyQt4.QtAssistant.py
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtAssistant.py
+END
+hook-cStringIO.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-cStringIO.py
+END
+hook-babel.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-babel.py
+END
+hook-gadfly.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-gadfly.py
+END
+hook-vtkpython.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-vtkpython.py
+END
+hook-matplotlib.py
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-matplotlib.py
+END
+hook-PyQt4.QtOpenGL.py
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtOpenGL.py
+END
+hook-django.core.mail.py
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.core.mail.py
+END
+hook-tables.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-tables.py
+END
+hook-django.db.backends.oracle.base.py
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.db.backends.oracle.base.py
+END
+hook-django.db.backends.mysql.base.py
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.db.backends.mysql.base.py
+END
+hook-cElementTree.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-cElementTree.py
+END
+hook-xml.dom.ext.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-xml.dom.ext.py
+END
+hook-win32com.client.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-win32com.client.py
+END
+hook-os.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-os.py
+END
+hook-gtk.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-gtk.py
+END
+hook-django.core.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-django.core.py
+END
+hook-PyQt4.QtScript.py
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/hooks/hook-PyQt4.QtScript.py
+END

@@ -7,7 +7,7 @@ import os
 import traceback
 
 "Add new language build here"
-_Languages = ('Cpp Thrift Proto')
+_Languages = ('Cpp Thrift Proto Python')
 
 class BuildManager(object):
   """Object that manages all build for all languages."""

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support
+END
+_pyi_egg_install.py
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/_pyi_egg_install.py
+END
+useTK.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/useTK.py
+END
+removeTK.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/removeTK.py
+END
+unpackTK.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/unpackTK.py
+END
+_mountzlib.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/_mountzlib.py
+END
+useUnicode.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/useUnicode.py
+END

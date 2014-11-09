@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/loader/Darwin-32bit
+END
+run
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/loader/Darwin-32bit/run
+END
+run_d
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/loader/Darwin-32bit/run_d
+END
+runw
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/loader/Darwin-32bit/runw
+END
+runw_d
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/loader/Darwin-32bit/runw_d
+END

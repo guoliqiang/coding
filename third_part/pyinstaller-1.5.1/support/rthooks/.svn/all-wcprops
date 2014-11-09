@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/rthooks
+END
+pyi_rth_qt4plugins.py
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/rthooks/pyi_rth_qt4plugins.py
+END
+versioneddll.py
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/rthooks/versioneddll.py
+END
+pyi_rth_django.py
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/rthooks/pyi_rth_django.py
+END
+pyi_rth_mpldata.py
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/rthooks/pyi_rth_mpldata.py
+END
+pyi_rth_opengl.py
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/rthooks/pyi_rth_opengl.py
+END
+pyi_rth_babel.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/rthooks/pyi_rth_babel.py
+END
+win32comgenpy.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/jike/!svn/ver/64153/branches/minsheng/minsheng_opt/third_party/pyinstaller-1.5.1/support/rthooks/win32comgenpy.py
+END
