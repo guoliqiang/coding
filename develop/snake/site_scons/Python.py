@@ -29,13 +29,14 @@ class PythonBuilder(LanguageBuilder):
         return {'PythonBuilder' : builder}
 
     def GenerateEnv(self, env):
-        env['PYTHONCOM'] = ('python $PY_BUILD_MODE $PYINSTALLER_MAKER -F $PY_SOURCE $OPTIONS -o $SPEC_DIR -n $NAME > $SPEC_DIR/log 2>&1 &&'
-                            'python $PY_BUILD_MODE $PYINSTALLER_BUILDER $SPEC_FILE >> $SPEC_DIR/log 2>&1 &&'
+        env['PYTHONCOM'] = ('$PYTHONBIN $PY_BUILD_MODE $PYINSTALLER_MAKER -F $PY_SOURCE $OPTIONS -o $SPEC_DIR -n $NAME > $SPEC_DIR/log 2>&1 &&'
+                            '$PYTHONBIN $PY_BUILD_MODE $PYINSTALLER_BUILDER $SPEC_FILE >> $SPEC_DIR/log 2>&1 &&'
                             'exit 0 ||'
                             'cat $SPEC_DIR/log && exit 1 ||'
                             'exit 2')
         env['PYINSTALLER_MAKER'] = Path.GetAbsPath(Flags.PYINSTALLER_MAKER)
         env['PYINSTALLER_BUILDER'] = Path.GetAbsPath(Flags.PYINSTALLER_BUILDER)
+        env['PYTHONBIN'] = Path.GetAbsPath(Flags.PYTHON_BIN)
 
     def PreProcessObject(self, env, obj):
         self._CheckSpecialDependency(obj)
@@ -83,10 +84,11 @@ class PythonBuilder(LanguageBuilder):
 
     def _GenerateConfiguration(self):
         abs_script = Path.GetAbsPath(Flags.PYINSTALLER_CONFIURE)
+        python_bin = Path.GetAbsPath(Flags.PYTHON_BIN)
         build_mode = ''
         if self._build_mode == 'opt':
             build_mode = '-O'
-        assert os.system('python %s %s > /dev/null 2>&1' % (build_mode, abs_script)) == 0
+        assert os.system('%s %s %s > /dev/null 2>&1' % (python_bin, build_mode, abs_script)) == 0
 
     def _CheckSpecialDependency(self, obj):
         dep_paths = set()
