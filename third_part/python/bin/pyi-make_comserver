@@ -1,0 +1,10 @@
+#!/home/guoliqiang/git-coding/coding/third_part/python/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'PyInstaller==2.1','console_scripts','pyi-make_comserver'
+__requires__ = 'PyInstaller==2.1'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('PyInstaller==2.1', 'console_scripts', 'pyi-make_comserver')()
+    )
