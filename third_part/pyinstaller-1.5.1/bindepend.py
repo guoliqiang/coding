@@ -730,7 +730,11 @@ def findLibrary(name):
     lib = None
 
     # Look in the LD_LIBRARY_PATH
+    # add by guoliqiang2006@gmail.com
+    os.environ['LD_LIBRARY_PATH'] = os.path.abspath('%s/third_part/python/lib/' % os.getcwd())
     lp = os.environ.get('LD_LIBRARY_PATH')
+    if not lp:
+        assert False, "null % s" % os.environ.get('LD_LIBRARY_PATH')
     if lp:
         for path in string.split(lp, os.pathsep):
             libs = glob(os.path.join(path, name + '*'))
