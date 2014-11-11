@@ -451,7 +451,8 @@ class ImportManager:
             if ctx and hasattr(sys.modules[ctx], nmparts[i]):
                 debug("importHook done with %s %s %s (case 1)" % (name, __globals_name, fromlist))
                 return sys.modules[nmparts[0]]
-            del sys.modules[fqname]
+            if fqname in sys.modules:
+                del sys.modules[fqname]
             raise ImportError, "No module named %s" % fqname
         if not fromlist:
             debug("importHook done with %s %s %s (case 2)" % (name, __globals_name, fromlist))
