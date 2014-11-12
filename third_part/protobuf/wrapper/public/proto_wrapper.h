@@ -6,6 +6,7 @@
 #include "file/public/file.h"
 #include "third_part/protobuf/include/google/protobuf/text_format.h"
 #include "base/public/string_util.h"
+#include "base/public/shared_ptr.h"
 
 
 namespace proto_wrapper {
@@ -37,6 +38,10 @@ inline bool ConvertToBinaryFile(const std::string &src_path,
   message->SerializeToString(&binary_format_str);
   file::File::WriteStringToFile(binary_format_str, dst_path);
   return true;
+}
+
+inline std::string MessageName(const google::protobuf::Message & message) {
+  return message.GetDescriptor()->name();
 }
 
 inline void GetNameValuePair(const google::protobuf::Message & message,
@@ -108,6 +113,18 @@ inline void SetNameValuePair(
        CHECK(false) << "type error!";
      }
    }
+}
+
+inline base::shared_ptr<google::protobuf::Message> SetNameValuePair(
+    const std::map<std::string, std::string> & vec,
+    const google::protobuf::Descriptor & type) {
+  const google::protobuf::Message * msg_template =
+      google::protobuf::MessageFactory::generated_factory()->GetPrototype(&type);
+  CHECK(msg_template != NULL);
+  google::protobuf::Message * msg = msg_template->New();
+  // can also call msg_template->GetReflection to get reflection
+  SetNameValuePair(vec, msg);
+  return base::shared_ptr<google::protobuf::Message>(msg);
 }
 
 }  // namespace proto_wrapper

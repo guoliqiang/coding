@@ -16,9 +16,9 @@ int main(int argc, char** argv) {
   std::map<std::string, std::string> vec;
   proto_wrapper::GetNameValuePair(person, &vec);
   LOG(INFO) << person.DebugString();
-  Person person2;
   vec["name"] = "guoliqiang";
-  proto_wrapper::SetNameValuePair(vec, &person2);
-  LOG(INFO) << person2.DebugString();
+  base::shared_ptr<google::protobuf::Message> ptr =
+      proto_wrapper::SetNameValuePair(vec,*(Person::descriptor()));
+  LOG(INFO) << ptr->DebugString();
   return 0;
 }
