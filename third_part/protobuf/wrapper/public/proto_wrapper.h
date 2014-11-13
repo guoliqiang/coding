@@ -46,7 +46,7 @@ inline std::string MessageName(const google::protobuf::Message & message) {
   return message.GetDescriptor()->name();
 }
 
-// not support repeated member and neted message.
+// not support repeated member and nested message.
 inline void GetNameValuePair(const google::protobuf::Message & message,
     std::map<std::string, std::string> * vec) {
   const google::protobuf::Reflection * reflection = message.GetReflection();
@@ -81,7 +81,7 @@ inline void GetNameValuePair(const google::protobuf::Message & message,
   }
 }
 
-// not support repeated member and neted message.
+// not support repeated member and nested message.
 inline void SetNameValuePair(
      const std::map<std::string, std::string> & vec,
      google::protobuf::Message * message) {
