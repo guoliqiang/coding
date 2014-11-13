@@ -20,5 +20,15 @@ int main(int argc, char** argv) {
   base::shared_ptr<google::protobuf::Message> ptr =
       proto_wrapper::SetNameValuePair(vec,*(Person::descriptor()));
   LOG(INFO) << ptr->DebugString();
+
+  proto_wrapper::PbRuntimeCreater creater;
+  creater.AddProtoFile("../proto/test.proto");
+  base::shared_ptr<google::protobuf::Message> foo =
+      creater.CreateMessageByName("Person");
+  vec.clear();
+  vec["id"] = "1";
+  vec["name"] = "guoliqiang";
+  proto_wrapper::SetNameValuePair(vec, foo.get());
+  LOG(INFO) << foo->DebugString();
   return 0;
 }

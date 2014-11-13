@@ -5,6 +5,8 @@
 #include <map>
 #include "file/public/file.h"
 #include "third_part/protobuf/include/google/protobuf/text_format.h"
+#include "third_part/protobuf/include/google/protobuf/compiler/importer.h"
+#include "third_part/protobuf/include/google/protobuf/dynamic_message.h"
 #include "base/public/string_util.h"
 #include "base/public/shared_ptr.h"
 
@@ -127,6 +129,37 @@ inline base::shared_ptr<google::protobuf::Message> SetNameValuePair(
   return base::shared_ptr<google::protobuf::Message>(msg);
 }
 
+class PbRuntimeCreater {
+ public:
+  PbRuntimeCreater() : importer_(&source_tree_, NULL) {}
+
+  void AddProtoFile(const std::string & path) {
+    std::string dirname = file::File::DirName(path);
+    std::string filename = file::File::BaseName(path);
+    source_tree_.MapPath("", dirname);
+    CHECK(importer_.Import(filename) != NULL)
+        << "import " << dirname << " " << filename << " error";
+  }
+
+  base::shared_ptr<google::protobuf::Message> CreateMessageByName(
+      const std::string & name) {
+    if (!messages_.count(name)) {
+      const google::protobuf::Descriptor * des =
+          importer_.pool()->FindMessageTypeByName(name);
+      CHECK(des != NULL) << "find Message " << name << " failed!";
+      const google::protobuf::Message * msg = factory_.GetPrototype(des);
+      CHECK(msg != NULL) << "get msg failed for Message " << name;
+      messages_.insert(std::make_pair(name, msg));
+    }
+    return base::shared_ptr<google::protobuf::Message>(messages_[name]->New());
+  }
+
+ private:
+  google::protobuf::compiler::DiskSourceTree source_tree_;
+  google::protobuf::compiler::Importer importer_;
+  google::protobuf::DynamicMessageFactory factory_;
+  std::map<std::string, const google::protobuf::Message *> messages_;
+};
 }  // namespace proto_wrapper
 
 
