@@ -3,5 +3,6 @@ cc_binary(name='proto_unittest',
           deps = [
                  '//third_part/protobuf/wrapper/internal:proto_wrapper',
                  '//third_part/protobuf/wrapper/proto:test_proto',
+                 '//third_part/testing/gtest/src:gtest',
                  ]
           )

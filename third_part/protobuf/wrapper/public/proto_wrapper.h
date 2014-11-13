@@ -46,6 +46,7 @@ inline std::string MessageName(const google::protobuf::Message & message) {
   return message.GetDescriptor()->name();
 }
 
+// not support repeated member and neted message.
 inline void GetNameValuePair(const google::protobuf::Message & message,
     std::map<std::string, std::string> * vec) {
   const google::protobuf::Reflection * reflection = message.GetReflection();
@@ -55,8 +56,9 @@ inline void GetNameValuePair(const google::protobuf::Message & message,
     const std::string & name = field_desc[i]->name();
     std::string value = "";
     const google::protobuf::FieldDescriptor::Type type = field_desc[i]->type();
-    if (type == google::protobuf::FieldDescriptor::TYPE_BYTES ||
-        type == google::protobuf::FieldDescriptor::TYPE_STRING) {
+    if (type == google::protobuf::FieldDescriptor::TYPE_BYTES) {
+      value = reflection->GetString(message, field_desc[i]);
+    } else if (type == google::protobuf::FieldDescriptor::TYPE_STRING) {
       value = reflection->GetString(message, field_desc[i]);
     } else if (type == google::protobuf::FieldDescriptor::TYPE_INT32) {
       value = IntToString(reflection->GetInt32(message, field_desc[i]));
@@ -79,6 +81,7 @@ inline void GetNameValuePair(const google::protobuf::Message & message,
   }
 }
 
+// not support repeated member and neted message.
 inline void SetNameValuePair(
      const std::map<std::string, std::string> & vec,
      google::protobuf::Message * message) {
@@ -92,8 +95,9 @@ inline void SetNameValuePair(
      CHECK(ptr != NULL) << "illegal name:" << i->first;
 
      const google::protobuf::FieldDescriptor::Type type = ptr->type();
-     if (type == google::protobuf::FieldDescriptor::TYPE_BYTES ||
-        type == google::protobuf::FieldDescriptor::TYPE_STRING) {
+     if (type == google::protobuf::FieldDescriptor::TYPE_BYTES) {
+       reflection->SetString(message, ptr, i->second);
+     } else if (type == google::protobuf::FieldDescriptor::TYPE_STRING) {
        reflection->SetString(message, ptr, i->second);
      } else if (type == google::protobuf::FieldDescriptor::TYPE_INT32) {
        reflection->SetInt32(message, ptr, StringToInt(i->second));
