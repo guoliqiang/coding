@@ -3,10 +3,23 @@ from LanguageBuilder import RegisterObj
 from SCons.Script import Action
 from SCons.Script import Builder
 from SCons.Script import ARGUMENTS
+from pylint import lint
+from pylint.reporters.text import TextReporter
 
+import Util
 import os
 import Flags
 import Path
+
+input_target = ARGUMENTS.get('t')
+
+class WritableObject(object):
+    def __init__(self):
+        self.content = []
+    def write(self, st):
+        self.content.append(st)
+    def read(self):
+        return self.content
 
 def py_binary(name, srcs, deps=[], paths=[]):
     opt = {}
@@ -29,14 +42,11 @@ class PythonBuilder(LanguageBuilder):
         return {'PythonBuilder' : builder}
 
     def GenerateEnv(self, env):
-        env['PYTHONCOM'] = ('$PYTHONBIN $PY_BUILD_MODE $PYINSTALLER_MAKER -F $PY_SOURCE $OPTIONS -o $SPEC_DIR -n $NAME > $SPEC_DIR/log 2>&1 &&'
-                            '$PYTHONBIN $PY_BUILD_MODE $PYINSTALLER_BUILDER $SPEC_FILE >> $SPEC_DIR/log 2>&1 &&'
-                            'exit 0 ||'
-                            'cat $SPEC_DIR/log && exit 1 ||'
-                            'exit 2')
-        env['PYINSTALLER_MAKER'] = Path.GetAbsPath(Flags.PYINSTALLER_MAKER)
-        env['PYINSTALLER_BUILDER'] = Path.GetAbsPath(Flags.PYINSTALLER_BUILDER)
+        env['PYTHONCOM'] = ('export PYTHONPATH=$OPTIONS && '
+                            '$PYTHONBIN $PY_SOURCE')
         env['PYTHONBIN'] = Path.GetAbsPath(Flags.PYTHON_BIN)
+        env['PYTHONBIN'] = '/usr/bin/python'
+        #env['PYTHONCOMSTR'] = '\x1b[32m[BEGIN RUN: $PY_SOURCE]\x1b[0m'
 
     def PreProcessObject(self, env, obj):
         self._CheckSpecialDependency(obj)
@@ -51,31 +61,22 @@ class PythonBuilder(LanguageBuilder):
             os.makedirs(target_dir)
 
         basename = Path.GetBaseName(obj.name_)
-        build_mode = ''
-        spec_dir = os.path.dirname(Path.GetAbsRelativePath(obj.name_))
-        spec_file = os.path.join(spec_dir, '%s.spec' % basename)
         options = []
         if obj.option_['paths']:
-            options.append('-p %s' % self._GetImportPaths(obj.option_['paths']))
-        if self._build_mode == 'dbg':
-            pass
-        elif self._build_mode == 'opt':
-            build_mode = '-O'
-        else:
-            Util.Abort('wrong build strategy: %s' % self._build_mode)
-        tmp_binary = os.path.join(spec_dir, 'dist', basename)
-
-        env.PythonBuilder(None,  # pyinstaller check the mtime between source and target
-                          source,
-                          PY_BUILD_MODE = build_mode,
-                          PY_SOURCE = source,
-                          PY_TARGET = target,
-                          NAME = basename,
-                          BINARY = tmp_binary,
-                          OPTIONS = ' '.join(options),
-                          SPEC_DIR = spec_dir,
-                          SPEC_FILE = spec_file)
-
+            options.append(self._GetImportPaths(obj.option_['paths']))
+        if basename == input_target:
+            pylint_output = WritableObject()
+            lint.Run(['-r', 'n', source], reporter = TextReporter(pylint_output), exit = False)
+            for line in pylint_output.read():
+                if len(line.strip()) != 0:
+                  if line.startswith("C:") or line.startswith("R:"):
+                      pass
+                  elif line.startswith("W:"):
+                      print Util.BuildMessage('[%s] %s' % (basename, line), 'INFO')
+                  elif line.startswith('E:') or line.startswith('F:'):
+                      print Util.BuildMessage('[%s] %s' % (basename, line), 'WARNING')
+            env.PythonBuilder(target, source,
+                              PY_SOURCE = source, OPTIONS = ' '.join(options))
     def _GetImportPaths(self, paths):
         abs_paths = []
         for path in paths:
@@ -83,12 +84,7 @@ class PythonBuilder(LanguageBuilder):
         return ':'.join(abs_paths)
 
     def _GenerateConfiguration(self):
-        abs_script = Path.GetAbsPath(Flags.PYINSTALLER_CONFIURE)
-        python_bin = Path.GetAbsPath(Flags.PYTHON_BIN)
-        build_mode = ''
-        if self._build_mode == 'opt':
-            build_mode = '-O'
-        assert os.system('%s %s %s > /dev/null 2>&1' % (python_bin, build_mode, abs_script)) == 0
+        pass
 
     def _CheckSpecialDependency(self, obj):
         dep_paths = set()
@@ -120,4 +116,7 @@ class PythonBuilder(LanguageBuilder):
                 dep_obj.option_['gen_py'] = True
         if has_proto_dep:
             obj.option_['paths'].extend(dep_paths)
-            obj.option_['paths'].append(Flags.PROTO_PY_INC)
+
+        for d in obj.depends_:
+            if not d.endswith('_proto') and not d.endswith('_thrift'):
+                obj.option_['paths'].append(Path.Dep2Path(d))

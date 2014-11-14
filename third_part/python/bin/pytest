@@ -1,0 +1,4 @@
+#!/home/guoliqiang/git-coding/coding/third_part/python/bin/python
+# EASY-INSTALL-SCRIPT: 'logilab-common==0.63.0','pytest'
+__requires__ = 'logilab-common==0.63.0'
+__import__('pkg_resources').run_script('logilab-common==0.63.0', 'pytest')

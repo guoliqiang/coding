@@ -23,7 +23,11 @@ def GetSnakeFilePathWithoutAbort(logical_path):
   snake_path = os.path.join(logical_path.split(':')[0], Flags.SNAKE_NAME)
   return GetAbsPath(snake_path, abort = False)
 
-
+def Dep2Path(path):
+  """dep path to paths for Python"""
+  """//base/internal:base --> //base/internal"""
+  assert path.startswith('//'), "INPUT %s" % path
+  return path[0 : path.index(':')]
 
 def GetSnakeFilePath(logical_path):
   """'//base/internal:base' --> '~/$ROOT/base/internal/SNAKE'"""

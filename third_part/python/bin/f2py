@@ -1,0 +1,4 @@
+#!/home/guoliqiang/git-coding/coding/third_part/python/bin/python
+# EASY-INSTALL-SCRIPT: 'numpy==1.9.1','f2py'
+__requires__ = 'numpy==1.9.1'
+__import__('pkg_resources').run_script('numpy==1.9.1', 'f2py')
