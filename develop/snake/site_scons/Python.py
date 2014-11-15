@@ -10,6 +10,7 @@ import Util
 import os
 import Flags
 import Path
+import sys
 
 input_target = ARGUMENTS.get('t')
 
@@ -21,7 +22,7 @@ class WritableObject(object):
     def read(self):
         return self.content
 
-def py_binary(name, srcs, deps=[], paths=[]):
+def py_binary(name, srcs, sibling = [], deps=[], paths=[]):
     opt = {}
     opt['paths'] = paths
     assert len(srcs) == 1
@@ -46,7 +47,7 @@ class PythonBuilder(LanguageBuilder):
                             '$PYTHONBIN $PY_SOURCE')
         env['PYTHONBIN'] = Path.GetAbsPath(Flags.PYTHON_BIN)
         env['PYTHONBIN'] = '/usr/bin/python'
-        #env['PYTHONCOMSTR'] = '\x1b[32m[BEGIN RUN: $PY_SOURCE]\x1b[0m'
+        env['PYTHONCOMSTR'] = '\x1b[32m[BEGIN RUN: $PY_SOURCE]\x1b[0m'
 
     def PreProcessObject(self, env, obj):
         self._CheckSpecialDependency(obj)
@@ -65,6 +66,10 @@ class PythonBuilder(LanguageBuilder):
         if obj.option_['paths']:
             options.append(self._GetImportPaths(obj.option_['paths']))
         if basename == input_target:
+            for item_i in options:
+                for item_j in item_i.strip().split(':'):
+                    sys.path.append(item_j)
+
             pylint_output = WritableObject()
             lint.Run(['-r', 'n', source], reporter = TextReporter(pylint_output), exit = False)
             for line in pylint_output.read():
@@ -72,6 +77,7 @@ class PythonBuilder(LanguageBuilder):
                   if line.startswith("C:") or line.startswith("R:"):
                       pass
                   elif line.startswith("W:"):
+                      if line.find('bad-indentation'): continue
                       print Util.BuildMessage('[%s] %s' % (basename, line), 'INFO')
                   elif line.startswith('E:') or line.startswith('F:'):
                       print Util.BuildMessage('[%s] %s' % (basename, line), 'WARNING')
