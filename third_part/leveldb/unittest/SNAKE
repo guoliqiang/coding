@@ -1,0 +1,11 @@
+cc_binary(name='level_db_unittest',
+          srcs = ['level_db_unittest.cc'],
+          deps = [
+                 '//third_part/testing/gtest/src:gtest',
+                 '//base/internal:base',
+                 '//libs/third_part/leveldb:leveldb',
+                 ],
+          cflags = [
+                 '-I/home/guoliqiang/git-coding/coding/third_part/leveldb/include'
+                 ]
+          )
