@@ -1,0 +1,7 @@
+cc_library(name = 'large_file_reader',
+           srcs = ['large_file_reader.cc'],
+           deps = [
+                  '//base/internal:base',
+                  '//file/internal:file',
+           ]
+           )

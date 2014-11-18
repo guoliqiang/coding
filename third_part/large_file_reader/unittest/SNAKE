@@ -1,0 +1,7 @@
+cc_binary(name='large_file_reader_unittest',
+          srcs = ['large_file_reader_unittest.cc'],
+          deps = [
+                 '//third_part/large_file_reader/internal:large_file_reader',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
