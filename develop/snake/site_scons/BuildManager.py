@@ -175,7 +175,8 @@ class BuildManager(object):
             if d in obj.depends_:
               obj.depends_.remove(d)
             obj.depends_.append(d)
-          obj.option_['paths'].extend(dep_obj.option_['paths']) # for py_binary
+          if 'paths' in dep_obj.option_:
+            obj.option_['paths'].extend(dep_obj.option_['paths']) # for py_binary
         obj_idx -= 1
       dep_idx -= 1
     result.reverse()
