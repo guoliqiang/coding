@@ -18,7 +18,7 @@ TEST(LargeFileReaderTest, MMAP) {
   int size = 1024 * 1024;
   std::string rs;
   rs.resize(size);
-  while(reader.Read(offset, size, &rs)) {
+  while (reader.Read(offset, size, &rs) != -1) {
     offset += size;
   }
 }

@@ -40,13 +40,16 @@ class LargeFileReader {
     }
   }
 
-  bool Read(int offset, int size, std::string * rs) {
-    if (offset + size >= file_len_) {
-      return false;
-    }
+  int Read(int offset, int size, std::string * rs) {
+    if (offset >= file_len_) return -1;
+    if (offset + size > file_len_) size = file_len_ - offset;
     rs->resize(size);
     memmove((void *)rs->data(), (void *)(file_ptr_ + offset), size);
-    return true;
+    return size;
+  }
+
+  size_t FileSize() {
+    return file_len_;
   }
 
  private:
