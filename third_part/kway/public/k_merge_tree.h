@@ -55,13 +55,13 @@
 namespace kway {
 
 template <class T, class iterator_t, class comparitor = std::less<T> > 
-class kmerge_tree_c {
+class KmergeTree {
  public:
 	// create the tree with the given number of buckets. Call add() for
   // each of the buckets and then call execute() to build things.
   // Call get_top() then next() until get_top returns false.
-	kmerge_tree_c(long bucket_qty);
-	~kmerge_tree_c();
+	KmergeTree(long bucket_qty);
+	~KmergeTree();
 	
 	// add a sorted collection to the tree
 	// begin/end - start end of a collection
@@ -116,9 +116,9 @@ class kmerge_tree_c {
 	
 	void build_tree(void);	
 	node_rec * build_levels(long number_of_levels);
-	void build_left_siblings(kmerge_tree_c::node_rec* node_ptr);
-	void build_right_siblings(kmerge_tree_c::node_rec* node_ptr);
-	void compare_nodes(kmerge_tree_c::node_rec* node_ptr);
+	void build_left_siblings(KmergeTree::node_rec* node_ptr);
+	void build_right_siblings(KmergeTree::node_rec* node_ptr);
+	void compare_nodes(KmergeTree::node_rec* node_ptr);
 
 	comparitor	comparitor_mbr;
 	long bucket_qty_mbr;
@@ -139,7 +139,7 @@ inline long kmerge_tree_brute_log2(long value) {
 }
 
 template <class T, class iterator_t, class comparitor> 
-kmerge_tree_c<T, iterator_t, comparitor>::kmerge_tree_c(long bucket_qty) :
+KmergeTree<T, iterator_t, comparitor>::KmergeTree(long bucket_qty) :
     bucket_qty_mbr(bucket_qty),
 	  number_of_levels_mbr(kmerge_tree_brute_log2(bucket_qty_mbr)),
     top_node_ptr_mbr(NULL),
@@ -148,14 +148,14 @@ kmerge_tree_c<T, iterator_t, comparitor>::kmerge_tree_c(long bucket_qty) :
 }
 
 template <class T, class iterator_t, class comparitor> 
-kmerge_tree_c<T, iterator_t, comparitor>::~kmerge_tree_c() {
+KmergeTree<T, iterator_t, comparitor>::~KmergeTree() {
 	delete top_node_ptr_mbr;
 }
 
 // Unlike the book, I'm going to make my life easy
 // by maintaining every possible link to each node that I might need
 template <class T, class iterator_t, class comparitor> 
-void kmerge_tree_c<T, iterator_t, comparitor>::build_tree(void) {
+void KmergeTree<T, iterator_t, comparitor>::build_tree(void) {
 	// the book says that the number of levels is (log2 * k) + 1
 	top_node_ptr_mbr = build_levels(number_of_levels_mbr);
 	if (top_node_ptr_mbr) {
@@ -169,8 +169,8 @@ void kmerge_tree_c<T, iterator_t, comparitor>::build_tree(void) {
 // and updates the parent link for them. If no children are to be built
 // (i.e. number_of_levels is 0), then the leaf linked list is created
 template <class T, class iterator_t, class comparitor> 
-typename kmerge_tree_c<T, iterator_t, comparitor>::node_rec *
-kmerge_tree_c<T, iterator_t, comparitor>::build_levels(long number_of_levels) {
+typename KmergeTree<T, iterator_t, comparitor>::node_rec *
+KmergeTree<T, iterator_t, comparitor>::build_levels(long number_of_levels) {
 	node_rec * node_ptr = new node_rec();
 	if (number_of_levels) {
 		node_ptr->left_child_ptr = build_levels(number_of_levels - 1);
@@ -200,8 +200,8 @@ kmerge_tree_c<T, iterator_t, comparitor>::build_levels(long number_of_levels) {
 // off with the top node's children and then these two swing back and forth
 // between each other.
 template <class T, class iterator_t, class comparitor> 
-void kmerge_tree_c<T, iterator_t, comparitor>::build_left_siblings(
-    kmerge_tree_c<T, iterator_t, comparitor>::node_rec * node_ptr) {
+void KmergeTree<T, iterator_t, comparitor>::build_left_siblings(
+    KmergeTree<T, iterator_t, comparitor>::node_rec * node_ptr) {
 	if (node_ptr->parent_ptr) {
 		if (node_ptr->parent_ptr->right_child_ptr) {
 			node_ptr->next_ptr = node_ptr->parent_ptr->right_child_ptr;
@@ -217,8 +217,8 @@ void kmerge_tree_c<T, iterator_t, comparitor>::build_left_siblings(
 }
 
 template <class T, class iterator_t, class comparitor> 
-void kmerge_tree_c<T, iterator_t, comparitor>::build_right_siblings(
-    kmerge_tree_c<T, iterator_t, comparitor>::node_rec* node_ptr) {
+void KmergeTree<T, iterator_t, comparitor>::build_right_siblings(
+    KmergeTree<T, iterator_t, comparitor>::node_rec* node_ptr) {
 	if (node_ptr->parent_ptr) {
 		if (node_ptr->parent_ptr->left_child_ptr) {
 			node_ptr->previous_ptr = node_ptr->parent_ptr->left_child_ptr;
@@ -235,7 +235,7 @@ void kmerge_tree_c<T, iterator_t, comparitor>::build_right_siblings(
 
 // fill the leaf linked list
 template <class T, class iterator_t, class comparitor> 
-void kmerge_tree_c<T, iterator_t, comparitor>::add(iterator_t begin,
+void KmergeTree<T, iterator_t, comparitor>::add(iterator_t begin,
     iterator_t end) {
 	if (begin == end) return;
 	node_rec * node_ptr = first_leaf_ptr;
@@ -255,7 +255,7 @@ void kmerge_tree_c<T, iterator_t, comparitor>::add(iterator_t begin,
 // leaf linked list and then factoring that up to the parents
 // This is only done once so it doesn't have to be that efficient
 template <class T, class iterator_t, class comparitor> 
-void kmerge_tree_c<T, iterator_t, comparitor>::execute(void) {
+void KmergeTree<T, iterator_t, comparitor>::execute(void) {
 	for (long parent_level = 0; parent_level < number_of_levels_mbr;
        parent_level++) {
 		// the number of nodes to skip is (parent level + 1) ^ 2 - 1
@@ -281,8 +281,8 @@ void kmerge_tree_c<T, iterator_t, comparitor>::execute(void) {
 
 // compare the given node and its sibling and bubble the result up to the parent
 template <class T, class iterator_t, class comparitor> 
-void kmerge_tree_c<T, iterator_t, comparitor>::compare_nodes(
-    kmerge_tree_c<T, iterator_t, comparitor>::node_rec * node_ptr) {
+void KmergeTree<T, iterator_t, comparitor>::compare_nodes(
+    KmergeTree<T, iterator_t, comparitor>::node_rec * node_ptr) {
 	node_rec*	node1_ptr = NULL;
 	node_rec*	node2_ptr = NULL;
 	if (node_ptr->next_ptr) {
@@ -313,7 +313,7 @@ void kmerge_tree_c<T, iterator_t, comparitor>::compare_nodes(
 // pop the top node, factor it down the list to find its
 // leaf, replace its leaf and then factor that back up
 template <class T, class iterator_t, class comparitor> 
-void kmerge_tree_c<T, iterator_t, comparitor>::next(void) {
+void KmergeTree<T, iterator_t, comparitor>::next(void) {
 	if (top_node_ptr_mbr->current_iterator == top_node_ptr_mbr->end_iterator) {
 		return;
 	}

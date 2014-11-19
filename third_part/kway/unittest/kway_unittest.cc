@@ -1,22 +1,21 @@
 // Copyright 2014 Liqiang Guo. All Rights Reserved.
 // Author: Liqiang Guo (guoliqiang2006@gmail.com)
-// I just want to GH to hss~
 // Date  : 2014-11-19 05:05:15
 // File  : kway_unittest.cc
 // Brief :
 
-#include "third_part/kway/public/k_merge_tree.h"
 #include <vector>
+#include "third_part/kway/public/k_merge_tree.h"
 #include "base/public/common_head.h"
 #include "third_part/testing/gtest/include/gtest/gtest.h"
 #include "base/public/logging.h"
 #include "base/public/random.h"
 
 template <typename Container>
-class Cmp{                            
+class Cmp {
  public:
   typedef typename Container::iterator Iterator;
-  bool operator ()(
+  bool operator()(
       const std::pair<Iterator, Iterator> & x,
       const std::pair<Iterator, Iterator> & y) const {
     return *(x.first) > *(y.first);
@@ -56,7 +55,7 @@ TEST(Kway, PriorityQueue) {
 TEST(Kway, KmergeTree) {
   std::vector<std::vector<int> > data;
   Fake(100, 20000, &data);
-  kway::kmerge_tree_c<int, std::vector<int>::iterator> merge(data.size());
+  kway::KmergeTree<int, std::vector<int>::iterator> merge(data.size());
   for (int i = 0; i < data.size(); i++) {
     merge.add(data[i].begin(), data[i].end());
   }
