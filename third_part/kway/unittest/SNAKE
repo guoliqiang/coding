@@ -1,0 +1,7 @@
+cc_binary(name = 'kway_unittest',
+          srcs = ['kway_unittest.cc'],
+          deps = [
+                  '//base/internal:base',
+                  '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
