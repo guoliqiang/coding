@@ -1,0 +1,7 @@
+cc_library(name = 'csv_parser',
+           srcs = ['csv_parser.cc'],
+           deps = [
+                   '//base/internal:base',
+                  ],
+           copt = ['no_style_check']
+           )

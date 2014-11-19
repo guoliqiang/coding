@@ -1,0 +1,7 @@
+cc_binary(name = 'csv_unittest',
+          srcs = ['csv_unittest.cc'],
+          deps = [
+                 '//third_part/csv_parser/internal:csv_parser',
+                 ],
+          copt = ['no_style_check']
+          )
