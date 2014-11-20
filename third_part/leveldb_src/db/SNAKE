@@ -1,0 +1,112 @@
+cc_library(name = 'leveldb',
+           srcs = [
+                  'builder.cc',
+                  'table_cache.cc',
+                  'version_set.cc',
+                  'dbformat.cc',
+                  'db_iter.cc',
+                  'repair.cc',
+                  'c.cc',
+                  'log_writer.cc',
+                  'version_edit.cc',
+                  'write_batch.cc',
+                  'db_impl.cc',
+                  'filename.cc',
+                  'log_reader.cc',
+                  'memtable.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/table:table',
+                  '//third_part/leveldb_src/util:util',
+           ]
+           )
+
+cc_binary(name = 'corruption_test',
+           srcs = [
+                  'corruption_test.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'dbformat_test',
+           srcs = [
+                  'dbformat_test.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'db_test',
+           srcs = [
+                  'db_test.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'filename_test',
+           srcs = [
+                  'filename_test.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'leveldb_main',
+           srcs = [
+                  'leveldb_main.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'skiplist_test',
+           srcs = [
+                  'skiplist_test.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'version_edit_test',
+           srcs = [
+                  'version_edit_test.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'version_set_test',
+           srcs = [
+                  'version_set_test.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'write_batch_test',
+           srcs = [
+                  'write_batch_test.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'db_bench',
+           srcs = [
+                  'db_bench.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+cc_binary(name = 'c_test',
+           srcs = [
+                  'c_test.c',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+
