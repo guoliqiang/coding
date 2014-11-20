@@ -6,6 +6,7 @@
 
 #include <vector>
 #include "third_part/kway/public/k_merge_tree.h"
+#include "third_part/kway/public/fast_k_merge_tree.h"
 #include "base/public/common_head.h"
 #include "third_part/testing/gtest/include/gtest/gtest.h"
 #include "base/public/logging.h"
@@ -18,7 +19,7 @@ class Cmp {
   bool operator()(
       const std::pair<Iterator, Iterator> & x,
       const std::pair<Iterator, Iterator> & y) const {
-    return *(x.first) > *(y.first);
+     return *(x.first) > *(y.first);
   }
 };
 
@@ -33,10 +34,13 @@ void Fake(int m, int n, std::vector<std::vector<int> > * rs) {
   }
 }
 
+std::vector<std::vector<int> > data;
+
+TEST(Kway, Random) {
+  Fake(2, 5, &data);
+}
 
 TEST(Kway, PriorityQueue) {
-  std::vector<std::vector<int> > data;
-  Fake(100, 20000, &data);
   typedef std::vector<int> Vec;
   std::priority_queue<std::pair<Vec::iterator, Vec::iterator>,
       std::vector<std::pair<Vec::iterator, Vec::iterator> >,
@@ -46,24 +50,46 @@ TEST(Kway, PriorityQueue) {
   }
   while (!queue.empty()) {
     std::pair<Vec::iterator, Vec::iterator> tmp = queue.top();
+    LOG(INFO) << *tmp.first;
     queue.pop();
     tmp.first++;
     if (tmp.first != tmp.second) queue.push(tmp);
   }
 }
 
+class Cmp2 {
+ public:
+  bool operator() (const int & x, const int & y) {
+    return x < y;
+  }
+};
+
 TEST(Kway, KmergeTree) {
-  std::vector<std::vector<int> > data;
-  Fake(100, 20000, &data);
-  kway::KmergeTree<int, std::vector<int>::iterator> merge(data.size());
+  kway::KmergeTree<int, std::vector<int>::iterator, Cmp2> merge(data.size());
   for (int i = 0; i < data.size(); i++) {
     merge.add(data[i].begin(), data[i].end());
   }
+
   merge.execute();
   while (true) {
     vector<int>::iterator tmp;
     if (!merge.get_top(tmp)) break;
+    LOG(INFO) << *tmp;
     merge.next();
+  }
+}
+
+TEST(Kway, FastKmergeTree) {
+  kway::FastKmergeTree<int, std::vector<int>::iterator, Cmp2> merge;
+  for (int i = 0; i < data.size(); i++) {
+    merge.Add(data[i].begin(), data[i].end());
+  }
+  merge.Build();
+  while (true) {
+    vector<int>::iterator tmp;
+    if (!merge.Top(&tmp)) break;
+    LOG(INFO) << *tmp;
+    merge.Next();
   }
 }
 
