@@ -141,7 +141,7 @@ class SkipList {
 
 // Implementation details follow
 template<typename Key, class Comparator>
-struct SkipList<Key,Comparator>::Node {
+struct SkipList<Key, Comparator>::Node {
   explicit Node(const Key& k) : key(k) { }
 
   Key const key;
