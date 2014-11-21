@@ -1,0 +1,10 @@
+cc_binary(name = 'memenv_test',
+           srcs = [
+                  'memenv_test.cc',
+                  'memenv.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ]
+           )
+
