@@ -99,7 +99,8 @@ cc_binary(name = 'db_bench',
                   ],
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
-           ]
+           ],
+           cflags = ['-D__OPTIMIZE__'],
            )
 cc_binary(name = 'c_test',
            srcs = [
@@ -107,6 +108,6 @@ cc_binary(name = 'c_test',
                   ],
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
-           ]
+           ],
            )
 

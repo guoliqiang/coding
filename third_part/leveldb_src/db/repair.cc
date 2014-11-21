@@ -75,7 +75,7 @@ class Repairer {
       status = WriteDescriptor();
     }
     if (status.ok()) {
-      unsigned long long bytes = 0;
+      unsigned long long bytes = 0;  // NOLINT
       for (size_t i = 0; i < tables_.size(); i++) {
         bytes += tables_[i].meta.file_size;
       }
@@ -152,7 +152,7 @@ class Repairer {
       Status status = ConvertLogToTable(logs_[i]);
       if (!status.ok()) {
         Log(options_.info_log, "Log #%llu: ignoring conversion error: %s",
-            (unsigned long long) logs_[i],
+            (unsigned long long) logs_[i],  // NOLINT
             status.ToString().c_str());
       }
       ArchiveFile(logname);
@@ -167,7 +167,7 @@ class Repairer {
       virtual void Corruption(size_t bytes, const Status& s) {
         // We print error messages for corruption, but continue repairing.
         Log(info_log, "Log #%llu: dropping %d bytes; %s",
-            (unsigned long long) lognum,
+            (unsigned long long) lognum,  // NOLINT
             static_cast<int>(bytes),
             s.ToString().c_str());
       }
@@ -212,7 +212,7 @@ class Repairer {
         counter += WriteBatchInternal::Count(&batch);
       } else {
         Log(options_.info_log, "Log #%llu: ignoring %s",
-            (unsigned long long) log,
+            (unsigned long long) log,  // NOLINT
             status.ToString().c_str());
         status = Status::OK();  // Keep going with rest of file
       }
@@ -234,9 +234,9 @@ class Repairer {
       }
     }
     Log(options_.info_log, "Log #%llu: %d ops saved to Table #%llu %s",
-        (unsigned long long) log,
+        (unsigned long long) log,  // NOLINT
         counter,
-        (unsigned long long) meta.number,
+        (unsigned long long) meta.number,  // NOLINT
         status.ToString().c_str());
     return status;
   }
@@ -250,7 +250,7 @@ class Repairer {
       if (!status.ok()) {
         std::string fname = TableFileName(dbname_, table_numbers_[i]);
         Log(options_.info_log, "Table #%llu: ignoring %s",
-            (unsigned long long) table_numbers_[i],
+            (unsigned long long) table_numbers_[i],  // NOLINT
             status.ToString().c_str());
         ArchiveFile(fname);
       } else {
@@ -273,7 +273,7 @@ class Repairer {
         Slice key = iter->key();
         if (!ParseInternalKey(key, &parsed)) {
           Log(options_.info_log, "Table #%llu: unparsable key %s",
-              (unsigned long long) t->meta.number,
+              (unsigned long long) t->meta.number,  // NOLINT
               EscapeString(key).c_str());
           continue;
         }
@@ -294,7 +294,7 @@ class Repairer {
       delete iter;
     }
     Log(options_.info_log, "Table #%llu: %d entries %s",
-        (unsigned long long) t->meta.number,
+        (unsigned long long) t->meta.number,  // NOLINT
         counter,
         status.ToString().c_str());
     return status;
@@ -327,7 +327,7 @@ class Repairer {
                     t.meta.smallest, t.meta.largest);
     }
 
-    //fprintf(stderr, "NewDescriptor:\n%s\n", edit_.DebugString().c_str());
+    // fprintf(stderr, "NewDescriptor:\n%s\n", edit_.DebugString().c_str());
     {
       log::Writer log(file);
       std::string record;

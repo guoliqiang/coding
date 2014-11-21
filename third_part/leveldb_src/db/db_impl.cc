@@ -4,11 +4,11 @@
 
 #include "third_part/leveldb_src/db/db_impl.h"
 
+#include <stdint.h>
+#include <stdio.h>
 #include <algorithm>
 #include <set>
 #include <string>
-#include <stdint.h>
-#include <stdio.h>
 #include <vector>
 #include "third_part/leveldb_src/db/builder.h"
 #include "third_part/leveldb_src/db/db_iter.h"
@@ -82,7 +82,7 @@ struct DBImpl::CompactionState {
 };
 
 // Fix user-supplied options to be reasonable
-template <class T,class V>
+template <class T, class V>
 static void ClipToRange(T* ptr, V minvalue, V maxvalue) {
   if (static_cast<V>(*ptr) > maxvalue) *ptr = maxvalue;
   if (static_cast<V>(*ptr) < minvalue) *ptr = minvalue;
@@ -221,7 +221,7 @@ void DBImpl::DeleteObsoleteFiles() {
   versions_->AddLiveFiles(&live);
 
   std::vector<std::string> filenames;
-  env_->GetChildren(dbname_, &filenames); // Ignoring errors on purpose
+  env_->GetChildren(dbname_, &filenames);  // Ignoring errors on purpose
   uint64_t number;
   FileType type;
   for (size_t i = 0; i < filenames.size(); i++) {
@@ -257,8 +257,8 @@ void DBImpl::DeleteObsoleteFiles() {
           table_cache_->Evict(number);
         }
         Log(options_.info_log, "Delete type=%d #%lld\n",
-            int(type),
-            static_cast<unsigned long long>(number));
+            static_cast<int>(type),
+            static_cast<unsigned long long>(number));  // NOLINT
         env_->DeleteFile(dbname_ + "/" + filenames[i]);
       }
     }
@@ -329,7 +329,8 @@ Status DBImpl::Recover(VersionEdit* edit) {
       char buf[50];
       snprintf(buf, sizeof(buf), "%d missing files; e.g.",
                static_cast<int>(expected.size()));
-      return Status::Corruption(buf, TableFileName(dbname_, *(expected.begin())));
+      return Status::Corruption(buf, TableFileName(dbname_,
+                                                   *(expected.begin())));
     }
 
     // Recover in the order in which the logs were generated
@@ -393,7 +394,7 @@ Status DBImpl::RecoverLogFile(uint64_t log_number,
   log::Reader reader(file, &reporter, true/*checksum*/,
                      0/*initial_offset*/);
   Log(options_.info_log, "Recovering log #%llu",
-      (unsigned long long) log_number);
+      (unsigned long long) log_number);  // NOLINT
 
   // Read all the records and add to a memtable
   std::string scratch;
@@ -457,7 +458,7 @@ Status DBImpl::WriteLevel0Table(MemTable* mem, VersionEdit* edit,
   pending_outputs_.insert(meta.number);
   Iterator* iter = mem->NewIterator();
   Log(options_.info_log, "Level-0 table #%llu: started",
-      (unsigned long long) meta.number);
+      (unsigned long long) meta.number);  // NOLINT
 
   Status s;
   {
@@ -467,8 +468,8 @@ Status DBImpl::WriteLevel0Table(MemTable* mem, VersionEdit* edit,
   }
 
   Log(options_.info_log, "Level-0 table #%llu: %lld bytes %s",
-      (unsigned long long) meta.number,
-      (unsigned long long) meta.file_size,
+      (unsigned long long) meta.number,  // NOLINT
+      (unsigned long long) meta.file_size,  // NOLINT
       s.ToString().c_str());
   delete iter;
   pending_outputs_.erase(meta.number);
@@ -538,13 +539,14 @@ void DBImpl::CompactRange(const Slice* begin, const Slice* end) {
       }
     }
   }
-  TEST_CompactMemTable(); // TODO(sanjay): Skip if memtable does not overlap
+  TEST_CompactMemTable();  // TODO(sanjay): Skip if memtable does not overlap
   for (int level = 0; level < max_level_with_files; level++) {
     TEST_CompactRange(level, begin, end);
   }
 }
 
-void DBImpl::TEST_CompactRange(int level, const Slice* begin,const Slice* end) {
+void DBImpl::TEST_CompactRange(int level, const Slice* begin,
+                               const Slice* end) {
   assert(level >= 0);
   assert(level + 1 < config::kNumLevels);
 
@@ -692,9 +694,9 @@ Status DBImpl::BackgroundCompaction() {
     status = versions_->LogAndApply(c->edit(), &mutex_);
     VersionSet::LevelSummaryStorage tmp;
     Log(options_.info_log, "Moved #%lld to level-%d %lld bytes %s: %s\n",
-        static_cast<unsigned long long>(f->number),
+        static_cast<unsigned long long>(f->number),  // NOLINT
         c->level() + 1,
-        static_cast<unsigned long long>(f->file_size),
+        static_cast<unsigned long long>(f->file_size),  // NOLINT
         status.ToString().c_str(),
         versions_->LevelSummary(&tmp));
   } else {
@@ -819,9 +821,9 @@ Status DBImpl::FinishCompactionOutputFile(CompactionState* compact,
     if (s.ok()) {
       Log(options_.info_log,
           "Generated table #%llu: %lld keys, %lld bytes",
-          (unsigned long long) output_number,
-          (unsigned long long) current_entries,
-          (unsigned long long) current_bytes);
+          (unsigned long long) output_number,  // NOLINT
+          (unsigned long long) current_entries,  // NOLINT
+          (unsigned long long) current_bytes);  // NOLINT
     }
   }
   return s;
@@ -835,7 +837,7 @@ Status DBImpl::InstallCompactionResults(CompactionState* compact) {
       compact->compaction->level(),
       compact->compaction->num_input_files(1),
       compact->compaction->level() + 1,
-      static_cast<long long>(compact->total_bytes));
+      static_cast<long long>(compact->total_bytes));  // NOLINT
 
   // Add compaction outputs
   compact->compaction->AddInputDeletions(compact->compaction->edit());
@@ -940,9 +942,10 @@ Status DBImpl::DoCompactionWork(CompactionState* compact) {
         "  Compact: %s, seq %d, type: %d %d, drop: %d, is_base: %d, "
         "%d smallest_snapshot: %d",
         ikey.user_key.ToString().c_str(),
-        (int)ikey.sequence, ikey.type, kTypeValue, drop,
+        static_cast<int>(ikey.sequence), ikey.type, kTypeValue, drop,
         compact->compaction->IsBaseLevelForKey(ikey.user_key),
-        (int)last_sequence_for_key, (int)compact->smallest_snapshot);
+        static_cast<int>(last_sequence_for_key),
+        static_cast<int>(compact->smallest_snapshot));
 #endif
 
     if (!drop) {
@@ -1345,8 +1348,7 @@ bool DBImpl::GetProperty(const Slice& property, std::string* value) {
     snprintf(buf, sizeof(buf),
              "                               Compactions\n"
              "Level  Files Size(MB) Time(sec) Read(MB) Write(MB)\n"
-             "--------------------------------------------------\n"
-             );
+             "--------------------------------------------------\n");
     value->append(buf);
     for (int level = 0; level < config::kNumLevels; level++) {
       int files = versions_->NumLevelFiles(level);
@@ -1421,7 +1423,8 @@ Status DB::Open(const Options& options, const std::string& dbname,
   DBImpl* impl = new DBImpl(options, dbname);
   impl->mutex_.Lock();
   VersionEdit edit;
-  Status s = impl->Recover(&edit); // Handles create_if_missing, error_if_exists
+  // Handles create_if_missing, error_if_exists
+  Status s = impl->Recover(&edit);
   if (s.ok()) {
     uint64_t new_log_number = impl->versions_->NewFileNumber();
     WritableFile* lfile;

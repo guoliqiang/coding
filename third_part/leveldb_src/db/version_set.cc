@@ -4,8 +4,9 @@
 
 #include "third_part/leveldb_src/db/version_set.h"
 
-#include <algorithm>
 #include <stdio.h>
+#include <string>
+#include <algorithm>
 #include "third_part/leveldb_src/db/filename.h"
 #include "third_part/leveldb_src/db/log_reader.h"
 #include "third_part/leveldb_src/db/log_writer.h"
@@ -148,7 +149,8 @@ bool SomeFileOverlapsRange(
   uint32_t index = 0;
   if (smallest_user_key != NULL) {
     // Find the earliest possible internal key for smallest_user_key
-    InternalKey small(*smallest_user_key, kMaxSequenceNumber,kValueTypeForSeek);
+    InternalKey small(*smallest_user_key, kMaxSequenceNumber,
+                      kValueTypeForSeek);
     index = FindFile(icmp, files, small.Encode());
   }
 
@@ -986,7 +988,8 @@ void VersionSet::Finalize(Version* v) {
 }
 
 Status VersionSet::WriteSnapshot(log::Writer* log) {
-  // TODO: Break up into multiple records to reduce memory usage on recovery?
+  // TODO(guoliqiang):
+  // Break up into multiple records to reduce memory usage on recovery?
 
   // Save metadata
   VersionEdit edit;
@@ -1026,13 +1029,13 @@ const char* VersionSet::LevelSummary(LevelSummaryStorage* scratch) const {
   assert(config::kNumLevels == 7);
   snprintf(scratch->buffer, sizeof(scratch->buffer),
            "files[ %d %d %d %d %d %d %d ]",
-           int(current_->files_[0].size()),
-           int(current_->files_[1].size()),
-           int(current_->files_[2].size()),
-           int(current_->files_[3].size()),
-           int(current_->files_[4].size()),
-           int(current_->files_[5].size()),
-           int(current_->files_[6].size()));
+           static_cast<int>(current_->files_[0].size()),
+           static_cast<int>(current_->files_[1].size()),
+           static_cast<int>(current_->files_[2].size()),
+           static_cast<int>(current_->files_[3].size()),
+           static_cast<int>(current_->files_[4].size()),
+           static_cast<int>(current_->files_[5].size()),
+           static_cast<int>(current_->files_[6].size()));
   return scratch->buffer;
 }
 
@@ -1283,12 +1286,14 @@ void VersionSet::SetupOtherInputs(Compaction* c) {
         Log(options_->info_log,
             "Expanding@%d %d+%d (%ld+%ld bytes) to %d+%d (%ld+%ld bytes)\n",
             level,
-            int(c->inputs_[0].size()),
-            int(c->inputs_[1].size()),
-            long(inputs0_size), long(inputs1_size),
-            int(expanded0.size()),
-            int(expanded1.size()),
-            long(expanded0_size), long(inputs1_size));
+            static_cast<int>(c->inputs_[0].size()),
+            static_cast<int>(c->inputs_[1].size()),
+            static_cast<long>(inputs0_size),  // NOLINT
+            static_cast<long>(inputs1_size),  // NOLINT
+            static_cast<int>(expanded0.size()),
+            static_cast<int>(expanded1.size()),
+            static_cast<long>(expanded0_size),  // NOLINT
+            static_cast<long>(inputs1_size));  // NOLINT
         smallest = new_start;
         largest = new_limit;
         c->inputs_[0] = expanded0;

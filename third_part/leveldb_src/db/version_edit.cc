@@ -4,6 +4,7 @@
 
 #include "third_part/leveldb_src/db/version_edit.h"
 
+#include <string>
 #include "third_part/leveldb_src/db/version_set.h"
 #include "third_part/leveldb_src/util/coding.h"
 

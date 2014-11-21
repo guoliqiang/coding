@@ -4,6 +4,7 @@
 
 #include "third_part/leveldb_src/db/builder.h"
 
+#include <string>
 #include "third_part/leveldb_src/db/filename.h"
 #include "third_part/leveldb_src/db/dbformat.h"
 #include "third_part/leveldb_src/db/table_cache.h"

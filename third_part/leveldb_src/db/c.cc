@@ -42,29 +42,28 @@ using leveldb::WriteBatch;
 using leveldb::WriteOptions;
 
 extern "C" {
-
-struct leveldb_t              { DB*               rep; };
-struct leveldb_iterator_t     { Iterator*         rep; };
-struct leveldb_writebatch_t   { WriteBatch        rep; };
-struct leveldb_snapshot_t     { const Snapshot*   rep; };
-struct leveldb_readoptions_t  { ReadOptions       rep; };
-struct leveldb_writeoptions_t { WriteOptions      rep; };
-struct leveldb_options_t      { Options           rep; };
-struct leveldb_cache_t        { Cache*            rep; };
-struct leveldb_seqfile_t      { SequentialFile*   rep; };
-struct leveldb_randomfile_t   { RandomAccessFile* rep; };
-struct leveldb_writablefile_t { WritableFile*     rep; };
-struct leveldb_logger_t       { Logger*           rep; };
-struct leveldb_filelock_t     { FileLock*         rep; };
+struct leveldb_t              { DB*               rep; };  // NOLINT
+struct leveldb_iterator_t     { Iterator*         rep; };  // NOLINT
+struct leveldb_writebatch_t   { WriteBatch        rep; };  // NOLINT
+struct leveldb_snapshot_t     { const Snapshot*   rep; };  // NOLINT
+struct leveldb_readoptions_t  { ReadOptions       rep; };  // NOLINT
+struct leveldb_writeoptions_t { WriteOptions      rep; };  // NOLINT
+struct leveldb_options_t      { Options           rep; };  // NOLINT
+struct leveldb_cache_t        { Cache*            rep; };  // NOLINT
+struct leveldb_seqfile_t      { SequentialFile*   rep; };  // NOLINT
+struct leveldb_randomfile_t   { RandomAccessFile* rep; };  // NOLINT
+struct leveldb_writablefile_t { WritableFile*     rep; };  // NOLINT
+struct leveldb_logger_t       { Logger*           rep; };  // NOLINT
+struct leveldb_filelock_t     { FileLock*         rep; };  // NOLINT
 
 struct leveldb_comparator_t : public Comparator {
   void* state_;
-  void (*destructor_)(void*);
-  int (*compare_)(
+  void (*destructor_)(void*);  // NOLINT
+  int (*compare_)(  // NOLINT
       void*,
       const char* a, size_t alen,
       const char* b, size_t blen);
-  const char* (*name_)(void*);
+  const char* (*name_)(void*);  // NOLINT
 
   virtual ~leveldb_comparator_t() {
     (*destructor_)(state_);
@@ -85,14 +84,14 @@ struct leveldb_comparator_t : public Comparator {
 
 struct leveldb_filterpolicy_t : public FilterPolicy {
   void* state_;
-  void (*destructor_)(void*);
-  const char* (*name_)(void*);
+  void (*destructor_)(void*);  // NOLINT
+  const char* (*name_)(void*);  // NOLINT
   char* (*create_)(
       void*,
       const char* const* key_array, const size_t* key_length_array,
       int num_keys,
       size_t* filter_length);
-  unsigned char (*key_match_)(
+  unsigned char (*key_match_)(  // NOLINT
       void*,
       const char* key, size_t length,
       const char* filter, size_t filter_length);
@@ -144,8 +143,9 @@ static bool SaveError(char** errptr, const Status& s) {
 }
 
 static char* CopyString(const std::string& str) {
-  char* result = reinterpret_cast<char*>(malloc(sizeof(char) * str.size()));
-  memcpy(result, str.data(), sizeof(char) * str.size());
+  char* result =
+      reinterpret_cast<char*>(malloc(sizeof(char) * str.size()));  // NOLINT
+  memcpy(result, str.data(), sizeof(char) * str.size());  // NOLINT
   return result;
 }
 
@@ -452,12 +452,12 @@ void leveldb_options_set_compression(leveldb_options_t* opt, int t) {
 
 leveldb_comparator_t* leveldb_comparator_create(
     void* state,
-    void (*destructor)(void*),
-    int (*compare)(
+    void (*destructor)(void*),  // NOLINT
+    int (*compare)(  // NOLINT
         void*,
         const char* a, size_t alen,
         const char* b, size_t blen),
-    const char* (*name)(void*)) {
+    const char* (*name)(void*)) {  // NOLINT
   leveldb_comparator_t* result = new leveldb_comparator_t;
   result->state_ = state;
   result->destructor_ = destructor;
@@ -472,17 +472,17 @@ void leveldb_comparator_destroy(leveldb_comparator_t* cmp) {
 
 leveldb_filterpolicy_t* leveldb_filterpolicy_create(
     void* state,
-    void (*destructor)(void*),
+    void (*destructor)(void*),  // NOLINT
     char* (*create_filter)(
         void*,
         const char* const* key_array, const size_t* key_length_array,
         int num_keys,
         size_t* filter_length),
-    unsigned char (*key_may_match)(
+    unsigned char (*key_may_match) (  // NOLINT
         void*,
         const char* key, size_t length,
         const char* filter, size_t filter_length),
-    const char* (*name)(void*)) {
+    const char* (*name)(void*)) {  // NOLINT
   leveldb_filterpolicy_t* result = new leveldb_filterpolicy_t;
   result->state_ = state;
   result->destructor_ = destructor;
@@ -510,7 +510,7 @@ leveldb_filterpolicy_t* leveldb_filterpolicy_create_bloom(int bits_per_key) {
     bool KeyMayMatch(const Slice& key, const Slice& filter) const {
       return rep_->KeyMayMatch(key, filter);
     }
-    static void DoNothing(void*) { }
+    static void DoNothing(void* name) { }
   };
   Wrapper* wrapper = new Wrapper;
   wrapper->rep_ = NewBloomFilterPolicy(bits_per_key);
@@ -528,7 +528,7 @@ void leveldb_readoptions_destroy(leveldb_readoptions_t* opt) {
 }
 
 void leveldb_readoptions_set_verify_checksums(
-    leveldb_readoptions_t* opt,
+    leveldb_readoptions_t * opt,  // NOLINT
     unsigned char v) {
   opt->rep.verify_checksums = v;
 }
@@ -591,5 +591,4 @@ int leveldb_major_version() {
 int leveldb_minor_version() {
   return kMinorVersion;
 }
-
 }  // end extern "C"
