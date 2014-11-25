@@ -14,7 +14,7 @@
 //   <cstdatomic> based acquire-load vs. ~1ns for a barrier based
 //   acquire-load).
 // This code is based on atomicops-internals-* in Google's perftools:
-// http://code.google.com/p/google-perftools/source/browse/#svn%2Ftrunk%2Fsrc%2Fbase
+// code.google.com/p/google-perftools/source/browse/#svn%2Ftrunk%2Fsrc%2Fbase
 
 #ifndef PORT_ATOMIC_POINTER_H_
 #define PORT_ATOMIC_POINTER_H_
@@ -31,17 +31,11 @@ inline void MemoryBarrier() {
 
 // AtomicPointer built using platform-specific MemoryBarrier()
 class AtomicPointer {
- private:
-  void* rep_;
  public:
-  AtomicPointer() { }
+  AtomicPointer() {}
   explicit AtomicPointer(void* p) : rep_(p) {}
-  inline void* NoBarrier_Load() const {
-    return rep_;
-  }
-  inline void NoBarrier_Store(void* v) {
-    rep_ = v;
-  }
+  inline void* NoBarrier_Load() const { return rep_; }
+  inline void NoBarrier_Store(void* v) { rep_ = v; }
   inline void* Acquire_Load() const {
     void* result = rep_;
     MemoryBarrier();
@@ -51,6 +45,8 @@ class AtomicPointer {
     MemoryBarrier();
     rep_ = v;
   }
+ private:
+  void* rep_;
 };
 
 }  // namespace skiplist

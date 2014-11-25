@@ -8,6 +8,7 @@
 #include "third_part/testing/gtest/include/gtest/gtest.h"
 #include "third_part/skip_list/public/skiplist.h"
 #include "base/public/thread.h"
+#include "base/public/mutex.h"
 
 template <typename Key>
 struct Comparator {
@@ -23,14 +24,12 @@ struct Comparator {
 };
 
 TEST(SkipList, Normal) {
-  Comparator<double> cmp;
-  skiplist::SkipList<double, Comparator<double> > sl(cmp);
-  for (int i = 0; i < 100; i++) {
-    sl.Insert(i);
-  }
+  skiplist::SkipList<double, Comparator<double> > sl;
+  sl.Insert(-10);
   skiplist::SkipList<double, Comparator<double> >::Iterator iterator(&sl);
   iterator.SeekToFirst();
   while (iterator.Valid()) {
+    LOG(INFO) << iterator.key();
     iterator.Next();
   }
 }
@@ -66,23 +65,29 @@ class Writer : public base::Thread {
   }
  protected:
   void Run() {
-    std::set<int> set;
     for (int i = 0; i < 10; i++) {
       int t = base::Random() % 100;
-      if (set.count(t)) continue;
-      set.insert(t);
-      list_->Insert(t);
+      {
+        base::MutexLock lock(&mutex_);
+        if (set_.count(t)) continue;
+        set_.insert(t);
+        list_->Insert(t);
+      }
       LOG(INFO) << i << " insert :" << t;
-      sleep(1);
+      if (i % 2 == 0) sleep(1);
     }
   }
  private:
   skiplist::SkipList<double, Comparator<double> > * list_;
+  static base::Mutex mutex_;
+  static std::set<int> set_;
 };
 
+base::Mutex Writer::mutex_;
+std::set<int> Writer::set_;
+
 TEST(SkipList, OneWriterTwoReader) {
-  Comparator<double> cmp;
-  skiplist::SkipList<double, Comparator<double> > list(cmp);
+  skiplist::SkipList<double, Comparator<double> > list;
   Writer writer(&list);
   Reader reader1(&list);
   Reader reader2(&list);
@@ -90,6 +95,22 @@ TEST(SkipList, OneWriterTwoReader) {
   reader1.Start();
   reader2.Start();
   writer.Join();
+  reader1.Join();
+  reader2.Join();
+}
+
+TEST(SkipList, MultiWriterReader) {
+  skiplist::SkipList<double, Comparator<double> > list;
+  Writer writer1(&list);
+  Writer writer2(&list);
+  Reader reader1(&list);
+  Reader reader2(&list);
+  writer1.Start();
+  writer2.Start();
+  reader1.Start();
+  reader2.Start();
+  writer1.Join();
+  writer2.Join();
   reader1.Join();
   reader2.Join();
 }

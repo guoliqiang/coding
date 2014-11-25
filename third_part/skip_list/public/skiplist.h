@@ -41,7 +41,7 @@ class SkipList {
   // Create a new SkipList object that will use "cmp" for comparing keys,
   // and will allocate memory using "*arena".  Objects allocated in the arena
   // must remain allocated for the lifetime of the skiplist object.
-  explicit SkipList(Comparator cmp);
+  explicit SkipList();
 
   // Insert key into the list.
   // REQUIRES: nothing that compares equal to key is currently in the list.
@@ -139,7 +139,7 @@ template<typename Key, class Comparator>
 class SkipList<Key, Comparator>::MemArea {
  public:
   MemArea(int size) {
-    CHECK(size > 0);
+    CHECK(size > 0) << size << " should > 0";
     ptr_ = new char[size];
   }
   ~MemArea() { delete [] ptr_; }
@@ -151,20 +151,20 @@ class SkipList<Key, Comparator>::MemArea {
 // Implementation details follow
 template<typename Key, class Comparator>
 struct SkipList<Key, Comparator>::Node {
-  explicit Node(const Key& k) : key(k) { }
+  explicit Node(const Key & k) : key(k) { }
 
   Key const key;
 
   // Accessors/mutators for links.  Wrapped in methods so we can
   // add the appropriate barriers as necessary.
   Node* Next(int n) {
-    CHECK(n >= 0);
+    CHECK(n >= 0) << n;
     // Use an 'acquire load' so that we observe a fully initialized
     // version of the returned Node.
     return reinterpret_cast<Node*>(next_[n].Acquire_Load());
   }
   void SetNext(int n, Node* x) {
-    CHECK(n >= 0);
+    CHECK(n >= 0) << n;
     // Use a 'release store' so that anybody who reads through this
     // pointer observes a fully initialized version of the inserted node.
     next_[n].Release_Store(x);
@@ -172,11 +172,11 @@ struct SkipList<Key, Comparator>::Node {
 
   // No-barrier variants that can be safely used in a few locations.
   Node* NoBarrier_Next(int n) {
-    CHECK(n >= 0);
+    CHECK(n >= 0) << n;
     return reinterpret_cast<Node*>(next_[n].NoBarrier_Load());
   }
   void NoBarrier_SetNext(int n, Node* x) {
-    CHECK(n >= 0);
+    CHECK(n >= 0) << n;
     next_[n].NoBarrier_Store(x);
   }
 
@@ -254,13 +254,13 @@ int SkipList<Key, Comparator>::RandomHeight() {
   while (height < kMaxHeight && ((base::Random() % kBranching) == 0)) {
     height++;
   }
-  CHECK(height > 0);
-  CHECK(height <= kMaxHeight);
+  CHECK(height > 0) << height;
+  CHECK(height <= kMaxHeight) << height << " " << kMaxHeight;
   return height;
 }
 
 template<typename Key, class Comparator>
-bool SkipList<Key, Comparator>::KeyIsAfterNode(const Key& key, Node* n) const {
+bool SkipList<Key, Comparator>::KeyIsAfterNode(const Key & key, Node* n) const {
   // NULL n is considered infinite
   return (n != NULL) && (compare_(n->key, key) < 0);
 }
@@ -330,8 +330,8 @@ typename SkipList<Key,Comparator>::Node* SkipList<Key,Comparator>::FindLast()
 }
 
 template<typename Key, class Comparator>
-SkipList<Key, Comparator>::SkipList(Comparator cmp)
-    : compare_(cmp),
+SkipList<Key, Comparator>::SkipList()
+    : compare_(Comparator()),
       head_(NewNode(0 /* any key will do */, kMaxHeight)),
       max_height_(reinterpret_cast<void*>(1)) {
   for (int i = 0; i < kMaxHeight; i++) {
@@ -340,7 +340,7 @@ SkipList<Key, Comparator>::SkipList(Comparator cmp)
 }
 
 template<typename Key, class Comparator>
-void SkipList<Key,Comparator>::Insert(const Key& key) {
+void SkipList<Key,Comparator>::Insert(const Key & key) {
   // TODO(opt): We can use a barrier-free variant of FindGreaterOrEqual()
   // here since Insert() is externally synchronized.
   Node* prev[kMaxHeight];
@@ -354,7 +354,7 @@ void SkipList<Key,Comparator>::Insert(const Key& key) {
     for (int i = GetMaxHeight(); i < height; i++) {
       prev[i] = head_;
     }
-    //fprintf(stderr, "Change height from %d to %d\n", max_height_, height);
+    LOG(INFO) << "Change height from " << GetMaxHeight() << " to " << height;
 
     // It is ok to mutate max_height_ without any synchronization
     // with concurrent readers.  A concurrent reader that observes
@@ -376,7 +376,7 @@ void SkipList<Key,Comparator>::Insert(const Key& key) {
 }
 
 template<typename Key, class Comparator>
-bool SkipList<Key,Comparator>::Contains(const Key& key) const {
+bool SkipList<Key,Comparator>::Contains(const Key & key) const {
   Node* x = FindGreaterOrEqual(key, NULL);
   if (x != NULL && Equal(key, x->key)) {
     return true;
