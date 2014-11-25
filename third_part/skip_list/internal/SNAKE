@@ -1,0 +1,6 @@
+cc_library(name = 'skiplist',
+           srcs = ['skiplist.cc'],
+           deps = [
+                  '//base/internal:base',
+           ]
+           )

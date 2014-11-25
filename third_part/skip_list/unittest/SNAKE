@@ -1,0 +1,7 @@
+cc_binary(name='skiplist_unittest',
+          srcs = ['skiplist_unittest.cc'],
+          deps = [
+                 '//third_part/skip_list/internal:skiplist',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
