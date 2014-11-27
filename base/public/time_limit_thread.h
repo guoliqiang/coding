@@ -13,6 +13,24 @@
 #include "base/public/mutex.h"
 #include "base/public/shared_ptr.h"
 
+// Note: the thread must exit with "return" of Run function. Beacuse
+// pthread_cancel and pthread_kill both are possible result to memory leak.
+//
+// Usage:
+// class Foo : public TimeLimitThread {
+//  public:
+//   Foo(int timeout) : TimeLimitThread(timeout) {}
+//  protected:
+//   virtual void Run() {
+//     do something;
+//     TIMEOUTRETURN;
+//     do something;
+//   }
+// };
+//
+// Note: when timeout, the thread are also running until reatch return.
+//       So you must be carefull for data synchronization.
+
 namespace base {
 
 class TimeLimitThread {
@@ -51,7 +69,6 @@ class TimeLimitThread {
     MutexLock lock(&mutex_);
     return already_time_out_;
   }
-#define TIMEOUTRETURN do { if (AlreadyTimeOut()) return; } while(0)
   void Start();
   bool Join();
 
@@ -80,6 +97,7 @@ class TimeLimitThread {
   DISALLOW_COPY_AND_ASSIGN(TimeLimitThread);
 };
 
+#define TIMEOUTRETURN do { if (AlreadyTimeOut()) return; } while(0)
 }  // namespace base
 
 #endif  //__TIME_LIMIT_THREAD_H_
