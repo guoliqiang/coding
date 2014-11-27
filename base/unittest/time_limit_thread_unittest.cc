@@ -4,8 +4,8 @@
 // File  : time_limit_thread_unittest.cc
 // Brief :
 
-#include "third_part/testing/gtest/include/gtest/gtest.h"
 #include "base/public/time_limit_thread.h"
+#include "third_part/testing/gtest/include/gtest/gtest.h"
 
 class ThreadFoo : public base::TimeLimitThread {
  public:
@@ -13,9 +13,11 @@ class ThreadFoo : public base::TimeLimitThread {
 
  protected:
   virtual void Run() {
-    sleep(1);
-    EXPECT_TRUE(AlreadyTimeOut());
-    TIMEOUTRETURN;
+    while (true) {
+      sleep(1);
+      EXPECT_TRUE(AlreadyTimeOut());
+      TIMEOUTRETURN;
+    }
   }
 };
 
@@ -31,16 +33,17 @@ class ThreadBar : public base::TimeLimitThread {
   }
 };
 
+TEST(TimeLimitThread, Normal) {
+  base::shared_ptr<base::TimeLimitThread> foo =
+      base::TimeLimitThread::GetInstance<ThreadBar>(1200);
+  foo->Start();
+  EXPECT_TRUE(foo->Join());
+}
+
 TEST(TimeLimitThread, Timeout) {
   base::shared_ptr<base::TimeLimitThread> foo =
       base::TimeLimitThread::GetInstance<ThreadFoo>(500);
   foo->Start();
   EXPECT_FALSE(foo->Join());
   sleep(1);
-}
-
-TEST(TimeLimitThread, Normal) {
-  ThreadBar foo(1200);
-  foo.Start();
-  EXPECT_TRUE(foo.Join());
 }
