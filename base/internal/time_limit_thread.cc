@@ -28,16 +28,12 @@ void TimeLimitThread::Exit() {
   cond_var_.SignalAll();
 }
 
-bool TimeLimitThread::Finish() {
-  MutexLock lock(&mutex_);
-  return finished_;
-}
-
 bool TimeLimitThread::Join() {
   CHECK(started_ == true) << "thread not start!";
   base::MutexLock lock(&mutex_);
   if (finished_ == false) {
     if (cond_var_.WaitWithTimeout(&mutex_, time_out_)) {
+      already_time_out_ = true;
       return false;
     }
   }
@@ -45,5 +41,6 @@ bool TimeLimitThread::Join() {
 }
 
 std::list<shared_ptr<TimeLimitThread> > TimeLimitThread::threads;
+Mutex TimeLimitThread::mutex;
 
 }  // namespace base
