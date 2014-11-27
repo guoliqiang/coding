@@ -3,7 +3,9 @@ cc_library(name = 'crypto',
                   'base64.cc',
                   'hmac_sha1.cc',
                   'md5.cc',
-                  'sha1.cc'],
+                  'sha1.cc',
+                  'crc32c.cc'
+                  ],
             deps = [
                    '//base/internal:base',
                    '//third_part/modp_b64/internal:modp_b64'

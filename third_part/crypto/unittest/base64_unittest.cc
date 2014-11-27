@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#include "util/crypto/base64.h"
-#include "testing/gtest/include/gtest/gtest.h"
+#include "third_part/crypto/public/base64.h"
+#include "third_part/testing/gtest/include/gtest/gtest.h"
 
 TEST(Base64Test, Basic) {
   const std::string kText = "hello world";

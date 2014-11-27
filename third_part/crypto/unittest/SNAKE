@@ -1,0 +1,23 @@
+cc_binary(name='crc32c_unittest',
+          srcs = ['crc32c_unittest.cc'],
+          deps = [
+                 '//third_part/crypto/internal:crypto',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
+
+cc_binary(name='base62_unittest',
+          srcs = ['base62_unittest.cc'],
+          deps = [
+                 '//third_part/crypto/internal:crypto',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
+
+cc_binary(name='base64_unittest',
+          srcs = ['base64_unittest.cc'],
+          deps = [
+                 '//third_part/crypto/internal:crypto',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
