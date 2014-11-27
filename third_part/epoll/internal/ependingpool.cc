@@ -7,6 +7,10 @@
 #include "base/public/logging.h"
 #include "base/public/net.h"
 
+// Abnormal closed tcp(net down), need to set keep-alive
+// and epoll will receive a EPOOLERR event, and ependingpool will close this
+// socket.
+
 DEFINE_int32(DEF_CONN_TIMEO, 500, "");
 DEFINE_int32(DEF_READ_TIMEO, 500, "");
 DEFINE_int32(DEF_WRITE_TIMEO, 500, "");
