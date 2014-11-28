@@ -1,0 +1,14 @@
+cc_library(name = 'data_logger',
+           srcs = [
+                   'log_reader.cc',
+                   'log_writer.cc',
+                   'status.cc',
+                   'env_posix.cc',
+                   'env.cc',
+                  ],
+           deps = [
+                  '//base/internal:base',
+                  '//file/internal:file',
+                  '//third_part/crypto/internal:crypto',
+           ]
+           )

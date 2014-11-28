@@ -1,0 +1,7 @@
+cc_binary(name='log_unittest',
+          srcs = ['log_unittest.cc'],
+          deps = [
+                 '//third_part/data_logger/internal:data_logger',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
