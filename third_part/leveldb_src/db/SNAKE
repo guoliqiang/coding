@@ -110,4 +110,12 @@ cc_binary(name = 'c_test',
                   '//third_part/leveldb_src/db:leveldb',
            ],
            )
+cc_binary(name = 'log_test',
+           srcs = [
+                  'log_test.cc',
+                  ],
+           deps = [
+                  '//third_part/leveldb_src/db:leveldb',
+           ],
+           )
 

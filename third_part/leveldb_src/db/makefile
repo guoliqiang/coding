@@ -21,6 +21,7 @@ all:
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/write_batch_test $(WORK_ROOT)/$(PROJ_NAME)/; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/c_test $(WORK_ROOT)/$(PROJ_NAME)/; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/db_bench $(WORK_ROOT)/$(PROJ_NAME)/; \
+	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/log_test $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 opt:
 
@@ -37,4 +38,5 @@ clean:
 	rm -rf write_batch_test
 	rm -rf c_test
 	rm -rf db_bench
+	rm -rf log_test
 
