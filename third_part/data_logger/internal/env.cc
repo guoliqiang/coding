@@ -6,23 +6,17 @@
 
 namespace data_logger {
 
-Env::~Env() {
-}
+Env::~Env() { }
 
-SequentialFile::~SequentialFile() {
-}
+SequentialFile::~SequentialFile() { }
 
-RandomAccessFile::~RandomAccessFile() {
-}
+RandomAccessFile::~RandomAccessFile() { }
 
-WritableFile::~WritableFile() {
-}
+WritableFile::~WritableFile() { }
 
-Logger::~Logger() {
-}
+Logger::~Logger() { }
 
-FileLock::~FileLock() {
-}
+FileLock::~FileLock() { }
 
 void Log(Logger* info_log, const char* format, ...) {
   if (info_log != NULL) {
@@ -90,7 +84,6 @@ Status ReadFileToString(Env* env, const std::string& fname, std::string* data) {
   return s;
 }
 
-EnvWrapper::~EnvWrapper() {
-}
+EnvWrapper::~EnvWrapper() { }
 
 }  // namespace data_logger

@@ -62,6 +62,7 @@ class PosixSequentialFile: public SequentialFile {
 };
 
 // pread() based random-access
+// http://www.cnblogs.com/brill/p/3226439.html
 class PosixRandomAccessFile: public RandomAccessFile {
  private:
   std::string filename_;
@@ -132,6 +133,53 @@ class MmapLimiter {
 
   MmapLimiter(const MmapLimiter&);
   void operator=(const MmapLimiter&);
+};
+
+// mmap() based sequence-access
+class PosixMmapSequentialReadableFile: public SequentialFile {
+ private:
+  std::string filename_;
+  void * mmapped_region_;
+  size_t length_;
+  size_t left_size_;
+  MmapLimiter* limiter_;
+
+ public:
+  // base[0,length-1] contains the mmapped contents of the file.
+  PosixMmapSequentialReadableFile(const std::string& fname, void* base,
+                                  size_t length, MmapLimiter* limiter)
+      : filename_(fname), mmapped_region_(base), length_(length),
+        left_size_(length), limiter_(limiter) {
+  }
+
+  virtual ~PosixMmapSequentialReadableFile() {
+    munmap(mmapped_region_, length_);
+    limiter_->Release();
+  }
+
+  virtual Status Read(size_t n, std::string* result,
+                      char* scratch) {
+    Status s;
+    if (left_size_ <= 0) {
+      *result = std::string();
+      s = IOError(filename_, EINVAL);
+    } else {
+      int cur_size = std::min(left_size_, n);
+      *result = std::string(reinterpret_cast<char*>(mmapped_region_), cur_size);
+      mmapped_region_ = reinterpret_cast<char*>(mmapped_region_) + cur_size;
+      left_size_ -= cur_size;
+    }
+    return s;
+  }
+
+  virtual Status Skip(uint64_t n) {
+    if (left_size_ <  n) {
+      return IOError(filename_, EINVAL);
+    }
+    mmapped_region_ = reinterpret_cast<char*>(mmapped_region_) + n;
+    left_size_ -= n;
+    return Status::OK();
+  }
 };
 
 // mmap() based random-access
@@ -384,6 +432,34 @@ class PosixEnv : public Env {
 
   virtual Status NewSequentialFile(const std::string& fname,
                                    SequentialFile** result) {
+    if (mmap_limit_.Acquire()) {
+      Status s;
+      int fd = open(fname.c_str(), O_RDONLY);
+      if (fd < 0) {
+        s = IOError(fname, errno);
+      } else {
+        uint64_t size;
+        s = GetFileSize(fname, &size);
+        if (s.ok()) {
+          void* base = mmap(NULL, size, PROT_READ, MAP_SHARED, fd, 0);
+          if (base != MAP_FAILED) {
+            *result = new PosixMmapSequentialReadableFile(fname, base,
+                size, &mmap_limit_);
+            if (madvise(base, size, MADV_WILLNEED | MADV_SEQUENTIAL) == -1) {
+              s = IOError(fname, errno);
+            }
+          } else {
+            s = IOError(fname, errno);
+          }
+        }
+        close(fd);
+      }
+      if (!s.ok()) {
+        mmap_limit_.Release();
+        return s;
+      }
+    }
+
     FILE* f = fopen(fname.c_str(), "r");
     if (f == NULL) {
       *result = NULL;
@@ -408,6 +484,9 @@ class PosixEnv : public Env {
         void* base = mmap(NULL, size, PROT_READ, MAP_SHARED, fd, 0);
         if (base != MAP_FAILED) {
           *result = new PosixMmapReadableFile(fname, base, size, &mmap_limit_);
+          if (madvise(base, size, MADV_RANDOM) == -1) {
+            s = IOError(fname, errno);
+          }
         } else {
           s = IOError(fname, errno);
         }

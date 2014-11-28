@@ -214,10 +214,10 @@ class LogTest : public testing::Test {
               record.size());
     ASSERT_EQ(initial_offset_last_record_offsets_[expected_record_offset],
               offset_reader->LastRecordOffset());
-    ASSERT_EQ((char)('a' + expected_record_offset), record.data()[0]);
+    ASSERT_EQ((char)('a' + expected_record_offset),  // NOLINT
+              record.data()[0]);
     delete offset_reader;
   }
-
 };
 
 size_t LogTest::initial_offset_record_sizes_[] =
@@ -480,8 +480,8 @@ TEST_F(LogTest, ReadFourthLastBlock) {
 
 TEST_F(LogTest, ReadFourthStart) {
   CheckInitialOffsetRecord(
-      2 * (kHeaderSize + 1000) + (2 * data_logger::kBlockSize - 1000) + 3 * kHeaderSize,
-      3);
+      2 * (kHeaderSize + 1000) + (2 * data_logger::kBlockSize - 1000)
+      + 3 * kHeaderSize, 3);
 }
 
 TEST_F(LogTest, ReadEnd) {
