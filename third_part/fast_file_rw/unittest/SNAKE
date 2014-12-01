@@ -1,0 +1,7 @@
+cc_binary(name='env_test',
+          srcs = ['env_test.cc'],
+          deps = [
+                 '//third_part/fast_file_rw/internal:fast_file_rw',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )

@@ -1,0 +1,10 @@
+cc_library(name = 'fast_file_rw',
+           srcs = [
+                   'status.cc',
+                   'env_posix.cc',
+                  ],
+           deps = [
+                  '//base/internal:base',
+                  '//file/internal:file',
+           ]
+           )
