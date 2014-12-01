@@ -10,13 +10,14 @@
 #include <errno.h>
 
 #include "third_part/data_logger/public/log_format.h"
-#include "third_part/data_logger/public/status.h"
-#include "third_part/data_logger/public/env.h"
+#include "third_part/fast_file_rw/public/status.h"
+#include "third_part/fast_file_rw/public/env.h"
 #include "base/public/logging.h"
 
 namespace data_logger {
 
-class SequentialFile;
+using fast_file_rw::Status;
+using fast_file_rw::SequentialFile;
 
 class Reader {
  public:
@@ -101,6 +102,18 @@ class Reader {
   // No copying allowed
   Reader(const Reader&);
   void operator=(const Reader&);
+};
+
+class DefaultReport : public Reader::Reporter {
+ public:
+  size_t dropped_bytes_;
+  std::string message_;
+
+  DefaultReport() : dropped_bytes_(0) { }
+  virtual void Corruption(size_t bytes, const Status& status) {
+    dropped_bytes_ += bytes;
+    message_.append(status.ToString());
+  }
 };
 
 }  // namespace data_logger

@@ -7,13 +7,13 @@
 
 #include <stdint.h>
 #include "third_part/data_logger/public/log_format.h"
-#include "third_part/data_logger/public/status.h"
-#include "third_part/data_logger/public/env.h"
-
+#include "third_part/fast_file_rw/public/status.h"
+#include "third_part/fast_file_rw/public/env.h"
 
 namespace data_logger {
 
-class WritableFile;
+using fast_file_rw::Status;
+using fast_file_rw::WritableFile;
 
 class Writer {
  public:
@@ -34,7 +34,7 @@ class Writer {
   // record type stored in the header.
   uint32_t type_crc_[kMaxRecordType + 1];
 
-  Status EmitPhysicalRecord(RecordType type, const char* ptr, size_t length);
+  fast_file_rw::Status EmitPhysicalRecord(RecordType type, const char* ptr, size_t length);
 
   // No copying allowed
   Writer(const Writer&);
