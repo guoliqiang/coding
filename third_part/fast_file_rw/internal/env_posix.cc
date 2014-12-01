@@ -301,7 +301,7 @@ class PosixMmapFile : public WritableFile {
   }
 
   virtual Status Flush() {
-    return Status::OK();
+    return Sync();
   }
 
   // http://blog.csdn.net/cywosp/article/details/8767327
