@@ -38,14 +38,12 @@ static Status GetFileSize(const std::string & file_name, uint64_t * size) {
 }
 
 class PosixSequentialFile: public SequentialFile {
- private:
-  std::string filename_;
-  FILE* file_;
-
  public:
   PosixSequentialFile(const std::string& fname, FILE* f)
       : filename_(fname), file_(f) { }
-  virtual ~PosixSequentialFile() { fclose(file_); }
+  virtual ~PosixSequentialFile() {
+    fclose(file_);
+  }
 
   virtual Status Read(size_t n, std::string* result, char* scratch) {
     Status s;
@@ -68,19 +66,21 @@ class PosixSequentialFile: public SequentialFile {
     }
     return Status::OK();
   }
+
+ private:
+  std::string filename_;
+  FILE * file_;
 };
 
 // pread() based random-access
 // http://www.cnblogs.com/brill/p/3226439.html
 class PosixRandomAccessFile: public RandomAccessFile {
- private:
-  std::string filename_;
-  int fd_;
-
  public:
   PosixRandomAccessFile(const std::string& fname, int fd)
       : filename_(fname), fd_(fd) { }
-  virtual ~PosixRandomAccessFile() { close(fd_); }
+  virtual ~PosixRandomAccessFile() {
+    close(fd_);
+  }
 
   virtual Status Read(uint64_t offset, size_t n, std::string* result,
                       char* scratch) const {
@@ -93,6 +93,10 @@ class PosixRandomAccessFile: public RandomAccessFile {
     }
     return s;
   }
+
+ private:
+  std::string filename_;
+  int fd_;
 };
 
 // Helper class to limit mmap file usage so that we do not end up
@@ -140,19 +144,11 @@ class MmapLimiter {
     allowed_.Release_Store(reinterpret_cast<void*>(v));
   }
 
-  MmapLimiter(const MmapLimiter&);
-  void operator=(const MmapLimiter&);
+  DISALLOW_COPY_AND_ASSIGN(MmapLimiter);
 };
 
-// mmap() based sequence-access
+// mmap() based sequential-access
 class PosixMmapSequentialReadableFile: public SequentialFile {
- private:
-  std::string filename_;
-  void * mmapped_region_;
-  size_t length_;
-  size_t left_size_;
-  MmapLimiter* limiter_;
-
  public:
   // base[0,length-1] contains the mmapped contents of the file.
   PosixMmapSequentialReadableFile(const std::string& fname, void* base,
@@ -171,7 +167,6 @@ class PosixMmapSequentialReadableFile: public SequentialFile {
     Status s;
     if (left_size_ <= 0) {
       *result = std::string();
-      s = IOError(filename_, EINVAL);
     } else {
       int cur_size = std::min(left_size_, n);
       *result = std::string(reinterpret_cast<char*>(mmapped_region_), cur_size);
@@ -182,23 +177,22 @@ class PosixMmapSequentialReadableFile: public SequentialFile {
   }
 
   virtual Status Skip(uint64_t n) {
-    if (left_size_ <  n) {
-      return IOError(filename_, EINVAL);
-    }
+    if (left_size_ <  n)  n = left_size_;
     mmapped_region_ = reinterpret_cast<char*>(mmapped_region_) + n;
     left_size_ -= n;
     return Status::OK();
   }
+
+ private:
+  std::string filename_;
+  void * mmapped_region_;
+  size_t length_;
+  size_t left_size_;
+  MmapLimiter* limiter_;
 };
 
 // mmap() based random-access
 class PosixMmapReadableFile: public RandomAccessFile {
- private:
-  std::string filename_;
-  void* mmapped_region_;
-  size_t length_;
-  MmapLimiter* limiter_;
-
  public:
   // base[0,length-1] contains the mmapped contents of the file.
   PosixMmapReadableFile(const std::string& fname, void* base, size_t length,
@@ -225,6 +219,12 @@ class PosixMmapReadableFile: public RandomAccessFile {
     }
     return s;
   }
+
+ private:
+  std::string filename_;
+  void* mmapped_region_;
+  size_t length_;
+  MmapLimiter* limiter_;
 };
 
 // We preallocate up to an extra megabyte and use memcpy to append new
@@ -307,7 +307,6 @@ class PosixMmapFile : public WritableFile {
   // http://blog.csdn.net/cywosp/article/details/8767327
   virtual Status Sync() {
     Status s;
-
     if (pending_sync_) {
       // Some unmapped data was not synced
       pending_sync_ = false;
@@ -427,19 +426,17 @@ class PosixEnv : public Env {
         }
         close(fd);
       }
-      if (!s.ok()) {
-        mmap_limit_.Release();
-        return s;
-      }
-    }
-
-    FILE* f = fopen(fname.c_str(), "r");
-    if (f == NULL) {
-      *result = NULL;
-      return IOError(fname, errno);
+      if (!s.ok()) mmap_limit_.Release();
+      return s;
     } else {
-      *result = new PosixSequentialFile(fname, f);
-      return Status::OK();
+      FILE * f = fopen(fname.c_str(), "r");
+      if (f == NULL) {
+        *result = NULL;
+        return IOError(fname, errno);
+      } else {
+        *result = new PosixSequentialFile(fname, f);
+        return Status::OK();
+      }
     }
   }
 

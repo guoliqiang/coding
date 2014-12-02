@@ -141,32 +141,6 @@ class Env {
   DISALLOW_COPY_AND_ASSIGN(Env);
 };
 
-// An implementation of Env that forwards all calls to another Env.
-// May be useful to clients who wish to override just part of the
-// functionality of another Env.
-class EnvWrapper : public Env {
- public:
-  // Initialize an EnvWrapper that delegates all calls to *t
-  explicit EnvWrapper(Env* t) : target_(t) { }
-  virtual ~EnvWrapper();
-
-  // Return the target to which this Env forwards all calls
-  Env* target() const { return target_; }
-
-  // The following text is boilerplate that forwards all methods to target()
-  Status NewSequentialFile(const std::string& f, SequentialFile** r) {
-    return target_->NewSequentialFile(f, r);
-  }
-  Status NewRandomAccessFile(const std::string& f, RandomAccessFile** r) {
-    return target_->NewRandomAccessFile(f, r);
-  }
-  Status NewWritableFile(const std::string& f, WritableFile** r) {
-    return target_->NewWritableFile(f, r);
-  }
- private:
-  Env* target_;
-};
-
 }  // namespace fast_file_rw
 
 #endif  // _ENV_H_
