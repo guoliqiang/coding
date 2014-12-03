@@ -1,0 +1,7 @@
+cc_binary(name='bloom_test',
+          srcs = ['bloom_test.cc'],
+          deps = [
+                 '//third_part/bloom_filter/internal:bloom_filter',
+                 '//third_part/testing/gtest/src:gtest',
+                 ]
+          )
