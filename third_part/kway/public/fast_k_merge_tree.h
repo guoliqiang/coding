@@ -11,7 +11,7 @@
 #include "base/public/string_util.h"
 
 namespace kway {
-template <typename T, typename Iterator, class Cmp = std::less<T> >
+template <typename T, typename Iterator, typename Cmp = std::less<T> >
 class FastKmergeTree {
  public:
   void Add(const Iterator & begin, const Iterator & end) {
