@@ -38,6 +38,9 @@ inline uint32_t Unmask(uint32_t masked_crc) {
   return ((rot >> 17) | (rot << 15));
 }
 
+uint32_t DecodeFixed32(const char * p);
+void EncodeFixed32(char* buf, uint32_t value);
+
 }  // namespace crypto
 
 #endif  // _CRC32C_H_

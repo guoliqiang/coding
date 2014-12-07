@@ -4,7 +4,8 @@ cc_library(name = 'crypto',
                   'hmac_sha1.cc',
                   'md5.cc',
                   'sha1.cc',
-                  'crc32c.cc'
+                  'crc32c.cc',
+                  'crc64c.cc',
                   ],
             deps = [
                    '//base/internal:base',
