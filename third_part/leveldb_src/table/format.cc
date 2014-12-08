@@ -63,6 +63,12 @@ Status Footer::DecodeFrom(Slice* input) {
   return result;
 }
 
+// read the data block
+// Data Block
+//
+// Block Data
+// Type(char)
+// CRC(uint32)
 Status ReadBlock(RandomAccessFile* file,
                  const ReadOptions& options,
                  const BlockHandle& handle,
