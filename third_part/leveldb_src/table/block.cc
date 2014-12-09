@@ -14,6 +14,16 @@
 #include "third_part/leveldb_src/util/coding.h"
 #include "third_part/leveldb_src/util/logging.h"
 
+// Data Block
+//
+// |Block Data|  --> |KeyValue0   | --> |shared key len; non-share key len;
+// |Type      |      |KeyValue1   |      value len; non-share key; value   |
+// |CRC       |      |...         |
+//                   |Restart[0]  | --> offset of KeyValue, Restart[0] == 0
+//                   |Restart[1]  |
+//                   |...         |
+//                   |Restarts Num|
+
 namespace leveldb {
 
 inline uint32_t Block::NumRestarts() const {
@@ -112,6 +122,16 @@ class Block::Iter : public Iterator {
     value_ = Slice(data_ + offset, 0);
   }
 
+// data_  -->              |          |
+//                         |          |
+//                         |          |
+// restarts_(offset)-->    |restart[0]|   <--- cuffrent_(offset)
+//                         |restart[1]|
+//                         |restart[2]|
+//                         |    3     |
+// num_restarts_ = 3
+// restart_index_ = 3  it used to do pre
+//
  public:
   Iter(const Comparator* comparator,
        const char* data,
