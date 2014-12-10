@@ -12,8 +12,8 @@
 namespace leveldb {
 
 struct TableAndFile {
-  RandomAccessFile* file;
-  Table* table;
+  RandomAccessFile * file;
+  Table * table;
 };
 
 static void DeleteEntry(const Slice& key, void* value) {
