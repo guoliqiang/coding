@@ -639,16 +639,13 @@ class VersionSet::Builder {
       const FileSet* added = levels_[level].added_files;
       v->files_[level].reserve(base_files.size() + added->size());
       for (FileSet::const_iterator added_iter = added->begin();
-           added_iter != added->end();
-           ++added_iter) {
+           added_iter != added->end(); ++added_iter) {
         // Add all smaller files listed in base_
         for (std::vector<FileMetaData*>::const_iterator bpos
                  = std::upper_bound(base_iter, base_end, *added_iter, cmp);
-             base_iter != bpos;
-             ++base_iter) {
+             base_iter != bpos; ++base_iter) {
           MaybeAddFile(v, level, *base_iter);
         }
-
         MaybeAddFile(v, level, *added_iter);
       }
 
@@ -1098,8 +1095,7 @@ uint64_t VersionSet::ApproximateOffsetOf(Version* v, const InternalKey& ikey) {
 
 void VersionSet::AddLiveFiles(std::set<uint64_t>* live) {
   for (Version* v = dummy_versions_.next_;
-       v != &dummy_versions_;
-       v = v->next_) {
+       v != &dummy_versions_; v = v->next_) {
     for (int level = 0; level < config::kNumLevels; level++) {
       const std::vector<FileMetaData*>& files = v->files_[level];
       for (size_t i = 0; i < files.size(); i++) {
@@ -1121,7 +1117,7 @@ int64_t VersionSet::MaxNextLevelOverlappingBytes() {
   for (int level = 1; level < config::kNumLevels - 1; level++) {
     for (size_t i = 0; i < current_->files_[level].size(); i++) {
       const FileMetaData* f = current_->files_[level][i];
-      current_->GetOverlappingInputs(level+1, &f->smallest, &f->largest,
+      current_->GetOverlappingInputs(level + 1, &f->smallest, &f->largest,
                                      &overlaps);
       const int64_t sum = TotalFileSize(overlaps);
       if (sum > result) {
@@ -1213,7 +1209,7 @@ Compaction* VersionSet::PickCompaction() {
   if (size_compaction) {
     level = current_->compaction_level_;
     assert(level >= 0);
-    assert(level+1 < config::kNumLevels);
+    assert(level + 1 < config::kNumLevels);
     c = new Compaction(level);
 
     // Pick the first file that comes after compact_pointer_[level]
@@ -1261,7 +1257,8 @@ void VersionSet::SetupOtherInputs(Compaction* c) {
   InternalKey smallest, largest;
   GetRange(c->inputs_[0], &smallest, &largest);
 
-  current_->GetOverlappingInputs(level+1, &smallest, &largest, &c->inputs_[1]);
+  current_->GetOverlappingInputs(level + 1, &smallest,
+                                 &largest, &c->inputs_[1]);
 
   // Get entire range covered by compaction
   InternalKey all_start, all_limit;
@@ -1280,7 +1277,7 @@ void VersionSet::SetupOtherInputs(Compaction* c) {
       InternalKey new_start, new_limit;
       GetRange(expanded0, &new_start, &new_limit);
       std::vector<FileMetaData*> expanded1;
-      current_->GetOverlappingInputs(level+1, &new_start, &new_limit,
+      current_->GetOverlappingInputs(level + 1, &new_start, &new_limit,
                                      &expanded1);
       if (expanded1.size() == c->inputs_[1].size()) {
         Log(options_->info_log,
