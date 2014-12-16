@@ -1,3 +1,2 @@
-make
-cp -r ./levedb-1../include .
-cp ./leveldb-1../libleveldb.a ./lib
+cp -r ./levedb-git/include .
+cp ./leveldb-git/libleveldb.a ./lib
