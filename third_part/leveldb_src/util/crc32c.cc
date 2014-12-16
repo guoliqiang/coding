@@ -313,7 +313,10 @@ uint32_t Extend(uint32_t crc, const char* buf, size_t size) {
   }
   // Process bytes 16 at a time
   while ((e-p) >= 16) {
-    STEP4; STEP4; STEP4; STEP4;
+    STEP4;
+    STEP4;
+    STEP4;
+    STEP4;
   }
   // Process bytes 4 at a time
   while ((e-p) >= 4) {

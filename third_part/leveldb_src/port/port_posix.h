@@ -44,6 +44,7 @@
 #endif
 #include <stdint.h>
 #include <string>
+#include <stdio.h>
 #include "third_part/leveldb_src/port/atomic_pointer.h"
 
 #ifndef PLATFORM_IS_LITTLE_ENDIAN

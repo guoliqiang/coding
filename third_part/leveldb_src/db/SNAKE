@@ -20,6 +20,7 @@ cc_library(name = 'leveldb',
                   '//third_part/leveldb_src/table:table',
                   '//third_part/leveldb_src/util:util',
            ],
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 
 cc_binary(name = 'corruption_test',
@@ -29,7 +30,7 @@ cc_binary(name = 'corruption_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 cc_binary(name = 'dbformat_test',
            srcs = [
@@ -38,7 +39,7 @@ cc_binary(name = 'dbformat_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 cc_binary(name = 'filename_test',
            srcs = [
@@ -47,7 +48,7 @@ cc_binary(name = 'filename_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 cc_binary(name = 'leveldb_main',
            srcs = [
@@ -56,7 +57,7 @@ cc_binary(name = 'leveldb_main',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 cc_binary(name = 'skiplist_test',
            srcs = [
@@ -65,7 +66,7 @@ cc_binary(name = 'skiplist_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 cc_binary(name = 'version_edit_test',
            srcs = [
@@ -74,7 +75,7 @@ cc_binary(name = 'version_edit_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 cc_binary(name = 'version_set_test',
            srcs = [
@@ -83,7 +84,7 @@ cc_binary(name = 'version_set_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 cc_binary(name = 'write_batch_test',
            srcs = [
@@ -92,7 +93,7 @@ cc_binary(name = 'write_batch_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 cc_binary(name = 'db_bench',
            srcs = [
@@ -100,8 +101,10 @@ cc_binary(name = 'db_bench',
                   ],
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
+                  '//libs/third_part/gperftools:tcmalloc',
+                  '//libs/third_part/libunwind:unwind',
            ],
-#           cflags = ['-DSNAPPY', '-DNDEBUG'],
+           cflags = ['-DSNAPPY', '-DNDEBUG', '-D__OPTIMIZE__'],
            )
 
 cc_binary(name = 'db_test',
@@ -111,7 +114,7 @@ cc_binary(name = 'db_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 
 cc_binary(name = 'c_test',
@@ -121,7 +124,7 @@ cc_binary(name = 'c_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 cc_binary(name = 'log_test',
            srcs = [
@@ -130,7 +133,7 @@ cc_binary(name = 'log_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 
 cc_binary(name = 'fault_injection_test',
@@ -140,6 +143,6 @@ cc_binary(name = 'fault_injection_test',
            deps = [
                   '//third_part/leveldb_src/db:leveldb',
            ],
-           cflags = ['-DSNAPPY']
+           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 

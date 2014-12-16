@@ -107,5 +107,4 @@ bool FilterBlockReader::KeyMayMatch(uint64_t block_offset, const Slice& key) {
   }
   return true;  // Errors are treated as potential matches
 }
-
-}
+}  // namespace leveldb

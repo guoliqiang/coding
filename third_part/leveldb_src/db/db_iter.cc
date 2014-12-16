@@ -4,6 +4,8 @@
 
 #include "third_part/leveldb_src/db/db_iter.h"
 
+#include <string>
+#include <algorithm>
 #include "third_part/leveldb_src/db/filename.h"
 #include "third_part/leveldb_src/db/db_impl.h"
 #include "third_part/leveldb_src/db/dbformat.h"

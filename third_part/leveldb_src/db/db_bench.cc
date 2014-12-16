@@ -746,7 +746,7 @@ class Benchmark {
       }
       s = db_->Write(write_options_, &batch);
       if (!s.ok()) {
-        fprintf(stderr, "put error: %s\n", s.ToString().c_str());
+        fprintf(stderr, "%d put error: %s\n", __LINE__, s.ToString().c_str());
         exit(1);
       }
     }
@@ -889,7 +889,7 @@ class Benchmark {
         snprintf(key, sizeof(key), "%016d", k);
         Status s = db_->Put(write_options_, key, gen.Generate(value_size_));
         if (!s.ok()) {
-          fprintf(stderr, "put error: %s\n", s.ToString().c_str());
+          fprintf(stderr, "%d put error: %s\n", __LINE__, s.ToString().c_str());
           exit(1);
         }
       }

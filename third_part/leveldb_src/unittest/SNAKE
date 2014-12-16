@@ -4,5 +4,6 @@ cc_binary(name = 'variable_unittest',
                   ],
            deps = [
                   '//base/internal:base',
-           ]
+           ],
+           cflags = ['-DSNAPPY']
            )

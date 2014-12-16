@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <string>
 #include "third_part/leveldb_src/include/leveldb/comparator.h"
 #include "third_part/leveldb_src/table/format.h"
 #include "third_part/leveldb_src/util/coding.h"
@@ -78,7 +79,7 @@ class Block::Iter : public Iterator {
   const Comparator* const comparator_;
   const char* const data_;      // underlying block contents
   uint32_t const restarts_;     // Offset of restart array (list of fixed32)
-  uint32_t const num_restarts_; // Number of uint32_t entries in restart array
+  uint32_t const num_restarts_;  // Number of uint32_t entries in restart array
 
   // current_ is offset in data_ of current entry.  >= restarts_ if !Valid
   uint32_t current_;

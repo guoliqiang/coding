@@ -4,6 +4,7 @@
 
 #include "third_part/leveldb_src/table/two_level_iterator.h"
 
+#include <string>
 #include "third_part/leveldb_src/include/leveldb/table.h"
 #include "third_part/leveldb_src/table/block.h"
 #include "third_part/leveldb_src/table/format.h"
@@ -67,7 +68,7 @@ class TwoLevelIterator: public Iterator {
   const ReadOptions options_;
   Status status_;
   IteratorWrapper index_iter_;
-  IteratorWrapper data_iter_; // May be NULL
+  IteratorWrapper data_iter_;  // May be NULL
   // If data_iter_ is non-NULL, then "data_block_handle_" holds the
   // "index_value" passed to block_function_ to create the data_iter_.
   std::string data_block_handle_;

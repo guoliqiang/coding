@@ -96,7 +96,7 @@ class MmapLimiter {
  public:
   // Up to 1000 mmaps for 64-bit binaries; none for smaller pointer sizes.
   MmapLimiter() {
-    SetAllowed(sizeof(void*) >= 8 ? 1000 : 0);
+    SetAllowed(sizeof(void*) >= 8 ? 1000 : 0);  // NOLINT
   }
 
   // If another mmap slot is available, acquire it and return true.
@@ -362,7 +362,7 @@ class PosixEnv : public Env {
       return IOError(dir, errno);
     }
     struct dirent* entry;
-    while ((entry = readdir(d)) != NULL) {
+    while ((entry = readdir(d)) != NULL) {  // NOLINT
       result->push_back(entry->d_name);
     }
     closedir(d);
@@ -447,7 +447,7 @@ class PosixEnv : public Env {
     return result;
   }
 
-  virtual void Schedule(void (*function)(void*), void* arg);
+  virtual void Schedule(void (*function)(void*), void* arg);  // NOLINT
 
   virtual void StartThread(void (*function)(void* arg), void* arg);
 
@@ -457,7 +457,7 @@ class PosixEnv : public Env {
       *result = env;
     } else {
       char buf[100];
-      snprintf(buf, sizeof(buf), "/tmp/leveldbtest-%d", int(geteuid()));
+      snprintf(buf, sizeof(buf), "/tmp/leveldbtest-%d", int(geteuid()));  // NOLINT
       *result = buf;
     }
     // Directory may already exist
@@ -514,7 +514,10 @@ class PosixEnv : public Env {
   bool started_bgthread_;
 
   // Entry per Schedule() call
-  struct BGItem { void* arg; void (*function)(void*); };
+  struct BGItem {
+    void* arg;
+    void (*function)(void*);  // NOLINT
+  };
   typedef std::deque<BGItem> BGQueue;
   BGQueue queue_;
 
@@ -527,7 +530,7 @@ PosixEnv::PosixEnv() : started_bgthread_(false) {
   PthreadCall("cvar_init", pthread_cond_init(&bgsignal_, NULL));
 }
 
-void PosixEnv::Schedule(void (*function)(void*), void* arg) {
+void PosixEnv::Schedule(void (*function)(void*), void* arg) {  // NOLINT
   PthreadCall("lock", pthread_mutex_lock(&mu_));
 
   // Start background thread if necessary
@@ -560,7 +563,7 @@ void PosixEnv::BGThread() {
       PthreadCall("wait", pthread_cond_wait(&bgsignal_, &mu_));
     }
 
-    void (*function)(void*) = queue_.front().function;
+    void (*function)(void*) = queue_.front().function;  // NOLINT
     void* arg = queue_.front().arg;
     queue_.pop_front();
 
@@ -571,7 +574,7 @@ void PosixEnv::BGThread() {
 
 namespace {
 struct StartThreadState {
-  void (*user_function)(void*);
+  void (*user_function)(void*);  // NOLINT
   void* arg;
 };
 }
