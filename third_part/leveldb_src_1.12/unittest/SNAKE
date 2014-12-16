@@ -1,0 +1,8 @@
+cc_binary(name = 'variable_unittest',
+           srcs = [
+                  'variable_unittest.cc',
+                  ],
+           deps = [
+                  '//base/internal:base',
+           ]
+           )

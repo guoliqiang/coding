@@ -9,19 +9,6 @@
 
 namespace leveldb {
 
-// |filter data 0|
-// |filter data 1|   <-- results_
-// |....         |
-// |filter data n|  <-----------------------------------
-// |offset of filter data 0|                            |
-// |offset of filter data 1|                            |
-// |....                   |   <-- filter_offsets_      |
-// |offset of filter data n|                            |
-// |the end pos of data n  |-----------------------------
-// |kFilterBaseLg          |
-
-// SatartBlock AddKey Addkey AddKey ... StartBlock AddKey AddKey.. Finish
-//
 // See doc/table_format.txt for an explanation of the filter block format.
 
 // Generate new filter every 2KB of data
@@ -81,7 +68,6 @@ void FilterBlockBuilder::GenerateFilter() {
 
   // Generate filter for current set of keys and append to result_.
   filter_offsets_.push_back(result_.size());
-  // new filter data append to result_
   policy_->CreateFilter(&tmp_keys_[0], num_keys, &result_);
 
   tmp_keys_.clear();
@@ -98,7 +84,7 @@ FilterBlockReader::FilterBlockReader(const FilterPolicy* policy,
       base_lg_(0) {
   size_t n = contents.size();
   if (n < 5) return;  // 1 byte for base_lg_ and 4 for start of offset array
-  base_lg_ = contents[n - 1];
+  base_lg_ = contents[n-1];
   uint32_t last_word = DecodeFixed32(contents.data() + n - 5);
   if (last_word > n - 5) return;
   data_ = contents.data();
@@ -109,8 +95,8 @@ FilterBlockReader::FilterBlockReader(const FilterPolicy* policy,
 bool FilterBlockReader::KeyMayMatch(uint64_t block_offset, const Slice& key) {
   uint64_t index = block_offset >> base_lg_;
   if (index < num_) {
-    uint32_t start = DecodeFixed32(offset_ + index * 4);
-    uint32_t limit = DecodeFixed32(offset_ + index * 4 + 4);
+    uint32_t start = DecodeFixed32(offset_ + index*4);
+    uint32_t limit = DecodeFixed32(offset_ + index*4 + 4);
     if (start <= limit && limit <= (offset_ - data_)) {
       Slice filter = Slice(data_ + start, limit - start);
       return policy_->KeyMayMatch(key, filter);
@@ -121,4 +107,5 @@ bool FilterBlockReader::KeyMayMatch(uint64_t block_offset, const Slice& key) {
   }
   return true;  // Errors are treated as potential matches
 }
+
 }

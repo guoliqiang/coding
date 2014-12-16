@@ -28,8 +28,8 @@
 
 #include "third_part/leveldb_src/table/block_builder.h"
 
-#include <assert.h>
 #include <algorithm>
+#include <assert.h>
 #include "third_part/leveldb_src/include/leveldb/comparator.h"
 #include "third_part/leveldb_src/include/leveldb/table_builder.h"
 #include "third_part/leveldb_src/util/coding.h"
@@ -74,7 +74,7 @@ void BlockBuilder::Add(const Slice& key, const Slice& value) {
   Slice last_key_piece(last_key_);
   assert(!finished_);
   assert(counter_ <= options_->block_restart_interval);
-  assert(buffer_.empty()  // No values yet?
+  assert(buffer_.empty() // No values yet?
          || options_->comparator->Compare(key, last_key_piece) > 0);
   size_t shared = 0;
   if (counter_ < options_->block_restart_interval) {

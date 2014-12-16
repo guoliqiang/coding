@@ -10,7 +10,6 @@
 // Include the appropriate platform specific file below.  If you are
 // porting to a new platform, see "port_example.h" for documentation
 // of what the new port_<platform>.h file must provide.
-
 #define LEVELDB_PLATFORM_POSIX
 
 #if defined(LEVELDB_PLATFORM_POSIX)

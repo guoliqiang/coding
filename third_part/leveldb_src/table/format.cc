@@ -48,7 +48,7 @@ Status Footer::DecodeFrom(Slice* input) {
   const uint64_t magic = ((static_cast<uint64_t>(magic_hi) << 32) |
                           (static_cast<uint64_t>(magic_lo)));
   if (magic != kTableMagicNumber) {
-    return Status::InvalidArgument("not an sstable (bad magic number)");
+    return Status::Corruption("not an sstable (bad magic number)");
   }
 
   Status result = metaindex_handle_.DecodeFrom(input);
@@ -63,12 +63,6 @@ Status Footer::DecodeFrom(Slice* input) {
   return result;
 }
 
-// read the data block
-// Data Block
-//
-// Block Data
-// Type(char)
-// CRC(uint32)
 Status ReadBlock(RandomAccessFile* file,
                  const ReadOptions& options,
                  const BlockHandle& handle,

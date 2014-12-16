@@ -19,7 +19,7 @@ static std::string MakeFileName(const std::string& name, uint64_t number,
                                 const char* suffix) {
   char buf[100];
   snprintf(buf, sizeof(buf), "/%06llu.%s",
-           static_cast<unsigned long long>(number),  // NOLINT
+           static_cast<unsigned long long>(number),
            suffix);
   return name + buf;
 }
@@ -31,6 +31,11 @@ std::string LogFileName(const std::string& name, uint64_t number) {
 
 std::string TableFileName(const std::string& name, uint64_t number) {
   assert(number > 0);
+  return MakeFileName(name, number, "ldb");
+}
+
+std::string SSTTableFileName(const std::string& name, uint64_t number) {
+  assert(number > 0);
   return MakeFileName(name, number, "sst");
 }
 
@@ -38,7 +43,7 @@ std::string DescriptorFileName(const std::string& dbname, uint64_t number) {
   assert(number > 0);
   char buf[100];
   snprintf(buf, sizeof(buf), "/MANIFEST-%06llu",
-           static_cast<unsigned long long>(number));  // NOLINT
+           static_cast<unsigned long long>(number));
   return dbname + buf;
 }
 
@@ -71,7 +76,7 @@ std::string OldInfoLogFileName(const std::string& dbname) {
 //    dbname/LOG
 //    dbname/LOG.old
 //    dbname/MANIFEST-[0-9]+
-//    dbname/[0-9]+.(log|sst)
+//    dbname/[0-9]+.(log|sst|ldb)
 bool ParseFileName(const std::string& fname,
                    uint64_t* number,
                    FileType* type) {
@@ -106,7 +111,7 @@ bool ParseFileName(const std::string& fname,
     Slice suffix = rest;
     if (suffix == Slice(".log")) {
       *type = kLogFile;
-    } else if (suffix == Slice(".sst")) {
+    } else if (suffix == Slice(".sst") || suffix == Slice(".ldb")) {
       *type = kTableFile;
     } else if (suffix == Slice(".dbtmp")) {
       *type = kTempFile;

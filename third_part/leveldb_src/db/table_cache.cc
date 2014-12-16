@@ -9,13 +9,11 @@
 #include "third_part/leveldb_src/include/leveldb/table.h"
 #include "third_part/leveldb_src/util/coding.h"
 
-// if table not in cache, it will read it immediately
-// then, store it in memory.
 namespace leveldb {
 
 struct TableAndFile {
-  RandomAccessFile * file;
-  Table * table;
+  RandomAccessFile* file;
+  Table* table;
 };
 
 static void DeleteEntry(const Slice& key, void* value) {
@@ -56,6 +54,12 @@ Status TableCache::FindTable(uint64_t file_number, uint64_t file_size,
     RandomAccessFile* file = NULL;
     Table* table = NULL;
     s = env_->NewRandomAccessFile(fname, &file);
+    if (!s.ok()) {
+      std::string old_fname = SSTTableFileName(dbname_, file_number);
+      if (env_->NewRandomAccessFile(old_fname, &file).ok()) {
+        s = Status::OK();
+      }
+    }
     if (s.ok()) {
       s = Table::Open(*options_, file, file_size, &table);
     }

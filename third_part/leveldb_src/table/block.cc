@@ -8,21 +8,10 @@
 
 #include <vector>
 #include <algorithm>
-#include <string>
 #include "third_part/leveldb_src/include/leveldb/comparator.h"
 #include "third_part/leveldb_src/table/format.h"
 #include "third_part/leveldb_src/util/coding.h"
 #include "third_part/leveldb_src/util/logging.h"
-
-// Data Block
-//
-// |Block Data|  --> |KeyValue0   | --> |shared key len; non-share key len;
-// |Type      |      |KeyValue1   |      value len; non-share key; value   |
-// |CRC       |      |...         |
-//                   |Restart[0]  | --> offset of KeyValue, Restart[0] == 0
-//                   |Restart[1]  |
-//                   |...         |
-//                   |Restarts Num|
 
 namespace leveldb {
 
@@ -38,7 +27,7 @@ Block::Block(const BlockContents& contents)
   if (size_ < sizeof(uint32_t)) {
     size_ = 0;  // Error marker
   } else {
-    size_t max_restarts_allowed = (size_ - sizeof(uint32_t)) / sizeof(uint32_t);
+    size_t max_restarts_allowed = (size_-sizeof(uint32_t)) / sizeof(uint32_t);
     if (NumRestarts() > max_restarts_allowed) {
       // The size is too small for NumRestarts()
       size_ = 0;
@@ -57,7 +46,7 @@ Block::~Block() {
 // Helper routine: decode the next block entry starting at "p",
 // storing the number of shared key bytes, non_shared key bytes,
 // and the length of the value in "*shared", "*non_shared", and
-// "*value_length", respectively.  Will not derefence past "limit".
+// "*value_length", respectively.  Will not dereference past "limit".
 //
 // If any errors are detected, returns NULL.  Otherwise, returns a
 // pointer to the key delta (just past the three decoded values).
@@ -87,9 +76,9 @@ static inline const char* DecodeEntry(const char* p, const char* limit,
 class Block::Iter : public Iterator {
  private:
   const Comparator* const comparator_;
-  const char* const data_;       // underlying block contents
-  uint32_t const restarts_;      // Offset of restart array (list of fixed32)
-  uint32_t const num_restarts_;  // Number of uint32_t entries in restart array
+  const char* const data_;      // underlying block contents
+  uint32_t const restarts_;     // Offset of restart array (list of fixed32)
+  uint32_t const num_restarts_; // Number of uint32_t entries in restart array
 
   // current_ is offset in data_ of current entry.  >= restarts_ if !Valid
   uint32_t current_;
@@ -122,16 +111,6 @@ class Block::Iter : public Iterator {
     value_ = Slice(data_ + offset, 0);
   }
 
-// data_  -->              |          |
-//                         |          |
-//                         |          |
-// restarts_(offset)-->    |restart[0]|   <--- cuffrent_(offset)
-//                         |restart[1]|
-//                         |restart[2]|
-//                         |    3     |
-// num_restarts_ = 3
-// restart_index_ = 3  it used to do pre
-//
  public:
   Iter(const Comparator* comparator,
        const char* data,

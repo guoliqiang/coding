@@ -67,7 +67,7 @@ class Footer {
   // Footer will always occupy exactly this many bytes.  It consists
   // of two block handles and a magic number.
   enum {
-    kEncodedLength = 2 * BlockHandle::kMaxEncodedLength + 8
+    kEncodedLength = 2*BlockHandle::kMaxEncodedLength + 8
   };
 
  private:

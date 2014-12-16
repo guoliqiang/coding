@@ -4,11 +4,10 @@
 
 #include "third_part/leveldb_src/util/testharness.h"
 
+#include <string>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <string>
-#include <vector>
 
 namespace leveldb {
 namespace test {
@@ -39,7 +38,7 @@ int RunAllTests() {
 
   int num = 0;
   if (tests != NULL) {
-    for (int i = 0; i < tests->size(); i++) {
+    for (size_t i = 0; i < tests->size(); i++) {
       const Test& t = (*tests)[i];
       if (matcher != NULL) {
         std::string name = t.base;

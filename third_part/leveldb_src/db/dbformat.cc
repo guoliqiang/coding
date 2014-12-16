@@ -3,7 +3,6 @@
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 
 #include <stdio.h>
-#include <string>
 #include "third_part/leveldb_src/db/dbformat.h"
 #include "third_part/leveldb_src/port/port.h"
 #include "third_part/leveldb_src/util/coding.h"
@@ -24,7 +23,8 @@ void AppendInternalKey(std::string* result, const ParsedInternalKey& key) {
 std::string ParsedInternalKey::DebugString() const {
   char buf[50];
   snprintf(buf, sizeof(buf), "' @ %llu : %d",
-           (unsigned long long) sequence, static_cast<int>(type));  // NOLINT
+           (unsigned long long) sequence,
+           int(type));
   std::string result = "'";
   result += EscapeString(user_key.ToString());
   result += buf;
@@ -77,8 +77,7 @@ void InternalKeyComparator::FindShortestSeparator(
       user_comparator_->Compare(user_start, tmp) < 0) {
     // User key has become shorter physically, but larger logically.
     // Tack on the earliest possible number to the shortened user key.
-    PutFixed64(&tmp, PackSequenceAndType(kMaxSequenceNumber,
-                                         kValueTypeForSeek));
+    PutFixed64(&tmp, PackSequenceAndType(kMaxSequenceNumber,kValueTypeForSeek));
     assert(this->Compare(*start, tmp) < 0);
     assert(this->Compare(tmp, limit) < 0);
     start->swap(tmp);
@@ -93,8 +92,7 @@ void InternalKeyComparator::FindShortSuccessor(std::string* key) const {
       user_comparator_->Compare(user_key, tmp) < 0) {
     // User key has become shorter physically, but larger logically.
     // Tack on the earliest possible number to the shortened user key.
-    PutFixed64(&tmp, PackSequenceAndType(kMaxSequenceNumber,
-                                         kValueTypeForSeek));
+    PutFixed64(&tmp, PackSequenceAndType(kMaxSequenceNumber,kValueTypeForSeek));
     assert(this->Compare(*key, tmp) < 0);
     key->swap(tmp);
   }

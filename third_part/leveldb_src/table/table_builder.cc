@@ -15,15 +15,6 @@
 #include "third_part/leveldb_src/util/coding.h"
 #include "third_part/leveldb_src/util/crc32c.h"
 
-// |Data Block| (block type key:value)
-// |Data Block|
-// |          |
-// |Data Block|
-// |Filter Data Block     | (filter block type)
-// |Filter Index Block    | (block type key:value/filter_name:offset+size)
-// |Data Block Index Block| (block type key:value/max key of its data block:offset+size)  // NOLINT
-// |footer                | (footer type)
-
 namespace leveldb {
 
 struct TableBuilder::Rep {

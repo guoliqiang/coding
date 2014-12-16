@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 
-// http://blog.csdn.net/swpihchj/article/details/8647836
-
 #ifndef STORAGE_LEVELDB_TABLE_BLOCK_H_
 #define STORAGE_LEVELDB_TABLE_BLOCK_H_
 

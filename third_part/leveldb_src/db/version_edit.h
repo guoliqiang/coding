@@ -84,7 +84,7 @@ class VersionEdit {
  private:
   friend class VersionSet;
 
-  typedef std::set<std::pair<int, uint64_t> > DeletedFileSet;
+  typedef std::set< std::pair<int, uint64_t> > DeletedFileSet;
 
   std::string comparator_;
   uint64_t log_number_;

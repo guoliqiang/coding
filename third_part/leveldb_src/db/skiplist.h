@@ -1,7 +1,10 @@
 // Copyright (c) 2011 The LevelDB Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
-//
+
+#ifndef STORAGE_LEVELDB_DB_SKIPLIST_H_
+#define STORAGE_LEVELDB_DB_SKIPLIST_H_
+
 // Thread safety
 // -------------
 //
@@ -114,19 +117,17 @@ class SkipList {
 
   Node* NewNode(const Key& key, int height);
   int RandomHeight();
-  bool Equal(const Key& a, const Key& b) const {
-    return (compare_(a, b) == 0);
-  }
+  bool Equal(const Key& a, const Key& b) const { return (compare_(a, b) == 0); }
 
   // Return true if key is greater than the data stored in "n"
-  bool KeyIsAfterNode(const Key & key, Node* n) const;
+  bool KeyIsAfterNode(const Key& key, Node* n) const;
 
   // Return the earliest node that comes at or after key.
   // Return NULL if there is no such node.
   //
   // If prev is non-NULL, fills prev[level] with pointer to previous
   // node at "level" for every level in [0..max_height_-1].
-  Node* FindGreaterOrEqual(const Key & key, Node** prev) const;
+  Node* FindGreaterOrEqual(const Key& key, Node** prev) const;
 
   // Return the latest node with a key < key.
   // Return head_ if there is no such node.
@@ -143,7 +144,7 @@ class SkipList {
 
 // Implementation details follow
 template<typename Key, class Comparator>
-struct SkipList<Key, Comparator>::Node {
+struct SkipList<Key,Comparator>::Node {
   explicit Node(const Key& k) : key(k) { }
 
   Key const key;
@@ -179,7 +180,7 @@ struct SkipList<Key, Comparator>::Node {
 };
 
 template<typename Key, class Comparator>
-typename SkipList<Key, Comparator>::Node*
+typename SkipList<Key,Comparator>::Node*
 SkipList<Key,Comparator>::NewNode(const Key& key, int height) {
   char* mem = arena_->AllocateAligned(
       sizeof(Node) + sizeof(port::AtomicPointer) * (height - 1));
@@ -204,13 +205,13 @@ inline const Key& SkipList<Key,Comparator>::Iterator::key() const {
 }
 
 template<typename Key, class Comparator>
-inline void SkipList<Key, Comparator>::Iterator::Next() {
+inline void SkipList<Key,Comparator>::Iterator::Next() {
   assert(Valid());
   node_ = node_->Next(0);
 }
 
 template<typename Key, class Comparator>
-inline void SkipList<Key, Comparator>::Iterator::Prev() {
+inline void SkipList<Key,Comparator>::Iterator::Prev() {
   // Instead of using explicit "prev" links, we just search for the
   // last node that falls before key.
   assert(Valid());
@@ -239,7 +240,7 @@ inline void SkipList<Key,Comparator>::Iterator::SeekToLast() {
 }
 
 template<typename Key, class Comparator>
-int SkipList<Key, Comparator>::RandomHeight() {
+int SkipList<Key,Comparator>::RandomHeight() {
   // Increase height with probability 1 in kBranching
   static const unsigned int kBranching = 4;
   int height = 1;
@@ -252,14 +253,13 @@ int SkipList<Key, Comparator>::RandomHeight() {
 }
 
 template<typename Key, class Comparator>
-bool SkipList<Key, Comparator>::KeyIsAfterNode(const Key& key, Node* n) const {
+bool SkipList<Key,Comparator>::KeyIsAfterNode(const Key& key, Node* n) const {
   // NULL n is considered infinite
   return (n != NULL) && (compare_(n->key, key) < 0);
 }
 
 template<typename Key, class Comparator>
-typename SkipList<Key,Comparator>::Node*
-SkipList<Key,Comparator>::FindGreaterOrEqual(const Key& key, Node** prev)
+typename SkipList<Key,Comparator>::Node* SkipList<Key,Comparator>::FindGreaterOrEqual(const Key& key, Node** prev)
     const {
   Node* x = head_;
   int level = GetMaxHeight() - 1;
@@ -281,7 +281,7 @@ SkipList<Key,Comparator>::FindGreaterOrEqual(const Key& key, Node** prev)
 }
 
 template<typename Key, class Comparator>
-typename SkipList<Key, Comparator>::Node*
+typename SkipList<Key,Comparator>::Node*
 SkipList<Key,Comparator>::FindLessThan(const Key& key) const {
   Node* x = head_;
   int level = GetMaxHeight() - 1;
@@ -380,3 +380,5 @@ bool SkipList<Key,Comparator>::Contains(const Key& key) const {
 }
 
 }  // namespace leveldb
+
+#endif  // STORAGE_LEVELDB_DB_SKIPLIST_H_

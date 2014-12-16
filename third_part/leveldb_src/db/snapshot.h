@@ -5,6 +5,7 @@
 #ifndef STORAGE_LEVELDB_DB_SNAPSHOT_H_
 #define STORAGE_LEVELDB_DB_SNAPSHOT_H_
 
+#include "third_part/leveldb_src/db/dbformat.h"
 #include "third_part/leveldb_src/include/leveldb/db.h"
 
 namespace leveldb {

@@ -15,7 +15,7 @@ namespace leveldb {
 
 void AppendNumberTo(std::string* str, uint64_t num) {
   char buf[30];
-  snprintf(buf, sizeof(buf), "%llu", (unsigned long long)num);  // NOLINT
+  snprintf(buf, sizeof(buf), "%llu", (unsigned long long) num);
   str->append(buf);
 }
 
@@ -45,15 +45,6 @@ std::string EscapeString(const Slice& value) {
   return r;
 }
 
-bool ConsumeChar(Slice* in, char c) {
-  if (!in->empty() && (*in)[0] == c) {
-    in->remove_prefix(1);
-    return true;
-  } else {
-    return false;
-  }
-}
-
 bool ConsumeDecimalNumber(Slice* in, uint64_t* val) {
   uint64_t v = 0;
   int digits = 0;
@@ -63,8 +54,8 @@ bool ConsumeDecimalNumber(Slice* in, uint64_t* val) {
       ++digits;
       const int delta = (c - '0');
       static const uint64_t kMaxUint64 = ~static_cast<uint64_t>(0);
-      if (v > kMaxUint64 / 10 ||
-          (v == kMaxUint64 / 10 && delta > kMaxUint64 % 10)) {
+      if (v > kMaxUint64/10 ||
+          (v == kMaxUint64/10 && delta > kMaxUint64%10)) {
         // Overflow
         return false;
       }

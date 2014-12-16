@@ -4,7 +4,6 @@
 
 #include "third_part/leveldb_src/util/testutil.h"
 
-#include <string>
 #include "third_part/leveldb_src/util/random.h"
 
 namespace leveldb {
@@ -33,7 +32,7 @@ std::string RandomKey(Random* rnd, int len) {
 
 
 extern Slice CompressibleString(Random* rnd, double compressed_fraction,
-                                int len, std::string* dst) {
+                                size_t len, std::string* dst) {
   int raw = static_cast<int>(len * compressed_fraction);
   if (raw < 1) raw = 1;
   std::string raw_data;
