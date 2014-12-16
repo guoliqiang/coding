@@ -9,6 +9,8 @@
 #include "third_part/leveldb_src/include/leveldb/table.h"
 #include "third_part/leveldb_src/util/coding.h"
 
+// if table not in cache, it will read it immediately
+// then, store it in memory.
 namespace leveldb {
 
 struct TableAndFile {

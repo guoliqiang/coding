@@ -108,6 +108,7 @@ Options SanitizeOptions(const std::string& dbname,
     }
   }
   if (result.block_cache == NULL) {
+    // data block cache
     result.block_cache = NewLRUCache(8 << 20);
   }
   return result;
@@ -482,6 +483,7 @@ Status DBImpl::WriteLevel0Table(MemTable* mem, VersionEdit* edit,
     const Slice min_user_key = meta.smallest.user_key();
     const Slice max_user_key = meta.largest.user_key();
     if (base != NULL) {
+      // the new file may not be level_0
       level = base->PickLevelForMemTableOutput(min_user_key, max_user_key);
     }
     edit->AddFile(level, meta.number, meta.file_size,
@@ -495,6 +497,7 @@ Status DBImpl::WriteLevel0Table(MemTable* mem, VersionEdit* edit,
   return s;
 }
 
+// only write memtable to sst.
 Status DBImpl::CompactMemTable() {
   mutex_.AssertHeld();
   assert(imm_ != NULL);

@@ -17,6 +17,8 @@
 
 namespace leveldb {
 
+// only store the index data, the block data will be cached
+// in the options.block_cache_
 struct Table::Rep {
   ~Rep() {
     delete filter;
