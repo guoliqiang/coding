@@ -5,5 +5,5 @@ cc_library(name = 'port',
            deps = [
                    '//libs/third_part/snappy:snappy',
                   ],
-           cflags = ['-DSNAPPY', '-DNDEBUG'],
+           cflags = ['-DNDEBUG'],
            )

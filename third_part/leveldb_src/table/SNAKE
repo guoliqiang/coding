@@ -14,7 +14,7 @@ cc_library(name = 'table',
                   '//base/internal:base',
                   '//third_part/leveldb_src/util:util',
            ],
-           cflags = ['-DSNAPPY', '-DNDEBUG'],
+           cflags = ['-DNDEBUG'],
            )
 
 cc_binary(name = 'filter_block_test',
@@ -24,6 +24,5 @@ cc_binary(name = 'filter_block_test',
            deps = [
                   '//third_part/leveldb_src/table:table',
            ],
-           cflags = ['-DSNAPPY', '-DNDEBUG'],
            )
 
