@@ -1,0 +1,21 @@
+cc_binary(name = 'memcache_main',
+           srcs = [
+                  'memcached.c',
+                  'assoc.c',
+                  'cache.c',
+                  'hash.c',
+                  'items.c',
+                  'slabs.c',
+                  'thread.c',
+                  'util.c',
+                  'stats.c',
+                  'daemon.c',
+                  ],
+           deps = [
+                   "//libs/third_part/libevent:event",
+                  ],
+           cflags = [
+                  '-DHAVE_CONFIG_H',
+                  '-I/home/guoliqiang/git-coding/coding/third_part/libevent/include'
+                  ]
+           )
