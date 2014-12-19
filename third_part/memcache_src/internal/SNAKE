@@ -1,4 +1,4 @@
-cc_binary(name = 'memcache_main',
+cc_binary(name = 'memcached_main',
            srcs = [
                   'memcached.c',
                   'assoc.c',

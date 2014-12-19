@@ -9,7 +9,7 @@ PROJ_NAME=third_part/memcache_src/internal
 
 all:
 	$(WORK_ROOT)/develop/snake/snake.sh t=*
-	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/memcache_main $(WORK_ROOT)/$(PROJ_NAME)/; \
+	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/memcached_main $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 opt:
 
