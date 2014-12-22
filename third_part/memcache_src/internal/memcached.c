@@ -153,20 +153,32 @@ static rel_time_t realtime(const time_t exptime) {
 }
 
 static void stats_init(void) {
-  stats.curr_items = stats.total_items = stats.curr_conns =
-    stats.total_conns = stats.conn_structs = 0;
-  stats.get_cmds = stats.set_cmds = stats.get_hits =
-    stats.get_misses = stats.evictions = stats.reclaimed = 0;
-  stats.touch_cmds = stats.touch_misses = stats.touch_hits =
-    stats.rejected_conns = 0;
+  stats.curr_items = 0;
+  stats.total_items = 0;
+  stats.curr_conns = 0;
+  stats.total_conns = 0;
+  stats.conn_structs = 0;
+  stats.get_cmds = 0;
+  stats.set_cmds = 0;
+  stats.get_hits = 0;
+  stats.get_misses = 0;
+  stats.evictions = 0;
+  stats.reclaimed = 0;
+  stats.touch_cmds = 0;
+  stats.touch_misses = 0;
+  stats.touch_hits = 0;
+  stats.rejected_conns = 0;
   stats.malloc_fails = 0;
-  stats.curr_bytes = stats.listen_disabled_num = 0;
-  stats.hash_power_level = stats.hash_bytes = stats.hash_is_expanding = 0;
-  stats.expired_unfetched = stats.evicted_unfetched = 0;
+  stats.curr_bytes = 0;
+  stats.listen_disabled_num = 0;
+  stats.hash_power_level = 0;
+  stats.hash_bytes = 0;
+  stats.hash_is_expanding = 0;
+  stats.expired_unfetched = 0;
+  stats.evicted_unfetched = 0;
   stats.slabs_moved = 0;
   stats.accepting_conns = true; // assuming we start in this state.
   stats.slab_reassign_running = false;
-
   // make the time we started always be 2 seconds before we really
   // did, so time(0) - time.started is never zero.  if so, things
   // like 'settings.oldest_live' which act as booleans as well as
@@ -4338,9 +4350,9 @@ int main (int argc, char **argv) {
   bool do_daemonize = false;
   bool preallocate = false;
   int maxcore = 0;
-  char *username = NULL;
-  char *pid_file = NULL;
-  struct passwd *pw;
+  char * username = NULL;
+  char * pid_file = NULL;
+  struct passwd * pw;
   struct rlimit rlim;
   char unit = '\0';
   int size_max = 0;
@@ -4753,14 +4765,15 @@ int main (int argc, char **argv) {
   // lock paged memory if needed
   if (lock_memory) {
 #ifdef HAVE_MLOCKALL
+    // http://linux.about.com/library/cmd/blcmdl2_mlockall.htm
     int res = mlockall(MCL_CURRENT | MCL_FUTURE);
     if (res != 0) {
       fprintf(stderr, "warning: -k invalid, mlockall() failed: %s\n",
-          strerror(errno));
+              strerror(errno));
     }
 #else
     fprintf(stderr, "warning: -k invalid, mlockall() not supported on "
-    "this platform.  proceeding without.\n");
+                    "this platform.  proceeding without.\n");
 #endif
   }
 
@@ -4784,8 +4797,7 @@ int main (int argc, char **argv) {
   if (start_assoc_maintenance_thread() == -1) {
     exit(EXIT_FAILURE);
   }
-  if (settings.slab_reassign &&
-      start_slab_maintenance_thread() == -1) {
+  if (settings.slab_reassign && start_slab_maintenance_thread() == -1) {
     exit(EXIT_FAILURE);
   }
   // initialise clock event

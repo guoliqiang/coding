@@ -12,6 +12,7 @@ cc_binary(name = 'memcached_main',
                   'daemon.c',
                   ],
            deps = [
+                   "//base/internal:base",
                    "//libs/third_part/libevent:event",
                   ],
            cflags = [

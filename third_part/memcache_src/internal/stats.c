@@ -15,13 +15,13 @@
 // CRC function used by the cache hashtable.
 typedef struct _prefix_stats PREFIX_STATS;
 struct _prefix_stats {
-  char         *prefix;
-  size_t        prefix_len;
-  uint64_t      num_gets;
-  uint64_t      num_sets;
-  uint64_t      num_deletes;
-  uint64_t      num_hits;
-  PREFIX_STATS *next;
+  char * prefix;
+  size_t prefix_len;
+  uint64_t num_gets;
+  uint64_t num_sets;
+  uint64_t num_deletes;
+  uint64_t num_hits;
+  PREFIX_STATS * next;
 };
 
 #define PREFIX_HASH_SIZE 256
@@ -54,7 +54,7 @@ void stats_prefix_clear() {
 // Returns the stats structure for a prefix, creating it if it's not already
 // in the list.
 static PREFIX_STATS *stats_prefix_find(const char *key, const size_t nkey) {
-  PREFIX_STATS *pfs;
+  PREFIX_STATS * pfs;
   uint32_t hashval;
   size_t length;
   bool bailout = true;
@@ -65,15 +65,10 @@ static PREFIX_STATS *stats_prefix_find(const char *key, const size_t nkey) {
       break;
     }
   }
-
-  if (bailout) {
-    return NULL;
-  }
-
+  if (bailout) return NULL;
   hashval = hash(key, length, 0) % PREFIX_HASH_SIZE;
   for (pfs = prefix_stats[hashval]; NULL != pfs; pfs = pfs->next) {
-    if (strncmp(pfs->prefix, key, length) == 0)
-      return pfs;
+    if (strncmp(pfs->prefix, key, length) == 0) return pfs;
   }
   pfs = calloc(sizeof(PREFIX_STATS), 1);
   if (NULL == pfs) {
@@ -87,7 +82,7 @@ static PREFIX_STATS *stats_prefix_find(const char *key, const size_t nkey) {
     return NULL;
   }
   strncpy(pfs->prefix, key, length);
-  pfs->prefix[length] = '\0';   // because strncpy() sucks
+  pfs->prefix[length] = '\0';  // because strncpy() sucks
   pfs->prefix_len = length;
 
   pfs->next = prefix_stats[hashval];
@@ -100,22 +95,21 @@ static PREFIX_STATS *stats_prefix_find(const char *key, const size_t nkey) {
 }
 
 // Records a "get" of a key.
-void stats_prefix_record_get(const char *key, const size_t nkey, const bool is_hit) {
-  PREFIX_STATS *pfs;
+void stats_prefix_record_get(const char *key, const size_t nkey,
+                             const bool is_hit) {
+  PREFIX_STATS * pfs = NULL;
   STATS_LOCK();
   pfs = stats_prefix_find(key, nkey);
   if (NULL != pfs) {
     pfs->num_gets++;
-    if (is_hit) {
-      pfs->num_hits++;
-    }
+    if (is_hit) pfs->num_hits++;
   }
   STATS_UNLOCK();
 }
 
 // Records a "delete" of a key.
 void stats_prefix_record_delete(const char *key, const size_t nkey) {
-  PREFIX_STATS *pfs;
+  PREFIX_STATS * pfs = NULL;
   STATS_LOCK();
   pfs = stats_prefix_find(key, nkey);
   if (NULL != pfs) {
@@ -126,7 +120,7 @@ void stats_prefix_record_delete(const char *key, const size_t nkey) {
 
 // Records a "set" of a key.
 void stats_prefix_record_set(const char *key, const size_t nkey) {
-  PREFIX_STATS *pfs;
+  PREFIX_STATS * pfs = NULL;
   STATS_LOCK();
   pfs = stats_prefix_find(key, nkey);
   if (NULL != pfs) {
@@ -136,21 +130,23 @@ void stats_prefix_record_set(const char *key, const size_t nkey) {
 }
 
 // Returns stats in textual form suitable for writing to a client.
-char *stats_prefix_dump(int *length) {
-  const char *format = "PREFIX %s get %llu hit %llu set %llu del %llu\r\n";
-  PREFIX_STATS *pfs;
-  char *buf;
-  int i, pos;
-  size_t size = 0, written = 0, total_written = 0;
-
+char * stats_prefix_dump(int *length) {
+  const char * format = "PREFIX %s get %llu hit %llu set %llu del %llu\r\n";
+  PREFIX_STATS * pfs = NULL;
+  char * buf = NULL;
+  int i = 0;
+  int pos = 0;
+  size_t size = 0;
+  size_t written = 0;
+  size_t total_written = 0;
   // Figure out how big the buffer needs to be. This is the sum of the
   // lengths of the prefixes themselves, plus the size of one copy of
   // the per-prefix output with 20-digit values for all the counts,
   // plus space for the "END" at the end.
   STATS_LOCK();
   size = strlen(format) + total_prefix_size +
-    num_prefixes * (strlen(format) - 2 /* %s */
-        + 4 * (20 - 4)) // %llu replaced by 20-digit num
+    num_prefixes * (strlen(format) - 2 // %s
+    + 4 * (20 - 4)) // %llu replaced by 20-digit num
     + sizeof("END\r\n");
   buf = malloc(size);
   if (NULL == buf) {
@@ -161,9 +157,9 @@ char *stats_prefix_dump(int *length) {
   pos = 0;
   for (i = 0; i < PREFIX_HASH_SIZE; i++) {
     for (pfs = prefix_stats[i]; NULL != pfs; pfs = pfs->next) {
-      written = snprintf(buf + pos, size-pos, format,
-          pfs->prefix, pfs->num_gets, pfs->num_hits,
-          pfs->num_sets, pfs->num_deletes);
+      written = snprintf(buf + pos, size - pos, format,
+                         pfs->prefix, pfs->num_gets, pfs->num_hits,
+                         pfs->num_sets, pfs->num_deletes);
       pos += written;
       total_written += written;
       assert(total_written < size);
@@ -179,7 +175,6 @@ char *stats_prefix_dump(int *length) {
 #ifdef UNIT_TEST
 // To run unit tests, compile with $(CC) -DUNIT_TEST stats.c assoc.o
 // (need assoc.o to get the hash() function).
-
 struct settings settings;
 
 static char *current_test = "";
@@ -343,7 +338,7 @@ static void run_test(char *what, void (*func)(void)) {
 void mt_stats_lock() { }
 void mt_stats_unlock() { }
 
-main(int argc, char **argv) {
+int main(int argc, char **argv) {
   stats_prefix_init();
   settings.prefix_delimiter = ':';
   run_test("stats_prefix_find", test_prefix_find);
@@ -352,5 +347,4 @@ main(int argc, char **argv) {
   run_test("stats_prefix_record_set", test_prefix_record_set);
   run_test("stats_prefix_dump", test_prefix_dump);
 }
-
 #endif
