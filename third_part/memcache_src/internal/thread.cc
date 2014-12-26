@@ -108,7 +108,7 @@ void item_unlock_global(void) {
 }
 
 void item_lock(uint32_t hv) {
-  uint8_t *lock_type = pthread_getspecific(item_lock_type_key);
+  uint8_t *lock_type = (uint8_t *)pthread_getspecific(item_lock_type_key);
   if (likely(*lock_type == ITEM_LOCK_GRANULAR)) {
     mutex_lock(&item_locks[(hv & hashmask(hashpower)) % item_lock_count]);
   } else {
@@ -134,7 +134,7 @@ void item_trylock_unlock(void *lock) {
 }
 
 void item_unlock(uint32_t hv) {
-  uint8_t *lock_type = pthread_getspecific(item_lock_type_key);
+  uint8_t *lock_type = (uint8_t *)pthread_getspecific(item_lock_type_key);
   if (likely(*lock_type == ITEM_LOCK_GRANULAR)) {
     mutex_unlock(&item_locks[(hv & hashmask(hashpower)) % item_lock_count]);
   } else {
@@ -226,7 +226,7 @@ static CQ_ITEM *cqi_new(void) {
   if (NULL == item) {
     int i;
     // Allocate a bunch of items at once to reduce fragmentation gc
-    item = malloc(sizeof(CQ_ITEM) * ITEMS_PER_ALLOC);
+    item = (CQ_ITEM *)malloc(sizeof(CQ_ITEM) * ITEMS_PER_ALLOC);
     if (NULL == item) {
       STATS_LOCK();
       stats.malloc_fails++;
@@ -292,7 +292,7 @@ static void setup_thread(LIBEVENT_THREAD *me) {
     fprintf(stderr, "Can't monitor libevent notify pipe\n");
     exit(1);
   }
-  me->new_conn_queue = malloc(sizeof(struct conn_queue));
+  me->new_conn_queue = (conn_queue *)malloc(sizeof(struct conn_queue));
   if (me->new_conn_queue == NULL) {
     perror("Failed to allocate memory for connection queue");
     exit(EXIT_FAILURE);
@@ -312,7 +312,7 @@ static void setup_thread(LIBEVENT_THREAD *me) {
 
 // Worker thread: main event loop
 static void *worker_libevent(void *arg) {
-  LIBEVENT_THREAD * me = arg;
+  LIBEVENT_THREAD * me = (LIBEVENT_THREAD *)arg;
   // Any per-thread setup can happen here; thread_init() will block until
   // all threads have finished initializing.
 
@@ -329,7 +329,7 @@ static void *worker_libevent(void *arg) {
 // Processes an incoming "handle a new connection" item. This is called when
 // input arrives on the libevent wakeup pipe.
 static void thread_libevent_process(int fd, short which, void *arg) {
-  LIBEVENT_THREAD * me = arg;
+  LIBEVENT_THREAD * me = (LIBEVENT_THREAD *)arg;
   CQ_ITEM * item;
   char buf[1];
 
@@ -693,7 +693,8 @@ void thread_init(int nthreads, struct event_base *main_base) {
   }
 
   item_lock_count = hashsize(power);
-  item_locks = calloc(item_lock_count, sizeof(pthread_mutex_t));
+  item_locks = (pthread_mutex_t*)
+      calloc(item_lock_count, sizeof(pthread_mutex_t));
   if (!item_locks) {
     perror("Can't allocate item locks");
     exit(1);
@@ -703,7 +704,7 @@ void thread_init(int nthreads, struct event_base *main_base) {
   }
   pthread_key_create(&item_lock_type_key, NULL);
   pthread_mutex_init(&item_global_lock, NULL);
-  threads = calloc(nthreads, sizeof(LIBEVENT_THREAD));
+  threads = (LIBEVENT_THREAD *)calloc(nthreads, sizeof(LIBEVENT_THREAD));
   if (!threads) {
     perror("Can't allocate thread descriptors");
     exit(1);

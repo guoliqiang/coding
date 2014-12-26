@@ -146,7 +146,7 @@ static int grow_slab_list (const unsigned int id) {
     void *new_list = realloc(p->slab_list, new_size * sizeof(void *));
     if (new_list == 0) return 0;
     p->list_size = new_size;
-    p->slab_list = new_list;
+    p->slab_list = (void **)new_list;
   }
   return 1;
 }
@@ -167,7 +167,7 @@ static int do_slabs_newslab(const unsigned int id) {
   char *ptr;
   if ((mem_limit && mem_malloced + len > mem_limit && p->slabs > 0) ||
       (grow_slab_list(id) == 0) ||
-      ((ptr = memory_allocate((size_t)len)) == 0)) {
+      ((ptr = (char *)memory_allocate((size_t)len)) == 0)) {
     MEMCACHED_SLABS_SLABCLASS_ALLOCATE_FAILED(id);
     return 0;
   }
@@ -225,7 +225,7 @@ static void do_slabs_free(void *ptr, const size_t size, unsigned int id) {
   it = (item *)ptr;
   it->it_flags |= ITEM_SLABBED;
   it->prev = 0;
-  it->next = p->slots;
+  it->next = (_stritem *)p->slots;
   if (it->next) it->next->prev = it;
   p->slots = it;
 
@@ -440,7 +440,7 @@ static int slab_rebalance_move(void) {
 
   s_cls = &slabclass[slab_rebal.s_clsid];
   for (x = 0; x < slab_bulk_check; x++) {
-    item *it = slab_rebal.slab_pos;
+    item * it = (item *)slab_rebal.slab_pos;
     status = MOVE_PASS;
     if (it->slabs_clsid != 255) {
       void *hold_lock = NULL;
@@ -533,7 +533,7 @@ static void slab_rebalance_finish(void) {
   memset(slab_rebal.slab_start, 0, (size_t)settings.item_size_max);
 
   d_cls->slab_list[d_cls->slabs++] = slab_rebal.slab_start;
-  split_slab_page_into_freelist(slab_rebal.slab_start,
+  split_slab_page_into_freelist((char *)slab_rebal.slab_start,
                                 slab_rebal.d_clsid);
 
   slab_rebal.done       = 0;

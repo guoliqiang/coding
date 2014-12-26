@@ -136,7 +136,7 @@ item *do_item_alloc(char *key, const size_t nkey, const int flags,
       do_item_unlink_nolock(it, hv);
       // Initialize the item block:
       it->slabs_clsid = 0;
-    } else if ((it = slabs_alloc(ntotal, id)) == NULL) {
+    } else if ((it = (item *)slabs_alloc(ntotal, id)) == NULL) {
       tried_alloc = 1;
       if (settings.evict_to_free == 0) {
         itemstats[id].outofmemory++;
@@ -170,7 +170,7 @@ item *do_item_alloc(char *key, const size_t nkey, const int flags,
   }
 
   if (!tried_alloc && (tries == 0 || search == NULL))
-    it = slabs_alloc(ntotal, id);
+    it = (item *)slabs_alloc(ntotal, id);
 
   if (it == NULL) {
     itemstats[id].outofmemory++;
@@ -369,7 +369,7 @@ char *do_item_cachedump(const unsigned int slabs_clsid,
 
   it = heads[slabs_clsid];
 
-  buffer = malloc((size_t)memlimit);
+  buffer = (char *)malloc((size_t)memlimit);
   if (buffer == 0) return NULL;
   bufcurr = 0;
 
@@ -465,7 +465,7 @@ void do_item_stats(ADD_STAT add_stats, void *c) {
 void do_item_stats_sizes(ADD_STAT add_stats, void *c) {
   // max 1MB object, divided into 32 bytes size buckets
   const int num_buckets = 32768;
-  unsigned int *histogram = calloc(num_buckets, sizeof(int));
+  unsigned int *histogram = (unsigned int *)calloc(num_buckets, sizeof(int));
   if (histogram != NULL) {
     int i;
     // build the histogram

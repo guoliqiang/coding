@@ -48,7 +48,7 @@ void assoc_init(const int hashtable_init) {
   if (hashtable_init) {
     hashpower = hashtable_init;
   }
-  primary_hashtable = calloc(hashsize(hashpower), sizeof(void *));
+  primary_hashtable = (item **)calloc(hashsize(hashpower), sizeof(void *));
   if (!primary_hashtable) {
     fprintf(stderr, "Failed to init hashtable.\n");
     exit(EXIT_FAILURE);
@@ -103,7 +103,7 @@ static item ** _hashitem_before (const char *key, const size_t nkey,
 // grows the hashtable to the next power of 2. 
 static void assoc_expand(void) {
   old_hashtable = primary_hashtable;
-  primary_hashtable = calloc(hashsize(hashpower + 1), sizeof(void *));
+  primary_hashtable = (item **)calloc(hashsize(hashpower + 1), sizeof(void *));
   if (primary_hashtable) {
     if (settings.verbose > 1) {
       fprintf(stderr, "Hash table expansion starting\n");

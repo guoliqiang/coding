@@ -1,20 +1,22 @@
 cc_binary(name = 'memcached_main',
            srcs = [
-                  'memcached.c',
-                  'assoc.c',
-                  'cache.c',
-                  'hash.c',
-                  'items.c',
-                  'slabs.c',
-                  'thread.c',
-                  'util.c',
-                  'stats.c',
-                  'daemon.c',
+                  'memcached.cc',
+                  'assoc.cc',
+                  'cache.cc',
+                  'hash.cc',
+                  'items.cc',
+                  'slabs.cc',
+                  'thread.cc',
+                  'util.cc',
+                  'stats.cc',
+                  'daemon.cc',
                   ],
            deps = [
+                   "//base/internal:base",
                    "//libs/third_part/libevent:event",
                   ],
            cflags = [
-                  '-std=gnu99 -DHAVE_CONFIG_H -DNDEBUG',
-                  ]
+                  '-DHAVE_CONFIG_H -DNDEBUG',
+                  ],
+           copt = ['no_style_check']
            )
