@@ -4168,8 +4168,8 @@ static void usage(void) {
 }
 
 static void usage_license(void) {
-  printf(PACKAGE " " VERSION "\n\n");
-  printf(
+  LOG(INFO) << PACKAGE " " VERSION "";
+  LOG(INFO) <<
       "Copyright (c) 2003, Danga Interactive, Inc. <http://www.danga.com/>\n"
       "All rights reserved.\n"
       "\n"
@@ -4233,8 +4233,7 @@ static void usage_license(void) {
       "THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n"
       "(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\n"
       "THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-      );
-
+      ; 
   return;
 }
 
@@ -4246,8 +4245,8 @@ static void save_pid(const char *pid_file) {
       if (fgets(buffer, sizeof(buffer), fp) != NULL) {
         unsigned int pid;
         if (safe_strtoul(buffer, &pid) && kill((pid_t)pid, 0) == 0) {
-          fprintf(stderr, "WARNING: The pid file contained "
-                          "the following (running) pid: %u\n", pid);
+          LOG(ERROR) << "WARNING: The pid file contained "
+                     << "the following (running) pid: " << pid;
         }
       }
       fclose(fp);
@@ -4261,28 +4260,28 @@ static void save_pid(const char *pid_file) {
   char tmp_pid_file[1024];
   snprintf(tmp_pid_file, sizeof(tmp_pid_file), "%s.tmp", pid_file);
   if ((fp = fopen(tmp_pid_file, "w")) == NULL) {
-    vperror("Could not open the pid file %s for writing", tmp_pid_file);
+    LOG(ERROR) << "Could not open the pid file for writing at "<< tmp_pid_file;
     return;
   }
   fprintf(fp,"%ld\n", (long)getpid());
   if (fclose(fp) == -1) {
-    vperror("Could not close the pid file %s", tmp_pid_file);
+    LOG(ERROR) << "Could not close the pid file " << tmp_pid_file;
   }
   if (rename(tmp_pid_file, pid_file) != 0) {
-    vperror("Could not rename the pid file from %s to %s",
-        tmp_pid_file, pid_file);
+    LOG(ERROR) << "Could not rename the pid file from " << tmp_pid_file
+               << "to " << pid_file;
   }
 }
 
 static void remove_pidfile(const char *pid_file) {
   if (pid_file == NULL) return;
   if (unlink(pid_file) != 0) {
-    vperror("Could not remove the pid file %s", pid_file);
+    LOG(ERROR) << "Could not remove the pid file :" << pid_file;
   }
 }
 
 static void sig_handler(const int sig) {
-  printf("SIGINT handled.\n");
+  LOG(ERROR) << "SIGINT handled.";
   exit(EXIT_SUCCESS);
 }
 
@@ -4317,16 +4316,14 @@ static int enable_large_pages(void) {
     arg.mha_pagesize = max;
     arg.mha_cmd = MHA_MAPSIZE_BSSBRK;
     if (memcntl(0, 0, MC_HAT_ADVISE, (caddr_t)&arg, 0, 0) == -1) {
-      fprintf(stderr, "Failed to set large pages: %s\n",
-              strerror(errno));
-      fprintf(stderr, "Will use default page size\n");
+      LOG(ERROR) << "Failed to set large pages: " << strerror(errno);
+      LOG(ERROR) << "Will use default page size";
     } else {
       ret = 0;
     }
   } else {
-    fprintf(stderr, "Failed to get supported pagesizes: %s\n",
-            strerror(errno));
-    fprintf(stderr, "Will use default page size\n");
+    LOG(ERROR) << "Failed to get supported pagesizes: " << strerror(errno);
+    LOG(ERROR) << "Will use default page size";
   }
   return ret;
 #else
@@ -4343,9 +4340,8 @@ static bool sanitycheck(void) {
     if (strncmp(ever, "1.", 2) == 0) {
       // Require at least 1.3 (that's still a couple of years old)
       if ((ever[2] == '1' || ever[2] == '2') && !isdigit(ever[3])) {
-        fprintf(stderr, "You are using libevent %s.\nPlease upgrade to"
-                " a more recent version (1.3 or newer)\n",
-                event_get_version());
+        LOG(ERROR) << "You are using libevent : " << event_get_version()
+                   << " Please upgrade to a more recent version (1.3 or newer)";
         return false;
       }
     }
@@ -4475,7 +4471,7 @@ int main (int argc, char **argv) {
                   size_t len = strlen(settings.inter) + strlen(optarg) + 2;
                   char * p = (char *)malloc(len);
                   if (p == NULL) {
-                    fprintf(stderr, "Failed to allocate memory\n");
+                    LOG(ERROR) << "Failed to allocate memory";
                     return 1;
                   }
                   snprintf(p, len, "%s,%s", settings.inter, optarg);
@@ -4494,8 +4490,8 @@ int main (int argc, char **argv) {
               case 'R':
                 settings.reqs_per_event = atoi(optarg);
                 if (settings.reqs_per_event == 0) {
-                  fprintf(stderr, "Number of requests per event "
-                                  "must be greater than 0\n");
+                  LOG(ERROR) << "Number of requests per event "
+                             << "must be greater than 0";
                   return 1;
                 }
                 break;
@@ -4508,36 +4504,36 @@ int main (int argc, char **argv) {
               case 'f':
                 settings.factor = atof(optarg);
                 if (settings.factor <= 1.0) {
-                  fprintf(stderr, "Factor must be greater than 1\n");
+                  LOG(ERROR) << "Factor must be greater than 1";
                   return 1;
                 }
                 break;
               case 'n':
                 settings.chunk_size = atoi(optarg);
                 if (settings.chunk_size == 0) {
-                  fprintf(stderr, "Chunk size must be greater than 0\n");
+                  LOG(ERROR) << "Chunk size must be greater than 0";
                   return 1;
                 }
                 break;
               case 't':
                 settings.num_threads = atoi(optarg);
                 if (settings.num_threads <= 0) {
-                  fprintf(stderr, "Number of threads must be greater than 0\n");
+                  LOG(ERROR) << "Number of threads must be greater than 0";
                   return 1;
                 }
                 // There're other problems when you get above 64 threads.
                 // In the future we should portably detect # of cores for the
                 // default.
                 if (settings.num_threads > 64) {
-                  fprintf(stderr, "WARNING: Setting a high number of worker"
-                                  "threads is not recommended.\n"
-                                  " Set this value to the number of cores in"
-                                  " your machine or less.\n");
+                  LOG(ERROR) << "WARNING: Setting a high number of worker"
+                             << "threads is not recommended.\n"
+                             << " Set this value to the number of cores in"
+                             << " your machine or less.";
                 }
                 break;
               case 'D':
                 if (! optarg || ! optarg[0]) {
-                  fprintf(stderr, "No delimiter specified\n");
+                  LOG(ERROR) << "No delimiter specified";
                   return 1;
                 }
                 settings.prefix_delimiter = optarg[0];
@@ -4547,8 +4543,8 @@ int main (int argc, char **argv) {
                 if (enable_large_pages() == 0) {
                   preallocate = true;
                 } else {
-                  fprintf(stderr, "Cannot enable large pages on this system\n"
-                          "(There is no Linux support as of this version)\n");
+                  LOG(ERROR) << "Cannot enable large pages on this system "
+                             << "There is no Linux support as of this version";
                   return 1;
                 }
                 break;
@@ -4567,9 +4563,9 @@ int main (int argc, char **argv) {
                 } else if (strcmp(optarg, "ascii") == 0) {
                   settings.binding_protocol = ascii_prot;
                 } else {
-                  fprintf(stderr, "Invalid value for binding protocol: %s\n"
-                          " -- should be one of auto, binary, or ascii\n",
-                          optarg);
+                  LOG(ERROR) << "Invalid value for binding protocol: "
+                             << optarg
+                             << " -- should be one of auto, binary, or ascii";
                   exit(EX_USAGE);
                 }
                 break;
@@ -4588,28 +4584,24 @@ int main (int argc, char **argv) {
                   settings.item_size_max = atoi(optarg);
                 }
                 if (settings.item_size_max < 1024) {
-                  fprintf(stderr, "Item max size cannot be less "
-                                  "than 1024 bytes.\n");
+                  LOG(ERROR) << "Item max size cannot be less than 1024 bytes.";
                   return 1;
                 }
                 if (settings.item_size_max > 1024 * 1024 * 128) {
-                  fprintf(stderr, "Cannot set item size limit higher "
-                                  "than 128 mb.\n");
+                  LOG(ERROR) << "Cannot set item size limit higher than 128 mb";
                   return 1;
                 }
                 if (settings.item_size_max > 1024 * 1024) {
-                  fprintf(stderr,
-                      "WARNING: Setting item max size above 1MB is not"
-                      " recommended!\n"
-                      " Raising this limit increases the minimum memory "
-                      "requirements\n"
-                      " and will decrease your memory efficiency.\n"
-                      );
+                  LOG(ERROR) << "WARNING: Setting item max size above 1MB is "
+                             << "not recommended!\n"
+                             << " Raising this limit increases the minimum "
+                             << "memory requirements\n"
+                             << " and will decrease your memory efficiency.";
                 }
                 break;
               case 'S': // set Sasl authentication to true. Default is false
 #ifndef ENABLE_SASL
-                fprintf(stderr, "This server is not built with SASL support.\n");
+                LOG(ERROR) << "This server is not built with SASL support.";
                 exit(EX_USAGE);
 #endif
                 settings.sasl = true;
@@ -4626,22 +4618,20 @@ int main (int argc, char **argv) {
                       break;
                     case HASHPOWER_INIT:
                       if (subopts_value == NULL) {
-                        fprintf(stderr, "Missing numeric argument for "
-                                        "hashpower\n");
+                        LOG(ERROR) << "Missing numeric argument for hashpower";
                         return 1;
                       }
                       settings.hashpower_init = atoi(subopts_value);
                       if (settings.hashpower_init < 12) {
-                        fprintf(stderr, "Initial hashtable multiplier "
-                                        "of %d is too low\n",
-                            settings.hashpower_init);
+                        LOG(ERROR) << "Initial hashtable multiplier of "
+                                   << settings.hashpower_init << " is too low";
                         return 1;
                       } else if (settings.hashpower_init > 64) {
-                        fprintf(stderr, "Initial hashtable multiplier of %d is"
-                            " too high\n"
-                            "Choose a value based on \"STAT hash_power_level\" "
-                            "from a running instance\n",
-                            settings.hashpower_init);
+                        LOG(ERROR) << "Initial hashtable multiplier of"
+                                   << settings.hashpower_init << " is too high"
+                                   << "Choose a value based on"
+                                   << " \"STAT hash_power_level\" "
+                                   << "from a running instance";
                         return 1;
                       }
                       break;
@@ -4656,32 +4646,31 @@ int main (int argc, char **argv) {
                       settings.slab_automove = atoi(subopts_value);
                       if (settings.slab_automove < 0 ||
                           settings.slab_automove > 2) {
-                        fprintf(stderr, "slab_automove must be "
-                                        "between 0 and 2\n");
+                        LOG(ERROR) << "slab_automove must be between 0 and 2";
                         return 1;
                       }
                       break;
                     case TAIL_REPAIR_TIME:
                       if (subopts_value == NULL) {
-                        fprintf(stderr, "Missing numeric argument for "
-                                        "tail_repair_time\n");
+                        LOG(ERROR) << "Missing numeric argument for "
+                                   << "tail_repair_time";
                         return 1;
                       }
                       settings.tail_repair_time = atoi(subopts_value);
                       if (settings.tail_repair_time < 10) {
-                        fprintf(stderr, "Cannot set tail_repair_time to less"
-                                        " than 10 seconds\n");
+                        LOG(ERROR) << "Cannot set tail_repair_time to less"
+                                   << " than 10 seconds";
                         return 1;
                       }
                       break;
                     default:
-                      printf("Illegal suboption \"%s\"\n", subopts_value);
+                      LOG(ERROR) << "Illegal suboption :" << subopts_value;
                       return 1;
                   }
                 }
                 break;
               default:
-                fprintf(stderr, "Illegal argument \"%c\"\n", c);
+                LOG(ERROR) << "Illegal argument:" << c;
                 return 1;
             }
           }
@@ -4697,8 +4686,8 @@ int main (int argc, char **argv) {
       settings.binding_protocol = binary_prot;
     } else {
       if (settings.binding_protocol != binary_prot) {
-        fprintf(stderr, "ERROR: You cannot allow the ASCII protocol "
-                        "while using SASL.\n");
+        LOG(ERROR) << "ERROR: You cannot allow the ASCII protocol "
+                   << "while using SASL.";
         exit(EX_USAGE);
       }
     }
@@ -4724,36 +4713,36 @@ int main (int argc, char **argv) {
     // the soft limit ends up 0, because then no core files will be
     // created at all.
     if ((getrlimit(RLIMIT_CORE, &rlim) != 0) || rlim.rlim_cur == 0) {
-      fprintf(stderr, "failed to ensure corefile creation\n");
+      LOG(ERROR) << "failed to ensure corefile creation";
       exit(EX_OSERR);
     }
   }
   // If needed, increase rlimits to allow as many connections
   // as needed.
   if (getrlimit(RLIMIT_NOFILE, &rlim) != 0) {
-    fprintf(stderr, "failed to getrlimit number of files\n");
+    LOG(ERROR) << "failed to getrlimit number of files";
     exit(EX_OSERR);
   } else {
     rlim.rlim_cur = settings.maxconns;
     rlim.rlim_max = settings.maxconns;
     if (setrlimit(RLIMIT_NOFILE, &rlim) != 0) {
-      fprintf(stderr, "failed to set rlimit for open files. "
-              "Try starting as root or requesting smaller maxconns value.\n");
+      LOG(ERROR) << "failed to set rlimit for open files. Try starting as root"
+                 << " or requesting smaller maxconns value.";
       exit(EX_OSERR);
     }
   }
   // lose root privileges if we have them
   if (getuid() == 0 || geteuid() == 0) {
     if (username == 0 || *username == '\0') {
-      fprintf(stderr, "can't run as root without the -u switch\n");
+      LOG(ERROR) << "can't run as root without the -u switch";
       exit(EX_USAGE);
     }
     if ((pw = getpwnam(username)) == 0) {
-      fprintf(stderr, "can't find the user %s to switch to\n", username);
+      LOG(ERROR) << "can't find the user " << username << " to switch to";
       exit(EX_NOUSER);
     }
     if (setgid(pw->pw_gid) < 0 || setuid(pw->pw_uid) < 0) {
-      fprintf(stderr, "failed to assume identity of user %s\n", username);
+      LOG(ERROR) << "failed to assume identity of user " << username;
       exit(EX_OSERR);
     }
   }
@@ -4763,10 +4752,10 @@ int main (int argc, char **argv) {
   // if we want to ensure our ability to dump core, don't chdir to
   if (do_daemonize) {
     if (sigignore(SIGHUP) == -1) {
-      perror("Failed to ignore SIGHUP");
+      LOG(ERROR) << "Failed to ignore SIGHUP" << strerror(errno);
     }
     if (daemonize(maxcore, settings.verbose) == -1) {
-      fprintf(stderr, "failed to daemon() in order to daemonize\n");
+      LOG(ERROR) << "failed to daemon() in order to daemonize";
       exit(EXIT_FAILURE);
     }
   }
@@ -4777,12 +4766,12 @@ int main (int argc, char **argv) {
     // http://linux.about.com/library/cmd/blcmdl2_mlockall.htm
     int res = mlockall(MCL_CURRENT | MCL_FUTURE);
     if (res != 0) {
-      fprintf(stderr, "warning: -k invalid, mlockall() failed: %s\n",
-              strerror(errno));
+      LOG(ERROR) << "warning: -k invalid, mlockall() failed: "
+                 << strerror(errno);
     }
 #else
-    fprintf(stderr, "warning: -k invalid, mlockall() not supported on "
-                    "this platform.  proceeding without.\n");
+    LOG(ERROR) << "warning: -k invalid, mlockall() not supported on "
+               << "this platform.  proceeding without.";
 #endif
   }
 
@@ -4798,7 +4787,7 @@ int main (int argc, char **argv) {
   // ignore SIGPIPE signals; we can use errno == EPIPE if we
   // need that information
   if (sigignore(SIGPIPE) == -1) {
-    perror("failed to ignore SIGPIPE; sigaction");
+    LOG(ERROR) << "failed to ignore SIGPIPE; sigaction" << strerror(errno);
     exit(EX_OSERR);
   }
   // start up worker threads if MT mode
@@ -4815,7 +4804,7 @@ int main (int argc, char **argv) {
   if (settings.socketpath != NULL) {
     errno = 0;
     if (server_socket_unix(settings.socketpath,settings.access)) {
-      vperror("failed to listen on UNIX socket: %s", settings.socketpath);
+      LOG(ERROR) << "failed to listen on UNIX socket: " << settings.socketpath;
       exit(EX_OSERR);
     }
   }
@@ -4826,21 +4815,19 @@ int main (int argc, char **argv) {
     FILE *portnumber_file = NULL;
 
     if (portnumber_filename != NULL) {
-      snprintf(temp_portnumber_filename,
-          sizeof(temp_portnumber_filename),
-          "%s.lck", portnumber_filename);
-
+      snprintf(temp_portnumber_filename, sizeof(temp_portnumber_filename),
+               "%s.lck", portnumber_filename);
       portnumber_file = fopen(temp_portnumber_filename, "a");
       if (portnumber_file == NULL) {
-        fprintf(stderr, "Failed to open \"%s\": %s\n",
-            temp_portnumber_filename, strerror(errno));
+        LOG(ERROR) << "Failed to open " << temp_portnumber_filename << ":"
+                   << strerror(errno);
       }
     }
 
     errno = 0;
     if (settings.port && server_sockets(settings.port, tcp_transport,
-          portnumber_file)) {
-      vperror("failed to listen on TCP port %d", settings.port);
+                                        portnumber_file)) {
+      LOG(ERROR) << "failed to listen on TCP port " << settings.port;
       exit(EX_OSERR);
     }
 
@@ -4852,8 +4839,8 @@ int main (int argc, char **argv) {
     // create the UDP listening socket and bind it
     errno = 0;
     if (settings.udpport && server_sockets(settings.udpport, udp_transport,
-          portnumber_file)) {
-      vperror("failed to listen on UDP port %d", settings.udpport);
+                                           portnumber_file)) {
+      LOG(ERROR) << "failed to listen on UDP port " << settings.udpport;
       exit(EX_OSERR);
     }
 
@@ -4866,7 +4853,7 @@ int main (int argc, char **argv) {
   // is only an advisory.
   usleep(1000);
   if (stats.curr_conns + stats.reserved_fds >= settings.maxconns - 1) {
-    fprintf(stderr, "Maxconns setting is too low, use -c to increase.\n");
+    LOG(ERROR) << "Maxconns setting is too low, use -c to increase.";
     exit(EXIT_FAILURE);
   }
   if (pid_file != NULL) {

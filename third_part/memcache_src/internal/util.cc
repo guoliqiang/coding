@@ -104,7 +104,7 @@ void vperror(const char *fmt, ...) {
   }
   va_end(ap);
   errno = old_errno;
-  perror(buf);
+  LOG(ERROR) << buf;
 }
 
 #ifndef HAVE_HTONLL
