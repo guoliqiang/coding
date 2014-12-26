@@ -1,11 +1,7 @@
-//  memcached - memory caching daemon
-//       http://www.danga.com/memcached/
-//  Copyright 2003 Danga Interactive, Inc.  All rights reserved.
-//  Use and distribution licensed under the BSD license.  See
-//  the LICENSE file for full text.
-//  Authors:
-//      Anatoly Vorobey <mellon@pobox.com>
-//      Brad Fitzpatrick <brad@danga.com>
+//  Copyright 2003 Danga Interactive, Inc.  All rights reserved. Use and
+//  distribution licensed under the BSD license.  See the LICENSE file for full
+//  text.
+
 #include "third_part/memcache_src/public/memcached.h"
 #include <sys/stat.h>
 #include <sys/socket.h>
@@ -213,7 +209,7 @@ static void settings_init(void) {
   settings.inter = NULL;
   settings.maxbytes = 64 * 1024 * 1024; // default is 64MB
   settings.maxconns = 1024; // to limit connections-related memory to about 5MB
-  settings.verbose = 0;
+  settings.verbose = MAX_VERBOSITY_LEVEL;
   settings.oldest_live = 0;
   // push old items out of cache when memory runs out
   settings.evict_to_free = 1;
@@ -283,7 +279,7 @@ static void conn_init(void) {
   freetotal = 200;
   freecurr = 0;
   if ((freeconns = (conn **)calloc(freetotal, sizeof(conn *))) == NULL) {
-    fprintf(stderr, "Failed to allocate connection structures\n");
+    LOG(ERROR) << "Failed to allocate connection structures";
   }
   return;
 }
@@ -381,7 +377,7 @@ conn *conn_new(const int sfd, enum conn_states init_state,
       STATS_LOCK();
       stats.malloc_fails++;
       STATS_UNLOCK();
-      fprintf(stderr, "Failed to allocate buffers for connection\n");
+      LOG(ERROR) << "Failed to allocate buffers for connection";
       return NULL;
     }
 
@@ -393,8 +389,7 @@ conn *conn_new(const int sfd, enum conn_states init_state,
   c->protocol = settings.binding_protocol;
 
   // unix socket mode doesn't need this, so zeroed out.  but why
-  // is this done for every command?  presumably for UDP
-  // mode.
+  // is this done for every command?  presumably for UDP mode.
   if (!settings.socketpath) {
     c->request_addr_size = sizeof(c->request_addr);
   } else {
@@ -403,20 +398,19 @@ conn *conn_new(const int sfd, enum conn_states init_state,
 
   if (settings.verbose > 1) {
     if (init_state == conn_listening) {
-      fprintf(stderr, "<%d server listening (%s)\n", sfd,
-          prot_text(c->protocol));
+      LOG(ERROR) << "<" << sfd << " server listening ("
+                 << prot_text(c->protocol) << ")";
     } else if (IS_UDP(transport)) {
-      fprintf(stderr, "<%d server listening (udp)\n", sfd);
+      LOG(ERROR) << "<" << sfd << " server listening (udp)";
     } else if (c->protocol == negotiating_prot) {
-      fprintf(stderr, "<%d new auto-negotiating client connection\n",
-          sfd);
+      LOG(ERROR) << "<" << sfd << " new auto-negotiating client connection";
     } else if (c->protocol == ascii_prot) {
-      fprintf(stderr, "<%d new ascii client connection.\n", sfd);
+      LOG(ERROR) << "<" << sfd << " new ascii client connection.";
     } else if (c->protocol == binary_prot) {
-      fprintf(stderr, "<%d new binary client connection.\n", sfd);
+      LOG(ERROR) << "<" << sfd << " new binary client connection.";
     } else {
-      fprintf(stderr, "<%d new unknown (%d) client connection\n",
-          sfd, c->protocol);
+      LOG(ERROR) << "<" << sfd << " new unknown (" << c->protocol
+                 << ") client connection";
       assert(false);
     }
   }
@@ -452,6 +446,7 @@ conn *conn_new(const int sfd, enum conn_states init_state,
     if (conn_add_to_freelist(c)) {
       conn_free(c);
     }
+    LOG(ERROR) << "event_add";
     perror("event_add");
     return NULL;
   }
@@ -471,7 +466,7 @@ static void conn_cleanup(conn *c) {
     c->item = 0;
   }
   if (c->ileft != 0) {
-    for (; c->ileft > 0; c->ileft--,c->icurr++) {
+    for (; c->ileft > 0; c->ileft--, c->icurr++) {
       item_remove(*(c->icurr));
     }
   }
@@ -513,8 +508,9 @@ static void conn_close(conn *c) {
   assert(c != NULL);
   // delete the event, the socket and the conn
   event_del(&c->event);
-  if (settings.verbose > 1)
-    fprintf(stderr, "<%d connection closed.\n", c->sfd);
+  if (settings.verbose > 1) {
+    LOG(ERROR) << "<" << c->sfd << " connection closed.";
+  }
   MEMCACHED_CONN_RELEASE(c->sfd);
   close(c->sfd);
   pthread_mutex_lock(&conn_lock);
@@ -554,7 +550,7 @@ static void conn_shrink(conn *c) {
 
   if (c->isize > ITEM_LIST_HIGHWAT) {
     item **newbuf = (item**) realloc((void *)c->ilist,
-        ITEM_LIST_INITIAL * sizeof(c->ilist[0]));
+                    ITEM_LIST_INITIAL * sizeof(c->ilist[0]));
     if (newbuf) {
       c->ilist = newbuf;
       c->isize = ITEM_LIST_INITIAL;
@@ -606,9 +602,8 @@ static void conn_set_state(conn *c, enum conn_states state) {
   assert(state >= conn_listening && state < conn_max_state);
   if (state != c->state) {
     if (settings.verbose > 2) {
-      fprintf(stderr, "%d: going from %s to %s\n",
-          c->sfd, state_text(c->state),
-          state_text(state));
+      LOG(ERROR) << c->sfd << ": going from " <<  state_text(c->state) << " to "
+                 << state_text(state);
     }
 
     if (state == conn_write || state == conn_mwrite) {
@@ -626,8 +621,8 @@ static int ensure_iov_space(conn *c) {
   if (c->iovused >= c->iovsize) {
     int i, iovnum;
     struct iovec *new_iov = (struct iovec *)realloc(c->iov,
-        (c->iovsize * 2) * sizeof(struct iovec));
-    if (! new_iov) {
+                            (c->iovsize * 2) * sizeof(struct iovec));
+    if (!new_iov) {
       STATS_LOCK();
       stats.malloc_fails++;
       STATS_UNLOCK();
@@ -736,15 +731,17 @@ static void out_string(conn *c, const char *str) {
   size_t len;
   assert(c != NULL);
   if (c->noreply) {
-    if (settings.verbose > 1)
-      fprintf(stderr, ">%d NOREPLY %s\n", c->sfd, str);
+    if (settings.verbose > 1) {
+      LOG(ERROR) << ">" << c->sfd << " NOREPLY " << str;
+    }
     c->noreply = false;
     conn_set_state(c, conn_new_cmd);
     return;
   }
 
-  if (settings.verbose > 1)
-    fprintf(stderr, ">%d %s\n", c->sfd, str);
+  if (settings.verbose > 1) {
+    LOG(ERROR) << ">" << c->sfd << " " << str;
+  }
 
   // Nuke a partial output...
   c->msgcurr = 0;
@@ -876,14 +873,14 @@ static void add_bin_header(conn *c, uint16_t err, uint8_t hdr_len,
   header->response.cas = htonll(c->cas);
   if (settings.verbose > 1) {
     int ii;
-    fprintf(stderr, ">%d Writing bin response:", c->sfd);
+    LOG(ERROR) << ">" << c->sfd << " Writing bin response:";
     for (ii = 0; ii < sizeof(header->bytes); ++ii) {
       if (ii % 4 == 0) {
-        fprintf(stderr, "\n>%d  ", c->sfd);
+        LOG(ERROR) << ">" << c->sfd;
       }
-      fprintf(stderr, " 0x%02x", header->bytes[ii]);
+      LOG(ERROR) << "0x" << std::hex << header->bytes[ii];
     }
-    fprintf(stderr, "\n");
+    LOG(ERROR) << "";
   }
   add_iov(c, c->wbuf, sizeof(header->response));
 }
@@ -923,11 +920,11 @@ static void write_bin_error(conn *c, protocol_binary_response_status err,
     default:
       assert(false);
       errstr = "UNHANDLED ERROR";
-      fprintf(stderr, ">%d UNHANDLED ERROR: %d\n", c->sfd, err);
+      LOG(ERROR) << ">" << c->sfd << " UNHANDLED ERROR: " << err;
   }
 
   if (settings.verbose > 1) {
-    fprintf(stderr, ">%d Writing an error: %s\n", c->sfd, errstr);
+    LOG(ERROR) << ">"  << c->sfd << " Writing an error: " << errstr;
   }
 
   len = strlen(errstr);
@@ -983,21 +980,19 @@ static void complete_incr_bin(conn *c) {
 
   if (settings.verbose > 1) {
     int i;
-    fprintf(stderr, "incr ");
+    std::string str = "incr ";
     for (i = 0; i < nkey; i++) {
-      fprintf(stderr, "%c", key[i]);
+      str.push_back(key[i]);
     }
-    fprintf(stderr, " %lld, %llu, %d\n",
-        (long long)req->message.body.delta,
-        (long long)req->message.body.initial,
-        req->message.body.expiration);
+    LOG(ERROR) << str << (long long)req->message.body.delta << ","
+               << (long long)req->message.body.initial << ","
+               << req->message.body.expiration;
   }
   if (c->binary_header.request.cas != 0) {
     cas = c->binary_header.request.cas;
   }
   switch(add_delta(c, key, nkey, c->cmd == PROTOCOL_BINARY_CMD_INCREMENT,
-        req->message.body.delta, tmpbuf,
-        &cas)) {
+        req->message.body.delta, tmpbuf, &cas)) {
     case OK:
       rsp->message.body.value = htonll(strtoull(tmpbuf, NULL, 10));
       if (cas) {
