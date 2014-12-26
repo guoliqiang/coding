@@ -1,6 +1,6 @@
 #libevent pkg-config source file
 
-prefix=/home/guoliqiang/git-coding/coding/third_part/libevent
+prefix=/home/guoliqiang/git-coding/coding/third_part/libevent_my
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

@@ -37,9 +37,9 @@
   headers.
  */
 
-#include "third_part/libevent/include/event.h"
-#include "third_part/libevent/include/event2/http.h"
-#include "third_part/libevent/include/event2/http_struct.h"
-#include "third_part/libevent/include/event2/http_compat.h"
+#include <third_part/libevent_my/include/event.h>
+#include <third_part/libevent_my/include/event2/http.h>
+#include <third_part/libevent_my/include/event2/http_struct.h>
+#include <third_part/libevent_my/include/event2/http_compat.h>
 
 #endif /* _EVHTTP_H_ */

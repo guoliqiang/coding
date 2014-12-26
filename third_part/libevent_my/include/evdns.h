@@ -37,9 +37,9 @@
   headers.
  */
 
-#include "third_part/libevent/include/event.h"
-#include "third_part/libevent/include/event2/dns.h"
-#include "third_part/libevent/include/event2/dns_compat.h"
-#include "third_part/libevent/include/event2/dns_struct.h"
+#include <third_part/libevent_my/include/event.h>
+#include <third_part/libevent_my/include/event2/dns.h>
+#include <third_part/libevent_my/include/event2/dns_compat.h>
+#include <third_part/libevent_my/include/event2/dns_struct.h>
 
 #endif /* _EVDNS_H_ */

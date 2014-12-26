@@ -76,7 +76,7 @@
 extern "C" {
 #endif
 
-#include "event-config.h"
+#include <third_part/libevent_my/include/event2/event-config.h>
 #include <stdarg.h>
 #ifdef _EVENT_HAVE_SYS_TYPES_H
 #include <sys/types.h>
@@ -84,7 +84,7 @@ extern "C" {
 #ifdef _EVENT_HAVE_SYS_UIO_H
 #include <sys/uio.h>
 #endif
-#include "util.h"
+#include <third_part/libevent_my/include/event2/util.h>
 
 /**
    An evbuffer is an opaque data type for efficiently buffering data to be

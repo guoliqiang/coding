@@ -140,7 +140,7 @@ extern "C" {
 #endif
 
 /* For integer types. */
-#include <event2/util.h>
+#include <third_part/libevent_my/include/event2/util.h>
 
 /** Error codes 0-5 are as described in RFC 1035. */
 #define DNS_ERR_NONE 0

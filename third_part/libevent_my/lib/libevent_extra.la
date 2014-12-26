@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/guoliqiang/git-coding/coding/third_part/libevent/lib'
+libdir='/usr/local/lib'
