@@ -166,7 +166,7 @@ void switch_item_lock_type(enum item_lock_types type) {
       buf[0] = 'g';
       break;
     default:
-      fprintf(stderr, "Unknown lock type: %d\n", type);
+      LOG(ERROR) << "Unknown lock type: " << type;
       assert(1 == 0);
       break;
   }
@@ -262,7 +262,7 @@ static void create_worker(void *(*func)(void *), void *arg) {
   int ret;
   pthread_attr_init(&attr);
   if ((ret = pthread_create(&thread, &attr, func, arg)) != 0) {
-    fprintf(stderr, "Can't create thread: %s\n", strerror(ret));
+    LOG(ERROR) << "Can't create thread: " << strerror(ret);
     exit(1);
   }
 }
@@ -278,7 +278,7 @@ void accept_new_conns(const bool do_accept) {
 static void setup_thread(LIBEVENT_THREAD *me) {
   me->base = event_init();
   if (!me->base) {
-    fprintf(stderr, "Can't allocate event base\n");
+    LOG(ERROR) << "Can't allocate event base";
     exit(1);
   }
   // Listen for notifications from other threads
@@ -289,7 +289,7 @@ static void setup_thread(LIBEVENT_THREAD *me) {
             me);
   event_base_set(me->base, &me->notify_event);
   if (event_add(&me->notify_event, 0) == -1) {
-    fprintf(stderr, "Can't monitor libevent notify pipe\n");
+    LOG(ERROR) << "Can't monitor libevent notify pipe";
     exit(1);
   }
   me->new_conn_queue = (conn_queue *)malloc(sizeof(struct conn_queue));
@@ -305,7 +305,7 @@ static void setup_thread(LIBEVENT_THREAD *me) {
   me->suffix_cache = cache_create("suffix", SUFFIX_SIZE, sizeof(char*),
                                   NULL, NULL);
   if (me->suffix_cache == NULL) {
-    fprintf(stderr, "Failed to create suffix cache\n");
+    LOG(ERROR) << "Failed to create suffix cache";
     exit(EXIT_FAILURE);
   }
 }
@@ -335,7 +335,7 @@ static void thread_libevent_process(int fd, short which, void *arg) {
 
   if (read(fd, buf, 1) != 1) {
     if (settings.verbose > 0) {
-      fprintf(stderr, "Can't read from libevent pipe\n");
+      LOG(ERROR) << "Can't read from libevent pipe";
     }
   }
 
@@ -347,11 +347,11 @@ static void thread_libevent_process(int fd, short which, void *arg) {
                            item->read_buffer_size, item->transport, me->base);
         if (c == NULL) {
           if (IS_UDP(item->transport)) {
-            fprintf(stderr, "Can't listen for events on UDP socket\n");
+            LOG(ERROR) << "Can't listen for events on UDP socket";
             exit(1);
           } else {
             if (settings.verbose > 0) {
-              fprintf(stderr, "Can't listen for events on fd %d\n", item->sfd);
+              LOG(ERROR) << "Can't listen for events on fd " << item->sfd;
             }
             close(item->sfd);
           }
@@ -386,7 +386,7 @@ void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags,
   if (item == NULL) {
     close(sfd);
     // given that malloc failed this may also fail, but let's try
-    fprintf(stderr, "Failed to allocate memory for connection object\n");
+    LOG(ERROR) << "Failed to allocate memory for connection object";
     return ;
   }
 

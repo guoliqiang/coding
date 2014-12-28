@@ -50,7 +50,7 @@ void assoc_init(const int hashtable_init) {
   }
   primary_hashtable = (item **)calloc(hashsize(hashpower), sizeof(void *));
   if (!primary_hashtable) {
-    fprintf(stderr, "Failed to init hashtable.\n");
+    LOG(ERROR) << "Failed to init hashtable.";
     exit(EXIT_FAILURE);
   }
   STATS_LOCK();
@@ -100,13 +100,13 @@ static item ** _hashitem_before (const char *key, const size_t nkey,
   return pos;
 }
 
-// grows the hashtable to the next power of 2. 
+// grows the hashtable to the next power of 2.
 static void assoc_expand(void) {
   old_hashtable = primary_hashtable;
   primary_hashtable = (item **)calloc(hashsize(hashpower + 1), sizeof(void *));
   if (primary_hashtable) {
     if (settings.verbose > 1) {
-      fprintf(stderr, "Hash table expansion starting\n");
+      LOG(ERROR) << "Hash table expansion starting";
     }
     hashpower++;
     expanding = true;
@@ -118,7 +118,7 @@ static void assoc_expand(void) {
     STATS_UNLOCK();
   } else {
     primary_hashtable = old_hashtable;
-    // Bad news, but we can keep running. 
+    // Bad news, but we can keep running.
   }
 }
 
@@ -193,7 +193,7 @@ static void * assoc_maintenance_thread(void *arg) {
         stats.hash_is_expanding = 0;
         STATS_UNLOCK();
         if (settings.verbose > 1) {
-          fprintf(stderr, "Hash table expansion done\n");
+          LOG(ERROR) << "Hash table expansion done";
         }
       }
     }
@@ -232,7 +232,7 @@ int start_assoc_maintenance_thread() {
   }
   if ((ret = pthread_create(&maintenance_tid, NULL,
                             assoc_maintenance_thread, NULL)) != 0) {
-    fprintf(stderr, "Can't create thread: %s\n", strerror(ret));
+    LOG(ERROR) << "Can't create thread: " << strerror(ret);
     return -1;
   }
   return 0;

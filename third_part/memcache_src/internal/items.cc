@@ -53,11 +53,10 @@ uint64_t get_cas_id(void) {
 
 // Enable this for reference-count debugging.
 #if 0
-# define DEBUG_REFCNT(it,op) \
-    fprintf(stderr, "item %x refcnt(%c) %d %c%c%c\n", \
-            it, op, it->refcount, \
-            (it->it_flags & ITEM_LINKED) ? 'L' : ' ', \
-            (it->it_flags & ITEM_SLABBED) ? 'S' : ' ')
+# define DEBUG_REFCNT(it, op) \
+    LOG(ERROR) << "item " << it << " refcnt(" << op << ") " << it->refcount\
+               << " " << ((it->it_flags & ITEM_LINKED) ? 'L' : ' ') << " "\
+               << ((it->it_flags & ITEM_SLABBED) ? 'S' : ' '))
 #else
 # define DEBUG_REFCNT(it,op) while(0)
 #endif
@@ -514,13 +513,13 @@ item *do_item_get(const char *key, const size_t nkey, const uint32_t hv) {
   if (settings.verbose > 2) {
     int ii;
     if (it == NULL) {
-      fprintf(stderr, "> NOT FOUND ");
+      LOG(ERROR) << "> NOT FOUND ";
     } else {
-      fprintf(stderr, "> FOUND KEY ");
+      LOG(ERROR) << "> FOUND KEY ";
       was_found++;
     }
     for (ii = 0; ii < nkey; ++ii) {
-      fprintf(stderr, "%c", key[ii]);
+      LOG(ERROR) << key[ii];
     }
   }
   if (it != NULL) {
@@ -530,21 +529,21 @@ item *do_item_get(const char *key, const size_t nkey, const uint32_t hv) {
       do_item_remove(it);
       it = NULL;
       if (was_found) {
-        fprintf(stderr, " -nuked by flush");
+        LOG(ERROR) << " -nuked by flush";
       }
     } else if (it->exptime != 0 && it->exptime <= current_time) {
       do_item_unlink(it, hv);
       do_item_remove(it);
       it = NULL;
       if (was_found) {
-        fprintf(stderr, " -nuked by expire");
+        LOG(ERROR) << " -nuked by expire";
       }
     } else {
       it->it_flags |= ITEM_FETCHED;
       DEBUG_REFCNT(it, '+');
     }
   }
-  if (settings.verbose > 2) fprintf(stderr, "\n");
+  if (settings.verbose > 2) LOG(ERROR) << "";
   return it;
 }
 

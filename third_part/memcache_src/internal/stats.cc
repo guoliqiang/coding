@@ -182,8 +182,7 @@ static int test_count = 0;
 static int fail_count = 0;
 
 static void fail(char *what) {
-  printf("\tFAIL: %s\n", what);
-  fflush(stdout);
+  LOG(ERROR) << "FAIL: " << what;
   fail_count++;
 }
 static void test_equals_int(char *what, int a, int b) {
@@ -331,7 +330,7 @@ static void run_test(char *what, void (*func)(void)) {
 
   stats_prefix_clear();
   (func)();
-  printf("\t%d / %d pass\n", (test_count - fail_count), test_count);
+  LOG(ERROR) << (test_count - fail_count) << " / " << test_count << " pass";
 }
 
 // In case we're compiled in thread mode

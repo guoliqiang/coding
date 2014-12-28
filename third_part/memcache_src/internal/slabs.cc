@@ -84,8 +84,8 @@ void slabs_init(const size_t limit, const double factor, const bool prealloc) {
       mem_current = mem_base;
       mem_avail = mem_limit;
     } else {
-      fprintf(stderr, "Warning: Failed to allocate requested memory in"
-              " one large chunk.\nWill allocate in smaller chunks\n");
+      LOG(ERROR) << "Warning: Failed to allocate requested memory in"
+                 << " one large chunk. Will allocate in smaller chunks";
     }
   }
   memset(slabclass, 0, sizeof(slabclass));
@@ -97,16 +97,18 @@ void slabs_init(const size_t limit, const double factor, const bool prealloc) {
     slabclass[i].perslab = settings.item_size_max / slabclass[i].size;
     size *= factor;
     if (settings.verbose > 1) {
-      fprintf(stderr, "slab class %3d: chunk size %9u perslab %7u\n",
-              i, slabclass[i].size, slabclass[i].perslab);
+      LOG(ERROR) << "slab class " << i << ": chunk size "
+                 << slabclass[i].size << " perslab "
+                 << slabclass[i].perslab;
     }
   }
   power_largest = i;
   slabclass[power_largest].size = settings.item_size_max;
   slabclass[power_largest].perslab = 1;
   if (settings.verbose > 1) {
-    fprintf(stderr, "slab class %3d: chunk size %9u perslab %7u\n",
-            i, slabclass[i].size, slabclass[i].perslab);
+    LOG(ERROR) << "slab class " << i << ": chunk size "
+               << slabclass[i].size << " perslab "
+               << slabclass[i].perslab;
   }
   // for the test suite:  faking of how much we've already malloc'd
   {
@@ -131,9 +133,9 @@ static void slabs_preallocate (const unsigned int maxslabs) {
   for (i = POWER_SMALLEST; i <= POWER_LARGEST; i++) {
     if (++prealloc > maxslabs) return;
     if (do_slabs_newslab(i) == 0) {
-      fprintf(stderr, "Error while preallocating slab memory!\n"
-              "If using -L or other prealloc options, max memory must be "
-              "at least %d megabytes.\n", power_largest);
+      LOG(ERROR) << "Error while preallocating slab memory! "
+                 << "If using -L or other prealloc options, max memory must be "
+                 << "at least " << power_largest <<  " megabytes.";
       exit(1);
     }
   }
@@ -363,7 +365,7 @@ void slabs_adjust_mem_requested(unsigned int id, size_t old, size_t ntotal) {
   pthread_mutex_lock(&slabs_lock);
   slabclass_t *p;
   if (id < POWER_SMALLEST || id > power_largest) {
-    fprintf(stderr, "Internal error! Invalid slab class\n");
+    LOG(ERROR) << "Internal error! Invalid slab class";
     abort();
   }
   p = &slabclass[id];
@@ -410,7 +412,7 @@ static int slab_rebalance_start(void) {
   // Also tells do_item_get to search for items in this slab
   slab_rebalance_signal = 2;
   if (settings.verbose > 1) {
-    fprintf(stderr, "Started a slab rebalance\n");
+    LOG(ERROR) << "Started a slab rebalance";
   }
   pthread_mutex_unlock(&slabs_lock);
   pthread_mutex_unlock(&cache_lock);
@@ -474,8 +476,9 @@ static int slab_rebalance_move(void) {
           }
         } else {
           if (settings.verbose > 2) {
-            fprintf(stderr, "Slab reassign hit a busy item: refcount: %d (%d -> %d)\n",
-                it->refcount, slab_rebal.s_clsid, slab_rebal.d_clsid);
+            LOG(ERROR) << "Slab reassign hit a busy item: refcount:"
+                       << it->refcount << " (" << slab_rebal.s_clsid
+                       << " -> " << slab_rebal.d_clsid << ")";
           }
           status = MOVE_BUSY;
         }
@@ -554,7 +557,7 @@ static void slab_rebalance_finish(void) {
   STATS_UNLOCK();
 
   if (settings.verbose > 1) {
-    fprintf(stderr, "finished a slab move\n");
+    LOG(ERROR) << "finished a slab move";
   }
 }
 
@@ -748,19 +751,19 @@ int start_slab_maintenance_thread(void) {
   }
 
   if (pthread_cond_init(&slab_rebalance_cond, NULL) != 0) {
-    fprintf(stderr, "Can't intiialize rebalance condition\n");
+    LOG(ERROR) << "Can't intiialize rebalance condition";
     return -1;
   }
   pthread_mutex_init(&slabs_rebalance_lock, NULL);
 
   if ((ret = pthread_create(&maintenance_tid, NULL,
           slab_maintenance_thread, NULL)) != 0) {
-    fprintf(stderr, "Can't create slab maint thread: %s\n", strerror(ret));
+    LOG(ERROR) << "Can't create slab maint thread: " << strerror(ret);
     return -1;
   }
   if ((ret = pthread_create(&rebalance_tid, NULL,
           slab_rebalance_thread, NULL)) != 0) {
-    fprintf(stderr, "Can't create rebal thread: %s\n", strerror(ret));
+    LOG(ERROR) << "Can't create rebal thread: " << strerror(ret);
     return -1;
   }
   return 0;
