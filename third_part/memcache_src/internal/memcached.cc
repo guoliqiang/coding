@@ -43,7 +43,6 @@
 #endif
 #endif
 
-// forward declarations
 static void drive_machine(conn *c);
 static int new_socket(struct addrinfo *ai);
 static int try_read_command(conn *c);
@@ -59,16 +58,12 @@ enum try_read_result {
 
 static enum try_read_result try_read_network(conn *c);
 static enum try_read_result try_read_udp(conn *c);
-
 static void conn_set_state(conn *c, enum conn_states state);
 
-// stats
 static void stats_init(void);
 static void server_stats(ADD_STAT add_stats, conn *c);
 static void process_stat_settings(ADD_STAT add_stats, void *c);
 
-
-// defaults
 static void settings_init(void);
 
 // event handling, network IO
@@ -83,13 +78,13 @@ static int ensure_iov_space(conn *c);
 static int add_iov(conn *c, const void *buf, int len);
 static int add_msghdr(conn *c);
 
-
 static void conn_free(conn *c);
 
 // exported globals
 struct stats stats;
 struct settings settings;
-time_t process_started;  // when the process was started
+// when the process was started
+time_t process_started;
 
 struct slab_rebalance slab_rebal;
 volatile int slab_rebalance_signal;
@@ -124,8 +119,8 @@ static void maxconns_handler(const int fd, const short which, void *arg) {
     event_base_set(main_base, &maxconnsevent);
     evtimer_add(&maxconnsevent, &t);
   } else {
-     evtimer_del(&maxconnsevent);
-     accept_new_conns(true);
+    evtimer_del(&maxconnsevent);
+    accept_new_conns(true);
   }
 }
 
@@ -345,7 +340,7 @@ conn *conn_new(const int sfd, enum conn_states init_state,
       STATS_LOCK();
       stats.malloc_fails++;
       STATS_UNLOCK();
-      fprintf(stderr, "Failed to allocate connection object\n");
+      LOG(ERROR) << "Failed to allocate connection object";
       return NULL;
     }
     MEMCACHED_CONN_CREATE(c);
@@ -4393,8 +4388,11 @@ int main (int argc, char **argv) {
   char *subopts;
   char *subopts_value;
   enum {
-    MAXCONNS_FAST = 0, HASHPOWER_INIT = 1, SLAB_REASSIGN = 2,
-    SLAB_AUTOMOVE = 3, TAIL_REPAIR_TIME = 4
+    MAXCONNS_FAST = 0,
+    HASHPOWER_INIT = 1,
+    SLAB_REASSIGN = 2,
+    SLAB_AUTOMOVE = 3,
+    TAIL_REPAIR_TIME = 4
   };
   char *const subopts_tokens[] = {
     (char *)"maxconns_fast",

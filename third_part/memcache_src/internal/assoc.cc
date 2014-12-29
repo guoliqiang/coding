@@ -2,8 +2,8 @@
 // The hash function used here is by Bob Jenkins, 1996:
 //  <http://burtleburtle.net/bob/hash/doobs.html>
 //  "By Bob Jenkins, 1996.  bob_jenkins@burtleburtle.net.
-//   You may use this code any way you wish, private, educational,
-//   or commercial.  It's free."
+//  You may use this code any way you wish, private, educational,
+//  or commercial.  It's free."
 // The rest of the file is licensed under the BSD license.  See LICENSE.
 
 #include "third_part/memcache_src/public/memcached.h"
@@ -25,13 +25,14 @@
 static pthread_cond_t maintenance_cond = PTHREAD_COND_INITIALIZER;
 typedef  unsigned long  int ub4;  // unsigned 4-byte quantities
 typedef  unsigned char ub1;  // unsigned 1-byte quantities
+
 // how many powers of 2's worth of buckets we use
 unsigned int hashpower = HASHPOWER_DEFAULT;  // 16
 // Main hash table. This is where we look except during expansion.
-static item** primary_hashtable = 0;
+static item ** primary_hashtable = 0;
 // Previous hash table. During expansion, we look here for keys that haven't
 // been moved over to the primary yet.
-static item** old_hashtable = 0;
+static item ** old_hashtable = 0;
 // Number of items in the hash table. 
 static unsigned int hash_items = 0;
 // Flag: Are we in the middle of expanding now? 
@@ -41,6 +42,7 @@ static bool started_expanding = false;
 // far we've gotten so far. Ranges from 0 .. hashsize(hashpower - 1) - 1.
 static unsigned int expand_bucket = 0;
 static volatile int do_run_maintenance_thread = 1;
+
 #define DEFAULT_HASH_BULK_MOVE 1
 int hash_bulk_move = DEFAULT_HASH_BULK_MOVE;
 
@@ -78,7 +80,7 @@ item * assoc_find(const char *key, const size_t nkey, const uint32_t hv) {
     it = it->h_next;
     ++depth;
   }
-  MEMCACHED_ASSOC_FIND(key, nkey, depth);
+  MEMCACHED_ASSOC_FIND(key, nkey, depth);  // empty macro
   return ret;
 }
 
@@ -86,7 +88,7 @@ item * assoc_find(const char *key, const size_t nkey, const uint32_t hv) {
 // the item wasn't found 
 static item ** _hashitem_before (const char *key, const size_t nkey,
                                  const uint32_t hv) {
-  item **pos;
+  item ** pos;
   unsigned int oldbucket;
   if (expanding &&
       (oldbucket = (hv & hashmask(hashpower - 1))) >= expand_bucket) {
@@ -94,19 +96,20 @@ static item ** _hashitem_before (const char *key, const size_t nkey,
   } else {
     pos = &primary_hashtable[hv & hashmask(hashpower)];
   }
-  while (*pos && ((nkey != (*pos)->nkey) || memcmp(key, ITEM_key(*pos), nkey))) {
+  while (*pos && (nkey != (*pos)->nkey ||
+                  memcmp(key, ITEM_key(*pos), nkey))) {
     pos = &(*pos)->h_next;
   }
   return pos;
 }
 
 // grows the hashtable to the next power of 2.
-static void assoc_expand(void) {
+static void assoc_expand() {
   old_hashtable = primary_hashtable;
   primary_hashtable = (item **)calloc(hashsize(hashpower + 1), sizeof(void *));
   if (primary_hashtable) {
     if (settings.verbose > 1) {
-      LOG(ERROR) << "Hash table expansion starting";
+      LOG(INFO) << "Hash table expansion starting";
     }
     hashpower++;
     expanding = true;
@@ -223,7 +226,7 @@ static pthread_t maintenance_tid;
 
 int start_assoc_maintenance_thread() {
   int ret;
-  char *env = getenv("MEMCACHED_HASH_BULK_MOVE");
+  char * env = getenv("MEMCACHED_HASH_BULK_MOVE");
   if (env != NULL) {
     hash_bulk_move = atoi(env);
     if (hash_bulk_move == 0) {
