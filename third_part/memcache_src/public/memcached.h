@@ -10,6 +10,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include "third_part/libevent_my/include/event.h"
+#include "base/public/logging.h"
 #include "protocol_binary.h"
 #include "cache.h"
 #include "sasl_defs.h"
@@ -98,7 +99,7 @@
 
 // Append a simple stat with a stat name, value format and value
 #define APPEND_STAT(name, fmt, val) \
-    append_stat(name, add_stats, c, fmt, val);
+    append_stat(name, add_stats, (conn *)c, fmt, val);
 
 // Append an indexed stat with a stat name (with format), value format
 // and value
@@ -169,7 +170,7 @@ enum item_lock_types {
   ITEM_LOCK_GLOBAL
 };
 
-#define IS_UDP(x) (x == udp_transport)
+#define IS_UDP(x) ((x) == udp_transport)
 
 #define NREAD_ADD 1
 #define NREAD_SET 2
@@ -393,9 +394,9 @@ struct conn {
   int    msgcurr;   // element in msglist[] being transmitted now
   int    msgbytes;  // number of bytes in current msg
 
-  item   **ilist;   // list of items to write out
+  ::item   **ilist;   // list of items to write out
   int    isize;
-  item   **icurr;
+  ::item   **icurr;
   int    ileft;
 
   char   **suffixlist;
