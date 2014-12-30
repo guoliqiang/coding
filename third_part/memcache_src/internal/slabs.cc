@@ -4,6 +4,7 @@
 // a multiplier factor from there, up to half the maximum slab size. The last
 // slab size is always 1MB, since that's the maximum item size allowed by the
 // memcached protocol.
+
 #include "third_part/memcache_src/public/memcached.h"
 #include <sys/stat.h>
 #include <sys/socket.h>
@@ -23,16 +24,16 @@
 typedef struct {
   unsigned int size;      // sizes of items
   unsigned int perslab;   // how many items per slab
-  void *slots;           // list of item ptrs
+  void *slots;            // list of item ptrs
   unsigned int sl_curr;   // total free items in list
   unsigned int slabs;     // how many slabs were allocated for this class
   void **slab_list;       // array of slab pointers
   unsigned int list_size; // size of prev array
-  unsigned int killing;  // index+1 of dying slab, or zero if none
-  size_t requested; // The number of requested bytes
+  unsigned int killing;   // index+1 of dying slab, or zero if none
+  size_t requested;       // The number of requested bytes
 } slabclass_t;
 
-static slabclass_t slabclass[MAX_NUMBER_OF_SLAB_CLASSES];
+static slabclass_t slabclass[MAX_NUMBER_OF_SLAB_CLASSES];  // 201
 static size_t mem_limit = 0;
 static size_t mem_malloced = 0;
 static int power_largest;
@@ -56,18 +57,19 @@ static void do_slabs_free(void *ptr, const size_t size, unsigned int id);
 // if maxslabs is 18 (POWER_LARGEST - POWER_SMALLEST + 1), then all
 // slab types can be made.  if max memory is less than 18 MB, only the
 // smaller ones will be made.
-static void slabs_preallocate (const unsigned int maxslabs);
+static void slabs_preallocate(const unsigned int maxslabs);
 
 // Figures out which slab class (chunk size) is required to store an item of
 // a given size.
 // Given object size, return id to use when allocating/freeing memory for object
 // 0 means error: can't store such a large object
 unsigned int slabs_clsid(const size_t size) {
-  int res = POWER_SMALLEST;
+  int res = POWER_SMALLEST;  // == 1
   if (size == 0) return 0;
-  while (size > slabclass[res].size)
-    if (res++ == power_largest)   // won't fit in the biggest slab
-      return 0;
+  while (size > slabclass[res].size) {
+    // won't fit in the biggest slab
+    if (res++ == power_largest) return 0;
+  }
   return res;
 }
 
@@ -91,8 +93,9 @@ void slabs_init(const size_t limit, const double factor, const bool prealloc) {
   memset(slabclass, 0, sizeof(slabclass));
   while (++i < POWER_LARGEST && size <= settings.item_size_max / factor) {
     // Make sure items are always n-byte aligned
-    if (size % CHUNK_ALIGN_BYTES)
+    if (size % CHUNK_ALIGN_BYTES) {
       size += CHUNK_ALIGN_BYTES - (size % CHUNK_ALIGN_BYTES);
+    }
     slabclass[i].size = size;
     slabclass[i].perslab = settings.item_size_max / slabclass[i].size;
     size *= factor;
@@ -757,12 +760,12 @@ int start_slab_maintenance_thread(void) {
   pthread_mutex_init(&slabs_rebalance_lock, NULL);
 
   if ((ret = pthread_create(&maintenance_tid, NULL,
-          slab_maintenance_thread, NULL)) != 0) {
+       slab_maintenance_thread, NULL)) != 0) {
     LOG(ERROR) << "Can't create slab maint thread: " << strerror(ret);
     return -1;
   }
   if ((ret = pthread_create(&rebalance_tid, NULL,
-          slab_rebalance_thread, NULL)) != 0) {
+       slab_rebalance_thread, NULL)) != 0) {
     LOG(ERROR) << "Can't create rebal thread: " << strerror(ret);
     return -1;
   }

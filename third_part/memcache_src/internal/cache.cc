@@ -1,11 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <inttypes.h>
-
-#ifndef NDEBUG
 #include <signal.h>
-#endif
-
 #include "third_part/memcache_src/public/cache.h"
 
 #ifndef NDEBUG
@@ -42,16 +38,16 @@ cache_t* cache_create(const char * name,
   return ret;
 }
 
-static inline void* get_object(void *ptr) {
+static inline void * get_object(void * ptr) {
 #ifndef NDEBUG
-  uint64_t *pre = ptr;
+  uint64_t * pre = ptr;
   return pre + 1;
 #else
   return ptr;
 #endif
 }
 
-void cache_destroy(cache_t *cache) {
+void cache_destroy(cache_t * cache) {
   while (cache->freecurr > 0) {
     void *ptr = cache->ptr[--cache->freecurr];
     if (cache->destructor) {
@@ -65,9 +61,9 @@ void cache_destroy(cache_t *cache) {
   free(cache);
 }
 
-void* cache_alloc(cache_t *cache) {
-  void *ret;
-  void *object;
+void * cache_alloc(cache_t * cache) {
+  void * ret;
+  void * object;
   pthread_mutex_lock(&cache->mutex);
   if (cache->freecurr > 0) {
       ret = cache->ptr[--cache->freecurr];
@@ -97,7 +93,7 @@ void* cache_alloc(cache_t *cache) {
   return object;
 }
 
-void cache_free(cache_t *cache, void *ptr) {
+void cache_free(cache_t * cache, void * ptr) {
   pthread_mutex_lock(&cache->mutex);
 #ifndef NDEBUG
   // validate redzone...
@@ -123,7 +119,7 @@ void cache_free(cache_t *cache, void *ptr) {
   } else {
     // try to enlarge free connections array
     size_t newtotal = cache->freetotal * 2;
-    void **new_free = (void **)realloc(cache->ptr, sizeof(char *) * newtotal);
+    void ** new_free = (void **)realloc(cache->ptr, sizeof(char *) * newtotal);
     if (new_free) {
       cache->freetotal = newtotal;
       cache->ptr = new_free;

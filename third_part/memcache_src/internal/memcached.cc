@@ -4852,7 +4852,6 @@ int main (int argc, char **argv) {
     // (may need root on low ports), then drop root if needed,
     // then daemonise if needed, then init libevent (in some cases
     // descriptors created by libevent wouldn't survive forking).
-
     // create the UDP listening socket and bind it
     errno = 0;
     if (settings.udpport && server_sockets(settings.udpport, udp_transport,

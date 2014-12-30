@@ -1,4 +1,3 @@
-// See items.c
 uint64_t get_cas_id(void);
 
 item *do_item_alloc(char *key, const size_t nkey, const int flags,

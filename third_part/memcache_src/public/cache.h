@@ -3,6 +3,7 @@
 #include <pthread.h>
 
 #ifdef HAVE_UMEM_H
+
 #include <umem.h>
 #define cache_t umem_cache_t
 #define cache_alloc(a) umem_cache_alloc(a, UMEM_DEFAULT)
@@ -34,16 +35,16 @@ typedef int cache_constructor_t(void* obj, void* notused1, int notused2);
 typedef void cache_destructor_t(void* obj, void* notused);
 
 
-// Definition of the structure to keep track of the internal details of
-// the cache allocator. Touching any of these variables results in
-// undefined behavior.
+// Definition of the structure to keep track of the internal details of the
+// cache allocator. Touching any of these variables results in undefined
+// behavior.
 typedef struct {
   // Mutex to protect access to the structure
   pthread_mutex_t mutex;
   // Name of the cache objects in this cache (provided by the caller)
-  char *name;
+  char * name;
   // List of pointers to available buffers in this cache
-  void **ptr;
+  void ** ptr;
   // The size of each element in this cache
   size_t bufsize;
   // The capacity of the list of elements
@@ -51,9 +52,9 @@ typedef struct {
   // The current number of free elements
   int freecurr;
   // The constructor to be called each time we allocate more memory
-  cache_constructor_t* constructor;
+  cache_constructor_t * constructor;
   // The destructor to be called each time before we release memory
-  cache_destructor_t* destructor;
+  cache_destructor_t * destructor;
 } cache_t;
 
 // Create an object cache.
@@ -86,7 +87,7 @@ void cache_destroy(cache_t* handle);
 // @param handle the handle to the object cache to allocate from
 // @return a pointer to an initialized object from the cache, or NULL if the
 // allocation cannot be satisfied.
-void* cache_alloc(cache_t* handle);
+void * cache_alloc(cache_t * handle);
 
 // Return an object back to the cache.
 // The caller should return the object in an initialized state so that

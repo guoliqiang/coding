@@ -12,7 +12,6 @@
 #include <time.h>
 #include <assert.h>
 
-// Forward Declarations
 static void item_link_q(item *it);
 static void item_unlink_q(item *it);
 
@@ -33,8 +32,8 @@ typedef struct {
   uint64_t evicted_unfetched;
 } itemstats_t;
 
-static item *heads[LARGEST_ID];
-static item *tails[LARGEST_ID];
+static item * heads[LARGEST_ID];
+static item * tails[LARGEST_ID];
 static itemstats_t itemstats[LARGEST_ID];
 static unsigned int sizes[LARGEST_ID];
 
@@ -78,8 +77,11 @@ static size_t item_make_header(const uint8_t nkey,
   return sizeof(item) + nkey + *nsuffix + nbytes;
 }
 
-item *do_item_alloc(char *key, const size_t nkey, const int flags,
-                    const rel_time_t exptime, const int nbytes,
+item *do_item_alloc(char * key,
+                    const size_t nkey,
+                    const int flags,
+                    const rel_time_t exptime,
+                    const int nbytes,
                     const uint32_t cur_hv) {
   uint8_t nsuffix;
   item *it = NULL;
