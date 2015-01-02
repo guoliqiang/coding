@@ -96,12 +96,14 @@ class RwMutex {
 
   // Create a Mutex that is not held by anybody.  This constructor is
   // typically used for Mutexes allocated on the heap or the stack.
-  inline RwMutex();
+  // Default is prefer write.
+  inline RwMutex(bool prefer_write = true);
   // This constructor should be used for global, static Mutex objects.
   // It inhibits work being done by the destructor, which makes it
   // safer for code that tries to acqiure this mutex in their global
   // destructor.
-  inline RwMutex(LinkerInitialized);
+  // Default is prefer write.
+  inline RwMutex(LinkerInitialized, bool prefer_write = true);
 
   inline ~RwMutex();
 
@@ -119,11 +121,31 @@ class RwMutex {
 #define SAFE_PTHREAD(fncall) do {                          \
   if (fncall(&mu_) != 0) abort();                          \
 } while (0)
-RwMutex::RwMutex() : destroy_(true) {
-  CHECK(0 == pthread_rwlock_init(&mu_, NULL));
+
+// http://man7.org/linux/man-pages/man3/pthread_rwlockattr_setkind_np.3.html
+// http://blog.sina.com.cn/s/blog_a5783c7801014xd5.html
+RwMutex::RwMutex(bool prefer_write) : destroy_(true) {
+  if (prefer_write) {
+    pthread_rwlockattr_t attr;
+    pthread_rwlockattr_init(&attr);
+    pthread_rwlockattr_setkind_np (&attr,
+        PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP);
+    CHECK(0 == pthread_rwlock_init(&mu_, &attr));
+  } else {
+    CHECK(0 == pthread_rwlock_init(&mu_, NULL));
+  }
 }
-RwMutex::RwMutex(RwMutex::LinkerInitialized) : destroy_(false) {
-  CHECK(0 == pthread_rwlock_init(&mu_, NULL));
+RwMutex::RwMutex(RwMutex::LinkerInitialized, bool prefer_write) :
+    destroy_(false) {
+  if (prefer_write) {
+    pthread_rwlockattr_t attr;
+    pthread_rwlockattr_init(&attr);
+    pthread_rwlockattr_setkind_np (&attr,
+        PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP);
+    CHECK(0 == pthread_rwlock_init(&mu_, &attr));
+  } else {
+    CHECK(0 == pthread_rwlock_init(&mu_, NULL));
+  }
 }
 RwMutex::~RwMutex() {
   if (destroy_)
