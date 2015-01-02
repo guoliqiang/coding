@@ -1319,7 +1319,9 @@ static bool grow_stats_buf(conn *c, size_t needed) {
   // Special case: No buffer -- need to allocate fresh
   if (c->stats.buffer == NULL) {
     nsize = 1024;
-    available = c->stats.size = c->stats.offset = 0;
+    available = 0;
+    c->stats.size = 0;
+    c->stats.offset = 0;
   }
   while (needed > available) {
     assert(nsize > 0);
@@ -1341,25 +1343,19 @@ static bool grow_stats_buf(conn *c, size_t needed) {
   return rv;
 }
 
-static void append_stats(const char *key, const uint16_t klen,
-                  const char *val, const uint32_t vlen,
-                  const void *cookie) {
+static void append_stats(const char * key, const uint16_t klen,
+                         const char * val, const uint32_t vlen,
+                         const void * cookie) {
   // value without a key is invalid
-  if (klen == 0 && vlen > 0) {
-    return ;
-  }
-  conn *c = (conn*)cookie;
+  if (klen == 0 && vlen > 0) return;
+  conn * c = (conn*)cookie;
   if (c->protocol == binary_prot) {
     size_t needed = vlen + klen + sizeof(protocol_binary_response_header);
-    if (!grow_stats_buf(c, needed)) {
-      return ;
-    }
+    if (!grow_stats_buf(c, needed)) return;
     append_bin_stats(key, klen, val, vlen, c);
   } else {
     size_t needed = vlen + klen + 10; // 10 == "STAT = \r\n"
-    if (!grow_stats_buf(c, needed)) {
-      return ;
-    }
+    if (!grow_stats_buf(c, needed)) return;
     append_ascii_stats(key, klen, val, vlen, c);
   }
   assert(c->stats.offset <= c->stats.size);
@@ -2116,8 +2112,9 @@ enum store_item_type do_store_item(item *it, int comm, conn *c,
   if (old_it != NULL && comm == NREAD_ADD) {
     // add only adds a nonexistent item, but promote to head of LRU
     do_item_update(old_it);
-  } else if (!old_it && (comm == NREAD_REPLACE
-        || comm == NREAD_APPEND || comm == NREAD_PREPEND)) {
+  } else if (!old_it && (comm == NREAD_REPLACE ||
+                         comm == NREAD_APPEND ||
+                         comm == NREAD_PREPEND)) {
     // replace only replaces an existing value; don't store
   } else if (comm == NREAD_CAS) {
     // validate cas operation
@@ -2294,8 +2291,8 @@ static inline bool set_noreply_maybe(conn *c, token_t *tokens, size_t ntokens) {
   return c->noreply;
 }
 
-void append_stat(const char *name, ADD_STAT add_stats, conn *c,
-                 const char *fmt, ...) {
+void append_stat(const char * name, ADD_STAT add_stats, conn * c,
+                 const char * fmt, ...) {
   char val_str[STAT_VAL_LEN];
   int vlen;
   va_list ap;
@@ -2814,9 +2811,13 @@ static void process_arithmetic_command(conn *c, token_t *tokens,
 // delta amount to adjust value by
 // buf   buffer for response string
 // returns a response string to send back to the client.
-enum delta_result_type do_add_delta(conn *c, const char *key, const size_t nkey,
-                                    const bool incr, const int64_t delta,
-                                    char *buf, uint64_t *cas,
+enum delta_result_type do_add_delta(conn * c,
+                                    const char *key,
+                                    const size_t nkey,
+                                    const bool incr,
+                                    const int64_t delta,
+                                    char * buf,
+                                    uint64_t * cas,
                                     const uint32_t hv) {
   char *ptr;
   uint64_t value;

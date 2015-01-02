@@ -1,5 +1,5 @@
-// The main memcached header holding commonly used data
-// structures and function prototypes.
+// The main memcached header holding commonly used data structures and function
+// prototypes.
 
 #include "config.h"
 #include <sys/types.h>
@@ -180,11 +180,18 @@ enum item_lock_types {
 #define NREAD_CAS 6
 
 enum store_item_type {
-  NOT_STORED=0, STORED, EXISTS, NOT_FOUND
+  NOT_STORED = 0,
+  STORED,
+  EXISTS,
+  NOT_FOUND
 };
 
 enum delta_result_type {
-  OK, NON_NUMERIC, EOM, DELTA_ITEM_NOT_FOUND, DELTA_ITEM_CAS_MISMATCH
+  OK,
+  NON_NUMERIC,
+  EOM,
+  DELTA_ITEM_NOT_FOUND,
+  DELTA_ITEM_CAS_MISMATCH
 };
 
 // Time relative to server start. Smaller than time_t on 64-bit systems.
@@ -306,9 +313,9 @@ extern struct settings settings;
 
 // Structure for storing items within memcached.
 typedef struct _stritem {
-  struct _stritem *next;
-  struct _stritem *prev;
-  struct _stritem *h_next;    // hash chain next
+  struct _stritem * next;
+  struct _stritem * prev;
+  struct _stritem * h_next;   // hash chain next
   rel_time_t      time;       // least recent access
   rel_time_t      exptime;    // expire time
   int             nbytes;     // size of data
@@ -323,8 +330,7 @@ typedef struct _stritem {
     uint64_t cas;
     char end;
   } data[];
-  // if it_flags & ITEM_CAS we have 8 bytes CAS
-  // then null-terminated key
+  // if it_flags & ITEM_CAS we have 8 bytes CAS then null-terminated key
   // then " flags length\r\n" (no terminating null)
   // then data with terminating \r\n (no terminating null; it's binary!)
 } item;
@@ -441,9 +447,9 @@ extern volatile rel_time_t current_time;
 extern volatile int slab_rebalance_signal;
 
 struct slab_rebalance {
-  void *slab_start;
-  void *slab_end;
-  void *slab_pos;
+  void * slab_start;
+  void * slab_end;
+  void * slab_pos;
   int s_clsid;
   int d_clsid;
   int busy_items;

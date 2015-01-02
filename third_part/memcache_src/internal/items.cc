@@ -126,8 +126,8 @@ item *do_item_alloc(char * key,
       continue;
     }
     // Expired or flushed
-    if ((search->exptime != 0 && search->exptime < current_time)
-        || (search->time <= oldest_live && oldest_live <= current_time)) {
+    if ((search->exptime != 0 && search->exptime < current_time) ||
+        (search->time <= oldest_live && oldest_live <= current_time)) {
       itemstats[id].reclaimed++;
       if ((search->it_flags & ITEM_FETCHED) == 0) {
         itemstats[id].expired_unfetched++;
@@ -427,7 +427,7 @@ void do_item_stats_totals(ADD_STAT add_stats, void *c) {
 }
 
 void do_item_stats(ADD_STAT add_stats, void *c) {
-  int i;
+  int i = 0;
   for (i = 0; i < LARGEST_ID; i++) {
     if (tails[i] != NULL) {
       const char *fmt = "items:%d:%s";
@@ -466,12 +466,12 @@ void do_item_stats(ADD_STAT add_stats, void *c) {
 void do_item_stats_sizes(ADD_STAT add_stats, void *c) {
   // max 1MB object, divided into 32 bytes size buckets
   const int num_buckets = 32768;
-  unsigned int *histogram = (unsigned int *)calloc(num_buckets, sizeof(int));
+  unsigned int * histogram = (unsigned int *)calloc(num_buckets, sizeof(int));
   if (histogram != NULL) {
     int i;
     // build the histogram
     for (i = 0; i < LARGEST_ID; i++) {
-      item *iter = heads[i];
+      item * iter = heads[i];
       while (iter) {
         int ntotal = ITEM_ntotal(iter);
         int bucket = ntotal / 32;
@@ -525,7 +525,8 @@ item *do_item_get(const char *key, const size_t nkey, const uint32_t hv) {
     }
   }
   if (it != NULL) {
-    if (settings.oldest_live != 0 && settings.oldest_live <= current_time &&
+    if (settings.oldest_live != 0 &&
+        settings.oldest_live <= current_time &&
         it->time <= settings.oldest_live) {
       do_item_unlink(it, hv);
       do_item_remove(it);
@@ -549,9 +550,11 @@ item *do_item_get(const char *key, const size_t nkey, const uint32_t hv) {
   return it;
 }
 
-item *do_item_touch(const char *key, size_t nkey, uint32_t exptime,
+item *do_item_touch(const char * key,
+                    size_t nkey,
+                    uint32_t exptime,
                     const uint32_t hv) {
-  item *it = do_item_get(key, nkey, hv);
+  item * it = do_item_get(key, nkey, hv);
   if (it != NULL) {
     it->exptime = exptime;
   }
@@ -561,7 +564,8 @@ item *do_item_touch(const char *key, size_t nkey, uint32_t exptime,
 // expires items that are more recent than the oldest_live setting.
 void do_item_flush_expired(void) {
   int i;
-  item *iter, *next;
+  item * iter = NULL;
+  item * next = NULL;
   if (settings.oldest_live == 0) return;
   for (i = 0; i < LARGEST_ID; i++) {
     // The LRU is sorted in decreasing time order, and an item's timestamp
