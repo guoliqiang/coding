@@ -331,10 +331,11 @@ static const char *prot_text(enum protocol prot) {
 }
 
 conn *conn_new(const int sfd, enum conn_states init_state,
-                const int event_flags,
-                const int read_buffer_size, enum network_transport transport,
-                struct event_base *base) {
-  conn *c = conn_from_freelist();
+               const int event_flags,
+               const int read_buffer_size,
+               enum network_transport transport,
+               struct event_base *base) {
+  conn * c = conn_from_freelist();
   if (NULL == c) {
     if (!(c = (conn *)calloc(1, sizeof(conn)))) {
       STATS_LOCK();
@@ -565,7 +566,7 @@ static void conn_shrink(conn *c) {
 
   if (c->iovsize > IOV_LIST_HIGHWAT) {
     struct iovec *newbuf = (struct iovec *) realloc((void *)c->iov,
-        IOV_LIST_INITIAL * sizeof(c->iov[0]));
+                           IOV_LIST_INITIAL * sizeof(c->iov[0]));
     if (newbuf) {
       c->iov = newbuf;
       c->iovsize = IOV_LIST_INITIAL;
@@ -576,7 +577,8 @@ static void conn_shrink(conn *c) {
 
 // Convert a state name to a human readable form.
 static const char *state_text(enum conn_states state) {
-  const char* const statenames[] = { "conn_listening",
+  const char * const statenames[] = {
+    "conn_listening",
     "conn_new_cmd",
     "conn_waiting",
     "conn_read",
@@ -585,7 +587,8 @@ static const char *state_text(enum conn_states state) {
     "conn_nread",
     "conn_swallow",
     "conn_closing",
-    "conn_mwrite" };
+    "conn_mwrite"
+  };
   return statenames[state];
 }
 
@@ -716,7 +719,7 @@ static int build_udp_headers(conn *c) {
     *hdr++ = 0;
     *hdr++ = 0;
     assert((void *) hdr == (caddr_t)c->msglist[i].msg_iov[0].iov_base +
-        UDP_HEADER_SIZE);
+                           UDP_HEADER_SIZE);
   }
   return 0;
 }
@@ -783,27 +786,27 @@ static void complete_nread_ascii(conn *c) {
     switch (c->cmd) {
       case NREAD_ADD:
         MEMCACHED_COMMAND_ADD(c->sfd, ITEM_key(it), it->nkey,
-            (ret == 1) ? it->nbytes : -1, cas);
+                              (ret == 1) ? it->nbytes : -1, cas);
         break;
       case NREAD_REPLACE:
         MEMCACHED_COMMAND_REPLACE(c->sfd, ITEM_key(it), it->nkey,
-            (ret == 1) ? it->nbytes : -1, cas);
+                                  (ret == 1) ? it->nbytes : -1, cas);
         break;
       case NREAD_APPEND:
         MEMCACHED_COMMAND_APPEND(c->sfd, ITEM_key(it), it->nkey,
-            (ret == 1) ? it->nbytes : -1, cas);
+                                 (ret == 1) ? it->nbytes : -1, cas);
         break;
       case NREAD_PREPEND:
         MEMCACHED_COMMAND_PREPEND(c->sfd, ITEM_key(it), it->nkey,
-            (ret == 1) ? it->nbytes : -1, cas);
+                                  (ret == 1) ? it->nbytes : -1, cas);
         break;
       case NREAD_SET:
         MEMCACHED_COMMAND_SET(c->sfd, ITEM_key(it), it->nkey,
-            (ret == 1) ? it->nbytes : -1, cas);
+                              (ret == 1) ? it->nbytes : -1, cas);
         break;
       case NREAD_CAS:
         MEMCACHED_COMMAND_CAS(c->sfd, ITEM_key(it), it->nkey, it->nbytes,
-            cas);
+                              cas);
         break;
     }
 #endif
@@ -832,7 +835,7 @@ static void complete_nread_ascii(conn *c) {
 static void* binary_get_request(conn *c) {
   char *ret = c->rcurr;
   ret -= (sizeof(c->binary_header) + c->binary_header.request.keylen +
-      c->binary_header.request.extlen);
+          c->binary_header.request.extlen);
   assert(ret >= c->rbuf);
   return ret;
 }
@@ -880,8 +883,9 @@ static void add_bin_header(conn *c, uint16_t err, uint8_t hdr_len,
   add_iov(c, c->wbuf, sizeof(header->response));
 }
 
-static void write_bin_error(conn *c, protocol_binary_response_status err,
-    int swallow) {
+static void write_bin_error(conn * c,
+                            protocol_binary_response_status err,
+                            int swallow) {
   const char *errstr = "Unknown error";
   size_t len;
   switch (err) {
@@ -937,8 +941,13 @@ static void write_bin_error(conn *c, protocol_binary_response_status err,
 }
 
 // Form and send a response to a command over the binary protocol
-static void write_bin_response(conn *c, void *d, int hlen, int keylen, int dlen) {
-  if (!c->noreply || c->cmd == PROTOCOL_BINARY_CMD_GET ||
+static void write_bin_response(conn * c,
+                               void * d,
+                               int hlen,
+                               int keylen,
+                               int dlen) {
+  if (!c->noreply ||
+      c->cmd == PROTOCOL_BINARY_CMD_GET ||
       c->cmd == PROTOCOL_BINARY_CMD_GETK) {
     add_bin_header(c, 0, hlen, keylen, dlen);
     if(dlen > 0) {
@@ -1010,7 +1019,7 @@ static void complete_incr_bin(conn *c) {
             (unsigned long long)req->message.body.initial);
         int res = strlen(tmpbuf);
         it = item_alloc(key, nkey, 0, realtime(req->message.body.expiration),
-            res + 2);
+                        res + 2);
         if (it != NULL) {
           memcpy(ITEM_data(it), tmpbuf, res);
           memcpy(ITEM_data(it) + res, "\r\n", 2);
@@ -1062,23 +1071,23 @@ static void complete_update_bin(conn *c) {
   switch (c->cmd) {
     case NREAD_ADD:
       MEMCACHED_COMMAND_ADD(c->sfd, ITEM_key(it), it->nkey,
-          (ret == STORED) ? it->nbytes : -1, cas);
+                            (ret == STORED) ? it->nbytes : -1, cas);
       break;
     case NREAD_REPLACE:
       MEMCACHED_COMMAND_REPLACE(c->sfd, ITEM_key(it), it->nkey,
-          (ret == STORED) ? it->nbytes : -1, cas);
+                                (ret == STORED) ? it->nbytes : -1, cas);
       break;
     case NREAD_APPEND:
       MEMCACHED_COMMAND_APPEND(c->sfd, ITEM_key(it), it->nkey,
-          (ret == STORED) ? it->nbytes : -1, cas);
+                               (ret == STORED) ? it->nbytes : -1, cas);
       break;
     case NREAD_PREPEND:
       MEMCACHED_COMMAND_PREPEND(c->sfd, ITEM_key(it), it->nkey,
-          (ret == STORED) ? it->nbytes : -1, cas);
+                                (ret == STORED) ? it->nbytes : -1, cas);
       break;
     case NREAD_SET:
       MEMCACHED_COMMAND_SET(c->sfd, ITEM_key(it), it->nkey,
-          (ret == STORED) ? it->nbytes : -1, cas);
+                            (ret == STORED) ? it->nbytes : -1, cas);
       break;
   }
 #endif
@@ -1219,7 +1228,7 @@ static void process_bin_get(conn *c) {
     pthread_mutex_unlock(&c->thread->stats.mutex);
 
     MEMCACHED_COMMAND_GET(c->sfd, ITEM_key(it), it->nkey,
-        it->nbytes, ITEM_get_cas(it));
+                          it->nbytes, ITEM_get_cas(it));
 
     if (c->cmd == PROTOCOL_BINARY_CMD_GETK) {
       bodylen += nkey;
@@ -1255,7 +1264,7 @@ static void process_bin_get(conn *c) {
       if (c->cmd == PROTOCOL_BINARY_CMD_GETK) {
         char *ofs = c->wbuf + sizeof(protocol_binary_response_header);
         add_bin_header(c, PROTOCOL_BINARY_RESPONSE_KEY_ENOENT,
-            0, nkey, nkey);
+                       0, nkey, nkey);
         memcpy(ofs, key, nkey);
         add_iov(c, ofs, nkey);
         conn_set_state(c, conn_mwrite);
@@ -1537,8 +1546,8 @@ static void process_bin_sasl_auth(conn *c) {
   // Guard for handling disabled SASL on the server.
   if (!settings.sasl) {
     write_bin_error(c, PROTOCOL_BINARY_RESPONSE_UNKNOWN_COMMAND,
-        c->binary_header.request.bodylen
-        - c->binary_header.request.keylen);
+                    c->binary_header.request.bodylen -
+                    c->binary_header.request.keylen);
     return;
   }
   assert(c->binary_header.request.extlen == 0);
@@ -1583,13 +1592,13 @@ static void process_bin_complete_sasl_auth(conn *c) {
   switch (c->cmd) {
     case PROTOCOL_BINARY_CMD_SASL_AUTH:
       result = sasl_server_start(c->sasl_conn, mech,
-          challenge, vlen,
-          &out, &outlen);
+                                 challenge, vlen,
+                                 &out, &outlen);
       break;
     case PROTOCOL_BINARY_CMD_SASL_STEP:
       result = sasl_server_step(c->sasl_conn,
-          challenge, vlen,
-          &out, &outlen);
+                                challenge, vlen,
+                                &out, &outlen);
       break;
     default:
       assert(false); // CMD should be one of the above
@@ -2088,8 +2097,8 @@ static void reset_cmd_handler(conn *c) {
 
 static void complete_nread(conn *c) {
   assert(c != NULL);
-  assert(c->protocol == ascii_prot
-      || c->protocol == binary_prot);
+  assert(c->protocol == ascii_prot ||
+         c->protocol == binary_prot);
   if (c->protocol == ascii_prot) {
     complete_nread_ascii(c);
   } else if (c->protocol == binary_prot) {
@@ -2162,7 +2171,8 @@ enum store_item_type do_store_item(item *it, int comm, conn *c,
         // flags was already lost - so recover them from ITEM_suffix(it)
         flags = (int) strtol(ITEM_suffix(old_it), (char **) NULL, 10);
         new_it = do_item_alloc(key, it->nkey, flags, old_it->exptime,
-            it->nbytes + old_it->nbytes - 2 /* CRLF */, hv);
+                               it->nbytes + old_it->nbytes - 2, // CRLF
+                               hv);
         if (new_it == NULL) {
           // SERVER_ERROR out of memory
           if (old_it != NULL) do_item_remove(old_it);
@@ -2171,22 +2181,21 @@ enum store_item_type do_store_item(item *it, int comm, conn *c,
         // copy data from it and old_it to new_it
         if (comm == NREAD_APPEND) {
           memcpy(ITEM_data(new_it), ITEM_data(old_it), old_it->nbytes);
-          memcpy(ITEM_data(new_it) + old_it->nbytes - 2 /* CRLF */,
+          memcpy(ITEM_data(new_it) + old_it->nbytes - 2, // CRLF
                  ITEM_data(it), it->nbytes);
         } else {
           // NREAD_PREPEND
           memcpy(ITEM_data(new_it), ITEM_data(it), it->nbytes);
-          memcpy(ITEM_data(new_it) + it->nbytes - 2 /* CRLF */,
+          memcpy(ITEM_data(new_it) + it->nbytes - 2, // CRLF
                  ITEM_data(old_it), old_it->nbytes);
         }
         it = new_it;
       }
     }
     if (stored == NOT_STORED) {
-      if (old_it != NULL)
-        item_replace(old_it, it, hv);
-      else
-        do_item_link(it, hv);
+      if (old_it != NULL) item_replace(old_it, it, hv);
+      else do_item_link(it, hv);
+
       c->cas = ITEM_get_cas(it);
       stored = STORED;
     }
@@ -2194,9 +2203,7 @@ enum store_item_type do_store_item(item *it, int comm, conn *c,
 
   if (old_it != NULL) do_item_remove(old_it);  // release our reference
   if (new_it != NULL) do_item_remove(new_it);
-  if (stored == STORED) {
-    c->cas = ITEM_get_cas(it);
-  }
+  if (stored == STORED) c->cas = ITEM_get_cas(it);
   return stored;
 }
 
@@ -2226,8 +2233,9 @@ typedef struct token_s {
 //      ncommand = tokens[ix].value - command;
 //      command  = tokens[ix].value;
 //   }
-static size_t tokenize_command(char *command, token_t *tokens,
-    const size_t max_tokens) {
+static size_t tokenize_command(char *command,
+                               token_t *tokens,
+                               const size_t max_tokens) {
   char *s, *e;
   size_t ntokens = 0;
   size_t len = strlen(command);
@@ -2362,32 +2370,56 @@ static void server_stats(ADD_STAT add_stats, conn *c) {
   }
   APPEND_STAT("connection_structures", "%u", stats.conn_structs);
   APPEND_STAT("reserved_fds", "%u", stats.reserved_fds);
-  APPEND_STAT("cmd_get", "%llu", (unsigned long long)thread_stats.get_cmds);
-  APPEND_STAT("cmd_set", "%llu", (unsigned long long)slab_stats.set_cmds);
-  APPEND_STAT("cmd_flush", "%llu", (unsigned long long)thread_stats.flush_cmds);
-  APPEND_STAT("cmd_touch", "%llu", (unsigned long long)thread_stats.touch_cmds);
-  APPEND_STAT("get_hits", "%llu", (unsigned long long)slab_stats.get_hits);
-  APPEND_STAT("get_misses", "%llu", (unsigned long long)thread_stats.get_misses);
-  APPEND_STAT("delete_misses", "%llu", (unsigned long long)thread_stats.delete_misses);
-  APPEND_STAT("delete_hits", "%llu", (unsigned long long)slab_stats.delete_hits);
-  APPEND_STAT("incr_misses", "%llu", (unsigned long long)thread_stats.incr_misses);
-  APPEND_STAT("incr_hits", "%llu", (unsigned long long)slab_stats.incr_hits);
-  APPEND_STAT("decr_misses", "%llu", (unsigned long long)thread_stats.decr_misses);
-  APPEND_STAT("decr_hits", "%llu", (unsigned long long)slab_stats.decr_hits);
-  APPEND_STAT("cas_misses", "%llu", (unsigned long long)thread_stats.cas_misses);
-  APPEND_STAT("cas_hits", "%llu", (unsigned long long)slab_stats.cas_hits);
-  APPEND_STAT("cas_badval", "%llu", (unsigned long long)slab_stats.cas_badval);
-  APPEND_STAT("touch_hits", "%llu", (unsigned long long)slab_stats.touch_hits);
-  APPEND_STAT("touch_misses", "%llu", (unsigned long long)thread_stats.touch_misses);
-  APPEND_STAT("auth_cmds", "%llu", (unsigned long long)thread_stats.auth_cmds);
-  APPEND_STAT("auth_errors", "%llu", (unsigned long long)thread_stats.auth_errors);
-  APPEND_STAT("bytes_read", "%llu", (unsigned long long)thread_stats.bytes_read);
-  APPEND_STAT("bytes_written", "%llu", (unsigned long long)thread_stats.bytes_written);
-  APPEND_STAT("limit_maxbytes", "%llu", (unsigned long long)settings.maxbytes);
+  APPEND_STAT("cmd_get", "%llu",
+              (unsigned long long)thread_stats.get_cmds);
+  APPEND_STAT("cmd_set", "%llu",
+              (unsigned long long)slab_stats.set_cmds);
+  APPEND_STAT("cmd_flush", "%llu",
+              (unsigned long long)thread_stats.flush_cmds);
+  APPEND_STAT("cmd_touch", "%llu",
+              (unsigned long long)thread_stats.touch_cmds);
+  APPEND_STAT("get_hits", "%llu",
+              (unsigned long long)slab_stats.get_hits);
+  APPEND_STAT("get_misses", "%llu",
+              (unsigned long long)thread_stats.get_misses);
+  APPEND_STAT("delete_misses", "%llu",
+              (unsigned long long)thread_stats.delete_misses);
+  APPEND_STAT("delete_hits", "%llu",
+              (unsigned long long)slab_stats.delete_hits);
+  APPEND_STAT("incr_misses", "%llu",
+              (unsigned long long)thread_stats.incr_misses);
+  APPEND_STAT("incr_hits", "%llu",
+              (unsigned long long)slab_stats.incr_hits);
+  APPEND_STAT("decr_misses", "%llu",
+              (unsigned long long)thread_stats.decr_misses);
+  APPEND_STAT("decr_hits", "%llu",
+              (unsigned long long)slab_stats.decr_hits);
+  APPEND_STAT("cas_misses", "%llu",
+              (unsigned long long)thread_stats.cas_misses);
+  APPEND_STAT("cas_hits", "%llu",
+              (unsigned long long)slab_stats.cas_hits);
+  APPEND_STAT("cas_badval", "%llu",
+              (unsigned long long)slab_stats.cas_badval);
+  APPEND_STAT("touch_hits", "%llu",
+              (unsigned long long)slab_stats.touch_hits);
+  APPEND_STAT("touch_misses", "%llu",
+              (unsigned long long)thread_stats.touch_misses);
+  APPEND_STAT("auth_cmds", "%llu",
+              (unsigned long long)thread_stats.auth_cmds);
+  APPEND_STAT("auth_errors", "%llu",
+              (unsigned long long)thread_stats.auth_errors);
+  APPEND_STAT("bytes_read", "%llu",
+              (unsigned long long)thread_stats.bytes_read);
+  APPEND_STAT("bytes_written", "%llu",
+              (unsigned long long)thread_stats.bytes_written);
+  APPEND_STAT("limit_maxbytes", "%llu",
+              (unsigned long long)settings.maxbytes);
   APPEND_STAT("accepting_conns", "%u", stats.accepting_conns);
-  APPEND_STAT("listen_disabled_num", "%llu", (unsigned long long)stats.listen_disabled_num);
+  APPEND_STAT("listen_disabled_num", "%llu",
+              (unsigned long long)stats.listen_disabled_num);
   APPEND_STAT("threads", "%d", settings.num_threads);
-  APPEND_STAT("conn_yields", "%llu", (unsigned long long)thread_stats.conn_yields);
+  APPEND_STAT("conn_yields", "%llu",
+              (unsigned long long)thread_stats.conn_yields);
   APPEND_STAT("hash_power_level", "%u", stats.hash_power_level);
   APPEND_STAT("hash_bytes", "%llu", (unsigned long long)stats.hash_bytes);
   APPEND_STAT("hash_is_expanding", "%u", stats.hash_is_expanding);
@@ -3075,8 +3107,10 @@ static void process_command(conn *c, char *command) {
     } else {
       out_string(c, "ERROR: shutdown not enabled");
     }
-  } else if (ntokens > 1 && strcmp(tokens[COMMAND_TOKEN].value, "slabs") == 0) {
-    if (ntokens == 5 && strcmp(tokens[COMMAND_TOKEN + 1].value, "reassign") == 0) {
+  } else if (ntokens > 1 &&
+             strcmp(tokens[COMMAND_TOKEN].value, "slabs") == 0) {
+    if (ntokens == 5 &&
+        strcmp(tokens[COMMAND_TOKEN + 1].value, "reassign") == 0) {
       int src, dst, rv;
       if (settings.slab_reassign == false) {
         out_string(c, "CLIENT_ERROR slab reassignment disabled");
@@ -3448,7 +3482,8 @@ static void drive_machine(conn *c) {
         addrlen = sizeof(addr);
 #ifdef HAVE_ACCEPT4
         if (use_accept4) {
-          sfd = accept4(c->sfd, (struct sockaddr *)&addr, &addrlen, SOCK_NONBLOCK);
+          sfd = accept4(c->sfd, (struct sockaddr *)&addr,
+                        &addrlen, SOCK_NONBLOCK);
         } else {
           sfd = accept(c->sfd, (struct sockaddr *)&addr, &addrlen);
         }
@@ -3642,7 +3677,8 @@ static void drive_machine(conn *c) {
           break;
         }
         //  now try reading from the socket
-        res = read(c->sfd, c->rbuf, c->rsize > c->sbytes ? c->sbytes : c->rsize);
+        res = read(c->sfd, c->rbuf,
+                   c->rsize > c->sbytes ? c->sbytes : c->rsize);
         if (res > 0) {
           pthread_mutex_lock(&c->thread->stats.mutex);
           c->thread->stats.bytes_read += res;
@@ -3965,7 +4001,8 @@ static int server_sockets(int port, enum network_transport transport,
     char *list = strdup(settings.inter);
 
     if (list == NULL) {
-      LOG(ERROR) << "Failed to allocate memory for parsing server interface string";
+      LOG(ERROR) << "Failed to allocate memory for "
+                 << "parsing server interface string";
       return 1;
     }
     char * p = NULL;
