@@ -73,7 +73,7 @@ unsigned int slabs_clsid(const size_t size) {
 }
 
 // slabclass_t
-// slab_list : [0], [1], ..., [list_size - 1]  // current number : slabs
+// slab_list : [0], [1], ..., [list_size - 1]  // page number : slabs
 //              |
 //             \|/
 //             [0], [1], ..., [perslab - 1]
@@ -118,10 +118,9 @@ void slabs_init(const size_t limit, const double factor, const bool prealloc) {
   slabclass[power_largest].perslab = 1;
   if (settings.verbose > 1) {
     LOG(ERROR) << "slab class " << i << ": chunk size "
-               << slabclass[i].size << " perslab "
-               << slabclass[i].perslab;
+               << slabclass[i].size << " perslab " << slabclass[i].perslab;
   }
-  // for the test suite:  faking of how much we've already malloc'd
+  // for the test suite: faking of how much we've already malloc'd
   {
     char *t_initial_malloc = getenv("T_MEMD_INITIAL_MALLOC");
     if (t_initial_malloc) {

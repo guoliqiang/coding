@@ -3751,7 +3751,7 @@ static void drive_machine(conn *c) {
 }
 
 void event_handler(const int fd, const short which, void *arg) {
-  conn *c;
+  conn * c = NULL;
   c = (conn *)arg;
   assert(c != NULL);
   c->which = which;
@@ -4069,7 +4069,7 @@ static struct event clockevent;
 // libevent uses a monotonic clock when available for event scheduling. Aside
 // from jitter, simply ticking our internal timer here is accurate enough.
 // Note that users who are setting explicit dates for expiration times *must*
-// ensure their clocks are correct before starting memcached. */
+// ensure their clocks are correct before starting memcached.
 static void clock_handler(const int fd, const short which, void *arg) {
   struct timeval t;
   t.tv_sec = 1;
