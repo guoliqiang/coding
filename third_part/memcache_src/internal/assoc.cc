@@ -66,6 +66,7 @@ item * assoc_find(const char *key, const size_t nkey, const uint32_t hv) {
   unsigned int oldbucket;
   if (expanding &&
      (oldbucket = (hv & hashmask(hashpower - 1))) >= expand_bucket) {
+    // now data has stored in old_hashtable
     it = old_hashtable[oldbucket];
   } else {
     it = primary_hashtable[hv & hashmask(hashpower)];
@@ -80,7 +81,7 @@ item * assoc_find(const char *key, const size_t nkey, const uint32_t hv) {
     it = it->h_next;
     ++depth;
   }
-  MEMCACHED_ASSOC_FIND(key, nkey, depth);  // empty macro
+  MEMCACHED_ASSOC_FIND(key, nkey, depth);
   return ret;
 }
 
@@ -131,8 +132,7 @@ static void assoc_start_expand(void) {
   pthread_cond_signal(&maintenance_cond);
 }
 
-// Note: this isn't an assoc_update. The key must not already exist to call
-// this.
+// This isn't an assoc_update. The key must not already exist to call this.
 int assoc_insert(item * it, const uint32_t hv) {
   unsigned int oldbucket;
   // shouldn't have duplicately named things defined 

@@ -59,11 +59,9 @@ enum try_read_result {
 static enum try_read_result try_read_network(conn *c);
 static enum try_read_result try_read_udp(conn *c);
 static void conn_set_state(conn *c, enum conn_states state);
-
 static void stats_init(void);
 static void server_stats(ADD_STAT add_stats, conn *c);
 static void process_stat_settings(ADD_STAT add_stats, void *c);
-
 static void settings_init(void);
 
 // event handling, network IO
@@ -77,7 +75,6 @@ static void write_and_free(conn *c, char *buf, int bytes);
 static int ensure_iov_space(conn *c);
 static int add_iov(conn *c, const void *buf, int len);
 static int add_msghdr(conn *c);
-
 static void conn_free(conn *c);
 
 // exported globals
@@ -235,7 +232,7 @@ static int add_msghdr(conn *c) {
   assert(c != NULL);
   if (c->msgsize == c->msgused) {
     msg = (msghdr*)realloc(c->msglist, c->msgsize * 2 * sizeof(struct msghdr));
-    if (! msg) {
+    if (!msg) {
       STATS_LOCK();
       stats.malloc_fails++;
       STATS_UNLOCK();

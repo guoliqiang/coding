@@ -250,16 +250,16 @@ struct stats {
   uint64_t      touch_misses;
   uint64_t      evictions;
   uint64_t      reclaimed;
-  time_t        started;          // when the process was started
-  bool          accepting_conns;  // whether we are currently accepting
+  time_t        started;                // when the process was started
+  bool          accepting_conns;        // whether we are currently accepting
   uint64_t      listen_disabled_num;
-  unsigned int  hash_power_level; // Better hope it's not over 9000
-  uint64_t      hash_bytes;       // size used for hash tables
-  bool          hash_is_expanding; // If the hash table is being expanded
-  uint64_t      expired_unfetched; // items reclaimed but never touched
-  uint64_t      evicted_unfetched; // items evicted but never touched
-  bool          slab_reassign_running; // slab reassign in progress
-  uint64_t      slabs_moved;       // times slabs were moved around
+  unsigned int  hash_power_level;       // Better hope it's not over 9000
+  uint64_t      hash_bytes;             // size used for hash tables
+  bool          hash_is_expanding;      // If the hash table is being expanded
+  uint64_t      expired_unfetched;      // items reclaimed but never touched
+  uint64_t      evicted_unfetched;      // items evicted but never touched
+  bool          slab_reassign_running;  // slab reassign in progress
+  uint64_t      slabs_moved;            // times slabs were moved around
 };
 
 #define MAX_VERBOSITY_LEVEL 2
@@ -271,7 +271,7 @@ struct settings {
   int maxconns;
   int port;
   int udpport;
-  char *inter;
+  char * inter;
   int verbose;
   rel_time_t oldest_live; // ignore existing items older than this
   int evict_to_free;
@@ -313,17 +313,17 @@ extern struct settings settings;
 
 // Structure for storing items within memcached.
 typedef struct _stritem {
-  struct _stritem * next;
-  struct _stritem * prev;
-  struct _stritem * h_next;   // hash chain next
-  rel_time_t      time;       // least recent access
-  rel_time_t      exptime;    // expire time
-  int             nbytes;     // size of data
-  unsigned short  refcount;
-  uint8_t         nsuffix;    // length of flags-and-length string
-  uint8_t         it_flags;   // ITEM_* above
-  uint8_t         slabs_clsid;  // which slab class we're in
-  uint8_t         nkey;       // key length, w/terminating null and padding
+  struct _stritem * next;  // next in slab, used by slab
+  struct _stritem * prev;  // pre in slab used by slab
+  struct _stritem * h_next;  // hash chain next
+  rel_time_t time;  // least recent access
+  rel_time_t exptime;  // expire time
+  int nbytes;  // size of data
+  unsigned short refcount;
+  uint8_t nsuffix;  // length of flags-and-length string
+  uint8_t it_flags;  // ITEM_* above
+  uint8_t slabs_clsid;  // which slab class we're in
+  uint8_t nkey;  // key length, w/terminating null and padding
   // this odd type prevents type-punning issues when we do
   // the little shuffle to save space when not using CAS.
   union {
@@ -355,60 +355,60 @@ typedef struct {
 // The structure representing a connection into memcached.
 typedef struct conn conn;
 struct conn {
-  int    sfd;
-  sasl_conn_t *sasl_conn;
+  int sfd;
+  sasl_conn_t * sasl_conn;
   bool authenticated;
-  enum conn_states  state;
+  enum conn_states state;
   enum bin_substates substate;
   struct event event;
   short  ev_flags;
-  short  which;   /** which events were just triggered */
+  short  which; // which events were just triggered
 
-  char   *rbuf;   /** buffer to read commands into */
-  char   *rcurr;  /** but if we parsed some already, this is where we stopped */
-  int    rsize;   /** total allocated size of rbuf */
-  int    rbytes;  /** how much data, starting from rcur, do we have unparsed */
+  char *rbuf;  // buffer to read commands into
+  char *rcurr; // but if we parsed some already, this is where we stopped
+  int rsize;  // total allocated size of rbuf
+  int rbytes;  // how much data, starting from rcur, do we have unparsed
 
-  char   *wbuf;
-  char   *wcurr;
-  int    wsize;
-  int    wbytes;
-  /** which state to go into after finishing current write */
+  char * wbuf;
+  char * wcurr;
+  int wsize;
+  int wbytes;
+  // which state to go into after finishing current write
   enum conn_states  write_and_go;
-  void   *write_and_free; /** free this memory after finishing writing */
+  void * write_and_free; // free this memory after finishing writing
 
-  char   *ritem;  /** when we read in an item's value, it goes here */
-  int    rlbytes;
+  char * ritem;  // when we read in an item's value, it goes here
+  int rlbytes;
 
   // data for the nread state
   // item is used to hold an item structure created after reading the command
   // line of set/add/replace commands, but before we finished reading the actual
   // data. The data is read into ITEM_data(item) to avoid extra copying.
-  void   *item;     // for commands set/add/replace
+  void *item;  // for commands set/add/replace
 
   // data for the swallow state
-  int    sbytes;    // how many bytes to swallow
+  int sbytes;  // how many bytes to swallow
 
   // data for the mwrite state
   struct iovec *iov;
-  int    iovsize;   // number of elements allocated in iov[]
-  int    iovused;   // number of elements used in iov[]
+  int iovsize;  // number of elements allocated in iov[]
+  int iovused;  // number of elements used in iov[]
 
-  struct msghdr *msglist;
-  int    msgsize;   // number of elements allocated in msglist[]
-  int    msgused;   // number of elements used in msglist[]
-  int    msgcurr;   // element in msglist[] being transmitted now
-  int    msgbytes;  // number of bytes in current msg
+  struct msghdr * msglist;
+  int msgsize;   // number of elements allocated in msglist[]
+  int msgused;   // number of elements used in msglist[]
+  int msgcurr;   // element in msglist[] being transmitted now
+  int msgbytes;  // number of bytes in current msg
 
-  ::item   **ilist;   // list of items to write out
-  int    isize;
-  ::item   **icurr;
-  int    ileft;
+  ::item **ilist;   // list of items to write out
+  int isize;
+  ::item **icurr;
+  int ileft;
 
-  char   **suffixlist;
-  int    suffixsize;
-  char   **suffixcurr;
-  int    suffixleft;
+  char ** suffixlist;
+  int suffixsize;
+  char ** suffixcurr;
+  int suffixleft;
 
   enum protocol protocol;   // which protocol this connection speaks
   enum network_transport transport; // what transport is used by this connection
@@ -423,7 +423,7 @@ struct conn {
   bool noreply;   // True if the reply should not be sent.
   // current stats command
   struct {
-    char *buffer;
+    char * buffer;
     size_t size;
     size_t offset;
   } stats;
