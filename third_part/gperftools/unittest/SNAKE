@@ -13,10 +13,6 @@ cc_binary(name='profile_unittest',
           deps = [
                   '//base/internal:base',
                   '//third_part/testing/gtest/src:gtest',
-                  '//libs/third_part/gperftools:profiler',
-                  '//libs/third_part/libunwind:unwind',
+                  '//third_part/gperftools/wrapper/internal:gperftools_wrapper',
                   ],
-          cflags = [
-                    '-I/home/guoliqiang/git-coding/coding/third_part/gperftools/include'
-                   ]
-           )
+         )

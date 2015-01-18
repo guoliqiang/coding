@@ -9,3 +9,6 @@ Here is how to interpret the columns:
 4. Number of profiling samples in this function and its callees
 5. Percentage of profiling samples in this function and its callees
 6. Function name
+
+http://gperftools.googlecode.com/svn/trunk/doc/cpuprofile.html
+
