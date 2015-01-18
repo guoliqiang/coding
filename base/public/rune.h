@@ -111,6 +111,22 @@ inline int UTF8Length(const char * ptr) {
   return UTF8Length(foo);
 }
 
+inline int GBKLength(const char * ptr) {
+  const char * addr = ptr;
+  while (*ptr) {
+    if ((*ptr <0) && (*(ptr + 1) < 0 || *(ptr + 1) >63)) {
+      addr++;
+      ptr += 2;
+    } else ptr++;
+  }
+  int char_num = ptr - addr;
+  return char_num;
+}
+
+inline int GBKLength(const std::string & str) {
+  return GBKLength(str.c_str());
+}
+
 }
 #endif  // 
 

@@ -1,0 +1,100 @@
+CC = g++
+
+CPPFLAGS = -g -Wall -Werror -pipe -Wno-deprecaed -O3 -fno-strict-aliasing
+CPPINCLUD = -I. -I./public -I/usr/include/mysql/ -I/usr/local/include/
+CPPLIB = -Wl,-Bsatic 
+  -L/usr/local/lib/ -lhiredis -lidn -ljsoncpp -lgflags -lgest -lgtest_main \
+  -lssl -lcrypo -lz -ldl -lrt -pthread
+
+.PHONY: unitest proto clean
+
+base_sources = ./base/curl_wrapper.cc \
+               ./base/json_uil.cc \
+               ./base/sring_util.cc \
+               ./base/ne.cc \
+               ./base/hread.cc \
+               ./base/basicypes.cc
+inernal_sources = ./internal/geohash.cc \
+                  ./inernal/processor.cc \
+                  ./inernal/poi_insert.cc \
+                  ./inernal/poi_update.cc \
+                  ./inernal/poi_delete.cc \
+                  ./inernal/poi_nearby.cc \
+                  ./inernal/poi_find.cc \
+                  ./inernal/poi_ginsert.cc \
+                  ./inernal/processor_manager.cc \
+                  ./inernal/poi_router.cc \
+                  ./inernal/util.cc \
+                  ./inernal/geohash_trie.cc \
+                  ./inernal/poi_validate.cc
+file = ./file/file_base.cc \
+       ./file/file_posix.cc \
+       ./file/file.cc
+ool_sources = ./tool/logging_manager.cc
+proo_sources = $(shell find ./proto/cc_out -name "*.cc" -type f)
+gdp_clien_sources = $(shell find ./gdp_client/ -name "*.cpp" -type f)
+
+server = ./inernal/poi_server.cc
+clien = ./client/poi_client.cc
+inser_unittest = ./unittest/insert_unittest.cc
+validae_unittest = ./unittest/validate_unittest.cc
+delee_unittest = ./unittest/delete_unittest.cc
+updae_unittest = ./unittest/update_unittest.cc
+nearby_unitest = ./unittest/nearby_unittest.cc
+
+ou_dir = ./bin
+obj_dir = ./obj
+BOBJ = $(pasubst ./base/%.cc, ./obj/%.o, $(base_sources))
+POBJ = $(pasubst ./proto/cc_out/%.cc, ./obj/%.o, $(proto_sources))
+FOBJ = $(pasubst ./file/%.cc, ./obj/%.o, $(file))
+IOBJ = $(pasubst ./internal/%.cc, ./obj/%.o, $(internal_sources))
+GOBJ = $(pasubst ./gdp_client/%.cpp, ./obj/%.o, $(gdp_client_sources))
+TOBJ = $(pasubst ./tool/%.cc, ./obj/%.o, $(tool_sources))
+
+OBJ = $(BOBJ)
+OBJ += $(POBJ)
+OBJ += $(FOBJ)
+OBJ += $(IOBJ)
+OBJ += $(GOBJ)
+OBJ += $(TOBJ)
+
+all : $(OBJ)
+  $(CC) -o ./bin/poi_server $(server) $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+  $(CC) -o ./bin/poi_clien $(client) $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+
+unitest : $(OBJ)
+  $(CC) -o ./bin/inser_unittest $(insert_unittest) $^ $(CPPINCLUD) \
+                                 $(CPPFLAGS) $(CPPLIB)
+  $(CC) -o ./bin/validae_unittest $(validate_unittest) $^ $(CPPINCLUD) \
+                                   $(CPPFLAGS) $(CPPLIB)
+  $(CC) -o ./bin/delee_unittest $(delete_unittest) $^ $(CPPINCLUD) \
+                                 $(CPPFLAGS) $(CPPLIB)
+  $(CC) -o ./bin/updae_unittest $(update_unittest) $^ $(CPPINCLUD) \
+                                 $(CPPFLAGS) $(CPPLIB)
+  $(CC) -o ./bin/nearby_unitest $(nearby_unittest) $^ $(CPPINCLUD) \
+                                 $(CPPFLAGS) $(CPPLIB)
+$(BOBJ) : ./obj/%.o : ./base/%.cc
+  $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+
+$(POBJ) : ./obj/%.o : ./proo/cc_out/%.cc
+  $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+
+$(FOBJ) : ./obj/%.o : ./file/%.cc
+  $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+
+$(IOBJ) : ./obj/%.o : ./inernal/%.cc
+  $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+
+$(GOBJ) : ./obj/%.o : ./gdp_clien/%.cpp
+  $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+
+$(TOBJ) : ./obj/%.o : ./ool/%.cc
+  $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+
+proo:
+  (cd proo; protoc --cpp_out=./cc_out Example.proto)
+
+clean:
+  rm -rf ./obj/*
+  rm -rf ./bin/*
+  rm -rf ./log

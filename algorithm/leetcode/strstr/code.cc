@@ -239,6 +239,89 @@ const char * KMP(const char * str, const char * pattern) {
 }
 }  // namespace twice
 
+namespace third {
+void Next(std::vector<int> & next, char * p) {
+  int n = strlen(p);
+  if (n == 0) return;
+  next.resize(n, 0);
+  int i = 0;
+  next[i] = -1;
+  int k = next[i];
+  while (i < n) {
+    while (k >= 0 && p[i] != p[k]) k = next[k];
+    i++;
+    k++;
+    if (i == n) break;
+    if (p[i] == p[k]) next[i] = next[k];
+    else next[i] = k;
+  }
+}
+
+char * KMP(char * s, char * p) {
+  int s_len = strlen(s);
+  int p_len = strlen(p);
+  if (p_len == 0) return s;
+  std::vector<int> next;
+  Next(next, p);
+  int i = 0;
+  int j = 0;
+  while (i < s_len) {
+    if (s[i] == p[j]) {
+      i++;
+      j++;
+    } else j = next[j];
+    if (j == p_len) return s + i - p_len;
+    if (j == -1) {
+      i++;
+      j++;
+    }
+  }
+  return NULL;
+}
+}  // namespace third
+
+namespace updated {
+void Next(std::vector<int> & next, char * p) {
+  int n = strlen(p);
+  if (n == 0) return;
+  next.resize(n, 0);
+  int i = 0;
+  next[i] = -1;
+  int k = next[i];
+  while (i < n) {
+    while (k >= 0 && p[i] != p[k]) k = next[k];
+    i++;
+    k++;
+    if (i == n) break;
+    if (p[i] == p[k]) next[i] = next[k];
+    else next[i] = k;
+  }
+}
+
+int KMP(char * s, char * p) {
+  int s_len = strlen(s);
+  int p_len = strlen(p);
+  if (p_len == 0) return 0;
+  if (s_len == 0) return -1;
+  std::vector<int> next;
+  Next(next, p);
+  int i = 0;
+  int j = 0;
+  while (i < s_len) {
+    if (s[i] == p[j]) {
+      i++;
+      j++;
+    } else j = next[j];
+    if (j == p_len) return i - p_len;
+    if (j == -1) {
+      i++;
+      j++;
+    }
+  }
+  return -1;
+}
+
+}  // namespcae update
 using namespace algorithm;
 
 int main(int argc, char** argv) {

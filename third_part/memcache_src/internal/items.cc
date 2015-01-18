@@ -32,19 +32,19 @@ typedef struct {
   uint64_t evicted_unfetched;
 } itemstats_t;
 
-static item * heads[LARGEST_ID];
-static item * tails[LARGEST_ID];
+static item * heads[LARGEST_ID] = { 0 };
+static item * tails[LARGEST_ID] = { 0 };
 static itemstats_t itemstats[LARGEST_ID];
-static unsigned int sizes[LARGEST_ID];
+static unsigned int sizes[LARGEST_ID] = { 0 };
 
-void item_stats_reset(void) {
+void item_stats_reset() {
   mutex_lock(&cache_lock);
   memset(itemstats, 0, sizeof(itemstats));
   mutex_unlock(&cache_lock);
 }
 
 // Get the next CAS id for a new item.
-uint64_t get_cas_id(void) {
+uint64_t get_cas_id() {
   static uint64_t cas_id = 0;
   return ++cas_id;
 }
@@ -60,7 +60,6 @@ uint64_t get_cas_id(void) {
 #endif
 
 // Generates the variable-sized part of the header for an object.
-//
 // key     - The key
 // nkey    - The length of the key
 // flags   - key flags
@@ -69,21 +68,23 @@ uint64_t get_cas_id(void) {
 // nsuffix - The length of the suffix is stored here.
 // Returns the total size of the header.
 static size_t item_make_header(const uint8_t nkey,
-                               const int flags, const int nbytes,
-                               char *suffix, uint8_t *nsuffix) {
+                               const int flags,
+                               const int nbytes,
+                               char * suffix,
+                               uint8_t * nsuffix) {
   // suffix is defined at 40 chars elsewhere..
   *nsuffix = (uint8_t) snprintf(suffix, 40, " %d %d\r\n", flags, nbytes - 2);
   return sizeof(item) + nkey + *nsuffix + nbytes;
 }
 
-item *do_item_alloc(char * key,
-                    const size_t nkey,
-                    const int flags,
-                    const rel_time_t exptime,
-                    const int nbytes,
-                    const uint32_t cur_hv) {
+item * do_item_alloc(char * key,
+                     const size_t nkey,
+                     const int flags,
+                     const rel_time_t exptime,
+                     const int nbytes, // nvalue
+                     const uint32_t cur_hv) {
   uint8_t nsuffix;
-  item *it = NULL;
+  item * it = NULL;
   char suffix[40];
   size_t ntotal = item_make_header(nkey + 1, flags, nbytes, suffix, &nsuffix);
   if (settings.use_cas) {
@@ -97,14 +98,14 @@ item *do_item_alloc(char * key,
   // do a quick check if we have any expired items in the tail..
   int tries = 5;
   int tried_alloc = 0;
-  item *search;
-  void *hold_lock = NULL;
+  item * search = NULL;
+  void * hold_lock = NULL;
   rel_time_t oldest_live = settings.oldest_live;
 
   search = tails[id];
   // We walk up *only* for locked items. Never searching for expired.
   // Waste of CPU for almost all deployments
-  for (; tries > 0 && search != NULL; tries--, search=search->prev) {
+  for (; tries > 0 && search != NULL; tries--, search = search->prev) {
     uint32_t hv = hash(ITEM_key(search), search->nkey, 0);
     // Attempt to hash item lock the "search" item. If locked, no
     // other callers can incr the refcount
@@ -138,13 +139,14 @@ item *do_item_alloc(char * key,
       it->slabs_clsid = 0;
     } else if ((it = (item *)slabs_alloc(ntotal, id)) == NULL) {
       tried_alloc = 1;
-      if (settings.evict_to_free == 0) {
+      if (settings.evict_to_free == 0) {  // not use LRU
         itemstats[id].outofmemory++;
       } else {
+        // LRU replace the last one (pointed by 'search')
+        // http://kenby.iteye.com/blog/1423989
         itemstats[id].evicted++;
         itemstats[id].evicted_time = current_time - search->time;
-        if (search->exptime != 0)
-          itemstats[id].evicted_nonzero++;
+        if (search->exptime != 0) itemstats[id].evicted_nonzero++;
         if ((search->it_flags & ITEM_FETCHED) == 0) {
           itemstats[id].evicted_unfetched++;
         }
@@ -153,7 +155,6 @@ item *do_item_alloc(char * key,
         do_item_unlink_nolock(it, hv);
         // Initialize the item block:
         it->slabs_clsid = 0;
-
         // If we've just evicted an item, and the automover is set to
         // angry bird mode, attempt to rip memory into this slab class.
         // TODO: Move valid object detection into a function, and on a
@@ -169,23 +170,23 @@ item *do_item_alloc(char * key,
     break;
   }
 
-  if (!tried_alloc && (tries == 0 || search == NULL))
+  if (!tried_alloc && (tries == 0 || search == NULL)) {
     it = (item *)slabs_alloc(ntotal, id);
-
+  }
   if (it == NULL) {
     itemstats[id].outofmemory++;
     mutex_unlock(&cache_lock);
     return NULL;
   }
-
   assert(it->slabs_clsid == 0);
   assert(it != heads[id]);
-
   // Item initialization can happen outside of the lock; the item's already
   // been removed from the slab LRU.
-  it->refcount = 1;     // the caller will have a reference
+  it->refcount = 1;  // the caller will have a reference
   mutex_unlock(&cache_lock);
-  it->next = it->prev = it->h_next = 0;
+  it->next = 0;
+  it->prev = 0;
+  it->h_next = 0;
   it->slabs_clsid = id;
 
   DEBUG_REFCNT(it, '*');
@@ -228,7 +229,8 @@ bool item_size_ok(const size_t nkey, const int flags, const int nbytes) {
 }
 
 static void item_link_q(item *it) { // item is the new head
-  item **head, **tail;
+  item ** head = NULL;
+  item ** tail = NULL;
   assert(it->slabs_clsid < LARGEST_ID);
   assert((it->it_flags & ITEM_SLABBED) == 0);
 
@@ -246,7 +248,8 @@ static void item_link_q(item *it) { // item is the new head
 }
 
 static void item_unlink_q(item *it) {
-  item **head, **tail;
+  item ** head = NULL;
+  item ** tail = NULL;
   assert(it->slabs_clsid < LARGEST_ID);
   head = &heads[it->slabs_clsid];
   tail = &tails[it->slabs_clsid];
@@ -268,7 +271,7 @@ static void item_unlink_q(item *it) {
   return;
 }
 
-int do_item_link(item *it, const uint32_t hv) {
+int do_item_link(item * it, const uint32_t hv) {
   MEMCACHED_ITEM_LINK(ITEM_key(it), it->nkey, it->nbytes);
   assert((it->it_flags & (ITEM_LINKED|ITEM_SLABBED)) == 0);
   mutex_lock(&cache_lock);
@@ -300,15 +303,18 @@ void do_item_unlink(item *it, const uint32_t hv) {
     stats.curr_bytes -= ITEM_ntotal(it);
     stats.curr_items -= 1;
     STATS_UNLOCK();
+    // 1. delete from hashtable
     assoc_delete(ITEM_key(it), it->nkey, hv);
+    // 2. delete item from list
     item_unlink_q(it);
+    // 3. if refcount == 0 then free item
     do_item_remove(it);
   }
   mutex_unlock(&cache_lock);
 }
 
 // FIXME: Is it necessary to keep this copy/pasted code?
-void do_item_unlink_nolock(item *it, const uint32_t hv) {
+void do_item_unlink_nolock(item * it, const uint32_t hv) {
   MEMCACHED_ITEM_UNLINK(ITEM_key(it), it->nkey, it->nbytes);
   if ((it->it_flags & ITEM_LINKED) != 0) {
     it->it_flags &= ~ITEM_LINKED;
@@ -326,7 +332,6 @@ void do_item_remove(item *it) {
   MEMCACHED_ITEM_REMOVE(ITEM_key(it), it->nkey, it->nbytes);
   assert((it->it_flags & ITEM_SLABBED) == 0);
   assert(it->refcount > 0);
-
   if (refcount_decr(&it->refcount) == 0) {
     item_free(it);
   }
@@ -336,7 +341,6 @@ void do_item_update(item *it) {
   MEMCACHED_ITEM_UPDATE(ITEM_key(it), it->nkey, it->nbytes);
   if (it->time < current_time - ITEM_UPDATE_INTERVAL) {
     assert((it->it_flags & ITEM_SLABBED) == 0);
-
     mutex_lock(&cache_lock);
     if ((it->it_flags & ITEM_LINKED) != 0) {
       item_unlink_q(it);
@@ -347,7 +351,7 @@ void do_item_update(item *it) {
   }
 }
 
-int do_item_replace(item *it, item *new_it, const uint32_t hv) {
+int do_item_replace(item * it, item * new_it, const uint32_t hv) {
   MEMCACHED_ITEM_REPLACE(ITEM_key(it), it->nkey, it->nbytes,
                          ITEM_key(new_it), new_it->nkey, new_it->nbytes);
   assert((it->it_flags & ITEM_SLABBED) == 0);

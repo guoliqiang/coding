@@ -23,12 +23,13 @@
 
 typedef struct {
   unsigned int size;      // sizes of items
-  unsigned int perslab;   // how many items per slab
-  void * slots;           // list of item ptrs
+  unsigned int perslab;   // how many items per slab/page
+  void * slots;           // list of free item ptrs
   unsigned int sl_curr;   // total free items in list
-  unsigned int slabs;     // how many slabs were allocated for this class
+  unsigned int slabs;     // how many slabs were allocated for this class,
+                          // index of slab_list
   void ** slab_list;      // array of slab pointers
-  unsigned int list_size; // size of prev array
+  unsigned int list_size; // size of slab_list
   unsigned int killing;   // index+1 of dying slab, or zero if none
   size_t requested;       // The number of requested bytes
 } slabclass_t;
@@ -73,6 +74,7 @@ unsigned int slabs_clsid(const size_t size) {
 }
 
 // slabclass_t
+// each page size is 1 MB
 // slab_list : [0], [1], ..., [list_size - 1]  // page number : slabs
 //              |
 //             \|/
@@ -100,6 +102,7 @@ void slabs_init(const size_t limit, const double factor, const bool prealloc) {
   }
   memset(slabclass, 0, sizeof(slabclass));
   int i = POWER_SMALLEST - 1;  // POWER_SMALLEST == 1
+  // settings.item_size_max default value is 1MB
   while (++i < POWER_LARGEST && size <= settings.item_size_max / factor) {
     // Make sure items are always n-byte aligned
     if (size % CHUNK_ALIGN_BYTES) {
@@ -151,10 +154,10 @@ static void slabs_preallocate (const unsigned int maxslabs) {
   }
 }
 
-static int grow_slab_list (const unsigned int id) {
+static int grow_slab_list(const unsigned int id) {
   slabclass_t * p = &slabclass[id];
   if (p->slabs == p->list_size) {
-    size_t new_size =  (p->list_size != 0) ? p->list_size * 2 : 16;
+    size_t new_size = (p->list_size != 0) ? p->list_size * 2 : 16;
     void * new_list = realloc(p->slab_list, new_size * sizeof(void *));
     if (new_list == 0) return 0;
     p->list_size = new_size;
