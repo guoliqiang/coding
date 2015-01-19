@@ -1,0 +1,7 @@
+cc_library(name='pipe_monitor',
+           srcs = ['pipe_monitor.cc'],
+           deps = [
+                   '//base/internal:base',
+                   '//file/internal:file',
+                  ],
+          )

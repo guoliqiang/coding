@@ -1,0 +1,7 @@
+cc_binary(name='pipe_monitor_unittest',
+          srcs = ['pipe_monitor_unittest.cc'],
+          deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/pipe_monitor/internal:pipe_monitor',
+                  ]
+           )
