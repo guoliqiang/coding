@@ -9,12 +9,16 @@
 #define  __PIPE_MONITOR_H_
 
 #include <string>
+#include <map>
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "base/public/thread.h"
 #include "base/public/logging.h"
+#include "base/public/mutex.h"
+#include "base/public/callback.h"
+#include "base/public/shared_ptr.h"
 #include "file/public/file.h"
 
 namespace pipe_monitor {
@@ -48,6 +52,12 @@ class PipeMonitor :  public base::Thread {
     CHECK(fd_ != -1) << "can not open " << pipe_path_;
   }
 
+  void AddCallback(char ch, base::Closure * callback) {
+    base::MutexLock lock(&mutex_);
+    callback_.insert(std::make_pair(ch,
+        base::shared_ptr<base::Closure>(callback)));
+  }
+
  protected:
   virtual void Run() {
     while (true) {
@@ -79,7 +89,12 @@ class PipeMonitor :  public base::Thread {
           LOG(WARNING) << "read space charactter";
           continue;
         }
-        LOG(INFO) << "read " << ch << " form " << pipe_path_;
+        base::MutexLock lock(&mutex_);
+        if (callback_.count(ch)) {
+          callback_[ch]->Run();
+        } else {
+          LOG(WARNING) << "not find callback for " << ch;
+        }
       }
     }
   }
@@ -87,6 +102,8 @@ class PipeMonitor :  public base::Thread {
  private:
   std::string pipe_path_;
   int fd_;
+  std::map<char, base::shared_ptr<base::Closure> > callback_;
+  base::Mutex mutex_;
 };
 
 }  // namespace pipe_monitor

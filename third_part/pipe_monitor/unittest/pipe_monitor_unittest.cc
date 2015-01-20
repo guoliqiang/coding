@@ -7,8 +7,15 @@
 #include "third_part/testing/gtest/include/gtest/gtest.h"
 #include "third_part/pipe_monitor/public/pipe_monitor.h"
 
+void Foo(const std::string input) {
+  LOG(INFO) << input;
+}
+
 TEST(pipe_monitor, Normal) {
   pipe_monitor::PipeMonitor pm("/tmp/pmonitor", true);
+  base::Closure * callback = base::NewPermanentCallback(Foo,
+      std::string("Hello Word"));
+  pm.AddCallback('G', callback);
   pm.Start();
   pm.Join();
 }
