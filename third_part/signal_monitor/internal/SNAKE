@@ -1,0 +1,6 @@
+cc_library(name='signal_monitor',
+           srcs = ['signal_monitor.cc'],
+           deps = [
+                   '//base/internal:base',
+                  ],
+          )

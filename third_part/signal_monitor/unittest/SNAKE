@@ -1,0 +1,7 @@
+cc_binary(name='signal_monitor_unittest',
+          srcs = ['signal_monitor_unittest.cc'],
+          deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/signal_monitor/internal:signal_monitor',
+                  ]
+           )
