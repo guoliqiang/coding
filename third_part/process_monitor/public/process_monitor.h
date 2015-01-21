@@ -2,7 +2,7 @@
 // Author: Liqiang Guo (guoliqiang2006@gmail.com)
 // Date  : 2015-01-20 22:43:19
 // File  : process_monitor.h
-// Brief :
+// Brief : https://github.com/russells/process-monitor
 
 #ifndef  __PROCESS_MONITOR_H_
 #define  __PROCESS_MONITOR_H_
