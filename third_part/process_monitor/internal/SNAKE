@@ -1,0 +1,7 @@
+cc_library(name='process_monitor',
+           srcs = ['process_monitor.cc'],
+           deps = [
+                   '//base/internal:base',
+                   '//third_part/signal_monitor/internal:signal_monitor',
+                  ],
+          )

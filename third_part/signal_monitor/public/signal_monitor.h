@@ -22,14 +22,26 @@ class SignalMonitor {
     return LightSingleton<SignalMonitor>::GetInstance();
   }
 
-  void AddCallback(int signal_num, base::Closure * callback) {
+  void AddCallback(int signal_num, base::Closure * callback,
+      bool check = true) {
     CHECK(signal_num >= 1 && signal_num <= 64)  << signal_num
        << " is invalid";
     base::MutexLock lock(&mutex_);
-    intptr_t old_signal_handler = reinterpret_cast<intptr_t>(
-        signal(signal_num, SignalMonitor::SignalCall));
-    CHECK(old_signal_handler == 0) << "signal num "
-        << signal_num << " already in use";
+    struct sigaction new_sa;
+    struct sigaction old_sa;
+    new_sa.sa_handler = SignalMonitor::SignalCall;
+    sigemptyset(&new_sa.sa_mask);
+    new_sa.sa_flags = SA_NOCLDSTOP;
+    sigaction(signal_num, &new_sa, &old_sa);
+    if (check) {
+      CHECK(old_sa.sa_handler == NULL)  << "signal num " << signal_num
+          << " alaredy in use";
+    }
+    
+    // intptr_t old_signal_handler = reinterpret_cast<intptr_t>(
+    //     signal(signal_num, SignalMonitor::SignalCall));
+    // CHECK(old_signal_handler == 0) << "signal num "
+    //     << signal_num << " already in use";
     callback_.insert(std::make_pair(signal_num,
         base::shared_ptr<base::Closure>(callback)));
   }

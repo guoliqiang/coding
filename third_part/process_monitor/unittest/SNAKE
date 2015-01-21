@@ -1,0 +1,8 @@
+cc_binary(name='process_monitor_unittest',
+          srcs = ['process_monitor_unittest.cc'],
+          deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/process_monitor/internal:process_monitor',
+                  ],
+          link_flags= ['-lutil'],
+          )
