@@ -33,7 +33,6 @@ class ProcessMonitor : public base::Thread {
     if (pty_fd_ != -1) close(pty_fd_);
   }
 
-
   void GoDaemon() {
     int ret = fork();
     CHECK(ret != -1) << "can not fork!";
