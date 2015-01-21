@@ -23,24 +23,116 @@
 
 namespace pipe_monitor {
 
+class AnonymousPipeMonitor : public base::Thread {
+ public:
+  AnonymousPipeMonitor(bool joinable = false) : base::Thread(joinable) {
+    fd_[0] = -1;
+    fd_[1] = -1;
+    Init();
+  }
+
+  ~AnonymousPipeMonitor() {
+    if (fd_[0] != -1) close(fd_[0]);
+    if (fd_[1] != -1) close(fd_[1]);
+  }
+
+  void Init() {
+    if (fd_[0] == -1) close(fd_[0]);
+    if (fd_[1] == -1) close(fd_[1]);
+    CHECK(pipe(fd_) != -1) << "can not make pipe for "  << strerror(errno);
+    fcntl(fd_[0], F_SETFL, O_NONBLOCK);
+  }
+
+  void AddCallback(char ch, base::Closure * callback) {
+    base::MutexLock lock(&mutex_);
+    callback_.insert(std::make_pair(ch,
+        base::shared_ptr<base::Closure>(callback)));
+  }
+
+  void Execute(char ch) {
+    base::MutexLock lock(&mutex_);
+    if (callback_.count(ch)) {
+      callback_[ch]->Run();
+    } else {
+      LOG(WARNING) << "not find callback for " << ch;
+    }
+  }
+
+  void Write(char ch) {
+    write(fd_[1], &ch, 1);
+  }
+ 
+ protected:
+  virtual void Run() {
+    while (true) {
+      fd_set read_fds;
+      FD_ZERO(&read_fds);
+      FD_SET(fd_[0], &read_fds);
+
+      timeval timeout;
+      timeout.tv_sec = 10;
+      timeout.tv_usec = 0;
+      int ret = select(fd_[0] + 1, &read_fds, 0, 0, &timeout);
+      if (ret == -1 && errno != EINTR) {
+        LOG(WARNING) << "select error :" << strerror(errno);
+      } else {
+        if (!FD_ISSET(fd_[0], &read_fds)) continue;
+        char ch;
+        int read_ret = read(fd_[0], &ch, 1);
+        if (read_ret == 0) { // closed, reopen
+          LOG(WARNING) << "read EOF";
+          Init();
+          continue;
+        } else if (read_ret == -1) {
+          if (errno != EWOULDBLOCK) {
+            LOG(WARNING) << "read error";
+            Init();
+          }
+          continue;
+        } else if (isspace(ch)) {
+          LOG(WARNING) << "read space charactter";
+          continue;
+        }
+        Execute(ch);
+      }
+    }
+  }
+
+ private:
+  int fd_[2];
+  std::map<char, base::shared_ptr<base::Closure> > callback_;
+  base::Mutex mutex_;
+};
+
 class PipeMonitor :  public base::Thread {
  public:
   PipeMonitor(const std::string & pipe_path, bool joinable = false)
       : base::Thread(joinable) {
     pipe_path_ = pipe_path;
     fd_ = -1;
+    wfd_ = -1;
     Init();
   }
 
   ~PipeMonitor() {
     if (fd_ != -1) close(fd_);
+    if (wfd_ != -1) close(wfd_);
   }
 
+  void Write(char ch) {
+    write(wfd_, &ch, 1);
+  }
+ 
   void Init() {
     if (fd_ != -1) {
       close(fd_);
       fd_ = -1;
     }
+    if (wfd_ != -1) {
+      close(wfd_);
+      wfd_ = -1;
+    }
+
     file::File::DeleteRecursively(pipe_path_);
     unlink(pipe_path_.c_str());
     int mk_ret = mkfifo(pipe_path_.c_str(), 0610);
@@ -49,13 +141,24 @@ class PipeMonitor :  public base::Thread {
                    << strerror(errno);
     }
     fd_ = open(pipe_path_.c_str(), O_RDONLY | O_NONBLOCK);
+    wfd_ = open(pipe_path_.c_str(), O_WRONLY | O_NONBLOCK);
     CHECK(fd_ != -1) << "can not open " << pipe_path_;
+    CHECK(wfd_ != -1) << "can not open " << pipe_path_;
   }
 
   void AddCallback(char ch, base::Closure * callback) {
     base::MutexLock lock(&mutex_);
     callback_.insert(std::make_pair(ch,
         base::shared_ptr<base::Closure>(callback)));
+  }
+
+  void Execute(char ch) {
+    base::MutexLock lock(&mutex_);
+    if (callback_.count(ch)) {
+      callback_[ch]->Run();
+    } else {
+      LOG(WARNING) << "not find callback for " << ch;
+    }
   }
 
  protected:
@@ -89,12 +192,7 @@ class PipeMonitor :  public base::Thread {
           LOG(WARNING) << "read space charactter";
           continue;
         }
-        base::MutexLock lock(&mutex_);
-        if (callback_.count(ch)) {
-          callback_[ch]->Run();
-        } else {
-          LOG(WARNING) << "not find callback for " << ch;
-        }
+        Execute(ch);
       }
     }
   }
@@ -102,6 +200,7 @@ class PipeMonitor :  public base::Thread {
  private:
   std::string pipe_path_;
   int fd_;
+  int wfd_;
   std::map<char, base::shared_ptr<base::Closure> > callback_;
   base::Mutex mutex_;
 };

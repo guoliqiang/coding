@@ -34,7 +34,7 @@ class SignalMonitor {
         base::shared_ptr<base::Closure>(callback)));
   }
 
-  void Excute(int signal_num) {
+  void Execute(int signal_num) {
     base::MutexLock lock(&mutex_);
     if (callback_.count(signal_num)) {
       callback_[signal_num]->Run();
@@ -44,7 +44,7 @@ class SignalMonitor {
   }
 
   static void SignalCall(int signal_num) {
-    GetInstance()->Excute(signal_num);
+    GetInstance()->Execute(signal_num);
   }
 
  private:

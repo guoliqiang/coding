@@ -17,5 +17,21 @@ TEST(PipeMonitor, Normal) {
       std::string("Hello Word"));
   pm.AddCallback('G', callback);
   pm.Start();
+  pm.Write('G');
+  pm.Write('U');
+  pm.Write('O');
   pm.Join();
 }
+/*
+TEST(PipeMonitor, Anonymous) {
+  pipe_monitor::AnonymousPipeMonitor apm(true);
+  base::Closure * callback = base::NewPermanentCallback(Foo,
+      std::string("Hello Word"));
+  apm.AddCallback('G', callback);
+  apm.Start();
+  apm.Write('G');
+  apm.Write('U');
+  apm.Write('O');
+  apm.Join();
+}
+*/
