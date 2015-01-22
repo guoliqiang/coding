@@ -12,6 +12,7 @@ all:
 	if test $$? -ne 0; then exit 1; fi; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/malloc_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/profile_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/mem_leak_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 opt:
 
@@ -19,3 +20,4 @@ opt:
 clean:
 	rm -rf malloc_unittest
 	rm -rf profile_unittest
+	rm -rf mem_leak_unittest
