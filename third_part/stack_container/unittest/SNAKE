@@ -1,0 +1,7 @@
+cc_binary(name = 'stack_container_unittest',
+          srcs = ['stack_container_unittest.cc'],
+          deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  '//base/internal:base',
+                 ]
+          )
