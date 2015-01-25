@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "base/public/basictypes.h"
+#include "base/public/logging.h"
 
 // This allocator can be used with STL containers to provide a stack buffer
 // from which to allocate memory and overflows onto the heap. This stack buffer
@@ -47,7 +48,6 @@ class StackAllocator : public std::allocator<T> {
       return reinterpret_cast<const T*>(stack_buffer_);
     }
 
-    //
     // IMPORTANT: Take care to ensure that stack_buffer_ is aligned
     // since it is used to mimic an array of T.
     // Be careful while declaring any unaligned types (like bool)
