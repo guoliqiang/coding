@@ -1,12 +1,20 @@
 CC = g++
+AR = ar
 
 CPPFLAGS = -g -Wall -Werror -pipe -Wno-deprecaed -O3 -fno-strict-aliasing
 CPPINCLUD = -I. -I./public -I/usr/include/mysql/ -I/usr/local/include/
-CPPLIB = -Wl,-Bsatic 
+CPPLIB = -Wl,-Bstatic 
   -L/usr/local/lib/ -lhiredis -lidn -ljsoncpp -lgflags -lgest -lgtest_main \
-  -lssl -lcrypo -lz -ldl -lrt -pthread
+  -lssl -lcrypo -lz -ldl -lrt -pthread \
+	-Wl, -Bdynamic -L/usr/lib64/mysql/ -lmysqlclient_r
+# -Bstatic following static library
+#  compiler sequence from right to left, only left can depends right. e.g.
+#  -Bstatic -la -lb, a can depend b, b must not depend a
+#
+# -Bdynamic following dynamic library
+#  search path:http://www.eyrie.org/~eagle/notes/rpath.html
 
-.PHONY: unitest proto clean
+.PHONY: unitest proto clean dir bins
 
 base_sources = ./base/curl_wrapper.cc \
                ./base/json_uil.cc \
@@ -44,12 +52,14 @@ nearby_unitest = ./unittest/nearby_unittest.cc
 
 ou_dir = ./bin
 obj_dir = ./obj
-BOBJ = $(pasubst ./base/%.cc, ./obj/%.o, $(base_sources))
-POBJ = $(pasubst ./proto/cc_out/%.cc, ./obj/%.o, $(proto_sources))
-FOBJ = $(pasubst ./file/%.cc, ./obj/%.o, $(file))
-IOBJ = $(pasubst ./internal/%.cc, ./obj/%.o, $(internal_sources))
-GOBJ = $(pasubst ./gdp_client/%.cpp, ./obj/%.o, $(gdp_client_sources))
-TOBJ = $(pasubst ./tool/%.cc, ./obj/%.o, $(tool_sources))
+lib_dir = ./lib
+
+BOBJ = $(pasubst ./base/%.cc, ./obj/base_%.o, $(base_sources))
+POBJ = $(pasubst ./proto/cc_out/%.cc, ./obj/proto_%.o, $(proto_sources))
+FOBJ = $(pasubst ./file/%.cc, ./obj/file_%.o, $(file))
+IOBJ = $(pasubst ./internal/%.cc, ./obj/internal_%.o, $(internal_sources))
+GOBJ = $(pasubst ./gdp_client/%.cpp, ./obj/gdp_client_%.o, $(gdp_client_sources))
+TOBJ = $(pasubst ./tool/%.cc, ./obj/tool_%.o, $(tool_sources))
 
 OBJ = $(BOBJ)
 OBJ += $(POBJ)
@@ -58,9 +68,16 @@ OBJ += $(IOBJ)
 OBJ += $(GOBJ)
 OBJ += $(TOBJ)
 
-all : $(OBJ)
+LIB = $(lib_dir)/libXX.a
+
+all : dir bins $(lib)
+
+bins : $(OBJ)
   $(CC) -o ./bin/poi_server $(server) $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
   $(CC) -o ./bin/poi_clien $(client) $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+
+$(LIB) : $(OBJ)
+	$(AR) cr $@ $^
 
 unitest : $(OBJ)
   $(CC) -o ./bin/inser_unittest $(insert_unittest) $^ $(CPPINCLUD) \
@@ -73,28 +90,33 @@ unitest : $(OBJ)
                                  $(CPPFLAGS) $(CPPLIB)
   $(CC) -o ./bin/nearby_unitest $(nearby_unittest) $^ $(CPPINCLUD) \
                                  $(CPPFLAGS) $(CPPLIB)
-$(BOBJ) : ./obj/%.o : ./base/%.cc
+
+$(BOBJ) : ./obj/base_%.o : ./base/%.cc
   $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
 
-$(POBJ) : ./obj/%.o : ./proo/cc_out/%.cc
+$(POBJ) : ./obj/proto_%.o : ./proo/cc_out/%.cc
   $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
 
-$(FOBJ) : ./obj/%.o : ./file/%.cc
+$(FOBJ) : ./obj/file_%.o : ./file/%.cc
   $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
 
-$(IOBJ) : ./obj/%.o : ./inernal/%.cc
+$(IOBJ) : ./obj/internal_%.o : ./inernal/%.cc
   $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
 
-$(GOBJ) : ./obj/%.o : ./gdp_clien/%.cpp
+$(GOBJ) : ./obj/gdp_client_%.o : ./gdp_clien/%.cpp
   $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
 
-$(TOBJ) : ./obj/%.o : ./ool/%.cc
+$(TOBJ) : ./obj/tool_%.o : ./ool/%.cc
   $(CC) -c -o $@ $^ $(CPPINCLUD) $(CPPFLAGS) $(CPPLIB)
+
+dir :
+	mkdir -p bin
+	mkdir -p obj
 
 proo:
-  (cd proo; protoc --cpp_out=./cc_out Example.proto)
+	(cd proo; protoc --cpp_out=./cc_out Example.proto)
 
 clean:
-  rm -rf ./obj/*
-  rm -rf ./bin/*
-  rm -rf ./log
+	rm -rf ./obj/*
+	rm -rf ./bin/*
+	rm -rf ./log
