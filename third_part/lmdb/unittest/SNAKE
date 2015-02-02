@@ -1,0 +1,30 @@
+cc_binary(name='mtest',
+          srcs = ['mtest.c'],
+          deps = [
+                  '//third_part/lmdb/internal:lmdb',
+                  ]
+           )
+cc_binary(name='mtest2',
+          srcs = ['mtest2.c'],
+          deps = [
+                  '//third_part/lmdb/internal:lmdb',
+                  ]
+           )
+cc_binary(name='mtest3',
+          srcs = ['mtest3.c'],
+          deps = [
+                  '//third_part/lmdb/internal:lmdb',
+                  ]
+           )
+cc_binary(name='mtest4',
+          srcs = ['mtest4.c'],
+          deps = [
+                  '//third_part/lmdb/internal:lmdb',
+                  ]
+           )
+cc_binary(name='mtest5',
+          srcs = ['mtest5.c'],
+          deps = [
+                  '//third_part/lmdb/internal:lmdb',
+                  ]
+           )
