@@ -1,0 +1,4 @@
+cc_library(name='lmdb',
+           srcs = ['mdb.c', 'midl.c'],
+           deps = []
+          )

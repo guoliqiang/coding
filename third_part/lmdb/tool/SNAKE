@@ -1,0 +1,24 @@
+cc_binary(name='mdb_copy',
+          srcs = ['mdb_copy.c'],
+          deps = [
+                  '//third_part/lmdb/internal:lmdb',
+                  ]
+           )
+cc_binary(name='mdb_dump',
+          srcs = ['mdb_dump.c'],
+          deps = [
+                  '//third_part/lmdb/internal:lmdb',
+                  ]
+           )
+cc_binary(name='mdb_load',
+          srcs = ['mdb_load.c'],
+          deps = [
+                  '//third_part/lmdb/internal:lmdb',
+                  ]
+           )
+cc_binary(name='mdb_stat',
+          srcs = ['mdb_stat.c'],
+          deps = [
+                  '//third_part/lmdb/internal:lmdb',
+                  ]
+           )
