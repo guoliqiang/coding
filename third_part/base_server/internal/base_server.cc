@@ -18,22 +18,16 @@ static void DoRead(struct bufferevent *bev, void * arg) {
   BaseServer * server = static_cast<BaseServer*>(arg);
   base::shared_ptr<Node> node(new Node());
   node->bev = bev;
-  node->fd = bufferevent_getfd(bev);
-  std::pair<std::string, int> ip_port = server->FindFd(node->fd);
+  std::pair<std::string, int> ip_port = server->FindFd(bufferevent_getfd(bev));
   node->ip = ip_port.first;
   node->port = ip_port.second;
-  if (server->IsSync() == false) {
-    node->content = base::shared_ptr<std::string>(new std::string());
-    server->Read(node);
-  }
+  node->content = base::shared_ptr<std::string>(new std::string());
+
   server->PushNode(node);
-  if (server->IsSync()) {
-    bufferevent_disable(bev, EV_READ);
-  }
+  bufferevent_disable(bev, EV_READ);
+  LOG(INFO) << "Push fd = " << bufferevent_getfd(bev) << " to work queue";
 }
 
-static void DoWrite(struct bufferevent *bev, void * arg) {
-}
 
 static void DoError(struct bufferevent *bev, int16_t error, void * arg) {
   int fd = bufferevent_getfd(bev);
@@ -43,10 +37,12 @@ static void DoError(struct bufferevent *bev, int16_t error, void * arg) {
     LOG(ERROR) << "Read ERROR for " << fd;
   } else if (error & BEV_EVENT_TIMEOUT) {
     LOG(ERROR) << "Read TIMEOUT for " << fd;
+  } else {
+    LOG(ERROR) << "Unknown error for " << fd;
   }
-  LOG(ERROR) << "Unknown error for " << fd;
   BaseServer * server = static_cast<BaseServer*>(arg);
   server->EraseFd(fd);
+  bufferevent_free(bev);
 }
 
 static void DoAccept(evutil_socket_t listener, int16_t event, void * arg) {
@@ -94,13 +90,13 @@ static void DoAccept(evutil_socket_t listener, int16_t event, void * arg) {
   }
   bufferevent * bev =
     bufferevent_socket_new(evbase, client_fd, BEV_OPT_THREADSAFE);
-  if (NULL == bev) {
+  if (bev == NULL) {
     LOG(ERROR) << "create bufferevent on client fd=" << client_fd << " failed";
     close(client_fd);
     return;
   }
 
-  bufferevent_setcb(bev, DoRead, DoWrite, DoError, server);
+  bufferevent_setcb(bev, DoRead, NULL, DoError, server);
   if (bufferevent_enable(bev, EV_READ | EV_WRITE) != 0) {
     LOG(ERROR) << "enable bufferevent on client fd=" << client_fd << " failed";
     bufferevent_free(bev);
@@ -148,51 +144,50 @@ void BaseServer::Start() {
 }
 
 BaseServer::BaseServer(int port, base::shared_ptr<BaseRouter> router,
-                       int size, bool is_sync) {
+                       int size) {
   port_ = port;
   router_ = router;
   evbase_ = NULL;
-  is_sync_ = is_sync;
   for (int i = 0; i < size; i++) {
     worker_.push_back(base::shared_ptr<Worker>(new Worker(this)));
   }
 }
 
 bool BaseServer::Read(base::shared_ptr<Node> node) {
-  bufferevent_lock(node->bev);
   struct evbuffer * input = bufferevent_get_input(node->bev);
   CHECK(input != NULL)
       << "Read " << node->ip << " " << node->port << " error";
   if (input == NULL) {  // not enough data
-    bufferevent_unlock(node->bev);
+    LOG(INFO) << "not enough data, input == NULL";
     return false;
   }
 
   unsigned char * buff = evbuffer_pullup(input, 4);
+  if (buff == NULL) {
+    LOG(INFO) << "not enough data, buff == NULL";
+    return false;
+  }
+
   uint32_t size = *(reinterpret_cast<uint32_t*>(buff));
   int real_size = evbuffer_get_length(input);
+  int total_size = size + 4;
 
-  if (real_size < size + 4) {  // not enough data
-    bufferevent_unlock(node->bev);
-    return false;
-  } else if (real_size > size + 4) {  // error data
-    evbuffer_drain(input, real_size);
-    bufferevent_unlock(node->bev);
+  if (real_size < total_size) {  // not enough data
+    LOG(INFO) << "not enough data, real_size = "
+              << real_size << " total_size = " << total_size;
     return false;
   } else {
+    node->content->resize(total_size);
     int cnt = evbuffer_remove(input,
-        const_cast<char *>(node->content->data()), real_size);
-    CHECK(cnt == real_size) << cnt << " " << real_size;
-    bufferevent_unlock(node->bev);
+        const_cast<char *>(node->content->data()), total_size);
+    CHECK(cnt == total_size) << cnt << " " << total_size;
     return true;
   }
 }
 
 bool BaseServer::Send(base::shared_ptr<Node> node) {
-  bufferevent_lock(node->bev);
   int rs = bufferevent_write(node->bev, node->content->data(),
       node->content->size());
-  bufferevent_unlock(node->bev);
   return rs == 0;
 }
 

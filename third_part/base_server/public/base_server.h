@@ -35,7 +35,6 @@ namespace base_server {
 
 struct Node {
   bufferevent * bev;
-  int fd;
   std::string ip;
   int port;
   base::shared_ptr<std::string> content;
@@ -52,8 +51,7 @@ class Worker;
 
 class BaseServer {
  public:
-  BaseServer(int prot, base::shared_ptr<BaseRouter> router,
-             int size, bool is_sync = true);
+  BaseServer(int prot, base::shared_ptr<BaseRouter> router, int size);
   virtual ~BaseServer() {
     if (evbase_ != NULL) event_base_free(evbase_);
   }
@@ -62,7 +60,6 @@ class BaseServer {
   static bool Read(base::shared_ptr<Node> client);
 
   void Start();
-  bool IsSync() { return is_sync_; }
   event_base * GetBaseEvent() { return evbase_; }
 
   void AddFd(int fd, const std::string & ip, int port) {
@@ -92,7 +89,6 @@ class BaseServer {
   int listen_fd_;
   int port_;
   std::map<int, std::pair<std::string, int> > fd_client_;
-  bool is_sync_;
 };
 
 class Worker : public base::Thread {
@@ -104,10 +100,11 @@ class Worker : public base::Thread {
     while (true) {
       base::shared_ptr<Node> node;
       server_->PopNode(node);
-      server_->GetRouter()->Process(node);
-      if (server_->IsSync()) {
-        bufferevent_enable(node->bev, EV_READ);
+      while (server_->Read(node)) {
+        LOG(INFO) << "Begin to Call Process of Router";
+        server_->GetRouter()->Process(node);
       }
+      bufferevent_enable(node->bev, EV_READ);
     }
   }
 
