@@ -19,44 +19,43 @@ static void Accept(evutil_socket_t listener, int16_t event, void * arg) {
   sockaddr_in client_addr;
   socklen_t client_len = sizeof(client_addr);
   int client_fd = accept(listener,
-                         reinterpret_cast<struct sockaddr*>(&client_addr),
+                         reinterpret_cast<sockaddr*>(&client_addr),
                          &client_len);
-  if (client_fd < 0) {
-    LOG(ERROR) << "accept error";
-    return;
-  }
+  CHECK_GE(client_fd, 0) << "accept error";
   evutil_make_socket_nonblocking(client_fd);
+
   int optval = 1;
   socklen_t optlen = sizeof(optval);
   CHECK_GE(setsockopt(client_fd, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen), 0)
-      << "set SO_KEEPALIVE on client fd=" << client_fd << " failed";
+    << "set SO_KEEPALIVE on client fd=" << client_fd << " failed";
 
   optval = FLAGS_keepalive_offset;
   CHECK_GE(setsockopt(client_fd, SOL_TCP, TCP_KEEPIDLE, &optval, optlen), 0)
-      << "set TCP_KEEPIDLE on client fd=" << client_fd << " failed";
+    << "set TCP_KEEPIDLE on client fd=" << client_fd << " failed";
 
   optval = FLAGS_keepalive_interval;
   CHECK_GE(setsockopt(client_fd, SOL_TCP, TCP_KEEPINTVL, &optval, optlen), 0)
-      << "set TCP_KEEPINTVL on client fd=" << client_fd << " failed";
+    << "set TCP_KEEPINTVL on client fd=" << client_fd << " failed";
 
   optval = FLAGS_keepalive_probes;
   CHECK_GE(setsockopt(client_fd, SOL_TCP, TCP_KEEPCNT, &optval, optlen), 0)
-      << "set TCP_KEEPCNT on client fd=" << client_fd << " failed";
+    << "set TCP_KEEPCNT on client fd=" << client_fd << " failed";
+
   optval = 1;
   CHECK_GE(setsockopt(client_fd, IPPROTO_TCP, TCP_NODELAY, &optval,
-                 sizeof(optval)), 0)
-      << "set TCP_NODELAY on client fd=" << client_fd << " failed";
+           sizeof(optval)), 0)
+    << "set TCP_NODELAY on client fd=" << client_fd << " failed";
 
   server->AddFd(client_fd,
                 inet_ntoa(client_addr.sin_addr),
                 ntohs(client_addr.sin_port));
   server->Push(client_fd);
-  server->RandomNotify();
+  server->NotifyWorker();
 }
 
-void BaseServer::RandomNotify() {
-  int index = random() % worker_.size();
-  worker_[index]->Notify();
+void BaseServer::NotifyWorker() {
+  worker_[index_]->Notify();
+  index_ = (index_ + 1) % worker_.size();
 }
 
 void BaseServer::Start() {
@@ -64,14 +63,16 @@ void BaseServer::Start() {
   CHECK_GE(listen_fd_, 0) << "create fd error!";
   CHECK_EQ(evutil_make_socket_nonblocking(listen_fd_), 0)
     << "set linsten sock non block error!";
+
   int optval = 1;
   setsockopt(listen_fd_, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval));
-  struct sockaddr_in listen_addr;
+
+  sockaddr_in listen_addr;
   bzero(&listen_addr, sizeof(listen_addr));
   listen_addr.sin_family = AF_INET;
   listen_addr.sin_addr.s_addr = 0;
   listen_addr.sin_port = htons(port_);
-  CHECK_EQ(bind(listen_fd_, (struct sockaddr *) &listen_addr,
+  CHECK_EQ(bind(listen_fd_, reinterpret_cast<sockaddr*>(&listen_addr),
         sizeof(listen_addr)), 0)
     << "bind listen sock error, start listen failed";
   CHECK_EQ(listen(listen_fd_, FLAGS_max_conns), 0)
@@ -83,16 +84,12 @@ void BaseServer::Start() {
   CHECK(evbase_ != NULL) << "new base event error!";
   event * evlisten = event_new(evbase_, listen_fd_, EV_READ | EV_PERSIST,
                                Accept, this);
-
   event_add(evlisten, NULL);
-  for (int i = 0; i < worker_.size(); i++) {
-    worker_[i]->Start();
-  }
 
+  for (int i = 0; i < worker_.size(); i++) worker_[i]->Start();
+  // dead loop
   event_base_dispatch(evbase_);
-  for (int i = 0; i < worker_.size(); i++) {
-    worker_[i]->Join();
-  }
+  CHECK(false) << "should never be reached!";
 }
 
 BaseServer::BaseServer(int port, base::shared_ptr<BaseRouter> router,
@@ -100,13 +97,33 @@ BaseServer::BaseServer(int port, base::shared_ptr<BaseRouter> router,
   port_ = port;
   router_ = router;
   evbase_ = NULL;
+  index_ = 0;
   for (int i = 0; i < size; i++) {
     worker_.push_back(base::shared_ptr<Worker>(new Worker(this)));
   }
 }
 
-bool BaseServer::Read(struct bufferevent *bev, std::string * content) {
-  struct evbuffer * input = bufferevent_get_input(bev);
+BaseServer::~BaseServer() {
+  if (evbase_ != NULL) event_base_free(evbase_);
+}
+
+void BaseServer::AddFd(int fd, const std::string & ip, int port) {
+  CHECK(fd_client_.count(fd) == false) << "find " << fd;
+  fd_client_.insert(std::make_pair(fd, std::make_pair(ip, port)));
+}
+
+void BaseServer::EraseFd(int fd) {
+  CHECK(fd_client_.count(fd)) << "not find " << fd << " to erase!";
+  fd_client_.erase(fd);
+}
+
+std::pair<std::string, int> BaseServer::FindFd(int fd) {
+  CHECK(fd_client_.count(fd)) << "not find " << fd << " to erase!";
+  return fd_client_[fd];
+}
+
+bool BaseServer::Read(bufferevent *bev, std::string * content) {
+  evbuffer * input = bufferevent_get_input(bev);
   CHECK(input != NULL) << "get input error ";
 
   unsigned char * buff = evbuffer_pullup(input, 4);
@@ -132,12 +149,11 @@ bool BaseServer::Read(struct bufferevent *bev, std::string * content) {
   }
 }
 
-bool BaseServer::Send(struct bufferevent *bev, const std::string & content) {
-  int rs = bufferevent_write(bev, content.data(), content.size());
-  return rs == 0;
+bool BaseServer::Send(bufferevent *bev, const std::string & content) {
+  return bufferevent_write(bev, content.data(), content.size()) == 0;
 }
 
-static void WorkerRead(struct bufferevent *bev, void * arg) {
+static void WorkerRead(bufferevent *bev, void * arg) {
   BaseServer * server = static_cast<Worker*>(arg)->GetServer();
   std::pair<std::string, int> ip_port = server->FindFd(bufferevent_getfd(bev));
   std::string content;
@@ -146,7 +162,7 @@ static void WorkerRead(struct bufferevent *bev, void * arg) {
   }
 }
 
-static void WorkerError(struct bufferevent *bev, int16_t error, void * arg) {
+static void WorkerError(bufferevent *bev, int16_t error, void * arg) {
   int fd = bufferevent_getfd(bev);
   if (error & BEV_EVENT_EOF) {
     LOG(ERROR) << "Read EOF for " << fd;
@@ -174,7 +190,7 @@ static void WorkerAccept(int fd, int16_t which, void * arg) {
 
     bufferevent_setcb(bev, WorkerRead, NULL, WorkerError, arg);
     CHECK_EQ(bufferevent_enable(bev, EV_READ), 0)
-        << "enable " << fd << " error!";
+      << "enable " << fd << " error!";
   }
 }
 
@@ -186,17 +202,22 @@ Worker::Worker(BaseServer * server) : base::Thread(true), server_(server) {
 
   evbase_ = event_base_new();
   CHECK(evbase_ != NULL) << "new base event error!";
-  event_set(&notify_event_,
-            notify_receive_fd_,
-            EV_READ | EV_PERSIST,
-            WorkerAccept,
-            this);
+  event_set(&notify_event_, notify_receive_fd_, EV_READ | EV_PERSIST,
+            WorkerAccept, this);
   event_base_set(evbase_, &notify_event_);
   event_add(&notify_event_, NULL);
 }
 
+Worker::~Worker() {
+  event_base_free(evbase_);
+  close(notify_receive_fd_);
+  close(notify_send_fd_);
+}
+
 void Worker::Run() {
+  // dead loop
   event_base_dispatch(evbase_);
+  CHECK(false) << "should never be reached!";
 }
 
 }  // namespace base_server
