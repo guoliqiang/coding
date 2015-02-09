@@ -30,21 +30,16 @@
 #include "third_part/libevent/include/event2/thread.h"
 #include "third_part/libevent/include/event2/event-config.h"
 #include "third_part/libevent/include/event2/buffer.h"
+#include "third_part/libevent/include/event2/event_compat.h"
 
 namespace base_server {
-
-struct Node {
-  bufferevent * bev;
-  std::string ip;
-  int port;
-  base::shared_ptr<std::string> content;
-};
 
 class BaseRouter {
  public:
   BaseRouter() {}
   virtual ~BaseRouter() {}
-  virtual bool Process(base::shared_ptr<Node> client) = 0;
+  virtual bool Process(const std::string & data, struct bufferevent * bev,
+                       const std::pair<std::string, int> & ip_port) = 0;
 };
 
 class Worker;
@@ -56,8 +51,8 @@ class BaseServer {
     if (evbase_ != NULL) event_base_free(evbase_);
   }
 
-  static bool Send(base::shared_ptr<Node> client);
-  static bool Read(base::shared_ptr<Node> client);
+  static bool Send(struct bufferevent * bev, const std::string & content);
+  static bool Read(struct bufferevent * bev, std::string * content);
 
   void Start();
   event_base * GetBaseEvent() { return evbase_; }
@@ -76,14 +71,15 @@ class BaseServer {
     CHECK(fd_client_.count(fd)) << "not find " << fd << " to erase!";
     return fd_client_[fd];
   }
-  void PushNode(const base::shared_ptr<Node> & node) { queue_.Push(node); }
-  void PopNode(base::shared_ptr<Node> & node) { queue_.Pop(node); }
+  void Push(const int fd) { queue_.Push(fd); }
+  void Pop(int & fd) { queue_.Pop(fd); }
   BaseRouter * GetRouter() { return router_.get(); }
   event_base * GetEventBase() { return evbase_; }
+  void RandomNotify();
 
  protected:
   base::shared_ptr<BaseRouter> router_;
-  base::ConcurrentQueue<base::shared_ptr<Node> > queue_;
+  base::ConcurrentQueue<int> queue_;
   event_base * evbase_;
   std::vector<base::shared_ptr<Worker> > worker_;
   int listen_fd_;
@@ -93,23 +89,26 @@ class BaseServer {
 
 class Worker : public base::Thread {
  public:
-  Worker(BaseServer * server) : base::Thread(true), server_(server) {}
+  Worker(BaseServer * server);
+
+  ~Worker() {
+    event_base_free(evbase_);
+    close(notify_receive_fd_);
+    close(notify_send_fd_);
+  }
+  void Notify() { write(notify_send_fd_, " ", 1); }
+  BaseServer * GetServer() { return server_; }
+  event_base * GetEvBase() { return evbase_; }
 
  protected:
-  virtual void Run() {
-    while (true) {
-      base::shared_ptr<Node> node;
-      server_->PopNode(node);
-      while (server_->Read(node)) {
-        LOG(INFO) << "Begin to Call Process of Router";
-        server_->GetRouter()->Process(node);
-      }
-      bufferevent_enable(node->bev, EV_READ);
-    }
-  }
+  virtual void Run();
 
  private:
   BaseServer * server_;
+  struct event notify_event_;
+  int notify_receive_fd_;
+  int notify_send_fd_;
+  event_base * evbase_;
 };
 
 }  // namespace base_server

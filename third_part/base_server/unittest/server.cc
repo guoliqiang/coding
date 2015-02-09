@@ -6,15 +6,15 @@
 
 #include "third_part/base_server/public/base_server.h"
 
-using base_server::Node;
 using base_server::BaseRouter;
 using base_server::BaseServer;
 
 class Router : public BaseRouter {
  public:
-  virtual bool Process(base::shared_ptr<Node> client) {
-    LOG(INFO) << client->content->data() + 4;
-    BaseServer::Send(client);
+  virtual bool Process(const std::string & content, struct bufferevent * bev,
+                       const std::pair<std::string, int> & ip_port ) {
+    LOG(INFO) << content.data() + 4;
+    BaseServer::Send(bev, content);
     return true;
   }
 };
@@ -22,7 +22,7 @@ class Router : public BaseRouter {
 int main(int argc, char** argv) {
   int port = 30008;
   base::shared_ptr<BaseRouter> router(new Router());
-  int size = 10;
+  int size = 1;
 
   BaseServer server(port, router, size);
   server.Start();
