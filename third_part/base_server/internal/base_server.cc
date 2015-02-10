@@ -6,6 +6,7 @@
 
 #include <string>
 #include "third_part/base_server/public/base_server.h"
+#include "base/public/string_util.h"
 
 namespace base_server {
 
@@ -45,11 +46,11 @@ static void Accept(evutil_socket_t listener, int16_t event, void * arg) {
   CHECK_GE(setsockopt(client_fd, IPPROTO_TCP, TCP_NODELAY, &optval,
            sizeof(optval)), 0)
     << "set TCP_NODELAY on client fd=" << client_fd << " failed";
-
-  server->AddFd(client_fd,
-                inet_ntoa(client_addr.sin_addr),
-                ntohs(client_addr.sin_port));
-  server->Push(client_fd);
+  Node node;
+  node.fd = client_fd;
+  node.ip = inet_ntoa(client_addr.sin_addr);
+  node.port = ntohs(client_addr.sin_port);
+  server->Push(node);
   server->NotifyWorker();
 }
 
@@ -59,30 +60,30 @@ void BaseServer::NotifyWorker() {
 }
 
 void BaseServer::Start() {
-  listen_fd_ = socket(AF_INET, SOCK_STREAM, 0);
-  CHECK_GE(listen_fd_, 0) << "create fd error!";
-  CHECK_EQ(evutil_make_socket_nonblocking(listen_fd_), 0)
+  int listen_fd = socket(AF_INET, SOCK_STREAM, 0);
+  CHECK_GE(listen_fd, 0) << "create fd error!";
+  CHECK_EQ(evutil_make_socket_nonblocking(listen_fd), 0)
     << "set linsten sock non block error!";
 
   int optval = 1;
-  setsockopt(listen_fd_, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval));
+  setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval));
 
   sockaddr_in listen_addr;
   bzero(&listen_addr, sizeof(listen_addr));
   listen_addr.sin_family = AF_INET;
   listen_addr.sin_addr.s_addr = 0;
   listen_addr.sin_port = htons(port_);
-  CHECK_EQ(bind(listen_fd_, reinterpret_cast<sockaddr*>(&listen_addr),
+  CHECK_EQ(bind(listen_fd, reinterpret_cast<sockaddr*>(&listen_addr),
         sizeof(listen_addr)), 0)
     << "bind listen sock error, start listen failed";
-  CHECK_EQ(listen(listen_fd_, FLAGS_max_conns), 0)
+  CHECK_EQ(listen(listen_fd, FLAGS_max_conns), 0)
     << "begin listen sock error, start listen failed";
 
   CHECK_EQ(evthread_use_pthreads(), 0)
     << "enable pthreads for libevent failed!";
   evbase_ = event_base_new();
   CHECK(evbase_ != NULL) << "new base event error!";
-  event * evlisten = event_new(evbase_, listen_fd_, EV_READ | EV_PERSIST,
+  event * evlisten = event_new(evbase_, listen_fd, EV_READ | EV_PERSIST,
                                Accept, this);
   event_add(evlisten, NULL);
 
@@ -105,21 +106,6 @@ BaseServer::BaseServer(int port, base::shared_ptr<BaseRouter> router,
 
 BaseServer::~BaseServer() {
   if (evbase_ != NULL) event_base_free(evbase_);
-}
-
-void BaseServer::AddFd(int fd, const std::string & ip, int port) {
-  CHECK(fd_client_.count(fd) == false) << "find " << fd;
-  fd_client_.insert(std::make_pair(fd, std::make_pair(ip, port)));
-}
-
-void BaseServer::EraseFd(int fd) {
-  CHECK(fd_client_.count(fd)) << "not find " << fd << " to erase!";
-  fd_client_.erase(fd);
-}
-
-std::pair<std::string, int> BaseServer::FindFd(int fd) {
-  CHECK(fd_client_.count(fd)) << "not find " << fd << " to erase!";
-  return fd_client_[fd];
 }
 
 bool BaseServer::Read(bufferevent *bev, std::string * content) {
@@ -153,12 +139,22 @@ bool BaseServer::Send(bufferevent *bev, const std::string & content) {
   return bufferevent_write(bev, content.data(), content.size()) == 0;
 }
 
+void BaseServer::Dump(std::string * rs) {
+  rs->clear();
+  rs->append("\nconn queue size = " + IntToString(queue_.Size()) + "\n");
+  for (int i = 0; i < worker_.size(); i++) {
+    rs->append("thread [" + IntToString(i) + "] : ");
+    worker_[i]->Dump(rs);
+    rs->append("\n");
+  }
+}
+
 static void WorkerRead(bufferevent *bev, void * arg) {
-  BaseServer * server = static_cast<Worker*>(arg)->GetServer();
-  std::pair<std::string, int> ip_port = server->FindFd(bufferevent_getfd(bev));
+  Worker * worker = static_cast<Worker*>(arg);
+  Node node = worker->FindFd(bufferevent_getfd(bev));
   std::string content;
   if (BaseServer::Read(bev, &content)) {
-    server->GetRouter()->Process(content, bev, ip_port);
+    worker->GetServer()->GetRouter()->Process(content, node);
   }
 }
 
@@ -173,8 +169,8 @@ static void WorkerError(bufferevent *bev, int16_t error, void * arg) {
   } else {
     LOG(ERROR) << "Unknown error for " << fd;
   }
-  BaseServer * server = static_cast<Worker*>(arg)->GetServer();
-  server->EraseFd(fd);
+  Worker * worker = static_cast<Worker*>(arg);
+  worker->EraseFd(fd);
   bufferevent_free(bev);
 }
 
@@ -182,15 +178,45 @@ static void WorkerAccept(int fd, int16_t which, void * arg) {
   Worker * worker = static_cast<Worker*>(arg);
   char buff[1] = { 0 };
   if (read(fd, buff, 1) == 1) {
-    int fd = 0;
-    worker->GetServer()->Pop(fd);
+    Node node;
+    worker->GetServer()->Pop(node);
     bufferevent * bev = bufferevent_socket_new(worker->GetEvBase(),
-        fd, BEV_OPT_THREADSAFE);
-    CHECK(bev != NULL) << "create bufferevent on client fd=" << fd;
+        node.fd, BEV_OPT_THREADSAFE);
+    CHECK(bev != NULL) << "create bufferevent on client fd=" << node.fd;
+    node.bev = bev;
+    worker->AddFd(node);
 
     bufferevent_setcb(bev, WorkerRead, NULL, WorkerError, arg);
     CHECK_EQ(bufferevent_enable(bev, EV_READ), 0)
-      << "enable " << fd << " error!";
+      << "enable " << node.fd << " " << node.ip << " "
+      << node.port << " error!";
+  }
+}
+
+void Worker::AddFd(const Node & node) {
+  base::MutexLock lock(&mutex_);
+  CHECK(fd_client_.count(node.fd) == false) << "find " << node.fd;
+  fd_client_.insert(std::make_pair(node.fd, node));
+}
+
+void Worker::EraseFd(int fd) {
+  base::MutexLock lock(&mutex_);
+  CHECK(fd_client_.count(fd)) << "not find " << fd << " to erase!";
+  fd_client_.erase(fd);
+}
+
+Node Worker::FindFd(int fd) {
+  base::MutexLock lock(&mutex_);
+  CHECK(fd_client_.count(fd)) << "not find " << fd << " to erase!";
+  return fd_client_[fd];
+}
+
+void Worker::Dump(std::string * rs) {
+  base::MutexLock lock(&mutex_);
+  for (std::map<int, Node>::iterator i = fd_client_.begin();
+       i != fd_client_.end(); i++) {
+    if (i != fd_client_.begin()) rs->append(" ");
+    rs->append(i->second.ip + ":" + IntToString(i->second.port));
   }
 }
 

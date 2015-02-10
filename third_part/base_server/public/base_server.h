@@ -34,12 +34,19 @@
 
 namespace base_server {
 
+struct Node {
+  Node() : fd(-1), ip(""), port(-1), bev(NULL) { }
+  int fd;
+  std::string ip;
+  int port;
+  bufferevent * bev;
+};
+
 class BaseRouter {
  public:
   BaseRouter() {}
   virtual ~BaseRouter() {}
-  virtual bool Process(const std::string & data, bufferevent * bev,
-                       const std::pair<std::string, int> & ip_port) = 0;
+  virtual bool Process(const std::string & data, const Node & node) = 0;
 };
 
 class Worker;
@@ -53,26 +60,21 @@ class BaseServer {
   static bool Read(bufferevent * bev, std::string * content);
 
   void Start();
-  void AddFd(int fd, const std::string & ip, int port);
-  void EraseFd(int fd);
-  std::pair<std::string, int> FindFd(int fd);
-
+  void NotifyWorker();
+  void Dump(std::string * rs);
   event_base * GetBaseEvent() { return evbase_; }
-  void Push(const int fd) { queue_.Push(fd); }
-  void Pop(int & fd) { queue_.Pop(fd); }
+  void Push(const Node & node) { queue_.Push(node); }
+  void Pop(Node & node) { queue_.Pop(node); }
   BaseRouter * GetRouter() { return router_.get(); }
   event_base * GetEventBase() { return evbase_; }
-  void NotifyWorker();
 
  protected:
   base::shared_ptr<BaseRouter> router_;
-  base::ConcurrentQueue<int> queue_;
+  base::ConcurrentQueue<Node> queue_;
   event_base * evbase_;
   std::vector<base::shared_ptr<Worker> > worker_;
-  int listen_fd_;
   int port_;
   int index_;
-  std::map<int, std::pair<std::string, int> > fd_client_;
 };
 
 class Worker : public base::Thread {
@@ -84,6 +86,11 @@ class Worker : public base::Thread {
   BaseServer * GetServer() { return server_; }
   event_base * GetEvBase() { return evbase_; }
 
+  void AddFd(const Node & node);
+  void EraseFd(int fd);
+  Node FindFd(int fd);
+  void Dump(std::string * rs);
+
  protected:
   virtual void Run();
 
@@ -93,9 +100,10 @@ class Worker : public base::Thread {
   int notify_receive_fd_;
   int notify_send_fd_;
   event_base * evbase_;
+  std::map<int, Node> fd_client_;
+  base::Mutex mutex_;
 };
 
 }  // namespace base_server
-
 
 #endif  //__BASE_SERVER_H_

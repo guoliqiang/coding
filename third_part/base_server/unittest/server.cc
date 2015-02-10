@@ -8,23 +8,44 @@
 
 using base_server::BaseRouter;
 using base_server::BaseServer;
+using base_server::Node;
 
 class Router : public BaseRouter {
  public:
-  virtual bool Process(const std::string & content, struct bufferevent * bev,
-                       const std::pair<std::string, int> & ip_port ) {
-    LOG(INFO) << content.data() + 4;
-    BaseServer::Send(bev, content);
+  virtual bool Process(const std::string & content, const Node & node) {
+    // LOG(INFO) << content.data() + 4;
+    BaseServer::Send(node.bev, content);
     return true;
   }
+};
+
+class Monitor : public base::Thread {
+ public:
+  explicit Monitor(BaseServer * server)
+      : base::Thread(true), server_(server) { }
+
+ protected:
+  void Run() {
+    while (true) {
+      std::string tmp;
+      server_->Dump(&tmp);
+      LOG(INFO) << tmp;
+    }
+  }
+
+ private:
+  BaseServer * server_;
 };
 
 int main(int argc, char** argv) {
   int port = 30008;
   base::shared_ptr<BaseRouter> router(new Router());
-  int size = 1;
+  int size = 5;
 
   BaseServer server(port, router, size);
+  Monitor monitor(&server);
+  monitor.Start();
+
   server.Start();
   return 0;
 }
