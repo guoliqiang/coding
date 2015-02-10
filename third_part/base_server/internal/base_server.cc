@@ -180,8 +180,9 @@ static void WorkerAccept(int fd, int16_t which, void * arg) {
   if (read(fd, buff, 1) == 1) {
     Node node;
     worker->GetServer()->Pop(node);
+    // http://blog.sina.com.cn/s/blog_56dee71a0100qx4s.html
     bufferevent * bev = bufferevent_socket_new(worker->GetEvBase(),
-        node.fd, BEV_OPT_THREADSAFE);
+        node.fd, BEV_OPT_THREADSAFE | BEV_OPT_CLOSE_ON_FREE);
     CHECK(bev != NULL) << "create bufferevent on client fd=" << node.fd;
     node.bev = bev;
     worker->AddFd(node);
