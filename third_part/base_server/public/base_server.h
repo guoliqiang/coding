@@ -87,8 +87,8 @@ class Worker : public base::Thread {
   event_base * GetEvBase() { return evbase_; }
 
   void AddFd(const Node & node);
-  void EraseFd(int fd);
-  Node FindFd(int fd);
+  void EraseFd(size_t fd);
+  Node FindFd(size_t fd);
   void Dump(std::string * rs);
 
  protected:
@@ -97,10 +97,10 @@ class Worker : public base::Thread {
  private:
   BaseServer * server_;
   event notify_event_;
-  int notify_receive_fd_;
-  int notify_send_fd_;
+  size_t notify_receive_fd_;
+  size_t notify_send_fd_;
   event_base * evbase_;
-  std::map<int, Node> fd_client_;
+  std::map<size_t, Node> fd_client_;
   base::Mutex mutex_;
 };
 

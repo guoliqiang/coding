@@ -60,7 +60,7 @@ void BaseServer::NotifyWorker() {
 }
 
 void BaseServer::Start() {
-  int listen_fd = socket(AF_INET, SOCK_STREAM, 0);
+  size_t listen_fd = socket(AF_INET, SOCK_STREAM, 0);
   CHECK_GE(listen_fd, 0) << "create fd error!";
   CHECK_EQ(evutil_make_socket_nonblocking(listen_fd), 0)
     << "set linsten sock non block error!";
@@ -87,7 +87,7 @@ void BaseServer::Start() {
                                Accept, this);
   event_add(evlisten, NULL);
 
-  for (int i = 0; i < worker_.size(); i++) worker_[i]->Start();
+  for (size_t i = 0; i < worker_.size(); i++) worker_[i]->Start();
   // dead loop
   event_base_dispatch(evbase_);
   CHECK(false) << "should never be reached!";
@@ -99,7 +99,7 @@ BaseServer::BaseServer(size_t port, base::shared_ptr<BaseRouter> router,
   router_ = router;
   evbase_ = NULL;
   index_ = 0;
-  for (int i = 0; i < size; i++) {
+  for (size_t i = 0; i < size; i++) {
     worker_.push_back(base::shared_ptr<Worker>(new Worker(this)));
   }
 }
@@ -119,8 +119,8 @@ bool BaseServer::Read(bufferevent *bev, std::string * content) {
   }
 
   uint32_t size = *(reinterpret_cast<uint32_t*>(buff));
-  int real_size = evbuffer_get_length(input);
-  int total_size = size + 4;
+  uint32_t real_size = evbuffer_get_length(input);
+  uint32_t total_size = size + 4;
 
   if (real_size < total_size) {  // not enough data
     LOG(INFO) << "not enough data, real_size = "
@@ -128,8 +128,8 @@ bool BaseServer::Read(bufferevent *bev, std::string * content) {
     return false;
   } else {
     content->resize(total_size);
-    int cnt = evbuffer_remove(input, const_cast<char *>(content->data()),
-                              total_size);
+    uint32_t cnt = evbuffer_remove(input, const_cast<char *>(content->data()),
+                                   total_size);
     CHECK(cnt == total_size) << cnt << " " << total_size;
     return true;
   }
@@ -142,7 +142,7 @@ bool BaseServer::Send(bufferevent *bev, const std::string & content) {
 void BaseServer::Dump(std::string * rs) {
   rs->clear();
   rs->append("\nconn queue size = " + IntToString(queue_.Size()) + "\n");
-  for (int i = 0; i < worker_.size(); i++) {
+  for (size_t i = 0; i < worker_.size(); i++) {
     rs->append("thread [" + IntToString(i) + "] : ");
     worker_[i]->Dump(rs);
     rs->append("\n");
@@ -159,7 +159,7 @@ static void WorkerRead(bufferevent *bev, void * arg) {
 }
 
 static void WorkerError(bufferevent *bev, int16_t error, void * arg) {
-  int fd = bufferevent_getfd(bev);
+  size_t fd = bufferevent_getfd(bev);
   if (error & BEV_EVENT_EOF) {
     LOG(ERROR) << "Read EOF for " << fd;
   } else if (error & BEV_EVENT_ERROR) {
@@ -200,13 +200,13 @@ void Worker::AddFd(const Node & node) {
   fd_client_.insert(std::make_pair(node.fd, node));
 }
 
-void Worker::EraseFd(int fd) {
+void Worker::EraseFd(size_t fd) {
   base::MutexLock lock(&mutex_);
   CHECK(fd_client_.count(fd)) << "not find " << fd << " to erase!";
   fd_client_.erase(fd);
 }
 
-Node Worker::FindFd(int fd) {
+Node Worker::FindFd(size_t fd) {
   base::MutexLock lock(&mutex_);
   CHECK(fd_client_.count(fd)) << "not find " << fd << " to erase!";
   return fd_client_[fd];
@@ -214,7 +214,7 @@ Node Worker::FindFd(int fd) {
 
 void Worker::Dump(std::string * rs) {
   base::MutexLock lock(&mutex_);
-  for (std::map<int, Node>::iterator i = fd_client_.begin();
+  for (std::map<size_t, Node>::iterator i = fd_client_.begin();
        i != fd_client_.end(); i++) {
     if (i != fd_client_.begin()) rs->append(" ");
     rs->append(i->second.ip + ":" + IntToString(i->second.port));
@@ -222,7 +222,7 @@ void Worker::Dump(std::string * rs) {
 }
 
 Worker::Worker(BaseServer * server) : base::Thread(true), server_(server) {
-  int fds[2];
+  int fds[2] = { 0 };
   CHECK_EQ(pipe(fds), 0) << "create Pipes error!";
   notify_receive_fd_ = fds[0];
   notify_send_fd_ = fds[1];
