@@ -36,9 +36,9 @@ namespace base_server {
 
 struct Node {
   Node() : fd(-1), ip(""), port(-1), bev(NULL) { }
-  int fd;
+  size_t fd;
   std::string ip;
-  int port;
+  size_t port;
   bufferevent * bev;
 };
 
@@ -53,7 +53,7 @@ class Worker;
 
 class BaseServer {
  public:
-  BaseServer(int prot, base::shared_ptr<BaseRouter> router, int size);
+  BaseServer(size_t prot, base::shared_ptr<BaseRouter> router, size_t size);
   virtual ~BaseServer();
 
   static bool Send(bufferevent * bev, const std::string & content);
@@ -73,8 +73,8 @@ class BaseServer {
   base::ConcurrentQueue<Node> queue_;
   event_base * evbase_;
   std::vector<base::shared_ptr<Worker> > worker_;
-  int port_;
-  int index_;
+  size_t port_;
+  size_t index_;
 };
 
 class Worker : public base::Thread {

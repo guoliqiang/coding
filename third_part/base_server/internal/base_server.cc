@@ -19,9 +19,9 @@ static void Accept(evutil_socket_t listener, int16_t event, void * arg) {
   BaseServer * server = static_cast<BaseServer*>(arg);
   sockaddr_in client_addr;
   socklen_t client_len = sizeof(client_addr);
-  int client_fd = accept(listener,
-                         reinterpret_cast<sockaddr*>(&client_addr),
-                         &client_len);
+  size_t client_fd = accept(listener,
+                           reinterpret_cast<sockaddr*>(&client_addr),
+                           &client_len);
   CHECK_GE(client_fd, 0) << "accept error";
   evutil_make_socket_nonblocking(client_fd);
 
@@ -93,8 +93,8 @@ void BaseServer::Start() {
   CHECK(false) << "should never be reached!";
 }
 
-BaseServer::BaseServer(int port, base::shared_ptr<BaseRouter> router,
-                       int size) {
+BaseServer::BaseServer(size_t port, base::shared_ptr<BaseRouter> router,
+                       size_t size) {
   port_ = port;
   router_ = router;
   evbase_ = NULL;
