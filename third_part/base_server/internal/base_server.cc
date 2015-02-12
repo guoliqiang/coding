@@ -160,14 +160,17 @@ static void WorkerRead(bufferevent *bev, void * arg) {
 
 static void WorkerError(bufferevent *bev, int16_t error, void * arg) {
   size_t fd = bufferevent_getfd(bev);
+  int last_error = evutil_socket_geterror(fd);
   if (error & BEV_EVENT_EOF) {
     LOG(ERROR) << "Read EOF for " << fd;
   } else if (error & BEV_EVENT_ERROR) {
-    LOG(ERROR) << "Read ERROR for " << fd;
+    LOG(ERROR) << "Read ERROR for " << fd << " "
+               << evutil_socket_error_to_string(last_error);
   } else if (error & BEV_EVENT_TIMEOUT) {
     LOG(ERROR) << "Read TIMEOUT for " << fd;
   } else {
-    LOG(ERROR) << "Unknown error for " << fd;
+    LOG(ERROR) << "Unknown error for " << fd << " "
+               << evutil_socket_error_to_string(last_error);
   }
   Worker * worker = static_cast<Worker*>(arg);
   worker->EraseFd(fd);
