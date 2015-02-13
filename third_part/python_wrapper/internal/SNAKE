@@ -1,0 +1,8 @@
+cc_library(name='python_wrapper',
+           srcs = ['python_wrapper.cc'],
+           deps = [
+                   '//base/internal:base',
+                   '//file/internal:file',
+                   '//libs/third_part/python:python2.7',
+                  ],
+          )

@@ -1,0 +1,8 @@
+cc_binary(name='python_unittest',
+          srcs = ['python_unittest.cc'],
+          deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  '//third_part/python_wrapper/internal:python_wrapper',
+                  ],
+          link_flags = ['-lutil']
+          )
