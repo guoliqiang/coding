@@ -1,14 +1,11 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-10 00:24:45
 // File  : scale.cc
 // Brief :
 
 #include "../public/scale.h"
-
-#define INF HUGE_VAL
-#define TAU 1e-12
+#include "../public/solver.h"
 
 namespace nltk {
 namespace svm {

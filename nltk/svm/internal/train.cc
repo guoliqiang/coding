@@ -18,7 +18,8 @@ void Train::ReadFile(const std::string path) {
   Model::GetInstance().node_ = Problem::GetInstance().node_;
   Model::GetInstance().start_ = Problem::GetInstance().start_;
   Model::GetInstance().count_ = Problem::GetInstance().count_;
-  Model::GetInstance().feature_max_min_ = MaxMinScale::GetInstance()->feature_max_min_;
+  Model::GetInstance().feature_max_min_ =
+      MaxMinScale::GetInstance()->feature_max_min_;
 }
 
 void Train::SvmTrain() {
@@ -31,27 +32,27 @@ void Train::SvmTrain() {
     for (int k = 0; k < Problem::GetInstance().count_[i->first]; k++) {
       a.push_back(Problem::GetInstance().node_[i->second + k]);
     }
-    std::map<int32_t, int32_t>::reverse_iterator foo = i;
-    foo++;
-    for (std::map<int32_t, int32_t>::reverse_iterator j = foo;
+
+    std::map<int32_t, int32_t>::reverse_iterator next = i;
+    next++;
+    for (std::map<int32_t, int32_t>::reverse_iterator j = next;
          j != Problem::GetInstance().start_.rend(); j++) {
       b.clear();
       for (int k = 0; k < Problem::GetInstance().count_[j->first]; k++) {
         b.push_back(Problem::GetInstance().node_[j->second + k]);
       }
-      scoped_ptr<Solver> solver(new SMO(a, b, Problem::GetInstance().para_));
 
       base::shared_ptr<ModelNode> ptr(new ModelNode());
       if (!Model::GetInstance().model_.count(i->first)) {
-        base::shared_ptr<std::map<int32_t,
-              base::shared_ptr<ModelNode> > > foo(new std::map<int32_t,
-              base::shared_ptr<ModelNode> >());
-        foo->insert(std::make_pair(j->first, ptr));
-        Model::GetInstance().model_.insert(std::make_pair(i->first, foo));
-      } else {
-        Model::GetInstance().model_[i->first]->insert(std::make_pair(j->first, ptr));
+        base::shared_ptr<std::map<int32_t, base::shared_ptr<ModelNode> > >
+            tmp(new std::map<int32_t, base::shared_ptr<ModelNode> >());
+        Model::GetInstance().model_.insert(std::make_pair(i->first, tmp));
       }
+      Model::GetInstance().model_[i->first]->insert(
+          std::make_pair(j->first, ptr));
+
       LOG(INFO) << "solve :" << i->first << "~" << j->first;
+      scoped_ptr<Solver> solver(new SMO(a, b, Problem::GetInstance().para_));
       solver->Do(ptr.get());
     }
   }

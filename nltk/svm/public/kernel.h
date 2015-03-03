@@ -1,6 +1,5 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-07 23:21:29
 // File  : kernel.h
 // Brief :
@@ -112,37 +111,28 @@ class Kernel {
     f_ = NULL;
     if (para->kernel_type_ == LINEAR) {
       f_ = &Kernel::linear;
-      return;
     } else if (para->kernel_type_ == POLY) {
       f_ = &Kernel::poly;
-      return;
     } else if (para->kernel_type_ == RBF) {
       f_ = &Kernel::rbf;
-      return;
     } else if (para->kernel_type_ == SIGMOID) {
       f_ = &Kernel::sigmoid;
-      return;
+    } else {
+      CHECK(false) << "unknown kernel type";
     }
-    CHECK(false);
   }
 
-  double Do(const ProblemNode & a,
-            const ProblemNode & b) {
+  double Do(const ProblemNode & a, const ProblemNode & b) {
     return ((this->*f_)(a, b));
   }
 
  private:
-  double dot(const ProblemNode & a,
-             const ProblemNode & b) {
-    base::NormalSarray<double>::const_iterator
-          i = a.element.begin();
-    base::NormalSarray<double>::const_iterator
-          ei = a.element.end();
+  double dot(const ProblemNode & a, const ProblemNode & b) {
+    base::NormalSarray<double>::const_iterator i = a.element.begin();
+    base::NormalSarray<double>::const_iterator ei = a.element.end();
     
-    base::NormalSarray<double>::const_iterator
-          j = b.element.begin();
-    base::NormalSarray<double>::const_iterator
-          ej = b.element.end();
+    base::NormalSarray<double>::const_iterator j = b.element.begin();
+    base::NormalSarray<double>::const_iterator ej = b.element.end();
     if (i == ei || j == ej) return 0;
     double rs = 0;
     while (i != ei && j!= ej) {
@@ -168,33 +158,25 @@ class Kernel {
     }
     return ret;
   }
-
-  double linear(const ProblemNode & a,
-                const ProblemNode & b) {
+  // a * b
+  double linear(const ProblemNode & a, const ProblemNode & b) {
     return dot(a, b);   
   }
-
-  double poly(const ProblemNode & a,
-              const ProblemNode & b) {
-    return powi(para_->gamma_ * dot(a, b) + para_->coef0_,
-                para_->degree_);
+  // (gamma * a * b + coef0) ^ degree
+  double poly(const ProblemNode & a, const ProblemNode & b) {
+    return powi(para_->gamma_ * dot(a, b) + para_->coef0_, para_->degree_);
   }
-
-  double rbf(const ProblemNode & a,
-             const ProblemNode & b) {
-    return exp(-(para_->gamma_) *
-           (dot(a, a) + dot(b, b) - 2 * dot(a, b)));
+  // exp(-gamma * |a - b|^2)
+  double rbf(const ProblemNode & a, const ProblemNode & b) {
+    return exp(-(para_->gamma_) * (dot(a, a) + dot(b, b) - 2 * dot(a, b)));
   }
-
-  double sigmoid(const ProblemNode & a,
-                 const ProblemNode & b) {
-    return tanh(para_->gamma_ * dot(a, b) +
-                para_->coef0_);
+  // tanh(gamma * a * b + coef0)
+  double sigmoid(const ProblemNode & a, const ProblemNode & b) {
+    return tanh(para_->gamma_ * dot(a, b) + para_->coef0_);
   }
 
  private:
-  double (Kernel::*f_)(const ProblemNode & a,
-                       const ProblemNode & b);
+  double (Kernel::*f_)(const ProblemNode & a, const ProblemNode & b);
   base::shared_ptr<Parameter> para_;
  
  private:

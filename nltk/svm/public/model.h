@@ -1,6 +1,5 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-08 00:55:43
 // File  : model.h
 // Brief :
@@ -36,8 +35,14 @@ class Model {
 
  public:
   base::shared_ptr<Parameter> para_;
-  std::map<int32_t, base::shared_ptr<std::map<int32_t,
-                    base::shared_ptr<ModelNode> > > > model_;
+  // class C --
+  //           class B  -- model
+  //           class A  -- model
+  // class B --
+  //           class A  -- model
+  std::map<int32_t,
+           base::shared_ptr<std::map<int32_t, base::shared_ptr<ModelNode> > >
+          > model_;
   std::vector<base::shared_ptr<ProblemNode> > node_;
   std::map<int32_t, int32_t> start_;
   std::map<int32_t, int32_t> count_;

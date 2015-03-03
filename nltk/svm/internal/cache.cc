@@ -44,13 +44,12 @@ int32_t Cache::GetData(int32_t index, int32_t len,
   }
 }
 
-void Cache::Insert(int32_t index,
-                   base::shared_ptr<CacheNode> & node) {
+void Cache::Insert(int32_t index, base::shared_ptr<CacheNode> & node) {
   if (size_ > node->len) {
     size_ -= node->len;
     cache_->Put(index, node);
   } else {
-    while (size_ < node->len) {
+    while (size_ < node->len && cache_->Size() > 0) {
       CHECK_GT(cache_->Size(), 0);
       cache::LRUCache<int32_t, CacheNode>::iterator back = cache_->back();
       size_ += back->second.get()->len;

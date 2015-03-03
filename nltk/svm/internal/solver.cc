@@ -1,10 +1,12 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-08 02:33:16
 // File  : solver.cc
 // Brief :
+
 #include "../public/solver.h"
+#include "../public/problem.h"
+
 namespace nltk {
 namespace svm {
 
@@ -22,18 +24,20 @@ bool SMO::SelectWorkingSet(int * out_i, int * out_j) {
   double obj_diff_min = INF;
 
   for (int t = 0; t< node_count_; t++) {
-    if (y(t) == +1) {
-      if (!UpperBound(t))
+    if (y(t) == 1) {
+      if (!UpperBound(t)) {
         if (-G_[t] >= Gmax) {
           Gmax = -G_[t];
           Gmax_idx = t;
         }
+      }
     } else {
-      if (!LowerBound(t))
+      if (!LowerBound(t)) {
         if (G_[t] >= Gmax) {
           Gmax = G_[t];
           Gmax_idx = t;
         }
+      }
     }
   }
   int i = Gmax_idx;
@@ -43,7 +47,7 @@ bool SMO::SelectWorkingSet(int * out_i, int * out_j) {
   }
 
   for (int j = 0;j < node_count_; j++) {
-    if (y(j) == +1) {
+    if (y(j) == 1) {
       if (!LowerBound(j)) {
         double grad_diff = Gmax + G_[j];
         if (G_[j] >= Gmax2) {
@@ -112,7 +116,7 @@ double SMO::CalculateB() {
         lb = max(lb, yG);
       }
     } else if (LowerBound(i)) {
-      if (y(i) == +1) {
+      if (y(i) == 1) {
         ub = min(ub, yG);
       } else {
         lb = max(lb, yG);

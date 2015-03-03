@@ -1,6 +1,5 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-10 00:17:48
 // File  : scale.h
 // Brief :
@@ -35,8 +34,7 @@ class MaxMinScale : public Scale {
   
   double Do(int32_t index, double value,
             std::map<int32_t,
-            base::shared_ptr<std::pair<double, double> > > *
-            f = NULL) {
+            base::shared_ptr<std::pair<double, double> > > * f = NULL) {
     if (f != NULL && !f->count(index)) return value;
 
     std::map<int32_t,
@@ -54,8 +52,7 @@ class MaxMinScale : public Scale {
     if (value >= max) {  // may be > when f!= NULL
       return FLAGS_upper;
     }
-    return  (FLAGS_upper - FLAGS_lower) *
-            ((value - min) / (max - min));
+    return  (FLAGS_upper - FLAGS_lower) * ((value - min) / (max - min));
   }
 
  private:

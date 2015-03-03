@@ -1,6 +1,5 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-08 09:01:13
 // File  : train.h
 // Brief :
@@ -19,7 +18,6 @@
 #include "file/public/file.h"
 
 namespace nltk {
-
 namespace svm {
 
 class Train {

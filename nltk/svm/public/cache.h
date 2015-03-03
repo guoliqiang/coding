@@ -1,6 +1,5 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-07 22:23:43
 // File  : cache.h
 // Brief :
@@ -34,15 +33,11 @@ class Cache {
  public:
   Cache(int32_t len, int32_t size) {
     size_ = size;
-    cache_.reset(new cache::LRUCache<int32_t,
-                 CacheNode>(len));
+    cache_.reset(new cache::LRUCache<int32_t, CacheNode>(len));
   }
 
-  int32_t GetData(int32_t index, int32_t len,
-                  base::shared_ptr<CacheNode>* rs);
-
-  void Insert(int32_t index,
-              base::shared_ptr<CacheNode> & node);
+  int32_t GetData(int32_t index, int32_t len, base::shared_ptr<CacheNode>* rs);
+  void Insert(int32_t index, base::shared_ptr<CacheNode> & node);
  
  private:
   int32_t size_;

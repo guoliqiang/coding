@@ -1,6 +1,5 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-08 01:08:14
 // File  : solver.h
 // Brief :
@@ -12,9 +11,6 @@
 #include "model.h"
 #include "kernel.h"
 #include "cache.h"
-
-#define INF HUGE_VAL
-#define TAU 1e-12
 
 namespace nltk {
 namespace svm {
@@ -47,8 +43,8 @@ class SMO : public Solver {
     if (para_->weights_.count(b.front()->lable)) {
       Cb_ *= para_->weights_[b.front()->lable];
     }
-    VLOG(3) << "+1 class alpha range: 0~" << Ca_
-            << " -1 class alpha range 0~" << Cb_;
+    VLOG(3) << a.front()->lable << " class alpha range: 0 ~ " << Ca_
+            << b.front()->lable << " class alpha range 0 ~ " << Cb_;
     
     node_count_ = a_.size() + b_.size();
     cache_.reset(new Cache(node_count_, max(node_count_, para_->mem_size_)));
@@ -65,7 +61,7 @@ class SMO : public Solver {
   }
   
   int32_t y(int32_t i) {
-    if (i < a_.size()) return +1;
+    if (i < a_.size()) return 1;
     return -1;
   }
 
@@ -100,7 +96,8 @@ class SMO : public Solver {
     base::shared_ptr<CacheNode> rs;
     int start = cache_->GetData(i, len, &rs);
     for (int j = start; j < len; j++) {
-      rs.get()->data[j] = y(i) * y(j)* Kernel::GetInstance().Do(GetNode(i), GetNode(j));
+      rs.get()->data[j] =
+          y(i) * y(j)* Kernel::GetInstance().Do(GetNode(i), GetNode(j));
     }
     return rs;
   }
@@ -116,7 +113,7 @@ class SMO : public Solver {
   double Cb_;
   scoped_ptr<Cache> cache_;
   base::shared_ptr<Parameter> para_;
-  // G_[i] = sum(alpha_[m] * y[m] * y[i] kernel(node[m], node[m])) -1
+  // G_[i] = sum(alpha_[m] * y[m] * y[i] * kernel(node[m], node[m])) -1
   // min(f) 的梯度
   // E[i] = y[i]G_[i] , E[i] was variable in book.
   std::vector<double> G_;
