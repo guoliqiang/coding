@@ -12,7 +12,7 @@
 using namespace nltk::svm;
 
 int main(int argc, char** argv) {
-   base::AtExitManager exit;
+  base::AtExitManager exit;
   base::shared_ptr<nltk::svm::Parameter> para(new Parameter());
   Kernel::GetInstance().Set(para);
   std::string path = "input.txt";

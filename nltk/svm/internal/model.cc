@@ -18,6 +18,7 @@ void Model::LoadModel(const std::string & path) {
   para_.reset(new Parameter());
   Transfer(model_out.para, para_.get());
   para_->LogContent();
+
   start_ = model_out.start;
   count_ = model_out.count;
   for (std::map<int32_t, featurenode>::iterator i =
@@ -31,8 +32,7 @@ void Model::LoadModel(const std::string & path) {
   }
 
   for (std::map<int32_t, std::map<int32_t, modelnode> >::iterator
-       i = model_out.model.begin(); i != model_out.model.end();
-       i++) {
+       i = model_out.model.begin(); i != model_out.model.end(); i++) {
     if (!model_.count(i->first)) {
       base::shared_ptr<std::map<int32_t,
             base::shared_ptr<ModelNode> > > bar;

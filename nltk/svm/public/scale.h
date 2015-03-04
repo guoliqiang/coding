@@ -31,29 +31,9 @@ class MaxMinScale : public Scale {
 
   MaxMinScale() {} 
   void Do(std::vector<base::shared_ptr<ProblemNode> > * v);
-  
   double Do(int32_t index, double value,
             std::map<int32_t,
-            base::shared_ptr<std::pair<double, double> > > * f = NULL) {
-    if (f != NULL && !f->count(index)) return value;
-
-    std::map<int32_t,
-        base::shared_ptr<std::pair<double, double> > > * foo = f;
-    if (foo == NULL) {
-      foo = &feature_max_min_;
-    }
-    CHECK(foo->count(index));
-    double max = (*foo)[index]->first;
-    double min = (*foo)[index]->second;
-    if (max == min) return value;  // ingnore single value feature
-    if (value <= min) {  // may be < when f!= NULL
-      return FLAGS_lower;
-    }
-    if (value >= max) {  // may be > when f!= NULL
-      return FLAGS_upper;
-    }
-    return  (FLAGS_upper - FLAGS_lower) * ((value - min) / (max - min));
-  }
+            base::shared_ptr<std::pair<double, double> > > * f = NULL);
 
  private:
   void GetFeatureMaxMin(std::vector<base::shared_ptr<ProblemNode> >& v);

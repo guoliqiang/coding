@@ -43,6 +43,7 @@ bool Problem::ReadFile(std::string path) {
     foo.reset(node);
     node_.push_back(foo);
   }
+  // sort by lable
   sort(node_.begin(), node_.end(), Cmp);
   int32_t before = 0;
   for (int i = 0; i < node_.size(); i++) {

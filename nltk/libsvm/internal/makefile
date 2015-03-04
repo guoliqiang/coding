@@ -19,3 +19,7 @@ opt:
 
 
 clean:
+	rm -rf svm_train
+	rm -rf svm_predict
+	rm -rf svm_scale
+	rm -rf nohup.out

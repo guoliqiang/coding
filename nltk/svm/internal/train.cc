@@ -26,8 +26,8 @@ void Train::SvmTrain() {
   std::vector<base::shared_ptr<ProblemNode> > a;
   std::vector<base::shared_ptr<ProblemNode> > b;
   for (std::map<int32_t, int32_t>::reverse_iterator i =
-    Problem::GetInstance().start_.rbegin();
-    i != Problem::GetInstance().start_.rend(); i++) {
+       Problem::GetInstance().start_.rbegin();
+       i != Problem::GetInstance().start_.rend(); i++) {
     a.clear();
     for (int k = 0; k < Problem::GetInstance().count_[i->first]; k++) {
       a.push_back(Problem::GetInstance().node_[i->second + k]);
@@ -63,8 +63,8 @@ void Train::WriteModel(std::string path) {
   Transfer(*(Problem::GetInstance().para_.get()), &model_out.para);
   model_out.start = Problem::GetInstance().start_;
   model_out.count = Problem::GetInstance().count_;
-  for (std::map<int32_t, base::shared_ptr<std::pair<double, double> > >::iterator
-       i = MaxMinScale::GetInstance()->feature_max_min_.begin();
+  for (std::map<int32_t, base::shared_ptr<std::pair<double, double> > >
+       ::iterator i = MaxMinScale::GetInstance()->feature_max_min_.begin();
        i != MaxMinScale::GetInstance()->feature_max_min_.end(); i++) {
     featurenode foo;
     foo.max = i->second->first;
@@ -77,15 +77,16 @@ void Train::WriteModel(std::string path) {
     Transfer(*(Problem::GetInstance().node_[i].get()), &foo);
     model_out.node.push_back(foo);
   }
+
   for (std::map<int32_t,
        base::shared_ptr<std::map<int32_t, base::shared_ptr<ModelNode> > > >
        ::iterator i = Model::GetInstance().model_.begin();
        i != Model::GetInstance().model_.end(); i++) {
     for (std::map<int32_t, base::shared_ptr<ModelNode> >::iterator
-         j = i->second->begin();
-         j != i->second->end(); j++) {
+         j = i->second->begin(); j != i->second->end(); j++) {
       if (!model_out.model.count(i->first)) {
-        model_out.model.insert(std::make_pair(i->first, std::map<int32_t, modelnode>()));
+        model_out.model.insert(std::make_pair(i->first,
+                                              std::map<int32_t, modelnode>()));
       }
       modelnode foo;
       Transfer(*(j->second.get()), &foo);

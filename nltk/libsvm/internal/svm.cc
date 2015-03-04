@@ -16,6 +16,7 @@
 #include <locale.h>
 
 #include "base/public/logging.h"
+#include "base/public/string_util.h"
 #include "../public/svm.h"
 
 namespace libsvm {
@@ -251,8 +252,8 @@ class Kernel: public QMatrix {
 
 	double kernel_rbf(int i,
                     int j) const {
-		LOG(INFO) << x_square[i] << " " << x_square[j] << " " << dot(x[i], x[j]);
-    LOG(INFO) << "gamma:" << gamma;
+		VLOG(5) << x_square[i] << " " << x_square[j] << " " << dot(x[i], x[j])
+            << "gamma:" << gamma;
     return exp(-gamma * (x_square[i] + x_square[j] - 2 * dot(x[i], x[j])));
 	}
 
@@ -312,11 +313,11 @@ Kernel::~Kernel() {
 double Kernel::dot(const svm_node *px,
                    const svm_node *py) {
 	double sum = 0;
-	LOG(INFO) << "begin:";
+	// LOG(INFO) << "begin:";
   while(px->index != -1 && py->index != -1) {
 		if(px->index == py->index) {
 			sum += px->value * py->value;
-			LOG(INFO) << px->value << " " << py->value << " " << sum;
+			// LOG(INFO) << px->value << " " << py->value << " " << sum;
       ++px;
 			++py;
 		} else {
@@ -327,7 +328,7 @@ double Kernel::dot(const svm_node *px,
       }
 		}
 	}  // while
-  LOG(INFO) << "end";
+  // LOG(INFO) << "end";
 	return sum;
 }
 
@@ -545,8 +546,14 @@ void Solver::Solve(int l, const QMatrix& Q,
 	this->Cn = Cn;
 	this->eps = eps;
 	unshrink = false;
-	for (int i = 0 ; i < l; i++) LOG(INFO) << (int)y[i];
-  LOG(INFO) << Cp << " " << Cn << " " << eps;
+
+  std::string tmp;
+	for (int i = 0 ; i < l; i++) {
+    tmp += IntToString(i) + ":" + IntToString(y[i]) + " ";
+  }
+  LOG(INFO) << "y " << tmp;
+
+  LOG(INFO) << "cp=" << Cp << " " << "cn=" << Cn << " eps=" << eps;
   // initialize alpha_status
 	{
 		alpha_status = new char[l];
@@ -590,8 +597,17 @@ void Solver::Solve(int l, const QMatrix& Q,
     }  // for
 	}
 
-  for(int i1 = 0; i1 < l; i1++) LOG(INFO) << G[i1];
-  for(int i1 = 0; i1 < l; i1++) LOG(INFO) << alpha[i1];
+  tmp.clear();
+  for(int i1 = 0; i1 < l; i1++) {
+    tmp += IntToString(i1) + ":" + IntToString(G[i1]) + " ";
+  }
+  LOG(INFO) << "G " << tmp;
+
+  tmp.clear();
+  for(int i1 = 0; i1 < l; i1++) {
+    tmp += IntToString(i1) + ":" + IntToString(alpha[i1]) + " ";
+  }
+  LOG(INFO) << "alpha " << tmp;
   
 	// optimization step
 
@@ -620,7 +636,7 @@ void Solver::Solve(int l, const QMatrix& Q,
 				counter = 1;	// do shrinking next iteration
       }
 		}
-    LOG(INFO) << i << " " << j;
+    LOG(INFO) << "round = " << iter << " opt i=" << i << " j=" << j;
 		++iter;
 		// update alpha[i] and alpha[j], handle bounds carefully
 		const Qfloat *Q_i = Q.get_Q(i, active_size);
@@ -810,7 +826,7 @@ int Solver::select_working_set(int &out_i, int &out_j) {
       }
 		}  // if
   }  // for
-  LOG(INFO) << Gmax_idx << " " << Gmax;
+  LOG(INFO) << "selct i = " << Gmax_idx << " gmax=" << Gmax;
 	int i = Gmax_idx;
 	const Qfloat *Q_i = NULL;
 	if(i != -1) {  // NULL Q_i not accessed: Gmax=-INF if i=-1
@@ -819,12 +835,13 @@ int Solver::select_working_set(int &out_i, int &out_j) {
 
 	for(int j = 0; j < active_size; j++) {
 		if(y[j] == +1) {
+      double quad_coef = 0;
 			if (!is_lower_bound(j)) {
 				double grad_diff=Gmax+G[j];
 				if (G[j] >= Gmax2) Gmax2 = G[j];
 				if (grad_diff > 0) {
 					double obj_diff; 
-					double quad_coef = QD[i]+QD[j]-2.0*y[i]*Q_i[j];
+					quad_coef = QD[i]+QD[j]-2.0*y[i]*Q_i[j];
 					if (quad_coef > 0) {
 						obj_diff = -(grad_diff*grad_diff)/quad_coef;
 					} else {
@@ -836,32 +853,33 @@ int Solver::select_working_set(int &out_i, int &out_j) {
 						obj_diff_min = obj_diff;
 					}
 				}
-        LOG(INFO) << j << ":" << "Gmin_idx:" << Gmin_idx << "obj_diff_min:" << obj_diff_min;
+        LOG(INFO) << "j=" << j << " Gmax2=" << Gmax2 << " grad_diff=" << grad_diff 
+                << " obj_diff_min=" << obj_diff_min << " kernel(" << i << ") = " 
+                << QD[i] << " kernel(" << j << ")=" << QD[j] << " quad_coef="  
+                << quad_coef;
 			}  // if
 		} else {
 			if (!is_upper_bound(j)) {
 				double grad_diff= Gmax-G[j];
-				LOG(INFO) << "grad_diff:" << grad_diff;
         if (-G[j] >= Gmax2) Gmax2 = -G[j];
+        double quad_coef = 0;
 				if (grad_diff > 0) {
 					double obj_diff; 
-					double quad_coef = QD[i]+QD[j]+2.0*y[i]*Q_i[j];
-					LOG(INFO) << QD[i] << ":" << QD[j] << ":" << (int)y[i] << ":"
-                    << Q_i[j];
-          LOG(INFO) << "quad_coef:" << quad_coef;
+					quad_coef = QD[i]+QD[j]+2.0*y[i]*Q_i[j];
           if (quad_coef > 0) {
 						obj_diff = -(grad_diff*grad_diff)/quad_coef;
 					} else {
 						obj_diff = -(grad_diff*grad_diff)/TAU;
           }
-          LOG(INFO) << "obj_diff:" << obj_diff;
-
 					if (obj_diff <= obj_diff_min) {
 						Gmin_idx=j;
 						obj_diff_min = obj_diff;
 					}
 				}
-        LOG(INFO) << j << ":" << "Gmin_idx:" << Gmin_idx << "obj_diff_min:" << obj_diff_min;
+        LOG(INFO) << "j=" << j << " Gmax2=" << Gmax2 << " grad_diff=" << grad_diff 
+                << " obj_diff_min=" << obj_diff_min << " kernel(" << i << ") = " 
+                << QD[i] << " kernel(" << j << ")=" << QD[j] << " quad_coef="  
+                << quad_coef;
 			}  // if
 		}
 	}  // for
@@ -870,6 +888,7 @@ int Solver::select_working_set(int &out_i, int &out_j) {
 
 	out_i = Gmax_idx;
 	out_j = Gmin_idx;
+  LOG(INFO) << "out_i=" << out_i << " out_j=" << out_j;
 	return 0;
 }
 
@@ -892,6 +911,7 @@ bool Solver::be_shrunk(int i, double Gmax1, double Gmax2) {
 }
 
 void Solver::do_shrinking() {
+  LOG(INFO) << "do shrinking";
 	int i;
 	double Gmax1 = -INF;		// max { -y_i * grad(f)_i | i in I_up(\alpha) }
 	double Gmax2 = -INF;		// max { y_i * grad(f)_i | i in I_low(\alpha) }
@@ -1231,7 +1251,7 @@ class SVC_Q: public Kernel {
 		if((start = cache->get_data(i,&data,len)) < len) {
 			for(j=start;j<len;j++) {
 				data[j] = (Qfloat)(y[i] * y[j] * (this->*kernel_function)(i, j));
-        LOG(INFO) << j << " " << (int)y[i] << " " << (int)y[j] << (this->*kernel_function)(i, j);
+        // LOG(INFO) << j << " " << (int)y[i] << " " << (int)y[j] << (this->*kernel_function)(i, j);
       }
 		}
 		return data;
@@ -1985,14 +2005,29 @@ static void svm_group_classes(const svm_problem *prob,
 	*start_ret = start;
 	*count_ret = count;
   LOG(INFO) << *nr_class_ret;
-  for (i = 0; i < nr_class; i++)
-    LOG(INFO) << label[i];
-  for (i = 0; i < nr_class; i++)
-    LOG(INFO) << count[i];
-  for (i = 0; i < nr_class; i++)
-    LOG(INFO) << start[i];
-  for (i = 0; i < l; i++)
-    LOG(INFO) << perm[i];
+  std::string tmp;
+  for (i = 0; i < nr_class; i++) {
+    tmp += IntToString(i) + ":" + IntToString(label[i]) + " ";
+  }
+  LOG(INFO) << "label " << tmp;
+  tmp.clear();
+
+  for (i = 0; i < nr_class; i++) {
+    tmp += IntToString(i) + ":" + IntToString(count[i]) + " ";
+  }
+  LOG(INFO) << "count " << tmp;
+  tmp.clear();
+
+  for (i = 0; i < nr_class; i++) {
+    tmp += IntToString(i) + ":" + IntToString(start[i]) + " ";
+  }
+  LOG(INFO) << "start " << tmp;
+  tmp.clear();
+
+  for (i = 0; i < l; i++) {
+    tmp += IntToString(i) + ":" + IntToString(perm[i]) + " ";
+  }
+  LOG(INFO) << "perm " << tmp;
 	free(data_label);
 }
 

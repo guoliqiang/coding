@@ -1,6 +1,5 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-08 13:16:12
 // File  : predict.cc
 // Brief :
@@ -10,13 +9,19 @@
 namespace nltk {
 namespace svm {
 
+DECLARE_bool(scale);
+
 void Predict::LoadModel(const std::string path) {
   Model::GetInstance().LoadModel(path);   
   Kernel::GetInstance().Set(Model::GetInstance().para_);
 }
 
-void Predict::SvmPredict(const std::string input,
-                         const std::string output) {
+bool Predict::Free(const double alpha, int32_t lable) {
+  if (fabs(alpha) > 0) return false;
+  return true;
+}
+
+void Predict::SvmPredict(const std::string input, const std::string output) {
   std::string rs = "";    
   std::string content;
   std::vector<std::string> lines;
@@ -36,8 +41,10 @@ void Predict::SvmPredict(const std::string input,
       double value = StringToDouble(foo[1]);
       CHECK_GE(index, 0);
       // scale
-      value = MaxMinScale::GetInstance()->Do(index, value,
-              &(Model::GetInstance().feature_max_min_));
+      if (FLAGS_scale) {
+        value = MaxMinScale::GetInstance()->Do(index, value,
+                &(Model::GetInstance().feature_max_min_));
+      }
       node.element.insert(index, value);
     }
     rs += (IntToString(SvmPredict(node)) + "\n");
@@ -65,8 +72,8 @@ int32_t Predict::SvmPredict(ProblemNode & input) {
       for (int k = 0; k < Model::GetInstance().count_[i->first]; k++) {
         double alpha;
         CHECK(foo->alpha.get(k, &alpha));
-        if (!Free(alpha * +1, i->first)) {
-          VLOG(3) << "bound alpha:" << alpha << " at:" << k;
+        if (!Free(alpha, i->first)) {
+          VLOG(3) << "not support SVM point " << " at:" << k;
           continue;
         }
         VLOG(3) << i->second << " " << k;
@@ -76,12 +83,14 @@ int32_t Predict::SvmPredict(ProblemNode & input) {
                Do(*Model::GetInstance().node_[i->second + k].get(), input);
         VLOG(3) << "bar:" << bar;
       }
+
       CHECK(Model::GetInstance().count_.count(j->first));
       for (int k = 0; k < Model::GetInstance().count_[j->first]; k++) {
         double alpha = 0;
-        CHECK(foo->alpha.get(Model::GetInstance().count_[i->first] + k, &alpha));
-        if (!Free(alpha * -1, j->first)) {
-          VLOG(3) << "bound alpha:" << alpha << " at:" << k;
+        CHECK(foo->alpha.get(Model::GetInstance().count_[i->first] + k,
+                             &alpha));
+        if (!Free(alpha, j->first)) {
+          VLOG(3) << "not support SVM point " << " at:" << k;
           continue;
         }
         VLOG(3) << j->second << " " << k << " size:"
@@ -94,12 +103,10 @@ int32_t Predict::SvmPredict(ProblemNode & input) {
       }
       bar -= foo->b;
       VLOG(3) << "bar:" << bar << " -b: " << foo->b;
+
       if (bar > 0)  {
-        if (votes.count(i->first)) {
-          votes[i->first]++;
-        } else {
-          votes[i->first] = 1;
-        }
+        if (votes.count(i->first)) votes[i->first]++;
+        else votes[i->first] = 1;
         if (max_vote < votes[i->first]) {
           max_vote = votes[i->first];
           max_lable = i->first;
