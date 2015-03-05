@@ -27,7 +27,7 @@ class Predict {
   int32_t SvmPredict(ProblemNode & input);
 
  private:
-  bool Free(const double alpha, int32_t lable);
+  bool Free(const double alpha);
 
  private:
   DISALLOW_COPY_AND_ASSIGN(Predict);

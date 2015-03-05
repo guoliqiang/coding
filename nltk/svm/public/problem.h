@@ -33,19 +33,25 @@ class Problem {
   Problem() {}
   bool ReadFile(std::string path);
     
-  void LogContent(int l = 0) {
-    para_->LogContent();
-    VLOG(l) << "start:" << JoinKeysValues(&start_);
-    VLOG(l) << "count:" << JoinKeysValues(&count_);
-    for (int i = 0; i< node_.size(); i++) {
-      node_[i]->LogContent();
+  std::string ToString() {
+    std::string rs = "\n";
+    rs += "start:" + JoinKeysValues(&start_) + "\n";
+    rs += "count:" + JoinKeysValues(&count_) + "\n";
+    for (int i = 0; i < node_.size(); i++) {
+      rs += node_[i]->ToString();
+      if (i != node_.size() - 1) rs += "\n";
     }
+    return rs;
   }
   
  private:
   static bool Cmp(const base::shared_ptr<ProblemNode> & a,
                   const base::shared_ptr<ProblemNode> & b) {
-    return a->lable > b->lable;
+    if (a->lable == b->lable) {
+      return a->line_no < b->line_no;
+    } else {
+      return a->lable > b->lable;
+    }
   }
 
  public:

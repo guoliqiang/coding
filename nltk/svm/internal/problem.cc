@@ -11,7 +11,7 @@
 namespace nltk {
 namespace svm {
 
-DEFINE_bool(scale, true, "");
+DEFINE_bool(scale, false, "");
 
 bool Problem::ReadFile(std::string path) {
   std::string content;
@@ -59,10 +59,11 @@ bool Problem::ReadFile(std::string path) {
   FLAGS_gamma = 1.0 / static_cast<double>(max_feature_num);
   para_.reset(new Parameter());
   if (FLAGS_scale) {
-    LOG(INFO) << "scaling begin...";
+    VLOG(2) << "scaling begin...";
     MaxMinScale::GetInstance()->Do(&node_);
+    VLOG(2) << "scaling end";
   }
-  LogContent();
+  VLOG(5) << ToString();
   return true;
 }
 }  // namespace svm

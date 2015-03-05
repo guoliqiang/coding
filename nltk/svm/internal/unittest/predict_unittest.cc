@@ -11,6 +11,6 @@ int main(int argc, char** argv) {
   base::AtExitManager exit;
   base::ParseCommandLineFlags(&argc, &argv, true);
   nltk::svm::Predict::GetInstance().LoadModel("output");
-  nltk::svm::Predict::GetInstance().SvmPredict("pinput.txt", "predict");
+  nltk::svm::Predict::GetInstance().SvmPredict("pinput.txt", "pinput.txt.out");
   return 0;
 }

@@ -1,6 +1,5 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-08 09:35:10
 // File  : train.cc
 // Brief :
@@ -25,6 +24,7 @@ void Train::ReadFile(const std::string path) {
 void Train::SvmTrain() {
   std::vector<base::shared_ptr<ProblemNode> > a;
   std::vector<base::shared_ptr<ProblemNode> > b;
+  // label from +1 to -1 of start
   for (std::map<int32_t, int32_t>::reverse_iterator i =
        Problem::GetInstance().start_.rbegin();
        i != Problem::GetInstance().start_.rend(); i++) {
@@ -51,7 +51,7 @@ void Train::SvmTrain() {
       Model::GetInstance().model_[i->first]->insert(
           std::make_pair(j->first, ptr));
 
-      LOG(INFO) << "solve :" << i->first << "~" << j->first;
+      LOG(INFO) << "solve class " << i->first << " V.S. class " << j->first;
       scoped_ptr<Solver> solver(new SMO(a, b, Problem::GetInstance().para_));
       solver->Do(ptr.get());
     }

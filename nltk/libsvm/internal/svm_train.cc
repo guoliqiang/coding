@@ -1,7 +1,5 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
-// Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
-// Date  : 2013-09-02 14:35:24
+// Author: Liqiang Guo(guoliqiang@jike.com) // I just want to GH to hss~ // Date  : 2013-09-02 14:35:24
 // File  : svm_train.cc
           
 #include <stdio.h>
@@ -11,6 +9,7 @@
 #include <errno.h>
 #include "../public/svm.h"
 #include "base/public/logging.h"
+#include "base/public/at_exit.h"
 
 namespace libsvm {
 
@@ -334,6 +333,8 @@ void read_problem(const char *filename) {
 using namespace libsvm;
 
 int main(int argc, char **argv) {
+  base::AtExitManager exit;
+  FLAGS_v = 0;
 	char input_file_name[1024];
 	char model_file_name[1024];
 	const char *error_msg;
@@ -345,7 +346,7 @@ int main(int argc, char **argv) {
 	error_msg = svm_check_parameter(&prob, &param);
 	if(error_msg) {
 		fprintf(stderr,"ERROR: %s\n",error_msg);
-		exit(1);
+    return 0;
 	}
 	if(cross_validation) {
 		do_cross_validation();
@@ -353,7 +354,7 @@ int main(int argc, char **argv) {
 		model = svm_train(&prob, &param);
 		if(svm_save_model(model_file_name,model)) {
 			fprintf(stderr, "can't save model to file %s\n", model_file_name);
-			exit(1);
+      return 0;
 		}
 		svm_free_and_destroy_model(&model);
 	}

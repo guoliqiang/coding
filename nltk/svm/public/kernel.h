@@ -91,10 +91,15 @@ struct ProblemNode {
   }
 
   void LogContent(int l = 0) {
-    VLOG(l) << "line no:" << line_no;
-    VLOG(l) << "lable:" << lable;
-    VLOG(l) << "sparse array:";
-    VLOG(l) << JoinKeysValues(&element.Get());
+    VLOG(l) << "\n" << ToString();
+  }
+
+  std::string ToString() {
+    std::string rs;
+    rs += "line no:" + IntToString(line_no) + "\n";
+    rs += "lable:" + IntToString(lable) + "\n";
+    rs += "sparse array:" + JoinKeysValues(&element.Get());
+    return rs;
   }
 };
 

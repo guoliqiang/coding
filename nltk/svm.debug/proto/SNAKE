@@ -1,4 +1,0 @@
-thrift_library(name = 'svm_thrift',
-           srcs = ['svm.thrift'],
-           gen_cpp = 1,
-           )

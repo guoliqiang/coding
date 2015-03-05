@@ -26,8 +26,8 @@ SMO::SMO(const std::vector<base::shared_ptr<ProblemNode> > & a,
   if (para_->weights_.count(b.front()->lable)) {
     Cb_ *= para_->weights_[b.front()->lable];
   }
-  VLOG(3) << a.front()->lable << " class alpha range: 0 ~ " << Ca_
-          << b.front()->lable << " class alpha range 0 ~ " << Cb_;
+  VLOG(5) << a.front()->lable << " class alpha range: 0~" << Ca_ << " "
+          << b.front()->lable << " class alpha range 0~" << Cb_;
 
   node_count_ = a_.size() + b_.size();
   cache_.reset(new Cache(node_count_, max(node_count_, para_->mem_size_)));
@@ -37,9 +37,6 @@ SMO::SMO(const std::vector<base::shared_ptr<ProblemNode> > & a,
 
   for (int i = 0; i < node_count_; i++) {
     QD_[i] = Kernel::GetInstance().Do(GetNode(i), GetNode(i));
-    VLOG(3) << "i=" << i << " kernel value:" << QD_[i];
-    GetNode(i).LogContent(3);
-    GetNode(i).LogContent(3);
   }
 }
 
@@ -84,6 +81,11 @@ base::shared_ptr<CacheNode> SMO::GetQ(int32_t i, int32_t len) {
   for (int j = start; j < len; j++) {
     rs.get()->data[j] =
       y(i) * y(j) * Kernel::GetInstance().Do(GetNode(i), GetNode(j));
+    VLOG(5) << "y[" << i << "]=" << y(i) << " y[" << j << "]=" << y(j)
+            << " kernel(x[" << i << "],x[" << j << "])="
+            << Kernel::GetInstance().Do(GetNode(i), GetNode(j))
+            << "\nx[" << i << "]:\n" << GetNode(i).ToString()
+            << "\nx[" << j << "]:\n" << GetNode(j).ToString();
   }
   return rs;
 }
@@ -130,7 +132,7 @@ bool SMO::SelectWorkingSet(int * out_i, int * out_j) {
   if (i != -1) {
     Q_i = GetQ(i, node_count_);
   }
-  VLOG(3) << "first select i=" << Gmax_idx << " value=" << Gmax;
+  VLOG(5) << "first select i=" << Gmax_idx << " value=" << Gmax;
 
   for (int j = 0;j < node_count_; j++) {
     if (y(j) == 1) {
@@ -162,10 +164,11 @@ bool SMO::SelectWorkingSet(int * out_i, int * out_j) {
             obj_diff_min = obj_diff;
           }
         }  // if (grad_diff > 0)
-        VLOG(3) << "j=" << j << " Gmax2=" << Gmax2 << " grad_diff=" << grad_diff
+        VLOG(5) << "j=" << j << " Gmax2=" << Gmax2 << " grad_diff=" << grad_diff
                 << " obj_diff_min=" << obj_diff_min << " kernel(" << i << ") = "
                 << QD_[i] << " kernel(" << j << ")=" << QD_[j] << " quad_coef="
-                << quad_coef;
+                << quad_coef << " y[" << i << "]=" << y(i) << " "
+                << (Q_i.get()->data)[j];
       }  //  if (!LowerBound(j))
     } else {
       if (!UpperBound(j)) {
@@ -187,10 +190,11 @@ bool SMO::SelectWorkingSet(int * out_i, int * out_j) {
             obj_diff_min = obj_diff;
           }
         }  //  if (grad_diff > 0)
-        VLOG(3) << "j=" << j << " Gmax2=" << Gmax2 << " grad_diff=" << grad_diff
+        VLOG(5) << "j=" << j << " Gmax2=" << Gmax2 << " grad_diff=" << grad_diff
                 << " obj_diff_min=" << obj_diff_min << " kernel(" << i << ") = "
                 << QD_[i] << " kernel(" << j << ")=" << QD_[j] << " quad_coef="
-                << quad_coef;
+                << quad_coef << " y[" << i << "]=" << y(i) << " "
+                << (Q_i.get()->data)[j];
       }  //  if (!UpperBound(j))
     }  //  else
   }
@@ -277,7 +281,9 @@ void SMO::Do(ModelNode * ptr) {
     if (!SelectWorkingSet(&i, &j)) {
       break;
     }
-    VLOG(3) << "round = " << iter << " opt i = " << i << " j=" << j;
+    VLOG(3) << "round = " << iter << " optimize\nx[" << i << "]:\n"
+            << GetNode(i).ToString() << "\nx[" << j << "]:\n"
+            << GetNode(j).ToString();
     ++iter;
     // update alpha[i] and alpha[j], handle bounds carefully
     base::shared_ptr<CacheNode> Q_i = GetQ(i, node_count_);
@@ -405,7 +411,7 @@ void SMO::Do(ModelNode * ptr) {
                (Q_j.get()->data)[k] * delta_alpha_j;
     }
   }  // while
-
+  LOG(INFO) << "optimize finished iter=" << iter;
   if (iter >= max_iter) {
     LOG(WARNING) << "reaching max number of iterations";
   }

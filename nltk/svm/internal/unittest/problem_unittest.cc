@@ -10,6 +10,6 @@ int main(int argc, char** argv) {
   base::AtExitManager exit;
   std::string path = "input.txt";
   CHECK(nltk::svm::Problem::GetInstance().ReadFile(path));
-  nltk::svm::Problem::GetInstance().LogContent();
+  LOG(INFO) << nltk::svm::Problem::GetInstance().ToString();
   return 0;
 }
