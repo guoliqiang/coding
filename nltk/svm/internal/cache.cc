@@ -1,11 +1,10 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-07 22:59:15
 // File  : cache.cc
 // Brief :
 
-#include "../public/cache.h"
+#include "nltk/svm/public/cache.h"
 
 namespace nltk {
 namespace svm {
@@ -50,7 +49,6 @@ void Cache::Insert(int32_t index, base::shared_ptr<CacheNode> & node) {
     cache_->Put(index, node);
   } else {
     while (size_ < node->len && cache_->Size() > 0) {
-      CHECK_GT(cache_->Size(), 0);
       cache::LRUCache<int32_t, CacheNode>::iterator back = cache_->back();
       size_ += back->second.get()->len;
       cache_->Erase(back);

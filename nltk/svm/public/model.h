@@ -7,9 +7,9 @@
 #ifndef  __MODEL_H_
 #define  __MODEL_H_
 
+#include "nltk/svm/public/kernel.h"
 #include <vector>
 #include <map>
-#include "kernel.h"
 #include "file/public/file.h"
 #include "third_part/thrift/wrapper/public/thrift.h"
 #include "thrift-out/nltk/svm/proto/gen-cpp/svm_types.h"
@@ -20,6 +20,7 @@ namespace svm {
 struct ModelNode {
  double b;
  base::NormalSarray<double> alpha;
+ base::NormalSarray<double> zeta;
  double best_obj;
 };
 
@@ -70,7 +71,8 @@ class Model {
   void Transfer(const modelnode & a, ModelNode * b) {
     b->b = a.b;
     b->best_obj = a.best_obj;
-    b->alpha.set(a.sparse_array);
+    b->alpha.set(a.sparse_alpha);
+    b->zeta.set(a.sparse_zeta);
   }
 
  private:

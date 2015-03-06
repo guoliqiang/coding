@@ -4,8 +4,11 @@
 // File  : scale.cc
 // Brief :
 
-#include "../public/scale.h"
-#include "../public/solver.h"
+#include "nltk/svm/public/scale.h"
+
+#include <map>
+#include <vector>
+#include "nltk/svm/public/solver.h"
 
 namespace nltk {
 namespace svm {

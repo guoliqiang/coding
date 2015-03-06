@@ -4,8 +4,11 @@
 // File  : solver.cc
 // Brief :
 
-#include "../public/solver.h"
-#include "../public/problem.h"
+#include "nltk/svm/public/solver.h"
+
+#include <vector>
+#include <algorithm>
+#include "nltk/svm/public/problem.h"
 
 namespace nltk {
 namespace svm {
@@ -32,6 +35,7 @@ SMO::SMO(const std::vector<base::shared_ptr<ProblemNode> > & a,
   node_count_ = a_.size() + b_.size();
   cache_.reset(new Cache(node_count_, max(node_count_, para_->mem_size_)));
   alpha_.assign(node_count_, 0);
+  zeta_.assign(node_count_, 0);
   G_.assign(node_count_, -1);
   QD_.assign(node_count_, 0);
 
@@ -440,6 +444,26 @@ void SMO::Do(ModelNode * ptr) {
   // put back the solution
   for (int i = 0; i < node_count_; i++) {
     ptr->alpha.insert(i, alpha_[i]);
+  }
+
+  // calculate zeta
+  CalculateZeta(-(ptr->b));
+  for (int i = 0; i < node_count_; i++) {
+    ptr->zeta.insert(i, zeta_[i]);
+  }
+}
+
+// zeta[i] = max(0, 1 - y[i] * (sum(y[j]* alpha[j]* Kernel(x[j] * x[i])) + b))
+// if zeta[i] is bigger, it is more posible to be a noise point
+void SMO::CalculateZeta(double b) {
+  for (int i = 0; i < node_count_; i++) {
+    base::shared_ptr<CacheNode> Q_i = GetQ(i, node_count_);
+    double value  = 0;
+    for (int j = 0; j < node_count_; j++) {
+      value += y(i) * Q_i->data[j] * alpha_[j] * y(j);
+    }
+    value = max(0.0, 1 - y(i) * (value + b));
+    zeta_[i] = value;
   }
 }
 }   // namepace svm

@@ -4,8 +4,9 @@
 // File  : predict.cc
 // Brief :
 
-#include "../public/predict.h"
-#include "../public/scale.h"
+#include "nltk/svm/public/predict.h"
+#include "nltk/svm/public/scale.h"
+
 namespace nltk {
 namespace svm {
 
@@ -53,7 +54,7 @@ void Predict::SvmPredict(const std::string input, const std::string output) {
       }
       node.element.insert(index, value);
     }
-    VLOG(3) << i << "/" << lines.size() << ":";
+    LOG(INFO) << i << "/" << lines.size();
     int predict_lable = SvmPredict(node);
     rs += IntToString(predict_lable) + "\n";
     right_num += input_lable == predict_lable ? 1 : 0;
@@ -63,10 +64,22 @@ void Predict::SvmPredict(const std::string input, const std::string output) {
             << " percent=" << double(right_num) / lines.size();
 }
 
+void Predict::KernelValue(const ProblemNode & input, std::vector<double> * rs) {
+  rs->clear();
+  for (int i = 0; i < Model::GetInstance().node_.size(); i++) {
+    rs->push_back(Kernel::GetInstance().Do(*(Model::GetInstance().node_[i]),
+                                           input));
+  }
+}
+
 int32_t Predict::SvmPredict(ProblemNode & input) {
   std::map<int32_t, int32_t> votes;
   int32_t max_vote = 0;
   int32_t max_lable = 0;
+
+  std::vector<double> kernel_value;
+  KernelValue(input, &kernel_value);
+
   for (std::map<int32_t, int32_t>::reverse_iterator i =
        Model::GetInstance().start_.rbegin();
        i != Model::GetInstance().start_.rend(); i++) {
@@ -86,11 +99,12 @@ int32_t Predict::SvmPredict(ProblemNode & input) {
           VLOG(5) << "not support SVM point " << " at:" << k;
           continue;
         }
-        bar += alpha * Kernel::GetInstance().
-               Do(*Model::GetInstance().node_[i->second + k].get(), input);
-        VLOG(5) << "alpha=" << alpha << " kernel=" << Kernel::GetInstance().
-                   Do(*Model::GetInstance().node_[j->second + k].get(), input)
-                << "value=" << bar;
+        CHECK_LT(i->second + k, kernel_value.size());
+        bar += alpha * kernel_value[i->second + k];
+        // Kernel::GetInstance().
+        //        Do(*(Model::GetInstance().node_[i->second + k].get()), input);
+        VLOG(5) << "alpha=" << alpha << " kernel="
+                << kernel_value[i->second + k] << "value=" << bar;
       }
       VLOG(5) << "after compute class=" << i->first << " value=" << bar;
 
@@ -103,11 +117,12 @@ int32_t Predict::SvmPredict(ProblemNode & input) {
           VLOG(5) << "not support SVM point " << " at:" << k;
           continue;
         }
-        bar += alpha * Kernel::GetInstance().
-               Do(*Model::GetInstance().node_[j->second + k].get(), input);
-        VLOG(5) << "alpha=" << alpha << " kernel=" << Kernel::GetInstance().
-                   Do(*Model::GetInstance().node_[j->second + k].get(), input)
-                << " value=" << bar;
+        CHECK_LT(j->second + k, kernel_value.size());
+        bar += alpha * kernel_value[j->second + k];
+        // Kernel::GetInstance().
+        //        Do(*(Model::GetInstance().node_[j->second + k].get()), input);
+        VLOG(5) << "alpha=" << alpha << " kernel="
+                << kernel_value[j->second + k] << " value=" << bar;
       }
       bar -= foo->b;
       VLOG(3) << "class=" << i->first << " V.S. class=" << j->first

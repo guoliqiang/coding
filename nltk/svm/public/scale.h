@@ -7,8 +7,8 @@
 #ifndef  __SCALE_H_
 #define  __SCALE_H_
 
-#include "problem.h"
-#include "kernel.h"
+#include "nltk/svm/public/problem.h"
+#include "nltk/svm/public/kernel.h"
 #include "base/public/shared_ptr.h"
 
 namespace nltk {

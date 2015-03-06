@@ -9,6 +9,7 @@ cc_binary(name = 'train_unittest',
            srcs = ['train_unittest.cc'],
            deps = [
                   '//nltk/svm/internal:train',
+                  '//third_part/gperftools/wrapper/internal:gperftools_wrapper',
                   ]
            )
 
@@ -16,6 +17,7 @@ cc_binary(name = 'predict_unittest',
            srcs = ['predict_unittest.cc'],
            deps = [
                   '//nltk/svm/internal:predict',
+                  '//third_part/gperftools/wrapper/internal:gperftools_wrapper',
                   ]
            )
 cc_binary(name = 'cache_unittest',

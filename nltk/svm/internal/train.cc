@@ -4,8 +4,8 @@
 // File  : train.cc
 // Brief :
 
-#include "../public/train.h"
-#include "../public/scale.h"
+#include "nltk/svm/public/train.h"
+#include "nltk/svm/public/scale.h"
 
 namespace nltk {
 namespace svm {

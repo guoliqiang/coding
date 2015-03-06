@@ -26,6 +26,11 @@ clean:
 	rm -rf  predict_unittest
 	rm -rf  cache_unittest
 	rm -rf  kernel_unittest
+	rm -rf  svm_predict.prof
+	rm -rf  svm_train.prof
+	rm -rf  output
+	rm -rf  output.debug
+	rm -rf  pinput.txt.out
 
 
 

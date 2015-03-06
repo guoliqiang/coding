@@ -7,8 +7,8 @@
 #ifndef  __PREDICT_H_
 #define  __PREDICT_H_
 
-#include "model.h"
-#include "kernel.h"
+#include "nltk/svm/public/model.h"
+#include "nltk/svm/public/kernel.h"
 #include "base/public/string_util.h"
 
 namespace nltk {
@@ -18,13 +18,12 @@ class Predict {
   static Predict & GetInstance() {
     return * Singleton<Predict>::get();
   }
-
   Predict() {}
 
   void LoadModel(const std::string path);
-  void SvmPredict(const std::string input,
-                  const std::string output);
+  void SvmPredict(const std::string input, const std::string output);
   int32_t SvmPredict(ProblemNode & input);
+  void KernelValue(const ProblemNode & input, std::vector<double> * rs);
 
  private:
   bool Free(const double alpha);

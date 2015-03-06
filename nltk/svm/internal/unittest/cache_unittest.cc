@@ -1,10 +1,10 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-08 16:51:13
 // File  : cache_unittest.cc
 // Brief :
-#include "../../public/cache.h"
+
+#include "nltk/svm/public/cache.h"
 
 int main(int argc, char** argv) {
   nltk::svm::Cache cache(10, 20);

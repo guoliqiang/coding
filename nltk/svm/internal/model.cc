@@ -1,11 +1,12 @@
 // Copyright 2013 Jike Inc. All Rights Reserved.
 // Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
 // Date  : 2013-09-08 01:05:04
 // File  : model.cc
 // Brief :
 
-#include "../public/model.h"
+#include "nltk/svm/public/model.h"
+
+#include<string>
 
 namespace nltk {
 namespace svm {
@@ -17,7 +18,7 @@ void Model::LoadModel(const std::string & path) {
   base::FromStringToThrift(content, &model_out);
   para_.reset(new Parameter());
   Transfer(model_out.para, para_.get());
-  para_->LogContent();
+  VLOG(3) << para_->ToString();
 
   start_ = model_out.start;
   count_ = model_out.count;

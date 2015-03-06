@@ -7,7 +7,8 @@ namespace cpp nltk.svm
 struct modelnode {
   1:  double b = 0;
   10: double best_obj = 0;
-  20: map<i32, double> sparse_array;
+  20: map<i32, double> sparse_alpha;
+  30: map<i32, double> sparse_zeta;
 }
 
 struct parameter {

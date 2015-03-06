@@ -7,13 +7,13 @@
 #ifndef  __PROBLEM_H_
 #define  __PROBLEM_H_
 
+#include "nltk/svm/public/kernel.h"
+#include <vector>
+#include <map>
 #include "base/public/normal_sparse_array.h"
 #include "base/public/logging.h"
 #include "base/public/shared_ptr.h"
-#include "kernel.h"
 #include "file/public/file.h"
-#include <vector>
-#include <map>
 #include "base/public/string_util.h"
 
 #define INF HUGE_VAL

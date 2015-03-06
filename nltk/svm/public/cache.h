@@ -16,11 +16,7 @@ namespace nltk {
 namespace svm {
 
 struct CacheNode {
-  CacheNode() {
-    len = 0;
-    data = NULL;
-  }
-
+  CacheNode() : len(0), data(NULL) {}
   ~CacheNode() {
     if (data) delete [] data;
   }

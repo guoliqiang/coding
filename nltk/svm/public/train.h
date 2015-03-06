@@ -7,10 +7,11 @@
 #ifndef  __TRAIN_H_
 #define  __TRAIN_H_
 
-#include "kernel.h"
-#include "problem.h"
-#include "model.h"
-#include "solver.h"
+#include "nltk/svm/public/kernel.h"
+#include "nltk/svm/public/problem.h"
+#include "nltk/svm/public/model.h"
+#include "nltk/svm/public/solver.h"
+
 #include "base/public/scoped_ptr.h"
 #include "base/public/shared_ptr.h"
 #include "thrift-out/nltk/svm/proto/gen-cpp/svm_types.h"
@@ -40,7 +41,8 @@ class Train {
   void Transfer(ModelNode & a, modelnode * b) {
     b->b = a.b;
     b->best_obj = a.best_obj;
-    b->sparse_array = a.alpha.Get();
+    b->sparse_alpha = a.alpha.Get();
+    b->sparse_zeta = a.zeta.Get();
   }
 
   void Transfer(const Parameter & a, parameter * b) {

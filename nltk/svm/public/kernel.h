@@ -12,8 +12,8 @@
 #include "base/public/singleton.h"
 #include "third_part/string/public/string_enum.h"
 #include "base/public/shared_ptr.h"
-#include <math.h>
 #include "base/public/string_util.h"
+#include <math.h>
 
 namespace nltk {
 namespace svm {
@@ -38,37 +38,12 @@ END_STRINGMAP_PARSER()
 
 namespace nltk {
 namespace svm {
-static util::StringEnumParser<KernelType> g_kernel_type;
-}  // namespace nltk
-}  // namespace svm
-
-
-namespace nltk {
-namespace svm {
 
 class Parameter {
  public:
   Parameter();
-
-  void LogContent(int l = 0) {
-    VLOG(l) << "[paremeter]";
-    VLOG(l) << "c:" << c_;
-    VLOG(l) << "degree:" << degree_;
-    VLOG(l) << "gamma:" << gamma_;
-    VLOG(l) << "coef0:" << coef0_;
-    VLOG(l) << "mem_size:" << mem_size_;
-    VLOG(l) << "eps:" << eps_;
-    VLOG(l) << "weights:";
-    for (std::map<int32_t, double>::iterator i = weights_.begin();
-         i != weights_.end(); i++) {
-      VLOG(l) << "\t" << i->first << ":" << i->second;
-    }
-    std::string foo;
-    CHECK(g_kernel_type.Enum2String(kernel_type_, &foo));
-    VLOG(l) << "kernel type:" << foo;
-    VLOG(l) << "[parameter]";
-  }
-
+  std::string ToString();
+  
  public:
   double c_;
   std::map<int32_t, double> weights_;
@@ -85,22 +60,8 @@ struct ProblemNode {
   int32_t lable;
   base::NormalSarray<double> element;
   
-  ProblemNode() {
-    line_no = -1;
-    lable = 0;
-  }
-
-  void LogContent(int l = 0) {
-    VLOG(l) << "\n" << ToString();
-  }
-
-  std::string ToString() {
-    std::string rs;
-    rs += "line no:" + IntToString(line_no) + "\n";
-    rs += "lable:" + IntToString(lable) + "\n";
-    rs += "sparse array:" + JoinKeysValues(&element.Get());
-    return rs;
-  }
+  ProblemNode() : line_no(-1), lable(0) {}
+  std::string ToString();
 };
 
 class Kernel {
@@ -110,29 +71,14 @@ class Kernel {
   }
 
   Kernel() {}
-  
-  void Set(base::shared_ptr<Parameter> para) {
-    para_ = para;
-    f_ = NULL;
-    if (para->kernel_type_ == LINEAR) {
-      f_ = &Kernel::linear;
-    } else if (para->kernel_type_ == POLY) {
-      f_ = &Kernel::poly;
-    } else if (para->kernel_type_ == RBF) {
-      f_ = &Kernel::rbf;
-    } else if (para->kernel_type_ == SIGMOID) {
-      f_ = &Kernel::sigmoid;
-    } else {
-      CHECK(false) << "unknown kernel type";
-    }
-  }
+  void Set(base::shared_ptr<Parameter> para);
 
-  double Do(const ProblemNode & a, const ProblemNode & b) {
+  inline double Do(const ProblemNode & a, const ProblemNode & b) {
     return ((this->*f_)(a, b));
   }
 
  private:
-  double dot(const ProblemNode & a, const ProblemNode & b) {
+  inline double dot(const ProblemNode & a, const ProblemNode & b) {
     base::NormalSarray<double>::const_iterator i = a.element.begin();
     base::NormalSarray<double>::const_iterator ei = a.element.end();
     
@@ -154,7 +100,7 @@ class Kernel {
     return rs;
   }
 
-  double powi(double base, int times) {
+  inline double powi(double base, int times) {
     double tmp = base;
     double ret = 1.0;
     for(int t = times; t > 0; t /= 2) {
@@ -164,19 +110,19 @@ class Kernel {
     return ret;
   }
   // a * b
-  double linear(const ProblemNode & a, const ProblemNode & b) {
+  inline double linear(const ProblemNode & a, const ProblemNode & b) {
     return dot(a, b);   
   }
   // (gamma * a * b + coef0) ^ degree
-  double poly(const ProblemNode & a, const ProblemNode & b) {
+  inline double poly(const ProblemNode & a, const ProblemNode & b) {
     return powi(para_->gamma_ * dot(a, b) + para_->coef0_, para_->degree_);
   }
   // exp(-gamma * |a - b|^2)
-  double rbf(const ProblemNode & a, const ProblemNode & b) {
+  inline double rbf(const ProblemNode & a, const ProblemNode & b) {
     return exp(-(para_->gamma_) * (dot(a, a) + dot(b, b) - 2 * dot(a, b)));
   }
   // tanh(gamma * a * b + coef0)
-  double sigmoid(const ProblemNode & a, const ProblemNode & b) {
+  inline double sigmoid(const ProblemNode & a, const ProblemNode & b) {
     return tanh(para_->gamma_ * dot(a, b) + para_->coef0_);
   }
 

@@ -23,3 +23,5 @@ clean:
 	rm -rf svm_predict
 	rm -rf svm_scale
 	rm -rf nohup.out
+	rm -rf pinput.txt.out
+	rm -rf input.txt.model

@@ -7,10 +7,10 @@
 #ifndef  __SOLVER_H_
 #define  __SOLVER_H_
 
+#include "nltk/svm/public/model.h"
+#include "nltk/svm/public/kernel.h"
+#include "nltk/svm/public/cache.h"
 #include "base/public/util.h"
-#include "model.h"
-#include "kernel.h"
-#include "cache.h"
 
 namespace nltk {
 namespace svm {
@@ -40,6 +40,7 @@ class SMO : public Solver {
   base::shared_ptr<CacheNode> GetQ(int32_t i, int32_t len);
   bool SelectWorkingSet(int * i, int * j);
   double CalculateB();
+  void CalculateZeta(double b);
   void Do(ModelNode * ptr);
  
  private:
@@ -64,6 +65,7 @@ class SMO : public Solver {
  
  private:
   std::vector<double> alpha_;
+  std::vector<double> zeta_;
 };
 
 }  // namespace svm
