@@ -5,25 +5,17 @@
 // File  : code.cc
 // Brief :
 
-/*
-在输入没有重复的时候，使用交换方式求得的permutation序列，可用next_permutation算法
-求得的序列是一致的，这个规律之前没有留意到 poj1833
-
-*/
-
 #include "base/public/common_head.h"
 
 namespace algorithm {
-// 按顺序选，根据第一次选择分类.
-// 传入的k是循环的起始位置，不用理会常用方法的结束位置
 void UnrepeatCombination(std::vector<int> & num, std::vector<int> & used,
                          std::vector<int> & path, int k) {
   LOG(INFO) << JoinVector(path);  // Note 每次都输出
-  for (int i = k; i < num.size(); i++) {  // 因为需要按次序选择，因此只能从i之后的开始选
-    if (used[i] > 0) {  // 如果某个元素重复了3次，结果中含有两个，这两个必然是前两个，不可能是后两个或第一与第三个
+  for (int i = k; i < num.size(); i++) {
+    if (used[i] > 0) {
       used[i]--;
       path.push_back(num[i]);
-      UnrepeatCombination(num, used, path, i);  // 因为i可能还有未被选择的元素，因此需要从i开始迭代
+      UnrepeatCombination(num, used, path, i);
       path.pop_back();
       used[i]++;
     }
@@ -46,10 +38,9 @@ void UnrepeatCombination(std::vector<int> & num) {
   UnrepeatCombination(v, cnt, path, 0);
 }
 
-// 循环起始位置总是从0开始，传入的cnt是元素总的数目，不用理会传统方法的结束位置
 void UnrepeatPermutation(std::vector<int> & num, std::vector<int> & used,
                          std::vector<int> & path, int cnt, int sum) {
-  if (cnt == sum) {  // path.size() == sum
+  if (cnt == sum) {
     LOG(INFO) << JoinVector(path);
   }
   // 利用used标记是不是可以被选出来，所以不可能会有重复
@@ -84,15 +75,53 @@ void UnrepeatPermutation(std::vector<int> & num) {
 
 }  // namespace algorithm
 
+namespace algorithm {
+// see from twitter
+void NewPermutation(std::vector<int>& vec, int n) {
+  if (n == 0) {
+    LOG(INFO) << JoinVector(vec) << "|";
+  } else {
+    for (int i = 0; i <= n; i++) {
+      NewPermutation(vec, n - 1);
+      int index = n % 2 == 0 ? i : 0;
+      // LOG(INFO) << "swap vec[" << index << "]:" << vec[index]
+      //           << " vec[" << n << "]:" << vec[n] << " n = " << n;
+      std::swap(vec[index], vec[n]);
+      // LOG(INFO) << JoinVector(vec);
+    }
+  }
+}
+
+void NormalPermutation(std::vector<int> & vec, int n) {
+  if (n == vec.size()) {
+    LOG(INFO) << JoinVector(vec);
+  } else {
+    for (int i = n; i < vec.size(); i++) {
+      std::swap(vec[i], vec[n]);
+      NormalPermutation(vec, n + 1);
+      std::swap(vec[i], vec[n]);
+    }
+  }
+}
+
+}  // namespace algorithn
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
   std::vector<int> num;
   num.push_back(1);
+  num.push_back(2);
   num.push_back(3);
-  num.push_back(3);
+  num.push_back(4);
+  num.push_back(5);
+  NewPermutation(num, 4);
+  HERE(INFO);
+  // NormalPermutation(num, 0);
+  return 0;
   UnrepeatCombination(num);
   HERE(INFO);
   UnrepeatPermutation(num);
+
   return 0;
 }
