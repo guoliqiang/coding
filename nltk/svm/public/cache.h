@@ -4,8 +4,8 @@
 // File  : cache.h
 // Brief :
 
-#ifndef  __CACHE_H_
-#define  __CACHE_H_
+#ifndef  NLTK_SVM_PUBLIC_CACHE_H_
+#define  NLTK_SVM_PUBLIC_CACHE_H_
 
 #include "base/public/logging.h"
 #include "third_part/cache/public/lru_cache-inl.h"
@@ -43,4 +43,4 @@ class Cache {
 }  // namespace svm
 }  // namespace nltk
 
-#endif  // __CACHE_H_
+#endif  // NLTK_SVM_PUBLIC_CACHE_H_

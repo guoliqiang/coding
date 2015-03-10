@@ -4,8 +4,8 @@
 // File  : model.h
 // Brief :
 
-#ifndef  __MODEL_H_
-#define  __MODEL_H_
+#ifndef  NLTK_SVM_PUBLIC_MODEL_H_
+#define  NLTK_SVM_PUBLIC_MODEL_H_
 
 #include "nltk/svm/public/kernel.h"
 #include <vector>
@@ -81,4 +81,4 @@ class Model {
 }  // namespace svm
 }  // namespace nltk
 
-#endif  //  __MODEL_H_
+#endif  // NLTK_SVM_PUBLIC_MODEL_H_

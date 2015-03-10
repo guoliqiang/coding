@@ -4,8 +4,8 @@
 // File  : problem.h
 // Brief :
 
-#ifndef  __PROBLEM_H_
-#define  __PROBLEM_H_
+#ifndef  NLTK_SVR_PUBLIC_PROBLEM_H_
+#define  NLTK_SVR_PUBLIC_PROBLEM_H_
 
 #include "nltk/svr/public/kernel.h"
 #include <vector>
@@ -56,4 +56,4 @@ class Problem {
 }  // namespace svr
 }  // namespace nltk
 
-#endif  //__PROBLEM_H_
+#endif  // NLTK_SVR_PUBLIC_PROBLEM_H_

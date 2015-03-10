@@ -4,8 +4,8 @@
 // File  : kernel.h
 // Brief :
 
-#ifndef  __KERNEL_H_
-#define  __KERNEL_H_
+#ifndef  NLTK_SVR_PUBLIC_KERNEL_H_
+#define  NLTK_SVR_PUBLIC_KERNEL_H_
 
 #include "base/public/logging.h"
 #include "base/public/normal_sparse_array.h"
@@ -57,7 +57,7 @@ class Parameter {
 
 struct ProblemNode {
   int32_t line_no;
-  int32_t value;
+  double value;
   base::NormalSarray<double> element;
   
   ProblemNode() : line_no(-1), value(0) {}
@@ -137,4 +137,4 @@ class Kernel {
 }  // namesace svr
 }  // namespace nltk
 
-#endif  //__KERNEL_H_
+#endif  // NLTK_SVR_PUBLIC_KERNEL_H_

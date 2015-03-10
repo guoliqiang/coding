@@ -4,8 +4,8 @@
 // File  : scale.h
 // Brief :
 
-#ifndef  __SCALE_H_
-#define  __SCALE_H_
+#ifndef  NLTK_SVR_PUBLIC_PROBLEM_SCALE_H_
+#define  NLTK_SVR_PUBLIC_PROBLEM_SCALE_H_
 
 #include "nltk/svr/public/problem.h"
 #include "nltk/svr/public/kernel.h"
@@ -49,4 +49,4 @@ class MaxMinScale : public Scale {
 }  // svr
 }  // namespace nltk
 
-#endif  // __SCALE_H_
+#endif  // NLTK_SVR_PUBLIC_PROBLEM_SCALE_H_

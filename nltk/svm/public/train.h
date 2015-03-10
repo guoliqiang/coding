@@ -4,8 +4,8 @@
 // File  : train.h
 // Brief :
 
-#ifndef  __TRAIN_H_
-#define  __TRAIN_H_
+#ifndef  NLTK_SVM_PUBLIC_TRAIN_H_
+#define  NLTK_SVM_PUBLIC_TRAIN_H_
 
 #include "nltk/svm/public/kernel.h"
 #include "nltk/svm/public/problem.h"
@@ -63,4 +63,4 @@ class Train {
 }  // namespace svm
 }  // namespace nltk
 
-#endif  // __TRAIN_H_
+#endif  // NLTK_SVM_PUBLIC_TRAIN_H_

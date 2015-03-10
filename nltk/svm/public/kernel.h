@@ -4,8 +4,8 @@
 // File  : kernel.h
 // Brief :
 
-#ifndef  __KERNEL_H_
-#define  __KERNEL_H_
+#ifndef  NLTK_SVM_PUBLIC_KERNEL_H_
+#define  NLTK_SVM_PUBLIC_KERNEL_H_
 
 #include "base/public/logging.h"
 #include "base/public/normal_sparse_array.h"
@@ -137,4 +137,4 @@ class Kernel {
 }  // namesace svm
 }  // namespace nltk
 
-#endif  //__KERNEL_H_
+#endif  // NLTK_SVM_PUBLIC_KERNEL_H_

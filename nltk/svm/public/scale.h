@@ -4,8 +4,8 @@
 // File  : scale.h
 // Brief :
 
-#ifndef  __SCALE_H_
-#define  __SCALE_H_
+#ifndef  NLTK_SVM_PUBLIC_SCALE_H_
+#define  NLTK_SVM_PUBLIC_SCALE_H_
 
 #include "nltk/svm/public/problem.h"
 #include "nltk/svm/public/kernel.h"
@@ -46,7 +46,7 @@ class MaxMinScale : public Scale {
   DISALLOW_COPY_AND_ASSIGN(MaxMinScale);
 };
 
-}  // svm
+}  // namespace svm
 }  // namespace nltk
 
-#endif  // __SCALE_H_
+#endif  // NLTK_SVM_PUBLIC_SCALE_H_

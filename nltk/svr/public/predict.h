@@ -4,8 +4,8 @@
 // File  : predict.h
 // Brief :
 
-#ifndef  __PREDICT_H_
-#define  __PREDICT_H_
+#ifndef  NLTK_SVR_PUBLIC_PREDICT_H_
+#define  NLTK_SVR_PUBLIC_PREDICT_H_
 
 #include "nltk/svr/public/model.h"
 #include "nltk/svr/public/kernel.h"
@@ -34,4 +34,4 @@ class Predict {
 }  // namespace svm
 }  // namespace nltk
 
-#endif  //  __PREDICT_H_
+#endif  //  NLTK_SVR_PUBLIC_PREDICT_H_

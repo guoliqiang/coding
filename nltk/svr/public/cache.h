@@ -4,8 +4,8 @@
 // File  : cache.h
 // Brief :
 
-#ifndef  __CACHE_H_
-#define  __CACHE_H_
+#ifndef  NLTK_SVR_PUBLIC_CACHE_H_
+#define  NLTK_SVR_PUBLIC_CACHE_H_
 
 #include "base/public/logging.h"
 #include "third_part/cache/public/lru_cache-inl.h"
@@ -43,4 +43,4 @@ class Cache {
 }  // namespace svr
 }  // namespace nltk
 
-#endif  // __CACHE_H_
+#endif  // NLTK_SVR_PUBLIC_CACHE_H_

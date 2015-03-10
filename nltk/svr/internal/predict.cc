@@ -25,6 +25,12 @@ bool Predict::Free(const double alpha) {
 void Predict::SvrPredict(const std::string input, const std::string output) {
   std::string rs = "";    
   std::string content;
+  double error = 0;
+  double sump = 0;
+  double sumi = 0;
+  double sumpp = 0;
+  double sumii = 0;
+  double sumpi = 0;
 
   std::vector<std::string> lines;
   file::File::ReadFileToStringOrDie(input, &content);
@@ -55,9 +61,23 @@ void Predict::SvrPredict(const std::string input, const std::string output) {
     }
     double predict_value = SvrPredict(node);
     rs += DoubleToString(predict_value) + "\n";
-    LOG(INFO) << i << "/" << lines.size() << " input value=" << input_value
-              << " real_value=" << predict_value;
+    error += (predict_value - input_value) * (predict_value - input_value);
+    sump += predict_value;
+    sumi += input_value;
+    sumpp += predict_value * predict_value;
+    sumii += input_value * input_value;
+    sumpi += predict_value * input_value;
+
+    LOG(INFO) << i << "/" << lines.size() << " input_value=" << input_value
+              << " predict_value=" << predict_value;
   }
+  double mean_error = error / lines.size();
+  double coeff = ((lines.size() * sumpi - sump * sumi) *
+                  (lines.size() * sumpi - sump * sumi)) /
+                 ((lines.size() * sumpp - sump * sump) *
+                  (lines.size() * sumii - sumi * sumi));
+  LOG(INFO) << "Mean squared error =" << mean_error
+            << "; Squared correlation coefficient =" << coeff;
   file::File::WriteStringToFile(rs, output);
 }
 

@@ -4,8 +4,8 @@
 // File  : solver.h
 // Brief :
 
-#ifndef  __SOLVER_H_
-#define  __SOLVER_H_
+#ifndef  NLTK_SVM_PUBLIC_SOLVER_H_
+#define  NLTK_SVM_PUBLIC_SOLVER_H_
 
 #include "nltk/svm/public/model.h"
 #include "nltk/svm/public/kernel.h"
@@ -71,4 +71,4 @@ class SMO : public Solver {
 }  // namespace svm
 }  // namespace nltk
 
-#endif  //  __SOLVER_H_
+#endif  //  NLTK_SVM_PUBLIC_SOLVER_H_
