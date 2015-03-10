@@ -273,6 +273,7 @@ class Kernel: public QMatrix {
  public:
   std::string to_string_x(int i) const {
     std::string rs;
+    return rs;
     const svm_node * ptr = x[i];
     while(ptr->index != -1) {
       rs += IntToString(ptr->index) + ":" + DoubleToString(ptr->value) + " ";
@@ -732,6 +733,8 @@ void Solver::Solve(int l, const QMatrix& Q,
 		for(int k = 0; k < active_size; k++) {
 			G[k] += Q_i[k] * delta_alpha_i + Q_j[k] * delta_alpha_j;
 		}
+    VLOG(3) << "alpha[" << i << "]=" << alpha[i] << " alpha[" << j << "]="
+              << alpha[j];
 
 		// update alpha_status and G_bar
 		{
@@ -758,6 +761,11 @@ void Solver::Solve(int l, const QMatrix& Q,
         }
 			}
 		}
+    tmp.clear();
+    for(int i1 = 0; i1 < l; i1++) {
+      tmp += IntToString(i1) + ":" + DoubleToString(G[i1]) + " ";
+    }
+    VLOG(4) << "G=" << tmp;
 	}  // while
 
 	if(iter >= max_iter) {
@@ -775,6 +783,24 @@ void Solver::Solve(int l, const QMatrix& Q,
 
 	// calculate objective value
 	{
+    tmp.clear();
+    for(int i1 = 0; i1 < l; i1++) {
+      tmp += IntToString(i1) + ":" + DoubleToString(G[i1]) + " ";
+    }
+    VLOG(4) << "G=" << tmp;
+
+    tmp.clear();
+    for(int i1 = 0; i1 < l; i1++) {
+      tmp += IntToString(i1) + ":" + DoubleToString(alpha[i1]) + " ";
+    }
+    VLOG(4) << "alpha=" << tmp;
+
+    tmp.clear();
+    for(int i1 = 0; i1 < l; i1++) {
+      tmp += IntToString(i1) + ":" + DoubleToString(p[i1]) + " ";
+    }
+    VLOG(4) << "p=" << tmp;
+
 		double v = 0;
 		int i;
 		for(i = 0; i < l; i++) v += alpha[i] * (G[i] + p[i]);
@@ -1381,9 +1407,15 @@ class SVR_Q: public Kernel {
 		Qfloat *buf = buffer[next_buffer];
 		next_buffer = 1 - next_buffer;
 		schar si = sign[i];
+    std::string rs = "";
 		for(j=0;j<len;j++) {
 			buf[j] = (Qfloat) si * (Qfloat) sign[j] * data[index[j]];
+      rs += "value[" + IntToString(j) + "]" + DoubleToString(buf[j]) + " ";
+      // + "kernel(" + IntToString(i) + "," + IntToString(j) + ")=" +
+      // DoubleToString(data[index[j]]) + " " + IntToString(index[i]) + " " +
+      // IntToString(index[j]);
     }
+    // LOG(INFO) << "GetQ " << rs;
 		return buf;
 	}
 

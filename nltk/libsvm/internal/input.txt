@@ -1,1 +1,1 @@
-../../svm/internal/unittest/input.txt
+../../svr/internal/unittest/input.txt

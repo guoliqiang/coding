@@ -1,0 +1,4 @@
+thrift_library(name = 'svr_thrift',
+           srcs = ['svr.thrift'],
+           gen_cpp = 1,
+           )

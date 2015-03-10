@@ -1,0 +1,28 @@
+cc_library(name = 'svrlib',
+           srcs = ['problem.cc',
+                   'kernel.cc',
+                   'model.cc',
+                   'solver.cc',
+                   'cache.cc',
+                   'scale.cc'
+                   ],
+           deps = [
+                  '//base/internal:base',
+                  '//file/internal:file',
+                  '//nltk/svr/proto:svr_thrift',
+                  ]
+           )
+
+cc_library(name = 'train',
+           srcs = ['train.cc'],
+           deps = [
+                  '//nltk/svr/internal:svrlib',
+                  ]
+           )
+
+cc_library(name = 'predict',
+           srcs = ['predict.cc'],
+           deps = [
+                  '//nltk/svr/internal:svrlib',
+                  ]
+           )
