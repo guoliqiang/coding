@@ -27,6 +27,10 @@ class NormalSarray {
     return elements_;
   }
 
+  const std::map<int32_t, Type> & Get() const {
+    return elements_;
+  }
+
   bool insert(const int32_t & i, const Type & v) {
     bool rs = exist(i);
     elements_[i] = v;

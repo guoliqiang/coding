@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <map>
 #include "nltk/svm/public/problem.h"
 
 namespace nltk {
@@ -451,6 +452,15 @@ void SMO::Do(ModelNode * ptr) {
   for (int i = 0; i < node_count_; i++) {
     ptr->zeta.insert(i, zeta_[i]);
   }
+
+  if (Model::GetInstance().para_->kernel_type_ == LINEAR) {
+    // calculate w
+    CalculateW();
+    for (std::map<int32_t, double>::iterator i = w_.begin();
+         i != w_.end(); i++) {
+      ptr->w.insert(i->first, i->second);
+    }
+  }
 }
 
 // zeta[i] = max(0, 1 - y[i] * (sum(y[j]* alpha[j]* Kernel(x[j] * x[i])) + b))
@@ -464,6 +474,18 @@ void SMO::CalculateZeta(double b) {
     }
     value = max(0.0, 1 - y(i) * (value + b));
     zeta_[i] = value;
+  }
+}
+
+// w = sum(alpha[i] * y[i] * x[i])
+// only can used when kernel_type = LINEAR
+void SMO::CalculateW() {
+  for (int i = 0; i < node_count_; i++) {
+    std::map<int32_t, double> & x = GetNode(i).element.Get();
+    for (std::map<int32_t, double>::iterator j = x.begin(); j != x.end(); j++) {
+      if (!w_.count(j->first)) w_[j->first] = 0;
+      w_[j->first] += alpha_[i] * j->second;
+    }
   }
 }
 }   // namepace svm

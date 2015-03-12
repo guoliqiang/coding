@@ -41,6 +41,7 @@ class SMO : public Solver {
   bool SelectWorkingSet(int * i, int * j);
   double CalculateB();
   void CalculateZeta(double b);
+  void CalculateW();
   void Do(ModelNode * ptr);
  
  private:
@@ -66,6 +67,7 @@ class SMO : public Solver {
  private:
   std::vector<double> alpha_;
   std::vector<double> zeta_;
+  std::map<int32_t, double> w_;
 };
 
 }  // namespace svm

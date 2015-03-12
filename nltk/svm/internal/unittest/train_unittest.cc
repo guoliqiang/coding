@@ -11,12 +11,12 @@
 int main(int argc, char** argv) {
   base::AtExitManager exit;
   base::ParseCommandLineFlags(&argc, &argv, true);
-  profiler::Start("svm_train.prof");
+  // profiler::Start("svm_train.prof");
   std::string path = "input.txt";
   nltk::svm::Train::GetInstance().ReadFile(path);
   nltk::svm::Train::GetInstance().SvmTrain();
   std::string out = "output";
   nltk::svm::Train::GetInstance().WriteModel(out);
-  profiler::Stop();
+  // profiler::Stop();
   return 0;
 }

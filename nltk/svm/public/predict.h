@@ -23,6 +23,7 @@ class Predict {
   void LoadModel(const std::string path);
   void SvmPredict(const std::string input, const std::string output);
   int32_t SvmPredict(ProblemNode & input);
+  int32_t SvmPredictFast(ProblemNode & input);
   void KernelValue(const ProblemNode & input, std::vector<double> * rs);
 
  private:

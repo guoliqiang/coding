@@ -9,6 +9,7 @@ struct modelnode {
   10: double best_obj = 0;
   20: map<i32, double> sparse_alpha;
   30: map<i32, double> sparse_zeta;
+  40: map<i32, double> sparse_w;
 }
 
 struct parameter {

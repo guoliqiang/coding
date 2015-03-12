@@ -21,6 +21,7 @@ struct ModelNode {
  double b;
  base::NormalSarray<double> alpha;
  base::NormalSarray<double> zeta;
+ base::NormalSarray<double> w;
  double best_obj;
 };
 
@@ -73,6 +74,7 @@ class Model {
     b->best_obj = a.best_obj;
     b->alpha.set(a.sparse_alpha);
     b->zeta.set(a.sparse_zeta);
+    b->w.set(a.sparse_w);
   }
 
  private:

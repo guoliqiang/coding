@@ -43,6 +43,7 @@ class Train {
     b->best_obj = a.best_obj;
     b->sparse_alpha = a.alpha.Get();
     b->sparse_zeta = a.zeta.Get();
+    b->sparse_w = a.w.Get();
   }
 
   void Transfer(const Parameter & a, parameter * b) {

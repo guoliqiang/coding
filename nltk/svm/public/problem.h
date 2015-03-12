@@ -33,7 +33,7 @@ class Problem {
   Problem() {}
   bool ReadFile(std::string path);
     
-  std::string ToString() {
+  std::string ToString() const {
     std::string rs = "\n";
     rs += "start:" + JoinKeysValues(&start_) + "\n";
     rs += "count:" + JoinKeysValues(&count_) + "\n";

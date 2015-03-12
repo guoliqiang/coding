@@ -42,7 +42,7 @@ namespace svm {
 class Parameter {
  public:
   Parameter();
-  std::string ToString();
+  std::string ToString () const;
   
  public:
   double c_;
@@ -61,7 +61,7 @@ struct ProblemNode {
   base::NormalSarray<double> element;
   
   ProblemNode() : line_no(-1), lable(0) {}
-  std::string ToString();
+  std::string ToString () const;
 };
 
 class Kernel {

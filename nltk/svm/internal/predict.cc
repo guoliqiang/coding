@@ -55,7 +55,12 @@ void Predict::SvmPredict(const std::string input, const std::string output) {
       node.element.insert(index, value);
     }
     LOG(INFO) << i << "/" << lines.size();
-    int predict_lable = SvmPredict(node);
+    int predict_lable = 0;
+    if (Model::GetInstance().para_->kernel_type_ == LINEAR) {
+      predict_lable = SvmPredictFast(node);
+    } else {
+      predict_lable = SvmPredict(node);
+    }
     rs += IntToString(predict_lable) + "\n";
     right_num += input_lable == predict_lable ? 1 : 0;
   }
@@ -70,6 +75,52 @@ void Predict::KernelValue(const ProblemNode & input, std::vector<double> * rs) {
     rs->push_back(Kernel::GetInstance().Do(*(Model::GetInstance().node_[i]),
                                            input));
   }
+}
+
+int32_t Predict::SvmPredictFast(ProblemNode & input) {
+  std::map<int32_t, int32_t> votes;
+  int32_t max_vote = 0;
+  int32_t max_lable = 0;
+
+  for (std::map<int32_t, int32_t>::reverse_iterator i =
+       Model::GetInstance().start_.rbegin();
+       i != Model::GetInstance().start_.rend(); i++) {
+    std::map<int32_t, int32_t>::reverse_iterator tmp = i;
+    tmp++;
+    for (std::map<int32_t, int32_t>::reverse_iterator j = tmp;
+         j != Model::GetInstance().start_.rend(); j++) {
+      base::shared_ptr<ModelNode> foo =
+            (*Model::GetInstance().model_[i->first].get())[j->first];
+      CHECK(foo.get() != NULL);
+
+      ProblemNode fake;
+      fake.element = foo->w;
+      double bar = Kernel::GetInstance().Do(fake, input);
+      bar -= foo->b;
+      VLOG(3) << "fast predict class=" << i->first << " V.S. class=" << j->first
+              << " value=" << bar;
+
+      if (bar > 0)  {
+        if (votes.count(i->first)) votes[i->first]++;
+        else votes[i->first] = 1;
+
+        if (max_vote < votes[i->first]) {
+          max_vote = votes[i->first];
+          max_lable = i->first;
+        }
+      } else {
+        if (votes.count(j->first)) votes[j->first]++;
+        else votes[j->first] = 1;
+
+        if (max_vote < votes[j->first]) {
+          max_vote = votes[j->first];
+          max_lable = j->first;
+        }
+      }
+    }
+  }
+  VLOG(3)<< JoinKeysValues(&votes);
+  return max_lable;
 }
 
 int32_t Predict::SvmPredict(ProblemNode & input) {

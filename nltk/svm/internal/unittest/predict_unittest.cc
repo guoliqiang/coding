@@ -11,9 +11,9 @@
 int main(int argc, char** argv) {
   base::AtExitManager exit;
   base::ParseCommandLineFlags(&argc, &argv, true);
-  profiler::Start("svm_predict.prof");
+  // profiler::Start("svm_predict.prof");
   nltk::svm::Predict::GetInstance().LoadModel("output");
   nltk::svm::Predict::GetInstance().SvmPredict("pinput.txt", "pinput.txt.out");
-  profiler::Stop();
+  // profiler::Stop();
   return 0;
 }

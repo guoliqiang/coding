@@ -43,7 +43,7 @@ Parameter::Parameter() {
   CHECK(g_kernel_type.String2Enum(FLAGS_kernel_type, &kernel_type_));
 }
 
-std::string Parameter::ToString() {
+std::string Parameter::ToString() const {
   std::string rs;
   rs += "[paremeter]\n";
   rs += "c=" + DoubleToString(c_) + "\n";
@@ -53,7 +53,8 @@ std::string Parameter::ToString() {
   rs += "mem_size=" + IntToString(mem_size_) + "\n";
   rs += "eps=" + DoubleToString(eps_) + "\n";
   rs += "weights:";
-  for (std::map<int32_t, double>::iterator i = weights_.begin();
+  LOG(INFO) << rs;
+  for (std::map<int32_t, double>::const_iterator i = weights_.begin();
        i != weights_.end(); i++) {
     rs += "\t" + IntToString(i->first) + ":" + DoubleToString(i->second);
   }
@@ -62,9 +63,10 @@ std::string Parameter::ToString() {
   CHECK(g_kernel_type.Enum2String(kernel_type_, &foo));
   rs += "kernel type=" + foo + "\n";
   rs += "[parameter]";
+  return rs;
 }
 
-std::string ProblemNode::ToString() {
+std::string ProblemNode::ToString() const {
   std::string rs;
   rs += "line no:" + IntToString(line_no) + "\n";
   rs += "lable:" + IntToString(lable) + "\n";
