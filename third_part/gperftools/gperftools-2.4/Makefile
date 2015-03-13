@@ -114,8 +114,8 @@ am__append_5 = -Wno-unused-result
 # particular, some x86_64 systems do not insert frame pointers by
 # default (all i386 systems that I know of, do.  I don't know about
 # non-x86 chips).  We need to tell perftools what to do about that.
-am__append_6 = -fno-omit-frame-pointer
-#am__append_7 = -DNO_FRAME_POINTER
+#am__append_6 = -fno-omit-frame-pointer
+am__append_7 = -DNO_FRAME_POINTER
 #am__append_8 = -Wl,-u__tcmalloc
 TESTS = low_level_alloc_unittest$(EXEEXT) atomicops_unittest$(EXEEXT) \
 	$(am__EXEEXT_9) tcmalloc_minimal_unittest$(EXEEXT) \
@@ -2186,7 +2186,7 @@ TCMALLOC_SO_VERSION = 6:6:2
 TC_VERSION_MAJOR = 2
 TC_VERSION_MINOR = 4
 TC_VERSION_PATCH = 
-UNWIND_LIBS = 
+UNWIND_LIBS = -lunwind
 VERSION = 2.4
 abs_builddir = /home/guoliqiang/git-coding/coding/third_part/gperftools/gperftools-2.4
 abs_srcdir = /home/guoliqiang/git-coding/coding/third_part/gperftools/gperftools-2.4
@@ -6424,8 +6424,8 @@ uninstall-man: uninstall-man1
 	uninstall-nodist_perftoolsincludeHEADERS \
 	uninstall-perftoolsincludeHEADERS uninstall-pkgconfigDATA
 
-#  # TODO(csilvers): check if -fomit-frame-pointer might be in $(CXXFLAGS),
-#  #                 before setting this.
+  # TODO(csilvers): check if -fomit-frame-pointer might be in $(CXXFLAGS),
+  #                 before setting this.
 pprof_unittest: $(top_srcdir)/src/pprof
 	$(top_srcdir)/src/pprof -test
 # This script preloads libtcmalloc, and calls two other binaries as well

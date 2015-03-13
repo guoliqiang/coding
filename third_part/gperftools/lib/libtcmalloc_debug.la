@@ -17,7 +17,7 @@ old_library='libtcmalloc_debug.a'
 inherited_linker_flags=' -pthread'
 
 # Libraries that this one depends upon.
-dependency_libs=' -lpthread'
+dependency_libs=' -lunwind -lpthread'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

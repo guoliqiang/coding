@@ -2,6 +2,7 @@ cc_library(name='gperftools_wrapper',
            srcs = ['gperftools.cc'],
            deps = [
                   '//libs/third_part/gperftools:profiler',
+                  '//libs/third_part/libunwind:unwind',
                   ],
            copt = ['always_link'],
           )

@@ -4,6 +4,7 @@ cc_binary(name='malloc_unittest',
                   '//base/internal:base',
                   '//third_part/testing/gtest/src:gtest',
                   '//libs/third_part/gperftools:tcmalloc',
+                  '//libs/third_part/libunwind:unwind',
                   ]
            )
 
@@ -22,5 +23,6 @@ cc_binary(name='mem_leak_unittest',
                   '//base/internal:base',
                   '//third_part/testing/gtest/src:gtest',
                   '//libs/third_part/gperftools:tcmalloc',
+                  '//libs/third_part/libunwind:unwind',
                   ],
          )

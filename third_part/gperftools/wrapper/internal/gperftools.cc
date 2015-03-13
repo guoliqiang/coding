@@ -6,7 +6,7 @@
 
 #include "third_part/gperftools/wrapper/public/gperftools.h"
 
-namespace gperftools {
+namespace profiler {
 // add a CpuProfileWrapper class in gperftools, in order to
 // init the CpuProfiler class.
 static CpuProfilerWrapper cpu_profiler_wrapper;
