@@ -1,0 +1,6 @@
+cc_binary(name='profile_unittest',
+          srcs = ['profile_unittest.cc'],
+          deps = [
+                  '//third_part/cpu_profiler/internal:cpu_profiler',
+                  ],
+         )

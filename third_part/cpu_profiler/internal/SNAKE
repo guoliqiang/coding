@@ -1,0 +1,13 @@
+cc_library(name='cpu_profiler',
+           srcs = ['profiledata.cc',
+                   'profile-handler.cc',
+                   'profiler.cc',
+                   'maybe_threads.cc',
+                   'sysinfo.cc',
+                   'stacktrace.cc'
+                   ],
+           deps = [
+                   '//base/internal:base',
+                   '//libs/third_part/libunwind:unwind',
+                  ],
+          )
