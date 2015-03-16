@@ -56,11 +56,6 @@ using std::string;
 using base::SpinLock;
 using base::SpinLockHolder;
 
-DEFINE_bool(cpu_profiler_unittest,
-            EnvToBool("PERFTOOLS_UNITTEST", true),
-            "Determines whether or not we are running under the "
-            "control of a unit test. This allows us to include or "
-            "exclude certain behaviours.");
 DEFINE_string(cpu_profiler_path, "cpu_profiler.prof", "");
 DEFINE_int32(cpu_profiler_signal, 12, "");
 
@@ -100,13 +95,11 @@ class CpuProfiler {
   // ProfileHandle that only one instance of prof_handler can run at a time.
   SpinLock lock_;
   ProfileData collector_;
-
   // Filter function and its argument, if any.  (NULL means include all
   // samples).  Set at start, read-only while running.  Written while holding
   // lock_, read and executed in the context of SIGPROF interrupt.
   int (*filter_)(void*);  // NOLINT
   void * filter_arg_;
-
   // Opaque token returned by the profile handler. To be used when calling
   // ProfileHandlerUnregisterCallback.
   ProfileHandlerToken* prof_handler_token_;
@@ -146,9 +139,7 @@ CpuProfiler CpuProfiler::instance_;
 // Initialize profiling: activated if getenv("CPUPROFILE") exists.
 CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
   if (getuid() != geteuid()) {
-    if (!FLAGS_cpu_profiler_unittest) {
-      LOG(WARNING) << "Cannot perform CPU profiling when running with setuid";
-    }
+    LOG(WARNING) << "Cannot perform CPU profiling when running with setuid";
     return;
   }
 
@@ -157,7 +148,7 @@ CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
     intptr_t old_signal_handler =
         reinterpret_cast<intptr_t>(signal(signal_number, CpuProfilerSwitch));
     if (old_signal_handler == 0) {
-      LOG(INFO) << "Using signal as cpu profiling switch" << signal_number;
+      LOG(INFO) << "Using signal as cpu profiling switch " << signal_number;
     } else {
       LOG(FATAL) << "Signal already in use" << signal_number;
     }
@@ -229,7 +220,6 @@ void CpuProfiler::GetCurrentState(ProfilerState* state) {
     SpinLockHolder cl(&lock_);
     collector_.GetCurrentState(&collector_state);
   }
-
   state->enabled = collector_state.enabled;
   state->start_time = static_cast<time_t>(collector_state.start_time);
   state->samples_gathered = collector_state.samples_gathered;
@@ -263,12 +253,10 @@ void CpuProfiler::prof_handler(int sig, siginfo_t*, void* signal_ucontext,
   if (instance->filter_ == NULL ||
       (*instance->filter_)(instance->filter_arg_)) {
     void* stack[ProfileData::kMaxStackDepth];
-
     // Under frame-pointer-based unwinding at least on x86, the
     // top-most active routine doesn't show up as a normal frame, but
     // as the "pc" value in the signal handler context.
     stack[0] = GetPC(*reinterpret_cast<ucontext_t*>(signal_ucontext));
-
     // We skip the top three stack trace entries (this function,
     // SignalHandler::SignalHandler and one signal handler frame)
     // since they are artifacts of profiling and should not be
@@ -320,4 +308,3 @@ void ProfilerGetCurrentState(
     ProfilerState* state) {
   CpuProfiler::instance_.GetCurrentState(state);
 }
-

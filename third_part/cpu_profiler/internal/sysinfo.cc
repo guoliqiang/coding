@@ -39,11 +39,6 @@
 #include <sys/sysctl.h>
 #include "third_part/cpu_profiler/public/cycleclock.h"
 
-#define SCNx64 "llx"
-#define SCNd64 "lld"
-#define PRIx64 "llx"
-#define PRId64 "lld"
-
 // Re-run fn until it doesn't cause EINTR.
 #define NO_INTR(fn)  do {} while ((fn) < 0 && errno == EINTR)
 
@@ -464,11 +459,9 @@ static bool ParseProcMapsLine(char *text, uint64 *start, uint64 *end,
                               char *flags, uint64 *offset,
                               int *major, int *minor, int64 *inode,
                               unsigned *filename_offset) {
-  /*
-   * It's similar to:
-   * sscanf(text, "%"SCNx64"-%"SCNx64" %4s %"SCNx64" %x:%x %"SCNd64" %n",
-   *        start, end, flags, offset, major, minor, inode, filename_offset)
-   */
+  // It's similar to:
+  // sscanf(text, "%llx-%llx %4s %llx %x:%x %llx %n",
+  //        start, end, flags, offset, major, minor, inode, filename_offset)
   char *endptr = text;
   if (endptr == NULL || *endptr == '\0')  return false;
 
@@ -691,11 +684,10 @@ int ProcMapsIterator::FormatLine(char* buffer,
       ? '-' : 'p';
 
   const int rc = snprintf(buffer, bufsize,
-                          "%08" PRIx64 "-%08" PRIx64 " %c%c%c%c %08" PRIx64
-                          " %02x:%02x %-11" PRId64 " %s\n",
-                          start, end, r, w, x, p, offset,
-                          static_cast<int>(dev/256), static_cast<int>(dev%256),
-                          inode, filename);
+                 "%08llx-%08llx %c%c%c%c %08llx %02x:%02x %-11llx %s\n",
+                 start, end, r, w, x, p, offset,
+                 static_cast<int>(dev/256), static_cast<int>(dev%256),
+                 inode, filename);
   return (rc < 0 || rc >= bufsize) ? 0 : rc;
 }
 
@@ -708,7 +700,7 @@ namespace tcmalloc {
 // We do not provision for 0-terminating 'buf'.
 int FillProcSelfMaps(char buf[], int size, bool* wrote_all) {
   ProcMapsIterator::Buffer iterbuf;
-  ProcMapsIterator it(0, &iterbuf);   // 0 means "current pid"
+  ProcMapsIterator it(0, &iterbuf);  // 0 means "current pid"
 
   uint64 start, end, offset;
   int64 inode;
@@ -720,15 +712,15 @@ int FillProcSelfMaps(char buf[], int size, bool* wrote_all) {
                                           size - bytes_written,
                                           start, end, flags, offset,
                                           inode, filename, 0);
-    if (line_length == 0)
-      *wrote_all = false;     // failed to write this line out
-    else
+    // failed to write this line out
+    if (line_length == 0) {
+      *wrote_all = false;
+    } else {
       bytes_written += line_length;
+    }
   }
   return bytes_written;
 }
-
-#define NO_INTR(fn)  do {} while ((fn) < 0 && errno == EINTR)
 
 void RawWrite(int fd, const char* buf, size_t len) {
   while (len > 0) {
@@ -739,12 +731,13 @@ void RawWrite(int fd, const char* buf, size_t len) {
     len -= r;
   }
 }
+
 // Dump the same data as FillProcSelfMaps reads to fd.
 // It seems easier to repeat parts of FillProcSelfMaps here than to
 // reuse it via a call.
 void DumpProcSelfMaps(int fd) {
   ProcMapsIterator::Buffer iterbuf;
-  ProcMapsIterator it(0, &iterbuf);   // 0 means "current pid"
+  ProcMapsIterator it(0, &iterbuf);  // 0 means "current pid"
 
   uint64 start, end, offset;
   int64 inode;
@@ -752,8 +745,7 @@ void DumpProcSelfMaps(int fd) {
   ProcMapsIterator::Buffer linebuf;
   while (it.Next(&start, &end, &flags, &offset, &inode, &filename)) {
     int written = it.FormatLine(linebuf.buf_, sizeof(linebuf.buf_),
-                                start, end, flags, offset, inode, filename,
-                                0);
+                                start, end, flags, offset, inode, filename, 0);
     RawWrite(fd, linebuf.buf_, written);
   }
 }

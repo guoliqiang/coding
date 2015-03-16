@@ -38,8 +38,8 @@
 
 #include <stdio.h>
 #include <errno.h>
-#include <sys/time.h>
 #include <time.h>
+#include <sys/time.h>
 #include <sys/syscall.h>
 #include <list>
 #include <string>
@@ -62,8 +62,7 @@ struct ProfileHandlerToken {
   // Sets the callback and associated arg.
   ProfileHandlerToken(ProfileHandlerCallback cb, void* cb_arg)
       : callback(cb),
-        callback_arg(cb_arg) { }
-
+        callback_arg(cb_arg) {}
   // Callback function to be invoked on receiving a profile timer interrupt.
   ProfileHandlerCallback callback;
   // Argument for the callback function.
@@ -194,39 +193,19 @@ class ProfileHandler {
   DISALLOW_COPY_AND_ASSIGN(ProfileHandler);
 };
 
-ProfileHandler* ProfileHandler::instance_ = NULL;
+ProfileHandler * ProfileHandler::instance_ = NULL;
 pthread_once_t ProfileHandler::once_ = PTHREAD_ONCE_INIT;
 
 const int32 ProfileHandler::kMaxFrequency;
 const int32 ProfileHandler::kDefaultFrequency;
 
-// If we are LD_PRELOAD-ed against a non-pthreads app, then
-// pthread_once won't be defined.  We declare it here, for that
-// case (with weak linkage) which will cause the non-definition to
-// resolve to NULL.  We can then check for NULL or not in Instance.
-int pthread_once(pthread_once_t *, void (*)(void));
-
-// We use weak alias to timer_create to avoid runtime dependency on
-// -lrt and in turn -lpthread.
-//
-// At runtime we detect if timer_create is available and if so we
-// can enable linux-sigev-thread mode of profiling
-int timer_create(clockid_t clockid, struct sigevent *evp,
-                 timer_t *timerid);
-int timer_delete(timer_t timerid);
-int timer_settime(timer_t timerid, int flags,
-                  const struct itimerspec *value,
-                  struct itimerspec *ovalue);
-
 struct timer_id_holder {
-  timer_t timerid;
   explicit timer_id_holder(timer_t _timerid) : timerid(_timerid) { }
+  timer_t timerid;
 };
 
 static void ThreadTimerDestructor(void *arg) {
-  if (!arg) {
-    return;
-  }
+  if (!arg) return;
   timer_id_holder *holder = static_cast<timer_id_holder *>(arg);
   timer_delete(holder->timerid);
   delete holder;
@@ -259,13 +238,11 @@ static void StartLinuxThreadTimer(int timer_type,
   if (rv) {
     LOG(FATAL) << "aborting due to timer_create error:" << strerror(errno);
   }
-
   timer_id_holder *holder = new timer_id_holder(timerid);
   rv = perftools_pthread_setspecific(timer_key, holder);
   if (rv) {
     LOG(FATAL) << "aborting due to pthread_setspecific error:" << strerror(rv);
   }
-
   its.it_interval.tv_sec = 0;
   its.it_interval.tv_nsec = 1000000000 / frequency;
   its.it_value = its.it_interval;
@@ -281,13 +258,7 @@ void ProfileHandler::Init() {
 
 ProfileHandler* ProfileHandler::Instance() {
   pthread_once(&once_, Init);
-  if (instance_ == NULL) {
-    // This will be true on systems that don't link in pthreads,
-    // including on FreeBSD where pthread_once has a non-zero address
-    // (but doesn't do anything) even when pthreads isn't linked in.
-    Init();
-    assert(instance_ != NULL);
-  }
+  CHECK(instance_ != NULL);
   return instance_;
 }
 
@@ -299,13 +270,11 @@ ProfileHandler::ProfileHandler()
       timer_sharing_(TIMERS_UNTOUCHED) {
   SpinLockHolder cl(&control_lock_);
   timer_type_ = FLAGS_CPUPROFILE_REALTIME ? ITIMER_REAL : ITIMER_PROF;
-  // Limit to kMaxFrequency
   frequency_ = (FLAGS_frequency > kMaxFrequency) ?
                kMaxFrequency : FLAGS_frequency;
   if (!allowed_) return;
-
-  // If something else is using the signal handler,
-  // assume it has priority over us and stop.
+  // If something else is using the signal handler, assume it has priority
+  // over us and stop.
   if (!IsSignalHandlerAvailable()) {
     LOG(INFO) << "Disabling profiler because handler is already in use."
               << (timer_type_ == ITIMER_REAL ? "SIGALRM" : "SIGPROF");
@@ -375,9 +344,9 @@ void ProfileHandler::RegisterThread() {
   }
 }
 
-ProfileHandlerToken* ProfileHandler::RegisterCallback(
+ProfileHandlerToken * ProfileHandler::RegisterCallback(
     ProfileHandlerCallback callback, void* callback_arg) {
-  ProfileHandlerToken* token = new ProfileHandlerToken(callback, callback_arg);
+  ProfileHandlerToken * token = new ProfileHandlerToken(callback, callback_arg);
   SpinLockHolder cl(&control_lock_);
   DisableHandler();
   {
@@ -395,8 +364,7 @@ ProfileHandlerToken* ProfileHandler::RegisterCallback(
 
 void ProfileHandler::UnregisterCallback(ProfileHandlerToken* token) {
   SpinLockHolder cl(&control_lock_);
-  for (CallbackIterator it = callbacks_.begin(); it != callbacks_.end();
-       ++it) {
+  for (CallbackIterator it = callbacks_.begin(); it != callbacks_.end(); ++it) {
     if ((*it) == token) {
       CHECK_GT(callback_count_, 0) << "Invalid callback count";
       DisableHandler();
@@ -414,8 +382,7 @@ void ProfileHandler::UnregisterCallback(ProfileHandlerToken* token) {
       return;
     }
   }
-  // Unknown token.
-  LOG(FATAL) << "Invalid token";
+  CHECK(false) << "Invalid token";
 }
 
 void ProfileHandler::Reset() {
@@ -463,7 +430,6 @@ void ProfileHandler::StartTimer() {
   timer.it_interval.tv_sec = 0;
   timer.it_interval.tv_usec = 1000000 / frequency_;
   timer.it_value = timer.it_interval;
-  LOG(INFO) << timer_type_ << " " <<  ITIMER_REAL << " " << ITIMER_PROF;
   setitimer(timer_type_, &timer, 0);
 }
 
@@ -493,7 +459,6 @@ void ProfileHandler::EnableHandler() {
   sa.sa_flags = SA_RESTART | SA_SIGINFO;
   sigemptyset(&sa.sa_mask);
   const int signal_number = (timer_type_ == ITIMER_PROF ? SIGPROF : SIGALRM);
-  LOG(INFO) << signal_number << " " << SIGPROF << " " << SIGALRM;
   CHECK(sigaction(signal_number, &sa, NULL) == 0) << "sigprof (enable)";
 }
 
@@ -532,8 +497,7 @@ void ProfileHandler::SignalHandler(int sig, siginfo_t* sinfo, void* ucontext) {
     SpinLockHolder sl(&instance->signal_lock_);
     ++instance->interrupts_;
     for (CallbackIterator it = instance->callbacks_.begin();
-         it != instance->callbacks_.end();
-         ++it) {
+         it != instance->callbacks_.end(); ++it) {
       (*it)->callback(sig, sinfo, ucontext, (*it)->callback_arg);
     }
   }

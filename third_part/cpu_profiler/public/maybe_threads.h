@@ -31,11 +31,6 @@
 // ---
 // Author: Paul Menage <opensource@google.com>
 
-//-------------------------------------------------------------------
-// Some wrappers for pthread functions so that we can be LD_PRELOADed
-// against non-pthreads apps.
-//-------------------------------------------------------------------
-
 #ifndef CPU_PROFILER_GOOGLE_MAYBE_THREADS_H_
 #define CPU_PROFILER_GOOGLE_MAYBE_THREADS_H_
 

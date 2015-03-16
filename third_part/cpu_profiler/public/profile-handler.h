@@ -49,7 +49,6 @@
 #include <signal.h>
 #include "base/public/basictypes.h"
 
-// Forward declaration.
 struct ProfileHandlerToken;
 
 // Callback function to be used with ProfilefHandlerRegisterCallback. This

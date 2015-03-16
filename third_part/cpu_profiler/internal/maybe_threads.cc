@@ -45,7 +45,6 @@
 #include <string>
 #include "base/public/basictypes.h"
 
-
 // NOTE: it's similar to bitcast defined in basic_types.h with
 // exception of ignoring sizes mismatch
 template <typename T1, typename T2>
@@ -75,7 +74,6 @@ void *perftools_pthread_getspecific(pthread_key_t key) {
 int perftools_pthread_setspecific(pthread_key_t key, void *val) {
   return pthread_setspecific(key, val);
 }
-
 
 int perftools_pthread_once(pthread_once_t *ctl,
                            void  (*init_routine) (void)) {  // NOLINT

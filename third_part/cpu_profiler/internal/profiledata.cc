@@ -47,8 +47,6 @@
 #include "base/public/logging.h"
 #include "third_part/cpu_profiler/public/sysinfo.h"
 
-#define PRIuS "lu"
-
 // All of these are initialized in profiledata.h.
 const int ProfileData::kMaxStackDepth;
 const int ProfileData::kAssociativity;
@@ -61,7 +59,7 @@ ProfileData::Options::Options() : frequency_(1) { }
 // re-entrant).  However, that's not part of its public interface.
 void ProfileData::Evict(const Entry& entry) {
   const int d = entry.depth;
-  const int nslots = d + 2;     // Number of slots needed in eviction buffer
+  const int nslots = d + 2;  // Number of slots needed in eviction buffer
   if (num_evicted_ + nslots > kBufferLength) {
     FlushEvicted();
     assert(num_evicted_ == 0);
@@ -82,19 +80,16 @@ ProfileData::ProfileData()
       evictions_(0),
       total_bytes_(0),
       fname_(0),
-      start_time_(0) { }
+      start_time_(0) {}
 
 bool ProfileData::Start(const char* fname,
                         const ProfileData::Options& options) {
   if (enabled()) return false;
-
   // Open output file and initialize various data structures
   int fd = open(fname, O_CREAT | O_WRONLY | O_TRUNC, 0666);
   if (fd < 0) return false;
-
   start_time_ = time(NULL);
   fname_ = strdup(fname);
-
   // Reset counters
   num_evicted_ = 0;
   count_ = 0;
@@ -104,7 +99,6 @@ bool ProfileData::Start(const char* fname,
   hash_ = new Bucket[kBuckets];
   evict_ = new Slot[kBufferLength];
   memset(hash_, 0, sizeof(hash_[0]) * kBuckets);
-
   // Record special entries
   evict_[num_evicted_++] = 0;  // count for header
   evict_[num_evicted_++] = 3;  // depth for header
@@ -145,15 +139,13 @@ static void DumpProcSelfMaps(int fd) {
   ProcMapsIterator::Buffer linebuf;
   while (it.Next(&start, &end, &flags, &offset, &inode, &filename)) {
     int written = it.FormatLine(linebuf.buf_, sizeof(linebuf.buf_),
-                                start, end, flags, offset, inode, filename,
-                                0);
+                                start, end, flags, offset, inode, filename, 0);
     FDWrite(fd, linebuf.buf_, written);
   }
 }
 
 void ProfileData::Stop() {
   if (!enabled())  return;
-
   // Move data from hash table to eviction buffer
   for (int b = 0; b < kBuckets; b++) {
     Bucket* bucket = &hash_[b];
@@ -168,17 +160,15 @@ void ProfileData::Stop() {
     // Ensure there is enough room for end of data marker
     FlushEvicted();
   }
-
   // Write end of data marker
   evict_[num_evicted_++] = 0;  // count
   evict_[num_evicted_++] = 1;  // depth
   evict_[num_evicted_++] = 0;  // end of data marker
   FlushEvicted();
-
   // Dump "/proc/self/maps" so we get list of mapped shared libraries
   DumpProcSelfMaps(out_);
   Reset();
-  fprintf(stderr, "PROFILE: interrupts/evictions/bytes = %d/%d/%" PRIuS "\n",
+  fprintf(stderr, "PROFILE: interrupts/evictions/bytes = %d/%d/%lu\n",
           count_, evictions_, total_bytes_);
 }
 
@@ -196,7 +186,6 @@ void ProfileData::Reset() {
   free(fname_);
   fname_ = 0;
   start_time_ = 0;
-
   out_ = -1;
 }
 
@@ -222,7 +211,6 @@ void ProfileData::GetCurrentState(State* state) const {
 // re-entrant).  However, that's not part of its public interface.
 void ProfileData::FlushTable() {
   if (!enabled()) return;
-
   // Move data from hash table to eviction buffer
   for (int b = 0; b < kBuckets; b++) {
     Bucket* bucket = &hash_[b];
@@ -234,17 +222,14 @@ void ProfileData::FlushTable() {
       }
     }
   }
-
   // Write out all pending data
   FlushEvicted();
 }
 
 void ProfileData::Add(int depth, const void* const* stack) {
   if (!enabled()) return;
-
   if (depth > kMaxStackDepth) depth = kMaxStackDepth;
   CHECK_GT(depth, 0) << "ProfileData::Add depth <= 0";
-
   // Make hash-value
   Slot h = 0;
   for (int i = 0; i < depth; i++) {
@@ -252,9 +237,7 @@ void ProfileData::Add(int depth, const void* const* stack) {
     h = (h << 8) | (h >> (8*(sizeof(h)-1)));
     h += (slot * 31) + (slot * 7) + (slot * 3);
   }
-
   count_++;
-
   // See if table already has an entry for this trace
   bool done = false;
   Bucket* bucket = &hash_[h % kBuckets];
@@ -275,7 +258,6 @@ void ProfileData::Add(int depth, const void* const* stack) {
       }
     }
   }
-
   if (!done) {
     // Evict entry with smallest count
     Entry* e = &bucket->entry[0];
@@ -288,7 +270,6 @@ void ProfileData::Add(int depth, const void* const* stack) {
       evictions_++;
       Evict(*e);
     }
-
     // Use the newly evicted entry
     e->depth = depth;
     e->count = 1;

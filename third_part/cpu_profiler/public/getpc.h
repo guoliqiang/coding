@@ -47,7 +47,7 @@
 
 #define PC_FROM_UCONTEXT uc_mcontext.gregs[REG_RIP]
 inline void* GetPC(const ucontext_t& signal_ucontext) {
-  return (void*)signal_ucontext.PC_FROM_UCONTEXT;   // defined in config.h
+  return (void*)signal_ucontext.PC_FROM_UCONTEXT;  // defined in config.h
 }
 
 #endif  // CPU_PROFILER_BASE_GETPC_H_

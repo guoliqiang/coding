@@ -31,15 +31,15 @@
 // All functions here are thread-hostile due to file caching unless
 // commented otherwise.
 
-#ifndef _SYSINFO_H_
-#define _SYSINFO_H_
+#ifndef CPU_PROFILER_SYSINFO_H_
+#define CPU_PROFILER_SYSINFO_H_
 
 #include <time.h>
-#include <unistd.h>    // for pid_t
-#include <stddef.h>    // for size_t
-#include <limits.h>    // for PATH_MAX
+#include <unistd.h>
+#include <stddef.h>
+#include <limits.h>
 #include "base/public/basictypes.h"
-#include "base/public/logging.h"   // for RawFD
+#include "base/public/logging.h"
 
 // This getenv function is safe to call before the C runtime is initialized.
 // On Windows, it utilizes GetEnvironmentVariable() and on unix it uses
@@ -61,14 +61,10 @@ extern const char* GetenvBeforeMain(const char* name);
 // path to that path, and returns true.  Non-trivial for surprising
 // reasons, as documented in sysinfo.cc.  path must have space PATH_MAX.
 extern bool GetUniquePathFromEnv(const char* env_name, char* path);
-
 extern int NumCPUs();
-
 void SleepForMilliseconds(int milliseconds);
-
 // processor cycles per second of each processor.  Thread-safe.
 extern double CyclesPerSecond(void);
-
 
 //  Return true if we're running POSIX (e.g., NPTL on Linux) threads,
 //  as opposed to a non-POSIX thread library.  The thing that we care
@@ -77,7 +73,6 @@ extern double CyclesPerSecond(void);
 //  Thread-safe.
 //  Note: We consider false negatives to be OK.
 bool HasPosixThreads();
-
 
 // A ProcMapsIterator abstracts access to /proc/maps for a given
 // process. Needs to be stack-allocatable and avoid using stdio/malloc
@@ -93,16 +88,9 @@ bool HasPosixThreads();
 class ProcMapsIterator {
  public:
   struct Buffer {
-#ifdef __FreeBSD__
-    // FreeBSD requires us to read all of the maps file at once, so
-    // we have to make a buffer that's "always" big enough
-    static const size_t kBufSize = 102400;
-#else   // a one-line buffer is good enough
     static const size_t kBufSize = PATH_MAX + 1024;
-#endif
     char buf_[kBufSize];
   };
-
 
   // Create a new iterator for the specified pid.  pid can be 0 for "self".
   explicit ProcMapsIterator(pid_t pid);
@@ -144,9 +132,14 @@ class ProcMapsIterator {
   // then the output of this function is only valid if Next() returned
   // true, and only until the iterator is destroyed or Next() is
   // called again.  (Since filename, at least, points into CurrentLine.)
-  static int FormatLine(char* buffer, int bufsize,
-                        long long unsigned int start, long long unsigned int end, const char *flags,
-                        long long unsigned int offset, long long int inode, const char *filename,
+  static int FormatLine(char* buffer,
+                        int bufsize,
+                        long long unsigned int start,
+                        long long unsigned int end,
+                        const char *flags,
+                        long long unsigned int offset,
+                        long long int inode,
+                        const char *filename,
                         dev_t dev);
 
   // Find the next entry in /proc/maps; return true if found or false
@@ -181,34 +174,12 @@ class ProcMapsIterator {
  private:
   void Init(pid_t pid, Buffer *buffer, bool use_maps_backing);
 
-  char *ibuf_;        // input buffer
-  char *stext_;       // start of text
-  char *etext_;       // end of text
-  char *nextline_;    // start of next line
-  char *ebuf_;        // end of buffer (1 char for a nul)
-#if (defined(_WIN32) || defined(__MINGW32__)) && (!defined(__CYGWIN__) && !defined(__CYGWIN32__))
-  HANDLE snapshot_;   // filehandle on dll info
-  // In a change from the usual W-A pattern, there is no A variant of
-  // MODULEENTRY32.  Tlhelp32.h #defines the W variant, but not the A.
-  // We want the original A variants, and this #undef is the only
-  // way I see to get them.  Redefining it when we're done prevents us
-  // from affecting other .cc files.
-# ifdef MODULEENTRY32  // Alias of W
-#   undef MODULEENTRY32
-  MODULEENTRY32 module_;   // info about current dll (and dll iterator)
-#   define MODULEENTRY32 MODULEENTRY32W
-# else  // It's the ascii, the one we want.
-  MODULEENTRY32 module_;   // info about current dll (and dll iterator)
-# endif
-#elif defined(__MACH__)
-  int current_image_; // dll's are called "images" in macos parlance
-  int current_load_cmd_;   // the segment of this dll we're examining
-#elif defined(__sun__)     // Solaris
-  int fd_;
-  char current_filename_[PATH_MAX];
-#else
-  int fd_;            // filehandle on /proc/*/maps
-#endif
+  char *ibuf_;  // input buffer
+  char *stext_;  // start of text
+  char *etext_;  // end of text
+  char *nextline_;  // start of next line
+  char *ebuf_;  // end of buffer (1 char for a nul)
+  int fd_;  // filehandle on /proc/*/maps
   pid_t pid_;
   char flags_[10];
   Buffer* dynamic_buffer_;  // dynamically-allocated Buffer
@@ -216,10 +187,8 @@ class ProcMapsIterator {
 };
 
 // Helper routines
-
 namespace tcmalloc {
 int FillProcSelfMaps(char buf[], int size, bool* wrote_all);
 void DumpProcSelfMaps(int fd);
 }
-
-#endif   /* #ifndef _SYSINFO_H_ */
+#endif   // CPU_PROFILER_SYSINFO_H_
