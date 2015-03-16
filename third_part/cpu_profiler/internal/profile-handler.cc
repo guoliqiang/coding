@@ -590,3 +590,4 @@ void ProfileHandlerGetState(ProfileHandlerState* state) {
   ProfileHandler::Instance()->GetState(state);
 }
 
+REGISTER_MODULE_INITIALIZER(profile_main, ProfileHandlerRegisterThread());

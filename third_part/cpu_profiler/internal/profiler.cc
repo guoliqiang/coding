@@ -176,10 +176,9 @@ bool CpuProfiler::Start(const char* fname, const ProfilerOptions* options) {
   ProfileData::Options collector_options;
   collector_options.set_frequency(prof_handler_state.frequency);
   if (!collector_.Start(fname, collector_options)) {
-    LOG(INFO) << "Start Error";
+    LOG(WARNING) << "Start Error";
     return false;
   }
-  LOG(INFO) << "Start OK";
 
   filter_ = NULL;
   if (options != NULL && options->filter_in_thread != NULL) {

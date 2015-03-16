@@ -55,8 +55,7 @@ const int ProfileData::kAssociativity;
 const int ProfileData::kBuckets;
 const int ProfileData::kBufferLength;
 
-ProfileData::Options::Options()
-    : frequency_(1) { }
+ProfileData::Options::Options() : frequency_(1) { }
 
 // This function is safe to call from asynchronous signals (but is not
 // re-entrant).  However, that's not part of its public interface.
@@ -83,8 +82,7 @@ ProfileData::ProfileData()
       evictions_(0),
       total_bytes_(0),
       fname_(0),
-      start_time_(0) {
-}
+      start_time_(0) { }
 
 bool ProfileData::Start(const char* fname,
                         const ProfileData::Options& options) {
@@ -92,10 +90,7 @@ bool ProfileData::Start(const char* fname,
 
   // Open output file and initialize various data structures
   int fd = open(fname, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-  if (fd < 0) {
-    // Can't open outfile for write
-    return false;
-  }
+  if (fd < 0) return false;
 
   start_time_ = time(NULL);
   fname_ = strdup(fname);

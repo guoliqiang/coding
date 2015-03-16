@@ -17,3 +17,4 @@ opt:
 
 clean:
 	rm -rf profile_unittest
+	rm -rf profiler.prof

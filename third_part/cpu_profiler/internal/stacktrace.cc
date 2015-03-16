@@ -80,7 +80,8 @@ struct GetStackImplementation {
   const char *name;
 };
 
-#define STACKTRACE_INL_HEADER "third_part/cpu_profiler/public/stacktrace_libunwind-inl.h"
+#define STACKTRACE_INL_HEADER \
+"third_part/cpu_profiler/public/stacktrace_libunwind-inl.h"
 #define GST_SUFFIX libunwind
 #include "third_part/cpu_profiler/public/stacktrace_impl_setup-inl.h"
 #undef GST_SUFFIX
