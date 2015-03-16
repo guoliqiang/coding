@@ -40,6 +40,7 @@
 #include <errno.h>
 #include <sys/time.h>
 #include <time.h>
+#include <sys/syscall.h>
 #include <list>
 #include <string>
 #include "third_part/cpu_profiler/public/maybe_threads.h"
@@ -47,6 +48,8 @@
 #include "base/public/mutex.h"
 
 DEFINE_int32(frequency, 1000, "");
+DEFINE_bool(CPUPROFILE_PER_THREAD_TIMERS, false, "");
+DEFINE_bool(CPUPROFILE_REALTIME, false, "");
 
 using std::list;
 using std::string;
@@ -59,13 +62,12 @@ struct ProfileHandlerToken {
   // Sets the callback and associated arg.
   ProfileHandlerToken(ProfileHandlerCallback cb, void* cb_arg)
       : callback(cb),
-        callback_arg(cb_arg) {
-  }
+        callback_arg(cb_arg) { }
 
   // Callback function to be invoked on receiving a profile timer interrupt.
   ProfileHandlerCallback callback;
   // Argument for the callback function.
-  void* callback_arg;
+  void * callback_arg;
 };
 
 // This class manages profile timers and associated signal handler. This is a
@@ -85,26 +87,21 @@ class ProfileHandler {
   // that timers are shared, then it will stop the timer if no callbacks are
   // currently registered.
   void RegisterThread();
-
   // Registers a callback routine to receive profile timer ticks. The returned
   // token is to be used when unregistering this callback and must not be
   // deleted by the caller. Registration of the first callback enables the
   // SIGPROF handler (or SIGALRM if using ITIMER_REAL).
   ProfileHandlerToken* RegisterCallback(ProfileHandlerCallback callback,
                                         void* callback_arg);
-
   // Unregisters a previously registered callback. Expects the token returned
   // by the corresponding RegisterCallback routine. Unregistering the last
   // callback disables the SIGPROF handler (or SIGALRM if using ITIMER_REAL).
   void UnregisterCallback(ProfileHandlerToken* token);
-
   // Unregisters all the callbacks, stops the timer if shared, disables the
   // SIGPROF (or SIGALRM) handler and clears the timer_sharing_ state.
   void Reset();
-
   // Gets the current state of profile handler.
   void GetState(ProfileHandlerState* state);
-
   // Initializes and returns the ProfileHandler singleton.
   static ProfileHandler* Instance();
 
@@ -133,13 +130,9 @@ class ProfileHandler {
   // Is profiling allowed at all?
   bool allowed_;
   bool per_thread_timer_enabled_;
-
-#ifdef HAVE_LINUX_SIGEV_THREAD_ID
   // this is used to destroy per-thread profiling timers on thread
   // termination
   pthread_key_t thread_timer_key;
-#endif
-
   // Whether or not the threading system provides interval timers that are
   // shared by all threads in a process.
   enum {
@@ -152,7 +145,6 @@ class ProfileHandler {
     // Timers are separate in each thread.
     TIMERS_SEPARATE
   } timer_sharing_;
-
   // This lock serializes the registration of threads and protects the
   // callbacks_ list below.
   // Locking order:
@@ -161,7 +153,6 @@ class ProfileHandler {
   // handler and then acquire signal_lock_.
   SpinLock control_lock_;
   SpinLock signal_lock_;
-
   // Holds the list of registered callbacks. We expect the list to be pretty
   // small. Currently, the cpu profiler (base/profiler) and thread module
   // (base/thread.h) are the only two components registering callbacks.
@@ -178,7 +169,6 @@ class ProfileHandler {
   typedef list<ProfileHandlerToken*> CallbackList;
   typedef CallbackList::iterator CallbackIterator;
   CallbackList callbacks_;
-
   // Starts the interval timer.  If the thread library shares timers between
   // threads, this function starts the shared timer. Otherwise, this will start
   // the timer in the current thread.
@@ -215,8 +205,6 @@ const int32 ProfileHandler::kDefaultFrequency;
 // case (with weak linkage) which will cause the non-definition to
 // resolve to NULL.  We can then check for NULL or not in Instance.
 int pthread_once(pthread_once_t *, void (*)(void));
-
-#if HAVE_LINUX_SIGEV_THREAD_ID
 
 // We use weak alias to timer_create to avoid runtime dependency on
 // -lrt and in turn -lpthread.
@@ -260,7 +248,7 @@ static void StartLinuxThreadTimer(int timer_type,
   struct itimerspec its;
   memset(&sevp, 0, sizeof(sevp));
   sevp.sigev_notify = SIGEV_THREAD_ID;
-  sevp._sigev_un._tid = sys_gettid();
+  sevp._sigev_un._tid = syscall(__NR_gettid);
   const int signal_number = (timer_type == ITIMER_PROF ? SIGPROF : SIGALRM);
   sevp.sigev_signo = signal_number;
   clockid_t clock = CLOCK_THREAD_CPUTIME_ID;
@@ -286,7 +274,6 @@ static void StartLinuxThreadTimer(int timer_type,
     LOG(FATAL) << "aborting due to timer_settime error:" << strerror(errno);
   }
 }
-#endif
 
 void ProfileHandler::Init() {
   instance_ = new ProfileHandler();
@@ -311,7 +298,7 @@ ProfileHandler::ProfileHandler()
       per_thread_timer_enabled_(false),
       timer_sharing_(TIMERS_UNTOUCHED) {
   SpinLockHolder cl(&control_lock_);
-  timer_type_ = (getenv("CPUPROFILE_REALTIME") ? ITIMER_REAL : ITIMER_PROF);
+  timer_type_ = FLAGS_CPUPROFILE_REALTIME ? ITIMER_REAL : ITIMER_PROF;
   // Limit to kMaxFrequency
   frequency_ = (FLAGS_frequency > kMaxFrequency) ?
                kMaxFrequency : FLAGS_frequency;
@@ -325,33 +312,21 @@ ProfileHandler::ProfileHandler()
     allowed_ = false;
     return;
   }
-
   // Ignore signals until we decide to turn profiling on.  (Paranoia;
   // should already be ignored.)
   DisableHandler();
-
-#if HAVE_LINUX_SIGEV_THREAD_ID
-  if (getenv("CPUPROFILE_PER_THREAD_TIMERS")) {
-    if (timer_create && pthread_once) {
-      timer_sharing_ = TIMERS_SEPARATE;
-      CreateThreadTimerKey(&thread_timer_key);
-      per_thread_timer_enabled_ = true;
-    } else {
-      LOG(INFO) << "Not enabling linux-per-thread-timers mode due to lack "
-                   "of timer_create. Preload or link to librt.so for "
-                   "this to work";
-    }
+  if (FLAGS_CPUPROFILE_PER_THREAD_TIMERS) {
+    timer_sharing_ = TIMERS_SEPARATE;
+    CreateThreadTimerKey(&thread_timer_key);
+    per_thread_timer_enabled_ = true;
   }
-#endif
 }
 
 ProfileHandler::~ProfileHandler() {
   Reset();
-#ifdef HAVE_LINUX_SIGEV_THREAD_ID
   if (per_thread_timer_enabled_) {
     perftools_pthread_key_delete(thread_timer_key);
   }
-#endif
 }
 
 void ProfileHandler::RegisterThread() {
@@ -480,18 +455,15 @@ void ProfileHandler::GetState(ProfileHandlerState* state) {
 
 void ProfileHandler::StartTimer() {
   if (!allowed_) return;
-
-#if HAVE_LINUX_SIGEV_THREAD_ID
   if (per_thread_timer_enabled_) {
     StartLinuxThreadTimer(timer_type_, frequency_, thread_timer_key);
     return;
   }
-#endif
-
   struct itimerval timer;
   timer.it_interval.tv_sec = 0;
   timer.it_interval.tv_usec = 1000000 / frequency_;
   timer.it_value = timer.it_interval;
+  LOG(INFO) << timer_type_ << " " <<  ITIMER_REAL << " " << ITIMER_PROF;
   setitimer(timer_type_, &timer, 0);
 }
 
@@ -500,7 +472,6 @@ void ProfileHandler::StopTimer() {
   if (per_thread_timer_enabled_) {
     LOG(FATAL) << "StopTimer cannot be called in linux-per-thread-timers mode";
   }
-
   struct itimerval timer;
   memset(&timer, 0, sizeof timer);
   setitimer(timer_type_, &timer, 0);
@@ -522,6 +493,7 @@ void ProfileHandler::EnableHandler() {
   sa.sa_flags = SA_RESTART | SA_SIGINFO;
   sigemptyset(&sa.sa_mask);
   const int signal_number = (timer_type_ == ITIMER_PROF ? SIGPROF : SIGALRM);
+  LOG(INFO) << signal_number << " " << SIGPROF << " " << SIGALRM;
   CHECK(sigaction(signal_number, &sa, NULL) == 0) << "sigprof (enable)";
 }
 
@@ -539,7 +511,6 @@ bool ProfileHandler::IsSignalHandlerAvailable() {
   struct sigaction sa;
   const int signal_number = (timer_type_ == ITIMER_PROF ? SIGPROF : SIGALRM);
   CHECK(sigaction(signal_number, NULL, &sa) == 0) << "is-signal-handler avail";
-
   // We only take over the handler if the current one is unset.
   // It must be SIG_IGN or SIG_DFL, not some other function.
   // SIG_IGN must be allowed because when profiling is allowed but

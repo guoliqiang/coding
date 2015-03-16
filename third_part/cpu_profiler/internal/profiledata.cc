@@ -97,8 +97,8 @@ bool ProfileData::Start(const char* fname,
 
   // Reset counters
   num_evicted_ = 0;
-  count_       = 0;
-  evictions_   = 0;
+  count_ = 0;
+  evictions_ = 0;
   total_bytes_ = 0;
 
   hash_ = new Bucket[kBuckets];
@@ -170,9 +170,9 @@ void ProfileData::Stop() {
   }
 
   // Write end of data marker
-  evict_[num_evicted_++] = 0;         // count
-  evict_[num_evicted_++] = 1;         // depth
-  evict_[num_evicted_++] = 0;         // end of data marker
+  evict_[num_evicted_++] = 0;  // count
+  evict_[num_evicted_++] = 1;  // depth
+  evict_[num_evicted_++] = 0;  // end of data marker
   FlushEvicted();
 
   // Dump "/proc/self/maps" so we get list of mapped shared libraries
@@ -184,7 +184,6 @@ void ProfileData::Stop() {
 
 void ProfileData::Reset() {
   if (!enabled()) return;
-
   // Don't reset count_, evictions_, or total_bytes_ here.  They're used
   // by Stop to print information about the profile after reset, and are
   // cleared by Start when starting a new profile.

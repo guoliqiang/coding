@@ -4,3 +4,10 @@ cc_binary(name='profile_unittest',
                   '//third_part/cpu_profiler/internal:cpu_profiler',
                   ],
          )
+
+cc_binary(name='timer_unittest',
+          srcs = ['timer_unittest.cc'],
+          deps = [
+                  '//base/internal:base',
+                  ],
+         )

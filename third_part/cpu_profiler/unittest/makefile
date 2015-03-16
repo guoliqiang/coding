@@ -11,6 +11,7 @@ all:
 	$(WORK_ROOT)/develop/snake/snake.sh t=*
 	if test $$? -ne 0; then exit 1; fi; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/profile_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/timer_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 opt:
 
@@ -18,3 +19,4 @@ opt:
 clean:
 	rm -rf profile_unittest
 	rm -rf profiler.prof
+	rm -rf timer_unittest
