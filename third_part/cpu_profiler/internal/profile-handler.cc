@@ -47,7 +47,7 @@
 #include "base/public/logging.h"
 #include "base/public/mutex.h"
 
-DEFINE_int32(frequency, 1000, "");
+DEFINE_int32(FREQUENCY, 1000, "");
 DEFINE_bool(CPUPROFILE_PER_THREAD_TIMERS, false, "");
 DEFINE_bool(CPUPROFILE_REALTIME, false, "");
 
@@ -61,8 +61,7 @@ using base::SpinLockHolder;
 struct ProfileHandlerToken {
   // Sets the callback and associated arg.
   ProfileHandlerToken(ProfileHandlerCallback cb, void* cb_arg)
-      : callback(cb),
-        callback_arg(cb_arg) {}
+      : callback(cb), callback_arg(cb_arg) {}
   // Callback function to be invoked on receiving a profile timer interrupt.
   ProfileHandlerCallback callback;
   // Argument for the callback function.
@@ -218,8 +217,7 @@ static void CreateThreadTimerKey(pthread_key_t *pkey) {
   }
 }
 
-static void StartLinuxThreadTimer(int timer_type,
-                                  int32 frequency,
+static void StartLinuxThreadTimer(int timer_type, int32 frequency,
                                   pthread_key_t timer_key) {
   int rv;
   struct sigevent sevp;
@@ -270,8 +268,8 @@ ProfileHandler::ProfileHandler()
       timer_sharing_(TIMERS_UNTOUCHED) {
   SpinLockHolder cl(&control_lock_);
   timer_type_ = FLAGS_CPUPROFILE_REALTIME ? ITIMER_REAL : ITIMER_PROF;
-  frequency_ = (FLAGS_frequency > kMaxFrequency) ?
-               kMaxFrequency : FLAGS_frequency;
+  frequency_ = (FLAGS_FREQUENCY > kMaxFrequency) ?
+               kMaxFrequency : FLAGS_FREQUENCY;
   if (!allowed_) return;
   // If something else is using the signal handler, assume it has priority
   // over us and stop.

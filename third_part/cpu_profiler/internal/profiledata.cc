@@ -116,8 +116,6 @@ ProfileData::~ProfileData() {
   Stop();
 }
 
-#define NO_INTR(fn)  do {} while ((fn) < 0 && errno == EINTR)
-
 static void FDWrite(int fd, const char* buf, size_t len) {
   while (len > 0) {
     ssize_t r;
@@ -128,10 +126,11 @@ static void FDWrite(int fd, const char* buf, size_t len) {
   }
 }
 
-// Dump /proc/maps data to fd.  Copied from heap-profile-table.cc.
+// Dump /proc/maps data to fd.
 static void DumpProcSelfMaps(int fd) {
   ProcMapsIterator::Buffer iterbuf;
-  ProcMapsIterator it(0, &iterbuf);  // 0 means "current pid"
+  // 0 means "current pid"
+  ProcMapsIterator it(0, &iterbuf);
 
   uint64 start, end, offset;
   int64 inode;
@@ -165,11 +164,11 @@ void ProfileData::Stop() {
   evict_[num_evicted_++] = 1;  // depth
   evict_[num_evicted_++] = 0;  // end of data marker
   FlushEvicted();
-  // Dump "/proc/self/maps" so we get list of mapped shared libraries
+  // Dump /proc/self/maps so we get list of mapped shared libraries
   DumpProcSelfMaps(out_);
   Reset();
-  fprintf(stderr, "PROFILE: interrupts/evictions/bytes = %d/%d/%lu\n",
-          count_, evictions_, total_bytes_);
+  LOG(INFO) << "PROFILE: interrupts/evictions/bytes ="
+            << count_ << "/" << evictions_ << "/" << total_bytes_;
 }
 
 void ProfileData::Reset() {

@@ -41,39 +41,6 @@
 #include "base/public/basictypes.h"
 #include "base/public/logging.h"
 
-// This getenv function is safe to call before the C runtime is initialized.
-// On Windows, it utilizes GetEnvironmentVariable() and on unix it uses
-// /proc/self/environ instead calling getenv().  It's intended to be used in
-// routines that run before main(), when the state required for getenv() may
-// not be set up yet.  In particular, errno isn't set up until relatively late
-// (after the pthreads library has a chance to make it threadsafe), and
-// getenv() doesn't work until then. 
-// On some platforms, this call will utilize the same, static buffer for
-// repeated GetenvBeforeMain() calls. Callers should not expect pointers from
-// this routine to be long lived.
-// Note that on unix, /proc only has the environment at the time the
-// application was started, so this routine ignores setenv() calls/etc.  Also
-// note it only reads the first 16K of the environment.
-extern const char* GetenvBeforeMain(const char* name);
-
-// This takes as an argument an environment-variable name (like
-// CPUPROFILE) whose value is supposed to be a file-path, and sets
-// path to that path, and returns true.  Non-trivial for surprising
-// reasons, as documented in sysinfo.cc.  path must have space PATH_MAX.
-extern bool GetUniquePathFromEnv(const char* env_name, char* path);
-extern int NumCPUs();
-void SleepForMilliseconds(int milliseconds);
-// processor cycles per second of each processor.  Thread-safe.
-extern double CyclesPerSecond(void);
-
-//  Return true if we're running POSIX (e.g., NPTL on Linux) threads,
-//  as opposed to a non-POSIX thread library.  The thing that we care
-//  about is whether a thread's pid is the same as the thread that
-//  spawned it.  If so, this function returns true.
-//  Thread-safe.
-//  Note: We consider false negatives to be OK.
-bool HasPosixThreads();
-
 // A ProcMapsIterator abstracts access to /proc/maps for a given
 // process. Needs to be stack-allocatable and avoid using stdio/malloc
 // so it can be used in the google stack dumper, heap-profiler, etc.
@@ -91,30 +58,24 @@ class ProcMapsIterator {
     static const size_t kBufSize = PATH_MAX + 1024;
     char buf_[kBufSize];
   };
-
   // Create a new iterator for the specified pid.  pid can be 0 for "self".
   explicit ProcMapsIterator(pid_t pid);
-
   // Create an iterator with specified storage (for use in signal
   // handler). "buffer" should point to a ProcMapsIterator::Buffer
   // buffer can be NULL in which case a bufer will be allocated.
   ProcMapsIterator(pid_t pid, Buffer *buffer);
-
   // Iterate through maps_backing instead of maps if use_maps_backing
   // is true.  Otherwise the same as above.  buffer can be NULL and
   // it will allocate a buffer itself.
   ProcMapsIterator(pid_t pid, Buffer *buffer,
                    bool use_maps_backing);
-
   // Returns true if the iterator successfully initialized;
   bool Valid() const;
-
   // Returns a pointer to the most recently parsed line. Only valid
   // after Next() returns true, and until the iterator is destroyed or
   // Next() is called again.  This may give strange results on non-Linux
   // systems.  Prefer FormatLine() if that may be a concern.
   const char *CurrentLine() const { return stext_; }
-
   // Writes the "canonical" form of the /proc/xxx/maps info for a single
   // line to the passed-in buffer. Returns the number of bytes written,
   // or 0 if it was not able to write the complete line.  (To guarantee
@@ -132,16 +93,9 @@ class ProcMapsIterator {
   // then the output of this function is only valid if Next() returned
   // true, and only until the iterator is destroyed or Next() is
   // called again.  (Since filename, at least, points into CurrentLine.)
-  static int FormatLine(char* buffer,
-                        int bufsize,
-                        long long unsigned int start,
-                        long long unsigned int end,
-                        const char *flags,
-                        long long unsigned int offset,
-                        long long int inode,
-                        const char *filename,
-                        dev_t dev);
-
+  static int FormatLine(char* buffer, int bufsize, uint64 start,
+                        uint64 end, const char *flags, uint64 offset,
+                        int64 inode, const char *filename, dev_t dev);
   // Find the next entry in /proc/maps; return true if found or false
   // if at the end of the file.
   //
@@ -160,35 +114,40 @@ class ProcMapsIterator {
   // IMPORTANT NOTE: see top-of-class notes for details about what
   // mapped regions Next() iterates over, depending on O/S.
   // TODO(csilvers): make flags and filename const.
-  bool Next(uint64 *start, uint64 *end, char **flags,
-            uint64 *offset, int64 *inode, char **filename);
-
-  bool NextExt(uint64 *start, uint64 *end, char **flags,
-               uint64 *offset, int64 *inode, char **filename,
-               uint64 *file_mapping, uint64 *file_pages,
-               uint64 *anon_mapping, uint64 *anon_pages,
-               dev_t *dev);
-
+  bool Next(uint64 * start, uint64 * end, char ** flags,
+            uint64 * offset, int64 * inode, char ** filename);
+  bool NextExt(uint64 * start, uint64 * end, char ** flags,
+               uint64 * offset, int64 * inode, char ** filename,
+               uint64 * file_mapping, uint64 * file_pages,
+               uint64 * anon_mapping, uint64 * anon_pages,
+               dev_t * dev);
   ~ProcMapsIterator();
 
  private:
   void Init(pid_t pid, Buffer *buffer, bool use_maps_backing);
-
-  char *ibuf_;  // input buffer
-  char *stext_;  // start of text
-  char *etext_;  // end of text
-  char *nextline_;  // start of next line
-  char *ebuf_;  // end of buffer (1 char for a nul)
-  int fd_;  // filehandle on /proc/*/maps
+  // input buffer
+  char *ibuf_;
+  // start of text
+  char *stext_;
+  // end of text
+  char *etext_;
+  // start of next line
+  char *nextline_;
+  // end of buffer (1 char for a nul)
+  char *ebuf_;
+  // filehandle on /proc/*/maps
+  int fd_;
   pid_t pid_;
   char flags_[10];
-  Buffer* dynamic_buffer_;  // dynamically-allocated Buffer
-  bool using_maps_backing_; // true if we are looking at maps_backing instead of maps.
+  // dynamically-allocated Buffer
+  Buffer* dynamic_buffer_;
+  // true if we are looking at maps_backing instead of maps.
+  bool using_maps_backing_;
 };
 
-// Helper routines
-namespace tcmalloc {
-int FillProcSelfMaps(char buf[], int size, bool* wrote_all);
-void DumpProcSelfMaps(int fd);
-}
+#define NO_INTR(fn)  do {} while ((fn) < 0 && errno == EINTR)
+# define safeopen(filename, mode)  open(filename, mode)
+# define saferead(fd, buffer, size)  read(fd, buffer, size)
+# define safeclose(fd)  close(fd)
+
 #endif   // CPU_PROFILER_SYSINFO_H_

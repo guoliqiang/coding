@@ -33,9 +33,6 @@
 //
 // Produce stack trace using libunwind
 
-
-
-
 #ifndef CPU_PROFILER_STACKTRACE_LIBINWIND_INL_H_
 #define CPU_PROFILER_STACKTRACE_LIBINWIND_INL_H_
 // Note: this file is included into stacktrace.cc more than once.

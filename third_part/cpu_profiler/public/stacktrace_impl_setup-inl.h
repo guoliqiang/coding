@@ -47,7 +47,8 @@
 #define IS_STACK_FRAMES 0
 #define IS_WITH_CONTEXT 0
 #define GET_STACK_TRACE_OR_FRAMES \
-  SIS_CONCAT(GetStackTrace_, GST_SUFFIX)(void **result, int max_depth, int skip_count)
+  SIS_CONCAT(GetStackTrace_, GST_SUFFIX)(void **result, int max_depth,\
+                                         int skip_count)
 #include STACKTRACE_INL_HEADER
 #undef IS_STACK_FRAMES
 #undef IS_WITH_CONTEXT
@@ -56,7 +57,8 @@
 #define IS_STACK_FRAMES 1
 #define IS_WITH_CONTEXT 0
 #define GET_STACK_TRACE_OR_FRAMES \
-  SIS_CONCAT(GetStackFrames_, GST_SUFFIX)(void **result, int *sizes, int max_depth, int skip_count)
+  SIS_CONCAT(GetStackFrames_, GST_SUFFIX)(void **result, int *sizes,\
+                                          int max_depth, int skip_count)
 #include STACKTRACE_INL_HEADER
 #undef IS_STACK_FRAMES
 #undef IS_WITH_CONTEXT
@@ -65,8 +67,10 @@
 #define IS_STACK_FRAMES 0
 #define IS_WITH_CONTEXT 1
 #define GET_STACK_TRACE_OR_FRAMES \
-  SIS_CONCAT(GetStackTraceWithContext_, GST_SUFFIX)(void **result, int max_depth, \
-                                                   int skip_count, const void *ucp)
+  SIS_CONCAT(GetStackTraceWithContext_, GST_SUFFIX)(void **result,   \
+                                                    int max_depth,   \
+                                                    int skip_count,  \
+                                                    const void *ucp)
 #include STACKTRACE_INL_HEADER
 #undef IS_STACK_FRAMES
 #undef IS_WITH_CONTEXT
@@ -75,8 +79,11 @@
 #define IS_STACK_FRAMES 1
 #define IS_WITH_CONTEXT 1
 #define GET_STACK_TRACE_OR_FRAMES \
-  SIS_CONCAT(GetStackFramesWithContext_, GST_SUFFIX)(void **result, int *sizes, int max_depth, \
-                                                    int skip_count, const void *ucp)
+  SIS_CONCAT(GetStackFramesWithContext_, GST_SUFFIX)(void **result,    \
+                                                     int *sizes,       \
+                                                     int max_depth,    \
+                                                     int skip_count,   \
+                                                     const void *ucp)
 #include STACKTRACE_INL_HEADER
 #undef IS_STACK_FRAMES
 #undef IS_WITH_CONTEXT

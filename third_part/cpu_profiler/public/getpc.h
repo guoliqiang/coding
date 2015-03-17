@@ -45,9 +45,8 @@
 #define CPU_PROFILER_BASE_GETPC_H_
 #include <ucontext.h>
 
-#define PC_FROM_UCONTEXT uc_mcontext.gregs[REG_RIP]
 inline void* GetPC(const ucontext_t& signal_ucontext) {
-  return (void*)signal_ucontext.PC_FROM_UCONTEXT;  // defined in config.h
+  return (void*)signal_ucontext.uc_mcontext.gregs[REG_RIP];
 }
 
 #endif  // CPU_PROFILER_BASE_GETPC_H_
