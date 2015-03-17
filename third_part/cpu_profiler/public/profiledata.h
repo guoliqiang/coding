@@ -78,30 +78,24 @@
 class ProfileData {
  public:
   struct State {
-    bool     enabled;             // Is profiling currently enabled?
-    time_t   start_time;          // If enabled, when was profiling started?
-    char     profile_name[1024];  // Name of file being written, or '\0'
-    int      samples_gathered;    // Number of samples gathered to far (or 0)
+    bool enabled;  // Is profiling currently enabled?
+    time_t start_time;  // If enabled, when was profiling started?
+    char profile_name[1024];  // Name of file being written, or '\0'
+    int samples_gathered; // Number of samples gathered to far (or 0)
   };
 
   class Options {
    public:
     Options();
-
     // Get and set the sample frequency.
-    int frequency() const {
-      return frequency_;
-    }
-    void set_frequency(int frequency) {
-      frequency_ = frequency;
-    }
+    int frequency() const { return frequency_; }
+    void set_frequency(int frequency) { frequency_ = frequency; }
 
    private:
-    int      frequency_;                  // Sample frequency.
+    int frequency_;  // Sample frequency.
   };
-
-  static const int kMaxStackDepth = 64;  // Max stack depth stored in profile
-
+  // Max stack depth stored in profile
+  static const int kMaxStackDepth = 128;
   ProfileData();
   ~ProfileData();
 
@@ -142,41 +136,37 @@ class ProfileData {
   void GetCurrentState(State* state) const;
 
  private:
-  static const int kAssociativity = 4;          // For hashtable
-  static const int kBuckets = 1 << 10;          // For hashtable
-  static const int kBufferLength = 1 << 18;     // For eviction buffer
+  static const int kAssociativity = 4;  // For hashtable
+  static const int kBuckets = 1 << 10;  // For hashtable
+  static const int kBufferLength = 1 << 18;  // For eviction buffer
 
   // Type of slots: each slot can be either a count, or a PC value
   typedef uintptr_t Slot;
-
   // Hash-table/eviction-buffer entry (a.k.a. a sample)
   struct Entry {
-    Slot count;                  // Number of hits
-    Slot depth;                  // Stack depth
+    Slot count;  // Number of hits
+    Slot depth;  // Stack depth
     Slot stack[kMaxStackDepth];  // Stack contents
   };
-
   // Hash table bucket
   struct Bucket {
     Entry entry[kAssociativity];
   };
 
-  Bucket*       hash_;          // hash table
-  Slot*         evict_;         // evicted entries
-  int           num_evicted_;   // how many evicted entries?
-  int           out_;           // fd for output file.
-  int           count_;         // How many samples recorded
-  int           evictions_;     // How many evictions
-  size_t        total_bytes_;   // How much output
-  char*         fname_;         // Profile file name
-  time_t        start_time_;    // Start time, or 0
+  Bucket * hash_;  // hash table
+  Slot * evict_;  // evicted entries
+  int num_evicted_;  // how many evicted entries?
+  int out_;  // fd for output file.
+  int count_;  // How many samples recorded
+  int evictions_;  // How many evictions
+  size_t total_bytes_;  // How much output
+  char * fname_;  // Profile file name
+  time_t start_time_;  // Start time, or 0
 
   // Move 'entry' to the eviction buffer.
   void Evict(const Entry& entry);
-
   // Write contents of eviction buffer to disk.
   void FlushEvicted();
-
   DISALLOW_COPY_AND_ASSIGN(ProfileData);
 };
 

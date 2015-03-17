@@ -313,11 +313,12 @@ void ProfileHandler::RegisterThread() {
   // not an issue for any Linux threading implementation, and should
   // not be a problem for a POSIX-compliant threads implementation.
   switch (timer_sharing_) {
-    case TIMERS_UNTOUCHED:
+    case TIMERS_UNTOUCHED: {
       StartTimer();
       timer_sharing_ = TIMERS_ONE_SET;
       break;
-    case TIMERS_ONE_SET:
+    }
+    case TIMERS_ONE_SET: {
       // If the timer is running, that means that the main thread's
       // timer setup is seen in this (second) thread -- and therefore
       // that timers are shared.
@@ -333,12 +334,15 @@ void ProfileHandler::RegisterThread() {
         StartTimer();
       }
       break;
-    case TIMERS_SHARED:
+    }
+    case TIMERS_SHARED: {
       // Nothing needed.
       break;
-    case TIMERS_SEPARATE:
+    }
+    case TIMERS_SEPARATE: {
       StartTimer();
       break;
+    }
   }
 }
 
@@ -449,7 +453,12 @@ bool ProfileHandler::IsTimerRunning() {
   return (current_timer.it_value.tv_sec != 0 ||
           current_timer.it_value.tv_usec != 0);
 }
-
+// SIGALRM : real time
+// SIGPROF: running process + running system code.
+// www.ucs.cam.ac.uk/docs/course-notes/unix-courses/Building/files/signals.pdf
+//
+// signal in multi-threads:
+// http://www.linuxprogrammingblog.com/all-about-linux-signals?page=11
 void ProfileHandler::EnableHandler() {
   if (!allowed_) return;
   struct sigaction sa;
@@ -522,5 +531,3 @@ void ProfileHandlerReset() {
 void ProfileHandlerGetState(ProfileHandlerState* state) {
   ProfileHandler::Instance()->GetState(state);
 }
-
-REGISTER_MODULE_INITIALIZER(profile_main, ProfileHandlerRegisterThread());

@@ -49,6 +49,8 @@
 #include "third_part/cpu_profiler/public/stacktrace.h"
 #include "base/public/logging.h"
 #include "base/public/mutex.h"
+#include "base/public/symbolize.h"
+#include "base/public/string_util.h"
 #include "third_part/cpu_profiler/public/profiledata.h"
 #include "third_part/cpu_profiler/public/profile-handler.h"
 
@@ -58,6 +60,7 @@ using base::SpinLockHolder;
 
 DEFINE_string(cpu_profiler_path, "cpu_profiler.prof", "");
 DEFINE_int32(cpu_profiler_signal, 12, "");
+DEFINE_bool(cpu_profiler_debug, true, "");
 
 // Collects up all profile data. This is a singleton, which is
 // initialized by a constructor at startup. If no cpu profiler
@@ -102,7 +105,7 @@ class CpuProfiler {
   void * filter_arg_;
   // Opaque token returned by the profile handler. To be used when calling
   // ProfileHandlerUnregisterCallback.
-  ProfileHandlerToken* prof_handler_token_;
+  ProfileHandlerToken * prof_handler_token_;
   // Sets up a callback to receive SIGPROF interrupt.
   void EnableHandler();
   // Disables receiving SIGPROF interrupt.
@@ -123,7 +126,7 @@ static void CpuProfilerSwitch(int signal_number) {
              FLAGS_cpu_profiler_path.c_str(), profile_count++);
     if (!ProfilerStart(full_profile_name)) {
       LOG(FATAL) << "Can't turn on cpu profiling for " << full_profile_name
-                 << strerror(errno);
+                 << " " << strerror(errno);
     }
   } else {
     ProfilerStop();
@@ -131,12 +134,10 @@ static void CpuProfilerSwitch(int signal_number) {
   started = !started;
 }
 
-// Profile data structure singleton: Constructor will check to see if
-// profiling should be enabled.  Destructor will write profile data
-// out to disk.
+// Profile data structure singleton: Constructor will check to see if profiling
+// should be enabled.  Destructor will write profile data out to disk.
 CpuProfiler CpuProfiler::instance_;
 
-// Initialize profiling: activated if getenv("CPUPROFILE") exists.
 CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
   if (getuid() != geteuid()) {
     LOG(WARNING) << "Cannot perform CPU profiling when running with setuid";
@@ -158,16 +159,21 @@ CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
 }
 
 bool CpuProfiler::Start(const char* fname, const ProfilerOptions* options) {
-  SpinLockHolder cl(&lock_);
-  if (collector_.enabled()) return false;
+  // register main thread/processor
+  ProfilerRegisterThread();
 
+  SpinLockHolder cl(&lock_);
+  if (collector_.enabled()) {
+    LOG(WARNING) << "profile has enabled";
+    return false;
+  }
   ProfileHandlerState prof_handler_state;
   ProfileHandlerGetState(&prof_handler_state);
 
   ProfileData::Options collector_options;
   collector_options.set_frequency(prof_handler_state.frequency);
   if (!collector_.Start(fname, collector_options)) {
-    LOG(WARNING) << "Start Error";
+    LOG(WARNING) << "start profiledata error";
     return false;
   }
 
@@ -246,13 +252,13 @@ void CpuProfiler::DisableHandler() {
 // access the data touched by prof_handler() disable this signal handler before
 // accessing the data and therefore cannot execute concurrently with
 // prof_handler().
-void CpuProfiler::prof_handler(int sig, siginfo_t*, void* signal_ucontext,
-                               void* cpu_profiler) {
+void CpuProfiler::prof_handler(int sig, siginfo_t *, void* signal_ucontext,
+                               void * cpu_profiler) {
   CpuProfiler* instance = static_cast<CpuProfiler*>(cpu_profiler);
 
   if (instance->filter_ == NULL ||
       (*instance->filter_)(instance->filter_arg_)) {
-    void* stack[ProfileData::kMaxStackDepth];
+    void * stack[ProfileData::kMaxStackDepth];
     // Under frame-pointer-based unwinding at least on x86, the
     // top-most active routine doesn't show up as a normal frame, but
     // as the "pc" value in the signal handler context.
@@ -266,16 +272,29 @@ void CpuProfiler::prof_handler(int sig, siginfo_t*, void* signal_ucontext,
     // unnecessarily.
     int depth = GetStackTraceWithContext(stack + 1, arraysize(stack) - 1,
                                          3, signal_ucontext);
-    void **used_stack;
+    void ** used_stack = NULL;
     if (stack[1] == stack[0]) {
       // in case of non-frame-pointer-based unwinding we will get
       // duplicate of PC in stack[1], which we don't want
       used_stack = stack + 1;
     } else {
       used_stack = stack;
-      depth++;  // To account for pc value in stack[0];
+      // To account for pc value in stack[0];
+      depth++;
     }
     instance->collector_.Add(depth, used_stack);
+
+    if (FLAGS_cpu_profiler_debug) {
+      char symbol[1024] = { 0 };
+      std::string debug_str;
+      for (int i = 0; i < depth; i++) {
+        if (google::Symbolize(static_cast<char *>(used_stack[i]),
+              symbol, sizeof(symbol))) {
+          debug_str = "[" + IntToString(i) + "]:" + symbol + "\n" + debug_str;
+        }
+      }
+      LOG(INFO) << "\n" << debug_str;
+    }
   }
 }
 

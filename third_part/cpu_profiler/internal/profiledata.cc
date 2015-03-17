@@ -57,7 +57,7 @@ ProfileData::Options::Options() : frequency_(1) { }
 
 // This function is safe to call from asynchronous signals (but is not
 // re-entrant).  However, that's not part of its public interface.
-void ProfileData::Evict(const Entry& entry) {
+void ProfileData::Evict(const Entry & entry) {
   const int d = entry.depth;
   const int nslots = d + 2;  // Number of slots needed in eviction buffer
   if (num_evicted_ + nslots > kBufferLength) {
@@ -227,9 +227,12 @@ void ProfileData::FlushTable() {
 
 void ProfileData::Add(int depth, const void* const* stack) {
   if (!enabled()) return;
-  if (depth > kMaxStackDepth) depth = kMaxStackDepth;
+  if (depth > kMaxStackDepth) {
+    LOG(WARNING) << depth << " is larger than default value " << kMaxStackDepth;
+    depth = kMaxStackDepth;
+  }
   CHECK_GT(depth, 0) << "ProfileData::Add depth <= 0";
-  // Make hash-value
+  // make hash-value
   Slot h = 0;
   for (int i = 0; i < depth; i++) {
     Slot slot = reinterpret_cast<Slot>(stack[i]);
@@ -237,7 +240,7 @@ void ProfileData::Add(int depth, const void* const* stack) {
     h += (slot * 31) + (slot * 7) + (slot * 3);
   }
   count_++;
-  // See if table already has an entry for this trace
+  // see if table already has an entry for this trace
   bool done = false;
   Bucket* bucket = &hash_[h % kBuckets];
   for (int a = 0; a < kAssociativity; a++) {
