@@ -860,6 +860,20 @@ std::string JoinVector(const std::vector<T>& parts, char sep = '\t') {
   return s.str();
 }
 
+inline std::string JoinVectorD(const std::vector<double>& parts,
+                               char sep = '\t') {
+  if (parts.size() == 0) return "";
+  std::string rs = "";
+  std::vector<double>::const_iterator iter = parts.begin();
+  rs += DoubleToString(*iter);
+  rs.push_back(sep);
+  for (; iter != parts.end(); ++iter) {
+    rs += DoubleToString(*iter);
+    rs.push_back(sep);
+  }
+  return rs;
+}
+
 template <typename T>
 std::string JoinKeys(T *v, const std::string &sep = "\t") {
   if (!v || v->empty()) return "";

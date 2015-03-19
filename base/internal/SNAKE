@@ -45,7 +45,8 @@ cc_library(name = 'base',
                    'util.cc',
                    'aligned_malloc.cc',
                    'time_limit_data.cc',
-                   'light_singleton.cc'
+                   'light_singleton.cc',
+                   'time_limit_thread.cc'
                   ],
            deps = [],  # base should not depends on other components!
            copt = ['no_style_check']
