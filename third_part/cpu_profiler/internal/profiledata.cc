@@ -45,7 +45,10 @@
 #include <string.h>
 #include <fcntl.h>
 #include "base/public/logging.h"
+#include "base/public/symbolize.h"
 #include "third_part/cpu_profiler/public/sysinfo.h"
+
+DECLARE_bool(cpu_profiler_debug);
 
 // All of these are initialized in profiledata.h.
 const int ProfileData::kMaxStackDepth;
@@ -82,7 +85,7 @@ ProfileData::ProfileData()
       fname_(0),
       start_time_(0) {}
 
-bool ProfileData::Start(const char* fname,
+bool ProfileData::Start(const char* fname, const char * sname,
                         const ProfileData::Options& options) {
   if (enabled()) return false;
   // Open output file and initialize various data structures
@@ -109,6 +112,10 @@ bool ProfileData::Start(const char* fname,
   evict_[num_evicted_++] = 0;  // Padding
 
   out_ = fd;
+
+  fd = open(sname, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+  if (fd < 0) return false;
+  address_out_ = fd;
   return true;
 }
 
@@ -166,6 +173,7 @@ void ProfileData::Stop() {
   FlushEvicted();
   // Dump /proc/self/maps so we get list of mapped shared libraries
   DumpProcSelfMaps(out_);
+  DumpAddressSymbol(address_out_);
   Reset();
   LOG(INFO) << "PROFILE: interrupts/evictions/bytes ="
             << count_ << "/" << evictions_ << "/" << total_bytes_;
@@ -177,6 +185,7 @@ void ProfileData::Reset() {
   // by Stop to print information about the profile after reset, and are
   // cleared by Start when starting a new profile.
   close(out_);
+  close(address_out_);
   delete[] hash_;
   hash_ = 0;
   delete[] evict_;
@@ -279,6 +288,7 @@ void ProfileData::Add(int depth, const void* const* stack) {
       e->stack[i] = reinterpret_cast<Slot>(stack[i]);
     }
   }
+  AddAddress(depth, stack);
 }
 
 // This function is safe to call from asynchronous signals (but is not
@@ -291,4 +301,27 @@ void ProfileData::FlushEvicted() {
     FDWrite(out_, buf, bytes);
   }
   num_evicted_ = 0;
+}
+
+void ProfileData::AddAddress(int depth, const void* const* stack) {
+  for (int i = 0; i < depth; i++) {
+    uint64_t key = reinterpret_cast<uint64_t>(stack[i]);
+    address_set_.insert(key);
+  }
+}
+
+void ProfileData::DumpAddressSymbol(int fd) {
+  char symbol[1024] = { 0 };
+  for (base::hash_set<uint64_t>::iterator i = address_set_.begin();
+       i != address_set_.end(); i++) {
+    FDWrite(address_out_, reinterpret_cast<const char *>(&(*i)),
+            sizeof(uint64_t));
+    if (!google::Symbolize(reinterpret_cast<char *>(*i), symbol,
+                            sizeof(symbol))) {
+      LOG(WARNING) << *i << " symbolize error";
+    }
+    int len = strlen(symbol);
+    FDWrite(address_out_, reinterpret_cast<char *>(&len), sizeof(len));
+    FDWrite(address_out_, symbol, strlen(symbol));
+  }
 }

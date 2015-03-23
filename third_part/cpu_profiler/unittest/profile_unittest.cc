@@ -24,8 +24,8 @@ int Fib2(int num) {
 }
 
 int main(int argc, char** argv) {
-  ProfilerStart("./profiler.prof");
-  for (int i = 0; i < 10; i++) Fib(40);
+  ProfilerStart("./profiler.prof", "./profiler.symbol");
+  for (int i = 0; i < 1; i++) Fib(40);
   ProfilerStop();
   return 0;
 }

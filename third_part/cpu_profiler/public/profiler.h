@@ -96,7 +96,7 @@ struct ProfilerOptions {
 // existing profiling data in that file.
 //
 // This is equivalent to calling ProfilerStartWithOptions(fname, NULL).
-int ProfilerStart(const char* fname);
+int ProfilerStart(const char* fname, const char * sname);
 
 // Start profiling and write profile into fname, discarding any
 // existing profiling data in that file.
@@ -107,7 +107,7 @@ int ProfilerStart(const char* fname);
 // 'options' may be NULL, in which case all are given default values.
 //
 // Returns nonzero if profiling was started successfully, or zero else.
-int ProfilerStartWithOptions(const char *fname,
+int ProfilerStartWithOptions(const char *fname, const char * sname,
                              const struct ProfilerOptions *options);
 
 // Stop profiling. Can be started again with ProfilerStart(), but

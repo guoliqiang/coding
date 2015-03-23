@@ -19,4 +19,5 @@ opt:
 clean:
 	rm -rf profile_unittest
 	rm -rf profiler.prof
+	rm -rf profiler.symbol
 	rm -rf timer_unittest

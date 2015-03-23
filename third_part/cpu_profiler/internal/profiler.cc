@@ -59,8 +59,9 @@ using base::SpinLock;
 using base::SpinLockHolder;
 
 DEFINE_string(cpu_profiler_path, "cpu_profiler.prof", "");
+DEFINE_string(cpu_profiler_symbol_path, "cpu_profiler.symbol", "");
 DEFINE_int32(cpu_profiler_signal, 12, "");
-DEFINE_bool(cpu_profiler_debug, true, "");
+DEFINE_bool(cpu_profiler_debug, false, "");
 
 // Collects up all profile data. This is a singleton, which is
 // initialized by a constructor at startup. If no cpu profiler
@@ -77,7 +78,8 @@ class CpuProfiler {
   ~CpuProfiler();
 
   // Start profiler to write profile info into fname
-  bool Start(const char* fname, const ProfilerOptions* options);
+  bool Start(const char* fname, const char * sname,
+             const ProfilerOptions* options);
   // Stop profiling and write the data to disk.
   void Stop();
   // Write the data to disk (and continue profiling).
@@ -122,11 +124,16 @@ static void CpuProfilerSwitch(int signal_number) {
   static unsigned profile_count = 0;
   if (!started) {
     char full_profile_name[1024] = { 0 };
+    char full_symbol_name[1024] = { 0 };
+
+    snprintf(full_symbol_name, sizeof(full_symbol_name), "%s.%u",
+             FLAGS_cpu_profiler_symbol_path.c_str(), profile_count);
     snprintf(full_profile_name, sizeof(full_profile_name), "%s.%u",
              FLAGS_cpu_profiler_path.c_str(), profile_count++);
-    if (!ProfilerStart(full_profile_name)) {
+
+    if (!ProfilerStart(full_profile_name, full_symbol_name)) {
       LOG(FATAL) << "Can't turn on cpu profiling for " << full_profile_name
-                 << " " << strerror(errno);
+                 << " " << full_symbol_name << " " << strerror(errno);
     }
   } else {
     ProfilerStop();
@@ -158,7 +165,8 @@ CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
   }
 }
 
-bool CpuProfiler::Start(const char* fname, const ProfilerOptions* options) {
+bool CpuProfiler::Start(const char* fname, const char * sname,
+                        const ProfilerOptions* options) {
   // register main thread/processor
   ProfilerRegisterThread();
 
@@ -172,7 +180,7 @@ bool CpuProfiler::Start(const char* fname, const ProfilerOptions* options) {
 
   ProfileData::Options collector_options;
   collector_options.set_frequency(prof_handler_state.frequency);
-  if (!collector_.Start(fname, collector_options)) {
+  if (!collector_.Start(fname, sname, collector_options)) {
     LOG(WARNING) << "start profiledata error";
     return false;
   }
@@ -289,8 +297,10 @@ void CpuProfiler::prof_handler(int sig, siginfo_t *, void* signal_ucontext,
       std::string debug_str;
       for (int i = 0; i < depth; i++) {
         if (google::Symbolize(static_cast<char *>(used_stack[i]),
-              symbol, sizeof(symbol))) {
-          debug_str = "[" + IntToString(i) + "]:" + symbol + "\n" + debug_str;
+                              symbol, sizeof(symbol))) {
+          uint64_t add = reinterpret_cast<uint64_t>(used_stack[i]);
+          debug_str = "[" + IntToString(i) + "]:" + Uint64ToString(add) +
+                      "/" + symbol + "\n" + debug_str;
         }
       }
       LOG(INFO) << "\n" << debug_str;
@@ -310,13 +320,13 @@ int ProfilingIsEnabledForAllThreads() {
   return CpuProfiler::instance_.Enabled();
 }
 
-int ProfilerStart(const char* fname) {
-  return CpuProfiler::instance_.Start(fname, NULL);
+int ProfilerStart(const char* fname, const char * sname) {
+  return CpuProfiler::instance_.Start(fname, sname, NULL);
 }
 
-int ProfilerStartWithOptions(
-    const char *fname, const ProfilerOptions *options) {
-  return CpuProfiler::instance_.Start(fname, options);
+int ProfilerStartWithOptions(const char *fname, const char * sname,
+                             const ProfilerOptions *options) {
+  return CpuProfiler::instance_.Start(fname, sname, options);
 }
 
 void ProfilerStop() {

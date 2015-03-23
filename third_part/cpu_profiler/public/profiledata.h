@@ -44,6 +44,7 @@
 #include <time.h>
 #include <stdint.h>
 #include "base/public/basictypes.h"
+#include "base/public/hash_tables.h"
 
 // A class that accumulates profile samples and writes them to a file.
 //
@@ -106,7 +107,7 @@ class ProfileData {
   // Returns true if data collection could be started, otherwise (if an
   // error occurred or if data collection was already enabled) returns
   // false.
-  bool Start(const char *fname, const Options& options);
+  bool Start(const char *fname, const char * sname, const Options& options);
 
   // If data collection is enabled, stop data collection and write the
   // data to disk.
@@ -163,6 +164,12 @@ class ProfileData {
   char * fname_;  // Profile file name
   time_t start_time_;  // Start time, or 0
 
+  // store all the stack address
+  base::hash_set<uint64_t> address_set_;
+  int address_out_;
+  // add address
+  void AddAddress(int depth, const void * const * stack);
+  void DumpAddressSymbol(int fd);
   // Move 'entry' to the eviction buffer.
   void Evict(const Entry& entry);
   // Write contents of eviction buffer to disk.
