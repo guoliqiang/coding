@@ -72,21 +72,7 @@ void ProfileAnalyzer::Build() {
           reverse_grap_[symbol_[stack[i]]][symbol_[stack[i - 1]]] += head[0];
         }
 
-        if (i == 0) {
-          hit_num_[symbol_[stack[head[0]]]]++;
-          if (!reverse_grap_[symbol_[stack[i]]].count(symbol_[stack[i]])) {
-            reverse_grap_[symbol_[stack[i]]][symbol_[stack[i]]] = 0;
-          }
-          reverse_grap_[symbol_[stack[i]]][symbol_[stack[i]]] += head[0];
-          if (!grap_[symbol_[stack[i]]].count(symbol_[stack[i]])) {
-            grap_[symbol_[stack[i]]][symbol_[stack[i]]] = 0;
-          }
-          grap_[symbol_[stack[i]]][symbol_[stack[i]]] += head[0];
-          VLOG(5) << "add "
-                  << "grap_[" << symbol_[stack[i]] << "]["
-                  << symbol_[stack[i]] << "]:"
-                  << head[0] << " in " << i << " of " << head[1];
-        }
+        if (i == 0) hit_num_[symbol_[stack[head[0]]]]++;
       }  // for
     }
   }
