@@ -312,6 +312,7 @@ void ProfileData::AddAddress(int depth, const void* const* stack) {
 
 void ProfileData::DumpAddressSymbol(int fd) {
   char symbol[1024] = { 0 };
+  const char * unknown = "Unknown";
   for (base::hash_set<uint64_t>::iterator i = address_set_.begin();
        i != address_set_.end(); i++) {
     FDWrite(address_out_, reinterpret_cast<const char *>(&(*i)),
@@ -319,6 +320,7 @@ void ProfileData::DumpAddressSymbol(int fd) {
     if (!google::Symbolize(reinterpret_cast<char *>(*i), symbol,
                             sizeof(symbol))) {
       LOG(WARNING) << *i << " symbolize error";
+      snprintf(symbol, sizeof(symbol), "%s:0x%lx", unknown, *i);
     }
     int len = strlen(symbol);
     FDWrite(address_out_, reinterpret_cast<char *>(&len), sizeof(len));
