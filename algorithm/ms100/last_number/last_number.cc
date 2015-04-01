@@ -11,6 +11,10 @@
 using namespace algorithm;
 
 int main(int argc, char** argv) {
+  std::vector<int> vec;
+  NumList(10, 3, &vec);
+  LOG(INFO) << JoinVector(vec);
+
   LOG(INFO) << LastNum(3, 2) << " " << LastNum2(3, 2);
   LOG(INFO) << LastNum(5, 5) << " " << LastNum2(5, 5);
   LOG(INFO) << LastNum(10, 3) << " " << LastNum2(10, 3);
