@@ -122,10 +122,42 @@ double Sqrt(double n) {
 
 using namespace algorithm;
 
+// http://www.zhihu.com/question/29214128/answer/44063508?from=timeline&isappinstalled=1
+namespace babylon {
+// fast inverse square root
+float Rsqrt(float number) {
+  long i = 0;
+  float x2 = 0;
+  float y = 0;
+  const float threehalfs = 1.5F;
+ 
+  x2 = number * 0.5F;
+  y = number;
+  // evil floating point bit level hacking
+  i = *reinterpret_cast<long *>(&y);
+  // what the fuck?
+  i = 0x5f3759df - (i >> 1);
+  y = *reinterpret_cast<float *>(&i);
+  // 1st iteration
+  y  = y * (threehalfs - (x2 * y * y));
+  // 2nd iteration, this can be removed
+  // added 2nd iteration it will be more precison, e.g sqrt(2) will change
+  // from 1.41386 to 1.41421
+  y = y * (threehalfs - (x2 * y * y));
+  return y;
+}
+
+float Sqrt(float num) {
+  return num * Rsqrt(num);
+}
+
+}  // namespace babylon
+
 
 int main(int argc, char** argv) {
   LOG(INFO) << Newton(2);
   LOG(INFO) << Sqrt(2);
+  LOG(INFO) << babylon::Sqrt(2);
   return 0;
   std::string str = "1156";
   // LOG(INFO) << str << ":" << SqrtByHand(str);
