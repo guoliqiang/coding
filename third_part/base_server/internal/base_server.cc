@@ -66,6 +66,7 @@ void BaseServer::Start() {
     << "set linsten sock non block error!";
 
   int optval = 1;
+  // http://www.cnblogs.com/mydomain/archive/2011/08/23/2150567.html
   setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval));
 
   sockaddr_in listen_addr;

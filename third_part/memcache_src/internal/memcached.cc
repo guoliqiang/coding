@@ -1,6 +1,8 @@
 //  Copyright 2003 Danga Interactive, Inc.  All rights reserved. Use and
 //  distribution licensed under the BSD license.  See the LICENSE file for full
 //  text.
+//
+//  facebook memcached:https://github.com/facebookarchive/memcached
 
 #include "third_part/memcache_src/public/memcached.h"
 #include <sys/stat.h>
@@ -693,7 +695,7 @@ static int build_udp_headers(conn *c) {
       new_hdrbuf = malloc(c->msgused * 2 * UDP_HEADER_SIZE);
     }
 
-    if (! new_hdrbuf) {
+    if (!new_hdrbuf) {
       STATS_LOCK();
       stats.malloc_fails++;
       STATS_UNLOCK();

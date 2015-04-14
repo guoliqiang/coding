@@ -1,0 +1,13 @@
+cc_library(name='udp_server',
+           srcs = ['udp_server.cc'],
+           deps = [
+                   '//base/internal:base',
+                   '//libs/third_part/libevent:event',
+                   '//libs/third_part/libevent:event_core',
+                   '//libs/third_part/libevent:event_extra',
+                   '//libs/third_part/libevent:event_pthreads',
+                  ],
+           cflags = [
+                     '-Ithird_part/libevent/include/'
+                    ],
+          )
