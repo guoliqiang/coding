@@ -42,7 +42,7 @@ class Worker : public base::Thread {
    Worker(int fd, UdpServer * server_);
    ~Worker();
    void Run();
-   void AllocateReplyFd(int times);
+   void AllocateReplyFd();
    int GetRfd() { return rfd_; }
    UdpServer * GetUdpServer() { return server_; }
 

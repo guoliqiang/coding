@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
   bzero(&servaddr,sizeof(servaddr));
   servaddr.sin_family = AF_INET;
   servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
-  servaddr.sin_port = htons(9003);
+  servaddr.sin_port = htons(9005);
 
   for (int i = 0; i < 100; i++) {
     std::string data =  "Hello World";

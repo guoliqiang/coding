@@ -12,6 +12,7 @@
 #define MAX_SENDBUF_SIZE (256 * 1024 * 1024)
 
 DEFINE_int32(buffer_size, 1000, "");
+DEFINE_int32(try_times, 5, "");
 
 namespace udp_server {
 
@@ -91,7 +92,7 @@ Worker::Worker(int fd, UdpServer * server) : base::Thread(true) {
   rfd_ = -1;
   fd_ = fd;
   server_ = server;
-  AllocateReplyFd(server_->GetWorkerNum() * 2);
+  AllocateReplyFd();
 }
 
 Worker::~Worker() {
@@ -102,11 +103,12 @@ Worker::~Worker() {
 // the system will automatically bind it for you and thus the recvfrom call
 // later on will succeed. recvfrom will not bind a socket, though, this call
 // expects the socket to have been bound already or an error is thrown.
-void Worker::AllocateReplyFd(int times) {
+void Worker::AllocateReplyFd() {
   int flags = 0;
   CHECK_NE((rfd_ = socket(AF_INET, SOCK_DGRAM, 0)), -1);
   CHECK_NE((flags = fcntl(rfd_, F_GETFL, 0)), 0);
   CHECK_GE(fcntl(rfd_, F_SETFL, flags | O_NONBLOCK), 0);
+
   flags = 1;
   setsockopt(rfd_, SOL_SOCKET, SO_REUSEADDR, &flags, sizeof(flags));
   MaximizeSendBuff(rfd_);
@@ -114,15 +116,21 @@ void Worker::AllocateReplyFd(int times) {
   sockaddr_in servaddr;
   servaddr.sin_family = AF_INET;
   servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+  static int cur_port = server_->GetPort();
 
   int index = 0;
-  for (index = 0; index < times; index++) {
-    servaddr.sin_port = htons(server_->GetPort() + index + 1);
+  for (index = 0; index < FLAGS_try_times; index++) {
+    cur_port++;
+    servaddr.sin_port = htons(cur_port);
     if (bind(rfd_, (struct sockaddr *)&servaddr, sizeof(servaddr)) >= 0) {
+      LOG(INFO) << "bind new port " << cur_port;
       break;
+    } else {
+      LOG(INFO) << "bind port " << cur_port << " faild"
+                << ", its ok, we will search next valable port";
     }
   }
-  if (index == times) {
+  if (index == FLAGS_try_times) {
     close(rfd_);
     rfd_ = fd_;
   }

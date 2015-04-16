@@ -20,7 +20,7 @@ class Router : public BaseRouter {
 
 int main(int argc, char** argv) {
   base::shared_ptr<BaseRouter> router(new Router());
-  UdpServer server(9003, 10, router);
+  UdpServer server(9005, 1, router);
   server.Start();
   return 0;
 }
