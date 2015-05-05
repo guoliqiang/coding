@@ -10,8 +10,13 @@
 #include <string>
 
 #define MAX_SENDBUF_SIZE (256 * 1024 * 1024)
-
-DEFINE_int32(buffer_size, 1000, "");
+// reference: http://stackoverflow.com/questions/1098897/
+// what-is-the-largest-safe-udp-packet-size-on-the-internet
+//
+// The safe udp length for client is 512, if you are in a high reliable network,
+// you can increase the length, but that may triger more transmission problems
+// and loss. The max length is 65536.
+DEFINE_int32(buffer_size, 65536, "");
 DEFINE_int32(try_times, 5, "");
 
 namespace udp_server {
@@ -146,13 +151,17 @@ static void WorkerRead(const int fd, const int16_t which, void * arg) {
   int rs = recvfrom(fd, data, buffer.size(), 0,
                     (struct sockaddr *)&(node.client_addr), &len);
   if (rs == -1) {
-    LOG(ERROR) << "recvfrom error errno=" << errno << " " << strerror(errno);
+    if (errno == EAGAIN || errno == EWOULDBLOCK) {
+      LOG(ERROR) << "data has read by other thread, it is all right";
+    } else {
+      LOG(ERROR) << "recvfrom error errno=" << errno << " " << strerror(errno);
+    }
   } else if (rs == 0) {
     LOG(ERROR) << "client is shutdown";
   } else if (rs == buffer.size()) {
-    LOG(ERROR) << "may read not full data, then we change data buff from "
-               << FLAGS_buffer_size << " to " << FLAGS_buffer_size * 2;
-    FLAGS_buffer_size *= 2;
+    // If a message is too long to fit in the supplied buffer,
+    // excess bytes is discarded.
+    CHECK(false) << "can not reachable";
   } else {
     worker->GetUdpServer()->GetRouter()->Process(data, node);
   }
