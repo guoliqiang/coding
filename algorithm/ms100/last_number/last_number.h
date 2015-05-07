@@ -9,13 +9,29 @@
 #define  __LAST_NUMNER_H_
 
 #include <list>
+#include <vector>
 #include "base/public/logging.h"
+#include "base/public/string_util.h"
 
 namespace algorithm {
 
 int LastNum(int n, int m) {
   if (n == 1) return 0;
   return (LastNum(n - 1, m) + m) % n;
+}
+
+void NumList(int n, int m, std::vector<int> * vec) {
+  if (n == 1) {
+    vec->push_back(0);
+  } else {
+    vec->push_back((m > n ? m % n : m)- 1);
+    NumList(n - 1, m, vec);
+    // LOG(INFO) << "n=" << n << " m=" << m << " i=" << vec->size() - n + 1;
+    // LOG(INFO) << "vec:" << JoinVector(*vec);
+    for (int i = vec->size() - n + 1; i < vec->size(); i++) {
+      (*vec)[i] = ((*vec)[i] + m) % n;
+    }
+  }
 }
 
 int LastNum2(int n, int m) {

@@ -216,6 +216,19 @@ class SpinLock {
   pthread_spinlock_t mu_;
 };
 
+class SpinLockHolder {
+ public:
+  SpinLockHolder(SpinLock * lock) : lock_(lock) {
+    lock_->Lock();
+  }
+  ~SpinLockHolder() {
+    lock_->Unlock();
+  }
+
+ private:
+  SpinLock * lock_;
+};
+
 /// Wrapper for pthread_cond_t.
 // http://baike.baidu.com/view/7844657.htm
 // used sample

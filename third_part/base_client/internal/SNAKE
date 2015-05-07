@@ -1,0 +1,6 @@
+cc_library(name='base_client',
+           srcs = ['base_client.cc'],
+           deps = [
+                   '//base/internal:base',
+                  ],
+          )

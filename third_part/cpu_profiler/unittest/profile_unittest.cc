@@ -24,7 +24,7 @@ int Fib2(int num) {
 }
 
 int main(int argc, char** argv) {
-  ProfilerStart("./profiler.prof");
+  ProfilerStart("./cpu_profiler.prof", "./cpu_profiler.symbol");
   for (int i = 0; i < 10; i++) Fib(40);
   ProfilerStop();
   return 0;

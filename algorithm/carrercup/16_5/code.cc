@@ -13,6 +13,11 @@
 //
 // 可以理解为从内存底地址往高低值走，先遇到的是数据的高位（大端）还是底位（小端）
 
+// x86 archtecture is Little-End
+// int a = 0xFFAABB
+// a >> 8
+// in fact 
+// 8 << |BB|AA|FF|
 #include "base/public/common_head.h"
 
 

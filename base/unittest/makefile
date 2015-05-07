@@ -15,10 +15,19 @@ all:
   cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/thread_safe_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
   cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/thread_local_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
   cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/time_limit_data_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+  cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/time_limit_thread_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+  cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/stacktrace_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 
 opt:
 
 
 clean:
+	rm -rf icu_unittest
+	rm -rf parallel_pool_unittest
+	rm -rf thread_safe_unittest
+	rm -rf thread_local_unittest
+	rm -rf time_limit_data_unittest
+	rm -rf time_limit_thread_unittest
+	rm -rf stacktrace_unittest
 

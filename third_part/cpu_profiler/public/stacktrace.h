@@ -37,7 +37,6 @@
 #ifndef CPU_PROFILER_GOOGLE_STACKTRACE_H_
 #define CPU_PROFILER_GOOGLE_STACKTRACE_H_
 
-
 // Skips the most recent "skip_count" stack frames (also skips the
 // frame generated for the "GetStackFrames" routine itself), and then
 // records the pc values for up to the next "max_depth" frames in
@@ -69,8 +68,7 @@
 //
 // This routine may return fewer stack frame entries than are
 // available. Also note that "result" and "sizes" must both be non-NULL.
-int GetStackFrames(void** result, int* sizes, int max_depth,
-                   int skip_count);
+int GetStackFrames(void** result, int* sizes, int max_depth, int skip_count);
 
 // Same as above, but to be used from a signal handler. The "uc" parameter
 // should be the pointer to ucontext_t which was passed as the 3rd parameter
@@ -95,8 +93,7 @@ int GetStackFramesWithContext(void** result, int* sizes, int max_depth,
 //           ....       ...
 //
 // "result" must not be NULL.
-int GetStackTrace(void** result, int max_depth,
-                  int skip_count);
+int GetStackTrace(void** result, int max_depth, int skip_count);
 
 // Same as above, but to be used from a signal handler. The "uc" parameter
 // should be the pointer to ucontext_t which was passed as the 3rd parameter

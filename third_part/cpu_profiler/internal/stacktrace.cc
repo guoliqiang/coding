@@ -58,29 +58,34 @@
 #include <stdio.h>
 #include "third_part/cpu_profiler/public/stacktrace.h"
 
-
 // we're using plain struct and not class to avoid any possible issues
-// during initialization. Struct of pointers is easy to init at
-// link-time.
+// during initialization. Struct of pointers is easy to init at link-time.
 struct GetStackImplementation {
   int (*GetStackFramesPtr)(void** result,
                            int* sizes,
                            int max_depth,
                            int skip_count);
 
-  int (*GetStackFramesWithContextPtr)(void** result, int* sizes, int max_depth,
-                                      int skip_count, const void *uc);
+  int (*GetStackFramesWithContextPtr)(void ** result,
+                                      int * sizes,
+                                      int max_depth,
+                                      int skip_count,
+                                      const void *uc);
 
-  int (*GetStackTracePtr)(void** result, int max_depth,
+  int (*GetStackTracePtr)(void ** result,
+                          int max_depth,
                           int skip_count);
 
-  int (*GetStackTraceWithContextPtr)(void** result, int max_depth,
-                                  int skip_count, const void *uc);
+  int (*GetStackTraceWithContextPtr)(void ** result,
+                                     int max_depth,
+                                     int skip_count,
+                                     const void * uc);
 
-  const char *name;
+  const char * name;
 };
 
-#define STACKTRACE_INL_HEADER "third_part/cpu_profiler/public/stacktrace_libunwind-inl.h"
+#define STACKTRACE_INL_HEADER \
+"third_part/cpu_profiler/public/stacktrace_libunwind-inl.h"
 #define GST_SUFFIX libunwind
 #include "third_part/cpu_profiler/public/stacktrace_impl_setup-inl.h"
 #undef GST_SUFFIX
@@ -94,24 +99,23 @@ static int frame_forcer(int rv) {
 
 int GetStackFrames(void** result, int* sizes, int max_depth, int skip_count) {
   return frame_forcer(get_stack_impl->GetStackFramesPtr(result, sizes,
-      max_depth, skip_count));
+                      max_depth, skip_count));
 }
 
 int GetStackFramesWithContext(void** result, int* sizes, int max_depth,
                               int skip_count, const void *uc) {
   return frame_forcer(get_stack_impl->GetStackFramesWithContextPtr(
-                      result, sizes, max_depth,
-                      skip_count, uc));
+                      result, sizes, max_depth, skip_count, uc));
 }
 
 int GetStackTrace(void** result, int max_depth,
                   int skip_count) {
   return frame_forcer(get_stack_impl->GetStackTracePtr(result, max_depth,
-                                                       skip_count));
+                      skip_count));
 }
 
 int GetStackTraceWithContext(void** result, int max_depth,
                              int skip_count, const void *uc) {
   return frame_forcer(get_stack_impl->GetStackTraceWithContextPtr(
-                        result, max_depth, skip_count, uc));
+                      result, max_depth, skip_count, uc));
 }

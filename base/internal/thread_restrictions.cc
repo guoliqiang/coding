@@ -26,6 +26,9 @@ LazyInstance<ThreadLocalBoolean>::Leaky
 
 }  // anonymous namespace
 
+
+#ifndef NDEBUG
+
 // static
 bool ThreadRestrictions::SetIOAllowed(bool allowed) {
   bool previous_disallowed = g_io_disallowed.Get().Get();
@@ -80,7 +83,15 @@ bool ThreadRestrictions::SetWaitAllowed(bool allowed) {
   g_wait_disallowed.Get().Set(!allowed);
   return !previous_disallowed;
 }
+#else
 
+void FixUnusedWarn() {
+  ignore_result(g_io_disallowed);
+  ignore_result(g_singleton_disallowed);
+  ignore_result(g_wait_disallowed);
+}
+
+#endif
 }  // namespace base
 
 #endif  // !defined(OFFICIAL_BUILD)

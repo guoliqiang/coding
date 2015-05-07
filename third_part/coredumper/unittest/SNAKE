@@ -1,0 +1,7 @@
+cc_binary(name='coredumper_unittest',
+          srcs = ['coredumper_unittest.cc'],
+          deps = [
+                  '//libs/third_part/coredumper:coredumper',
+                  '//base/internal:base',
+                  ],
+         )

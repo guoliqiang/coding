@@ -96,3 +96,19 @@ cc_binary(name = 'time_limit_data_unittest',
                    ],
            )
 
+cc_binary(name = 'time_limit_thread_unittest',
+           srcs = ['time_limit_thread_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   '//third_part/testing/gtest/src:gtest'
+                   ],
+           )
+
+cc_binary(name = 'stacktrace_unittest',
+           srcs = ['stacktrace_unittest.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )

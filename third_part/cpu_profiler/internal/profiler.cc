@@ -49,6 +49,8 @@
 #include "third_part/cpu_profiler/public/stacktrace.h"
 #include "base/public/logging.h"
 #include "base/public/mutex.h"
+#include "base/public/symbolize.h"
+#include "base/public/string_util.h"
 #include "third_part/cpu_profiler/public/profiledata.h"
 #include "third_part/cpu_profiler/public/profile-handler.h"
 
@@ -56,13 +58,10 @@ using std::string;
 using base::SpinLock;
 using base::SpinLockHolder;
 
-DEFINE_bool(cpu_profiler_unittest,
-            EnvToBool("PERFTOOLS_UNITTEST", true),
-            "Determines whether or not we are running under the "
-            "control of a unit test. This allows us to include or "
-            "exclude certain behaviours.");
 DEFINE_string(cpu_profiler_path, "cpu_profiler.prof", "");
+DEFINE_string(cpu_profiler_symbol_path, "cpu_profiler.symbol", "");
 DEFINE_int32(cpu_profiler_signal, 12, "");
+DEFINE_bool(cpu_profiler_debug, false, "");
 
 // Collects up all profile data. This is a singleton, which is
 // initialized by a constructor at startup. If no cpu profiler
@@ -79,7 +78,8 @@ class CpuProfiler {
   ~CpuProfiler();
 
   // Start profiler to write profile info into fname
-  bool Start(const char* fname, const ProfilerOptions* options);
+  bool Start(const char* fname, const char * sname,
+             const ProfilerOptions* options);
   // Stop profiling and write the data to disk.
   void Stop();
   // Write the data to disk (and continue profiling).
@@ -100,16 +100,14 @@ class CpuProfiler {
   // ProfileHandle that only one instance of prof_handler can run at a time.
   SpinLock lock_;
   ProfileData collector_;
-
   // Filter function and its argument, if any.  (NULL means include all
   // samples).  Set at start, read-only while running.  Written while holding
   // lock_, read and executed in the context of SIGPROF interrupt.
   int (*filter_)(void*);  // NOLINT
   void * filter_arg_;
-
   // Opaque token returned by the profile handler. To be used when calling
   // ProfileHandlerUnregisterCallback.
-  ProfileHandlerToken* prof_handler_token_;
+  ProfileHandlerToken * prof_handler_token_;
   // Sets up a callback to receive SIGPROF interrupt.
   void EnableHandler();
   // Disables receiving SIGPROF interrupt.
@@ -126,11 +124,16 @@ static void CpuProfilerSwitch(int signal_number) {
   static unsigned profile_count = 0;
   if (!started) {
     char full_profile_name[1024] = { 0 };
+    char full_symbol_name[1024] = { 0 };
+
+    snprintf(full_symbol_name, sizeof(full_symbol_name), "%s.%u",
+             FLAGS_cpu_profiler_symbol_path.c_str(), profile_count);
     snprintf(full_profile_name, sizeof(full_profile_name), "%s.%u",
              FLAGS_cpu_profiler_path.c_str(), profile_count++);
-    if (!ProfilerStart(full_profile_name)) {
+
+    if (!ProfilerStart(full_profile_name, full_symbol_name)) {
       LOG(FATAL) << "Can't turn on cpu profiling for " << full_profile_name
-                 << strerror(errno);
+                 << " " << full_symbol_name << " " << strerror(errno);
     }
   } else {
     ProfilerStop();
@@ -138,17 +141,13 @@ static void CpuProfilerSwitch(int signal_number) {
   started = !started;
 }
 
-// Profile data structure singleton: Constructor will check to see if
-// profiling should be enabled.  Destructor will write profile data
-// out to disk.
+// Profile data structure singleton: Constructor will check to see if profiling
+// should be enabled.  Destructor will write profile data out to disk.
 CpuProfiler CpuProfiler::instance_;
 
-// Initialize profiling: activated if getenv("CPUPROFILE") exists.
 CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
   if (getuid() != geteuid()) {
-    if (!FLAGS_cpu_profiler_unittest) {
-      LOG(WARNING) << "Cannot perform CPU profiling when running with setuid";
-    }
+    LOG(WARNING) << "Cannot perform CPU profiling when running with setuid";
     return;
   }
 
@@ -157,7 +156,7 @@ CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
     intptr_t old_signal_handler =
         reinterpret_cast<intptr_t>(signal(signal_number, CpuProfilerSwitch));
     if (old_signal_handler == 0) {
-      LOG(INFO) << "Using signal as cpu profiling switch" << signal_number;
+      LOG(INFO) << "Using signal as cpu profiling switch " << signal_number;
     } else {
       LOG(FATAL) << "Signal already in use" << signal_number;
     }
@@ -166,20 +165,25 @@ CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
   }
 }
 
-bool CpuProfiler::Start(const char* fname, const ProfilerOptions* options) {
-  SpinLockHolder cl(&lock_);
-  if (collector_.enabled()) return false;
+bool CpuProfiler::Start(const char* fname, const char * sname,
+                        const ProfilerOptions* options) {
+  // register main thread/processor
+  ProfilerRegisterThread();
 
+  SpinLockHolder cl(&lock_);
+  if (collector_.enabled()) {
+    LOG(WARNING) << "profile has enabled";
+    return false;
+  }
   ProfileHandlerState prof_handler_state;
   ProfileHandlerGetState(&prof_handler_state);
 
   ProfileData::Options collector_options;
   collector_options.set_frequency(prof_handler_state.frequency);
-  if (!collector_.Start(fname, collector_options)) {
-    LOG(INFO) << "Start Error";
+  if (!collector_.Start(fname, sname, collector_options)) {
+    LOG(WARNING) << "start profiledata error";
     return false;
   }
-  LOG(INFO) << "Start OK";
 
   filter_ = NULL;
   if (options != NULL && options->filter_in_thread != NULL) {
@@ -230,7 +234,6 @@ void CpuProfiler::GetCurrentState(ProfilerState* state) {
     SpinLockHolder cl(&lock_);
     collector_.GetCurrentState(&collector_state);
   }
-
   state->enabled = collector_state.enabled;
   state->start_time = static_cast<time_t>(collector_state.start_time);
   state->samples_gathered = collector_state.samples_gathered;
@@ -257,19 +260,17 @@ void CpuProfiler::DisableHandler() {
 // access the data touched by prof_handler() disable this signal handler before
 // accessing the data and therefore cannot execute concurrently with
 // prof_handler().
-void CpuProfiler::prof_handler(int sig, siginfo_t*, void* signal_ucontext,
-                               void* cpu_profiler) {
+void CpuProfiler::prof_handler(int sig, siginfo_t *, void* signal_ucontext,
+                               void * cpu_profiler) {
   CpuProfiler* instance = static_cast<CpuProfiler*>(cpu_profiler);
 
   if (instance->filter_ == NULL ||
       (*instance->filter_)(instance->filter_arg_)) {
-    void* stack[ProfileData::kMaxStackDepth];
-
+    void * stack[ProfileData::kMaxStackDepth];
     // Under frame-pointer-based unwinding at least on x86, the
     // top-most active routine doesn't show up as a normal frame, but
     // as the "pc" value in the signal handler context.
     stack[0] = GetPC(*reinterpret_cast<ucontext_t*>(signal_ucontext));
-
     // We skip the top three stack trace entries (this function,
     // SignalHandler::SignalHandler and one signal handler frame)
     // since they are artifacts of profiling and should not be
@@ -279,16 +280,31 @@ void CpuProfiler::prof_handler(int sig, siginfo_t*, void* signal_ucontext,
     // unnecessarily.
     int depth = GetStackTraceWithContext(stack + 1, arraysize(stack) - 1,
                                          3, signal_ucontext);
-    void **used_stack;
+    void ** used_stack = NULL;
     if (stack[1] == stack[0]) {
       // in case of non-frame-pointer-based unwinding we will get
       // duplicate of PC in stack[1], which we don't want
       used_stack = stack + 1;
     } else {
       used_stack = stack;
-      depth++;  // To account for pc value in stack[0];
+      // To account for pc value in stack[0];
+      depth++;
     }
     instance->collector_.Add(depth, used_stack);
+
+    if (FLAGS_cpu_profiler_debug) {
+      char symbol[1024] = { 0 };
+      std::string debug_str;
+      for (int i = 0; i < depth; i++) {
+        if (google::Symbolize(static_cast<char *>(used_stack[i]),
+                              symbol, sizeof(symbol))) {
+          uint64_t add = reinterpret_cast<uint64_t>(used_stack[i]);
+          debug_str = "[" + IntToString(i) + "]:" + Uint64ToString(add) +
+                      "/" + symbol + "\n" + debug_str;
+        }
+      }
+      LOG(INFO) << "\n" << debug_str;
+    }
   }
 }
 
@@ -304,13 +320,13 @@ int ProfilingIsEnabledForAllThreads() {
   return CpuProfiler::instance_.Enabled();
 }
 
-int ProfilerStart(const char* fname) {
-  return CpuProfiler::instance_.Start(fname, NULL);
+int ProfilerStart(const char* fname, const char * sname) {
+  return CpuProfiler::instance_.Start(fname, sname, NULL);
 }
 
-int ProfilerStartWithOptions(
-    const char *fname, const ProfilerOptions *options) {
-  return CpuProfiler::instance_.Start(fname, options);
+int ProfilerStartWithOptions(const char *fname, const char * sname,
+                             const ProfilerOptions *options) {
+  return CpuProfiler::instance_.Start(fname, sname, options);
 }
 
 void ProfilerStop() {
@@ -321,4 +337,3 @@ void ProfilerGetCurrentState(
     ProfilerState* state) {
   CpuProfiler::instance_.GetCurrentState(state);
 }
-

@@ -1,0 +1,16 @@
+cc_binary(name='server',
+          srcs = ['server.cc'],
+          deps = [
+                  '//third_part/udp_server/internal:udp_server',
+                  ],
+           cflags = [
+                     '-Ithird_part/libevent/include/'
+                    ],
+           )
+
+cc_binary(name='client',
+          srcs = ['client.cc'],
+          deps = [
+                  '//base/internal:base',
+                  ],
+           )

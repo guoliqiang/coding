@@ -34,8 +34,9 @@ class Bar : public base::Thread {
  public:
   Bar() : base::Thread(true) {}
   virtual void Run() {
-    foo.Value().Increase();
-    LOG(INFO) << foo.Value().Get();
+    while (true) {
+      LOG(INFO) << "Bar";
+    }
   }
  
 };
@@ -44,8 +45,5 @@ int main(int argc, char** argv) {
   Bar bar;
   bar.Start();
   bar.Join();
-  Bar bar1;
-  bar1.Start();
-  bar1.Join();
   return 0;
 }

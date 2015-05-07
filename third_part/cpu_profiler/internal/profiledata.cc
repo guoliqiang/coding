@@ -45,9 +45,10 @@
 #include <string.h>
 #include <fcntl.h>
 #include "base/public/logging.h"
+#include "base/public/symbolize.h"
 #include "third_part/cpu_profiler/public/sysinfo.h"
 
-#define PRIuS "lu"
+DECLARE_bool(cpu_profiler_debug);
 
 // All of these are initialized in profiledata.h.
 const int ProfileData::kMaxStackDepth;
@@ -55,14 +56,13 @@ const int ProfileData::kAssociativity;
 const int ProfileData::kBuckets;
 const int ProfileData::kBufferLength;
 
-ProfileData::Options::Options()
-    : frequency_(1) { }
+ProfileData::Options::Options() : frequency_(1) { }
 
 // This function is safe to call from asynchronous signals (but is not
 // re-entrant).  However, that's not part of its public interface.
-void ProfileData::Evict(const Entry& entry) {
+void ProfileData::Evict(const Entry & entry) {
   const int d = entry.depth;
-  const int nslots = d + 2;     // Number of slots needed in eviction buffer
+  const int nslots = d + 2;  // Number of slots needed in eviction buffer
   if (num_evicted_ + nslots > kBufferLength) {
     FlushEvicted();
     assert(num_evicted_ == 0);
@@ -83,33 +83,25 @@ ProfileData::ProfileData()
       evictions_(0),
       total_bytes_(0),
       fname_(0),
-      start_time_(0) {
-}
+      start_time_(0) {}
 
-bool ProfileData::Start(const char* fname,
+bool ProfileData::Start(const char* fname, const char * sname,
                         const ProfileData::Options& options) {
   if (enabled()) return false;
-
   // Open output file and initialize various data structures
   int fd = open(fname, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-  if (fd < 0) {
-    // Can't open outfile for write
-    return false;
-  }
-
+  if (fd < 0) return false;
   start_time_ = time(NULL);
   fname_ = strdup(fname);
-
   // Reset counters
   num_evicted_ = 0;
-  count_       = 0;
-  evictions_   = 0;
+  count_ = 0;
+  evictions_ = 0;
   total_bytes_ = 0;
 
   hash_ = new Bucket[kBuckets];
   evict_ = new Slot[kBufferLength];
   memset(hash_, 0, sizeof(hash_[0]) * kBuckets);
-
   // Record special entries
   evict_[num_evicted_++] = 0;  // count for header
   evict_[num_evicted_++] = 3;  // depth for header
@@ -120,14 +112,16 @@ bool ProfileData::Start(const char* fname,
   evict_[num_evicted_++] = 0;  // Padding
 
   out_ = fd;
+
+  fd = open(sname, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+  if (fd < 0) return false;
+  address_out_ = fd;
   return true;
 }
 
 ProfileData::~ProfileData() {
   Stop();
 }
-
-#define NO_INTR(fn)  do {} while ((fn) < 0 && errno == EINTR)
 
 static void FDWrite(int fd, const char* buf, size_t len) {
   while (len > 0) {
@@ -139,10 +133,11 @@ static void FDWrite(int fd, const char* buf, size_t len) {
   }
 }
 
-// Dump /proc/maps data to fd.  Copied from heap-profile-table.cc.
+// Dump /proc/maps data to fd.
 static void DumpProcSelfMaps(int fd) {
   ProcMapsIterator::Buffer iterbuf;
-  ProcMapsIterator it(0, &iterbuf);  // 0 means "current pid"
+  // 0 means "current pid"
+  ProcMapsIterator it(0, &iterbuf);
 
   uint64 start, end, offset;
   int64 inode;
@@ -150,15 +145,13 @@ static void DumpProcSelfMaps(int fd) {
   ProcMapsIterator::Buffer linebuf;
   while (it.Next(&start, &end, &flags, &offset, &inode, &filename)) {
     int written = it.FormatLine(linebuf.buf_, sizeof(linebuf.buf_),
-                                start, end, flags, offset, inode, filename,
-                                0);
+                                start, end, flags, offset, inode, filename, 0);
     FDWrite(fd, linebuf.buf_, written);
   }
 }
 
 void ProfileData::Stop() {
   if (!enabled())  return;
-
   // Move data from hash table to eviction buffer
   for (int b = 0; b < kBuckets; b++) {
     Bucket* bucket = &hash_[b];
@@ -173,27 +166,26 @@ void ProfileData::Stop() {
     // Ensure there is enough room for end of data marker
     FlushEvicted();
   }
-
   // Write end of data marker
-  evict_[num_evicted_++] = 0;         // count
-  evict_[num_evicted_++] = 1;         // depth
-  evict_[num_evicted_++] = 0;         // end of data marker
+  evict_[num_evicted_++] = 0;  // count
+  evict_[num_evicted_++] = 1;  // depth
+  evict_[num_evicted_++] = 0;  // end of data marker
   FlushEvicted();
-
-  // Dump "/proc/self/maps" so we get list of mapped shared libraries
+  // Dump /proc/self/maps so we get list of mapped shared libraries
   DumpProcSelfMaps(out_);
+  DumpAddressSymbol(address_out_);
   Reset();
-  fprintf(stderr, "PROFILE: interrupts/evictions/bytes = %d/%d/%" PRIuS "\n",
-          count_, evictions_, total_bytes_);
+  LOG(INFO) << "PROFILE: interrupts/evictions/bytes ="
+            << count_ << "/" << evictions_ << "/" << total_bytes_;
 }
 
 void ProfileData::Reset() {
   if (!enabled()) return;
-
   // Don't reset count_, evictions_, or total_bytes_ here.  They're used
   // by Stop to print information about the profile after reset, and are
   // cleared by Start when starting a new profile.
   close(out_);
+  close(address_out_);
   delete[] hash_;
   hash_ = 0;
   delete[] evict_;
@@ -202,7 +194,6 @@ void ProfileData::Reset() {
   free(fname_);
   fname_ = 0;
   start_time_ = 0;
-
   out_ = -1;
 }
 
@@ -228,7 +219,6 @@ void ProfileData::GetCurrentState(State* state) const {
 // re-entrant).  However, that's not part of its public interface.
 void ProfileData::FlushTable() {
   if (!enabled()) return;
-
   // Move data from hash table to eviction buffer
   for (int b = 0; b < kBuckets; b++) {
     Bucket* bucket = &hash_[b];
@@ -240,28 +230,26 @@ void ProfileData::FlushTable() {
       }
     }
   }
-
   // Write out all pending data
   FlushEvicted();
 }
 
 void ProfileData::Add(int depth, const void* const* stack) {
   if (!enabled()) return;
-
-  if (depth > kMaxStackDepth) depth = kMaxStackDepth;
+  if (depth > kMaxStackDepth) {
+    LOG(WARNING) << depth << " is larger than default value " << kMaxStackDepth;
+    depth = kMaxStackDepth;
+  }
   CHECK_GT(depth, 0) << "ProfileData::Add depth <= 0";
-
-  // Make hash-value
+  // make hash-value
   Slot h = 0;
   for (int i = 0; i < depth; i++) {
     Slot slot = reinterpret_cast<Slot>(stack[i]);
     h = (h << 8) | (h >> (8*(sizeof(h)-1)));
     h += (slot * 31) + (slot * 7) + (slot * 3);
   }
-
   count_++;
-
-  // See if table already has an entry for this trace
+  // see if table already has an entry for this trace
   bool done = false;
   Bucket* bucket = &hash_[h % kBuckets];
   for (int a = 0; a < kAssociativity; a++) {
@@ -281,7 +269,6 @@ void ProfileData::Add(int depth, const void* const* stack) {
       }
     }
   }
-
   if (!done) {
     // Evict entry with smallest count
     Entry* e = &bucket->entry[0];
@@ -294,7 +281,6 @@ void ProfileData::Add(int depth, const void* const* stack) {
       evictions_++;
       Evict(*e);
     }
-
     // Use the newly evicted entry
     e->depth = depth;
     e->count = 1;
@@ -302,6 +288,7 @@ void ProfileData::Add(int depth, const void* const* stack) {
       e->stack[i] = reinterpret_cast<Slot>(stack[i]);
     }
   }
+  AddAddress(depth, stack);
 }
 
 // This function is safe to call from asynchronous signals (but is not
@@ -314,4 +301,29 @@ void ProfileData::FlushEvicted() {
     FDWrite(out_, buf, bytes);
   }
   num_evicted_ = 0;
+}
+
+void ProfileData::AddAddress(int depth, const void* const* stack) {
+  for (int i = 0; i < depth; i++) {
+    uint64_t key = reinterpret_cast<uint64_t>(stack[i]);
+    address_set_.insert(key);
+  }
+}
+
+void ProfileData::DumpAddressSymbol(int fd) {
+  char symbol[1024] = { 0 };
+  const char * unknown = "Unknown";
+  for (base::hash_set<uint64_t>::iterator i = address_set_.begin();
+       i != address_set_.end(); i++) {
+    FDWrite(address_out_, reinterpret_cast<const char *>(&(*i)),
+            sizeof(uint64_t));
+    if (!google::Symbolize(reinterpret_cast<char *>(*i), symbol,
+                            sizeof(symbol))) {
+      LOG(WARNING) << *i << " symbolize error";
+      snprintf(symbol, sizeof(symbol), "%s:0x%lx", unknown, *i);
+    }
+    int len = strlen(symbol);
+    FDWrite(address_out_, reinterpret_cast<char *>(&len), sizeof(len));
+    FDWrite(address_out_, symbol, strlen(symbol));
+  }
 }
