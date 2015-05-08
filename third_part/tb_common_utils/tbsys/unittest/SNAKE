@@ -1,0 +1,7 @@
+cc_binary(name='thread_pool_unittest',
+          srcs = ['thread_pool_unittest.cc'],
+          deps = [
+                  '//third_part/tb_common_utils/tbsys/internal:tbsys',
+                  ],
+           cflags = ['-Wno-deprecated']
+           )
