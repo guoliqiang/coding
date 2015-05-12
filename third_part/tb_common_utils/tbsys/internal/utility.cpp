@@ -21,151 +21,110 @@ namespace tbsys {
 // @param iBufLen(int): 绝对路径存储内存长度
 // @return 0(成功)
 // @return -1(失败)
-int getAbsPath(const char *pszPath, char *pszBuf, int iBufLen)
-{
-    int iBuf = 0;
-    int iBufLeftLen = iBufLen;
-    int iNameLen = 0;
-    int iContinue = 1;
-    const char *pcSubPathBegin = pszPath;
-    const char *pcSubPathEnd = NULL;
-    if ((NULL == pszPath) || ('\0' == pszPath[0]) || (iBufLeftLen < 2))
-    {
-        return -1;
+int getAbsPath(const char *pszPath, char *pszBuf, int iBufLen) {
+  int iBuf = 0;
+  int iBufLeftLen = iBufLen;
+  int iNameLen = 0;
+  int iContinue = 1;
+  const char *pcSubPathBegin = pszPath;
+  const char *pcSubPathEnd = NULL;
+  if ((NULL == pszPath) || ('\0' == pszPath[0]) || (iBufLeftLen < 2)) {
+      return -1;
+  }
+  if (pszPath[0] != '/') {
+    if (NULL == getcwd(pszBuf, iBufLeftLen)) {
+      return -1;
     }
-
-    if (pszPath[0] != '/')
-    {
-        if (NULL == getcwd(pszBuf, iBufLeftLen))
-        {
-            return -1;
-        }
-        iBuf = strlen(pszBuf);
-        if ('/' == pszBuf[iBuf - 1])
-        {
-            --iBuf;
-            pszBuf[iBuf] = '\0';
-        }
-        iBufLeftLen -= iBuf;
+    iBuf = strlen(pszBuf);
+    if ('/' == pszBuf[iBuf - 1]) {
+      --iBuf;
+      pszBuf[iBuf] = '\0';
     }
-    else
-    {
-        pszBuf[0] = '\0';
+    iBufLeftLen -= iBuf;
+  } else {
+    pszBuf[0] = '\0';
+    ++pcSubPathBegin;
+  }
+  while (iContinue) {
+    switch (pcSubPathBegin[0]) {
+      case '\0': {
+        pszBuf[iBuf] = '\0';
+        iContinue = 0;
+        continue;
+      }
+      case '/': {
         ++pcSubPathBegin;
-    }
-
-    while (iContinue)
-    {
-        switch (pcSubPathBegin[0])
-        {
-            case '\0':
-            {
-                pszBuf[iBuf] = '\0';
+        continue;
+      }
+      case '.': {
+        switch (pcSubPathBegin[1]) {
+          case '\0': {
+            pszBuf[iBuf] = '\0';
+            iContinue = 0;
+            continue;
+          }
+          case '/': {
+            pszBuf[iBuf] = '\0';
+            pcSubPathBegin += 2;
+            continue;
+          }
+          case '.': {
+            switch (pcSubPathBegin[2]) {
+              case '\0': {
+                for (; iBuf >= 0; --iBuf) {
+                  if ('/' == pszBuf[iBuf]) {
+                    pszBuf[iBuf] = '\0';
+                    break;
+                  }
+                }
                 iContinue = 0;
                 continue;
-            }
-            case '/':
-            {
-                ++pcSubPathBegin;
-                continue;
-            }
-            case '.':
-            {
-                switch (pcSubPathBegin[1])
-                {
-                    case '\0':
-                    {
-                        pszBuf[iBuf] = '\0';
-                        iContinue = 0;
-                        continue;
-                    }
-                    case '/':
-                    {
-                        pszBuf[iBuf] = '\0';
-                        pcSubPathBegin += 2;
-                        continue;
-                    }
-                    case '.':
-                    {
-                        switch (pcSubPathBegin[2])
-                        {
-                            case '\0':
-                            {
-                                for (; iBuf >= 0; --iBuf)
-                                {
-                                    if ('/' == pszBuf[iBuf])
-                                    {
-                                        pszBuf[iBuf] = '\0';
-                                        break;
-                                    }
-                                }
-                                iContinue = 0;
-                                continue;
-                            }
-                            case '/':
-                            {
-                                for (; iBuf >= 0; --iBuf)
-                                {
-                                    if ('/' == pszBuf[iBuf])
-                                    {
-                                        pszBuf[iBuf] = '\0';
-                                        break;
-                                    }
-                                }
-                                pcSubPathBegin += 3;
-                                iBuf = (iBuf > 0)?iBuf:0;
-                                iBufLeftLen = iBufLen - iBuf;
-                                continue;
-                            }
-                            default:
-                            {
-
-                            }
-                        }
-                    }
-                    default:
-                    {
-
-                    }
+              }
+              case '/': {
+                for (; iBuf >= 0; --iBuf) {
+                  if ('/' == pszBuf[iBuf]) {
+                    pszBuf[iBuf] = '\0';
+                    break;
+                  }
                 }
+                pcSubPathBegin += 3;
+                iBuf = (iBuf > 0)?iBuf:0;
+                iBufLeftLen = iBufLen - iBuf;
+                continue;
+              }
+              default: { }
             }
-            default:
-            {
-
-            }
+          }
+          default: { }
         }
-        pszBuf[iBuf] = '/';
-        ++iBuf;
-        iBufLeftLen = iBufLen - iBuf;
-        pcSubPathEnd = strstr(pcSubPathBegin, "/");
-        if (pcSubPathEnd)
-        {
-            iNameLen = pcSubPathEnd - pcSubPathBegin;
-            if (iBufLeftLen <= iNameLen)
-            {
-                return -1;
-            }
-            memcpy(pszBuf + iBuf, pcSubPathBegin, iNameLen);
-            iBuf += iNameLen;
-            pcSubPathBegin = pcSubPathEnd + 1;
-        }
-        else
-        {
-            if (iBufLeftLen < (int)strlen(pcSubPathBegin))
-            {
-                return -1;
-            }
-            strcpy(pszBuf + iBuf, pcSubPathBegin);
-            return 0;
-        }
+      }
+      default: { }
     }
-
-    if (pszBuf[0] != '/')
-    {
-        pszBuf[0] = '/';
-        pszBuf[1] = '\0';
+    pszBuf[iBuf] = '/';
+    ++iBuf;
+    iBufLeftLen = iBufLen - iBuf;
+    pcSubPathEnd = strstr(pcSubPathBegin, "/");
+    if (pcSubPathEnd) {
+      iNameLen = pcSubPathEnd - pcSubPathBegin;
+      if (iBufLeftLen <= iNameLen) {
+        return -1;
+      }
+      memcpy(pszBuf + iBuf, pcSubPathBegin, iNameLen);
+      iBuf += iNameLen;
+      pcSubPathBegin = pcSubPathEnd + 1;
+    } else {
+      if (iBufLeftLen < (int)strlen(pcSubPathBegin)) {
+        return -1;
+      }
+      strcpy(pszBuf + iBuf, pcSubPathBegin);
+      return 0;
     }
-    return 0;
+  }
+  if (pszBuf[0] != '/') {
+    pszBuf[0] = '/';
+    pszBuf[1] = '\0';
+  }
+  return 0;
 }
 
 // 检查并创建一个目录或一个文件的父目录

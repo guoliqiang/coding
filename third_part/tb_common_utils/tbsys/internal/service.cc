@@ -1,17 +1,12 @@
-/*
- * (C) 2007-2010 Taobao Inc.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 2 as
- * published by the Free Software Foundation.
- *
- *
- * Version: $Id$
- *
- * Authors:
- *   duolong <duolong@taobao.com>
- *
- */
+// (C) 2007-2010 Taobao Inc.
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 2 as
+// published by the Free Software Foundation.
+//
+// Version: $Id$
+//
+// Authors: duolong <duolong@taobao.com>
 
 #include "third_part/tb_common_utils/tbsys/public/service.h"
 #include "third_part/tb_common_utils/tbsys/public/network.h"
@@ -24,50 +19,43 @@
 
 using namespace std;
 
-namespace tbutil
-{
+namespace tbutil {
+
 tbutil::Service* tbutil::Service::_instance=NULL;
 static tbutil::CtrlCHandler* _ctrlCHandler=NULL;
 
-static void ctrlCHandlerCallback( int sig )
-{
-    tbutil::Service* service = tbutil::Service::instance();
-    assert( service != 0 );
-    service->handleInterrupt( sig );
+static void ctrlCHandlerCallback(int sig) {
+  tbutil::Service* service = tbutil::Service::instance();
+  assert(service != 0);
+  service->handleInterrupt(sig);
 }
 
-Service::Service():
-   _nohup( true),
-   _service( false),
-   _changeDir( false),
-   _closeFiles( false),
-   _destroyed( false ),
-   _chlidStop(false)
-{
-   assert(_instance == NULL );
-   _instance = this;
+Service::Service(): _nohup(true),
+                    _service(false),
+                    _changeDir(false),
+                    _closeFiles(false),
+                    _destroyed(false ),
+                    _chlidStop(false) {
+  assert(_instance == NULL);
+  _instance = this;
 }
 
-Service::~Service()
-{
-    _instance = NULL;
-    delete _ctrlCHandler;
+Service::~Service() {
+  _instance = NULL;
+  delete _ctrlCHandler;
 }
 
-int Service::main(int argc,char*argv[])
-{
-    bool daemonize(false);
-    bool closeFiles(true);
-    bool changeDir(true);
-    int idx(1);
-    if ( argc < 2 )
-    {
-        cerr<<":invalid option\n"<<"Try `--help' for more information"<<endl;
-        return EXIT_FAILURE;
-    }
-    while( idx < argc )
-    {
-        if( strcmp(argv[idx],"-h") == 0 || strcmp(argv[idx],"--help") == 0 )
+int Service::main(int argc,char*argv[]) {
+  bool daemonize(false);
+  bool closeFiles(true);
+  bool changeDir(true);
+  int idx(1);
+  if (argc < 2) {
+    cerr<<":invalid option\n"<<"Try `--help' for more information"<<endl;
+    return EXIT_FAILURE;
+  }
+  while (idx < argc) {
+    if(strcmp(argv[idx],"-h") == 0 || strcmp(argv[idx],"--help") == 0)
         {
             help();//show help
             return EXIT_SUCCESS;
