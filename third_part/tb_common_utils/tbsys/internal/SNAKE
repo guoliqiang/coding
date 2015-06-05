@@ -29,5 +29,6 @@ cc_library(name = 'tbsys',
                    'thread_exception.cc',
                    'timer.cc',
                   ],
-            cflags = ['-Wno-deprecated']
+            cflags = ['-Wno-deprecated'],
+            copt = ['no_style_check']
           )

@@ -1,0 +1,16 @@
+cc_library(name='gperftools_base',
+           srcs = [
+                   'dynamic_annotations.c',
+                   'thread_lister.c',
+                   'atomicops-internals-x86.cc',
+                   'elf_mem_image.cc',
+                   'linuxthreads.cc',
+                   'logging.cc',
+                   'low_level_alloc.cc',
+                   'spinlock.cc',
+                   'spinlock_internal.cc',
+                   'sysinfo.cc',
+                   'vdso_support.cc',
+                  ],
+           copt = ['no_style_check']
+          )

@@ -1,17 +1,13 @@
-/*
- * (C) 2007-2010 Taobao Inc.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 2 as
- * published by the Free Software Foundation.
- *
- *
- * Version: $Id$
- *
- * Authors:
- *   duolong <duolong@taobao.com>
- *
- */
+// (C) 2007-2010 Taobao Inc.
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 2 as
+// published by the Free Software Foundation.
+//
+// Version: $Id$
+//
+// Authors:
+//   duolong <duolong@taobao.com>
 
 #ifndef TBSYS_H
 #define TBSYS_H
@@ -60,14 +56,14 @@ class noncopyable {
 };
 
 #if defined(__BCPLUSPLUS__) || defined(_MSC_VER)
-    typedef __int64 Int64;
-    #define T_INT64(n) n##i64
+  typedef __int64 Int64;
+  #define T_INT64(n) n##i64
 #elif defined(TNET_64)
-    typedef long Int64;
-    #define T_INT64(n) n##L
+  typedef long Int64;
+  #define T_INT64(n) n##L
 #else
-    typedef long long Int64;
-    #define T_INT64(n) n##LL
+  typedef long long Int64;
+  #define T_INT64(n) n##LL
 #endif
  
 typedef unsigned char Byte;
@@ -76,28 +72,19 @@ typedef int Int;
 typedef Int64 Long;
 typedef float Float;
 typedef double Double;
- 
 typedef ::std::vector<bool> BoolSeq;
- 
 typedef ::std::vector< Byte> ByteSeq;
- 
 typedef ::std::vector< Short> ShortSeq;
- 
 typedef ::std::vector< Int> IntSeq;
- 
 typedef ::std::vector< Long> LongSeq;
- 
 typedef ::std::vector< Float> FloatSeq;
- 
 typedef ::std::vector< Double> DoubleSeq;
- 
 typedef ::std::vector< ::std::string> StringSeq;
- 
-inline int getSystemErrno()
-{
-    return errno;
+inline int getSystemErrno() {
+  return errno;
 }
-}//end namespace tbutil
+
+}  // namespace tbutil
 
 #include "third_part/tb_common_utils/tbsys/public/atomic.h"
 #include "third_part/tb_common_utils/tbsys/public/config.h"
@@ -123,4 +110,3 @@ inline int getSystemErrno()
 #include "third_part/tb_common_utils/tbsys/public/byte_buffer.h"
 
 #endif
-
