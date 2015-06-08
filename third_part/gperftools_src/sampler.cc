@@ -33,11 +33,11 @@
 //
 // Author: Daniel Ford
 
-#include "sampler.h"
+#include "third_part/gperftools_src/sampler.h"
 
 #include <algorithm>  // For min()
 #include <math.h>
-#include "base/commandlineflags.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
 
 using std::min;
 

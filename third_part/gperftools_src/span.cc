@@ -31,14 +31,14 @@
 // ---
 // Author: Sanjay Ghemawat <opensource@google.com>
 
-#include <config.h>
-#include "span.h"
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/span.h"
 
 #include <string.h>                     // for NULL, memset
 
-#include "internal_logging.h"  // for ASSERT
-#include "page_heap_allocator.h"  // for PageHeapAllocator
-#include "static_vars.h"       // for Static
+#include "third_part/gperftools_src/internal_logging.h"  // for ASSERT
+#include "third_part/gperftools_src/page_heap_allocator.h"  // for PageHeapAllocator
+#include "third_part/gperftools_src/static_vars.h"       // for Static
 
 namespace tcmalloc {
 

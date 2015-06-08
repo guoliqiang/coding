@@ -34,8 +34,8 @@
 //
 // Profile current program by sampling stack-trace every so often
 
-#include "config.h"
-#include "getpc.h"      // should be first to get the _GNU_SOURCE dfn
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/getpc.h"      // should be first to get the _GNU_SOURCE dfn
 #include <signal.h>
 #include <assert.h>
 #include <stdio.h>
@@ -58,15 +58,15 @@ typedef int ucontext_t;   // just to quiet the compiler, mostly
 #include <string>
 #include <gperftools/profiler.h>
 #include <gperftools/stacktrace.h>
-#include "base/commandlineflags.h"
-#include "base/logging.h"
-#include "base/googleinit.h"
-#include "base/spinlock.h"
-#include "base/sysinfo.h"             /* for GetUniquePathFromEnv, etc */
-#include "profiledata.h"
-#include "profile-handler.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/googleinit.h"
+#include "third_part/gperftools_src/base/spinlock.h"
+#include "third_part/gperftools_src/base/sysinfo.h"             /* for GetUniquePathFromEnv, etc */
+#include "third_part/gperftools_src/profiledata.h"
+#include "third_part/gperftools_src/profile-handler.h"
 #ifdef HAVE_CONFLICT_SIGNAL_H
-#include "conflict-signal.h"          /* used on msvc machines */
+#include "third_part/gperftools_src/conflict-signal.h"          /* used on msvc machines */
 #endif
 
 using std::string;

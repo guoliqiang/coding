@@ -34,7 +34,7 @@
 #ifndef TCMALLOC_THREAD_CACHE_H_
 #define TCMALLOC_THREAD_CACHE_H_
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 #ifdef HAVE_PTHREAD
 #include <pthread.h>                    // for pthread_t, pthread_key_t
 #endif
@@ -43,19 +43,19 @@
 #include <stdint.h>                     // for uint32_t, uint64_t
 #endif
 #include <sys/types.h>                  // for ssize_t
-#include "common.h"
-#include "linked_list.h"
-#include "maybe_threads.h"
-#include "page_heap_allocator.h"
-#include "sampler.h"
-#include "static_vars.h"
+#include "third_part/gperftools_src/common.h"
+#include "third_part/gperftools_src/linked_list.h"
+#include "third_part/gperftools_src/maybe_threads.h"
+#include "third_part/gperftools_src/page_heap_allocator.h"
+#include "third_part/gperftools_src/sampler.h"
+#include "third_part/gperftools_src/static_vars.h"
 
-#include "common.h"            // for SizeMap, kMaxSize, etc
-#include "internal_logging.h"  // for ASSERT, etc
-#include "linked_list.h"       // for SLL_Pop, SLL_PopRange, etc
-#include "page_heap_allocator.h"  // for PageHeapAllocator
-#include "sampler.h"           // for Sampler
-#include "static_vars.h"       // for Static
+#include "third_part/gperftools_src/common.h"            // for SizeMap, kMaxSize, etc
+#include "third_part/gperftools_src/internal_logging.h"  // for ASSERT, etc
+#include "third_part/gperftools_src/linked_list.h"       // for SLL_Pop, SLL_PopRange, etc
+#include "third_part/gperftools_src/page_heap_allocator.h"  // for PageHeapAllocator
+#include "third_part/gperftools_src/sampler.h"           // for Sampler
+#include "third_part/gperftools_src/static_vars.h"       // for Static
 
 namespace tcmalloc {
 

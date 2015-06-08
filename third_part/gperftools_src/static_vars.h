@@ -36,14 +36,14 @@
 #ifndef TCMALLOC_STATIC_VARS_H_
 #define TCMALLOC_STATIC_VARS_H_
 
-#include <config.h>
-#include "base/spinlock.h"
-#include "central_freelist.h"
-#include "common.h"
-#include "page_heap.h"
-#include "page_heap_allocator.h"
-#include "span.h"
-#include "stack_trace_table.h"
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/base/spinlock.h"
+#include "third_part/gperftools_src/central_freelist.h"
+#include "third_part/gperftools_src/common.h"
+#include "third_part/gperftools_src/page_heap.h"
+#include "third_part/gperftools_src/page_heap_allocator.h"
+#include "third_part/gperftools_src/span.h"
+#include "third_part/gperftools_src/stack_trace_table.h"
 
 namespace tcmalloc {
 

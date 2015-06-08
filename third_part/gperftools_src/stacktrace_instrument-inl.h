@@ -51,7 +51,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/syscall.h>
-#include "gperftools/stacktrace.h"
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
 
 #define gettid() syscall(__NR_gettid)
 #ifndef __x86_64__

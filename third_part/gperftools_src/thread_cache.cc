@@ -31,16 +31,16 @@
 // ---
 // Author: Ken Ashcraft <opensource@google.com>
 
-#include <config.h>
-#include "thread_cache.h"
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/thread_cache.h"
 #include <errno.h>
 #include <string.h>                     // for memcpy
 #include <algorithm>                    // for max, min
-#include "base/commandlineflags.h"      // for SpinLockHolder
-#include "base/spinlock.h"              // for SpinLockHolder
-#include "getenv_safe.h"                // for TCMallocGetenvSafe
-#include "central_freelist.h"           // for CentralFreeListPadded
-#include "maybe_threads.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"      // for SpinLockHolder
+#include "third_part/gperftools_src/base/spinlock.h"              // for SpinLockHolder
+#include "third_part/gperftools_src/getenv_safe.h"                // for TCMallocGetenvSafe
+#include "third_part/gperftools_src/central_freelist.h"           // for CentralFreeListPadded
+#include "third_part/gperftools_src/maybe_threads.h"
 
 using std::min;
 using std::max;

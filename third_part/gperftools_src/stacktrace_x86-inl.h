@@ -38,7 +38,7 @@
 // Note: this file is included into stacktrace.cc more than once.
 // Anything that should only be defined once should be here:
 
-#include "config.h"
+#include "third_part/gperftools_src/config.h"
 #include <stdlib.h>   // for NULL
 #include <assert.h>
 #if defined(HAVE_SYS_UCONTEXT_H)
@@ -62,10 +62,10 @@ typedef ucontext ucontext_t;
 #endif
 #ifdef HAVE_MMAP
 #include <sys/mman.h> // for msync
-#include "base/vdso_support.h"
+#include "third_part/gperftools_src/base/vdso_support.h"
 #endif
 
-#include "gperftools/stacktrace.h"
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
 
 #if defined(__linux__) && defined(__i386__) && defined(__ELF__) && defined(HAVE_MMAP)
 // Count "push %reg" instructions in VDSO __kernel_vsyscall(),

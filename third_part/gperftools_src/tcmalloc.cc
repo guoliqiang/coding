@@ -87,7 +87,7 @@
 // * allocation of a reasonably complicated struct
 //   goes from about 1100 ns to about 300 ns.
 
-#include "config.h"
+#include "third_part/gperftools_src/config.h"
 #include <gperftools/tcmalloc.h>
 
 #include <errno.h>                      // for ENOMEM, EINVAL, errno
@@ -112,25 +112,25 @@
 #include <new>                          // for nothrow_t (ptr only), etc
 #include <vector>                       // for vector
 
-#include <gperftools/malloc_extension.h>
-#include <gperftools/malloc_hook.h>         // for MallocHook
-#include "base/basictypes.h"            // for int64
-#include "base/commandlineflags.h"      // for RegisterFlagValidator, etc
-#include "base/dynamic_annotations.h"   // for RunningOnValgrind
-#include "base/spinlock.h"              // for SpinLockHolder
-#include "central_freelist.h"  // for CentralFreeListPadded
-#include "common.h"            // for StackTrace, kPageShift, etc
-#include "internal_logging.h"  // for ASSERT, TCMalloc_Printer, etc
-#include "linked_list.h"       // for SLL_SetNext
-#include "malloc_hook-inl.h"       // for MallocHook::InvokeNewHook, etc
-#include "page_heap.h"         // for PageHeap, PageHeap::Stats
-#include "page_heap_allocator.h"  // for PageHeapAllocator
-#include "span.h"              // for Span, DLL_Prepend, etc
-#include "stack_trace_table.h"  // for StackTraceTable
-#include "static_vars.h"       // for Static
-#include "system-alloc.h"      // for DumpSystemAllocatorStats, etc
-#include "tcmalloc_guard.h"    // for TCMallocGuard
-#include "thread_cache.h"      // for ThreadCache
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/gperftools/malloc_hook.h"    // for MallocHook
+#include "third_part/gperftools_src/base/basictypes.h"            // for int64
+#include "third_part/gperftools_src/base/commandlineflags.h"      // for RegisterFlagValidator, etc
+#include "third_part/gperftools_src/base/dynamic_annotations.h"   // for RunningOnValgrind
+#include "third_part/gperftools_src/base/spinlock.h"              // for SpinLockHolder
+#include "third_part/gperftools_src/central_freelist.h"  // for CentralFreeListPadded
+#include "third_part/gperftools_src/common.h"            // for StackTrace, kPageShift, etc
+#include "third_part/gperftools_src/internal_logging.h"  // for ASSERT, TCMalloc_Printer, etc
+#include "third_part/gperftools_src/linked_list.h"       // for SLL_SetNext
+#include "third_part/gperftools_src/malloc_hook-inl.h"       // for MallocHook::InvokeNewHook, etc
+#include "third_part/gperftools_src/page_heap.h"         // for PageHeap, PageHeap::Stats
+#include "third_part/gperftools_src/page_heap_allocator.h"  // for PageHeapAllocator
+#include "third_part/gperftools_src/span.h"              // for Span, DLL_Prepend, etc
+#include "third_part/gperftools_src/stack_trace_table.h"  // for StackTraceTable
+#include "third_part/gperftools_src/static_vars.h"       // for Static
+#include "third_part/gperftools_src/system-alloc.h"      // for DumpSystemAllocatorStats, etc
+#include "third_part/gperftools_src/tcmalloc_guard.h"    // for TCMallocGuard
+#include "third_part/gperftools_src/thread_cache.h"      // for ThreadCache
 
 #if (defined(_WIN32) && !defined(__CYGWIN__) && !defined(__CYGWIN32__)) && !defined(WIN32_OVERRIDE_ALLOCATORS)
 # define WIN32_DO_PATCHING 1
@@ -143,7 +143,7 @@ using STL_NAMESPACE::max;
 using STL_NAMESPACE::numeric_limits;
 using STL_NAMESPACE::vector;
 
-#include "libc_override.h"
+#include "third_part/gperftools_src/libc_override.h"
 
 // __THROW is defined in glibc (via <sys/cdefs.h>).  It means,
 // counter-intuitively, "This function will never throw an exception."

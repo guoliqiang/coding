@@ -36,14 +36,14 @@
 #ifndef TCMALLOC_SAMPLER_H_
 #define TCMALLOC_SAMPLER_H_
 
-#include "config.h"
+#include "third_part/gperftools_src/config.h"
 #include <stddef.h>                     // for size_t
 #ifdef HAVE_STDINT_H
 #include <stdint.h>                     // for uint64_t, uint32_t, int32_t
 #endif
 #include <string.h>                     // for memcpy
-#include "base/basictypes.h"  // for ASSERT
-#include "internal_logging.h"  // for ASSERT
+#include "third_part/gperftools_src/base/basictypes.h"  // for ASSERT
+#include "third_part/gperftools_src/internal_logging.h"  // for ASSERT
 
 namespace tcmalloc {
 

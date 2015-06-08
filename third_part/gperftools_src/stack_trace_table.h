@@ -36,11 +36,11 @@
 #ifndef TCMALLOC_STACK_TRACE_TABLE_H_
 #define TCMALLOC_STACK_TRACE_TABLE_H_
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 #ifdef HAVE_STDINT_H
 #include <stdint.h>                     // for uintptr_t
 #endif
-#include "common.h"
+#include "third_part/gperftools_src/common.h"
 
 namespace tcmalloc {
 

@@ -41,10 +41,10 @@
 #ifndef BASE_PROFILEDATA_H_
 #define BASE_PROFILEDATA_H_
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 #include <time.h>   // for time_t
 #include <stdint.h>
-#include "base/basictypes.h"
+#include "third_part/gperftools_src/base/basictypes.h"
 
 // A class that accumulates profile samples and writes them to a file.
 //

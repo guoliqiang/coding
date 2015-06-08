@@ -31,17 +31,17 @@
 // ---
 // Author: Sanjay Ghemawat <opensource@google.com>
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 #ifdef HAVE_INTTYPES_H
 #include <inttypes.h>                   // for PRIuPTR
 #endif
-#include <gperftools/malloc_extension.h>      // for MallocRange, etc
-#include "base/basictypes.h"
-#include "base/commandlineflags.h"
-#include "internal_logging.h"  // for ASSERT, TCMalloc_Printer, etc
-#include "page_heap_allocator.h"  // for PageHeapAllocator
-#include "static_vars.h"       // for Static
-#include "system-alloc.h"      // for TCMalloc_SystemAlloc, etc
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"      // for MallocRange, etc
+#include "third_part/gperftools_src/base/basictypes.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/internal_logging.h"  // for ASSERT, TCMalloc_Printer, etc
+#include "third_part/gperftools_src/page_heap_allocator.h"  // for PageHeapAllocator
+#include "third_part/gperftools_src/static_vars.h"       // for Static
+#include "third_part/gperftools_src/system-alloc.h"      // for TCMalloc_SystemAlloc, etc
 
 DEFINE_double(tcmalloc_release_rate,
               EnvToDouble("TCMALLOC_RELEASE_RATE", 1.0),

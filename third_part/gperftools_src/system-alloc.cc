@@ -31,7 +31,7 @@
 // ---
 // Author: Sanjay Ghemawat
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 #include <errno.h>                      // for EAGAIN, errno
 #include <fcntl.h>                      // for open, O_RDWR
 #include <stddef.h>                     // for size_t, NULL, ptrdiff_t
@@ -50,11 +50,11 @@
 #endif
 #include <new>                          // for operator new
 #include <gperftools/malloc_extension.h>
-#include "base/basictypes.h"
-#include "base/commandlineflags.h"
-#include "base/spinlock.h"              // for SpinLockHolder, SpinLock, etc
-#include "common.h"
-#include "internal_logging.h"
+#include "third_part/gperftools_src/base/basictypes.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/base/spinlock.h"              // for SpinLockHolder, SpinLock, etc
+#include "third_part/gperftools_src/common.h"
+#include "third_part/gperftools_src/internal_logging.h"
 
 // On systems (like freebsd) that don't define MAP_ANONYMOUS, use the old
 // form of the name instead.

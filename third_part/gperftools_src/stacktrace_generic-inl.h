@@ -43,7 +43,7 @@
 
 #include <execinfo.h>
 #include <string.h>
-#include "gperftools/stacktrace.h"
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
 #endif  // BASE_STACKTRACE_GENERIC_INL_H_
 
 // Note: this part of the file is included several times.

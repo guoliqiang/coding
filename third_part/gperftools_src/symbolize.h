@@ -34,7 +34,7 @@
 #ifndef TCMALLOC_SYMBOLIZE_H_
 #define TCMALLOC_SYMBOLIZE_H_
 
-#include "config.h"
+#include "third_part/gperftools_src/config.h"
 #ifdef HAVE_STDINT_H
 #include <stdint.h>  // for uintptr_t
 #endif

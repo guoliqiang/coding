@@ -39,8 +39,8 @@
 // Anything that should only be defined once should be here:
 
 #include <stdint.h>   // for uintptr_t
-#include "base/basictypes.h"  // for NULL
-#include <gperftools/stacktrace.h>
+#include "third_part/gperftools_src/base/basictypes.h"  // for NULL
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
 
 // WARNING:
 // This only works if all your code is in either ARM or THUMB mode.  With

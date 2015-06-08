@@ -34,8 +34,8 @@
 //
 // Implements management of profile timers and the corresponding signal handler.
 
-#include "config.h"
-#include "profile-handler.h"
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/profile-handler.h"
 
 #if !(defined(__CYGWIN__) || defined(__CYGWIN32__))
 
@@ -50,16 +50,16 @@
 // for timer_{create,settime} and associated typedefs & constants
 #include <time.h>
 // for sys_gettid
-#include "base/linux_syscall_support.h"
+#include "third_part/gperftools_src/base/linux_syscall_support.h"
 // for perftools_pthread_key_create
-#include "maybe_threads.h"
+#include "third_part/gperftools_src/maybe_threads.h"
 #endif
 
-#include "base/dynamic_annotations.h"
-#include "base/googleinit.h"
-#include "base/logging.h"
-#include "base/spinlock.h"
-#include "maybe_threads.h"
+#include "third_part/gperftools_src/base/dynamic_annotations.h"
+#include "third_part/gperftools_src/base/googleinit.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/spinlock.h"
+#include "third_part/gperftools_src/maybe_threads.h"
 
 using std::list;
 using std::string;

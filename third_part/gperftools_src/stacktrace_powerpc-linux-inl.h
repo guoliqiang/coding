@@ -44,8 +44,8 @@
 
 #include <stdint.h>   // for uintptr_t
 #include <stdlib.h>   // for NULL
-#include <gperftools/stacktrace.h>
-#include <base/vdso_support.h>
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
+#include "third_part/gperftools_src/base/vdso_support.h"
 
 #if defined(HAVE_SYS_UCONTEXT_H)
 #include <sys/ucontext.h>

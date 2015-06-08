@@ -31,14 +31,14 @@
 // ---
 // Author: Andrew Fikes
 
-#include <config.h>
-#include "stack_trace_table.h"
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/stack_trace_table.h"
 #include <string.h>                     // for NULL, memset
-#include "base/spinlock.h"              // for SpinLockHolder
-#include "common.h"            // for StackTrace
-#include "internal_logging.h"  // for ASSERT, Log
-#include "page_heap_allocator.h"  // for PageHeapAllocator
-#include "static_vars.h"       // for Static
+#include "third_part/gperftools_src/base/spinlock.h"              // for SpinLockHolder
+#include "third_part/gperftools_src/common.h"            // for StackTrace
+#include "third_part/gperftools_src/internal_logging.h"  // for ASSERT, Log
+#include "third_part/gperftools_src/page_heap_allocator.h"  // for PageHeapAllocator
+#include "third_part/gperftools_src/static_vars.h"       // for Static
 
 namespace tcmalloc {
 

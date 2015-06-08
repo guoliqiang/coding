@@ -46,8 +46,8 @@ extern "C" {
 #include <string.h>   // for memset()
 #include <libunwind.h>
 }
-#include "gperftools/stacktrace.h"
-#include "base/logging.h"
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
+#include "third_part/gperftools_src/base/logging.h"
 
 // Sometimes, we can try to get a stack trace from within a stack
 // trace, because libunwind can call mmap (maybe indirectly via an

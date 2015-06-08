@@ -34,7 +34,7 @@
 //
 // Collect profiling data.
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,10 +46,10 @@
 #include <string.h>
 #include <fcntl.h>
 
-#include "profiledata.h"
+#include "third_part/gperftools_src/profiledata.h"
 
-#include "base/logging.h"
-#include "base/sysinfo.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/sysinfo.h"
 
 // All of these are initialized in profiledata.h.
 const int ProfileData::kMaxStackDepth;

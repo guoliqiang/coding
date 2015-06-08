@@ -41,7 +41,7 @@
 
 #include <stdint.h>   // for uintptr_t
 #include <stdlib.h>   // for NULL
-#include <gperftools/stacktrace.h>
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
 
 // Given a pointer to a stack frame, locate and return the calling
 // stackframe, or return NULL if no stackframe can be found. Perform sanity

@@ -36,8 +36,8 @@
 
 #include <stddef.h>                     // for NULL, size_t
 
-#include "common.h"            // for MetaDataAlloc
-#include "internal_logging.h"  // for ASSERT
+#include "third_part/gperftools_src/common.h"            // for MetaDataAlloc
+#include "third_part/gperftools_src/internal_logging.h"  // for ASSERT
 
 namespace tcmalloc {
 

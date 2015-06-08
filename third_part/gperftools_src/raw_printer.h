@@ -43,8 +43,8 @@
 #ifndef BASE_RAW_PRINTER_H_
 #define BASE_RAW_PRINTER_H_
 
-#include <config.h>
-#include "base/basictypes.h"
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/base/basictypes.h"
 
 namespace base {
 

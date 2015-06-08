@@ -55,7 +55,7 @@
 // Note: this file is included into stacktrace.cc more than once.
 // Anything that should only be defined once should be here:
 
-#include "config.h"
+#include "third_part/gperftools_src/config.h"
 #include <windows.h>    // for GetProcAddress and GetModuleHandle
 #include <assert.h>
 

@@ -34,8 +34,8 @@
 // This forks out to pprof to do the actual symbolizing.  We might
 // be better off writing our own in C++.
 
-#include "config.h"
-#include "symbolize.h"
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/symbolize.h"
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>   // for write()
@@ -57,9 +57,9 @@
 #include <io.h>            // for get_osfhandle()
 #endif
 #include <string>
-#include "base/commandlineflags.h"
-#include "base/logging.h"
-#include "base/sysinfo.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/sysinfo.h"
 
 using std::string;
 using tcmalloc::DumpProcSelfMaps;   // from sysinfo.h

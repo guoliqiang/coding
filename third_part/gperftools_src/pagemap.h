@@ -46,7 +46,7 @@
 #ifndef TCMALLOC_PAGEMAP_H_
 #define TCMALLOC_PAGEMAP_H_
 
-#include "config.h"
+#include "third_part/gperftools_src/config.h"
 
 #include <stddef.h>                     // for NULL, size_t
 #include <string.h>                     // for memset
@@ -57,7 +57,7 @@
 #else
 #include <sys/types.h>
 #endif
-#include "internal_logging.h"  // for ASSERT
+#include "third_part/gperftools_src/internal_logging.h"  // for ASSERT
 
 // Single-level array
 template <int BITS>

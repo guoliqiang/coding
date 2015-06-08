@@ -35,7 +35,7 @@
 // systems.  In those cases, we'll just declare them ourselves.
 // This file is meant to be used only internally, for unittests.
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 
 #ifndef _XOPEN_SOURCE
 # define _XOPEN_SOURCE 600  // for posix_memalign

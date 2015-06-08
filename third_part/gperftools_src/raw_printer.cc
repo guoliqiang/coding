@@ -31,11 +31,11 @@
 // ---
 // Author: sanjay@google.com (Sanjay Ghemawat)
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 #include <stdarg.h>
 #include <stdio.h>
-#include "raw_printer.h"
-#include "base/logging.h"
+#include "third_part/gperftools_src/raw_printer.h"
+#include "third_part/gperftools_src/base/logging.h"
 
 namespace base {
 

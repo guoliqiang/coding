@@ -46,12 +46,12 @@
 #ifndef BASE_PROFILE_HANDLER_H_
 #define BASE_PROFILE_HANDLER_H_
 
-#include "config.h"
+#include "third_part/gperftools_src/config.h"
 #include <signal.h>
 #ifdef COMPILER_MSVC
-#include "conflict-signal.h"
+#include "third_part/gperftools_src/conflict-signal.h"
 #endif
-#include "base/basictypes.h"
+#include "third_part/gperftools_src/base/basictypes.h"
 
 /* All this code should be usable from within C apps. */
 #ifdef __cplusplus

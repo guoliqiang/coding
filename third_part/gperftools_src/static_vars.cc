@@ -31,18 +31,18 @@
 // ---
 // Author: Ken Ashcraft <opensource@google.com>
 
-#include <config.h>
-#include "static_vars.h"
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/static_vars.h"
 #include <stddef.h>                     // for NULL
 #include <new>                          // for operator new
 #ifdef HAVE_PTHREAD
 #include <pthread.h>                    // for pthread_atfork
 #endif
-#include "internal_logging.h"  // for CHECK_CONDITION
-#include "common.h"
-#include "sampler.h"           // for Sampler
-#include "getenv_safe.h"       // TCMallocGetenvSafe
-#include "base/googleinit.h"
+#include "third_part/gperftools_src/internal_logging.h"  // for CHECK_CONDITION
+#include "third_part/gperftools_src/common.h"
+#include "third_part/gperftools_src/sampler.h"           // for Sampler
+#include "third_part/gperftools_src/getenv_safe.h"       // TCMallocGetenvSafe
+#include "third_part/gperftools_src/base/googleinit.h"
 
 namespace tcmalloc {
 

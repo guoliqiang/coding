@@ -53,13 +53,13 @@
 // correctly when GetStackTrace() is called with max_depth == 0.
 // Some code may do that.
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 #include <stdlib.h> // for getenv
 #include <string.h> // for strcmp
 #include <stdio.h> // for fprintf
-#include "gperftools/stacktrace.h"
-#include "base/commandlineflags.h"
-#include "base/googleinit.h"
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/base/googleinit.h"
 
 
 // we're using plain struct and not class to avoid any possible issues
@@ -84,7 +84,7 @@ struct GetStackImplementation {
 #if HAVE_DECL_BACKTRACE
 #define STACKTRACE_INL_HEADER "stacktrace_generic-inl.h"
 #define GST_SUFFIX generic
-#include "stacktrace_impl_setup-inl.h"
+#include "third_part/gperftools_src/stacktrace_impl_setup-inl.h"
 #undef GST_SUFFIX
 #undef STACKTRACE_INL_HEADER
 #define HAVE_GST_generic
@@ -95,7 +95,7 @@ struct GetStackImplementation {
 #if defined(HAVE_LIBUNWIND_H) && defined(HAVE_TLS)
 #define STACKTRACE_INL_HEADER "stacktrace_libunwind-inl.h"
 #define GST_SUFFIX libunwind
-#include "stacktrace_impl_setup-inl.h"
+#include "third_part/gperftools_src/stacktrace_impl_setup-inl.h"
 #undef GST_SUFFIX
 #undef STACKTRACE_INL_HEADER
 #define HAVE_GST_libunwind
@@ -104,7 +104,7 @@ struct GetStackImplementation {
 #if defined(__i386__) || defined(__x86_64__)
 #define STACKTRACE_INL_HEADER "stacktrace_x86-inl.h"
 #define GST_SUFFIX x86
-#include "stacktrace_impl_setup-inl.h"
+#include "third_part/gperftools_src/stacktrace_impl_setup-inl.h"
 #undef GST_SUFFIX
 #undef STACKTRACE_INL_HEADER
 #define HAVE_GST_x86
@@ -117,7 +117,7 @@ struct GetStackImplementation {
 #define STACKTRACE_INL_HEADER "stacktrace_powerpc-darwin-inl.h"
 #endif
 #define GST_SUFFIX ppc
-#include "stacktrace_impl_setup-inl.h"
+#include "third_part/gperftools_src/stacktrace_impl_setup-inl.h"
 #undef GST_SUFFIX
 #undef STACKTRACE_INL_HEADER
 #define HAVE_GST_ppc
@@ -126,7 +126,7 @@ struct GetStackImplementation {
 #if defined(__arm__)
 #define STACKTRACE_INL_HEADER "stacktrace_arm-inl.h"
 #define GST_SUFFIX arm
-#include "stacktrace_impl_setup-inl.h"
+#include "third_part/gperftools_src/stacktrace_impl_setup-inl.h"
 #undef GST_SUFFIX
 #undef STACKTRACE_INL_HEADER
 #define HAVE_GST_arm
@@ -135,7 +135,7 @@ struct GetStackImplementation {
 #ifdef TCMALLOC_ENABLE_INSTRUMENT_STACKTRACE
 #define STACKTRACE_INL_HEADER "stacktrace_instrument-inl.h"
 #define GST_SUFFIX instrument
-#include "stacktrace_impl_setup-inl.h"
+#include "third_part/gperftools_src/stacktrace_impl_setup-inl.h"
 #undef GST_SUFFIX
 #undef STACKTRACE_INL_HEADER
 #define HAVE_GST_instrument
@@ -146,7 +146,7 @@ struct GetStackImplementation {
 #if defined(_WIN32) || defined(__CYGWIN__) || defined(__CYGWIN32__) || defined(__MINGW32__)
 #define STACKTRACE_INL_HEADER "stacktrace_win32-inl.h"
 #define GST_SUFFIX win32
-#include "stacktrace_impl_setup-inl.h"
+#include "third_part/gperftools_src/stacktrace_impl_setup-inl.h"
 #undef GST_SUFFIX
 #undef STACKTRACE_INL_HEADER
 #define HAVE_GST_win32
