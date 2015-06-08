@@ -34,8 +34,8 @@
 // Some very basic linked list functions for dealing with using void * as
 // storage.
 
-#ifndef TCMALLOC_LINKED_LIST_H_
-#define TCMALLOC_LINKED_LIST_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LINKED_LIST_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LINKED_LIST_H_
 
 #include <stddef.h>
 
@@ -100,4 +100,4 @@ inline size_t SLL_Size(void *head) {
 
 }  // namespace tcmalloc
 
-#endif  // TCMALLOC_LINKED_LIST_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LINKED_LIST_H_

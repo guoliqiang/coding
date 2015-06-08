@@ -49,8 +49,8 @@
 // matters too, so we have a different file for each libc, and often
 // for different compilers and OS's.
 
-#ifndef TCMALLOC_LIBC_OVERRIDE_INL_H_
-#define TCMALLOC_LIBC_OVERRIDE_INL_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_INL_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_INL_H_
 
 #include "third_part/gperftools_src/config.h"
 #ifdef HAVE_FEATURES_H
@@ -88,4 +88,4 @@ static void ReplaceSystemAlloc() { PatchWindowsFunctions(); }
 
 #endif
 
-#endif  // TCMALLOC_LIBC_OVERRIDE_INL_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_INL_H_

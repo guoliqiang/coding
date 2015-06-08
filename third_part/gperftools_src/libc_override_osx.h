@@ -69,8 +69,8 @@
 // punt and don't implement our own posix_memalign.  Apps that really
 // care can use tc_posix_memalign directly.
 
-#ifndef TCMALLOC_LIBC_OVERRIDE_OSX_INL_H_
-#define TCMALLOC_LIBC_OVERRIDE_OSX_INL_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_OSX_INL_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_OSX_INL_H_
 
 #include "third_part/gperftools_src/config.h"
 #ifdef HAVE_FEATURES_H
@@ -273,4 +273,4 @@ static void ReplaceSystemAlloc() {
   malloc_zone_register(default_zone);
 }
 
-#endif  // TCMALLOC_LIBC_OVERRIDE_OSX_INL_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_OSX_INL_H_

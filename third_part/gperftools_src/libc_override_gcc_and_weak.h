@@ -36,8 +36,8 @@
 // (almost all unix-based systems are like this), on gcc, which
 // suppports the 'alias' attribute.
 
-#ifndef TCMALLOC_LIBC_OVERRIDE_GCC_AND_WEAK_INL_H_
-#define TCMALLOC_LIBC_OVERRIDE_GCC_AND_WEAK_INL_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_GCC_AND_WEAK_INL_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_GCC_AND_WEAK_INL_H_
 
 #ifdef HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>    // for __THROW
@@ -104,4 +104,4 @@ extern "C" {
 // via overriding weak symbols (at link time).
 static void ReplaceSystemAlloc() { }
 
-#endif  // TCMALLOC_LIBC_OVERRIDE_GCC_AND_WEAK_INL_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_GCC_AND_WEAK_INL_H_

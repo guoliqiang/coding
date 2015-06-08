@@ -33,8 +33,8 @@
  *         .h file by Craig Silverstein <opensource@google.com>
  */
 
-#ifndef TCMALLOC_TCMALLOC_H_
-#define TCMALLOC_TCMALLOC_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_TCMALLOC_TCMALLOC_H_
+#define THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_TCMALLOC_TCMALLOC_H_
 
 #include <stddef.h>                     // for size_t
 #ifdef HAVE_SYS_CDEFS_H
@@ -132,4 +132,4 @@ extern "C" {
 }
 #endif
 
-#endif  // #ifndef TCMALLOC_TCMALLOC_H_
+#endif  // #ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_TCMALLOC_TCMALLOC_H_

@@ -33,8 +33,8 @@
 //
 // Static variables shared by multiple classes.
 
-#ifndef TCMALLOC_STATIC_VARS_H_
-#define TCMALLOC_STATIC_VARS_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_STATIC_VARS_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_STATIC_VARS_H_
 
 #include "third_part/gperftools_src/config.h"
 #include "third_part/gperftools_src/base/spinlock.h"
@@ -112,4 +112,4 @@ class Static {
 
 }  // namespace tcmalloc
 
-#endif  // TCMALLOC_STATIC_VARS_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_STATIC_VARS_H_

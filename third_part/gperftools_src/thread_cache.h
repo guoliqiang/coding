@@ -31,8 +31,8 @@
 // ---
 // Author: Sanjay Ghemawat <opensource@google.com>
 
-#ifndef TCMALLOC_THREAD_CACHE_H_
-#define TCMALLOC_THREAD_CACHE_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_THREAD_CACHE_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_THREAD_CACHE_H_
 
 #include "third_part/gperftools_src/config.h"
 #ifdef HAVE_PTHREAD
@@ -437,4 +437,4 @@ inline void ThreadCache::SetMinSizeForSlowPath(size_t size) {
 
 }  // namespace tcmalloc
 
-#endif  // TCMALLOC_THREAD_CACHE_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_THREAD_CACHE_H_

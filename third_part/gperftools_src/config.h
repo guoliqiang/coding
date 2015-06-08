@@ -2,8 +2,8 @@
 /* src/config.h.in.  Generated from configure.ac by autoheader.  */
 
 
-#ifndef GPERFTOOLS_CONFIG_H_
-#define GPERFTOOLS_CONFIG_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_CONFIG_H_
+#define THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_CONFIG_H_
 
 
 /* Define to 1 if compiler supports __builtin_expect */
@@ -302,5 +302,5 @@
 #include "windows/mingw.h"
 #endif
 
-#endif  /* #ifndef GPERFTOOLS_CONFIG_H_ */
+#endif  /* #ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_CONFIG_H_ */
 

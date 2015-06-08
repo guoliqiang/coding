@@ -34,8 +34,8 @@
  * on how to use these.
  */
 
-#ifndef _MALLOC_HOOK_C_H_
-#define _MALLOC_HOOK_C_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_MALLOC_HOOK_C_H_
+#define THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_MALLOC_HOOK_C_H_
 
 #include <stddef.h>
 #include <sys/types.h>
@@ -170,4 +170,4 @@ MallocHook_SbrkHook MallocHook_SetSbrkHook(MallocHook_SbrkHook hook);
 }   // extern "C"
 #endif
 
-#endif /* _MALLOC_HOOK_C_H_ */
+#endif /* THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_MALLOC_HOOK_C_H_ */

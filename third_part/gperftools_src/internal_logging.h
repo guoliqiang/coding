@@ -33,8 +33,8 @@
 //
 // Internal logging and related utility routines.
 
-#ifndef TCMALLOC_INTERNAL_LOGGING_H_
-#define TCMALLOC_INTERNAL_LOGGING_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_INTERNAL_LOGGING_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_INTERNAL_LOGGING_H_
 
 #include "third_part/gperftools_src/config.h"
 #include <stddef.h>                     // for size_t
@@ -141,4 +141,4 @@ class TCMalloc_Printer {
 ;
 };
 
-#endif  // TCMALLOC_INTERNAL_LOGGING_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_INTERNAL_LOGGING_H_

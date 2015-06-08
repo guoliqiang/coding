@@ -48,8 +48,8 @@
 // ...
 // bucket_table[n] => HeapProfileBucket() => NULL
 
-#ifndef HEAP_PROFILE_STATS_H_
-#define HEAP_PROFILE_STATS_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_HEAP_PROFILE_STATS_H_
+#define THIRD_PART_GPERFTOOLS_SRC_HEAP_PROFILE_STATS_H_
 
 struct HeapProfileStats {
   // Returns true if the two HeapProfileStats are semantically equal.
@@ -75,4 +75,4 @@ struct HeapProfileBucket : public HeapProfileStats {
   HeapProfileBucket* next;  // Next entry in hash-table.
 };
 
-#endif  // HEAP_PROFILE_STATS_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_HEAP_PROFILE_STATS_H_

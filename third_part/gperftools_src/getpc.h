@@ -41,8 +41,8 @@
 // the signal triggered.  How to get from a ucontext_t to a Program
 // Counter is OS-dependent.
 
-#ifndef BASE_GETPC_H_
-#define BASE_GETPC_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_BASE_GETPC_H_
+#define THIRD_PART_GPERFTOOLS_SRC_BASE_GETPC_H_
 
 #include "third_part/gperftools_src/config.h"
 
@@ -153,7 +153,8 @@ inline void* GetPC(const ucontext_t& signal_ucontext) {
 }
 
 // Special case #2: Windows, which has to do something totally different.
-#elif defined(_WIN32) || defined(__CYGWIN__) || defined(__CYGWIN32__) || defined(__MINGW32__)
+#elif defined(_WIN32) || defined(__CYGWIN__) || defined(__CYGWIN32__) || \
+      defined(__MINGW32__)
 // If this is ever implemented, probably the way to do it is to have
 // profiler.cc use a high-precision timer via timeSetEvent:
 //    http://msdn2.microsoft.com/en-us/library/ms712713.aspx
@@ -184,4 +185,4 @@ inline void* GetPC(const ucontext_t& signal_ucontext) {
 
 #endif
 
-#endif  // BASE_GETPC_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_BASE_GETPC_H_

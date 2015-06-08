@@ -33,8 +33,8 @@
 //
 // Common definitions for tcmalloc code.
 
-#ifndef TCMALLOC_COMMON_H_
-#define TCMALLOC_COMMON_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_COMMON_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_COMMON_H_
 
 #include "third_part/gperftools_src/config.h"
 #include <stddef.h>                     // for size_t
@@ -271,4 +271,4 @@ struct StackTrace {
 
 }  // namespace tcmalloc
 
-#endif  // TCMALLOC_COMMON_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_COMMON_H_

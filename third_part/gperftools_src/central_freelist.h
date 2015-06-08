@@ -31,8 +31,8 @@
 // ---
 // Author: Sanjay Ghemawat <opensource@google.com>
 
-#ifndef TCMALLOC_CENTRAL_FREELIST_H_
-#define TCMALLOC_CENTRAL_FREELIST_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_CENTRAL_FREELIST_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_CENTRAL_FREELIST_H_
 
 #include "third_part/gperftools_src/config.h"
 #include <stddef.h>                     // for size_t
@@ -208,4 +208,4 @@ class CentralFreeListPadded : public CentralFreeListPaddedTo<
 
 }  // namespace tcmalloc
 
-#endif  // TCMALLOC_CENTRAL_FREELIST_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_CENTRAL_FREELIST_H_

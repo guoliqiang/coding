@@ -31,8 +31,8 @@
 // ---
 // Author: Sanjay Ghemawat <opensource@google.com>
 
-#ifndef TCMALLOC_PAGE_HEAP_H_
-#define TCMALLOC_PAGE_HEAP_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_PAGE_HEAP_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_PAGE_HEAP_H_
 
 #include "third_part/gperftools_src/config.h"
 #include <stddef.h>                     // for size_t
@@ -313,4 +313,4 @@ class PERFTOOLS_DLL_DECL PageHeap {
 #pragma warning(pop)
 #endif
 
-#endif  // TCMALLOC_PAGE_HEAP_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_PAGE_HEAP_H_

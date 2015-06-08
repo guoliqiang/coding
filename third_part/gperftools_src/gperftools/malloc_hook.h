@@ -64,8 +64,8 @@
 // NOTE FOR C USERS: If you want to use malloc_hook functionality from
 // a C program, #include malloc_hook_c.h instead of this file.
 
-#ifndef _MALLOC_HOOK_H_
-#define _MALLOC_HOOK_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_MALLOC_HOOK_H_
+#define THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_MALLOC_HOOK_H_
 
 #include <stddef.h>
 #include <sys/types.h>
@@ -356,4 +356,4 @@ class PERFTOOLS_DLL_DECL MallocHook {
 #endif
 
 
-#endif /* _MALLOC_HOOK_H_ */
+#endif /* THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_MALLOC_HOOK_H_ */

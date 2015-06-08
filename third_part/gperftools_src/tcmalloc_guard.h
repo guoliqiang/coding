@@ -37,8 +37,8 @@
 // create a static TCMallocGuard instance at the top of a file where
 // you need tcmalloc to be initialized before global constructors run.
 
-#ifndef TCMALLOC_TCMALLOC_GUARD_H_
-#define TCMALLOC_TCMALLOC_GUARD_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_TCMALLOC_GUARD_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_TCMALLOC_GUARD_H_
 
 class TCMallocGuard {
  public:
@@ -46,4 +46,4 @@ class TCMallocGuard {
   ~TCMallocGuard();
 };
 
-#endif  // TCMALLOC_TCMALLOC_GUARD_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_TCMALLOC_GUARD_H_

@@ -38,8 +38,8 @@
 // doc/cpuprofile-fileformat.html
 
 
-#ifndef BASE_PROFILEDATA_H_
-#define BASE_PROFILEDATA_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_BASE_PROFILEDATA_H_
+#define THIRD_PART_GPERFTOOLS_SRC_BASE_PROFILEDATA_H_
 
 #include "third_part/gperftools_src/config.h"
 #include <time.h>   // for time_t
@@ -181,4 +181,4 @@ class ProfileData {
   DISALLOW_COPY_AND_ASSIGN(ProfileData);
 };
 
-#endif  // BASE_PROFILEDATA_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_BASE_PROFILEDATA_H_

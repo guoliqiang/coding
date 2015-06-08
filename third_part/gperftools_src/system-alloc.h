@@ -35,8 +35,8 @@
 // Useful for implementing malloc.
 
 
-#ifndef TCMALLOC_SYSTEM_ALLOC_H_
-#define TCMALLOC_SYSTEM_ALLOC_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_SYSTEM_ALLOC_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_SYSTEM_ALLOC_H_
 
 #include "third_part/gperftools_src/config.h"
 #include <stddef.h>                     // for size_t
@@ -90,4 +90,4 @@ extern PERFTOOLS_DLL_DECL SysAllocator* sys_alloc;
 // Number of bytes taken from system.
 extern PERFTOOLS_DLL_DECL size_t TCMalloc_SystemTaken;
 
-#endif /* TCMALLOC_SYSTEM_ALLOC_H_ */
+#endif /* THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_SYSTEM_ALLOC_H_ */

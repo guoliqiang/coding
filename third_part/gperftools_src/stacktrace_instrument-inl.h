@@ -42,8 +42,8 @@
 // The backtrace arrays are stored in "thread_back_trace" variable.
 // Maybe to use thread local storage is better and should save memorys.
 
-#ifndef BASE_STACKTRACE_INSTRUMENT_INL_H_
-#define BASE_STACKTRACE_INSTRUMENT_INL_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_BASE_STACKTRACE_INSTRUMENT_INL_H_
+#define THIRD_PART_GPERFTOOLS_SRC_BASE_STACKTRACE_INSTRUMENT_INL_H_
 // Note: this file is included into stacktrace.cc more than once.
 // Anything that should only be defined once should be here:
 
@@ -113,7 +113,7 @@ static int cyg_backtrace(void **buffer, int size) {
   return nSize;
 }
 
-#endif  // BASE_STACKTRACE_INSTRUMENT_INL_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_BASE_STACKTRACE_INSTRUMENT_INL_H_
 
 
 // Note: this part of the file is included several times.

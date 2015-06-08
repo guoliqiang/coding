@@ -33,8 +33,8 @@
 //
 // Used to override malloc routines on systems that are using glibc.
 
-#ifndef TCMALLOC_LIBC_OVERRIDE_GLIBC_INL_H_
-#define TCMALLOC_LIBC_OVERRIDE_GLIBC_INL_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_GLIBC_INL_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_GLIBC_INL_H_
 
 #include "third_part/gperftools_src/config.h"
 #include <features.h>     // for __GLIBC__
@@ -146,4 +146,4 @@ void* (* MALLOC_HOOK_MAYBE_VOLATILE __memalign_hook)(size_t,size_t, const void*)
 // No need to write ReplaceSystemAlloc(); one of the #includes above
 // did it for us.
 
-#endif  // TCMALLOC_LIBC_OVERRIDE_GLIBC_INL_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_GLIBC_INL_H_

@@ -31,8 +31,8 @@
 // ---
 // Author: Craig Silverstein
 
-#ifndef TCMALLOC_SYMBOLIZE_H_
-#define TCMALLOC_SYMBOLIZE_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_SYMBOLIZE_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_SYMBOLIZE_H_
 
 #include "third_part/gperftools_src/config.h"
 #ifdef HAVE_STDINT_H
@@ -81,4 +81,4 @@ class SymbolTable {
   char *symbol_buffer_;
 };
 
-#endif  // TCMALLOC_SYMBOLIZE_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_SYMBOLIZE_H_

@@ -36,15 +36,15 @@
 // Note:  The glibc implementation may cause a call to malloc.
 // This can cause a deadlock in HeapProfiler.
 
-#ifndef BASE_STACKTRACE_GENERIC_INL_H_
-#define BASE_STACKTRACE_GENERIC_INL_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_BASE_STACKTRACE_GENERIC_INL_H_
+#define THIRD_PART_GPERFTOOLS_SRC_BASE_STACKTRACE_GENERIC_INL_H_
 // Note: this file is included into stacktrace.cc more than once.
 // Anything that should only be defined once should be here:
 
 #include <execinfo.h>
 #include <string.h>
 #include "third_part/gperftools_src/gperftools/stacktrace.h"
-#endif  // BASE_STACKTRACE_GENERIC_INL_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_BASE_STACKTRACE_GENERIC_INL_H_
 
 // Note: this part of the file is included several times.
 // Do not put globals below.

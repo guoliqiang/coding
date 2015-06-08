@@ -40,8 +40,8 @@
 // rethink this decision if we hit a problem with it calling
 // down into malloc() etc.
 
-#ifndef BASE_RAW_PRINTER_H_
-#define BASE_RAW_PRINTER_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_BASE_RAW_PRINTER_H_
+#define THIRD_PART_GPERFTOOLS_SRC_BASE_RAW_PRINTER_H_
 
 #include "third_part/gperftools_src/config.h"
 #include "third_part/gperftools_src/base/basictypes.h"
@@ -87,4 +87,4 @@ class RawPrinter {
 
 }
 
-#endif  // BASE_RAW_PRINTER_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_BASE_RAW_PRINTER_H_

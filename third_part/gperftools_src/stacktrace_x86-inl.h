@@ -33,8 +33,8 @@
 //
 // Produce stack trace
 
-#ifndef BASE_STACKTRACE_X86_INL_H_
-#define BASE_STACKTRACE_X86_INL_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_BASE_STACKTRACE_X86_INL_H_
+#define THIRD_PART_GPERFTOOLS_SRC_BASE_STACKTRACE_X86_INL_H_
 // Note: this file is included into stacktrace.cc more than once.
 // Anything that should only be defined once should be here:
 
@@ -271,7 +271,7 @@ static void **NextStackFrame(void **old_sp, const void *uc) {
   return new_sp;
 }
 
-#endif  // BASE_STACKTRACE_X86_INL_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_BASE_STACKTRACE_X86_INL_H_
 
 // Note: this part of the file is included several times.
 // Do not put globals below.

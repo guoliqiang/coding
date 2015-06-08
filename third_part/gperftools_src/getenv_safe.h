@@ -29,8 +29,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GETENV_SAFE_H
-#define GETENV_SAFE_H
+#ifndef THIRD_PART_GPERFTOOLS_SRC_GETENV_SAFE_H
+#define THIRD_PART_GPERFTOOLS_SRC_GETENV_SAFE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -60,4 +60,4 @@ const char* TCMallocGetenvSafe(const char* name);
 }
 #endif
 
-#endif
+#endif  // THIRD_PART_GPERFTOOLS_SRC_GETENV_SAFE_H

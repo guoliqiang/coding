@@ -57,8 +57,8 @@
  * These functions are thread-safe.
  */
 
-#ifndef BASE_PROFILER_H_
-#define BASE_PROFILER_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_BASE_PROFILER_H_
+#define THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_BASE_PROFILER_H_
 
 #include <time.h>       /* For time_t */
 
@@ -175,4 +175,4 @@ class CpuProfilerWrapper {
 }  // extern "C"
 #endif
 
-#endif  /* BASE_PROFILER_H_ */
+#endif  /* THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_BASE_PROFILER_H_ */

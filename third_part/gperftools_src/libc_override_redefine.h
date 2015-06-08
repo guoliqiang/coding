@@ -39,8 +39,8 @@
 // This should also work on systems were all the malloc routines are
 // defined as weak symbols, and there's no support for aliasing.
 
-#ifndef TCMALLOC_LIBC_OVERRIDE_REDEFINE_H_
-#define TCMALLOC_LIBC_OVERRIDE_REDEFINE_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_REDEFINE_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_REDEFINE_H_
 
 #ifdef HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>    // for __THROW
@@ -91,4 +91,4 @@ extern "C" {
 // via overriding weak symbols (at link time).
 static void ReplaceSystemAlloc() { }
 
-#endif  // TCMALLOC_LIBC_OVERRIDE_REDEFINE_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_LIBC_OVERRIDE_REDEFINE_H_

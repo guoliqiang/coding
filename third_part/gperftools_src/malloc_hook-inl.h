@@ -35,8 +35,8 @@
 // to use malloc-hook inside the tcmalloc system.  It does not hold
 // any of the client-facing calls that are used to add new hooks.
 
-#ifndef _MALLOC_HOOK_INL_H_
-#define _MALLOC_HOOK_INL_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_MALLOC_HOOK_INL_H_
+#define THIRD_PART_GPERFTOOLS_SRC_MALLOC_HOOK_INL_H_
 
 #include <stddef.h>
 #include <sys/types.h>
@@ -244,4 +244,4 @@ inline void MallocHook::InvokeSbrkHook(const void* result,
   }
 }
 
-#endif /* _MALLOC_HOOK_INL_H_ */
+#endif /* THIRD_PART_GPERFTOOLS_SRC_MALLOC_HOOK_INL_H_ */

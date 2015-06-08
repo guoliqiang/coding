@@ -49,8 +49,8 @@
 // a memory leak at program-exit, it will print instructions on how
 // to track down the leak.
 
-#ifndef BASE_HEAP_CHECKER_H_
-#define BASE_HEAP_CHECKER_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_BASE_HEAP_CHECKER_H_
+#define THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_BASE_HEAP_CHECKER_H_
 
 #include <sys/types.h>  // for size_t
 // I can't #include config.h in this public API file, but I should
@@ -419,4 +419,4 @@ class PERFTOOLS_DLL_DECL HeapCleaner {
   static HeapCleaner heapcheck_cleaner_##name(&heapcheck_cleanup_##name); \
   }
 
-#endif  // BASE_HEAP_CHECKER_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_BASE_HEAP_CHECKER_H_

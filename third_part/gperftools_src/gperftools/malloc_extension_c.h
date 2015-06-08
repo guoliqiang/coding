@@ -36,8 +36,8 @@
  * one MallocExtension object in C applications.
  */
 
-#ifndef _MALLOC_EXTENSION_C_H_
-#define _MALLOC_EXTENSION_C_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_MALLOC_EXTENSION_C_H_
+#define THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_MALLOC_EXTENSION_C_H_
 
 #include <stddef.h>
 #include <sys/types.h>
@@ -96,4 +96,4 @@ PERFTOOLS_DLL_DECL MallocExtension_Ownership MallocExtension_GetOwnership(const 
 }   /* extern "C" */
 #endif
 
-#endif /* _MALLOC_EXTENSION_C_H_ */
+#endif /* THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_MALLOC_EXTENSION_C_H_ */

@@ -39,8 +39,8 @@
 // NOTE FOR C USERS: If you wish to use this functionality from within
 // a C program, see malloc_extension_c.h.
 
-#ifndef BASE_MALLOC_EXTENSION_H_
-#define BASE_MALLOC_EXTENSION_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_BASE_MALLOC_EXTENSION_H_
+#define THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_BASE_MALLOC_EXTENSION_H_
 
 #include <stddef.h>
 // I can't #include config.h in this public API file, but I should
@@ -418,4 +418,4 @@ struct MallocRange {
 
 } // namespace base
 
-#endif  // BASE_MALLOC_EXTENSION_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_GPERFTOOLS_BASE_MALLOC_EXTENSION_H_

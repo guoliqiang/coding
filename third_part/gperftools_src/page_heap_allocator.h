@@ -31,8 +31,8 @@
 // ---
 // Author: Sanjay Ghemawat <opensource@google.com>
 
-#ifndef TCMALLOC_PAGE_HEAP_ALLOCATOR_H_
-#define TCMALLOC_PAGE_HEAP_ALLOCATOR_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_PAGE_HEAP_ALLOCATOR_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_PAGE_HEAP_ALLOCATOR_H_
 
 #include <stddef.h>                     // for NULL, size_t
 
@@ -111,4 +111,4 @@ class PageHeapAllocator {
 
 }  // namespace tcmalloc
 
-#endif  // TCMALLOC_PAGE_HEAP_ALLOCATOR_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_PAGE_HEAP_ALLOCATOR_H_

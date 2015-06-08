@@ -33,8 +33,8 @@
 //
 // Author: Daniel Ford
 
-#ifndef TCMALLOC_SAMPLER_H_
-#define TCMALLOC_SAMPLER_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_SAMPLER_H_
+#define THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_SAMPLER_H_
 
 #include "third_part/gperftools_src/config.h"
 #include <stddef.h>                     // for size_t
@@ -177,4 +177,4 @@ inline double Sampler::FastLog2(const double & d) {
 
 }  // namespace tcmalloc
 
-#endif  // TCMALLOC_SAMPLER_H_
+#endif  // THIRD_PART_GPERFTOOLS_SRC_TCMALLOC_SAMPLER_H_

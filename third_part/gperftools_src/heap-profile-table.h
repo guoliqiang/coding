@@ -33,8 +33,8 @@
 //         Maxim Lifantsev (refactoring)
 //
 
-#ifndef BASE_HEAP_PROFILE_TABLE_H_
-#define BASE_HEAP_PROFILE_TABLE_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_BASE_HEAP_PROFILE_TABLE_H_
+#define THIRD_PART_GPERFTOOLS_SRC_BASE_HEAP_PROFILE_TABLE_H_
 
 #include "third_part/gperftools_src/addressmap-inl.h"
 #include "third_part/gperftools_src/base/basictypes.h"

@@ -43,8 +43,8 @@
  * SIGPROF signal.
  */
 
-#ifndef BASE_PROFILE_HANDLER_H_
-#define BASE_PROFILE_HANDLER_H_
+#ifndef THIRD_PART_GPERFTOOLS_SRC_BASE_PROFILE_HANDLER_H_
+#define THIRD_PART_GPERFTOOLS_SRC_BASE_PROFILE_HANDLER_H_
 
 #include "third_part/gperftools_src/config.h"
 #include <signal.h>
@@ -146,4 +146,4 @@ void ProfileHandlerGetState(struct ProfileHandlerState* state);
 }  /* extern "C" */
 #endif
 
-#endif  /* BASE_PROFILE_HANDLER_H_ */
+#endif  /* THIRD_PART_GPERFTOOLS_SRC_BASE_PROFILE_HANDLER_H_ */
