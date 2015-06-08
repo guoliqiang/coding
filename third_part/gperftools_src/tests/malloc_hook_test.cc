@@ -31,7 +31,7 @@
 // ----
 // Author: llib@google.com (Bill Clarke)
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <assert.h>
 #include <stdio.h>
 #ifdef HAVE_MMAP
@@ -43,12 +43,12 @@
 #include <algorithm>
 #include <string>
 #include <vector>
-#include <gperftools/malloc_hook.h>
-#include "malloc_hook-inl.h"
-#include "base/logging.h"
-#include "base/simple_mutex.h"
-#include "base/sysinfo.h"
-#include "tests/testutil.h"
+#include "third_part/gperftools_src/gperftools/malloc_hook.h"
+#include "third_part/gperftools_src/malloc_hook-inl.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/simple_mutex.h"
+#include "third_part/gperftools_src/base/sysinfo.h"
+#include "third_part/gperftools_src/tests/testutil.h"
 
 // On systems (like freebsd) that don't define MAP_ANONYMOUS, use the old
 // form of the name instead.

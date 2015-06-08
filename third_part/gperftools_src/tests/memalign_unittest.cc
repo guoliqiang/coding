@@ -37,7 +37,7 @@
 // least, the following code checks that return values are properly
 // aligned, and that writing into the objects works.
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 
 // Complicated ordering requirements.  tcmalloc.h defines (indirectly)
 // _POSIX_C_SOURCE, which it needs so stdlib.h defines posix_memalign.
@@ -49,7 +49,7 @@
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>        // for getpagesize()
 #endif
-#include "tcmalloc.h"      // must come early, to pick up posix_memalign
+#include "third_part/gperftools_src/tcmalloc.h"      // must come early, to pick up posix_memalign
 #include <assert.h>
 #include <stdlib.h>        // defines posix_memalign
 #include <stdio.h>         // for the printf at the end
@@ -67,9 +67,9 @@
 #elif defined(HAVE_SYS_MALLOC_H)
 #include <sys/malloc.h>
 #endif
-#include "base/basictypes.h"
-#include "base/logging.h"
-#include "tests/testutil.h"
+#include "third_part/gperftools_src/base/basictypes.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/tests/testutil.h"
 
 
 // Return the next interesting size/delta to check.  Returns -1 if no more.

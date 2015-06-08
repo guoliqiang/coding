@@ -40,11 +40,11 @@
 // data structures, so that we report the actual application-used
 // bytes properly.
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <gperftools/malloc_extension.h>
-#include "base/logging.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/base/logging.h"
 
 const char kCurrent[] = "generic.current_allocated_bytes";
 

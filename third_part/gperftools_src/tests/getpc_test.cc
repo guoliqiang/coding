@@ -35,8 +35,8 @@
 // of Google infrastructure, to make it very easy to port to various
 // O/Ses and CPUs and test that GetPC is working.
 
-#include "config.h"
-#include "getpc.h"        // should be first to get the _GNU_SOURCE dfn
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/getpc.h"        // should be first to get the _GNU_SOURCE dfn
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>

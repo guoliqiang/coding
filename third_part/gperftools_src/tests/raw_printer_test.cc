@@ -5,10 +5,10 @@
 // Use of this source code is governed by a BSD-style license that can
 // be found in the LICENSE file.
 
-#include "raw_printer.h"
+#include "third_part/gperftools_src/raw_printer.h"
 #include <stdio.h>
 #include <string>
-#include "base/logging.h"
+#include "third_part/gperftools_src/base/logging.h"
 
 using std::string;
 

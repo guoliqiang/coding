@@ -38,7 +38,7 @@
 // another testing script to actually verify correctness.  See, eg,
 // heap-profiler_unittest.sh.
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>                  // for mkdir()
@@ -48,9 +48,9 @@
 #endif
 #include <sys/wait.h>               // for wait()
 #include <string>
-#include "base/basictypes.h"
-#include "base/logging.h"
-#include <gperftools/heap-profiler.h>
+#include "third_part/gperftools_src/base/basictypes.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/gperftools/heap-profiler.h"
 
 using std::string;
 

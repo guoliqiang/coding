@@ -35,7 +35,7 @@
 //
 // Checks basic properties of the sampler
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdlib.h>        // defines posix_memalign
 #include <stdio.h>         // for the printf at the end
 #if defined HAVE_STDINT_H
@@ -49,9 +49,9 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#include "base/logging.h"
-#include "base/commandlineflags.h"
-#include "sampler.h"       // The Sampler class being tested
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/sampler.h"       // The Sampler class being tested
 
 using std::sort;
 using std::min;

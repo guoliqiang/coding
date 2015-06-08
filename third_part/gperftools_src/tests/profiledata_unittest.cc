@@ -44,10 +44,10 @@
 #include <string.h>
 #include <string>
 
-#include "profiledata.h"
+#include "third_part/gperftools_src/profiledata.h"
 
-#include "base/commandlineflags.h"
-#include "base/logging.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/base/logging.h"
 
 using std::string;
 

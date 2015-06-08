@@ -33,8 +33,8 @@
  */
 
 #include <stdio.h>
-#include "base/logging.h"
-#include "base/atomicops.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/atomicops.h"
 
 #define GG_ULONGLONG(x)  static_cast<uint64>(x)
 

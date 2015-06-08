@@ -34,11 +34,11 @@
 // Routine that uses sbrk/mmap to allocate memory from the system.
 // Useful for implementing malloc.
 
+
 #ifndef TCMALLOC_SYSTEM_ALLOC_H_
 #define TCMALLOC_SYSTEM_ALLOC_H_
 
 #include "third_part/gperftools_src/config.h"
-#ifdef HAVE_STDINT_H
 #include <stddef.h>                     // for size_t
 
 class SysAllocator;

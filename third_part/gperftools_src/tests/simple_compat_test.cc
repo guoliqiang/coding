@@ -38,15 +38,16 @@
 
 #include <stddef.h>
 #include <stdio.h>
-#include <google/heap-checker.h>
-#include <google/heap-profiler.h>
-#include <google/malloc_extension.h>
-#include <google/malloc_extension_c.h>
-#include <google/malloc_hook.h>
-#include <google/malloc_hook_c.h>
-#include <google/profiler.h>
-#include <google/stacktrace.h>
-#include <google/tcmalloc.h>
+#include "third_part/gperftools_src/gperftools/heap-checker.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/gperftools/heap-profiler.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension_c.h"
+#include "third_part/gperftools_src/gperftools/malloc_hook.h"
+#include "third_part/gperftools_src/gperftools/malloc_hook_c.h"
+#include "third_part/gperftools_src/gperftools/profiler.h"
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
+#include "third_part/gperftools_src/gperftools/tcmalloc.h"
 
 // We don't link in -lprofiler for this test, so be sure not to make
 // any function calls that require the cpu-profiler code.  The

@@ -6,12 +6,12 @@
 // be found in the LICENSE file.
 
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdio.h>   // for puts()
-#include "stack_trace_table.h"
-#include "base/logging.h"
-#include "base/spinlock.h"
-#include "static_vars.h"
+#include "third_part/gperftools_src/stack_trace_table.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/spinlock.h"
+#include "third_part/gperftools_src/static_vars.h"
 
 #undef ARRAYSIZE   // may be defined on, eg, windows
 #define ARRAYSIZE(a)  ( sizeof(a) / sizeof(*(a)) )

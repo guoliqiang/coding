@@ -34,10 +34,10 @@
 // MallocExtension::MarkThreadIdle() testing
 #include <stdio.h>
 
-#include "config_for_unittests.h"
-#include "base/logging.h"
-#include <gperftools/malloc_extension.h>
-#include "tests/testutil.h"   // for RunThread()
+#include "third_part/gperftools_src/config_for_unittests.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/tests/testutil.h"   // for RunThread()
 
 // Helper routine to do lots of allocations
 static void TestAllocation() {

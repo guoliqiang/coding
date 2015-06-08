@@ -34,17 +34,17 @@
 #ifndef TCMALLOC_PAGE_HEAP_H_
 #define TCMALLOC_PAGE_HEAP_H_
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 #include <stddef.h>                     // for size_t
 #ifdef HAVE_STDINT_H
 #include <stdint.h>                     // for uint64_t, int64_t, uint16_t
 #endif
-#include <gperftools/malloc_extension.h>
-#include "base/basictypes.h"
-#include "common.h"
-#include "packed-cache-inl.h"
-#include "pagemap.h"
-#include "span.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/base/basictypes.h"
+#include "third_part/gperftools_src/common.h"
+#include "third_part/gperftools_src/packed-cache-inl.h"
+#include "third_part/gperftools_src/pagemap.h"
+#include "third_part/gperftools_src/span.h"
 
 // We need to dllexport PageHeap just for the unittest.  MSVC complains
 // that we don't dllexport the PageHeap members, but we don't need to
@@ -62,7 +62,7 @@
   // We use #define so code compiles even if you #include stacktrace.h somehow.
 # define GetStackTrace(stack, depth, skip)  (0)
 #else
-# include <gperftools/stacktrace.h>
+# include "third_part/gperftools_src/gperftools/stacktrace.h"
 #endif
 
 namespace base {

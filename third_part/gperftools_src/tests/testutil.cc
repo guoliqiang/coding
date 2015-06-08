@@ -33,7 +33,7 @@
 //
 // A few routines that are useful for multiple tests in this directory.
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdlib.h>           // for NULL, abort()
 // On FreeBSD, if you #include <sys/resource.h>, you have to get stdint first.
 #ifdef HAVE_STDINT_H
@@ -42,7 +42,7 @@
 #ifdef HAVE_SYS_RESOURCE_H
 #include <sys/resource.h>
 #endif
-#include "tests/testutil.h"
+#include "third_part/gperftools_src/tests/testutil.h"
 
 
 // When compiled 64-bit and run on systems with swap several unittests will end

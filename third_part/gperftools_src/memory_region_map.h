@@ -35,18 +35,18 @@
 #ifndef BASE_MEMORY_REGION_MAP_H_
 #define BASE_MEMORY_REGION_MAP_H_
 
-#include <config.h>
+#include "third_part/gperftools_src/config.h"
 
 #ifdef HAVE_PTHREAD
 #include <pthread.h>
 #endif
 #include <stddef.h>
 #include <set>
-#include "base/stl_allocator.h"
-#include "base/spinlock.h"
-#include "base/thread_annotations.h"
-#include "base/low_level_alloc.h"
-#include "heap-profile-stats.h"
+#include "third_part/gperftools_src/base/stl_allocator.h"
+#include "third_part/gperftools_src/base/spinlock.h"
+#include "third_part/gperftools_src/base/thread_annotations.h"
+#include "third_part/gperftools_src/base/low_level_alloc.h"
+#include "third_part/gperftools_src/heap-profile-stats.h"
 
 // TODO(maxim): add a unittest:
 //  execute a bunch of mmaps and compare memory map what strace logs

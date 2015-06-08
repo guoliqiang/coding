@@ -65,9 +65,9 @@
 #include <unistd.h>
 #endif
 
-#include <gperftools/malloc_extension.h>
-#include <gperftools/malloc_hook.h>
-#include <gperftools/stacktrace.h>
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/gperftools/malloc_hook.h"
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
 #include "third_part/gperftools_src/addressmap-inl.h"
 #include "third_part/gperftools_src/base/commandlineflags.h"
 #include "third_part/gperftools_src/base/googleinit.h"

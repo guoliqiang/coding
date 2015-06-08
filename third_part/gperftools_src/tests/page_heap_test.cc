@@ -5,12 +5,12 @@
 // Use of this source code is governed by a BSD-style license that can
 // be found in the LICENSE file.
 
-#include "config_for_unittests.h"
-#include "page_heap.h"
-#include "system-alloc.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
+#include "third_part/gperftools_src/page_heap.h"
+#include "third_part/gperftools_src/system-alloc.h"
 #include <stdio.h>
-#include "base/logging.h"
-#include "common.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/common.h"
 
 DECLARE_int64(tcmalloc_heap_limit_mb);
 

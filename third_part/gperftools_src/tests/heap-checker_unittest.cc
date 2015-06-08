@@ -58,7 +58,7 @@
 // is just one more chance for the liveness flood to be inexact
 // (see the comment in our .h file).
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #ifdef HAVE_POLL_H
 #include <poll.h>
 #endif
@@ -97,15 +97,15 @@
 #include <string>
 #include <vector>
 
-#include "base/commandlineflags.h"
-#include "base/googleinit.h"
-#include "base/logging.h"
-#include "base/commandlineflags.h"
-#include "base/thread_lister.h"
-#include <gperftools/heap-checker.h>
-#include "memory_region_map.h"
-#include <gperftools/malloc_extension.h>
-#include <gperftools/stacktrace.h>
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/base/googleinit.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/base/thread_lister.h"
+#include "third_part/gperftools_src/gperftools/heap-checker.h"
+#include "third_part/gperftools_src/memory_region_map.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
 
 // On systems (like freebsd) that don't define MAP_ANONYMOUS, use the old
 // form of the name instead.

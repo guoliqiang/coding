@@ -37,7 +37,7 @@
 # growth in the heap sized (ReadGrowthStackTraces).
 
 BINDIR="${BINDIR:-.}"
-PPROF_PATH="${PPROF_PATH:-$BINDIR/src/pprof}"
+PPROF_PATH="${PPROF_PATH:-$BINDIR/../pprof}"
 
 if [ "x$1" = "x-h" -o "x$1" = "x--help" ]; then
   echo "USAGE: $0 [unittest dir] [path to pprof]"

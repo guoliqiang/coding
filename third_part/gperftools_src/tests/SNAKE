@@ -1,0 +1,363 @@
+cc_binary(name='profiler_unittest',
+           srcs = [
+                   'profiler_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_profile',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='profiledata_unittest',
+           srcs = [
+                   'profiledata_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_profile',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='profile-handler_unittest',
+           srcs = [
+                   'profile-handler_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_profile',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='addressmap_unittest',
+           srcs = [
+                   'addressmap_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='atomicops_unittest',
+           srcs = [
+                   'atomicops_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='current_allocated_bytes_test',
+           srcs = [
+                   'current_allocated_bytes_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='debugallocation_test',
+           srcs = [
+                   'debugallocation_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='frag_unittest',
+           srcs = [
+                   'frag_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='getpc_test',
+           srcs = [
+                   'getpc_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='heap-checker_unittest',
+           srcs = [
+                   'heap-checker_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='heap-profiler_unittest',
+           srcs = [
+                   'heap-profiler_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='large_heap_fragmentation_unittest',
+           srcs = [
+                   'large_heap_fragmentation_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='low_level_alloc_unittest',
+           srcs = [
+                   'low_level_alloc_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='malloc_extension_c_test',
+           srcs = [
+                   'malloc_extension_c_test.c',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='malloc_extension_test',
+           srcs = [
+                   'malloc_extension_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='malloc_hook_test',
+           srcs = [
+                   'malloc_hook_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='malloc_hook_test',
+           srcs = [
+                   'malloc_hook_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='markidle_unittest',
+           srcs = [
+                   'markidle_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='memalign_unittest',
+           srcs = [
+                   'memalign_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='packed-cache_test',
+           srcs = [
+                   'packed-cache_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='page_heap_test',
+           srcs = [
+                   'page_heap_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='pagemap_unittest',
+           srcs = [
+                   'pagemap_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='raw_printer_test',
+           srcs = [
+                   'raw_printer_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='realloc_unittest',
+           srcs = [
+                   'realloc_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='sampler_test',
+           srcs = [
+                   'sampler_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='sampling_test',
+           srcs = [
+                   'sampling_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='simple_compat_test',
+           srcs = [
+                   'simple_compat_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='stack_trace_table_test',
+           srcs = [
+                   'stack_trace_table_test.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='stacktrace_unittest',
+           srcs = [
+                   'stacktrace_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='system-alloc_unittest',
+           srcs = [
+                   'system-alloc_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='tcmalloc_large_unittest',
+           srcs = [
+                   'tcmalloc_large_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='tcmalloc_unittest',
+           srcs = [
+                   'tcmalloc_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='thread_dealloc_unittest',
+           srcs = [
+                   'thread_dealloc_unittest.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )
+

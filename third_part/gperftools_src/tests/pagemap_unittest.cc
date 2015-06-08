@@ -31,7 +31,7 @@
 // ---
 // Author: Sanjay Ghemawat
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdio.h>
 #include <stdlib.h>
 #if defined HAVE_STDINT_H
@@ -41,8 +41,8 @@
 #endif
 #include <sys/types.h>
 #include <vector>
-#include "base/logging.h"
-#include "pagemap.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/pagemap.h"
 
 using std::vector;
 

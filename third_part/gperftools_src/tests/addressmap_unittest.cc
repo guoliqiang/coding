@@ -36,9 +36,9 @@
 #include <set>
 #include <algorithm>
 #include <utility>
-#include "addressmap-inl.h"
-#include "base/logging.h"
-#include "base/commandlineflags.h"
+#include "third_part/gperftools_src/addressmap-inl.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/commandlineflags.h"
 
 DEFINE_int32(iters, 20, "Number of test iterations");
 DEFINE_int32(N, 100000,  "Number of elements to test per iteration");

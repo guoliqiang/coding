@@ -74,20 +74,20 @@
 #include <algorithm>
 #include <functional>
 
-#include <gperftools/heap-checker.h>
+#include "third_part/gperftools_src/gperftools/heap-checker.h"
 
 #include "third_part/gperftools_src/base/basictypes.h"
 #include "third_part/gperftools_src/base/googleinit.h"
 #include "third_part/gperftools_src/base/logging.h"
-#include <gperftools/stacktrace.h>
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
 #include "third_part/gperftools_src/base/commandlineflags.h"
 #include "third_part/gperftools_src/base/elfcore.h"              // for i386_regs
 #include "third_part/gperftools_src/base/thread_lister.h"
 #include "third_part/gperftools_src/heap-profile-table.h"
 #include "third_part/gperftools_src/base/low_level_alloc.h"
 #include "third_part/gperftools_src/malloc_hook-inl.h"
-#include <gperftools/malloc_hook.h>
-#include <gperftools/malloc_extension.h>
+#include "third_part/gperftools_src/gperftools/malloc_hook.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
 #include "third_part/gperftools_src/maybe_threads.h"
 #include "third_part/gperftools_src/memory_region_map.h"
 #include "third_part/gperftools_src/base/spinlock.h"

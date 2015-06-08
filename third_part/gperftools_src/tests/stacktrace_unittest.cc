@@ -27,15 +27,15 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #ifdef HAVE_EXECINFO_H
 #include <execinfo.h>
 #endif
 #include <stdio.h>
 #include <stdlib.h>
-#include "base/commandlineflags.h"
-#include "base/logging.h"
-#include <gperftools/stacktrace.h>
+#include "third_part/gperftools_src/base/commandlineflags.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/gperftools/stacktrace.h"
 
 namespace {
 

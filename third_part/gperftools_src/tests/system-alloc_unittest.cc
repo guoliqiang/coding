@@ -31,8 +31,8 @@
 // ---
 // Author: Arun Sharma
 
-#include "config_for_unittests.h"
-#include "system-alloc.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
+#include "third_part/gperftools_src/system-alloc.h"
 #include <stdio.h>
 #if defined HAVE_STDINT_H
 #include <stdint.h>             // to get uintptr_t
@@ -42,9 +42,9 @@
 #include <sys/types.h>
 #include <algorithm>
 #include <limits>
-#include "base/logging.h"               // for Check_GEImpl, Check_LTImpl, etc
-#include <gperftools/malloc_extension.h>    // for MallocExtension::instance
-#include "common.h"                     // for kAddressBits
+#include "third_part/gperftools_src/base/logging.h"               // for Check_GEImpl, Check_LTImpl, etc
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"    // for MallocExtension::instance
+#include "third_part/gperftools_src/common.h"                     // for kAddressBits
 
 class ArraySysAllocator : public SysAllocator {
 public:

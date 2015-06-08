@@ -41,7 +41,7 @@
 #include <stdio.h>
 #include <set>                          // for set, etc
 
-#include "base/logging.h"               // for operator<<, CHECK, etc
+#include "third_part/gperftools_src/base/logging.h"               // for operator<<, CHECK, etc
 
 using std::set;
 

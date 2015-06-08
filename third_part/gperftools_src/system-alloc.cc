@@ -49,7 +49,7 @@
 #include <unistd.h>                     // for sbrk, getpagesize, off_t
 #endif
 #include <new>                          // for operator new
-#include <gperftools/malloc_extension.h>
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
 #include "third_part/gperftools_src/base/basictypes.h"
 #include "third_part/gperftools_src/base/commandlineflags.h"
 #include "third_part/gperftools_src/base/spinlock.h"              // for SpinLockHolder, SpinLock, etc

@@ -35,9 +35,9 @@
 #include <stdlib.h>
 #include <string.h> // for memcmp
 #include <vector>
-#include "gperftools/malloc_extension.h"
-#include "gperftools/tcmalloc.h"
-#include "base/logging.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/gperftools/tcmalloc.h"
+#include "third_part/gperftools_src/base/logging.h"
 
 using std::vector;
 

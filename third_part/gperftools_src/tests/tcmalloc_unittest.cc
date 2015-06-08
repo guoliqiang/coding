@@ -54,7 +54,7 @@
 // realloc() tries to minimize copying (which debug allocators don't
 // care about).
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 // Complicated ordering requirements.  tcmalloc.h defines (indirectly)
 // _POSIX_C_SOURCE, which it needs so stdlib.h defines posix_memalign.
 // unistd.h, on the other hand, requires _POSIX_C_SOURCE to be unset,
@@ -65,7 +65,7 @@
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>        // for testing sbrk hooks
 #endif
-#include "tcmalloc.h"      // must come early, to pick up posix_memalign
+#include "third_part/gperftools_src/tcmalloc.h"      // must come early, to pick up posix_memalign
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -87,14 +87,14 @@
 #include <algorithm>
 #include <string>
 #include <new>
-#include "base/logging.h"
-#include "base/simple_mutex.h"
-#include "gperftools/malloc_hook.h"
-#include "gperftools/malloc_extension.h"
-#include "gperftools/tcmalloc.h"
-#include "thread_cache.h"
-#include "system-alloc.h"
-#include "tests/testutil.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/simple_mutex.h"
+#include "third_part/gperftools_src/gperftools/malloc_hook.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/gperftools/tcmalloc.h"
+#include "third_part/gperftools_src/thread_cache.h"
+#include "third_part/gperftools_src/system-alloc.h"
+#include "third_part/gperftools_src/tests/testutil.h"
 
 // Windows doesn't define pvalloc and a few other obsolete unix
 // functions; nor does it define posix_memalign (which is not obsolete).

@@ -33,13 +33,13 @@
 //
 // Test realloc() functionality
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <assert.h>                     // for assert
 #include <stdio.h>
 #include <stddef.h>                     // for size_t, NULL
 #include <stdlib.h>                     // for free, malloc, realloc
 #include <algorithm>                    // for min
-#include "base/logging.h"
+#include "third_part/gperftools_src/base/logging.h"
 
 using std::min;
 

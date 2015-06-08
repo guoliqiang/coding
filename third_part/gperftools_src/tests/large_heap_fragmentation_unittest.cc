@@ -35,9 +35,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "base/logging.h"
-#include "common.h"
-#include <gperftools/malloc_extension.h>
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/common.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
 
 
 int main (int argc, char** argv) {

@@ -32,8 +32,8 @@
 // Author: Geoff Pike
 
 #include <stdio.h>
-#include "base/logging.h"
-#include "packed-cache-inl.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/packed-cache-inl.h"
 
 static const int kHashbits = PackedCache<64, uint64>::kHashbits;
 

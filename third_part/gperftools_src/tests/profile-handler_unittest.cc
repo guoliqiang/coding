@@ -16,15 +16,15 @@
 //     profile-handler_conflict_test tests that the profiler
 //         is disabled when a SIGPROF handler is registered before InitGoogle.
 
-#include "config.h"
-#include "profile-handler.h"
+#include "third_part/gperftools_src/config.h"
+#include "third_part/gperftools_src/profile-handler.h"
 
 #include <assert.h>
 #include <pthread.h>
 #include <sys/time.h>
 #include <time.h>
-#include "base/logging.h"
-#include "base/simple_mutex.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/base/simple_mutex.h"
 
 // Some helpful macros for the test class
 #define TEST_F(cls, fn)    void cls :: fn()

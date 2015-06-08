@@ -33,7 +33,7 @@
 //
 // Test speed of handling fragmented heap
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdlib.h>
 #include <stdio.h>
 #ifdef HAVE_SYS_RESOURCE_H
@@ -44,9 +44,9 @@
 #include <windows.h>            // for GetTickCount()
 #endif
 #include <vector>
-#include "base/logging.h"
-#include "common.h"
-#include <gperftools/malloc_extension.h>
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/common.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
 
 using std::vector;
 

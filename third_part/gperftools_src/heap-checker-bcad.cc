@@ -46,7 +46,7 @@
 // the allocated object is reachable from global data and hence "live").
 
 #include <stdlib.h>      // for abort()
-#include <gperftools/malloc_extension.h>
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
 
 // A dummy variable to refer from heap-checker.cc.  This is to make
 // sure this file is not optimized out by the linker.

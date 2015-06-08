@@ -37,12 +37,12 @@
 // verify the expected output.  The output is written to
 // argv[1].heap and argv[1].growth
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
-#include "base/logging.h"
-#include <gperftools/malloc_extension.h>
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
 
 using std::string;
 

@@ -33,12 +33,12 @@
 //
 // Simple test of malloc_extension.  Includes test of C shims.
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdio.h>
 #include <sys/types.h>
-#include "base/logging.h"
-#include <gperftools/malloc_extension.h>
-#include <gperftools/malloc_extension_c.h>
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension_c.h"
 
 int main(int argc, char** argv) {
   void* a = malloc(1000);

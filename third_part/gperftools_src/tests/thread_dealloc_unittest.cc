@@ -33,14 +33,14 @@
 //
 // Check that we do not leak memory when cycling through lots of threads.
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdio.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>    // for sleep()
 #endif
-#include "base/logging.h"
-#include <gperftools/malloc_extension.h>
-#include "tests/testutil.h"   // for RunThread()
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/gperftools/malloc_extension.h"
+#include "third_part/gperftools_src/tests/testutil.h"   // for RunThread()
 
 // Size/number of objects to allocate per thread (1 MB per thread)
 static const int kObjectSize = 1024;

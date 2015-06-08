@@ -1,0 +1,47 @@
+cc_library(name='gperftools_profile',
+           srcs = [
+                   'profiledata.cc',
+                   'profile-handler.cc',
+                   'profiler.cc',
+                   'maybe_threads.cc',
+                   'stacktrace.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src/base:gperftools_base',
+                  '//libs/third_part/libunwind:unwind',
+                  ],
+           copt = ['no_style_check']
+          )
+
+cc_library(name='gperftools_tcmalloc',
+           srcs = [
+                   'central_freelist.cc',
+                   'heap-checker-bcad.cc',
+                   'heap-profile-table.cc',
+                   'malloc_hook.cc',
+                   'memory_region_map.cc',
+                   'sampler.cc',
+                   'stack_trace_table.cc',
+                   'system-alloc.cc',
+                   'common.cc',
+                   'heap-checker.cc',
+                   'internal_logging.cc',
+                   'page_heap.cc',
+                   'span.cc',
+                   'static_vars.cc',
+                   'debugallocation.cc',
+                   'heap-profiler.cc',
+                   'malloc_extension.cc',
+                   'memfs_malloc.cc',
+                   'raw_printer.cc',
+                   'symbolize.cc',
+                   'thread_cache.cc',
+                   'maybe_threads.cc',
+                   'stacktrace.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src/base:gperftools_base',
+                  '//libs/third_part/libunwind:unwind',
+                  ],
+           copt = ['no_style_check']
+          )

@@ -33,9 +33,9 @@
 
 #include <stdio.h>
 #include <map>
-#include "base/low_level_alloc.h"
-#include "base/logging.h"
-#include <gperftools/malloc_hook.h>
+#include "third_part/gperftools_src/base/low_level_alloc.h"
+#include "third_part/gperftools_src/base/logging.h"
+#include "third_part/gperftools_src/gperftools/malloc_hook.h"
 
 using std::map;
 

@@ -57,7 +57,7 @@
 #include <algorithm>
 #include <string>
 
-#include <gperftools/heap-profiler.h>
+#include "third_part/gperftools_src/gperftools/heap-profiler.h"
 
 #include "third_part/gperftools_src/base/logging.h"
 #include "third_part/gperftools_src/base/basictypes.h"   // for PRId64, among other things

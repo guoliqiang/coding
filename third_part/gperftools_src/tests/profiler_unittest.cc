@@ -35,16 +35,16 @@
 // Define WITH_THREADS to add pthread functionality as well (otherwise, btw,
 // the num_threads argument to this program is ingored).
 
-#include "config_for_unittests.h"
+#include "third_part/gperftools_src/config_for_unittests.h"
 #include <stdio.h>
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>                 // for fork()
 #endif
 #include <sys/wait.h>               // for wait()
-#include "gperftools/profiler.h"
-#include "base/simple_mutex.h"
-#include "tests/testutil.h"
+#include "third_part/gperftools_src/gperftools/profiler.h"
+#include "third_part/gperftools_src/base/simple_mutex.h"
+#include "third_part/gperftools_src/tests/testutil.h"
 
 static int result = 0;
 static int g_iters = 0;   // argv[1]
