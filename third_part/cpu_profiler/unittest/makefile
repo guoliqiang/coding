@@ -13,13 +13,19 @@ all:
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/profile_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/profile_analyzer_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/timer_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/gprofile_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/gprofile_src_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 opt:
 
 
 clean:
 	rm -rf profile_unittest
+	rm -rf gprofile_unittest
+	rm -rf gprofile_src_unittest
 	rm -rf profile_analyzer_unittest
 	rm -rf cpu_profiler.prof
+	rm -rf gcpu_profiler.prof
+	rm -rf gcpu_src_profiler.prof
 	rm -rf cpu_profiler.symbol
 	rm -rf timer_unittest

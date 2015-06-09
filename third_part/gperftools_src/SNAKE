@@ -9,8 +9,11 @@ cc_library(name='gperftools_profile',
            deps = [
                   '//third_part/gperftools_src/base:gperftools_base',
                   '//libs/third_part/libunwind:unwind',
+                  '//base/internal:base',
                   ],
-           copt = ['no_style_check']
+           copt = ['no_style_check',
+                   'always_link',
+                  ],
           )
 
 cc_library(name='gperftools_tcmalloc',
@@ -42,6 +45,7 @@ cc_library(name='gperftools_tcmalloc',
            deps = [
                   '//third_part/gperftools_src/base:gperftools_base',
                   '//libs/third_part/libunwind:unwind',
+                  '//base/internal:base',
                   ],
            copt = ['no_style_check']
           )

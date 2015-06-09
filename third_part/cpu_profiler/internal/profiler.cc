@@ -61,7 +61,7 @@ using base::SpinLockHolder;
 DEFINE_string(cpu_profiler_path, "cpu_profiler.prof", "");
 DEFINE_string(cpu_profiler_symbol_path, "cpu_profiler.symbol", "");
 DEFINE_int32(cpu_profiler_signal, 12, "");
-DEFINE_bool(cpu_profiler_debug, false, "");
+DEFINE_bool(cpu_profiler_debug, true, "");
 
 // Collects up all profile data. This is a singleton, which is
 // initialized by a constructor at startup. If no cpu profiler
@@ -301,6 +301,9 @@ void CpuProfiler::prof_handler(int sig, siginfo_t *, void* signal_ucontext,
           uint64_t add = reinterpret_cast<uint64_t>(used_stack[i]);
           debug_str = "[" + IntToString(i) + "]:" + Uint64ToString(add) +
                       "/" + symbol + "\n" + debug_str;
+        } else {
+          LOG(WARNING) << reinterpret_cast<uint64_t>(used_stack[i])
+                       << " symbolize error";
         }
       }
       LOG(INFO) << "\n" << debug_str;

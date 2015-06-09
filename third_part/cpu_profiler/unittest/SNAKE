@@ -19,3 +19,18 @@ cc_binary(name='profile_analyzer_unittest',
                   ],
          )
 
+cc_binary(name='gprofile_unittest',
+          srcs = ['gprofile_unittest.cc'],
+          deps = [
+                  '//third_part/gperftools/wrapper/internal:gperftools_wrapper',
+                 ],
+         )
+
+cc_binary(name='gprofile_src_unittest',
+          srcs = ['gprofile_src_unittest.cc'],
+          deps = [
+                  '//third_part/gperftools_src:gperftools_profile',
+                 ],
+         )
+
+
