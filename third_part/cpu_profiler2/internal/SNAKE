@@ -1,0 +1,19 @@
+cc_library(name='gperftools_profile',
+           srcs = [
+                   'profiledata.cc',
+                   'profile-handler.cc',
+                   'profiler.cc',
+                   'maybe_threads.cc',
+                   'stacktrace.cc',
+                   'sysinfo.cc',
+                   'vdso_support.cc',
+                   'elf_mem_image.cc',
+                  ],
+           deps = [
+                  '//libs/third_part/libunwind:unwind',
+                  '//base/internal:base',
+                  ],
+           copt = ['no_style_check',
+                   'always_link',
+                  ],
+          )
