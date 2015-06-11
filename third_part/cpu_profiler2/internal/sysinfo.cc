@@ -51,7 +51,7 @@
 #include <sys/sysctl.h>
 #elif defined __FreeBSD__
 #include <sys/sysctl.h>
-#elif defined __sun__         // Solaris
+#elif defined __sun__  // Solaris
 #include <procfs.h>
 #elif defined(PLATFORM_WINDOWS)
 #include <process.h>
@@ -104,6 +104,8 @@
 #else
 # define safeclose(fd)  close(fd)
 #endif
+
+namespace cpu_profiler2 {
 
 // GetenvBeforeMain()
 // GetUniquePathFromEnv()
@@ -1100,73 +1102,4 @@ int ProcMapsIterator::FormatLine(char* buffer, int bufsize,
   return (rc < 0 || rc >= bufsize) ? 0 : rc;
 }
 
-namespace tcmalloc {
-
-// Helper to add the list of mapped shared libraries to a profile.
-// Fill formatted "/proc/self/maps" contents into buffer 'buf' of size 'size'
-// and return the actual size occupied in 'buf'.  We fill wrote_all to true
-// if we successfully wrote all proc lines to buf, false else.
-// We do not provision for 0-terminating 'buf'.
-int FillProcSelfMaps(char buf[], int size, bool* wrote_all) {
-  ProcMapsIterator::Buffer iterbuf;
-  ProcMapsIterator it(0, &iterbuf);  // 0 means "current pid"
-
-  uint64 start, end, offset;
-  int64 inode;
-  char *flags, *filename;
-  int bytes_written = 0;
-  *wrote_all = true;
-  while (it.Next(&start, &end, &flags, &offset, &inode, &filename)) {
-    const int line_length = it.FormatLine(buf + bytes_written,
-                                          size - bytes_written,
-                                          start, end, flags, offset,
-                                          inode, filename, 0);
-    if (line_length == 0)
-      *wrote_all = false;  // failed to write this line out
-    else
-      bytes_written += line_length;
-  }
-  return bytes_written;
-}
-
-// Re-run fn until it doesn't cause EINTR.
-#define NO_INTR(fn)  do {} while ((fn) < 0 && errno == EINTR)
-
-RawFD RawOpenForWriting(const char* filename) {
-  return open(filename, O_WRONLY|O_CREAT|O_TRUNC, 0664);
-}
-
-void RawWrite(RawFD fd, const char* buf, size_t len) {
-  while (len > 0) {
-    ssize_t r;
-    NO_INTR(r = write(fd, buf, len));
-    if (r <= 0) break;
-    buf += r;
-    len -= r;
-  }
-}
-
-void RawClose(RawFD fd) {
-  NO_INTR(close(fd));
-}
-
-// Dump the same data as FillProcSelfMaps reads to fd.
-// It seems easier to repeat parts of FillProcSelfMaps here than to
-// reuse it via a call.
-void DumpProcSelfMaps(RawFD fd) {
-  ProcMapsIterator::Buffer iterbuf;
-  ProcMapsIterator it(0, &iterbuf);   // 0 means "current pid"
-
-  uint64 start, end, offset;
-  int64 inode;
-  char *flags, *filename;
-  ProcMapsIterator::Buffer linebuf;
-  while (it.Next(&start, &end, &flags, &offset, &inode, &filename)) {
-    int written = it.FormatLine(linebuf.buf_, sizeof(linebuf.buf_),
-                                start, end, flags, offset, inode, filename,
-                                0);
-    RawWrite(fd, linebuf.buf_, written);
-  }
-}
-
-}  // namespace tcmalloc
+}  // namespace cpu_profiler2

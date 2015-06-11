@@ -76,6 +76,8 @@ DEFINE_bool(cpu_profiler_unittest, false,
 DEFINE_string(cpu_profiler_path, "/tmp/cpu_profiler.prof", "");
 DEFINE_int64(cpu_profiler_signal, 12, "");
 
+namespace cpu_profiler2 {
+
 // Collects up all profile data. This is a singleton, which is
 // initialized by a constructor at startup. If no cpu profiler
 // signal is specified then the profiler lifecycle is either
@@ -129,6 +131,10 @@ class CpuProfiler {
                            void* cpu_profiler);
 };
 
+// Profile data structure singleton: Constructor will check to see if profiling
+// should be enabled.  Destructor will write profile data out to disk.
+CpuProfiler CpuProfiler::instance_;
+
 // Signal handler that is registered when a user selectable signal
 // number is defined in the environment variable CPUPROFILESIGNAL.
 static void CpuProfilerSwitch(int signal_number) {
@@ -148,11 +154,6 @@ static void CpuProfilerSwitch(int signal_number) {
   started = !started;
 }
 
-// Profile data structure singleton: Constructor will check to see if profiling
-// should be enabled.  Destructor will write profile data out to disk.
-CpuProfiler CpuProfiler::instance_;
-
-// Initialize profiling: activated if getenv("CPUPROFILE") exists.
 CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
   // We don't enable profiling if setuid -- it's a security risk
 #ifdef HAVE_GETEUID
@@ -179,13 +180,17 @@ CpuProfiler::CpuProfiler() : prof_handler_token_(NULL) {
 
 bool CpuProfiler::Start(const char* fname, const ProfilerOptions* options) {
   SpinLockHolder cl(&lock_);
-  if (collector_.enabled()) return false;
+  if (collector_.enabled()) {
+    // has started already
+    return false;
+  }
 
   ProfileHandlerState prof_handler_state;
   ProfileHandlerGetState(&prof_handler_state);
 
   ProfileData::Options collector_options;
   collector_options.set_frequency(prof_handler_state.frequency);
+  // open an file and ready to record the info.
   if (!collector_.Start(fname, collector_options)) return false;
 
   filter_ = NULL;
@@ -196,7 +201,6 @@ bool CpuProfiler::Start(const char* fname, const ProfilerOptions* options) {
 
   // Setup handler for SIGPROF interrupts
   EnableHandler();
-
   return true;
 }
 
@@ -277,7 +281,7 @@ void CpuProfiler::prof_handler(int sig, siginfo_t*, void* signal_ucontext,
 
   if (instance->filter_ == NULL ||
       (*instance->filter_)(instance->filter_arg_)) {
-    void* stack[ProfileData::kMaxStackDepth];
+    void * stack[ProfileData::kMaxStackDepth];
 
     // Under frame-pointer-based unwinding at least on x86, the
     // top-most active routine doesn't show up as a normal frame, but
@@ -362,3 +366,5 @@ void ProfilerGetCurrentState(ProfilerState* state) {
 // DEPRECATED routines
 void ProfilerEnable() { }
 void ProfilerDisable() { }
+
+}  // namespace cpu_profiler

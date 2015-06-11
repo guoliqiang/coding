@@ -47,6 +47,7 @@
 #include "third_part/gperftools_src/gperftools/stacktrace.h"
 #include "base/public/logging.h"
 
+
 // Sometimes, we can try to get a stack trace from within a stack
 // trace, because libunwind can call mmap (maybe indirectly via an
 // internal mmap based memory allocator), and that mmap gets trapped
@@ -54,7 +55,10 @@
 // recursive request, we'd end up with infinite recursion or deadlock.
 // Luckily, it's safe to ignore those subsequent traces.  In such
 // cases, we return 0 to indicate the situation.
+namespace cpu_profiler2 {
+
 static __thread int recursive;
+}  // namespace cpu_profiler2
 
 #if defined(TCMALLOC_ENABLE_UNWIND_FROM_UCONTEXT) && (defined(__i386__) || \
     defined(__x86_64__)) && defined(__GNU_LIBRARY__)
@@ -62,6 +66,8 @@ static __thread int recursive;
 #endif
 
 #endif  // THIRD_PART_CPU_PROFILER2_PUBLIC_STACKTRACE_LIBINWIND_INL_H_
+
+namespace cpu_profiler2 {
 
 // Note: this part of the file is included several times.
 // Do not put globals below.
@@ -147,3 +153,5 @@ out:
   --recursive;
   return n;
 }
+
+}  // namespace cpu_profiler

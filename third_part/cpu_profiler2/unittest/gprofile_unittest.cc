@@ -24,8 +24,8 @@ int Fib2(int num) {
 }
 
 int main(int argc, char** argv) {
-  ProfilerStart("./gcpu_profiler.prof");
+  cpu_profiler2::ProfilerStart("./gcpu_profiler.prof");
   for (int i = 0; i < 10; i++) Fib(40);
-  ProfilerStop();
+  cpu_profiler2::ProfilerStop();
   return 0;
 }

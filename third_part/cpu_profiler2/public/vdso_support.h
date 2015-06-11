@@ -60,12 +60,10 @@
 #include "third_part/cpu_profiler2/public/elf_mem_image.h"
 
 #ifdef HAVE_ELF_MEM_IMAGE
-
 #define HAVE_VDSO_SUPPORT 1
+#include <stdlib.h>
 
-#include <stdlib.h>     // for NULL
-
-namespace base {
+namespace cpu_profiler2 {
 
 // NOTE: this class may be used from within tcmalloc, and can not
 // use any memory allocation routines.
@@ -125,7 +123,7 @@ class VDSOSupport {
   DISALLOW_COPY_AND_ASSIGN(VDSOSupport);
 };
 
-}  // namespace base
+}  // namespace cpu_profiler2
 
 #endif  // HAVE_ELF_MEM_IMAGE
 

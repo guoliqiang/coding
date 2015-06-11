@@ -32,34 +32,14 @@
 // Author: Sanjay Ghemawat
 //
 // Module for CPU profiling based on periodic pc-sampling.
-//
-// For full(er) information, see doc/cpuprofile.html
-//
-// This module is linked into your program with
-// no slowdown caused by this unless you activate the profiler
-// using one of the following methods:
-//
-//    1. Before starting the program, set the environment variable
-//       "CPUPROFILE" to be the name of the file to which the profile
-//       data should be written.
-//
-//    2. Programmatically, start and stop the profiler using the
-//       routines "ProfilerStart(filename)" and "ProfilerStop()".
-//
-//
-// (Note: if using linux 2.4 or earlier, only the main thread may be
-// profiled.)
-//
-// Use pprof to view the resulting profile output.
-//    % pprof <path_to_executable> <profile_file_name>
-//    % pprof --gv  <path_to_executable> <profile_file_name>
-//
 // These functions are thread-safe.
 
 #ifndef THIRD_PART_CPU_PROFILER2_PUBLIC_PROFILER_H_
 #define THIRD_PART_CPU_PROFILER2_PUBLIC_PROFILER_H_
 
 #include <time.h>
+
+namespace cpu_profiler2 {
 
 // Profiler options, for use with ProfilerStartWithOptions.  To use:
 //
@@ -94,7 +74,6 @@ struct ProfilerOptions {
 
 // Start profiling and write profile info into fname, discarding any
 // existing profiling data in that file.
-//
 // This is equivalent to calling ProfilerStartWithOptions(fname, NULL).
 int ProfilerStart(const char* fname);
 
@@ -107,8 +86,8 @@ int ProfilerStart(const char* fname);
 // 'options' may be NULL, in which case all are given default values.
 //
 // Returns nonzero if profiling was started successfully, or zero else.
-int ProfilerStartWithOptions(
-    const char *fname, const struct ProfilerOptions *options);
+int ProfilerStartWithOptions(const char *fname,
+                             const struct ProfilerOptions *options);
 
 // Stop profiling. Can be started again with ProfilerStart(), but
 // the currently accumulated profiling data will be cleared.
@@ -137,5 +116,7 @@ struct ProfilerState {
   int samples_gathered;  // Number of samples gathered so far (or 0)
 };
 void ProfilerGetCurrentState(struct ProfilerState* state);
+
+}  // namespace profiler2
 
 #endif  // THIRD_PART_CPU_PROFILER2_PUBLIC_PROFILER_H_

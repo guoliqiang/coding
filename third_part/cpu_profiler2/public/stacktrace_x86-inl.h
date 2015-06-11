@@ -64,8 +64,9 @@ typedef ucontext ucontext_t;
 #include <sys/mman.h>
 #include "third_part/cpu_profiler2/public/vdso_support.h"
 #endif
-
 #include "third_part/cpu_profiler2/public/stacktrace.h"
+
+namespace cpu_profiler2 {
 
 #if defined(__linux__) && defined(__i386__) && \
     defined(__ELF__) && defined(HAVE_MMAP)
@@ -271,6 +272,7 @@ static void **NextStackFrame(void **old_sp, const void *uc) {
   return new_sp;
 }
 
+}  // namespace cpu_profiler2
 #endif  // THIRD_PART_CPU_PROFILER2_PUBLIC_STACKTRACE_X86_INL_H_
 
 // Note: this part of the file is included several times.
@@ -287,6 +289,8 @@ static void **NextStackFrame(void **old_sp, const void *uc) {
 //   int max_depth: the size of the result (and sizes) array(s)
 //   int skip_count: how many stack pointers to skip before storing in result
 //   void* ucp: a ucontext_t* (GetStack{Trace,Frames}WithContext only)
+
+namespace cpu_profiler2{
 
 static int GET_STACK_TRACE_OR_FRAMES {
   void **sp;
@@ -352,3 +356,5 @@ static int GET_STACK_TRACE_OR_FRAMES {
   }
   return n;
 }
+
+}  // namespace cpu_profiler2

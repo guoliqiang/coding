@@ -64,7 +64,12 @@ using std::string;
 
 DEFINE_bool(cpu_profiler_real, false, "");
 DEFINE_bool(cpu_profiler_per_thread_timer, false, "");
+// http://stackoverflow.com/questions/4956206/change-linux-kernel-timer
+// In fact the must frequency only is 100.
+// Off course you can rebuild the kernal.
 DEFINE_int32(cpu_profiler_frequent, -1, "");
+
+namespace cpu_profiler2 {
 
 // This structure is used by ProfileHandlerRegisterCallback and
 // ProfileHandlerUnregisterCallback as a handle to a registered callback.
@@ -118,7 +123,7 @@ class ProfileHandler {
   void GetState(ProfileHandlerState* state);
 
   // Initializes and returns the ProfileHandler singleton.
-  static ProfileHandler* Instance();
+  static ProfileHandler * Instance();
 
  private:
   ProfileHandler();
@@ -292,7 +297,7 @@ void ProfileHandler::Init() {
   instance_ = new ProfileHandler();
 }
 
-ProfileHandler* ProfileHandler::Instance() {
+ProfileHandler * ProfileHandler::Instance() {
   pthread_once(&once_, Init);
   if (instance_ == NULL) {
     // This will be true on systems that don't link in pthreads,
@@ -315,7 +320,7 @@ ProfileHandler::ProfileHandler()
   timer_type_ = FLAGS_cpu_profiler_real ? ITIMER_REAL : ITIMER_PROF;
   if (FLAGS_cpu_profiler_frequent > 0) {
     frequency_ = FLAGS_cpu_profiler_frequent > kMaxFrequency ?
-        kMaxFrequency : frequency_;
+        kMaxFrequency : FLAGS_cpu_profiler_frequent;
   } else {
     frequency_ = kDefaultFrequency;
   }
@@ -326,7 +331,7 @@ ProfileHandler::ProfileHandler()
   // assume it has priority over us and stop.
   if (!IsSignalHandlerAvailable()) {
     LOG(INFO) << "Disabling profiler because handler is already in use:"
-              << (timer_type_ == ITIMER_REAL ? "SIGALRM" : "SIGPROF");
+               << (timer_type_ == ITIMER_REAL ? "SIGALRM" : "SIGPROF");
     allowed_ = false;
     return;
   }
@@ -478,10 +483,9 @@ void ProfileHandler::GetState(ProfileHandlerState* state) {
   state->allowed = allowed_;
 }
 
+// start the timer, and it will thorw interrupts
 void ProfileHandler::StartTimer() {
-  if (!allowed_) {
-    return;
-  }
+  if (!allowed_) return;
 
 #if HAVE_LINUX_SIGEV_THREAD_ID
   if (per_thread_timer_enabled_) {
@@ -498,9 +502,8 @@ void ProfileHandler::StartTimer() {
 }
 
 void ProfileHandler::StopTimer() {
-  if (!allowed_) {
-    return;
-  }
+  if (!allowed_) return;
+
   if (per_thread_timer_enabled_) {
     LOG(FATAL) << "StopTimer cannot be called in linux-per-thread-timers mode";
   }
@@ -511,22 +514,19 @@ void ProfileHandler::StopTimer() {
 }
 
 bool ProfileHandler::IsTimerRunning() {
-  if (!allowed_) {
-    return false;
-  }
-  if (per_thread_timer_enabled_) {
-    return false;
-  }
+  if (!allowed_) return false;
+  if (per_thread_timer_enabled_) return false;
+
   struct itimerval current_timer;
   CHECK(0 == getitimer(timer_type_, &current_timer)) << "getitimer";
   return (current_timer.it_value.tv_sec != 0 ||
           current_timer.it_value.tv_usec != 0);
 }
 
+// enable to catch the interrupts thrown by the timer.
 void ProfileHandler::EnableHandler() {
-  if (!allowed_) {
-    return;
-  }
+  if (!allowed_) return;
+
   struct sigaction sa;
   sa.sa_sigaction = SignalHandler;
   sa.sa_flags = SA_RESTART | SA_SIGINFO;
@@ -535,10 +535,10 @@ void ProfileHandler::EnableHandler() {
   CHECK(sigaction(signal_number, &sa, NULL) == 0) << "sigprof (enable)";
 }
 
+// disable to catch the interrupts thrown by the timer.
 void ProfileHandler::DisableHandler() {
-  if (!allowed_) {
-    return;
-  }
+  if (!allowed_)  return;
+
   struct sigaction sa;
   sa.sa_handler = SIG_IGN;
   sa.sa_flags = SA_RESTART;
@@ -623,3 +623,5 @@ void ProfileHandlerReset() { }
 void ProfileHandlerGetState(ProfileHandlerState* state) { }
 
 #endif  // OS_CYGWIN
+
+}  // namespace profiler2

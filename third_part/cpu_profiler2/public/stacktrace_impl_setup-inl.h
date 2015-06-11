@@ -50,6 +50,7 @@
     SIS_CONCAT(GetStackTrace_, GST_SUFFIX)(void **result, \
                                            int max_depth, \
                                            int skip_count)
+
 #include STACKTRACE_INL_HEADER
 #undef IS_STACK_FRAMES
 #undef IS_WITH_CONTEXT
@@ -60,6 +61,7 @@
 #define GET_STACK_TRACE_OR_FRAMES \
   SIS_CONCAT(GetStackFrames_, GST_SUFFIX)(void **result, int *sizes, \
                                           int max_depth, int skip_count)
+
 #include STACKTRACE_INL_HEADER
 #undef IS_STACK_FRAMES
 #undef IS_WITH_CONTEXT
@@ -72,6 +74,7 @@
                                                       int max_depth, \
                                                       int skip_count, \
                                                       const void *ucp)
+
 #include STACKTRACE_INL_HEADER
 #undef IS_STACK_FRAMES
 #undef IS_WITH_CONTEXT
@@ -85,10 +88,13 @@
                                                        int max_depth, \
                                                        int skip_count, \
                                                        const void *ucp)
+
 #include STACKTRACE_INL_HEADER
 #undef IS_STACK_FRAMES
 #undef IS_WITH_CONTEXT
 #undef GET_STACK_TRACE_OR_FRAMES
+
+namespace cpu_profiler2 {
 
 static GetStackImplementation SIS_CONCAT(impl__, GST_SUFFIX) = {
   SIS_CONCAT(GetStackFrames_, GST_SUFFIX),
@@ -97,6 +103,8 @@ static GetStackImplementation SIS_CONCAT(impl__, GST_SUFFIX) = {
   SIS_CONCAT(GetStackTraceWithContext_, GST_SUFFIX),
   SIS_STRINGIFY(GST_SUFFIX)
 };
+
+}  // namespace cpu_profiler2
 
 #undef SIS_CONCAT2
 #undef SIS_CONCAT

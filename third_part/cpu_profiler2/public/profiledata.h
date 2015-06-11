@@ -46,6 +46,8 @@
 #include <time.h>
 #include <stdint.h>
 
+namespace cpu_profiler2 {
+
 // A class that accumulates profile samples and writes them to a file.
 //
 // Each sample contains a stack trace and a count.  Memory usage is
@@ -138,8 +140,8 @@ class ProfileData {
 
  private:
   static const int kAssociativity = 4;  // For hashtable
-  static const int kBuckets = 1 << 10;  // For hashtable
-  static const int kBufferLength = 1 << 18;  // For eviction buffer
+  static const int kBuckets = 1 << 10;  // hashtable size
+  static const int kBufferLength = 1 << 18;  // eviction buffer
 
   // Type of slots: each slot can be either a count, or a PC value
   typedef uintptr_t Slot;
@@ -168,11 +170,11 @@ class ProfileData {
 
   // Move 'entry' to the eviction buffer.
   void Evict(const Entry& entry);
-
   // Write contents of eviction buffer to disk.
   void FlushEvicted();
-
   DISALLOW_COPY_AND_ASSIGN(ProfileData);
 };
+
+}  // namespace cpu_profiler2
 
 #endif  // THIRD_PART_CPU_PROFILER2_PUBLIC_PROFILEDATA_H_

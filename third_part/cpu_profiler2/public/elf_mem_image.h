@@ -40,18 +40,14 @@
 #ifdef HAVE_FEATURES_H
 #include <features.h>
 #endif
-
 // Maybe one day we can rewrite this file not to require the elf
 // symbol extensions in glibc, but for right now we need them.
 #if defined(__ELF__) && defined(__GLIBC__) && !defined(__native_client__)
-
 #define HAVE_ELF_MEM_IMAGE 1
-
 #include <stdlib.h>
-// for ElfW
 #include <link.h>
 
-namespace base {
+namespace cpu_profiler2 {
 
 // An in-memory ELF image (may not exist on disk).
 class ElfMemImage {
@@ -66,7 +62,7 @@ class ElfMemImage {
     const char * name;  // E.g. "__vdso_getcpu"
     const char * version;  // E.g. LINUX2.6, could be "" for unversioned symbol.
     const void * address;  // Relocated symbol address.
-    const ElfW(Sym) *symbol;  // Symbol in the dynamic symbol table.
+    const ElfW(Sym) * symbol;  // Symbol in the dynamic symbol table.
   };
 
   // Supports iteration over all dynamic symbols.
@@ -128,7 +124,7 @@ class ElfMemImage {
   ElfW(Addr) link_base_;  // Link-time base (p_vaddr of first PT_LOAD).
 };
 
-}  // namespace base
+}  // namespace cpu_profiler2
 
 #endif  // __ELF__ and __GLIBC__ and !__native_client__
 

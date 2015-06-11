@@ -65,6 +65,8 @@
 typedef ucontext ucontext_t;
 #endif
 
+namespace cpu_profiler2 {
+
 // Take the example where function Foo() calls function Bar().  For
 // many architectures, Bar() is responsible for setting up and tearing
 // down its own stack frame.  In that case, it's possible for the
@@ -183,5 +185,6 @@ inline void* GetPC(const ucontext_t& signal_ucontext) {
 }
 
 #endif
+}  // namespace cpu_profiler2
 
 #endif  // THIRD_PART_CPU_PROFILER2_PUBLIC_GETPC_H_

@@ -51,7 +51,7 @@ using base::subtle::MemoryBarrier;
 #define AT_SYSINFO_EHDR 33
 #endif
 
-namespace base {
+namespace cpu_profiler2 {
 
 const void *VDSOSupport::vdso_base_ = ElfMemImage::kInvalidBase;
 VDSOSupport::VDSOSupport()
@@ -135,6 +135,6 @@ static class VDSOInitHelper {
   VDSOInitHelper() { VDSOSupport::Init(); }
 } vdso_init_helper;
 
-}  // namespace base
+}  // namespace cpu_profiler2
 
 #endif  // HAVE_VDSO_SUPPORT

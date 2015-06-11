@@ -49,6 +49,8 @@
 // non-zero. I have no idea why ...
 #include <string>
 
+namespace cpu_profiler2 {
+
 #define MAX_PERTHREAD_VALS 16
 static void *perftools_pthread_specific_vals[MAX_PERTHREAD_VALS];
 static int next_key;
@@ -134,3 +136,5 @@ int perftools_pthread_once(pthread_once_t *ctl,
     return 0;
   }
 }
+
+}  // namespace cpu_profiler2

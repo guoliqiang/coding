@@ -45,9 +45,11 @@
 #ifndef THIRD_PART_CPU_PROFILER2_PUBLIC_PROFILE_HANDLER_H_
 #define THIRD_PART_CPU_PROFILER2_PUBLIC_PROFILE_HANDLER_H_
 
+#include <signal.h>
 #include "third_part/cpu_profiler2/public/config.h"
 #include "base/public/basictypes.h"
-#include <signal.h>
+
+namespace cpu_profiler2 {
 
 struct ProfileHandlerToken;
 
@@ -119,5 +121,7 @@ struct ProfileHandlerState {
   bool allowed;  // Profiling is allowed
 };
 void ProfileHandlerGetState(struct ProfileHandlerState* state);
+
+}  // namespace cpu_profiler2
 
 #endif  // THIRD_PART_CPU_PROFILER2_PUBLIC_PROFILE_HANDLER_H_

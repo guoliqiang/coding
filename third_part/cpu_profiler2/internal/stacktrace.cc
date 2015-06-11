@@ -60,6 +60,8 @@
 #include "third_part/cpu_profiler2/public/stacktrace.h"
 #include "base/public/logging.h"
 
+namespace cpu_profiler2 {
+
 // we're using plain struct and not class to avoid any possible issues
 // during initialization. Struct of pointers is easy to init at
 // link-time.
@@ -78,6 +80,8 @@ struct GetStackImplementation {
 
   const char *name;
 };
+
+}  // namespace cpu_profiler2
 
 #if HAVE_DECL_BACKTRACE
 #define STACKTRACE_INL_HEADER "stacktrace_generic-inl.h"
@@ -151,6 +155,8 @@ struct GetStackImplementation {
 #define HAVE_GST_win32
 #endif
 
+namespace cpu_profiler2 {
+
 static GetStackImplementation *all_impls[] = {
 #ifdef HAVE_GST_generic
   &impl__generic,
@@ -176,6 +182,8 @@ static GetStackImplementation *all_impls[] = {
   NULL
 };
 
+}  // namespace cpu_profiler2
+
 // ppc and i386 implementations prefer arch-specific asm implementations.
 // arm's asm implementation is broken
 #if defined(__i386__) || defined(__x86_64__) || defined(__ppc__) \
@@ -186,19 +194,40 @@ static GetStackImplementation *all_impls[] = {
 #endif
 
 #if defined(HAVE_GST_instrument)
+namespace cpu_profiler2 {
 static GetStackImplementation *get_stack_impl = &impl__instrument;
+}  // namespace cpu_profiler2
+
 #elif defined(HAVE_GST_win32)
+namespace cpu_profiler2 {
 static GetStackImplementation *get_stack_impl = &impl__win32;
+}  // namespace cpu_profiler2
+
 #elif defined(HAVE_GST_x86) && defined(TCMALLOC_DONT_PREFER_LIBUNWIND)
+namespace cpu_profiler2 {
 static GetStackImplementation *get_stack_impl = &impl__x86;
+}  // namespace cpu_profiler2
+
 #elif defined(HAVE_GST_ppc) && defined(TCMALLOC_DONT_PREFER_LIBUNWIND)
+namespace cpu_profiler2 {
 static GetStackImplementation *get_stack_impl = &impl__ppc;
+}  // namespace cpu_profiler2
+
 #elif defined(HAVE_GST_libunwind)
+namespace cpu_profiler2 {
 static GetStackImplementation *get_stack_impl = &impl__libunwind;
+}  // namespace cpu_profiler2
+
 #elif defined(HAVE_GST_arm)
+namespace cpu_profiler2 {
 static GetStackImplementation *get_stack_impl = &impl__arm;
+}  // namespace cpu_profiler2
+
 #elif defined(HAVE_GST_generic)
+namespace cpu_profiler2 {
 static GetStackImplementation *get_stack_impl = &impl__generic;
+}  // namespace cpu_profiler2
+
 #elif 0
 // This is for the benefit of code analysis tools that may have
 // trouble with the computed #include above.
@@ -207,6 +236,8 @@ static GetStackImplementation *get_stack_impl = &impl__generic;
 #else
 #error Cannot calculate stack trace: will need to write for your environment
 #endif
+
+namespace cpu_profiler2 {
 
 static int frame_forcer(int rv) {
   return rv;
@@ -265,3 +296,5 @@ static void init_default_stack_impl(void) {
 
 REGISTER_MODULE_INITIALIZER(stacktrace_init_default_stack_impl,
                             init_default_stack_impl());
+
+}  // namespace cpu_profiler2

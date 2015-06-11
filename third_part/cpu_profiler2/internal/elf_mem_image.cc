@@ -54,7 +54,7 @@
 
 #define VERSYM_VERSION 0x7fff
 
-namespace base {
+namespace cpu_profiler2 {
 
 namespace {
 template <int N> class ElfClass {
@@ -428,6 +428,6 @@ void ElfMemImage::SymbolIterator::Update(int increment) {
   info_.symbol  = symbol;
 }
 
-}  // namespace base
+}  // namespace cpu_profiler2
 
 #endif  // HAVE_ELF_MEM_IMAGE

@@ -49,6 +49,8 @@
 #include <string.h>
 #include <fcntl.h>
 
+namespace cpu_profiler2 {
+
 // All of these are initialized in profiledata.h.
 const int ProfileData::kMaxStackDepth;
 const int ProfileData::kAssociativity;
@@ -59,17 +61,17 @@ ProfileData::Options::Options() : frequency_(1) { }
 
 // This function is safe to call from asynchronous signals (but is not
 // re-entrant).  However, that's not part of its public interface.
-void ProfileData::Evict(const Entry& entry) {
+void ProfileData::Evict(const Entry & entry) {
   const int d = entry.depth;
   const int nslots = d + 2;  // Number of slots needed in eviction buffer
   if (num_evicted_ + nslots > kBufferLength) {
     FlushEvicted();
-    assert(num_evicted_ == 0);
-    assert(nslots <= kBufferLength);
+    CHECK(num_evicted_ == 0);
+    CHECK(nslots <= kBufferLength) << nslots << " " << kBufferLength;
   }
-  evict_[num_evicted_++] = entry.count;
-  evict_[num_evicted_++] = d;
-  memcpy(&evict_[num_evicted_], entry.stack, d * sizeof(Slot));
+  evict_[num_evicted_++] = entry.count;  // number
+  evict_[num_evicted_++] = d;  // depth
+  memcpy(&evict_[num_evicted_], entry.stack, d * sizeof(Slot));  // content
   num_evicted_ += d;
 }
 
@@ -86,14 +88,11 @@ ProfileData::ProfileData()
 
 bool ProfileData::Start(const char* fname,
                         const ProfileData::Options& options) {
-  if (enabled()) {
-    return false;
-  }
-
+  if (enabled()) return false;
   // Open output file and initialize various data structures
   int fd = open(fname, O_CREAT | O_WRONLY | O_TRUNC, 0666);
   if (fd < 0) {
-    // Can't open outfile for write
+    LOG(ERROR) << "can not open outfile:" << fname;
     return false;
   }
 
@@ -102,8 +101,8 @@ bool ProfileData::Start(const char* fname,
 
   // Reset counters
   num_evicted_ = 0;
-  count_       = 0;
-  evictions_   = 0;
+  count_ = 0;
+  evictions_ = 0;
   total_bytes_ = 0;
 
   hash_ = new Bucket[kBuckets];
@@ -120,7 +119,6 @@ bool ProfileData::Start(const char* fname,
   evict_[num_evicted_++] = 0;  // Padding
 
   out_ = fd;
-
   return true;
 }
 
@@ -128,7 +126,6 @@ ProfileData::~ProfileData() {
   Stop();
 }
 
-// Dump /proc/maps data to fd.  Copied from heap-profile-table.cc.
 #define NO_INTR(fn)  do {} while ((fn) < 0 && errno == EINTR)
 
 static void FDWrite(int fd, const char* buf, size_t len) {
@@ -141,9 +138,10 @@ static void FDWrite(int fd, const char* buf, size_t len) {
   }
 }
 
+// dump /proc/self/maps
 static void DumpProcSelfMaps(int fd) {
   ProcMapsIterator::Buffer iterbuf;
-  ProcMapsIterator it(0, &iterbuf);   // 0 means "current pid"
+  ProcMapsIterator it(0, &iterbuf);  // 0 means "current pid"
 
   uint64 start, end, offset;
   int64 inode;
@@ -158,9 +156,7 @@ static void DumpProcSelfMaps(int fd) {
 }
 
 void ProfileData::Stop() {
-  if (!enabled()) {
-    return;
-  }
+  if (!enabled()) return;
 
   // Move data from hash table to eviction buffer
   for (int b = 0; b < kBuckets; b++) {
@@ -192,9 +188,7 @@ void ProfileData::Stop() {
 }
 
 void ProfileData::Reset() {
-  if (!enabled()) {
-    return;
-  }
+  if (!enabled()) return;
 
   // Don't reset count_, evictions_, or total_bytes_ here.  They're used
   // by Stop to print information about the profile after reset, and are
@@ -233,9 +227,7 @@ void ProfileData::GetCurrentState(State* state) const {
 // This function is safe to call from asynchronous signals (but is not
 // re-entrant).  However, that's not part of its public interface.
 void ProfileData::FlushTable() {
-  if (!enabled()) {
-    return;
-  }
+  if (!enabled()) return;
 
   // Move data from hash table to eviction buffer
   for (int b = 0; b < kBuckets; b++) {
@@ -254,9 +246,7 @@ void ProfileData::FlushTable() {
 }
 
 void ProfileData::Add(int depth, const void* const* stack) {
-  if (!enabled()) {
-    return;
-  }
+  if (!enabled()) return;
 
   if (depth > kMaxStackDepth) depth = kMaxStackDepth;
   CHECK(depth > 0) << "ProfileData::Add depth <= 0";
@@ -325,3 +315,5 @@ void ProfileData::FlushEvicted() {
   }
   num_evicted_ = 0;
 }
+
+}  // namespace cpu_profiler2

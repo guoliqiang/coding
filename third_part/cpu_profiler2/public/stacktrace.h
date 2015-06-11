@@ -37,6 +37,8 @@
 #ifndef THIRD_PART_CPU_PROFILER2_PUBLIC_STACKTRACE_H_
 #define THIRD_PART_CPU_PROFILER2_PUBLIC_STACKTRACE_H_
 
+namespace cpu_profiler2 {
+
 // Skips the most recent "skip_count" stack frames (also skips the
 // frame generated for the "GetStackFrames" routine itself), and then
 // records the pc values for up to the next "max_depth" frames in
@@ -102,4 +104,5 @@ int GetStackTrace(void** result, int max_depth, int skip_count);
 int GetStackTraceWithContext(void** result, int max_depth,
                              int skip_count, const void *uc);
 
+}  // namespace cpu_profiler2
 #endif // THIRD_PART_CPU_PROFILER2_PUBLIC_STACKTRACE_H_

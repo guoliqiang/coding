@@ -66,6 +66,8 @@ uint64 __rdtsc();
 #include <sys/time.h>
 #endif
 
+namespace cpu_profiler2 {
+
 // NOTE: only i386 and x86_64 have been well tested.
 // PPC, sparc, alpha, and ia64 are based on
 //    http://peter.kuscsik.com/wordpress/?p=14
@@ -163,5 +165,7 @@ struct CycleClock {
 #endif
   }
 };
+
+}  // namespace cpu_profiler2
 
 #endif  // THIRD_PART_CPU_PROFILER2_PUBLIC_CYCLECLOCK_H_

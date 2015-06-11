@@ -60,6 +60,8 @@
 #include <fcntl.h>
 #endif
 
+namespace cpu_profiler2 {
+
 // This getenv function is safe to call before the C runtime is initialized.
 // On Windows, it utilizes GetEnvironmentVariable() and on unix it uses
 // /proc/self/environ instead calling getenv().  It's intended to be used in
@@ -239,12 +241,6 @@ class ProcMapsIterator {
 
 #endif  // #ifndef SWIG
 
-// Helper routines
-typedef int RawFD;
-
-namespace tcmalloc {
-int FillProcSelfMaps(char buf[], int size, bool* wrote_all);
-void DumpProcSelfMaps(RawFD fd);
-}
+}  // namespace cpu_profiler2
 
 #endif   // THIRD_PART_CPU_PROFILER2_PUBLIC_SYSINFO_H_
