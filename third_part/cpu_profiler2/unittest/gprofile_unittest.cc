@@ -7,6 +7,8 @@
 #include "base/public/logging.h"
 #include "third_part/cpu_profiler2/public/profiler.h"
 
+DECLARE_bool(cpu_profiler_debug);
+
 int Fib(int num) {
   if (num == 0 || num == 1) {
     return 1;
@@ -24,6 +26,7 @@ int Fib2(int num) {
 }
 
 int main(int argc, char** argv) {
+  FLAGS_cpu_profiler_debug = true;
   cpu_profiler2::ProfilerStart("./gcpu_profiler.prof");
   for (int i = 0; i < 10; i++) Fib(40);
   cpu_profiler2::ProfilerStop();

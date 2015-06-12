@@ -64,6 +64,7 @@ typedef int ucontext_t;  // just to quiet the compiler, mostly
 #include "base/public/mutex.h"
 #include "third_part/cpu_profiler2/public/profiledata.h"
 #include "third_part/cpu_profiler2/public/profile-handler.h"
+#include "base/public/string_util.h"
 
 using base::SpinLock;
 using base::SpinLockHolder;
@@ -75,6 +76,7 @@ DEFINE_bool(cpu_profiler_unittest, false,
 			      " exclude certain behaviours.");
 DEFINE_string(cpu_profiler_path, "/tmp/cpu_profiler.prof", "");
 DEFINE_int64(cpu_profiler_signal, 12, "");
+DEFINE_bool(cpu_profiler_debug, false, "");
 
 namespace cpu_profiler2 {
 
@@ -308,6 +310,14 @@ void CpuProfiler::prof_handler(int sig, siginfo_t*, void* signal_ucontext,
       depth++;  // To account for pc value in stack[0];
     }
     instance->collector_.Add(depth, used_stack);
+    if (FLAGS_cpu_profiler_debug) {
+      std::string debug = "";
+      for (int i = 0; i < depth; i++) {
+        debug += "/" +
+                 Int64ToHexString(reinterpret_cast<int64_t>(used_stack[i]));
+      }
+      LOG(INFO) << debug;
+    }
   }
 }
 

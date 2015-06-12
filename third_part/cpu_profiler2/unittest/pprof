@@ -340,8 +340,8 @@ sub Init() {
   $main::opt_raw = 0;
 
   $main::opt_nodecount = 80;
-  $main::opt_nodefraction = 0.0;
-  $main::opt_edgefraction = 0.0;
+  $main::opt_nodefraction = 0.005;
+  $main::opt_edgefraction = 0.001;
   $main::opt_maxdegree = 8;
   $main::opt_focus = '';
   $main::opt_ignore = '';
@@ -2042,8 +2042,8 @@ sub PrintDot {
 
   # Get total
   my $local_total = TotalProfile($flat);
-  my $nodelimit = 0 #int($main::opt_nodefraction * $local_total);
-  my $edgelimit = 0 #int($main::opt_edgefraction * $local_total);
+  my $nodelimit = int($main::opt_nodefraction * $local_total);
+  my $edgelimit = int($main::opt_edgefraction * $local_total);
   my $nodecount = $main::opt_nodecount;
 
   # Find nodes to include
