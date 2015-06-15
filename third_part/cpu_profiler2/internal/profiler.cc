@@ -65,6 +65,7 @@ typedef int ucontext_t;  // just to quiet the compiler, mostly
 #include "third_part/cpu_profiler2/public/profiledata.h"
 #include "third_part/cpu_profiler2/public/profile-handler.h"
 #include "base/public/string_util.h"
+#include "base/public/symbolize.h"
 
 using base::SpinLock;
 using base::SpinLockHolder;
@@ -312,9 +313,16 @@ void CpuProfiler::prof_handler(int sig, siginfo_t*, void* signal_ucontext,
     instance->collector_.Add(depth, used_stack);
     if (FLAGS_cpu_profiler_debug) {
       std::string debug = "";
+      char symbol[1023] = { 0 };
       for (int i = 0; i < depth; i++) {
         debug += "/" +
                  Int64ToHexString(reinterpret_cast<int64_t>(used_stack[i]));
+        if (google::Symbolize(static_cast<char *>(used_stack[i]),
+                              symbol, sizeof(symbol))) {
+          debug += "_" + std::string(symbol);
+        } else {
+          debug += "_unknown";
+        }
       }
       LOG(INFO) << debug;
     }

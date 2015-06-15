@@ -73,6 +73,7 @@ use warnings;
 use Getopt::Long;
 use Cwd;
 use POSIX;
+use Data::Dumper;
 
 my $PPROF_VERSION = "2.0";
 

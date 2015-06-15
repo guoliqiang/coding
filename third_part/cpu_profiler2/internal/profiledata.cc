@@ -49,6 +49,8 @@
 #include <string.h>
 #include <fcntl.h>
 
+DECLARE_bool(cpu_profiler_debug);
+
 namespace cpu_profiler2 {
 
 // All of these are initialized in profiledata.h.
@@ -151,6 +153,9 @@ static void DumpProcSelfMaps(int fd) {
     int written = it.FormatLine(linebuf.buf_, sizeof(linebuf.buf_),
                                 start, end, flags, offset, inode, filename,
                                 0);
+    if (FLAGS_cpu_profiler_debug) {
+      LOG(INFO) << linebuf.buf_;
+    }
     FDWrite(fd, linebuf.buf_, written);
   }
 }
