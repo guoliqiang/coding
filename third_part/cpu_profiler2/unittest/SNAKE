@@ -2,6 +2,14 @@ cc_binary(name='gprofile_unittest',
           srcs = ['gprofile_unittest.cc'],
           deps = [
                   '//third_part/cpu_profiler2/internal:gperftools_profile',
-#                   '//base/internal:base',
                  ],
+         )
+
+cc_binary(name='gnu_unittest',
+          srcs = ['gnu_unittest.cc'],
+          deps = [
+                  '//base/internal:base',
+                 ],
+          cflags = ['-pg'],
+          link_flags = ['-pg'],
          )

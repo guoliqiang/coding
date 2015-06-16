@@ -24,5 +24,28 @@ cc_binary(name='mem_leak_unittest',
                   '//third_part/testing/gtest/src:gtest',
                   '//libs/third_part/gperftools:tcmalloc',
                   '//libs/third_part/libunwind:unwind',
+                  '//file/internal:file',
                   ],
          )
+
+cc_library(name = 'testlib1',
+           srcs = ['lib1.cc'],
+          )
+
+cc_library(name = 'testlib2',
+           srcs = ['lib2.cc'],
+          )
+
+cc_library(name = 'testlib3',
+           srcs = ['lib3.cc'],
+          )
+
+cc_binary(name = 'link_unittest',
+          srcs = ['link_unittest.cc'],
+          deps = [
+            '//third_part/gperftools/unittest:testlib1',
+            '//third_part/gperftools/unittest:testlib3',
+            '//third_part/gperftools/unittest:testlib2',
+            '//base/internal:base',
+          ],
+          )

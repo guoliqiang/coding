@@ -13,6 +13,7 @@ all:
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/malloc_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/profile_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/mem_leak_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/link_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 opt:
 
@@ -21,3 +22,4 @@ clean:
 	rm -rf malloc_unittest
 	rm -rf profile_unittest
 	rm -rf mem_leak_unittest
+	rm -rf link_unittest

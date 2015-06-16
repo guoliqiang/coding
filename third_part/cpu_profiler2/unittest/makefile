@@ -11,10 +11,13 @@ all:
 	$(WORK_ROOT)/develop/snake/snake.sh t=*
 	if test $$? -ne 0; then exit 1; fi; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/gprofile_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/gnu_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 opt:
 
 
 clean:
 	rm -rf gprofile_unittest
+	rm -rf gnu_unittest
 	rm -rf gcpu_profiler.prof
+	rm -rf gmon.out
