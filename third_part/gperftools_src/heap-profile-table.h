@@ -50,15 +50,12 @@
 // TODO(maxim): add a unittest for this class.
 class HeapProfileTable {
  public:
-
   // Extension to be used for heap pforile files.
   static const char kFileExt[];
-
   // Longest stack trace we record.
   static const int kMaxStackDepth = 32;
 
   // data types ----------------------------
-
   // Profile stats.
   typedef HeapProfileStats Stats;
 
@@ -72,8 +69,8 @@ class HeapProfileTable {
   };
 
   // Info we return about an allocation context.
-  // An allocation context is a unique caller stack trace
-  // of an allocation operation.
+  // An allocation context is a unique caller stack trace of an allocation
+  // operation.
   struct AllocContextInfo : public Stats {
     int stack_depth;                // Depth of stack trace
     const void* const* call_stack;  // Stack trace

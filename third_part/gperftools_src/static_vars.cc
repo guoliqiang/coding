@@ -51,17 +51,13 @@ namespace tcmalloc {
 // sure the central_cache locks remain in a consisten state in the forked
 // version of the thread.
 
-static
-void CentralCacheLockAll()
-{
+static void CentralCacheLockAll() {
   Static::pageheap_lock()->Lock();
   for (int i = 0; i < kNumClasses; ++i)
     Static::central_cache()[i].Lock();
 }
 
-static
-void CentralCacheUnlockAll()
-{
+static void CentralCacheUnlockAll() {
   for (int i = 0; i < kNumClasses; ++i)
     Static::central_cache()[i].Unlock();
   Static::pageheap_lock()->Unlock();
@@ -111,9 +107,7 @@ void Static::InitStaticVars() {
 
 #if defined(HAVE_FORK) && defined(HAVE_PTHREAD)
 
-static inline
-void SetupAtForkLocksHandler()
-{
+static inline void SetupAtForkLocksHandler() {
   pthread_atfork(CentralCacheLockAll,    // parent calls before fork
                  CentralCacheUnlockAll,  // parent calls after fork
                  CentralCacheUnlockAll); // child calls after fork
