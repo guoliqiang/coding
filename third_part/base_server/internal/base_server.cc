@@ -156,6 +156,11 @@ static void WorkerRead(bufferevent *bev, void * arg) {
   std::string content;
   if (BaseServer::Read(bev, &content)) {
     worker->GetServer()->GetRouter()->Process(content, node);
+  } else {
+    LOG(WARNING) << "read illlegal format data and close the connection!";
+    size_t fd = bufferevent_getfd(bev);
+    worker->EraseFd(fd);
+    bufferevent_free(bev);
   }
 }
 

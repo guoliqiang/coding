@@ -30,6 +30,7 @@ class Monitor : public base::Thread {
       std::string tmp;
       server_->Dump(&tmp);
       LOG(INFO) << tmp;
+      sleep(10);
     }
   }
 
