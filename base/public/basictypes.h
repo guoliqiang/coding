@@ -435,4 +435,10 @@ class GoogleInitializer {
             google_init_module_##name);                         \
   }
 
+
+#define   PRINT_MACRO_HELPER(x)   #x
+#define   PRINT_MACRO(x)   #x"="PRINT_MACRO_HELPER(x)
+// usage:
+// #define PI 3.1415926
+// #pragma message(PRINT_MACRO(PI))
 #endif  // BASE_BASICTYPES_H_

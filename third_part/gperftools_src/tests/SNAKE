@@ -361,3 +361,13 @@ cc_binary(name='thread_dealloc_unittest',
            copt = ['no_style_check']
           )
 
+cc_binary(name='tcmalloc_unittest2',
+           srcs = [
+                   'tcmalloc_unittest2.cc',
+                   'testutil.cc',
+                  ],
+           deps = [
+                  '//third_part/gperftools_src:gperftools_tcmalloc',
+                  ],
+           copt = ['no_style_check']
+          )

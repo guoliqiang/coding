@@ -43,6 +43,7 @@ all:
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/tcmalloc_large_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/tcmalloc_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/thread_dealloc_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+	cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/tcmalloc_unittest2 $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 opt:
 
@@ -84,3 +85,4 @@ clean:
 	rm -rf tcmalloc_large_unittest
 	rm -rf tcmalloc_unittest
 	rm -rf thread_dealloc_unittest
+	rm -rf tcmalloc_unittest2
