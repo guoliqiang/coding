@@ -50,6 +50,10 @@ class File {
   // Check if the file exists.
   static bool Exists(const std::string &name);
 
+  // find the pattern, e.g. /tmp/*.cc
+  static bool FuzzyFind(const std::string & pattern,
+                        std::vector<std::string> * files);
+
   // Check if the path is a dir.
   static bool IsDir(const std::string &path);
 

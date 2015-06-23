@@ -107,6 +107,18 @@ bool FileBase::Exists(const string &path) {
   return false;
 }
 
+bool FileBase::FuzzyFind(const string & pattern,
+                         std::vector<std::string> * files) {
+  switch (GetFileType(pattern)) {
+  case kPosix:
+    return FilePosix::FuzzyFind(pattern, files);
+//  case kHdfs:
+//   return FileHadoop::Exists(path);
+  default:
+    break;
+  }
+  return false;
+}
 bool FileBase::IsDir(const string &path) {
   switch (GetFileType(path)) {
   case kPosix:

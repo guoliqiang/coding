@@ -2,6 +2,7 @@
 // Author: wangbin@yunrang.com (bin wang)
 
 #include <errno.h>
+#include <glob.h>
 
 #include "../public/file_posix.h"
 #include "base/public/scoped_ptr.h"
@@ -91,6 +92,17 @@ Status FilePosix::Flush() {
 
 bool FilePosix::Exists(const string& path) {
   return access(path.c_str(), F_OK) == 0;
+}
+
+bool FilePosix::FuzzyFind(const std::string & pattern,
+                          std::vector<std::string> * files) {
+  glob_t g;
+  int r = glob(pattern.c_str(), GLOB_ERR, NULL, &g);
+  if (r != 0) return false;
+  for (int i = 0; i < g.gl_pathc; i++) {
+    files->push_back(g.gl_pathv[i]);
+  }
+  return true;
 }
 
 bool FilePosix::IsDir(const std::string& path) {

@@ -32,6 +32,8 @@ class FilePosix: public FileBase {
   Status Flush();
   bool Eof() const;
   static bool Exists(const std::string &path);
+  static bool FuzzyFind(const std::string & pattern,
+                        std::vector<std::string> * files);
   static bool IsDir(const std::string &path);
   static Status MoveFile(const std::string &old_path,
                          const std::string &new_path);

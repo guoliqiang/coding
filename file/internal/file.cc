@@ -66,6 +66,11 @@ bool File::Exists(const string& name) {
   return FileBase::Exists(name);
 }
 
+bool File::FuzzyFind(const std::string & pattern,
+                     std::vector<std::string> * files) {
+  return FileBase::FuzzyFind(pattern, files);
+}
+
 bool File::IsDir(const std::string &path) {
   return FileBase::IsDir(path);
 }
