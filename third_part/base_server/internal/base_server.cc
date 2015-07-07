@@ -27,17 +27,24 @@ static void Accept(evutil_socket_t listener, int16_t event, void * arg) {
 
   int optval = 1;
   socklen_t optlen = sizeof(optval);
+  // Open the keepalive attribute for fd.
   CHECK_GE(setsockopt(client_fd, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen), 0)
     << "set SO_KEEPALIVE on client fd=" << client_fd << " failed";
 
+  // From the time that the program do not used fd, after TCP_KEEPIDLE ms,
+  // it will detect whether it is connected.
   optval = FLAGS_keepalive_offset;
   CHECK_GE(setsockopt(client_fd, SOL_TCP, TCP_KEEPIDLE, &optval, optlen), 0)
     << "set TCP_KEEPIDLE on client fd=" << client_fd << " failed";
 
+  // FLAGS_keepalive_interval is the interval value, when start to detect,
+  // after FLAGS_keepalive_interval ms it will detect it again.
   optval = FLAGS_keepalive_interval;
   CHECK_GE(setsockopt(client_fd, SOL_TCP, TCP_KEEPINTVL, &optval, optlen), 0)
     << "set TCP_KEEPINTVL on client fd=" << client_fd << " failed";
-
+  
+  // After detecting FLAGS_keepalive_probes times, if it is still unconnected.
+  // It will throw EPOLLRDHUP event under epoll.
   optval = FLAGS_keepalive_probes;
   CHECK_GE(setsockopt(client_fd, SOL_TCP, TCP_KEEPCNT, &optval, optlen), 0)
     << "set TCP_KEEPCNT on client fd=" << client_fd << " failed";
