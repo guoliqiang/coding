@@ -82,6 +82,7 @@ int TcpSend(int sock, const void *buffer, int size);
 
 bool TcpClientIpPort(int sock, std::string * ip, int * port);
 
+bool TcpSetKeepAliveAndReuse(int sock, int offset, int interval, int probes);
 }  // namespace base
 
 #endif  // BASE_NET_H_

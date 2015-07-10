@@ -27,6 +27,10 @@ static void Accept(evutil_socket_t listener, int16_t event, void * arg) {
 
   int optval = 1;
   socklen_t optlen = sizeof(optval);
+  // set reuse attribute
+  CHECK_GE(setsockopt(client_fd, SOL_SOCKET, SO_REUSEADDR, &optval, optlen), 0)
+    << "set SO_REUSEADDR on client fd=" << client_fd << " failed";
+
   // Open the keepalive attribute for fd.
   CHECK_GE(setsockopt(client_fd, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen), 0)
     << "set SO_KEEPALIVE on client fd=" << client_fd << " failed";
@@ -42,7 +46,7 @@ static void Accept(evutil_socket_t listener, int16_t event, void * arg) {
   optval = FLAGS_keepalive_interval;
   CHECK_GE(setsockopt(client_fd, SOL_TCP, TCP_KEEPINTVL, &optval, optlen), 0)
     << "set TCP_KEEPINTVL on client fd=" << client_fd << " failed";
-  
+
   // After detecting FLAGS_keepalive_probes times, if it is still unconnected.
   // It will throw EPOLLRDHUP event under epoll.
   optval = FLAGS_keepalive_probes;

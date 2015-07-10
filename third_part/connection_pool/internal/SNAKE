@@ -1,0 +1,7 @@
+cc_library(name='connection_pool',
+           srcs = ['connection_pool.cc'],
+           deps = [
+                   '//base/internal:base',
+                  ],
+           cflags = [ ],
+          )

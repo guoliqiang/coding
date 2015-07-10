@@ -1,0 +1,6 @@
+cc_binary(name='client',
+          srcs = ['client.cc'],
+          deps = [
+                  '//third_part/connection_pool/internal:connection_pool',
+                  ],
+           )

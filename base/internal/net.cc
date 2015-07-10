@@ -365,4 +365,37 @@ bool TcpClientIpPort(int sock, std::string * ip, int * port) {
   }
   return false;
 }
+
+// Q:编写 TCP/SOCK_STREAM 服务程序时，SO_REUSEADDR到底什么意思？
+// A:这个套接字选项通知内核，如果端口忙，但TCP状态位于 TIME_WAIT ，
+// 可以重用端口。如果端口忙，而TCP状态位于其他状态，重用端口时依旧得到一个
+// 错误信息，指明"地址已经使用中"。如果你的服务程序停止后想立即重启，
+// 而新套接字依旧使用同一端口，此时SO_REUSEADDR 选项非常有用。必须意识到，
+// 此时任何非期望数据到达，都可能导致服务程序反应混乱，不过这只是一种可能，
+// 事实上很不可能.
+// http://www.cnblogs.com/mydomain/archive/2011/08/23/2150567.html
+bool TcpSetKeepAliveAndReuse(int sock, int offset, int interval, int probes) {
+  int optval = 1;
+  socklen_t optlen = sizeof(optval);
+  if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) < 0) {
+    return false;
+  }
+  if (setsockopt(sock, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) {
+    return false;
+  }
+  optval = offset;
+  if (setsockopt(sock, SOL_TCP, TCP_KEEPIDLE, &optval, optlen) < 0) {
+    return false;
+  }
+  optval = interval;
+  if (setsockopt(sock, SOL_TCP, TCP_KEEPINTVL, &optval, optlen) < 0) {
+    return false;
+  }
+  optval = probes;
+  if (setsockopt(sock, SOL_TCP, TCP_KEEPCNT, &optval, optlen) < 0) {
+    return false;
+  }
+  return true;
+}
+
 }  //  namespace base
