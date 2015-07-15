@@ -16,6 +16,8 @@
 
 namespace signal_monitor {
 
+// do not need to add mutex, because a signal can not be captured by
+// more than one thread.
 class SignalMonitor {
  public:
   static SignalMonitor * GetInstance() {
@@ -26,7 +28,6 @@ class SignalMonitor {
       bool check = true) {
     CHECK(signal_num >= 1 && signal_num <= 64)  << signal_num
        << " is invalid";
-    base::MutexLock lock(&mutex_);
     struct sigaction new_sa;
     struct sigaction old_sa;
     new_sa.sa_handler = SignalMonitor::SignalCall;
@@ -47,7 +48,6 @@ class SignalMonitor {
   }
 
   void Execute(int signal_num) {
-    base::MutexLock lock(&mutex_);
     if (callback_.count(signal_num)) {
       callback_[signal_num]->Run();
     } else {
@@ -61,7 +61,6 @@ class SignalMonitor {
 
  private:
   std::map<int, base::shared_ptr<base::Closure> > callback_;
-  base::Mutex mutex_;
 };
 
 }  // namespace signal_monitor
