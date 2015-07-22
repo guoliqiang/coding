@@ -1,0 +1,20 @@
+cc_binary(name='test_kdtree',
+          srcs = ['test_kdtree.cc'],
+          deps = [
+                   '//base/internal:base',
+                 ],
+           )
+
+cc_binary(name='test_hayne',
+          srcs = ['test_hayne.cc'],
+          deps = [
+                   '//base/internal:base',
+                 ],
+           )
+
+cc_binary(name='test_find_within_range',
+          srcs = ['test_find_within_range.cc'],
+          deps = [
+                   '//base/internal:base',
+                 ],
+           )
