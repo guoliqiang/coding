@@ -1,13 +1,12 @@
-// file
 // Defines interfaces for nodes as used by the KDTree class.
 // author Martin F. Krafft <libkdtree@pobox.madduck.net>
 
-#ifndef INCLUDE_KDTREE_NODE_HPP
-#define INCLUDE_KDTREE_NODE_HPP
+#ifndef THIRD_PART_KDTREE_NODE_H
+#define THIRD_PART_KDTREE_NODE_H
 
 #ifdef KDTREE_DEFINE_OSTREAM_OPERATORS
 #include <ostream>
-#endif
+#endif  // KDTREE_DEFINE_OSTREAM_OPERATORS
 
 #include <cstddef>
 #include <cmath>
@@ -69,7 +68,7 @@ struct _Node : public _Node_base {
     out << "; right: " << node._M_right;
     return out;
   }
-#endif
+#endif  // KDTREE_DEFINE_OSTREAM_OPERATORS
 };
 
 template <typename _Val, typename _Acc, typename _Cmp>
@@ -106,7 +105,7 @@ template <typename _ValA, typename _ValB, typename _Dist, typename _Acc>
 inline typename _Dist::distance_type _S_node_distance (const size_t __dim,
 		                                                   const _Dist& __dist,
                                                        const _Acc& __acc,
-                                                       const _ValA& __a, 
+                                                       const _ValA& __a,
                                                        const _ValB& __b) {
   return __dist(__acc(__a, __dim), __acc(__b, __dim));
 }
@@ -251,7 +250,7 @@ _S_node_nearest (const size_t __k,
 		      --probe_dim;
 		    }
 	    } else { // ... and going upward.
-		    if (pprobe == near_node && far_node && 
+		    if (pprobe == near_node && far_node &&
            std::sqrt(_S_node_distance(probe_dim % __k, __dist, __acc, __val,
                                       probe->_M_value)) <= __max) {
 		      // only visit node's children if node's plane intersect hypersphere
@@ -290,7 +289,7 @@ _S_node_nearest (const size_t __k,
 }
 } // namespace KDTree
 
-#endif // include guard
+#endif  // THIRD_PART_KDTREE_NODE_H
 
 // COPYRIGHT --
 //

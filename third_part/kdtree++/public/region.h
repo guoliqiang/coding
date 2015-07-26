@@ -1,12 +1,11 @@
-// file
 // Defines the interface of the _Region class.
 // author Martin F. Krafft <libkdtree@pobox.madduck.net>
 
-#ifndef INCLUDE_KDTREE_REGION_HPP
-#define INCLUDE_KDTREE_REGION_HPP
+#ifndef THIRD_PART_KDTREE_REGION_H
+#define THIRD_PART_KDTREE_REGION_H
 
-#include <cstddef>
 #include "third_part/kdtree++/public/node.h"
+#include <cstddef>
 
 namespace KDTree {
 
@@ -44,7 +43,7 @@ struct _Region {
 
   bool intersects_with(_CenterPt const& __THAT) const {
     for (size_t __i = 0; __i != __K; ++__i) {
-      // does it fall outside the bounds? 
+      // does it fall outside the bounds?
       // ! low-tolerance <= x <= high+tolerance
       // ! (low-tol <= x and x <= high+tol)
       // !low-tol<=x or !x<=high+tol
@@ -53,7 +52,9 @@ struct _Region {
       if (_M_cmp(__THAT.first._M_low_bounds[__i],
                 _M_low_bounds[__i] - __THAT.second) ||
           _M_cmp(_M_high_bounds[__i] + __THAT.second,
-                 __THAT.first._M_low_bounds[__i])) return false;
+                 __THAT.first._M_low_bounds[__i])) {
+        return false;
+      }
     }
     return true;
   }
@@ -61,7 +62,9 @@ struct _Region {
   bool intersects_with(_Region const& __THAT) const {
     for (size_t __i = 0; __i != __K; ++__i) {
       if (_M_cmp(__THAT._M_high_bounds[__i], _M_low_bounds[__i]) ||
-          _M_cmp(_M_high_bounds[__i], __THAT._M_low_bounds[__i])) return false;
+          _M_cmp(_M_high_bounds[__i], __THAT._M_low_bounds[__i])) {
+        return false;
+      }
     }
     return true;
   }
@@ -69,7 +72,9 @@ struct _Region {
   bool encloses(value_type const& __V) const {
     for (size_t __i = 0; __i != __K; ++__i) {
       if (_M_cmp(_M_acc(__V, __i), _M_low_bounds[__i]) ||
-          _M_cmp(_M_high_bounds[__i], _M_acc(__V, __i))) return false;
+          _M_cmp(_M_high_bounds[__i], _M_acc(__V, __i))) {
+        return false;
+      }
     }
     return true;
   }
@@ -91,7 +96,7 @@ struct _Region {
 
 } // namespace KDTree
 
-#endif // include guard
+#endif  // THIRD_PART_KDTREE_REGION_H
 
 // COPYRIGHT --
 //

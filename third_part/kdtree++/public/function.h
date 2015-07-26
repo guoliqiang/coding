@@ -1,11 +1,9 @@
-// file
 // Defines the various functors and interfaces used for KDTree.
-//
 // author Martin F. Krafft <libkdtree@pobox.madduck.net>
 // author Sylvain Bougerel <sylvain.bougerel.devel@gmail.com>
 
-#ifndef INCLUDE_KDTREE_ACCESSOR_HPP
-#define INCLUDE_KDTREE_ACCESSOR_HPP
+#ifndef THIRD_PART_KDTREE_ACCESSOR_H
+#define THIRD_PART_KDTREE_ACCESSOR_H
 
 #include <cstddef>
 
@@ -13,10 +11,7 @@ namespace KDTree {
 template <typename _Val>
 struct _Bracket_accessor {
   typedef typename _Val::value_type result_type;
-
-  result_type operator()(_Val const& V, size_t const N) const {
-    return V[N];
-  }
+  result_type operator()(_Val const& V, size_t const N) const { return V[N]; }
 };
 
 template <typename _Tp>
@@ -53,7 +48,7 @@ struct squared_difference_counted {
 
 } // namespace KDTree
 
-#endif // include guard
+#endif  // THIRD_PART_KDTREE_ACCESSOR_H
 
 // COPYRIGHT --
 //

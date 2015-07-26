@@ -1,6 +1,4 @@
-// file
 // Defines the interface for the KDTree class.
-//
 // author Martin F. Krafft <libkdtree@pobox.madduck.net>
 //
 // Paul Harris figured this stuff out (below)
@@ -49,8 +47,8 @@
 //   This has no real effect on erase()s, a < test is good enough to keep
 //   consistency.
 
-#ifndef INCLUDE_KDTREE_KDTREE_HPP
-#define INCLUDE_KDTREE_KDTREE_HPP
+#ifndef THIRD_PART_KDTREE_KDTREE_H
+#define THIRD_PART_KDTREE_KDTREE_H
 
 //  This number is guarenteed to change with every release.
 //
@@ -68,19 +66,19 @@
 
 #ifdef KDTREE_CHECK_PERFORMANCE_COUNTERS
 #include<map>
-#endif
+#endif  // KDTREE_DEFINE_OSTREAM_OPERATORS
+
 #include<algorithm>
 #include<functional>
 
 #ifdef KDTREE_DEFINE_OSTREAM_OPERATORS
 #include<ostream>
 #include<stack>
-#endif
+#endif  // KDTREE_DEFINE_OSTREAM_OPERATORS
 
 #include<cmath>
 #include<cstddef>
 #include<cassert>
-
 #include"third_part/kdtree++/public/function.h"
 #include"third_part/kdtree++/public/allocator.h"
 #include"third_part/kdtree++/public/iterator.h"
@@ -91,7 +89,7 @@ namespace KDTree {
 
 #ifdef KDTREE_CHECK_PERFORMANCE
 unsigned long long num_dist_calcs = 0;
-#endif
+#endif  // KDTREE_DEFINE_OSTREAM_OPERATORS
 
 template <size_t const __K, typename _Val,
           typename _Acc = _Bracket_accessor<_Val>,
@@ -127,7 +125,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
          const allocator_type& __a = allocator_type())
       : _Base(__a), _M_header(), _M_count(0), _M_acc(__acc),
         _M_cmp(__cmp), _M_dist(__dist) {
-         _M_empty_initialise();
+    _M_empty_initialise();
   }
 
   KDTree(const KDTree& __x) :
@@ -176,7 +174,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
     // We increment __first all the way to __last once within
     // the distance() call, and again within the copy() call.
     //
-    // This should end up using some funky C++ concepts or 
+    // This should end up using some funky C++ concepts or
     // type traits to check that the iterators can be used in this way...
   }
 
@@ -304,13 +302,11 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
   // that might happen to have the same location, then you should use
   // erase_exact().
   void erase(const_reference __V) {
-	  const_iterator b =  this->find(__V);
+	  const_iterator b = this->find(__V);
     this->erase(b);
   }
 
-  void erase_exact(const_reference __V) {
-    this->erase(this->find_exact(__V));
-  }
+  void erase_exact(const_reference __V) { this->erase(this->find_exact(__V)); }
 
   // note: kept as const because its easier to const-cast it away
   void erase(const_iterator const& __IT) {
@@ -364,7 +360,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
     return this->count_within_range(__region);
   }
 
-  size_type count_within_range(_Region_ const& __REGION) const {
+  size_type count_within_range(_Region_ const & __REGION) const {
     if (!_M_get_root()) return 0;
     _Region_ __bounds(__REGION);
     return _M_count_within_range(_M_get_root(), __REGION, __bounds, 0);
@@ -373,14 +369,15 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
   // NOTE: see notes on find_within_range().
   template <typename SearchVal, class Visitor>
   Visitor visit_within_range(SearchVal const& V,
-                             subvalue_type const R, Visitor visitor) const {
+                             subvalue_type const R,
+                             Visitor visitor) const {
     if (!_M_get_root()) return visitor;
     _Region_ region(V, R, _M_acc, _M_cmp);
     return this->visit_within_range(region, visitor);
   }
 
   template <class Visitor>
-  Visitor visit_within_range(_Region_ const& REGION, Visitor visitor) const {
+  Visitor visit_within_range(_Region_ const & REGION, Visitor visitor) const {
     if (_M_get_root()) {
       _Region_ bounds(REGION);
       return _M_visit_within_range(visitor, _M_get_root(), REGION, bounds, 0);
@@ -458,7 +455,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
 				      always_true<value_type>());
        // make sure we didn't just get stuck with the root node...
        if (root_is_candidate || best.first != _M_get_root()) {
-          return std::pair<const_iterator, distance_type>
+         return std::pair<const_iterator, distance_type>
             (best.first, best.second.second);
        }
 	  }
@@ -487,7 +484,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
 				      node, __max, _M_cmp, _M_acc, _M_dist, __p);
        // make sure we didn't just get stuck with the root node...
        if (root_is_candidate || best.first != _M_get_root()) {
-          return std::pair<const_iterator, distance_type>
+         return std::pair<const_iterator, distance_type>
             (best.first, best.second.second);
        }
 	  }
@@ -497,11 +494,11 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
   void optimise() {
     std::vector<value_type> __v(this->begin(),this->end());
     this->clear();
-     _M_optimise(__v.begin(), __v.end(), 0);
-   }
-   // cater for people who cannot spell :)
-   void optimize() { this->optimise(); }
-   void check_tree() { _M_check_node(_M_get_root(),0); }
+    _M_optimise(__v.begin(), __v.end(), 0);
+  }
+  // cater for people who cannot spell :)
+  void optimize() { this->optimise(); }
+  void check_tree() { _M_check_node(_M_get_root(),0); }
 
  protected:
   void _M_check_children(_Link_const_type child,
@@ -546,14 +543,14 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
   iterator _M_insert_left(_Link_type __N, const_reference __V) {
     _S_set_left(__N, _M_new_node(__V)); ++_M_count;
     _S_set_parent( _S_left(__N), __N );
-    if (__N == _M_get_leftmost()) _M_set_leftmost( _S_left(__N) );
+    if (__N == _M_get_leftmost()) _M_set_leftmost(_S_left(__N));
     return iterator(_S_left(__N));
   }
 
   iterator _M_insert_right(_Link_type __N, const_reference __V) {
     _S_set_right(__N, _M_new_node(__V)); ++_M_count;
     _S_set_parent( _S_right(__N), __N );
-    if (__N == _M_get_rightmost()) _M_set_rightmost( _S_right(__N) );
+    if (__N == _M_get_rightmost()) _M_set_rightmost(_S_right(__N));
     return iterator(_S_right(__N));
   }
 
@@ -565,7 +562,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
       if (!_S_right(__N) || __N == _M_get_rightmost()) {
         return _M_insert_right(__N, __V);
       }
-      return _M_insert(_S_right(__N), __V, __L+1);
+      return _M_insert(_S_right(__N), __V, __L + 1);
     }
   }
 
@@ -615,7 +612,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
     // if there is nothing to the left, find a candidate on the right tree
     if (!_S_left(node)) {
       candidate = _M_get_j_min(std::pair<_Link_type,size_type>(_S_right(node),
-          level), level+1);
+          level), level + 1);
     // ditto for the right
     } else if ((!_S_right(node))) {
       candidate = _M_get_j_max(
@@ -635,10 +632,10 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
         // the right is smaller, get our replacement from the SMALLEST on the
         // right
         candidate = _M_get_j_min(std::pair<_Link_type,size_type>(
-            _S_right(node),level), level+1);
+            _S_right(node),level), level + 1);
       } else {
         candidate = _M_get_j_max(std::pair<_Link_type,size_type>(
-            _S_left(node),level), level+1);
+            _S_left(node),level), level + 1);
       }
     }
     // we have a candidate replacement by now.
@@ -662,14 +659,14 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
     Result candidate = node;
     if (_S_left(node.first)) {
       Result left = _M_get_j_min(Result(_S_left(node.first), node.second),
-          level+1);
+          level + 1);
       if (compare(left.first->_M_value, candidate.first->_M_value)) {
         candidate = left;
       }
     }
     if (_S_right(node.first)) {
       Result right = _M_get_j_min(
-          Result(_S_right(node.first),node.second), level+1);
+          Result(_S_right(node.first),node.second), level + 1);
       if (compare(right.first->_M_value, candidate.first->_M_value)) {
         candidate = right;
       }
@@ -687,13 +684,15 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
     _Node_compare_ compare(node.second % __K, _M_acc, _M_cmp);
     Result candidate = node;
     if (_S_left(node.first)) {
-      Result left = _M_get_j_max( Result(_S_left(node.first),node.second), level+1);
+      Result left = _M_get_j_max( Result(_S_left(node.first),node.second),
+          level + 1);
       if (compare(candidate.first->_M_value, left.first->_M_value)) {
         candidate = left;
       }
     }
     if (_S_right(node.first)) {
-      Result right = _M_get_j_max(Result(_S_right(node.first),node.second), level+1);
+      Result right = _M_get_j_max(Result(_S_right(node.first),node.second),
+          level + 1);
       if (compare(candidate.first->_M_value, right.first->_M_value)) {
         candidate = right;
       }
@@ -727,12 +726,12 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
         return const_iterator(node);   // return right away
       }
       if (_S_left(node)) {
-        found = _M_find(_S_left(node), value, level+1);
+        found = _M_find(_S_left(node), value, level + 1);
       }
     }
     if (_S_right(node) && found == this->end() &&
         !compare(value,node->_M_value)) {  // note, this is a <= test
-      found = _M_find(_S_right(node), value, level+1);
+      found = _M_find(_S_right(node), value, level + 1);
     }
     return found;
   }
@@ -751,7 +750,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
         return const_iterator(node);   // return right away
       }
       if (_S_left(node)) {
-        found = _M_find_exact(_S_left(node), value, level+1);
+        found = _M_find_exact(_S_left(node), value, level + 1);
       }
     }
     // note: no else!  items that are identical can be down both branches
@@ -796,7 +795,8 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
       _Region_ __bounds(__BOUNDS);
       __bounds.set_high_bound(_S_value(__N), __L);
       if (__REGION.intersects_with(__bounds)) {
-        count += _M_count_within_range(_S_left(__N), __REGION, __bounds, __L+1);
+        count += _M_count_within_range(_S_left(__N), __REGION, __bounds,
+                                       __L + 1);
       }
     }
     if (_S_right(__N)) {
@@ -804,7 +804,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
       __bounds.set_low_bound(_S_value(__N), __L);
       if (__REGION.intersects_with(__bounds)) {
         count += _M_count_within_range(_S_right(__N), __REGION,
-                                       __bounds, __L+1);
+                                       __bounds, __L + 1);
       }
     }
     return count;
@@ -825,7 +825,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
       bounds.set_high_bound(_S_value(N), L);
       if (REGION.intersects_with(bounds)) {
         visitor = _M_visit_within_range(visitor, _S_left(N),
-                                        REGION, bounds, L+1);
+                                        REGION, bounds, L + 1);
       }
     }
     if (_S_right(N)) {
@@ -833,7 +833,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
       bounds.set_low_bound(_S_value(N), L);
       if (REGION.intersects_with(bounds)) {
         visitor = _M_visit_within_range(visitor, _S_right(N),
-                                        REGION, bounds, L+1);
+                                        REGION, bounds, L + 1);
       }
     }
     return visitor;
@@ -853,7 +853,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
       __bounds.set_high_bound(_S_value(__N), __L);
       if (__REGION.intersects_with(__bounds)) {
         out = _M_find_within_range(out, _S_left(__N),
-                                   __REGION, __bounds, __L+1);
+                                   __REGION, __bounds, __L + 1);
       }
     }
     if (_S_right(__N)) {
@@ -861,7 +861,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
       __bounds.set_low_bound(_S_value(__N), __L);
       if (__REGION.intersects_with(__bounds)) {
         out = _M_find_within_range(out, _S_right(__N),
-                                   __REGION, __bounds, __L+1);
+                                   __REGION, __bounds, __L + 1);
       }
     }
     return out;
@@ -875,8 +875,8 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
     _Iter __m = __A + (__B - __A) / 2;
     std::nth_element(__A, __m, __B, compare);
     this->insert(*__m);
-    if (__m != __A) _M_optimise(__A, __m, __L+1);
-    if (++__m != __B) _M_optimise(__m, __B, __L+1);
+    if (__m != __A) _M_optimise(__A, __m, __L + 1);
+    if (++__m != __B) _M_optimise(__m, __B, __L + 1);
   }
 
   _Link_const_type _M_get_root() const {
@@ -890,9 +890,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
     return static_cast<_Link_type>(_M_header._M_left);
   }
 
-  void _M_set_leftmost( _Node_base * a ) {
-    _M_header._M_left = a;
-  }
+  void _M_set_leftmost( _Node_base * a ) { _M_header._M_left = a; }
 
   _Link_const_type _M_get_rightmost() const {
     return static_cast<_Link_type>( _M_header._M_right );
@@ -971,9 +969,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
       KDTree<__K, _Val, _Acc, _Dist, _Cmp, _Alloc> const& tree) {
     o << "meta node:   " << tree._M_header << std::endl;
     o << "root node:   " << tree._M_root << std::endl;
-
     if (tree.empty()) return o << "[empty " << __K << "d-tree " << &tree << "]";
-
     o << "nodes total: " << tree.size() << std::endl;
     o << "dimensions:  " << __K << std::endl;
 
@@ -992,11 +988,11 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
     }
     return o;
   }
-#endif
+#endif  // KDTREE_DEFINE_OSTREAM_OPERATORS
 };
 } // namespace KDTree
 
-#endif // include guard
+#endif  // THIRD_PART_KDTREE_KDTREE_H
 
 // COPYRIGHT --
 //
