@@ -21,11 +21,11 @@ struct _Region {
   typedef std::pair<_Region,_SubVal> _CenterPt;
 
   _Region(_Acc const& __acc=_Acc(), const _Cmp& __cmp=_Cmp())
-	    : _M_cmp(__cmp), _M_acc(__acc) {}
+      : _M_cmp(__cmp), _M_acc(__acc) {}
 
   template <typename Val>
   _Region(Val const& __V, _Acc const& __acc=_Acc(), const _Cmp& __cmp=_Cmp())
-	    : _M_acc(__acc), _M_cmp(__cmp) {
+      : _M_acc(__acc), _M_cmp(__cmp) {
     for (size_t __i = 0; __i != __K; ++__i) {
       _M_low_bounds[__i] = _M_high_bounds[__i] = _M_acc(__V,__i);
     }
@@ -33,8 +33,8 @@ struct _Region {
 
   template <typename Val>
   _Region(Val const& __V, subvalue_type const& __R,
-	       _Acc const& __acc=_Acc(), const _Cmp& __cmp=_Cmp())
-	    : _M_acc(__acc), _M_cmp(__cmp) {
+         _Acc const& __acc=_Acc(), const _Cmp& __cmp=_Cmp())
+      : _M_acc(__acc), _M_cmp(__cmp) {
     for (size_t __i = 0; __i != __K; ++__i) {
       _M_low_bounds[__i] = _M_acc(__V,__i) - __R;
       _M_high_bounds[__i] = _M_acc(__V,__i) + __R;

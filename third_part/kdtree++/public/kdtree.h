@@ -93,8 +93,8 @@ unsigned long long num_dist_calcs = 0;
 
 template <size_t const __K, typename _Val,
           typename _Acc = _Bracket_accessor<_Val>,
-	        typename _Dist = squared_difference<typename _Acc::result_type,
-					typename _Acc::result_type>,
+          typename _Dist = squared_difference<typename _Acc::result_type,
+          typename _Acc::result_type>,
           typename _Cmp = std::less<typename _Acc::result_type>,
           typename _Alloc = std::allocator<_Node<_Val> > >
 class KDTree : protected _Alloc_base<_Val, _Alloc> {
@@ -121,7 +121,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
 
   KDTree(_Acc const& __acc = _Acc(),
          _Dist const& __dist = _Dist(),
-	       _Cmp const& __cmp = _Cmp(),
+         _Cmp const& __cmp = _Cmp(),
          const allocator_type& __a = allocator_type())
       : _Base(__a), _M_header(), _M_count(0), _M_acc(__acc),
         _M_cmp(__cmp), _M_dist(__dist) {
@@ -130,7 +130,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
 
   KDTree(const KDTree& __x) :
       _Base(__x.get_allocator()), _M_header(), _M_count(0),
-	    _M_acc(__x._M_acc), _M_cmp(__x._M_cmp), _M_dist(__x._M_dist) {
+      _M_acc(__x._M_acc), _M_cmp(__x._M_cmp), _M_dist(__x._M_dist) {
     _M_empty_initialise();
     // this is slow:
     // this->insert(begin(), __x.begin(), __x.end());
@@ -149,12 +149,12 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
   template<typename _InputIterator>
   KDTree(_InputIterator __first,
          _InputIterator __last,
-	       _Acc const& acc = _Acc(),
+         _Acc const& acc = _Acc(),
          _Dist const& __dist = _Dist(),
-	       _Cmp const& __cmp = _Cmp(),
+         _Cmp const& __cmp = _Cmp(),
          const allocator_type& __a = allocator_type())
       : _Base(__a), _M_header(), _M_count(0),
-	      _M_acc(acc), _M_cmp(__cmp), _M_dist(__dist) {
+        _M_acc(acc), _M_cmp(__cmp), _M_dist(__dist) {
     _M_empty_initialise();
     // this is slow:
     // this->insert(begin(), __first, __last);
@@ -193,10 +193,10 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
   }
 
   KDTree & operator=(const KDTree& __x) {
-	  if (this != &__x) {
-	    _M_acc = __x._M_acc;
-	    _M_dist = __x._M_dist;
-	    _M_cmp = __x._M_cmp;
+    if (this != &__x) {
+      _M_acc = __x._M_acc;
+      _M_dist = __x._M_dist;
+      _M_cmp = __x._M_cmp;
       // this is slow:
       // this->insert(begin(), __x.begin(), __x.end());
       // this->optimise();
@@ -209,8 +209,8 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
       temp.reserve(__x.size());
       std::copy(__x.begin(),__x.end(),std::back_inserter(temp));
       efficient_replace_and_optimise(temp);
-	  }
-	  return *this;
+    }
+    return *this;
   }
 
   ~KDTree() { this->clear(); }
@@ -227,19 +227,19 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
   }
 
   // brief Comparator for the values in the KDTree.
-	// The comparator shall not be modified, it could invalidate the tree.
-	// return a copy of the comparator used by the KDTree.
+  // The comparator shall not be modified, it could invalidate the tree.
+  // return a copy of the comparator used by the KDTree.
   _Cmp value_comp() const { return _M_cmp; }
 
   // brief Accessor to the value's elements.
-	// This accessor shall not be modified, it could invalidate the tree.
-	// return a copy of the accessor used by the KDTree.
+  // This accessor shall not be modified, it could invalidate the tree.
+  // return a copy of the accessor used by the KDTree.
   _Acc value_acc() const { return _M_acc; }
 
   // brief Distance calculator between 2 value's element.
-	// This functor can be modified. It's modification will only affect the
-	// behavior of the find and find_nearest functions.
-	// return a reference to the distance calculator used by the KDTree.
+  // This functor can be modified. It's modification will only affect the
+  // behavior of the find and find_nearest functions.
+  // return a reference to the distance calculator used by the KDTree.
   const _Dist& value_distance() const { return _M_dist; }
   _Dist& value_distance() { return _M_dist; }
 
@@ -302,7 +302,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
   // that might happen to have the same location, then you should use
   // erase_exact().
   void erase(const_reference __V) {
-	  const_iterator b = this->find(__V);
+    const_iterator b = this->find(__V);
     this->erase(b);
   }
 
@@ -419,76 +419,76 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
   template <class SearchVal>
   std::pair<const_iterator, distance_type> find_nearest (
       SearchVal const& __val) const {
-	  if (_M_get_root()) {
-	    std::pair<const _Node<_Val>*,
-	              std::pair<size_type, typename _Acc::result_type> >
-	    best = _S_node_nearest (__K, 0, __val,
-				     _M_get_root(), &_M_header, _M_get_root(),
-				     std::sqrt(_S_accumulate_node_distance
-				     (__K, _M_dist, _M_acc, _M_get_root()->_M_value, __val)),
-				     _M_cmp, _M_acc, _M_dist,
-				     always_true<value_type>());
-	    return std::pair<const_iterator, distance_type>
-	        (best.first, best.second.second);
-	  }
-	  return std::pair<const_iterator, distance_type>(end(), 0);
+    if (_M_get_root()) {
+      std::pair<const _Node<_Val>*,
+                std::pair<size_type, typename _Acc::result_type> >
+      best = _S_node_nearest (__K, 0, __val,
+             _M_get_root(), &_M_header, _M_get_root(),
+             std::sqrt(_S_accumulate_node_distance
+             (__K, _M_dist, _M_acc, _M_get_root()->_M_value, __val)),
+             _M_cmp, _M_acc, _M_dist,
+             always_true<value_type>());
+      return std::pair<const_iterator, distance_type>
+          (best.first, best.second.second);
+    }
+    return std::pair<const_iterator, distance_type>(end(), 0);
   }
 
   template <class SearchVal>
   std::pair<const_iterator, distance_type>
   find_nearest (SearchVal const& __val, distance_type __max) const {
-	  if (_M_get_root()) {
+    if (_M_get_root()) {
       bool root_is_candidate = false;
-	    const _Node<_Val>* node = _M_get_root();
+      const _Node<_Val>* node = _M_get_root();
       { // scope to ensure we don't use 'root_dist' anywhere else
-	      distance_type root_dist = std::sqrt(_S_accumulate_node_distance
-	          (__K, _M_dist, _M_acc, _M_get_root()->_M_value, __val));
-	      if (root_dist <= __max) {
+        distance_type root_dist = std::sqrt(_S_accumulate_node_distance
+            (__K, _M_dist, _M_acc, _M_get_root()->_M_value, __val));
+        if (root_dist <= __max) {
           root_is_candidate = true;
           __max = root_dist;
-	      }
+        }
       }
-	    std::pair<const _Node<_Val>*,
-	              std::pair<size_type, typename _Acc::result_type> >
-	    best = _S_node_nearest (__K, 0, __val, _M_get_root(), &_M_header,
-				      node, __max, _M_cmp, _M_acc, _M_dist,
-				      always_true<value_type>());
+      std::pair<const _Node<_Val>*,
+                std::pair<size_type, typename _Acc::result_type> >
+      best = _S_node_nearest (__K, 0, __val, _M_get_root(), &_M_header,
+              node, __max, _M_cmp, _M_acc, _M_dist,
+              always_true<value_type>());
        // make sure we didn't just get stuck with the root node...
        if (root_is_candidate || best.first != _M_get_root()) {
          return std::pair<const_iterator, distance_type>
             (best.first, best.second.second);
        }
-	  }
-	  return std::pair<const_iterator, distance_type>(end(), __max);
+    }
+    return std::pair<const_iterator, distance_type>(end(), __max);
   }
 
   template <class SearchVal, class _Predicate>
   std::pair<const_iterator, distance_type> find_nearest_if (
       SearchVal const& __val, distance_type __max, _Predicate __p) const {
-	  if (_M_get_root()) {
+    if (_M_get_root()) {
       bool root_is_candidate = false;
-	    const _Node<_Val>* node = _M_get_root();
-	    if (__p(_M_get_root()->_M_value)) {
+      const _Node<_Val>* node = _M_get_root();
+      if (__p(_M_get_root()->_M_value)) {
         { // scope to ensure we don't use root_dist anywhere else
-	        distance_type root_dist = std::sqrt(_S_accumulate_node_distance
-		          (__K, _M_dist, _M_acc, _M_get_root()->_M_value, __val));
-		      if (root_dist <= __max) {
+          distance_type root_dist = std::sqrt(_S_accumulate_node_distance
+              (__K, _M_dist, _M_acc, _M_get_root()->_M_value, __val));
+          if (root_dist <= __max) {
             root_is_candidate = true;
-		        root_dist = __max;
-		      }
+            root_dist = __max;
+          }
         }
-	    }
-	    std::pair<const _Node<_Val>*,
-	      std::pair<size_type, typename _Acc::result_type> >
-	      best = _S_node_nearest (__K, 0, __val, _M_get_root(), &_M_header,
-				      node, __max, _M_cmp, _M_acc, _M_dist, __p);
+      }
+      std::pair<const _Node<_Val>*,
+        std::pair<size_type, typename _Acc::result_type> >
+        best = _S_node_nearest (__K, 0, __val, _M_get_root(), &_M_header,
+              node, __max, _M_cmp, _M_acc, _M_dist, __p);
        // make sure we didn't just get stuck with the root node...
        if (root_is_candidate || best.first != _M_get_root()) {
          return std::pair<const_iterator, distance_type>
             (best.first, best.second.second);
        }
-	  }
-	  return std::pair<const_iterator, distance_type>(end(), __max);
+    }
+    return std::pair<const_iterator, distance_type>(end(), __max);
   }
 
   void optimise() {
@@ -719,7 +719,7 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
     // Basically we have to check ALL branches, as we may have an identical
     // node in different branches.
     const_iterator found = this->end();
-	  _Node_compare_ compare(level % __K, _M_acc, _M_cmp);
+    _Node_compare_ compare(level % __K, _M_acc, _M_cmp);
     if (!compare(node->_M_value,value)) {  // note, this is a <= test
       // this line is the only difference between _M_find_exact() and _M_find()
       if (_M_matches_node(node, value, level)) {
@@ -947,13 +947,13 @@ class KDTree : protected _Alloc_base<_Val, _Alloc> {
                          _Base_ptr const __RIGHT = NULL) {
     typename _Base::NoLeakAlloc noleak(this);
     _Link_type new_node = noleak.get();
-	  _Base::_M_construct_node(new_node, __V, __PARENT, __LEFT, __RIGHT);
+    _Base::_M_construct_node(new_node, __V, __PARENT, __LEFT, __RIGHT);
     noleak.disconnect();
     return new_node;
   }
 
   void _M_delete_node(_Link_type __p) {
-	  _Base::_M_destroy_node(__p);
+    _Base::_M_destroy_node(__p);
     _Base::_M_deallocate_node(__p);
   }
 

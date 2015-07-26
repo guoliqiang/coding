@@ -54,32 +54,32 @@ class _Base_iterator {
         __p = _M_node->_M_parent;
       }
       // (__p) provide undetermined behavior on end()++ rather
-		  // than a seg fault, similar to standard iterator.
+      // than a seg fault, similar to standard iterator.
       if (__p) _M_node = __p;
     }
   }
 
   inline void _M_decrement() {
     if (!_M_node->_M_parent) { // clearly identify the header node
-	    _M_node = _M_node->_M_right;
-	  } else if (_M_node->_M_left) {
-	    _Base_const_ptr x = _M_node->_M_left;
-	    while (x->_M_right) x = x->_M_right;
-	    _M_node = x;
-	  } else {
-	    _Base_const_ptr __p = _M_node->_M_parent;
-	    while (__p && _M_node == __p->_M_left) { // see below
-	      _M_node = __p;
-	      __p = _M_node->_M_parent;
-	    }
-	    // (__p) provide undetermined behavior on rend()++ rather
-		  // than a seg fault, similar to standard iterator.
-	    if (__p) _M_node = __p;
-	  }
+      _M_node = _M_node->_M_right;
+    } else if (_M_node->_M_left) {
+      _Base_const_ptr x = _M_node->_M_left;
+      while (x->_M_right) x = x->_M_right;
+      _M_node = x;
+    } else {
+      _Base_const_ptr __p = _M_node->_M_parent;
+      while (__p && _M_node == __p->_M_left) { // see below
+        _M_node = __p;
+        __p = _M_node->_M_parent;
+      }
+      // (__p) provide undetermined behavior on rend()++ rather
+      // than a seg fault, similar to standard iterator.
+      if (__p) _M_node = __p;
+    }
   }
 
   template <size_t const __K, typename _Val, typename _Acc,
-	          typename _Dist, typename _Cmp, typename _Alloc>
+            typename _Dist, typename _Cmp, typename _Alloc>
   friend class KDTree;
 };
 

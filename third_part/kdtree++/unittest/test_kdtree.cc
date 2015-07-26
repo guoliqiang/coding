@@ -218,30 +218,30 @@ int main() {
   for (int loop = 0; loop != 4; ++loop) {
     tree_type * target;
     switch (loop) {
-	    case 0: {
+      case 0: {
         std::cout << "Testing plain construction" << std::endl;
-	      target = &src;
-	      break;
+        target = &src;
+        break;
       }
 
-	    case 1: {
+      case 1: {
         std::cout << "Testing copy-construction" << std::endl;
-	      target = &copied;
-	      break;
+        target = &copied;
+        break;
       }
 
-	    case 2: {
+      case 2: {
         std::cout << "Testing assign-construction" << std::endl;
-	      target = &assigned;
-	      break;
+        target = &assigned;
+        break;
       }
 
       default: {
-	      case 4: std::cout << "Testing efficient-replace-and-optimise" << std::endl;
-	      target = &eff_repl;
-	      break;
+        case 4: std::cout << "Testing efficient-replace-and-optimise" << std::endl;
+        target = &eff_repl;
+        break;
       }
-	  }
+    }
     tree_type & t = *target;
 
     int i=0;
