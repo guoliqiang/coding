@@ -1,12 +1,11 @@
-// file
 // Defines the allocator interface as used by the KDTree class.
 // author Martin F. Krafft <libkdtree@pobox.madduck.net>
 
-#ifndef INCLUDE_KDTREE_ALLOCATOR_HPP
-#define INCLUDE_KDTREE_ALLOCATOR_HPP
+#ifndef THIRD_PART_KDTREE_ALLOCATOR_H
+#define THIRD_PART_KDTREE_ALLOCATOR_H
 
-#include <cstddef>
 #include "third_part/kdtree++/public/node.h"
+#include <cstddef>
 
 namespace KDTree {
 
@@ -25,8 +24,8 @@ class _Alloc_base {
     _Alloc_base * base;
     _Node_ * new_node;
    public:
-    NoLeakAlloc(_Alloc_base * b) :
-        base(b), new_node(base->_M_allocate_node()) {}
+    NoLeakAlloc(_Alloc_base * b)
+        : base(b), new_node(base->_M_allocate_node()) {}
     _Node_ * get() { return new_node; }
     void disconnect() { new_node = NULL; }
     ~NoLeakAlloc() { if (new_node) base->_M_deallocate_node(new_node); }
@@ -34,15 +33,15 @@ class _Alloc_base {
 
  protected:
   allocator_type _M_node_allocator;
-      
+
   _Node_* _M_allocate_node() { return _M_node_allocator.allocate(1); }
   void _M_deallocate_node(_Node_* const __P) {
     return _M_node_allocator.deallocate(__P, 1);
   }
   void _M_construct_node(_Node_* __p, _Tp const __V = _Tp(),
-                          _Base_ptr const __PARENT = NULL,
-                          _Base_ptr const __LEFT = NULL,
-                          _Base_ptr const __RIGHT = NULL) {
+                         _Base_ptr const __PARENT = NULL,
+                         _Base_ptr const __LEFT = NULL,
+                         _Base_ptr const __RIGHT = NULL) {
     new (__p) _Node_(__V, __PARENT, __LEFT, __RIGHT);
   }
   void _M_destroy_node(_Node_* __p) { _M_node_allocator.destroy(__p); }
@@ -50,7 +49,7 @@ class _Alloc_base {
 
 } // namespace KDTree
 
-#endif // include guard
+#endif  // THIRD_PART_KDTREE_ALLOCATOR_H
 
 // COPYRIGHT --
 //

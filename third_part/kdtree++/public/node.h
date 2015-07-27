@@ -1,13 +1,12 @@
-// file
 // Defines interfaces for nodes as used by the KDTree class.
 // author Martin F. Krafft <libkdtree@pobox.madduck.net>
 
-#ifndef INCLUDE_KDTREE_NODE_HPP
-#define INCLUDE_KDTREE_NODE_HPP
+#ifndef THIRD_PART_KDTREE_NODE_H
+#define THIRD_PART_KDTREE_NODE_H
 
 #ifdef KDTREE_DEFINE_OSTREAM_OPERATORS
 #include <ostream>
-#endif
+#endif  // KDTREE_DEFINE_OSTREAM_OPERATORS
 
 #include <cstddef>
 #include <cmath>
@@ -69,7 +68,7 @@ struct _Node : public _Node_base {
     out << "; right: " << node._M_right;
     return out;
   }
-#endif
+#endif  // KDTREE_DEFINE_OSTREAM_OPERATORS
 };
 
 template <typename _Val, typename _Acc, typename _Cmp>
@@ -94,8 +93,8 @@ class _Node_compare {
 // parameters of the KDTree.
 template <typename _ValA, typename _ValB, typename _Cmp, typename _Acc>
 inline bool _S_node_compare (const size_t __dim,
-		                         const _Cmp& __cmp, const _Acc& __acc,
-		                         const _ValA& __a, const _ValB& __b) {
+                             const _Cmp& __cmp, const _Acc& __acc,
+                             const _ValA& __a, const _ValB& __b) {
   return __cmp(__acc(__a, __dim), __acc(__b, __dim));
 }
 
@@ -104,9 +103,9 @@ inline bool _S_node_compare (const size_t __dim,
 // parameters of the KDTree.
 template <typename _ValA, typename _ValB, typename _Dist, typename _Acc>
 inline typename _Dist::distance_type _S_node_distance (const size_t __dim,
-		                                                   const _Dist& __dist,
+                                                       const _Dist& __dist,
                                                        const _Acc& __acc,
-                                                       const _ValA& __a, 
+                                                       const _ValA& __a,
                                                        const _ValB& __b) {
   return __dist(__acc(__a, __dim), __acc(__b, __dim));
 }
@@ -118,7 +117,7 @@ inline typename _Dist::distance_type _S_node_distance (const size_t __dim,
 template <typename _ValA, typename _ValB, typename _Dist, typename _Acc>
 inline typename _Dist::distance_type _S_accumulate_node_distance (
     const size_t __dim,
-	  const _Dist& __dist,
+    const _Dist& __dist,
     const _Acc& __acc,
     const _ValA& __a,
     const _ValB& __b) {
@@ -132,7 +131,7 @@ inline typename _Dist::distance_type _S_accumulate_node_distance (
 // note it's the caller responsibility to check if node is NULL.
 template <typename _Val, typename _Cmp, typename _Acc, typename NodeType>
 inline const NodeType* _S_node_descend (const size_t __dim,
-		                                    const _Cmp& __cmp,
+                                        const _Cmp& __cmp,
                                         const _Acc& __acc,
                                         const _Val& __val,
                                         const NodeType* __node) {
@@ -168,13 +167,13 @@ _S_node_nearest (const size_t __k,
   size_t cur_dim = __dim+1;
   // find the smallest __max distance in direct descent
   while (cur) {
-	  if (__p(cur->_M_value)) {
-	    typename _Dist::distance_type d = 0;
-	    for (size_t i=0; i != __k; ++i) {
-	      d += _S_node_distance(i, __dist, __acc, __val, cur->_M_value);
+    if (__p(cur->_M_value)) {
+      typename _Dist::distance_type d = 0;
+      for (size_t i=0; i != __k; ++i) {
+        d += _S_node_distance(i, __dist, __acc, __val, cur->_M_value);
       }
       d = std::sqrt(d);
-	    if (d <= __max) {
+      if (d <= __max) {
       // ("bad candidate notes")
       // Changed: removed this test: || ( d == __max && cur < __best ))
       // Can't do this optimisation without checking that the current 'best'
@@ -183,14 +182,14 @@ _S_node_nearest (const size_t __k,
       // This is because find_nearest() etc will call this function with the
       // best set to _M_root EVEN IF _M_root is not a valid answer
       // (eg too far away or doesn't pass the predicate test)
-		    __best = cur;
-		    __max = d;
-		    __dim = cur_dim;
-	    }
-	  }
-	  pcur = cur;
-	  cur = _S_node_descend(cur_dim % __k, __cmp, __acc, __val, cur);
-	  ++cur_dim;
+        __best = cur;
+        __max = d;
+        __dim = cur_dim;
+      }
+    }
+    pcur = cur;
+    cur = _S_node_descend(cur_dim % __k, __cmp, __acc, __val, cur);
+    ++cur_dim;
   }
   // Swap cur to prev, only prev is a valid node.
   cur = pcur;
@@ -207,90 +206,90 @@ _S_node_nearest (const size_t __k,
   } else {
     near_node = static_cast<NodePtr>(probe->_M_left);
   }
-	// only visit node's children if node's plane intersect hypersphere
+  // only visit node's children if node's plane intersect hypersphere
   if (near_node && (std::sqrt(_S_node_distance(probe_dim % __k, __dist, __acc,
       __val, probe->_M_value)) <= __max)) {
-	  probe = near_node;
-	  ++probe_dim;
+    probe = near_node;
+    ++probe_dim;
   }
   while (cur != __end) {
-	  while (probe != cur) {
-	    if (_S_node_compare(probe_dim % __k, __cmp, __acc,
+    while (probe != cur) {
+      if (_S_node_compare(probe_dim % __k, __cmp, __acc,
                           __val, probe->_M_value)) {
-		    near_node = static_cast<NodePtr>(probe->_M_left);
-		    far_node = static_cast<NodePtr>(probe->_M_right);
-	    } else {
-		    near_node = static_cast<NodePtr>(probe->_M_right);
-		    far_node = static_cast<NodePtr>(probe->_M_left);
-	    }
-	    if (pprobe == probe->_M_parent) { // going downward ...
-		    if (__p(probe->_M_value)) {
-		      typename _Dist::distance_type d = 0;
-		      for (size_t i=0; i < __k; ++i) {
-		        d += _S_node_distance(i, __dist, __acc, __val, probe->_M_value);
+        near_node = static_cast<NodePtr>(probe->_M_left);
+        far_node = static_cast<NodePtr>(probe->_M_right);
+      } else {
+        near_node = static_cast<NodePtr>(probe->_M_right);
+        far_node = static_cast<NodePtr>(probe->_M_left);
+      }
+      if (pprobe == probe->_M_parent) { // going downward ...
+        if (__p(probe->_M_value)) {
+          typename _Dist::distance_type d = 0;
+          for (size_t i=0; i < __k; ++i) {
+            d += _S_node_distance(i, __dist, __acc, __val, probe->_M_value);
           }
           d = std::sqrt(d);
           // CHANGED, see the above notes ("bad candidate notes")
           if (d <= __max) {
-			      __best = probe;
-			      __max = d;
-			      __dim = probe_dim;
-		      }
-		    }
-		    pprobe = probe;
-		    if (near_node) {
-		      probe = near_node;
-		      ++probe_dim;
+            __best = probe;
+            __max = d;
+            __dim = probe_dim;
+          }
+        }
+        pprobe = probe;
+        if (near_node) {
+          probe = near_node;
+          ++probe_dim;
         } else if (far_node &&std::sqrt(_S_node_distance(probe_dim % __k,
             __dist, __acc, __val, probe->_M_value)) <= __max) {
-			    // only visit node's children if node's plane intersect hypersphere
-		      probe = far_node;
-		      ++probe_dim;
-		    } else {
-		      probe = static_cast<NodePtr>(probe->_M_parent);
-		      --probe_dim;
-		    }
-	    } else { // ... and going upward.
-		    if (pprobe == near_node && far_node && 
+          // only visit node's children if node's plane intersect hypersphere
+          probe = far_node;
+          ++probe_dim;
+        } else {
+          probe = static_cast<NodePtr>(probe->_M_parent);
+          --probe_dim;
+        }
+      } else { // ... and going upward.
+        if (pprobe == near_node && far_node &&
            std::sqrt(_S_node_distance(probe_dim % __k, __dist, __acc, __val,
                                       probe->_M_value)) <= __max) {
-		      // only visit node's children if node's plane intersect hypersphere
-		      pprobe = probe;
-		      probe = far_node;
-		      ++probe_dim;
-		    } else {
-		      pprobe = probe;
-		      probe = static_cast<NodePtr>(probe->_M_parent);
-		      --probe_dim;
-		    }
-	    }
-	  }
-	  pcur = cur;
-	  cur = static_cast<NodePtr>(cur->_M_parent);
-	  --cur_dim;
-	  pprobe = cur;
-	  probe = cur;
-	  probe_dim = cur_dim;
-	  if (cur != __end) {
-	    if (pcur == cur->_M_left) {
-	      near_node = static_cast<NodePtr>(cur->_M_right);
-      } else {
-	      near_node = static_cast<NodePtr>(cur->_M_left);
+          // only visit node's children if node's plane intersect hypersphere
+          pprobe = probe;
+          probe = far_node;
+          ++probe_dim;
+        } else {
+          pprobe = probe;
+          probe = static_cast<NodePtr>(probe->_M_parent);
+          --probe_dim;
+        }
       }
-	    if (near_node && (std::sqrt(_S_node_distance(cur_dim % __k, __dist,
+    }
+    pcur = cur;
+    cur = static_cast<NodePtr>(cur->_M_parent);
+    --cur_dim;
+    pprobe = cur;
+    probe = cur;
+    probe_dim = cur_dim;
+    if (cur != __end) {
+      if (pcur == cur->_M_left) {
+        near_node = static_cast<NodePtr>(cur->_M_right);
+      } else {
+        near_node = static_cast<NodePtr>(cur->_M_left);
+      }
+      if (near_node && (std::sqrt(_S_node_distance(cur_dim % __k, __dist,
           __acc, __val, cur->_M_value)) <= __max)) {
-		    // only visit node's children if node's plane intersect hypersphere
-		    probe = near_node;
-		    ++probe_dim;
-	    }
-	  }
+        // only visit node's children if node's plane intersect hypersphere
+        probe = near_node;
+        ++probe_dim;
+      }
+    }
   }
   return std::pair<NodePtr, std::pair<size_t, typename _Dist::distance_type> >
       (__best, std::pair<size_t, typename _Dist::distance_type> (__dim, __max));
 }
 } // namespace KDTree
 
-#endif // include guard
+#endif  // THIRD_PART_KDTREE_NODE_H
 
 // COPYRIGHT --
 //

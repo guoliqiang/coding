@@ -1,10 +1,8 @@
-// file
 // Defines interfaces for iterators as used by the KDTree class.
-//
 // author Martin F. Krafft <libkdtree@pobox.madduck.net>
 
-#ifndef INCLUDE_KDTREE_ITERATOR_HPP
-#define INCLUDE_KDTREE_ITERATOR_HPP
+#ifndef THIRD_PART_KDTREE_ITERATOR_H
+#define THIRD_PART_KDTREE_ITERATOR_H
 
 #include <iterator>
 #include "third_part/kdtree++/public/node.h"
@@ -43,8 +41,8 @@ class _Base_iterator {
   _Base_const_ptr _M_node;
 
   inline _Base_iterator(_Base_const_ptr const __N = NULL) : _M_node(__N) {}
-  inline _Base_iterator(_Base_iterator const& __THAT) : 
-      _M_node(__THAT._M_node) {}
+  inline _Base_iterator(_Base_iterator const& __THAT)
+      : _M_node(__THAT._M_node) {}
   inline void _M_increment() {
     if (_M_node->_M_right) {
       _M_node = _M_node->_M_right;
@@ -56,32 +54,32 @@ class _Base_iterator {
         __p = _M_node->_M_parent;
       }
       // (__p) provide undetermined behavior on end()++ rather
-		  // than a seg fault, similar to standard iterator.
+      // than a seg fault, similar to standard iterator.
       if (__p) _M_node = __p;
     }
   }
 
   inline void _M_decrement() {
     if (!_M_node->_M_parent) { // clearly identify the header node
-	    _M_node = _M_node->_M_right;
-	  } else if (_M_node->_M_left) {
-	    _Base_const_ptr x = _M_node->_M_left;
-	    while (x->_M_right) x = x->_M_right;
-	    _M_node = x;
-	  } else {
-	    _Base_const_ptr __p = _M_node->_M_parent;
-	    while (__p && _M_node == __p->_M_left) { // see below
-	      _M_node = __p;
-	      __p = _M_node->_M_parent;
-	    }
-	    // (__p) provide undetermined behavior on rend()++ rather
-		  // than a seg fault, similar to standard iterator.
-	    if (__p) _M_node = __p;
-	  }
+      _M_node = _M_node->_M_right;
+    } else if (_M_node->_M_left) {
+      _Base_const_ptr x = _M_node->_M_left;
+      while (x->_M_right) x = x->_M_right;
+      _M_node = x;
+    } else {
+      _Base_const_ptr __p = _M_node->_M_parent;
+      while (__p && _M_node == __p->_M_left) { // see below
+        _M_node = __p;
+        __p = _M_node->_M_parent;
+      }
+      // (__p) provide undetermined behavior on rend()++ rather
+      // than a seg fault, similar to standard iterator.
+      if (__p) _M_node = __p;
+    }
   }
 
   template <size_t const __K, typename _Val, typename _Acc,
-	          typename _Dist, typename _Cmp, typename _Alloc>
+            typename _Dist, typename _Cmp, typename _Alloc>
   friend class KDTree;
 };
 
@@ -101,31 +99,26 @@ class _Iterator : protected _Base_iterator {
   inline _Iterator() : _Base_iterator() {}
   inline _Iterator(_Link_const_type const __N) : _Base_iterator(__N) {}
   inline _Iterator(iterator const& __THAT) : _Base_iterator(__THAT) {}
-  _Link_const_type get_raw_node() const {
-     return _Link_const_type(_M_node);
-   }
-   reference operator*() const {
-     return _Link_const_type(_M_node)->_M_value;
-   }
+  _Link_const_type get_raw_node() const { return _Link_const_type(_M_node); }
+  reference operator*() const { return _Link_const_type(_M_node)->_M_value; }
 
-   pointer operator->() const { return &(operator*()); }
-   _Self operator++() { _M_increment(); return *this; }
-
-   _Self operator++(int) { _Self ret = *this; _M_increment(); return ret; }
-   _Self& operator--() { _M_decrement(); return *this; }
-   _Self operator--(int) { _Self ret = *this; _M_decrement(); return ret; }
-   friend bool operator== <>(_Iterator<_Val, _Ref, _Ptr> const&,
-                             _Iterator<_Val, _Ref, _Ptr> const&);
-   friend bool operator== <>(_Iterator<_Val, const _Val&, const _Val*> const&,
-                             _Iterator<_Val, _Val&, _Val*> const&);
-   friend bool operator== <>(_Iterator<_Val, _Val&, _Val*> const&,
-                             _Iterator<_Val, const _Val&, const _Val*> const&);
-   friend bool operator!= <>(_Iterator<_Val, _Ref, _Ptr> const&,
-                             _Iterator<_Val, _Ref, _Ptr> const&);
-   friend bool operator!= <>(_Iterator<_Val, const _Val&, const _Val*> const&,
-                             _Iterator<_Val, _Val&, _Val*> const&);
-   friend bool operator!= <>(_Iterator<_Val, _Val&, _Val*> const&,
-                             _Iterator<_Val, const _Val&, const _Val*> const&);
+  pointer operator->() const { return &(operator*()); }
+  _Self operator++() { _M_increment(); return *this; }
+  _Self operator++(int) { _Self ret = *this; _M_increment(); return ret; }
+  _Self& operator--() { _M_decrement(); return *this; }
+  _Self operator--(int) { _Self ret = *this; _M_decrement(); return ret; }
+  friend bool operator== <>(_Iterator<_Val, _Ref, _Ptr> const&,
+                            _Iterator<_Val, _Ref, _Ptr> const&);
+  friend bool operator== <>(_Iterator<_Val, const _Val&, const _Val*> const&,
+                            _Iterator<_Val, _Val&, _Val*> const&);
+  friend bool operator== <>(_Iterator<_Val, _Val&, _Val*> const&,
+                            _Iterator<_Val, const _Val&, const _Val*> const&);
+  friend bool operator!= <>(_Iterator<_Val, _Ref, _Ptr> const&,
+                            _Iterator<_Val, _Ref, _Ptr> const&);
+  friend bool operator!= <>(_Iterator<_Val, const _Val&, const _Val*> const&,
+                            _Iterator<_Val, _Val&, _Val*> const&);
+  friend bool operator!= <>(_Iterator<_Val, _Val&, _Val*> const&,
+                            _Iterator<_Val, const _Val&, const _Val*> const&);
 };
 
 template<typename _Val, typename _Ref, typename _Ptr>
@@ -166,7 +159,7 @@ bool operator!=(_Iterator<_Val, _Val&, _Val*> const& __X,
 
 } // namespace KDTree
 
-#endif // include guard
+#endif  // THIRD_PART_KDTREE_ITERATOR_H
 
 // COPYRIGHT --
 //
