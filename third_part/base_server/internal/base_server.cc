@@ -14,6 +14,7 @@ DEFINE_int32(max_conns, 128, "");
 DEFINE_int32(keepalive_offset, 100, "");
 DEFINE_int32(keepalive_interval, 100, "");
 DEFINE_int32(keepalive_probes, 100, "");
+DEFINE_int32(read_alarm_threshold, 1024 * 5, "");  // 5K
 
 static void Accept(evutil_socket_t listener, int16_t event, void * arg) {
   BaseServer * server = static_cast<BaseServer*>(arg);
@@ -139,6 +140,10 @@ bool BaseServer::Read(bufferevent *bev, std::string * content) {
               << real_size << " total_size = " << total_size;
     return false;
   } else {
+    if (real_size > FLAGS_read_alarm_threshold) {
+      LOG(WARNING) << "too much data in [" << bufferevent_getfd(bev) << "]"
+                   << " data size=" << real_size;
+    }
     content->resize(total_size);
     uint32_t cnt = evbuffer_remove(input, const_cast<char *>(content->data()),
                                    total_size);
