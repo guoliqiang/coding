@@ -59,8 +59,8 @@
 #ifndef HEADER_PKCS12_H
 #define HEADER_PKCS12_H
 
-#include <openssl/bio.h>
-#include <openssl/x509.h>
+#include <third_part/openssl/include/openssl/bio.h>
+#include <third_part/openssl/include/openssl/x509.h>
 
 #ifdef __cplusplus
 extern "C" {

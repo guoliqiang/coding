@@ -59,7 +59,7 @@
 #ifndef HEADER_IDEA_H
 #define HEADER_IDEA_H
 
-#include <openssl/opensslconf.h> /* IDEA_INT, OPENSSL_NO_IDEA */
+#include <third_part/openssl/include/openssl/opensslconf.h> /* IDEA_INT, OPENSSL_NO_IDEA */
 
 #ifdef OPENSSL_NO_IDEA
 #error IDEA is disabled.

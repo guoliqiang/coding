@@ -68,9 +68,9 @@
 extern "C" {
 #endif
 
-#include <openssl/safestack.h>
-#include <openssl/bn.h>
-#include <openssl/crypto.h>
+#include <third_part/openssl/include/openssl/safestack.h>
+#include <third_part/openssl/include/openssl/bn.h>
+#include <third_part/openssl/include/openssl/crypto.h>
 
 typedef struct SRP_gN_cache_st
 	{

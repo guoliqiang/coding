@@ -52,7 +52,7 @@
 #ifndef HEADER_AES_H
 #define HEADER_AES_H
 
-#include <openssl/opensslconf.h>
+#include <third_part/openssl/include/openssl/opensslconf.h>
 
 #ifdef OPENSSL_NO_AES
 #error AES is disabled.

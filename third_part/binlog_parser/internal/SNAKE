@@ -1,0 +1,23 @@
+cc_library(name='binlog_parser',
+           srcs = ['access_method_factory.cc',
+                   'basic_transaction_parser.cc',
+                   'binlog_driver.cc',
+                   'field_iterator.cc',
+                   'protocol.cc',
+                   'row_of_fields.cc',
+                   'utilities.cc',
+                   'basic_content_handler.cc',
+                   'binary_log.cc',
+                   'binlog_event.cc',
+                   'file_driver.cc',
+                   'resultset_iterator.cc',
+                   'tcp_driver.cc',
+                   'value.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   '//libs/third_part/openssl:ssl',
+                   '//libs/third_part/boost:boost_system',
+                   '//libs/third_part/boost:boost_thread',
+                  ],
+          )

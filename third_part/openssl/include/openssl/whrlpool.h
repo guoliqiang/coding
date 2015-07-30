@@ -1,7 +1,7 @@
 #ifndef HEADER_WHRLPOOL_H
 #define HEADER_WHRLPOOL_H
 
-#include <openssl/e_os2.h>
+#include <third_part/openssl/include/openssl/e_os2.h>
 #include <stddef.h>
 
 #ifdef __cplusplus

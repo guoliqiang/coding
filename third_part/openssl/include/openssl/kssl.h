@@ -63,7 +63,7 @@
 #ifndef	KSSL_H
 #define	KSSL_H
 
-#include <openssl/opensslconf.h>
+#include <third_part/openssl/include/openssl/opensslconf.h>
 
 #ifndef OPENSSL_NO_KRB5
 
