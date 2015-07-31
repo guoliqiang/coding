@@ -19,8 +19,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 */
 
 #include <vector>
-#include "third_part/binlog_parser/public/row_of_fields.h"
 #include <stdexcept>
+#include "third_part/binlog_parser/public/row_of_fields.h"
 #include "third_part/boost/include/boost/foreach.hpp"
 #include "third_part/binlog_parser/public/value.h"
 

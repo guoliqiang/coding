@@ -19,76 +19,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 */
 
 #include <stdint.h>
-#include "third_part/boost/include/boost/array.hpp"
 #include <vector>
-#include "third_part/binlog_parser/public/protocol.h"
 #include <iostream>
+#include "third_part/binlog_parser/public/protocol.h"
+#include "third_part/boost/include/boost/array.hpp"
 
 using namespace mysql;
 using namespace mysql::system;
 
 namespace mysql {
 namespace system {
-
-int proto_read_package_header(tcp::socket *socket,
-                              unsigned long *packet_length,
-                              unsigned char *packet_no) {
-  unsigned char buf[4];
-  try {
-    boost::asio::read(*socket, boost::asio::buffer(buf, 4),
-                      boost::asio::transfer_at_least(4));
-  } catch (boost::system::system_error e) {
-    return 1;
-  }
-  *packet_length=  (unsigned long)(buf[0] &0xFF);
-  *packet_length+= (unsigned long)((buf[1] &0xFF)<<8);
-  *packet_length+= (unsigned long)((buf[2] &0xFF)<<16);
-  *packet_no= (unsigned char)buf[3];
-  return 0;
-}
-
-int proto_read_package_header(tcp::socket *socket,
-                              boost::asio::streambuf &buff,
-                              unsigned long *packet_length,
-                              unsigned char *packet_no) {
-  std::streamsize inbuff= buff.in_avail();
-  if( inbuff < 0) inbuff= 0;
-  if (4 > inbuff) {
-    try {
-      boost::asio::read(*socket, buff,
-                        boost::asio::transfer_at_least(4-inbuff));
-    } catch (boost::system::system_error e) {
-      return 1;
-    }
-  }
-  char ch;
-  std::istream is(&buff);
-  is.get(ch);
-  *packet_length= (unsigned long)ch;
-  is.get(ch);
-  *packet_length+= (unsigned long)(ch<<8);
-  is.get(ch);
-  *packet_length+= (unsigned long)(ch<<16);
-  is.get(ch);
-  *packet_no= (unsigned char)ch;
-  return 0;
-}
-
-
-int proto_get_one_package(tcp::socket *socket, boost::asio::streambuf &buff,
-                          boost::uint8_t *packet_no) {
-  unsigned long packet_length;
-  if (proto_read_package_header(socket, buff, &packet_length, packet_no)) {
-    return 0;
-  }
-  std::streamsize inbuffer= buff.in_avail();
-  if (inbuffer < 0) inbuffer= 0;
-  if (packet_length > inbuffer) {
-    boost::asio::read(*socket, buff,
-                      boost::asio::transfer_at_least(packet_length-inbuffer));
-  }
-  return packet_length;
-}
 
 void prot_parse_error_message(std::istream &is, struct st_error_package &err,
                               int packet_length) {

@@ -24,8 +24,8 @@ using namespace mysql;
 
 namespace mysql {
 
-int server_var_decoder (std::map<std::string, mysql::Value> *my_var_map,
-                        std::vector<boost::uint8_t> variables) {
+int server_var_decoder(std::map<std::string, mysql::Value> *my_var_map,
+                       std::vector<boost::uint8_t> variables) {
   boost::uint8_t length, i;
   std::string name;
   mysql::system::enum_field_types field_type;
@@ -135,4 +135,3 @@ int server_var_decoder (std::map<std::string, mysql::Value> *my_var_map,
 }
 
 }  // namespace mysql
-

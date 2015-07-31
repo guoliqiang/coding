@@ -19,42 +19,41 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 */
 
 #include <list>
-
 #include "third_part/binlog_parser/public/binlog_api.h"
 #include "third_part/boost/include/boost/foreach.hpp"
 
-using namespace mysql;
 using namespace mysql::system;
 
 namespace mysql {
+
 Binary_log::Binary_log(Binary_log_driver *drv)
     : m_binlog_position(4), m_binlog_file("") {
   if (drv == NULL) m_driver= &m_dummy_driver;
   else m_driver= drv;
 }
 
-Content_handler_pipeline *Binary_log::content_handler_pipeline(void) {
+Content_handler_pipeline * Binary_log::content_handler_pipeline() {
   return &m_content_handlers;
 }
 
-int Binary_log::wait_for_next_event(mysql::Binary_log_event **event_ptr) {
-  int rc;
-  bool handler_code;
-  mysql::Binary_log_event *event;
+int Binary_log::wait_for_next_event(mysql::Binary_log_event ** event_ptr) {
+  int rc = 0;
+  bool handler_code = false;
+  mysql::Binary_log_event * event;
   mysql::Injection_queue reinjection_queue;
-
   do {
     handler_code= false;
     if (!reinjection_queue.empty()) {
       event = reinjection_queue.front();
       reinjection_queue.pop_front();
     } else {
-      // Return in case of non-ERR_OK.
-      if((rc = m_driver->wait_for_next_event(&event))) return rc;
+      if((rc = m_driver->wait_for_next_event(&event)) != 0) {
+        // Return in case of non-ERR_OK.
+        return rc;
+      }
     }
     m_binlog_position = event->header()->next_position;
     mysql::Content_handler * handler;
-
     BOOST_FOREACH(handler, m_content_handlers) {
       if (event) {
         handler->set_injection_queue(&reinjection_queue);
@@ -62,39 +61,33 @@ int Binary_log::wait_for_next_event(mysql::Binary_log_event **event_ptr) {
       }
     }
   } while(event == 0 || !reinjection_queue.empty());
-
   if (event_ptr) *event_ptr = event;
   return 0;
 }
 
-int Binary_log::set_position(const std::string &filename, unsigned long position)
-{
-  int status= m_driver->set_position(filename, position);
-  if (status == ERR_OK)
-  {
-    m_binlog_file= filename;
-    m_binlog_position= position;
+int Binary_log::set_position(const std::string &filename,
+                             unsigned long position) {
+  int status = m_driver->set_position(filename, position);
+  if (status == ERR_OK) {
+    m_binlog_file = filename;
+    m_binlog_position = position;
   }
   return status;
 }
 
-int Binary_log::set_position(unsigned long position)
-{
+int Binary_log::set_position(unsigned long position) {
   std::string filename;
   m_driver->get_position(&filename, NULL);
   return this->set_position(filename, position);
 }
 
-unsigned long Binary_log::get_position(void) {
-  return m_binlog_position;
-}
-
 unsigned long Binary_log::get_position(std::string &filename) {
   m_driver->get_position(&m_binlog_file, &m_binlog_position);
-  filename= m_binlog_file;
+  filename = m_binlog_file;
   return m_binlog_position;
 }
 
+unsigned long Binary_log::get_position(void) { return m_binlog_position; }
 int Binary_log::connect() { return m_driver->connect(); }
 
 }  // namespace mysql

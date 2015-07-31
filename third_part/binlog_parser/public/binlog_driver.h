@@ -30,33 +30,25 @@ class Binary_log_driver {
  public:
   template <class FilenameT>
   Binary_log_driver(const FilenameT& filename = FilenameT(),
-                    unsigned int offset = 0)
-      : m_binlog_file_name(filename), m_binlog_offset(offset) { }
+                    unsigned int offset = 0) : m_binlog_file_name(filename),
+                                               m_binlog_offset(offset) {}
   ~Binary_log_driver() {}
-
   // Connect to the binary log using previously declared connection parameters
-  // @return Success or error code
-  // @retval 0 Success
-  // @retval >0 Error code (to be specified)
-  virtual int connect()= 0;
+  // 0 Success, >0 Error code (to be specified)
+  virtual int connect() = 0;
 
   // Blocking attempt to get the next binlog event from the stream
   // @param event [out] Pointer to a binary log event to be fetched.
-  virtual int wait_for_next_event(mysql::Binary_log_event **event)= 0;
+  virtual int wait_for_next_event(mysql::Binary_log_event ** event) = 0;
 
-  // Set the reader position
-  // @param str The file name
-  // @param position The file position
+  // Set the reader position. str the file name. position is the file position
   // @return False on success and True if an error occurred.
-  virtual int set_position(const std::string &str, unsigned long position)= 0;
+  virtual int set_position(const std::string &str, unsigned long position) = 0;
 
   // Get the read position.
-  // @param[out]
-  //   string_ptr Pointer to location where the filename will be stored.
-  // @param[out]
-  //   position_ptr Pointer to location where the position will be stored.
-  // @retval 0 Success
-  // @retval >0 Error code
+  // string_ptr Pointer to location where the filename will be stored.
+  // position_ptr Pointer to location where the position will be stored.
+  // 0 Success, >0 Error code
   virtual int get_position(std::string *filename_ptr,
                            unsigned long *position_ptr) = 0;
   Binary_log_event* parse_event(std::istream &sbuff, Log_event_header *header);

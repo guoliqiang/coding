@@ -55,52 +55,66 @@ void Content_handler::set_injection_queue(Injection_queue *queue) {
 
 mysql::Binary_log_event * Content_handler::internal_process_event(
     mysql::Binary_log_event *ev) {
- mysql::Binary_log_event *processed_event= 0;
+ mysql::Binary_log_event * processed_event = NULL;
  switch(ev->header ()->type_code) {
- case mysql::QUERY_EVENT:
-   processed_event= process_event(static_cast<mysql::Query_event*>(ev));
-   break;
- case mysql::WRITE_ROWS_EVENT:
- case mysql::UPDATE_ROWS_EVENT:
- case mysql::DELETE_ROWS_EVENT:
-   processed_event= process_event(static_cast<mysql::Row_event*>(ev));
-   break;
- case mysql::USER_VAR_EVENT:
-   processed_event= process_event(static_cast<mysql::User_var_event *>(ev));
-   break;
- case mysql::ROTATE_EVENT:
-   processed_event= process_event(static_cast<mysql::Rotate_event *>(ev));
-   break;
- case mysql::INCIDENT_EVENT:
-   processed_event= process_event(static_cast<mysql::Incident_event *>(ev));
-   break;
- case mysql::XID_EVENT:
-   processed_event= process_event(static_cast<mysql::Xid *>(ev));
-   break;
- case mysql::TABLE_MAP_EVENT:
-   processed_event= process_event(static_cast<mysql::Table_map_event *>(ev));
-   break;
- case mysql::FORMAT_DESCRIPTION_EVENT:
-   processed_event= process_event(ev);
-   break;
- case mysql::BEGIN_LOAD_QUERY_EVENT:
-   processed_event= process_event(ev);
-   break;
- case mysql::EXECUTE_LOAD_QUERY_EVENT:
-   processed_event= process_event(ev);
-   break;
- case mysql::INTVAR_EVENT:
-   processed_event= process_event(ev);
-   break;
- case mysql::STOP_EVENT:
-   processed_event= process_event(ev);
-   break;
- case mysql::RAND_EVENT:
-   processed_event= process_event(ev);
-   break;
- default:
-   processed_event= process_event(ev);
-   break;
+   case mysql::QUERY_EVENT: {
+     processed_event = process_event(static_cast<mysql::Query_event*>(ev));
+     break;
+   }
+   case mysql::WRITE_ROWS_EVENT:
+   case mysql::UPDATE_ROWS_EVENT:
+   case mysql::DELETE_ROWS_EVENT: {
+     processed_event = process_event(static_cast<mysql::Row_event*>(ev));
+     break;
+   }
+   case mysql::USER_VAR_EVENT: {
+     processed_event = process_event(static_cast<mysql::User_var_event *>(ev));
+     break;
+   }
+   case mysql::ROTATE_EVENT: {
+     processed_event = process_event(static_cast<mysql::Rotate_event *>(ev));
+     break;
+   }
+   case mysql::INCIDENT_EVENT: {
+     processed_event = process_event(static_cast<mysql::Incident_event *>(ev));
+     break;
+   }
+   case mysql::XID_EVENT: {
+     processed_event = process_event(static_cast<mysql::Xid *>(ev));
+     break;
+   }
+   case mysql::TABLE_MAP_EVENT: {
+     processed_event = process_event(static_cast<mysql::Table_map_event *>(ev));
+     break;
+   }
+   case mysql::FORMAT_DESCRIPTION_EVENT: {
+     processed_event = process_event(ev);
+     break;
+   }
+   case mysql::BEGIN_LOAD_QUERY_EVENT: {
+     processed_event = process_event(ev);
+     break;
+   }
+   case mysql::EXECUTE_LOAD_QUERY_EVENT: {
+     processed_event = process_event(ev);
+     break;
+   }
+   case mysql::INTVAR_EVENT: {
+     processed_event = process_event(ev);
+     break;
+   }
+   case mysql::STOP_EVENT: {
+     processed_event = process_event(ev);
+     break;
+   }
+   case mysql::RAND_EVENT: {
+     processed_event = process_event(ev);
+     break;
+   }
+   default: {
+     processed_event = process_event(ev);
+     break;
+   }
  }
  return processed_event;
 }

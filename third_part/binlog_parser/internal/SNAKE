@@ -10,14 +10,14 @@ cc_library(name='binlog_parser',
                    'binary_log.cc',
                    'binlog_event.cc',
                    'file_driver.cc',
-                   'resultset_iterator.cc',
-                   'tcp_driver.cc',
                    'value.cc'
                   ],
            deps = [
                    '//base/internal:base',
                    '//libs/third_part/openssl:ssl',
+                   '//libs/third_part/openssl:crypto',
                    '//libs/third_part/boost:boost_system',
                    '//libs/third_part/boost:boost_thread',
                   ],
+          copt = ['no_style_check']
           )

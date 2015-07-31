@@ -17,6 +17,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 02110-1301  USA 
 */
+
 #ifndef BASIC_CONTENT_HANDLER_H
 #define	BASIC_CONTENT_HANDLER_H
 
@@ -41,7 +42,6 @@ class Content_handler {
   Content_handler();
   Content_handler(const mysql::Content_handler& orig);
   virtual ~Content_handler();
-
   virtual mysql::Binary_log_event *process_event(mysql::Query_event *ev);
   virtual mysql::Binary_log_event *process_event(mysql::Row_event *ev);
   virtual mysql::Binary_log_event *process_event(mysql::Table_map_event *ev);

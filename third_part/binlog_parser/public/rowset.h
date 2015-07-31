@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 #define	_ROWSET_H
 
 #include "third_part/binlog_parser/public/field_iterator.h"
-#include "third_part/binlog_parser/public/resultset_iterator.h"
 #include "third_part/boost/include/boost/function.hpp"
 #include "third_part/boost/include/boost/iterator.hpp"
 

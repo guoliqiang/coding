@@ -17,6 +17,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 02110-1301  USA 
 */
+
 #ifndef _BASIC_TRANSACTION_PARSER_H
 #define	_BASIC_TRANSACTION_PARSER_H
 
@@ -40,7 +41,7 @@ class Transaction_log_event : public Binary_log_event {
   Transaction_log_event(Log_event_header *header) : Binary_log_event(header) {}
   virtual ~Transaction_log_event();
   Int_to_Event_map &table_map() { return m_table_map; }
-  // Index for easier table name look up
+
   Int_to_Event_map m_table_map;
   std::list<Binary_log_event *> m_events;
 };
@@ -50,13 +51,13 @@ Transaction_log_event *create_transaction_log_event(void);
 class Basic_transaction_parser : public mysql::Content_handler {
  public:
   Basic_transaction_parser() : mysql::Content_handler() {
-    m_transaction_state= NOT_IN_PROGRESS;
+    m_transaction_state = NOT_IN_PROGRESS;
   }
-  mysql::Binary_log_event *process_event(mysql::Query_event *ev);
-  mysql::Binary_log_event *process_event(mysql::Row_event *ev);
-  mysql::Binary_log_event *process_event(mysql::Table_map_event *ev);
-  mysql::Binary_log_event *process_event(mysql::Xid *ev);
-  mysql::Binary_log_event *process_event(mysql::Binary_log_event *ev) {
+  mysql::Binary_log_event * process_event(mysql::Query_event *ev);
+  mysql::Binary_log_event * process_event(mysql::Row_event *ev);
+  mysql::Binary_log_event * process_event(mysql::Table_map_event *ev);
+  mysql::Binary_log_event * process_event(mysql::Xid *ev);
+  mysql::Binary_log_event * process_event(mysql::Binary_log_event *ev) {
     return ev;
   }
 
@@ -67,10 +68,11 @@ class Basic_transaction_parser : public mysql::Content_handler {
     IN_PROGRESS,
     COMMITTING,
     NOT_IN_PROGRESS
-  };
-  enum Transaction_states m_transaction_state;
-  std::list <mysql::Binary_log_event *> m_event_stack;
-  mysql::Binary_log_event *process_transaction_state(
+  } m_transaction_state;
+  std::list<mysql::Binary_log_event *> m_event_stack;
+ 
+ private:
+  mysql::Binary_log_event * process_transaction_state(
       mysql::Binary_log_event *ev);
 };
 

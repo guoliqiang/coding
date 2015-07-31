@@ -27,11 +27,12 @@ using namespace std;
 
 int Binlog_file_driver::connect() {
   struct stat stat_buff;
-  char magic[]= {0xfe, 0x62, 0x69, 0x6e, 0};
+  char magic[] = {0xfe, 0x62, 0x69, 0x6e, 0};
   char magic_buf[MAGIC_NUMBER_SIZE];
   // Get the file size.
-  if (stat(m_binlog_file_name.c_str(), &stat_buff) == -1)
-    return ERR_FAIL;  // Can't stat binlog file.
+  if (stat(m_binlog_file_name.c_str(), &stat_buff) == -1) {
+    return ERR_FAIL;
+  }
   m_binlog_file_size = stat_buff.st_size;
   m_binlog_file.exceptions(ifstream::failbit | ifstream::badbit |
                            ifstream::eofbit);
@@ -40,10 +41,10 @@ int Binlog_file_driver::connect() {
     m_binlog_file.open(m_binlog_file_name.c_str(), ios::in | ios::binary);
     // Check if a valid MySQL binlog file is provided, BINLOG_MAGIC.
     m_binlog_file.read(magic_buf, MAGIC_NUMBER_SIZE);
-    if (memcmp(magic, magic_buf, MAGIC_NUMBER_SIZE))
+    if (memcmp(magic, magic_buf, MAGIC_NUMBER_SIZE)) {
       return ERR_FAIL;  // Not a valid binlog file.
+    }
     m_bytes_read= MAGIC_NUMBER_SIZE;
-
   } catch (...) {
     return ERR_FAIL;
   }
@@ -55,7 +56,6 @@ int Binlog_file_driver::disconnect() {
   m_binlog_file.close();
   return ERR_OK;
 }
-
 
 int Binlog_file_driver::set_position(const string &str,
     unsigned long position) {
@@ -87,7 +87,6 @@ int Binlog_file_driver::wait_for_next_event(mysql::Binary_log_event **event) {
   assert(m_binlog_file.tellg() >= 4 );
   m_binlog_file.exceptions(ifstream::failbit | ifstream::badbit |
                            ifstream::eofbit);
-
   try {
     if (m_bytes_read < m_binlog_file_size && m_binlog_file.good()) {
       Protocol_chunk<boost::uint32_t> prot_timestamp(
@@ -107,11 +106,8 @@ int Binlog_file_driver::wait_for_next_event(mysql::Binary_log_event **event) {
                     >> prot_event_length
                     >> prot_next_position
                     >> prot_flags;
-
-
       *event = parse_event(* static_cast<std::istream*> (&m_binlog_file),
                           &m_event_log_header);
-
       // Correction. Except for the default case (above), this condition should
       // always fail.
       if (m_bytes_read + m_event_log_header.event_length !=

@@ -24,8 +24,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 #include "third_part/binlog_parser/public/value.h"
 #include "third_part/boost/include/boost/any.hpp"
 #include "third_part/boost/include/boost/lexical_cast.hpp"
-#include <iostream>
 #include "third_part/binlog_parser/public/field_iterator.h"
+#include <iostream>
 
 namespace mysql {
 
@@ -39,13 +39,13 @@ mysql::Binary_log_event *Basic_transaction_parser::process_event(
   return process_transaction_state(qev);
 }
 
-mysql::Binary_log_event *Basic_transaction_parser::process_event(
+mysql::Binary_log_event * Basic_transaction_parser::process_event(
     mysql::Xid *ev) {
-  m_transaction_state= COMMITTING;
+  m_transaction_state = COMMITTING;
   return process_transaction_state(ev);
 }
 
-mysql::Binary_log_event *Basic_transaction_parser::process_event(
+mysql::Binary_log_event * Basic_transaction_parser::process_event(
     mysql::Table_map_event *ev) {
   if(m_transaction_state == IN_PROGRESS) {
     m_event_stack.push_back(ev);
@@ -54,9 +54,9 @@ mysql::Binary_log_event *Basic_transaction_parser::process_event(
   return ev;
 }
 
-mysql::Binary_log_event *Basic_transaction_parser::process_event(
+mysql::Binary_log_event * Basic_transaction_parser::process_event(
     mysql::Row_event *ev) {
-  if(m_transaction_state ==IN_PROGRESS) {
+  if(m_transaction_state == IN_PROGRESS) {
     m_event_stack.push_back(ev);
     return 0;
   }
@@ -69,14 +69,14 @@ mysql::Binary_log_event *Basic_transaction_parser::process_transaction_state(
     case STARTING : {
       m_transaction_state= IN_PROGRESS;
       m_start_time= incomming_event->header()->timestamp;
-      delete incomming_event; // drop the begin event
+      delete incomming_event;  // drop the begin event
       return 0;
     }
     case COMMITTING : {
-      delete incomming_event; // drop the commit event
+      delete incomming_event;  // drop the commit event
       // Propagate the start time for the transaction to the newly created
       // event.
-      mysql::Transaction_log_event *trans =
+      mysql::Transaction_log_event * trans =
           mysql::create_transaction_log_event();
       trans->header()->timestamp= m_start_time;
 
@@ -88,30 +88,32 @@ mysql::Binary_log_event *Basic_transaction_parser::process_transaction_state(
             // Index the table name with a table id to ease lookup later.
             mysql::Table_map_event *tm =
                 static_cast<mysql::Table_map_event *>(event);
-            trans->m_table_map.insert(mysql::Event_index_element(tm->table_id,tm));
+            trans->m_table_map.insert(mysql::Event_index_element(
+                tm->table_id, tm));
             trans->m_events.push_back(event);
+            break;
           }
-          break;
           case mysql::WRITE_ROWS_EVENT:
           case mysql::DELETE_ROWS_EVENT:
           case mysql::UPDATE_ROWS_EVENT: {
             trans->m_events.push_back(event);
             // Propagate last known next position
             trans->header()->next_position= event->header()->next_position;
+            break;
           }
-          break;
-          default:
+          default: {
             delete event;
-         }
-      } // end while
-      m_transaction_state= NOT_IN_PROGRESS;
+          }
+        }
+      }
+      m_transaction_state = NOT_IN_PROGRESS;
       return(trans);
     }
     case NOT_IN_PROGRESS:
-    default:
+    default: {
       return incomming_event;
+    }
   }
-
 }
 
 Transaction_log_event *create_transaction_log_event(void) {
@@ -132,5 +134,4 @@ Transaction_log_event::~Transaction_log_event() {
     delete(event);
   }
 }
-
 }  // namespace mysql

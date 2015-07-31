@@ -22,17 +22,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 #define	_REPEVENT_H
 
 #include <iosfwd>
+#include <list>
+#include <cassert>
 #include "third_part/boost/include/boost/iostreams/categories.hpp"
 #include "third_part/boost/include/boost/iostreams/positioning.hpp"
 #include "third_part/boost/include/boost/iostreams/concepts.hpp"
 #include "third_part/boost/include/boost/asio.hpp"
 #include "third_part/boost/include/boost/function.hpp"
 #include "third_part/boost/include/boost/bind.hpp"
-#include <list>
-#include <cassert>
 #include "third_part/binlog_parser/public/binlog_event.h"
 #include "third_part/binlog_parser/public/binlog_driver.h"
-#include "third_part/binlog_parser/public/tcp_driver.h"
 #include "third_part/binlog_parser/public/file_driver.h"
 #include "third_part/binlog_parser/public/basic_content_handler.h"
 #include "third_part/binlog_parser/public/basic_transaction_parser.h"
@@ -44,7 +43,6 @@ namespace io = boost::iostreams;
 
 namespace mysql {
 
-// Error codes.
 enum Error_code {
   ERR_OK = 0,  // All OK
   ERR_EOF,  // End of file

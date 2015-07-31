@@ -1,0 +1,27 @@
+cc_binary(name='replaybinlog',
+          srcs = ['replaybinlog.cc'],
+          deps = [
+                   '//third_part/binlog_parser/internal:binlog_parser',
+                 ],
+         )
+
+cc_binary(name='replay_sys_vars',
+          srcs = ['replay_sys_vars.cc'],
+          deps = [
+                   '//third_part/binlog_parser/internal:binlog_parser',
+                 ],
+         )
+
+cc_binary(name='basic-1',
+          srcs = ['basic-1.cc'],
+          deps = [
+                   '//third_part/binlog_parser/internal:binlog_parser',
+                 ],
+         )
+
+cc_binary(name='basic-2',
+          srcs = ['basic-2.cc'],
+          deps = [
+                   '//third_part/binlog_parser/internal:binlog_parser',
+                 ],
+         )

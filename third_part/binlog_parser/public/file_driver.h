@@ -41,8 +41,7 @@ class Binlog_file_driver : public Binary_log_driver {
   template <class TFilename>
   Binlog_file_driver(const TFilename& filename = TFilename(),
                      unsigned int offset = 0)
-    : Binary_log_driver(filename, offset) { }
-
+    : Binary_log_driver(filename, offset) {}
   int connect();
   int disconnect();
   int wait_for_next_event(mysql::Binary_log_event **event);

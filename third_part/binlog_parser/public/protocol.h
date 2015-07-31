@@ -20,11 +20,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 #ifndef _PROTOCOL_H
 #define	_PROTOCOL_H
 
-#include "third_part/boost/include/boost/asio.hpp"
 #include <list>
 #include "third_part/binlog_parser/public/binlog_event.h"
 
-using boost::asio::ip::tcp;
 namespace mysql {
 namespace system {
 
@@ -343,26 +341,7 @@ std::istream &operator>>(std::istream &is, Protocol &chunk);
 std::istream &operator>>(std::istream &is, std::string &str);
 std::istream &operator>>(std::istream &is, Protocol_chunk_string_len &lenstr);
 std::istream &operator>>(std::istream &is, Protocol_chunk_string &str);
-int proto_read_package_header(tcp::socket *socket,
-                              unsigned long *packet_length,
-                              unsigned char *packet_no);
 
-// Read a server package header from a stream buffer
-// @retval 0 Success
-// @retval >0 An error occurred
-int proto_read_package_header(tcp::socket *socket,
-                              boost::asio::streambuf &buff,
-                              unsigned long *packet_length,
-                              unsigned char *packet_no);
-
-// Get one complete packet from the server
-// @param socket Pointer to the active tcp-socket
-// @param buff A reference to a stream buffer
-// @param packet_no [out] The number of the packet as given by the server
-// @return the size of the packet or 0 to indicate an error
-int proto_get_one_package(tcp::socket *socket,
-                          boost::asio::streambuf &buff,
-                          boost::uint8_t *packet_no);
 void prot_parse_error_message(std::istream &is,
                               struct st_error_package &err,
                               int packet_length);
