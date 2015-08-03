@@ -1,33 +1,30 @@
-/*
-Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
-reserved.
+// Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
+// reserved.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of
+// the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+// 02110-1301  USA
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 2 of
-the License.
+#ifndef THIRD_PART_BINLOG_PAESER_PUBLIC_BINLOG_EVENT_H
+#define	THIRD_PART_BINLOG_PAESER_PUBLIC_BINLOG_EVENT_H
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-02110-1301  USA
-*/
-
-#ifndef _BINLOG_EVENT_H
-#define	_BINLOG_EVENT_H
-
-#include "third_part/boost/include/boost/cstdint.hpp"
-#include "third_part/boost/include/boost/asio.hpp"
-#include "third_part/boost/include/boost/function.hpp"
 #include <list>
 #include <vector>
+#include "third_part/boost/include/boost/cstdint.hpp"
+#include "third_part/boost/include/boost/function.hpp"
 
-namespace mysql {
+namespace binlog_parser {
 
 enum Log_event_type {
   // Every time you update this enum (when you add a type), you have to
@@ -55,32 +52,26 @@ enum Log_event_type {
   BEGIN_LOAD_QUERY_EVENT = 17,
   EXECUTE_LOAD_QUERY_EVENT = 18,
   TABLE_MAP_EVENT = 19,
-
   // These event numbers were used for 5.1.0 to 5.1.15 and are therefore
   // obsolete.
   PRE_GA_WRITE_ROWS_EVENT = 20,
   PRE_GA_UPDATE_ROWS_EVENT = 21,
   PRE_GA_DELETE_ROWS_EVENT = 22,
-
   // These event numbers are used from 5.1.16 and forward
   WRITE_ROWS_EVENT = 23,
   UPDATE_ROWS_EVENT = 24,
   DELETE_ROWS_EVENT = 25,
-
   // Something out of the ordinary happened on the master
   INCIDENT_EVENT= 26,
-
   // A user defined event
-  USER_DEFINED= 27,
+  USER_DEFINED = 27,
   // Add new events here - right above this comment!
   // Existing events (except ENUM_END_EVENT) should never change their numbers
   ENUM_END_EVENT // end marker
 };
 
-namespace system {
 // Convenience function to get the string representation of a binlog event.
 const char* get_event_type_str(Log_event_type type);
-} // namespace system
 
 #define LOG_EVENT_HEADER_SIZE 20
 struct Log_event_header {
@@ -109,6 +100,7 @@ class Binary_log_event {
     return (enum Log_event_type) m_header.type_code;
   }
   Log_event_header *header() { return &m_header; }
+
  private:
   Log_event_header m_header;
 };
@@ -224,5 +216,6 @@ class Xid: public Binary_log_event {
 Binary_log_event *create_incident_event(unsigned int type,
                                         const char *message,
                                         unsigned long pos= 0);
-}  // namespace mysql
-#endif	// _BINLOG_EVENT_H
+}  // namespace binlog_parser
+
+#endif	// THIRD_PART_BINLOG_PAESER_PUBLIC_BINLOG_EVENT_H

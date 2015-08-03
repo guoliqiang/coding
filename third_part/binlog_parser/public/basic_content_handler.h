@@ -1,33 +1,31 @@
-/*
-Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
-reserved.
+// Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
+// reserved.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of
+// the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+// 02110-1301  USA 
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 2 of
-the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-02110-1301  USA 
-*/
-
-#ifndef BASIC_CONTENT_HANDLER_H
-#define	BASIC_CONTENT_HANDLER_H
+#ifndef THIRD_PART_BINLOG_PAESER_PUBLIC_BASIC_CONTENT_HANDLER_H
+#define	THIRD_PART_BINLOG_PAESER_PUBLIC_BASIC_CONTENT_HANDLER_H
 
 #include "third_part/binlog_parser/public/binlog_event.h"
 
-namespace mysql {
+namespace binlog_parser {
 
-class Injection_queue : public std::list<mysql::Binary_log_event *> {
+class Injection_queue : public std::list<Binary_log_event *> {
  public:
-  Injection_queue() : std::list<mysql::Binary_log_event * >() {}
+  Injection_queue() : std::list<Binary_log_event * >() {}
   ~Injection_queue() {}
 };
 
@@ -40,18 +38,18 @@ class Injection_queue : public std::list<mysql::Binary_log_event *> {
 class Content_handler {
  public:
   Content_handler();
-  Content_handler(const mysql::Content_handler& orig);
+  Content_handler(const Content_handler& orig);
   virtual ~Content_handler();
-  virtual mysql::Binary_log_event *process_event(mysql::Query_event *ev);
-  virtual mysql::Binary_log_event *process_event(mysql::Row_event *ev);
-  virtual mysql::Binary_log_event *process_event(mysql::Table_map_event *ev);
-  virtual mysql::Binary_log_event *process_event(mysql::Xid *ev);
-  virtual mysql::Binary_log_event *process_event(mysql::User_var_event *ev);
-  virtual mysql::Binary_log_event *process_event(mysql::Incident_event *ev);
-  virtual mysql::Binary_log_event *process_event(mysql::Rotate_event *ev);
-  virtual mysql::Binary_log_event *process_event(mysql::Int_var_event *ev);
+  virtual Binary_log_event *process_event(Query_event *ev);
+  virtual Binary_log_event *process_event(Row_event *ev);
+  virtual Binary_log_event *process_event(Table_map_event *ev);
+  virtual Binary_log_event *process_event(Xid *ev);
+  virtual Binary_log_event *process_event(User_var_event *ev);
+  virtual Binary_log_event *process_event(Incident_event *ev);
+  virtual Binary_log_event *process_event(Rotate_event *ev);
+  virtual Binary_log_event *process_event(Int_var_event *ev);
   // Process any event which hasn't been registered yet.
-  virtual mysql::Binary_log_event *process_event(mysql::Binary_log_event *ev);
+  virtual Binary_log_event *process_event(Binary_log_event *ev);
 
  protected:
   // The Injection queue is emptied before any new event is pulled from
@@ -62,11 +60,11 @@ class Content_handler {
 private:
   Injection_queue *m_reinject_queue;
   void set_injection_queue(Injection_queue *injection_queue);
-  mysql::Binary_log_event *internal_process_event(mysql::Binary_log_event *ev);
+  Binary_log_event *internal_process_event(Binary_log_event *ev);
 
   friend class Binary_log;
 };
 
-}  // namespace mysql
+}  // namespace binlog_parser
 
-#endif	// BASIC_CONTENT_HANDLER_H
+#endif	// THIRD_PART_BINLOG_PAESER_PUBLIC_BASIC_CONTENT_HANDLER_H

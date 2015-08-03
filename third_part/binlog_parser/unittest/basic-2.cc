@@ -1,3 +1,9 @@
+// @author Mats Kindahl <mats.kindahl@oracle.com>
+// This is a basic example that just opens a binary log either from a
+// file or a server and print out what events are found.  It uses a
+// simple event loop and checks information in the events using a
+// switch.
+
 #include "base/public/logging.h"
 #include "third_part/binlog_parser/public/binlog_api.h"
 #include <iostream>
@@ -6,10 +12,7 @@
 
 // Here is a basic system using the event loop to fetch context events
 // and store them in an associative array.
-using mysql::Binary_log;
-using mysql::system::create_transport;
-using mysql::system::get_event_type_str;
-using mysql::User_var_event;
+using namespace binlog_parser;
 
 // Class to maintain variable values.
 template <class AssociativeContainer>

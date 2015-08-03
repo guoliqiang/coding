@@ -1,25 +1,23 @@
-/*
-Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
-reserved.
+// Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
+// reserved.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of
+// the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+// 02110-1301  USA
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 2 of
-the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-02110-1301  USA
-*/
-
-#ifndef _BOUNDED_BUFFER_H
-#define	_BOUNDED_BUFFER_H
+#ifndef THIRD_PART_BINLOG_PAESER_PUBLIC_BOUNDED_BUFFER_H
+#define	THIRD_PART_BINLOG_PAESER_PUBLIC_BOUNDED_BUFFER_H
 
 #include "third_part/boost/include/boost/circular_buffer.hpp"
 #include "third_part/boost/include/boost/thread/mutex.hpp"
@@ -28,12 +26,15 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 #include "third_part/boost/include/boost/progress.hpp"
 #include "third_part/boost/include/boost/bind.hpp"
 
+namespace binlog_parser {
+
 template <class T>
 class bounded_buffer {
  public:
   typedef boost::circular_buffer<T> container_type;
   typedef typename container_type::size_type size_type;
   typedef typename container_type::value_type value_type;
+
   explicit bounded_buffer(size_type capacity) :
       m_unread(0), m_container(capacity) {}
 
@@ -65,12 +66,12 @@ class bounded_buffer {
   void unlock() { m_mutex.unlock(); }
 
  private:
-  // Disabled copy constructor
-  bounded_buffer(const bounded_buffer&);
-  // Disabled assign operator
-  bounded_buffer& operator = (const bounded_buffer&);
   bool is_not_empty() const { return m_unread > 0; }
   bool is_not_full() const { return m_unread < m_container.capacity(); }
+  bounded_buffer(const bounded_buffer&);
+  bounded_buffer& operator = (const bounded_buffer&);
+ 
+ private:
   size_type m_unread;
   container_type m_container;
   boost::mutex m_mutex;
@@ -78,4 +79,6 @@ class bounded_buffer {
   boost::condition m_not_full;
 };
 
-#endif	// _BOUNDED_BUFFER_H
+}  // namespace binlog_parser
+
+#endif	// THIRD_PART_BINLOG_PAESER_PUBLIC_BOUNDED_BUFFER_H

@@ -1,4 +1,3 @@
-// @file basic-1
 // @author Mats Kindahl <mats.kindahl@oracle.com>
 // This is a basic example that just opens a binary log either from a
 // file or a server and print out what events are found.  It uses a
@@ -8,8 +7,7 @@
 #include "base/public/logging.h"
 #include "third_part/binlog_parser/public/binlog_api.h"
 
-using mysql::Binary_log;
-using mysql::system::create_transport;
+using namespace binlog_parser;
 
 int main(int argc, char** argv) {
   if (argc != 2) {

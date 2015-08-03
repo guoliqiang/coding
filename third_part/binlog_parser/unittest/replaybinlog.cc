@@ -1,42 +1,49 @@
-/*
-Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
-reserved.
+// Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
+// reserved.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of
+// the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+// 02110-1301  USA
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 2 of
-the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-02110-1301  USA
-*/
+// mysql settings
+// /etc/mysql/my.cnf add:
+// [mysqld]
+// server-id = 1
+// log-bin = binlog
+// log-bin-index = binlog.index
+// binlog_format = ROW
 
 #include <stdlib.h>
 #include "base/public/logging.h"
 #include "third_part/boost/include/boost/foreach.hpp"
 #include "third_part/binlog_parser/public/binlog_api.h"
 
+using namespace binlog_parser;
+
 bool is_text_field(Value &val) {
-  if (val.type() == mysql::system::MYSQL_TYPE_VARCHAR ||
-      val.type() == mysql::system::MYSQL_TYPE_BLOB ||
-      val.type() == mysql::system::MYSQL_TYPE_MEDIUM_BLOB ||
-      val.type() == mysql::system::MYSQL_TYPE_LONG_BLOB)
-    return true;
+  if (val.type() == MYSQL_TYPE_VARCHAR ||
+      val.type() == MYSQL_TYPE_BLOB ||
+      val.type() == MYSQL_TYPE_MEDIUM_BLOB ||
+      val.type() == MYSQL_TYPE_LONG_BLOB) return true;
   return false;
 }
 
-void table_insert(const std::string& table_name, mysql::Row_of_fields &fields) {
+void table_insert(const std::string& table_name, Row_of_fields &fields) {
   std::stringstream out;
   out << "INSERT INTO " << table_name << " VALUES (";
-  mysql::Row_of_fields::iterator field_it= fields.begin();
-  mysql::Converter converter;
+  Row_of_fields::iterator field_it= fields.begin();
+  Converter converter;
   do {
     // Each row contains a vector of Value objects. The converter
     // allows us to transform the value into another representation.
@@ -52,16 +59,14 @@ void table_insert(const std::string& table_name, mysql::Row_of_fields &fields) {
   LOG(INFO) << out.str();
 }
 
-
 void table_update(const std::string& table_name,
-                  mysql::Row_of_fields &old_fields,
-                  mysql::Row_of_fields &new_fields) {
+                  Row_of_fields &old_fields,
+                  Row_of_fields &new_fields) {
   std::stringstream out;
   out << "UPDATE " << table_name << " SET ";
-
-  int field_id= 0;
-  mysql::Row_of_fields::iterator field_it = new_fields.begin();
-  mysql::Converter converter;
+  int field_id = 0;
+  Row_of_fields::iterator field_it = new_fields.begin();
+  Converter converter;
   do {
     std::string str;
     converter.to(str, *field_it);
@@ -74,8 +79,8 @@ void table_update(const std::string& table_name,
     if (field_it != new_fields.end()) out << ", ";
   } while(field_it != new_fields.end());
   out << " WHERE ";
-  field_it= old_fields.begin();
-  field_id= 0;
+  field_it = old_fields.begin();
+  field_id = 0;
   do {
     std::string str;
     converter.to(str, *field_it);
@@ -91,15 +96,13 @@ void table_update(const std::string& table_name,
   LOG(INFO) << out.str();
 }
 
-
-void table_delete(const std::string& table_name, mysql::Row_of_fields &fields) {
+void table_delete(const std::string& table_name, Row_of_fields &fields) {
   std::stringstream out;
   out << "DELETE FROM " << table_name << " WHERE ";
-  mysql::Row_of_fields::iterator field_it= fields.begin();
+  Row_of_fields::iterator field_it = fields.begin();
   int field_id= 0;
-  mysql::Converter converter;
+  Converter converter;
   do {
-
     std::string str;
     converter.to(str, *field_it);
     out << field_id << "= ";
@@ -114,12 +117,12 @@ void table_delete(const std::string& table_name, mysql::Row_of_fields &fields) {
   LOG(INFO) << out.str();
 }
 
-class Incident_handler : public mysql::Content_handler {
+class Incident_handler : public Content_handler {
  public:
-  Incident_handler() : mysql::Content_handler() {}
-  mysql::Binary_log_event *process_event(mysql::Incident_event *incident) {
+  Incident_handler() : Content_handler() {}
+  Binary_log_event *process_event(Incident_event *incident) {
    LOG(INFO) << "Event type: "
-             << mysql::system::get_event_type_str(incident->get_event_type())
+             << get_event_type_str(incident->get_event_type())
              << " length: " << incident->header()->event_length
              << " next pos: " << incident->header()->next_position;
    LOG(INFO) << "type= "
@@ -132,54 +135,54 @@ class Incident_handler : public mysql::Content_handler {
  }
 };
 
-class Replay_binlog : public mysql::Content_handler {
+class Replay_binlog : public Content_handler {
  public:
-  Replay_binlog() : mysql::Content_handler() {}
-  mysql::Binary_log_event *process_event(mysql::Binary_log_event *event) {
-    if (event->get_event_type() != mysql::USER_DEFINED) return event;
+  Replay_binlog() : Content_handler() {}
+  Binary_log_event *process_event(Binary_log_event *event) {
+    if (event->get_event_type() != USER_DEFINED) return event;
     LOG(INFO) << "Event type: "
-              << mysql::system::get_event_type_str(event->get_event_type())
+              << get_event_type_str(event->get_event_type())
               << " length: " << event->header()->event_length
               << " next pos: " << event->header()->next_position;
-    mysql::Transaction_log_event * trans =
-        static_cast<mysql::Transaction_log_event *>(event);
+    Transaction_log_event * trans =
+        static_cast<Transaction_log_event *>(event);
     // The transaction event we created has aggregated all row events in an
     // ordered list.
-    BOOST_FOREACH(mysql::Binary_log_event * event, trans->m_events) {
+    BOOST_FOREACH(Binary_log_event * event, trans->m_events) {
       switch (event->get_event_type()) {
-        case mysql::WRITE_ROWS_EVENT:
-        case mysql::DELETE_ROWS_EVENT:
-        case mysql::UPDATE_ROWS_EVENT: {
-          mysql::Row_event *rev= static_cast<mysql::Row_event *>(event);
-          boost::uint64_t table_id= rev->table_id;
+        case WRITE_ROWS_EVENT:
+        case DELETE_ROWS_EVENT:
+        case UPDATE_ROWS_EVENT: {
+          Row_event * rev= static_cast<Row_event *>(event);
+          boost::uint64_t table_id = rev->table_id;
           // BUG: will create a new event header if the table id doesn't exist.
-          Binary_log_event * tmevent= trans->table_map()[table_id];
-          mysql::Table_map_event *tm;
+          Binary_log_event * tmevent = trans->table_map()[table_id];
+          Table_map_event * tm;
           if (tmevent != NULL) {
-            tm= static_cast<mysql::Table_map_event *>(tmevent);
+            tm = static_cast<Table_map_event *>(tmevent);
           } else {
             LOG(INFO) << "Table id " << table_id
-                << " was not registered by any preceding table map event.";
+                      << "was not registered by any preceding table map event.";
             continue;
           }
           // Each row event contains multiple rows and fields. The Row_iterator
           // allows us to iterate one row at a time.
-          mysql::Row_event_set rows(rev, tm);
+          Row_event_set rows(rev, tm);
           // Create a fuly qualified table name
           std::ostringstream os;
           os << tm->db_name << '.' << tm->table_name;
-          mysql::Row_event_set::iterator it= rows.begin();
+          Row_event_set::iterator it = rows.begin();
           do {
-            mysql::Row_of_fields fields= *it;
-            if (event->get_event_type() == mysql::WRITE_ROWS_EVENT) {
-              table_insert(os.str(),fields);
+            Row_of_fields fields = *it;
+            if (event->get_event_type() == WRITE_ROWS_EVENT) {
+              table_insert(os.str(), fields);
             }
-            if (event->get_event_type() == mysql::UPDATE_ROWS_EVENT) {
+            if (event->get_event_type() == UPDATE_ROWS_EVENT) {
               ++it;
-              mysql::Row_of_fields fields2= *it;
+              Row_of_fields fields2 = *it;
               table_update(os.str(), fields, fields2);
             }
-            if (event->get_event_type() == mysql::DELETE_ROWS_EVENT) {
+            if (event->get_event_type() == DELETE_ROWS_EVENT) {
               table_delete(os.str(), fields);
             }
           } while (++it != rows.end());
@@ -188,8 +191,8 @@ class Replay_binlog : public mysql::Content_handler {
         default: {
           break;
         }
-      } // end switch
-    } // end BOOST_FOREACH
+      }
+    }
     // Consume the event
     delete trans;
     return 0;
@@ -197,13 +200,13 @@ class Replay_binlog : public mysql::Content_handler {
 };
 int main(int argc, char** argv) {
   if (argc != 2) {
-    LOG(INFO) << "Usage:\n\treplaybinlog URL\n\nExample:\n\treplaybinlog "
-                 "mysql://root:mypasswd@127.0.0.1:3306\n\n";
+    LOG(INFO) << "Usage:\nreplaybinlog file_path\nExample:\nreplaybinlog "
+                 "/var/lib/mysql/binlog.000005";
     return 0;
   }
-  mysql::Binary_log binlog(mysql::system::create_transport(argv[1]));
+  Binary_log binlog(create_transport(argv[1]));
   // Attach a custom event parser which produces user defined events
-  mysql::Basic_transaction_parser transaction_parser;
+  Basic_transaction_parser transaction_parser;
   Incident_handler incident_hndlr;
   Replay_binlog replay_hndlr;
 
@@ -211,21 +214,16 @@ int main(int argc, char** argv) {
   binlog.content_handler_pipeline()->push_back(&incident_hndlr);
   binlog.content_handler_pipeline()->push_back(&replay_hndlr);
 
-  HERE(INFO);
   if (binlog.connect()) {
-    HERE(INFO);
     LOG(INFO) << "Can't connect to the master.";
     return 0;
   }
   
-  HERE(INFO);
   if (binlog.set_position(4) != ERR_OK) {
-    HERE(INFO);
     LOG(INFO) << "Can't reposition the binary log reader.";
     return 0;
   }
-  HERE(INFO);
-  Binary_log_event  *event;
+  Binary_log_event  * event;
   bool quit= false;
   while(!quit) {
     // Pull events from the master. This is the heart beat of the event listener.
@@ -235,15 +233,15 @@ int main(int argc, char** argv) {
     }
     // Print the event
     LOG(INFO) << "Event type: "
-              << mysql::system::get_event_type_str(event->get_event_type())
+              << get_event_type_str(event->get_event_type())
               << " length: " << event->header()->event_length
               << " next pos: " << event->header()->next_position;
 
     // Perform a special action based on event type
     switch(event->header()->type_code) {
-      case mysql::QUERY_EVENT: {
-        const mysql::Query_event *qev =
-            static_cast<const mysql::Query_event *>(event);
+      case QUERY_EVENT: {
+        const Query_event *qev =
+            static_cast<const Query_event *>(event);
         LOG(INFO) << "query= " << qev->query << " db= " << qev->db_name;
         if (qev->query.find("DROP TABLE REPLICATION_LISTENER")
             != std::string::npos ||
@@ -253,8 +251,8 @@ int main(int argc, char** argv) {
         }
         break;
       }
-    case mysql::ROTATE_EVENT: {
-        mysql::Rotate_event *rot= static_cast<mysql::Rotate_event *>(event);
+    case ROTATE_EVENT: {
+        Rotate_event *rot= static_cast<Rotate_event *>(event);
         LOG(INFO) << "filename= " << rot->binlog_file.c_str() << " pos= "
                   << rot->binlog_pos;
         break;

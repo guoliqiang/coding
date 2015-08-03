@@ -1,27 +1,24 @@
-/*
-Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
-reserved.
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 2 of
-the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-02110-1301  USA
-*/
+// Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
+// reserved.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of
+// the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+// 02110-1301  USA
 
 #include "third_part/binlog_parser/public/file_driver.h"
 
-namespace mysql {
-namespace system {
+namespace binlog_parser {
 
 using namespace std;
 
@@ -82,8 +79,7 @@ int Binlog_file_driver::get_position(string *str, unsigned long *position) {
   return ERR_OK;
 }
 
-
-int Binlog_file_driver::wait_for_next_event(mysql::Binary_log_event **event) {
+int Binlog_file_driver::wait_for_next_event(Binary_log_event **event) {
   assert(m_binlog_file.tellg() >= 4 );
   m_binlog_file.exceptions(ifstream::failbit | ifstream::badbit |
                            ifstream::eofbit);
@@ -106,8 +102,8 @@ int Binlog_file_driver::wait_for_next_event(mysql::Binary_log_event **event) {
                     >> prot_event_length
                     >> prot_next_position
                     >> prot_flags;
-      *event = parse_event(* static_cast<std::istream*> (&m_binlog_file),
-                          &m_event_log_header);
+      *event = parse_event(*static_cast<std::istream*> (&m_binlog_file),
+                           &m_event_log_header);
       // Correction. Except for the default case (above), this condition should
       // always fail.
       if (m_bytes_read + m_event_log_header.event_length !=
@@ -115,7 +111,7 @@ int Binlog_file_driver::wait_for_next_event(mysql::Binary_log_event **event) {
           m_binlog_file.seekg(m_bytes_read + m_event_log_header.event_length,
                               ios::beg);
       }
-      m_bytes_read= m_binlog_file.tellg();
+      m_bytes_read = m_binlog_file.tellg();
       if(*event) return ERR_OK;
     }
   } catch(...) {
@@ -124,5 +120,4 @@ int Binlog_file_driver::wait_for_next_event(mysql::Binary_log_event **event) {
   return ERR_EOF;
 }
 
-}  // namespace system
-}  // namespace mysql
+}  // namespace binlog_parser

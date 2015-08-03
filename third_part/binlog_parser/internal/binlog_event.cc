@@ -1,29 +1,25 @@
-/*
-Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
-reserved.
+// Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
+// reserved.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of
+// the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+// 02110-1301  USA
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 2 of
-the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-02110-1301  USA
-*/
-
-#include "third_part/binlog_parser/public/binlog_event.h"
 #include <iostream>
+#include "third_part/binlog_parser/public/binlog_event.h"
 
-namespace mysql {
-
-namespace system {
+namespace binlog_parser {
 
 const char *get_event_type_str(Log_event_type type) {
   switch(type) {
@@ -58,8 +54,6 @@ const char *get_event_type_str(Log_event_type type) {
   }
 }
 
-}  // namespace system
-
 Binary_log_event::~Binary_log_event() { }
 Binary_log_event * create_incident_event(unsigned int type,
     const char *message, unsigned long pos) {
@@ -72,4 +66,4 @@ Binary_log_event * create_incident_event(unsigned int type,
   return incident;
 }
 
-}  // namespace mysql
+}  // namespace binlog_parser

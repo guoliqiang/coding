@@ -1,49 +1,53 @@
-/*
-Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
-reserved.
+// Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
+// reserved.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of
+// the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+// 02110-1301  USA
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 2 of
-the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-02110-1301  USA
-*/
-
+#include "base/public/logging.h"
 #include "third_part/binlog_parser/public/basic_content_handler.h"
 #include "third_part/boost/include/boost/bind.hpp"
 
-namespace mysql {
+namespace binlog_parser {
 
 Content_handler::Content_handler () {}
 Content_handler::~Content_handler () {}
 
-mysql::Binary_log_event * Content_handler::process_event(
-    mysql::Query_event *ev) { return ev; }
-mysql::Binary_log_event * Content_handler::process_event(
-    mysql::Row_event *ev) { return ev; }
-mysql::Binary_log_event *Content_handler::process_event(
-    mysql::Table_map_event *ev) { return ev; }
-mysql::Binary_log_event *Content_handler::process_event(
-    mysql::Xid *ev) { return ev; }
-mysql::Binary_log_event *Content_handler::process_event(
-    mysql::User_var_event *ev) { return ev; }
-mysql::Binary_log_event *Content_handler::process_event(
-    mysql::Incident_event *ev) { return ev; }
-mysql::Binary_log_event *Content_handler::process_event(
-    mysql::Rotate_event *ev) { return ev; }
-mysql::Binary_log_event *Content_handler::process_event(
-    mysql::Int_var_event *ev) { return ev; }
-mysql::Binary_log_event *Content_handler::process_event(
-    mysql::Binary_log_event *ev) { return ev; }
+Binary_log_event * Content_handler::process_event(Query_event *ev) {
+  return ev;
+}
+Binary_log_event *Content_handler::process_event(Table_map_event *ev) {
+  return ev;
+}
+Binary_log_event *Content_handler::process_event(User_var_event *ev) {
+  return ev;
+}
+Binary_log_event *Content_handler::process_event(Incident_event *ev) {
+  return ev;
+}
+Binary_log_event *Content_handler::process_event(Rotate_event *ev) {
+  return ev;
+}
+Binary_log_event *Content_handler::process_event(Int_var_event *ev) {
+  return ev;
+}
+Binary_log_event *Content_handler::process_event(Binary_log_event *ev) {
+  return ev;
+}
+Binary_log_event * Content_handler::process_event(Row_event *ev) { return ev; }
+Binary_log_event *Content_handler::process_event(Xid *ev) { return ev; }
 
 Injection_queue *Content_handler::get_injection_queue(void) {
   return m_reinject_queue;
@@ -53,61 +57,62 @@ void Content_handler::set_injection_queue(Injection_queue *queue) {
   m_reinject_queue = queue;
 }
 
-mysql::Binary_log_event * Content_handler::internal_process_event(
-    mysql::Binary_log_event *ev) {
- mysql::Binary_log_event * processed_event = NULL;
+Binary_log_event * Content_handler::internal_process_event(
+    Binary_log_event *ev) {
+ Binary_log_event * processed_event = NULL;
+ LOG(INFO) << "type:" << (int)ev->header ()->type_code;
  switch(ev->header ()->type_code) {
-   case mysql::QUERY_EVENT: {
-     processed_event = process_event(static_cast<mysql::Query_event*>(ev));
+   case QUERY_EVENT: {
+     processed_event = process_event(static_cast<Query_event*>(ev));
      break;
    }
-   case mysql::WRITE_ROWS_EVENT:
-   case mysql::UPDATE_ROWS_EVENT:
-   case mysql::DELETE_ROWS_EVENT: {
-     processed_event = process_event(static_cast<mysql::Row_event*>(ev));
+   case WRITE_ROWS_EVENT:
+   case UPDATE_ROWS_EVENT:
+   case DELETE_ROWS_EVENT: {
+     processed_event = process_event(static_cast<Row_event*>(ev));
      break;
    }
-   case mysql::USER_VAR_EVENT: {
-     processed_event = process_event(static_cast<mysql::User_var_event *>(ev));
+   case USER_VAR_EVENT: {
+     processed_event = process_event(static_cast<User_var_event *>(ev));
      break;
    }
-   case mysql::ROTATE_EVENT: {
-     processed_event = process_event(static_cast<mysql::Rotate_event *>(ev));
+   case ROTATE_EVENT: {
+     processed_event = process_event(static_cast<Rotate_event *>(ev));
      break;
    }
-   case mysql::INCIDENT_EVENT: {
-     processed_event = process_event(static_cast<mysql::Incident_event *>(ev));
+   case INCIDENT_EVENT: {
+     processed_event = process_event(static_cast<Incident_event *>(ev));
      break;
    }
-   case mysql::XID_EVENT: {
-     processed_event = process_event(static_cast<mysql::Xid *>(ev));
+   case XID_EVENT: {
+     processed_event = process_event(static_cast<Xid *>(ev));
      break;
    }
-   case mysql::TABLE_MAP_EVENT: {
-     processed_event = process_event(static_cast<mysql::Table_map_event *>(ev));
+   case TABLE_MAP_EVENT: {
+     processed_event = process_event(static_cast<Table_map_event *>(ev));
      break;
    }
-   case mysql::FORMAT_DESCRIPTION_EVENT: {
+   case FORMAT_DESCRIPTION_EVENT: {
      processed_event = process_event(ev);
      break;
    }
-   case mysql::BEGIN_LOAD_QUERY_EVENT: {
+   case BEGIN_LOAD_QUERY_EVENT: {
      processed_event = process_event(ev);
      break;
    }
-   case mysql::EXECUTE_LOAD_QUERY_EVENT: {
+   case EXECUTE_LOAD_QUERY_EVENT: {
      processed_event = process_event(ev);
      break;
    }
-   case mysql::INTVAR_EVENT: {
+   case INTVAR_EVENT: {
      processed_event = process_event(ev);
      break;
    }
-   case mysql::STOP_EVENT: {
+   case STOP_EVENT: {
      processed_event = process_event(ev);
      break;
    }
-   case mysql::RAND_EVENT: {
+   case RAND_EVENT: {
      processed_event = process_event(ev);
      break;
    }
@@ -119,4 +124,4 @@ mysql::Binary_log_event * Content_handler::internal_process_event(
  return processed_event;
 }
 
-}  // namespace mysql
+}  // namespace binlog_parser

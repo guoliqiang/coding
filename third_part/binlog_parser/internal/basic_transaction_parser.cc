@@ -1,23 +1,22 @@
-/*
-Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
-reserved.
+// Copyright (c) 2003, 2011, Oracle and/or its affiliates. All rights
+// reserved.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of
+// the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+// 02110-1301  USA
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 2 of
-the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-02110-1301  USA
-*/
-
+#include <iostream>
 #include "third_part/binlog_parser/public/binlog_event.h"
 #include "third_part/binlog_parser/public/basic_transaction_parser.h"
 #include "third_part/binlog_parser/public/protocol.h"
@@ -25,28 +24,24 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 #include "third_part/boost/include/boost/any.hpp"
 #include "third_part/boost/include/boost/lexical_cast.hpp"
 #include "third_part/binlog_parser/public/field_iterator.h"
-#include <iostream>
 
-namespace mysql {
+namespace binlog_parser {
 
-mysql::Binary_log_event *Basic_transaction_parser::process_event(
-    mysql::Query_event *qev) {
+Binary_log_event *Basic_transaction_parser::process_event(Query_event *qev) {
   if (qev->query == "BEGIN") {
-    m_transaction_state= STARTING;
+    m_transaction_state = STARTING;
   } else if (qev->query == "COMMIT") {
-    m_transaction_state= COMMITTING;
+    m_transaction_state = COMMITTING;
   }
   return process_transaction_state(qev);
 }
 
-mysql::Binary_log_event * Basic_transaction_parser::process_event(
-    mysql::Xid *ev) {
+Binary_log_event * Basic_transaction_parser::process_event(Xid *ev) {
   m_transaction_state = COMMITTING;
   return process_transaction_state(ev);
 }
 
-mysql::Binary_log_event * Basic_transaction_parser::process_event(
-    mysql::Table_map_event *ev) {
+Binary_log_event *Basic_transaction_parser::process_event(Table_map_event *ev) {
   if(m_transaction_state == IN_PROGRESS) {
     m_event_stack.push_back(ev);
     return 0;
@@ -54,8 +49,7 @@ mysql::Binary_log_event * Basic_transaction_parser::process_event(
   return ev;
 }
 
-mysql::Binary_log_event * Basic_transaction_parser::process_event(
-    mysql::Row_event *ev) {
+Binary_log_event * Basic_transaction_parser::process_event(Row_event *ev) {
   if(m_transaction_state == IN_PROGRESS) {
     m_event_stack.push_back(ev);
     return 0;
@@ -63,11 +57,11 @@ mysql::Binary_log_event * Basic_transaction_parser::process_event(
   return ev;
 }
 
-mysql::Binary_log_event *Basic_transaction_parser::process_transaction_state(
-    mysql::Binary_log_event *incomming_event) {
+Binary_log_event *Basic_transaction_parser::process_transaction_state(
+    Binary_log_event *incomming_event) {
   switch(m_transaction_state) {
     case STARTING : {
-      m_transaction_state= IN_PROGRESS;
+      m_transaction_state = IN_PROGRESS;
       m_start_time= incomming_event->header()->timestamp;
       delete incomming_event;  // drop the begin event
       return 0;
@@ -76,26 +70,23 @@ mysql::Binary_log_event *Basic_transaction_parser::process_transaction_state(
       delete incomming_event;  // drop the commit event
       // Propagate the start time for the transaction to the newly created
       // event.
-      mysql::Transaction_log_event * trans =
-          mysql::create_transaction_log_event();
+      Transaction_log_event * trans = create_transaction_log_event();
       trans->header()->timestamp= m_start_time;
 
       while (m_event_stack.size() > 0) {
-        mysql::Binary_log_event *event= m_event_stack.front();
+        Binary_log_event *event= m_event_stack.front();
         m_event_stack.pop_front();
         switch(event->get_event_type()) {
-          case mysql::TABLE_MAP_EVENT : {
+          case TABLE_MAP_EVENT : {
             // Index the table name with a table id to ease lookup later.
-            mysql::Table_map_event *tm =
-                static_cast<mysql::Table_map_event *>(event);
-            trans->m_table_map.insert(mysql::Event_index_element(
-                tm->table_id, tm));
+            Table_map_event *tm = static_cast<Table_map_event *>(event);
+            trans->m_table_map.insert(Event_index_element(tm->table_id, tm));
             trans->m_events.push_back(event);
             break;
           }
-          case mysql::WRITE_ROWS_EVENT:
-          case mysql::DELETE_ROWS_EVENT:
-          case mysql::UPDATE_ROWS_EVENT: {
+          case WRITE_ROWS_EVENT:
+          case DELETE_ROWS_EVENT:
+          case UPDATE_ROWS_EVENT: {
             trans->m_events.push_back(event);
             // Propagate last known next position
             trans->header()->next_position= event->header()->next_position;
@@ -107,7 +98,7 @@ mysql::Binary_log_event *Basic_transaction_parser::process_transaction_state(
         }
       }
       m_transaction_state = NOT_IN_PROGRESS;
-      return(trans);
+      return trans;
     }
     case NOT_IN_PROGRESS:
     default: {
@@ -134,4 +125,4 @@ Transaction_log_event::~Transaction_log_event() {
     delete(event);
   }
 }
-}  // namespace mysql
+}  // namespace binlog_parser
