@@ -23,6 +23,9 @@
 // log-bin = binlog
 // log-bin-index = binlog.index
 // binlog_format = ROW
+// 
+// Note: binlog is transaction safe which means binlog are *only* contain 
+// scuessfully commited transaction (no rollback transaction).
 
 #include <stdlib.h>
 #include "base/public/logging.h"

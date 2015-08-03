@@ -43,135 +43,135 @@ int calc_field_size(unsigned char column_type,
                     boost::uint32_t metadata) {
   boost::uint32_t length;
   switch (column_type) {
-  case MYSQL_TYPE_VAR_STRING: {
-    // This type is hijacked for result set types.
-    length = metadata;
-    break;
-  }
-  case MYSQL_TYPE_NEWDECIMAL: {
-    int precision = (metadata & 0xff);
-    int scale = metadata >> 8;
-    length = decimal_bin_size(precision, scale);
-    break;
-  }
-  case MYSQL_TYPE_DECIMAL:
-  case MYSQL_TYPE_FLOAT:
-  case MYSQL_TYPE_DOUBLE: {
-    length = metadata;
-    break;
-  }
-  // The cases for SET and ENUM are include for completeness, however
-  // both are mapped to type MYSQL_TYPE_STRING and their real types
-  // are encoded in the field metadata.
-  case MYSQL_TYPE_SET:
-  case MYSQL_TYPE_ENUM:
-  case MYSQL_TYPE_STRING: {
-    unsigned char type = metadata & 0xff;
-    if (type == MYSQL_TYPE_SET || type == MYSQL_TYPE_ENUM) {
-      length = (metadata & 0xff00) >> 8;
-    } else {
-      // We are reading the actual size from the master_data record
-      // because this field has the actual lengh stored in the first byte.
-      length= (unsigned int) *field_ptr+1;
-      //DBUG_ASSERT(length != 0);
+    case MYSQL_TYPE_VAR_STRING: {
+      // This type is hijacked for result set types.
+      length = metadata;
+      break;
     }
-    break;
-  }
-  case MYSQL_TYPE_YEAR:
-  case MYSQL_TYPE_TINY: {
-    length = 1;
-    break;
-  }
-  case MYSQL_TYPE_SHORT: {
-    length = 2;
-    break;
-  }
-  case MYSQL_TYPE_INT24: {
-    length = 3;
-    break;
-  }
-  case MYSQL_TYPE_LONG: {
-    length = 4;
-    break;
-  }
-  case MYSQL_TYPE_LONGLONG: {
-    length = 8;
-    break;
-  }
-  case MYSQL_TYPE_NULL: {
-    length = 0;
-    break;
-  }
-  case MYSQL_TYPE_NEWDATE: {
-    length = 3;
-    break;
-  }
-  case MYSQL_TYPE_DATETIME2: {
-    if (metadata > 19) length = 5 + (metadata - 19)/2;
-    else length = 5;
-    break;
-  }
-  case MYSQL_TYPE_DATE:
-  case MYSQL_TYPE_TIME: {
-    length = 3;
-    break;
-  }
-  case MYSQL_TYPE_TIMESTAMP: {
-    length = 4;
-    break;
-  }
-  case MYSQL_TYPE_DATETIME: {
-    length = 8;
-    break;
-  }
-  case MYSQL_TYPE_BIT: {
-    // Decode the size of the bit field from the master.
-    // from_len is the length in bytes from the master
-    // from_bit_len is the number of extra bits stored in the master record
-    // If from_bit_len is not 0, add 1 to the length to account for accurate
-    // number of bytes needed.
-	  boost::uint32_t from_len = (metadata >> 8U) & 0x00ff;
-	  boost::uint32_t from_bit_len = metadata & 0x00ff;
-    // DBUG_ASSERT(from_bit_len <= 7);
-    length = from_len + ((from_bit_len > 0) ? 1 : 0);
-    break;
-  }
-  case MYSQL_TYPE_VARCHAR: {
-    length = metadata > 255 ? 2 : 1;
-    length += length == 1 ? (boost::uint32_t) *field_ptr :
-                            *((boost::uint16_t *)field_ptr);
-    break;
-  }
-  case MYSQL_TYPE_TINY_BLOB:
-  case MYSQL_TYPE_MEDIUM_BLOB:
-  case MYSQL_TYPE_LONG_BLOB:
-  case MYSQL_TYPE_BLOB:
-  case MYSQL_TYPE_GEOMETRY: {
-     switch (metadata) {
-      case 1:
-        length = 1 + (boost::uint32_t) field_ptr[0];
-        break;
-      case 2:
-        length = 2 + (boost::uint32_t) (*(boost::uint16_t *)(field_ptr)
-            & 0xFFFF);
-        break;
-      case 3:
-        // TODO make platform indep.
-        length = 3+ (boost::uint32_t) (long) (*((boost::uint32_t *) (field_ptr))
-            & 0xFFFFFF);
-        break;
-      case 4:
-        // TODO make platform indep.
-        length = 4+ (boost::uint32_t) (long) *((boost::uint32_t *) (field_ptr));
-        break;
-      default:
-        length = 0;
-        break;
+    case MYSQL_TYPE_NEWDECIMAL: {
+      int precision = (metadata & 0xff);
+      int scale = metadata >> 8;
+      length = decimal_bin_size(precision, scale);
+      break;
     }
-    break;
-  }
-  default:
-    length =~(boost::uint32_t) 0;
+    case MYSQL_TYPE_DECIMAL:
+    case MYSQL_TYPE_FLOAT:
+    case MYSQL_TYPE_DOUBLE: {
+      length = metadata;
+      break;
+    }
+    // The cases for SET and ENUM are include for completeness, however
+    // both are mapped to type MYSQL_TYPE_STRING and their real types
+    // are encoded in the field metadata.
+    case MYSQL_TYPE_SET:
+    case MYSQL_TYPE_ENUM:
+    case MYSQL_TYPE_STRING: {
+      unsigned char type = metadata & 0xff;
+      if (type == MYSQL_TYPE_SET || type == MYSQL_TYPE_ENUM) {
+        length = (metadata & 0xff00) >> 8;
+      } else {
+        // We are reading the actual size from the master_data record
+        // because this field has the actual lengh stored in the first byte.
+        length= (unsigned int) *field_ptr+1;
+        //DBUG_ASSERT(length != 0);
+      }
+      break;
+    }
+    case MYSQL_TYPE_YEAR:
+    case MYSQL_TYPE_TINY: {
+      length = 1;
+      break;
+    }
+    case MYSQL_TYPE_SHORT: {
+      length = 2;
+      break;
+    }
+    case MYSQL_TYPE_INT24: {
+      length = 3;
+      break;
+    }
+    case MYSQL_TYPE_LONG: {
+      length = 4;
+      break;
+    }
+    case MYSQL_TYPE_LONGLONG: {
+      length = 8;
+      break;
+    }
+    case MYSQL_TYPE_NULL: {
+      length = 0;
+      break;
+    }
+    case MYSQL_TYPE_NEWDATE: {
+      length = 3;
+      break;
+    }
+    case MYSQL_TYPE_DATETIME2: {
+      if (metadata > 19) length = 5 + (metadata - 19)/2;
+      else length = 5;
+      break;
+    }
+    case MYSQL_TYPE_DATE:
+    case MYSQL_TYPE_TIME: {
+      length = 3;
+      break;
+    }
+    case MYSQL_TYPE_TIMESTAMP: {
+      length = 4;
+      break;
+    }
+    case MYSQL_TYPE_DATETIME: {
+      length = 8;
+      break;
+    }
+    case MYSQL_TYPE_BIT: {
+      // Decode the size of the bit field from the master.
+      // from_len is the length in bytes from the master
+      // from_bit_len is the number of extra bits stored in the master record
+      // If from_bit_len is not 0, add 1 to the length to account for accurate
+      // number of bytes needed.
+      boost::uint32_t from_len = (metadata >> 8U) & 0x00ff;
+      boost::uint32_t from_bit_len = metadata & 0x00ff;
+      // DBUG_ASSERT(from_bit_len <= 7);
+      length = from_len + ((from_bit_len > 0) ? 1 : 0);
+      break;
+    }
+    case MYSQL_TYPE_VARCHAR: {
+      length = metadata > 255 ? 2 : 1;
+      length += length == 1 ? (boost::uint32_t) *field_ptr :
+                              *((boost::uint16_t *)field_ptr);
+      break;
+    }
+    case MYSQL_TYPE_TINY_BLOB:
+    case MYSQL_TYPE_MEDIUM_BLOB:
+    case MYSQL_TYPE_LONG_BLOB:
+    case MYSQL_TYPE_BLOB:
+    case MYSQL_TYPE_GEOMETRY: {
+       switch (metadata) {
+        case 1:
+          length = 1 + (boost::uint32_t) field_ptr[0];
+          break;
+        case 2:
+          length = 2 + (boost::uint32_t) (*(boost::uint16_t *)(field_ptr)
+              & 0xFFFF);
+          break;
+        case 3:
+          // TODO make platform indep.
+          length = 3+ (boost::uint32_t) (long) (*((boost::uint32_t *) (field_ptr))
+              & 0xFFFFFF);
+          break;
+        case 4:
+          // TODO make platform indep.
+          length = 4+ (boost::uint32_t) (long) *((boost::uint32_t *) (field_ptr));
+          break;
+        default:
+          length = 0;
+          break;
+      }
+      break;
+    }
+    default:
+      length =~(boost::uint32_t) 0;
   }
   return length;
 }

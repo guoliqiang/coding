@@ -57,11 +57,6 @@ enum enum_field_types {
   MYSQL_TYPE_GEOMETRY = 255
 };
 
-
-#define int3store(T,A) do { *(T)=  (unsigned char) ((A));\
-                            *(T+1)=(unsigned char) (((unsigned int) (A) >> 8));\
-                            *(T+2)=(unsigned char) (((A) >> 16)); } while (0)
-
 class buffer_source;
 
 // The Protocol interface is used to describe a grammar consisting of
@@ -104,10 +99,7 @@ class Protocol {
 template<typename T>
 class Protocol_chunk : public Protocol {
  public:
-  Protocol_chunk() : Protocol() {
-    m_size = 0;
-    m_data = 0;
-  }
+  Protocol_chunk() : Protocol(), m_size(0), m_data(0) {}
 
   Protocol_chunk(T &chunk) : Protocol() {
     m_data = (const char *)&chunk;
@@ -132,8 +124,8 @@ class Protocol_chunk : public Protocol {
   }
 
  private:
-  const char *m_data;
   unsigned long m_size;
+  const char *m_data;
 };
 
 std::ostream & operator<<(std::ostream &os, Protocol &chunk);
@@ -147,9 +139,7 @@ class Protocol_chunk_string {
   }
   virtual unsigned int size() const { return m_str->size(); }
   virtual const char *data() const { return m_str->data(); }
-  virtual void collapse_size(unsigned int new_size) {
-    m_str->resize(new_size);
-  }
+  virtual void collapse_size(unsigned int new_size) { m_str->resize(new_size); }
 
  private:
   friend std::istream &operator>>(std::istream &is, Protocol_chunk_string &str);
@@ -168,9 +158,7 @@ class Protocol_chunk_vector : public Protocol_chunk_uint8 {
   virtual const char *data() {
     return reinterpret_cast<const char *>(&*m_vec->begin());
   }
-  virtual void collapse_size(unsigned int new_size) {
-    m_vec->resize(new_size);
-  }
+  virtual void collapse_size(unsigned int new_size) { m_vec->resize(new_size); }
  private:
   friend std::istream &operator>>(std::istream &is,
                                   Protocol_chunk_vector &chunk);
@@ -179,7 +167,7 @@ class Protocol_chunk_vector : public Protocol_chunk_uint8 {
 };
 
 
-std::istream &operator>>(std::istream &is, Protocol_chunk_vector &chunk);
+std::istream & operator >>(std::istream &is, Protocol_chunk_vector &chunk);
 
 class buffer_source {
  public:
@@ -188,18 +176,16 @@ class buffer_source {
     m_size = sz;
     m_ptr = 0;
   }
-  friend buffer_source & operator>>(buffer_source &src, Protocol &chunk);
+  friend buffer_source & operator >>(buffer_source &src, Protocol &chunk);
  private:
-  const char *m_src;
+  const char * m_src;
   int m_size;
   int m_ptr;
 };
 
 class Protocol_chunk_string_len {
  public:
-  Protocol_chunk_string_len(std::string &str) {
-    m_storage = &str;
-  }
+  Protocol_chunk_string_len(std::string &str) { m_storage = &str; }
 
  private:
   friend std::istream &operator>>(std::istream &is,

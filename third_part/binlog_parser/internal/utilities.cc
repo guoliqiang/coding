@@ -52,10 +52,8 @@ int server_var_decoder(std::map<std::string, Value> *my_var_map,
       }
       case Q_AUTO_INCREMENT: {
         length = 2;
-        my_var_map->insert(std::make_pair
-                           ("auto_increment_increment",
-                            Value(MYSQL_TYPE_SHORT,
-                                         length, (char*) &(*it))));
+        my_var_map->insert(std::make_pair("auto_increment_increment",
+                           Value(MYSQL_TYPE_SHORT, length, (char*) &(*it))));
         for (i= 0; i < length; i++) it++;
         name = "auto_increment_offset";
         field_type = MYSQL_TYPE_SHORT;
@@ -63,15 +61,11 @@ int server_var_decoder(std::map<std::string, Value> *my_var_map,
       }
       case Q_CHARSET_CODE: {
         length = 2;
-        my_var_map->insert(std::make_pair
-                           ("character_set_client",
-                            Value(MYSQL_TYPE_SHORT,
-                                         length, (char*) &(*it))));
+        my_var_map->insert(std::make_pair("character_set_client",
+                           Value(MYSQL_TYPE_SHORT, length, (char*) &(*it))));
         for (i= 0; i < length; i++) it++;
-        my_var_map->insert(std::make_pair
-                           ("collation_connection",
-                            Value(MYSQL_TYPE_SHORT,
-                                         length, (char*) &(*it))));
+        my_var_map->insert(std::make_pair("collation_connection",
+                            Value(MYSQL_TYPE_SHORT, length, (char*) &(*it))));
         for (i= 0; i < length; i++) it++;
         name = "collation_server";
         field_type = MYSQL_TYPE_SHORT;
@@ -115,9 +109,8 @@ int server_var_decoder(std::map<std::string, Value> *my_var_map,
       }
       case Q_INVOKER: {
         length = *it++;
-        my_var_map->insert(std::make_pair
-                           ("user", Value(MYSQL_TYPE_VAR_STRING,
-                                          length, (char*) &(*it))));
+        my_var_map->insert(std::make_pair("user", Value(MYSQL_TYPE_VAR_STRING,
+                           length, (char*) &(*it))));
         for(i= 0; i < length; i++) it++;
         length = *it++;
         name = "host";
@@ -129,8 +122,8 @@ int server_var_decoder(std::map<std::string, Value> *my_var_map,
         return 1;
       }
     }
-    my_var_map->insert(std::make_pair
-                       (name, Value(field_type, length, (char*) &(*it))));
+    my_var_map->insert(std::make_pair(name,
+                       Value(field_type, length, (char*) &(*it))));
     while (length --) ++it;
     // Handle null termination byte.
     if (is_null_byte) {
