@@ -1,0 +1,9 @@
+cc_library(name='linenoise',
+           srcs = [
+                   'linenoise.c',
+                   ],
+           deps = [
+                  ],
+           cflags = [
+                    ],
+          )

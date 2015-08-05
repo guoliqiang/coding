@@ -1,0 +1,44 @@
+cc_binary(name='redis-benchmark',
+           srcs = [
+                  'redis-benchmark.c',
+                   ],
+           deps = [
+                  '//third_part/redis_src/internal:redislib',
+                   ],
+           cflags = [ '-Wno-error'
+                    ],
+          )
+
+cc_binary(name='redis-cli',
+           srcs = [
+                  'redis-cli.c',
+                   ],
+           deps = [
+                  '//third_part/redis_src/internal:redislib',
+                  ],
+           cflags = [ '-Wno-error'
+                    ],
+          )
+
+cc_binary(name='redis-check-dump',
+           srcs = [
+                  'redis-check-dump.c',
+                   ],
+           deps = [
+                  '//third_part/redis_src/internal:redislib',
+                  ],
+           cflags = [ '-Wno-error'
+                    ],
+          )
+
+cc_binary(name='redis-check-aof',
+           srcs = [
+                  'redis-check-aof.c',
+                   ],
+           deps = [
+                  '//third_part/redis_src/internal:redislib',
+                  ],
+           cflags = [ '-Wno-error'
+                    ],
+          )
+
