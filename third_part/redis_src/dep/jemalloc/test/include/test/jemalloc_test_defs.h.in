@@ -1,4 +1,4 @@
-#include "jemalloc/internal/jemalloc_internal_defs.h"
+#include "third_part/redis_src/dep/jemalloc/include/jemalloc/internal/jemalloc_internal_defs.h"
 
 /* For use by SFMT. */
 #undef HAVE_SSE2

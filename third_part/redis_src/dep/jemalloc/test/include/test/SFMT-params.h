@@ -100,25 +100,25 @@
 */
 
 #if MEXP == 607
-  #include "test/SFMT-params607.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params607.h"
 #elif MEXP == 1279
-  #include "test/SFMT-params1279.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params1279.h"
 #elif MEXP == 2281
-  #include "test/SFMT-params2281.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params2281.h"
 #elif MEXP == 4253
-  #include "test/SFMT-params4253.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params4253.h"
 #elif MEXP == 11213
-  #include "test/SFMT-params11213.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params11213.h"
 #elif MEXP == 19937
-  #include "test/SFMT-params19937.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params19937.h"
 #elif MEXP == 44497
-  #include "test/SFMT-params44497.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params44497.h"
 #elif MEXP == 86243
-  #include "test/SFMT-params86243.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params86243.h"
 #elif MEXP == 132049
-  #include "test/SFMT-params132049.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params132049.h"
 #elif MEXP == 216091
-  #include "test/SFMT-params216091.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params216091.h"
 #else
 #ifdef __GNUC__
   #error "MEXP is not valid."

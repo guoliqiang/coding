@@ -1,4 +1,4 @@
-#include "test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
 
 #define	CHUNK 0x400000
 /* #define MAXALIGN ((size_t)UINT64_C(0x80000000000)) */
