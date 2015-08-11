@@ -1,4 +1,4 @@
-#include "test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
 
 /* Number of ring entries, in [2..26]. */
 #define	NENTRIES 9

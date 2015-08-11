@@ -1,4 +1,4 @@
-#include "test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
 
 #if (LG_BITMAP_MAXBITS > 12)
 #  define MAXBITS	4500

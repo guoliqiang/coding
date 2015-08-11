@@ -1,4 +1,4 @@
-#include "test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
 
 #define	NTHREADS		4
 #define	NALLOCS_PER_THREAD	50

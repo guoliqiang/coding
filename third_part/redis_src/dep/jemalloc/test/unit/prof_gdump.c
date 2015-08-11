@@ -1,4 +1,4 @@
-#include "test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
 
 #ifdef JEMALLOC_PROF
 const char *malloc_conf = "prof:true,prof_active:false,prof_gdump:true";

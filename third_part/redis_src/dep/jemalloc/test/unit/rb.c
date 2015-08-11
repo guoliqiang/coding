@@ -1,4 +1,4 @@
-#include "test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
 
 #define	rbtn_black_height(a_type, a_field, a_rbt, r_height) do {	\
     a_type *rbp_bh_t;							\

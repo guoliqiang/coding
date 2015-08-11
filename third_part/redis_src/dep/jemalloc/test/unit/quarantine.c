@@ -1,4 +1,4 @@
-#include "test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
 
 #define	QUARANTINE_SIZE		8192
 #define	STRINGIFY_HELPER(x)	#x

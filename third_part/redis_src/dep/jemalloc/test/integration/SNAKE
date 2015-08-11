@@ -1,0 +1,176 @@
+cc_binary(name='aligned_alloc',
+           srcs = [
+                   'aligned_alloc.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='allocated',
+           srcs = [
+                   'allocated.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='allocm',
+           srcs = [
+                   'allocm.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='MALLOCX_ARENA',
+           srcs = [
+                   'MALLOCX_ARENA.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='mremap',
+           srcs = [
+                   'mremap.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='posix_memalign',
+           srcs = [
+                   'posix_memalign.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='rallocm',
+           srcs = [
+                   'rallocm.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='rallocx',
+           srcs = [
+                   'rallocx.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='thread_arena',
+           srcs = [
+                   'thread_arena.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='thread_tcache_enabled',
+           srcs = [
+                   'thread_tcache_enabled.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+
+cc_binary(name='xallocx',
+           srcs = [
+                   'xallocx.c',
+                   '../src/math.c',
+                   '../src/mtx.c',
+                   '../src/SFMT.c',
+                   '../src/test.c',
+                   '../src/thd.c',
+                  ],
+           deps = [
+                  '//third_part/redis_src/dep/jemalloc/src:jemalloc',
+                  ],
+           cflags = [ '-DJEMALLOC_INTEGRATION_TEST -D_GNU_SOURCE -D_REENTRANT -Wno-error'
+                    ],
+          )
+

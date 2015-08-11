@@ -46,8 +46,8 @@
  * The new BSD License is applied to this software, see LICENSE.txt
  */
 #define	SFMT_C_
-#include "test/jemalloc_test.h"
-#include "test/SFMT-params.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-params.h"
 
 #if defined(JEMALLOC_BIG_ENDIAN) && !defined(BIG_ENDIAN64)
 #define BIG_ENDIAN64 1
@@ -132,9 +132,9 @@ JEMALLOC_INLINE_C void swap(w128_t *array, int size);
 #endif
 
 #if defined(HAVE_ALTIVEC)
-  #include "test/SFMT-alti.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-alti.h"
 #elif defined(HAVE_SSE2)
-  #include "test/SFMT-sse2.h"
+  #include "third_part/redis_src/dep/jemalloc/test/include/test/SFMT-sse2.h"
 #endif
 
 /**

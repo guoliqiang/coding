@@ -1,4 +1,4 @@
-#include "test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
 
 static unsigned		test_count = 0;
 static test_status_t	test_counts[test_status_count] = {0, 0, 0};

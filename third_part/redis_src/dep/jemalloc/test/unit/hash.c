@@ -27,7 +27,7 @@
  * THE SOFTWARE.
  */
 
-#include "test/jemalloc_test.h"
+#include "third_part/redis_src/dep/jemalloc/test/include/test/jemalloc_test.h"
 
 typedef enum {
 	hash_variant_x86_32,

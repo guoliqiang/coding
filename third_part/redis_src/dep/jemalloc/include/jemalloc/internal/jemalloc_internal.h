@@ -68,7 +68,7 @@ typedef intptr_t ssize_t;
 #define	JEMALLOC_NO_DEMANGLE
 #ifdef JEMALLOC_JET
 #  define JEMALLOC_N(n) jet_##n
-#  include "jemalloc/internal/public_namespace.h"
+#  include "third_part/redis_src/dep/jemalloc/include/jemalloc/internal/public_namespace.h"
 #  define JEMALLOC_NO_RENAME
 #  include "../jemalloc.h"
 #  undef JEMALLOC_NO_RENAME
