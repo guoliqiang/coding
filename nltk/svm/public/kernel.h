@@ -1,5 +1,5 @@
-// Copyright 2013 Jike Inc. All Rights Reserved.
-// Author: Liqiang Guo(guoliqiang@jike.com)
+// Copyright 2013. All Rights Reserved.
+// Author: Liqiang Guo(guoliqiang2006@gmail.com)
 // Date  : 2013-09-07 23:21:29
 // File  : kernel.h
 // Brief :

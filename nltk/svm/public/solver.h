@@ -1,5 +1,5 @@
-// Copyright 2013 Jike Inc. All Rights Reserved.
-// Author: Liqiang Guo(guoliqiang@jike.com)
+// Copyright 2013. All Rights Reserved.
+// Author: Liqiang Guo(guoliqiang2006@gmail.com)
 // Date  : 2013-09-08 01:08:14
 // File  : solver.h
 // Brief :

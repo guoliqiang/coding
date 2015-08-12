@@ -1,6 +1,5 @@
-// Copyright 2013 Jike Inc. All Rights Reserved.
-// Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
+// Copyright 2013. All Rights Reserved.
+// Author: Liqiang Guo(guoliqiang2006@gamil.com)
 // Date  : 2013-09-03 07:51:43
 // File  : perceptron_unittest.cc
 // Brief :

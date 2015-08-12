@@ -1,9 +1,10 @@
-// Copyright 2013 Jike Inc. All Rights Reserved.
-// Author: Liqiang Guo(guoliqiang@jike.com)
-// I just want to GH to hss~
+// Copyright 2013. All Rights Reserved.
+// Author: Liqiang Guo(guoliqiang2006@gmail.com)
 // Date  : 2013-09-02 23:00:07
 // File  : perceptron.cc
 // Brief :
+// http://stackoverflow.com/questions/1697243/
+// perceptron-learning-algorithm-not-converging-to-0
 
 // TODO(guoliqiang) use sparse_array.
 
