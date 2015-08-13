@@ -28,9 +28,7 @@ static void Accept(evutil_socket_t listener, int16_t event, void * arg) {
 
   int optval = 1;
   socklen_t optlen = sizeof(optval);
-  // set reuse attribute
-  CHECK_GE(setsockopt(client_fd, SOL_SOCKET, SO_REUSEADDR, &optval, optlen), 0)
-    << "set SO_REUSEADDR on client fd=" << client_fd << " failed";
+  // do not need to set reuse
 
   // Open the keepalive attribute for fd.
   CHECK_GE(setsockopt(client_fd, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen), 0)
