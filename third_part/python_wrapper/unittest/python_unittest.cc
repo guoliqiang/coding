@@ -27,3 +27,11 @@ TEST(PythonWrapper, Class) {
   pw.CallClassFunc("Bar", "Dump", cvec, "INPUT1", "INPUT2", &rs);
   LOG(INFO) << rs;
 }
+
+TEST(PythonWrapper, SendEmail) {
+  python_wrapper::PythonWrapper pw("./send_email.py");
+  std::vector<std::string> vec;
+  vec.push_back("guol@garena.com");
+  vec.push_back("From PythonWrapper");
+  pw.CallFunc("SendEmail", vec);
+}

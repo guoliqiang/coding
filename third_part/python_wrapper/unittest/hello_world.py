@@ -7,6 +7,9 @@
 # File  : hello_world.py
 # Brief :
 
+import smtplib
+from email.mime.text import MIMEText
+
 def Foo(s1, s2, s3):
   return 'Hello World %s %s %s' % (s1, s2, s3)
 

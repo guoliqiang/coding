@@ -14,6 +14,7 @@
 
 namespace python_wrapper {
 
+// muset be only-one instance at any time (obvious not-threadsafe).
 class PythonWrapper {
  public:
   PythonWrapper(const std::string & file_path) : file_path_(file_path) {
@@ -31,6 +32,7 @@ class PythonWrapper {
     }
 
     module_ = PyImport_ImportModule(name.c_str());
+    if (moduler_ == NULL) PyErr_Print();
     CHECK(module_ != NULL)
       << "import " << file_path_ << " name=" << name << " error";
   }

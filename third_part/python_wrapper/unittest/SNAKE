@@ -4,5 +4,5 @@ cc_binary(name='python_unittest',
                   '//third_part/testing/gtest/src:gtest',
                   '//third_part/python_wrapper/internal:python_wrapper',
                   ],
-          link_flags = ['-lutil']
+          link_flags = ['-lutil -Xlinker -export-dynamic']
           )
