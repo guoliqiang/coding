@@ -325,6 +325,18 @@ static string::size_type ExtensionSeparatorPosition(const string& path) {
   return last_dot;
 }
 
+std::string File::TimeBasedFileName(const std::string & name) {
+  struct timeval tv;
+  struct tm tm;
+  char buf[128];
+  gettimeofday(&tv, NULL);
+  localtime_r(&(tv.tv_sec), &tm);
+  snprintf(buf, 128, "%s.%d.%02d.%02d-%02d%02d%02d",
+           name.c_str(), tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
+           tm.tm_hour, tm.tm_min, tm.tm_sec);
+  return buf;
+}
+
 string File::GetExtension(const string& path) {
   string base = File::BaseName(path);
   const string::size_type dot = ExtensionSeparatorPosition(base);
