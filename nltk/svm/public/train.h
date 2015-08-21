@@ -28,9 +28,9 @@ class Train {
   }
 
   Train() {}
-  void ReadFile(const std::string path);
+  void ReadFile(const std::string & path);
   void SvmTrain();
-  void WriteModel(std::string path);
+  void WriteModel(const std::string & path);
 
  private:
   void Transfer(ProblemNode & a, problemnode *b) {

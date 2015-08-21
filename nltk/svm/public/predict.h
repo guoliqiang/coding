@@ -20,10 +20,12 @@ class Predict {
   }
   Predict() {}
 
-  void LoadModel(const std::string path);
-  void SvmPredict(const std::string input, const std::string output);
-  int32_t SvmPredict(ProblemNode & input);
-  int32_t SvmPredictFast(ProblemNode & input);
+  void LoadModel(const std::string & path);
+  void SvmPredict(const std::string & input, const std::string & output);
+  int32_t SvmPredict(ProblemNode & input,
+      std::map<std::pair<int32_t, int32_t>, double> * class_socre = NULL);
+  int32_t SvmPredictFast(ProblemNode & input,
+      std::map<std::pair<int32_t, int32_t>, double> * class_socre = NULL);
   void KernelValue(const ProblemNode & input, std::vector<double> * rs);
 
  private:

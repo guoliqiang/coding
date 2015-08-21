@@ -12,7 +12,7 @@ namespace svm {
 
 DECLARE_bool(scale);
 
-void Predict::LoadModel(const std::string path) {
+void Predict::LoadModel(const std::string & path) {
   Model::GetInstance().LoadModel(path);   
   Kernel::GetInstance().Set(Model::GetInstance().para_);
 }
@@ -22,7 +22,8 @@ bool Predict::Free(const double alpha) {
   return true;
 }
 
-void Predict::SvmPredict(const std::string input, const std::string output) {
+void Predict::SvmPredict(const std::string & input,
+                         const std::string & output) {
   std::string rs = "";    
   std::string content;
   int32_t right_num = 0;
@@ -77,7 +78,8 @@ void Predict::KernelValue(const ProblemNode & input, std::vector<double> * rs) {
   }
 }
 
-int32_t Predict::SvmPredictFast(ProblemNode & input) {
+int32_t Predict::SvmPredictFast(ProblemNode & input,
+    std::map<std::pair<int32_t, int32_t>, double> * class_score /*=NULL*/) {
   std::map<int32_t, int32_t> votes;
   int32_t max_vote = 0;
   int32_t max_lable = 0;
@@ -99,6 +101,10 @@ int32_t Predict::SvmPredictFast(ProblemNode & input) {
       bar -= foo->b;
       VLOG(3) << "fast predict class=" << i->first << " V.S. class=" << j->first
               << " value=" << bar;
+      if (class_score != 0) {
+        class_score->insert(std::make_pair(std::make_pair(i->first, j->first),
+            bar));
+      }
 
       if (bar > 0)  {
         if (votes.count(i->first)) votes[i->first]++;
@@ -123,7 +129,8 @@ int32_t Predict::SvmPredictFast(ProblemNode & input) {
   return max_lable;
 }
 
-int32_t Predict::SvmPredict(ProblemNode & input) {
+int32_t Predict::SvmPredict(ProblemNode & input,
+    std::map<std::pair<int32_t, int32_t>, double> * class_score) {
   std::map<int32_t, int32_t> votes;
   int32_t max_vote = 0;
   int32_t max_lable = 0;
@@ -178,6 +185,10 @@ int32_t Predict::SvmPredict(ProblemNode & input) {
       bar -= foo->b;
       VLOG(3) << "class=" << i->first << " V.S. class=" << j->first
               << " value=" << bar;
+      if (class_score != 0) {
+        class_score->insert(std::make_pair(std::make_pair(i->first, j->first),
+            bar));
+      }
 
       if (bar > 0)  {
         if (votes.count(i->first)) votes[i->first]++;

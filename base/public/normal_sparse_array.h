@@ -74,6 +74,33 @@ class NormalSarray {
   bool exist(const int32_t & i) const {
     return elements_.find(i) != elements_.end();
   }
+
+  NormalSarray operator - (const NormalSarray & other) {
+    NormalSarray rs;
+    const_iterator it1 = begin();
+    const_iterator it2 = other.begin();
+    while (it1 != end() || it2 != other.end()) {
+      if (it1 == end()) {
+        rs.insert(it2->first, -it2->second);
+        it2++;
+      } else if (it2 == other.end()) {
+        rs.insert(it1->first, it1->second);
+        it1++;
+      } else if (it1->first < it2->first) {
+        rs.insert(it1->first, it1->second);
+        it1++;
+      } else if (it1->first > it2->first) {
+        rs.insert(it2->first, -it2->second);
+        it2++;
+      } else {
+        rs.insert(it1->first, it1->second - it2->second);
+        it1++;
+        it2++;
+      }
+    }
+    return rs;
+  }
+
  private:
   std::map<int32_t, Type> elements_;
 };

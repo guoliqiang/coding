@@ -1,0 +1,27 @@
+cc_library(name = 'svm_ranklib',
+           srcs = ['problem.cc',
+                   ],
+           deps = [
+                  '//nltk/svm/internal:svmlib',
+                  ]
+           )
+
+cc_library(name = 'train',
+           srcs = [
+                   'train.cc',
+                   ],
+           deps = [
+                  '//nltk/svm_rank/internal:svm_ranklib',
+                  '//nltk/svm/internal:train',
+                  ]
+           )
+
+cc_library(name = 'predict',
+           srcs = [
+                   'predict.cc',
+                   ],
+           deps = [
+                  '//nltk/svm_rank/internal:svm_ranklib',
+                  '//nltk/svm/internal:predict',
+                  ]
+           )

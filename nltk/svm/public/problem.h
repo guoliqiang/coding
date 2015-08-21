@@ -31,7 +31,7 @@ class Problem {
   }
 
   Problem() {}
-  bool ReadFile(std::string path);
+  bool ReadFile(const std::string & path);
     
   std::string ToString() const {
     std::string rs = "\n";
@@ -44,7 +44,7 @@ class Problem {
     return rs;
   }
   
- private:
+ protected:
   static bool Cmp(const base::shared_ptr<ProblemNode> & a,
                   const base::shared_ptr<ProblemNode> & b) {
     if (a->lable == b->lable) {

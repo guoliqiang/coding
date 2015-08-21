@@ -14,7 +14,7 @@ namespace svm {
 
 DEFINE_bool(scale, false, "");
 
-bool Problem::ReadFile(std::string path) {
+bool Problem::ReadFile(const std::string & path) {
   std::string content;
   std::vector<std::string> lines;
   file::File::ReadFileToStringOrDie(path, &content);

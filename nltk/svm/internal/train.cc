@@ -10,7 +10,7 @@
 namespace nltk {
 namespace svm {
 
-void Train::ReadFile(const std::string path) {
+void Train::ReadFile(const std::string & path) {
   CHECK(Problem::GetInstance().ReadFile(path));
   Kernel::GetInstance().Set(Problem::GetInstance().para_);
   Model::GetInstance().para_ = Problem::GetInstance().para_;
@@ -58,7 +58,7 @@ void Train::SvmTrain() {
   }
 }
 
-void Train::WriteModel(std::string path) {
+void Train::WriteModel(const std::string & path) {
   modelout model_out;
   Transfer(*(Problem::GetInstance().para_.get()), &model_out.para);
   model_out.start = Problem::GetInstance().start_;
