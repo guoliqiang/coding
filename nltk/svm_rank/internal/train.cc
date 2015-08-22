@@ -12,9 +12,15 @@ namespace svm_rank {
 
 void Train::ReadFile(const std::string & path) {
   svm::Train::ReadFile(path);
+  CHECK(Problem::GetInstance().ReadFile(path));
+  // adapt
   svm::Model::GetInstance().node_ = Problem::GetInstance().transfer_node_;
   svm::Model::GetInstance().start_ = Problem::GetInstance().transfer_start_;
   svm::Model::GetInstance().count_ = Problem::GetInstance().transfer_count_;
+
+  svm::Problem::GetInstance().node_ = Problem::GetInstance().transfer_node_;
+  svm::Problem::GetInstance().start_ = Problem::GetInstance().transfer_start_;
+  svm::Problem::GetInstance().count_ = Problem::GetInstance().transfer_count_;
 }
 
 }  // namespace svm_rank

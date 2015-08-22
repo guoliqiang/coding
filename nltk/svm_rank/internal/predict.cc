@@ -7,9 +7,13 @@
 #include "nltk/svm_rank/public/predict.h"
 #include "nltk/svm/public/scale.h"
 
-DECLARE_bool(scale);
 
 namespace nltk {
+
+namespace svm {
+DECLARE_bool(scale);
+}  // namespace svm
+
 namespace svm_rank {
 
 using svm::ProblemNode;
@@ -38,7 +42,7 @@ void Predict::SvmPredict(const std::string & input,
       double value = StringToDouble(foo[1]);
       CHECK_GE(index, 0);
       // scale
-      if (FLAGS_scale) {
+      if (svm::FLAGS_scale) {
         value = svm::MaxMinScale::GetInstance()->Do(index, value,
                 &(svm::Model::GetInstance().feature_max_min_));
       }
@@ -54,6 +58,7 @@ void Predict::SvmPredict(const std::string & input,
     }
     CHECK_EQ(class_score.size(), 1)  << class_score.size();
     rs += DoubleToString(class_score.begin()->second) + "\n";
+    LOG(INFO) << class_score.begin()->second;
   }
   file::File::WriteStringToFile(rs, output);
 }

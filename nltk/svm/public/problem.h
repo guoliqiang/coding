@@ -32,7 +32,7 @@ class Problem {
 
   Problem() {}
   bool ReadFile(const std::string & path);
-    
+
   std::string ToString() const {
     std::string rs = "\n";
     rs += "start:" + JoinKeysValues(&start_) + "\n";
@@ -43,7 +43,7 @@ class Problem {
     }
     return rs;
   }
-  
+
  protected:
   static bool Cmp(const base::shared_ptr<ProblemNode> & a,
                   const base::shared_ptr<ProblemNode> & b) {
@@ -59,7 +59,7 @@ class Problem {
   std::vector<base::shared_ptr<ProblemNode> > node_;
   std::map<int32_t, int32_t> start_;
   std::map<int32_t, int32_t> count_;
- 
+
  private:
   DISALLOW_COPY_AND_ASSIGN(Problem);
 };

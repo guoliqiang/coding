@@ -15,6 +15,7 @@ using svm::ProblemNode;
 
 bool Problem::ReadFile(std::string path) {
   CHECK(svm::Problem::ReadFile(path));
+  // from rank 1 -> rank 2 -> rank 3
   for (std::map<int32_t, int32_t>::iterator i = start_.begin();
        i != start_.end(); i++) {
     for (int i_index = 0; i_index < count_[i->first]; i_index++) {
@@ -48,7 +49,7 @@ bool Problem::ReadFile(std::string path) {
       before = transfer_node_[i]->lable;
     }
   }
-  VLOG(5) << LocalToString();
+  VLOG(5) << ToString();
   return true;
 }
 

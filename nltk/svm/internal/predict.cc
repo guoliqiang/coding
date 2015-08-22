@@ -13,7 +13,7 @@ namespace svm {
 DECLARE_bool(scale);
 
 void Predict::LoadModel(const std::string & path) {
-  Model::GetInstance().LoadModel(path);   
+  Model::GetInstance().LoadModel(path);
   Kernel::GetInstance().Set(Model::GetInstance().para_);
 }
 
@@ -24,7 +24,7 @@ bool Predict::Free(const double alpha) {
 
 void Predict::SvmPredict(const std::string & input,
                          const std::string & output) {
-  std::string rs = "";    
+  std::string rs = "";
   std::string content;
   int32_t right_num = 0;
 

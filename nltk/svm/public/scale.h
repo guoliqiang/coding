@@ -29,7 +29,7 @@ class MaxMinScale : public Scale {
     return Singleton<MaxMinScale>::get();
   }
 
-  MaxMinScale() {} 
+  MaxMinScale() {}
   void Do(std::vector<base::shared_ptr<ProblemNode> > * v);
   double Do(int32_t index, double value,
             std::map<int32_t,
@@ -37,11 +37,11 @@ class MaxMinScale : public Scale {
 
  private:
   void GetFeatureMaxMin(std::vector<base::shared_ptr<ProblemNode> >& v);
- 
+
  public:
   std::map<int32_t,
            base::shared_ptr<std::pair<double, double> > > feature_max_min_;
- 
+
  private:
   DISALLOW_COPY_AND_ASSIGN(MaxMinScale);
 };

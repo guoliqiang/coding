@@ -32,7 +32,7 @@ class Model {
   }
 
   Model() {}
-  
+
   void LoadModel(const std::string & path);
 
  public:

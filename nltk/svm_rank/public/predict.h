@@ -17,6 +17,11 @@ namespace svm_rank {
 
 class Predict : public svm::Predict {
  public:
+  static Predict & GetInstance() {
+    return *Singleton<Predict>::get();
+  }
+
+  Predict() {}
   void SvmPredict(const std::string & input, const std::string & output);
 
  private:

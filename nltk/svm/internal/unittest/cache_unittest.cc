@@ -18,6 +18,6 @@ int main(int argc, char** argv) {
   LOG(INFO) << data.get()->data;
   LOG(INFO) << cache.GetData(2, 10, &data);
   LOG(INFO) << data.get()->data;
-  
+
   return 0;
 }

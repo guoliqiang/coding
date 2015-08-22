@@ -43,7 +43,7 @@ class Parameter {
  public:
   Parameter();
   std::string ToString () const;
-  
+
  public:
   double c_;
   std::map<int32_t, double> weights_;
@@ -59,7 +59,7 @@ struct ProblemNode {
   int32_t line_no;
   int32_t lable;
   base::NormalSarray<double> element;
-  
+
   ProblemNode() : line_no(-1), lable(0) {}
   std::string ToString () const;
 };
@@ -81,7 +81,7 @@ class Kernel {
   inline double dot(const ProblemNode & a, const ProblemNode & b) {
     base::NormalSarray<double>::const_iterator i = a.element.begin();
     base::NormalSarray<double>::const_iterator ei = a.element.end();
-    
+
     base::NormalSarray<double>::const_iterator j = b.element.begin();
     base::NormalSarray<double>::const_iterator ej = b.element.end();
     if (i == ei || j == ej) return 0;
@@ -111,7 +111,7 @@ class Kernel {
   }
   // a * b
   inline double linear(const ProblemNode & a, const ProblemNode & b) {
-    return dot(a, b);   
+    return dot(a, b);
   }
   // (gamma * a * b + coef0) ^ degree
   inline double poly(const ProblemNode & a, const ProblemNode & b) {
@@ -129,7 +129,7 @@ class Kernel {
  private:
   double (Kernel::*f_)(const ProblemNode & a, const ProblemNode & b);
   base::shared_ptr<Parameter> para_;
- 
+
  private:
   DISALLOW_COPY_AND_ASSIGN(Kernel);
 };

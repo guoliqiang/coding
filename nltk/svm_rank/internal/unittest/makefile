@@ -20,6 +20,9 @@ opt:
 clean:
 	rm -rf  train_unittest
 	rm -rf  predict_unittest
+	rm -rf output
+	rm -rf output.debug
+	rm -rf pinput.txt.out
 
 
 

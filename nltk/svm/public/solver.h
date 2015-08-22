@@ -30,7 +30,7 @@ class SMO : public Solver {
   SMO(const std::vector<base::shared_ptr<ProblemNode> > & a,
       const std::vector<base::shared_ptr<ProblemNode> > & b,
       base::shared_ptr<Parameter> para);
-       
+
   int32_t y(int32_t i);
   ProblemNode & GetNode(int32_t i);
   double GetC(int32_t i);
@@ -43,7 +43,7 @@ class SMO : public Solver {
   void CalculateZeta(double b);
   void CalculateW();
   void Do(ModelNode * ptr);
- 
+
  private:
   std::vector<base::shared_ptr<ProblemNode> > a_;
   std::vector<base::shared_ptr<ProblemNode> > b_;
@@ -63,7 +63,7 @@ class SMO : public Solver {
   // QD[i] = kernal(x[i], x[i])
   std::vector<double> QD_;
   int32_t node_count_;
- 
+
  private:
   std::vector<double> alpha_;
   std::vector<double> zeta_;

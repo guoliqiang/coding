@@ -24,5 +24,5 @@ int main(int argc, char** argv) {
                   *nltk::svm::Problem::GetInstance().node_[j].get());
     }
   }
-  return 0; 
+  return 0;
 }

@@ -34,7 +34,7 @@ class Cache {
 
   int32_t GetData(int32_t index, int32_t len, base::shared_ptr<CacheNode>* rs);
   void Insert(int32_t index, base::shared_ptr<CacheNode> & node);
- 
+
  private:
   int32_t size_;
   scoped_ptr<cache::LRUCache<int32_t, CacheNode> > cache_;

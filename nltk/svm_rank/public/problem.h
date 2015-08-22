@@ -22,7 +22,7 @@ class Problem : public svm::Problem {
 
   Problem() {}
   virtual bool ReadFile(std::string path);
-  std::string LocalToString() const {
+  std::string ToString() const {
     std::string rs = "\n";
     rs += "transfer_start:" + JoinKeysValues(&transfer_start_) + "\n";
     rs += "transfer_count:" + JoinKeysValues(&transfer_count_) + "\n";
