@@ -15,28 +15,33 @@ using svm::ProblemNode;
 
 bool Problem::ReadFile(std::string path) {
   CHECK(svm::Problem::ReadFile(path));
-  // from rank 1 -> rank 2 -> rank 3
+  // from group 1 -> group 2 -> group 3
+  int num = 0;
   for (std::map<int32_t, int32_t>::iterator i = start_.begin();
        i != start_.end(); i++) {
-    for (int i_index = 0; i_index < count_[i->first]; i_index++) {
-      std::map<int32_t, int32_t>::iterator next = i;
-      for (std::map<int32_t, int32_t>::iterator j = ++next; j != start_.end();
-           j++) {
-        for (int j_index = 0; j_index < count_[j->first]; j_index++) {
+    int cnt = count_[i->first];
+    for (int j = 0; j < cnt; j++) {
+      for (int k = j + 1; k < cnt; k++) {
+        if (node_[i->second + j]->score > node_[i->second + k]->score) {
           base::shared_ptr<ProblemNode> positive(new ProblemNode());
-          base::shared_ptr<ProblemNode> negative(new ProblemNode());
           positive->lable = 1;
-          negative->lable = -1;
-          positive->element = node_[i->second + i_index]->element -
-                              node_[j->second + j_index]->element;
-          negative->element = node_[j->second + j_index]->element -
-                              node_[i->second + i_index]->element;
+          positive->line_no = num++;
+          positive->element = node_[i->second + j]->element -
+                              node_[i->second + k]->element;
           transfer_node_.push_back(positive);
+          // In fact, model can ignore negative instance, but I find
+          // if insert negative instance the result will be better.
+          base::shared_ptr<ProblemNode> negative(new ProblemNode());
+          negative->lable = -1;
+          negative->line_no = num++;
+          negative->element = node_[i->second + k]->element -
+                              node_[i->second + j]->element;
           transfer_node_.push_back(negative);
         }
       }
     }
   }
+
   sort(transfer_node_.begin(), transfer_node_.end(), Cmp);
   int32_t before = 0;
   for (int i = 0; i < transfer_node_.size(); i++) {

@@ -58,9 +58,10 @@ class Parameter {
 struct ProblemNode {
   int32_t line_no;
   int32_t lable;
+  double score;  // used for rank-svm
   base::NormalSarray<double> element;
 
-  ProblemNode() : line_no(-1), lable(0) {}
+  ProblemNode() : line_no(-1), lable(0), score(0) {}
   std::string ToString () const;
 };
 

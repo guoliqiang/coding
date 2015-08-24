@@ -436,9 +436,12 @@ void SMO::Do(ModelNode * ptr) {
   // this is the object function of CSVM
   ptr->best_obj = v / 2;
 
+  int support_vector_cnt = 0;
   for (int i = 0; i < node_count_; i++) {
     alpha_[i] *= y(i);
+    if (alpha_[i] != 0) support_vector_cnt++;
   }
+  LOG(INFO) << "support vector count=" << support_vector_cnt;
   // when predict x(m)
   // sign[sum(alpha_a[i] * y[i] * kernel(x[i], x[m])) + b]
 

@@ -70,6 +70,7 @@ std::string ProblemNode::ToString() const {
   std::string rs;
   rs += "line no:" + IntToString(line_no) + "\n";
   rs += "lable:" + IntToString(lable) + "\n";
+  rs += "score:" + DoubleToString(score) + "\n";
   rs += "sparse array:" + JoinKeysValues(&element.Get());
   return rs;
 }

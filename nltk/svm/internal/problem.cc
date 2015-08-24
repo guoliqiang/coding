@@ -34,6 +34,10 @@ bool Problem::ReadFile(const std::string & path) {
       std::vector<std::string> foo;
       SplitString(parts[j], ':', &foo);
       CHECK_EQ(foo.size(), 2);
+      if (foo[0] == "score") {
+        node->score = StringToDouble(foo[1]);
+        continue;
+      }
       int32_t index = StringToInt(foo[0]);
       double value = StringToDouble(foo[1]);
       CHECK_GE(index, 0);

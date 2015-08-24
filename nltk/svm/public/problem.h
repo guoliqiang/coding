@@ -48,7 +48,11 @@ class Problem {
   static bool Cmp(const base::shared_ptr<ProblemNode> & a,
                   const base::shared_ptr<ProblemNode> & b) {
     if (a->lable == b->lable) {
-      return a->line_no < b->line_no;
+      if (fabs(a->score - b->score) < 0.000001) {
+        return a->line_no < b->line_no;
+      } else {
+        return a->score > b->score;
+      }
     } else {
       return a->lable > b->lable;
     }
