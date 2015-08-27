@@ -1,0 +1,7 @@
+cc_binary(name='preprocessor_unittest',
+          srcs = ['preprocessor_unittest.cc'],
+          deps = [
+                  '//base/internal:base',
+                  ],
+          cflags = ['-DBOOST_PP_VARIADICS']
+           )
