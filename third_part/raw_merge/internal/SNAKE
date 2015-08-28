@@ -1,0 +1,12 @@
+cc_library(name='raw_merge',
+           srcs = [
+                   'serializer.cc',
+                   'deserializer.cc',
+                   'merger.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   '//file/internal:file',
+                   '//third_part/data_logger/internal:data_logger',
+                  ],
+          )

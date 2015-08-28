@@ -1,0 +1,7 @@
+cc_binary(name='raw_merge_unittest',
+          srcs = ['raw_merge_unittest.cc'],
+          deps = [
+                  '//third_part/raw_merge/internal:raw_merge',
+                  '//third_part/testing/gtest/src:gtest',
+                  ],
+           )
