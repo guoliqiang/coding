@@ -22,7 +22,7 @@ class InstancePool {
  friend class  InstanceWrapper<T>;
  
  public:
-  static InstancePool & Get() {
+  static InstancePool<T> & Get() {
     if (instance_pool.get() == NULL) {
       base::MutexLock lock(&mutex);
       if (instance_pool.get() == NULL) {
