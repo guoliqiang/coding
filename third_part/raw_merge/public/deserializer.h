@@ -36,9 +36,13 @@ class Deserializer {
   int GetRawid(const std::string & name) {
     return StringToInt(name.substr(name.find('.') + 1));
   }
-  int GetMergeid(const std::string & name) {
+  int GetMergeid(const std::string & name, int * subid = NULL) {
     std::string tmp = name.substr(name.find('.') + 1);
-    return StringToInt(tmp.substr(0, tmp.find('.')));
+    int rs = StringToInt(tmp.substr(0, tmp.find('.')));
+    if (subid != NULL) {
+      *subid = StringToInt(tmp.substr(tmp.find('.') + 1));
+    }
+    return rs;
   }
 
  private:

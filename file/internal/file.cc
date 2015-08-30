@@ -42,8 +42,8 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include "../public/file.h"
-#include "../public/file_base.h"
+#include "file/public/file.h"
+#include "file/public/file_base.h"
 #include "base/public/time.h"
 #include "base/public/logging.h"
 #include "base/public/string_util.h"
@@ -61,6 +61,11 @@ const char* kCommonDoubleExtensions[] = { "gz", "z", "bz2" };
 }
 
 namespace file {
+
+bool File::MoveFile(const std::string & old_path,
+                    const std::string & new_path) {
+  return FileBase::MoveFile(old_path, new_path).ok();
+}
 
 bool File::Exists(const string& name) {
   return FileBase::Exists(name);

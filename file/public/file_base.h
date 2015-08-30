@@ -9,8 +9,8 @@
 #include <string>
 #include <vector>
 
-#include "../../base/public/basictypes.h"
-#include "../../third_part/registerer/public/registerer.h"
+#include "base/public/basictypes.h"
+#include "third_part/registerer/public/registerer.h"
 
 namespace file {
 

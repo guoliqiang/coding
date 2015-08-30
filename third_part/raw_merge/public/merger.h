@@ -7,6 +7,18 @@
 #ifndef  THIRD_PART_RAW_MERGE_PUBLIC_MERGER_H_
 #define  THIRD_PART_RAW_MERGE_PUBLIC_MERGER_H_
 
+// usage:
+// {
+//   Merger merge(dir);  // local variable
+//   if (merge.Init()) {
+//     while (merge.Deserialize(...)) {
+//       ....
+//     }
+//     ....
+//     mege.Serialize(...);
+//   }
+// }
+
 #include <string>
 #include "third_part/raw_merge/public/serializer.h"
 #include "third_part/raw_merge/public/deserializer.h"

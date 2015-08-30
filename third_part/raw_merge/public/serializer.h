@@ -20,9 +20,12 @@ class Serializer {
  public:
   Serializer(const std::string & dir, int size = 200 * 1000 * 1000,
              int last_merge_rawid = -1);
-  virtual ~Serializer() {}
+  virtual ~Serializer();
   void Serialize(const std::string & str);
-  bool RotateFile(bool force = false);
+  bool RotateFile();
+
+ private:
+  bool RotateFileInternal(bool force = false);
 
  private:
   std::string dir_;
@@ -30,6 +33,7 @@ class Serializer {
   int write_size_;
   int seq_num_;
   int last_merge_rawid_;
+  std::vector<std::string> tmp_files_;
   base::Mutex mutex_;
   base::shared_ptr<fast_file_rw::WritableFile> fd_;
   base::shared_ptr<data_logger::Writer> log_writer_;

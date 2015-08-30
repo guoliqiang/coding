@@ -39,7 +39,7 @@
 #include <string>
 #include <vector>
 
-#include "../../base/public/basictypes.h"
+#include "base/public/basictypes.h"
 
 namespace file {
 
@@ -126,6 +126,9 @@ class File {
   static std::string GetExtension(const std::string &path);
 
   static std::string TimeBasedFileName(const std::string & name);
+
+  static bool MoveFile(const std::string & old_path,
+                       const std::string & new_path);
 
  private:
   DISALLOW_COPY_AND_ASSIGN(File);

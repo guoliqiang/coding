@@ -4,7 +4,7 @@
 #include <errno.h>
 #include <glob.h>
 
-#include "../public/file_posix.h"
+#include "file/public/file_posix.h"
 #include "base/public/scoped_ptr.h"
 #include "base/public/logging.h"
 

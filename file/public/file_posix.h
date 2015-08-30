@@ -15,9 +15,9 @@
 #include <vector>
 #include <string>
 
-#include "../public/file_base.h"
-#include "../../base/public/string_util.h"
-#include "../../third_part/registerer/public/registerer.h"
+#include "file/public/file_base.h"
+#include "base/public/string_util.h"
+#include "third_part/registerer/public/registerer.h"
 
 namespace file {
 

@@ -37,14 +37,28 @@ Serializer::Serializer(const std::string & dir, int size,
   RotateFile();
 }
 
+Serializer::~Serializer() {
+  for (std::vector<std::string>::reverse_iterator i = tmp_files_.rbegin();
+       i != tmp_files_.rend(); i++) {
+    std::string old_path = dir_ + "/" + *i;
+    std::string new_path = dir_ + "/" + i->substr(i->find('.') + 1);
+    file::File::MoveFile(old_path, new_path);
+  }
+}
+
 void Serializer::Serialize(const std::string & str) {
   base::MutexLock lock(&mutex_);
   log_writer_->AddRecord(str);
   write_size_ += str.size();
-  RotateFile();
+  RotateFileInternal();
 }
 
-bool Serializer::RotateFile(bool force) {
+bool Serializer::RotateFile() {
+  base::MutexLock lock(&mutex_);
+  return RotateFileInternal(true);
+}
+
+bool Serializer::RotateFileInternal(bool force) {
   if (log_writer_.get() == NULL || force || write_size_ > size_) {
     seq_num_++;
     fast_file_rw::Env * env = fast_file_rw::Env::Default();
@@ -52,8 +66,9 @@ bool Serializer::RotateFile(bool force) {
 
     std::string path;
     if (last_merge_rawid_ != -1) {
-      path = dir_ + "/merge." + StringPrintf("%08d", last_merge_rawid_) +
+      path = dir_ + "/tmp.merge." + StringPrintf("%08d", last_merge_rawid_) +
              "." + StringPrintf("%06d", seq_num_);
+      tmp_files_.push_back(path.substr(path.rfind('/') + 1));
     } else {
       path = dir_ + "/raw." + StringPrintf("%08d", seq_num_);
     }

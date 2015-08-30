@@ -33,7 +33,11 @@ Deserializer::Deserializer(const std::string & dir, bool read_last_raw) {
     if (IsRawFile(name)) {
       max_rawid = std::max(max_rawid, GetRawid(name));
     } else if (IsMergeFile(name)) {
-      max_mergeid = std::max(max_mergeid, GetMergeid(name));
+      int subid = -1;
+      int mergeid = GetMergeid(name, &subid);
+      if (subid == 0) {
+        max_mergeid = std::max(max_mergeid, mergeid);
+      }
     }
   }
   if (!read_last_raw) max_rawid -= 1;

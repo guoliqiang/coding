@@ -17,15 +17,19 @@ TEST(RwaMerge, Serialize) {
 }
 
 TEST(RwaMerge, MergeNormal) {
-  Merger merger("./data");
-  EXPECT_TRUE(merger.Init(2 * 1000));
-  std::string record;
-  std::string scrach;
-  while (merger.Deserialize(&record, &scrach)) {
-    merger.Serialize(record);
+  {
+    Merger merger("./data");
+    EXPECT_TRUE(merger.Init(2 * 1000));
+    std::string record;
+    std::string scrach;
+    while (merger.Deserialize(&record, &scrach)) {
+      merger.Serialize(record);
+    }
   }
-  Merger merger2("./data");
-  EXPECT_FALSE(merger2.Init(2 * 1000));
+  {
+    Merger merger2("./data");
+    EXPECT_FALSE(merger2.Init(2 * 1000));
+  }
 }
 
 TEST(RwaMerge, DeserializeNormal) {
@@ -47,14 +51,18 @@ TEST(RwaMerge, DeserializeReadLastRaw) {
 }
 
 TEST(RwaMerge, MergeReadlastRaw) {
-  Merger merger("./data");
-  EXPECT_TRUE(merger.Init(2 * 1000, true));
-  std::string record;
-  std::string scrach;
-  while (merger.Deserialize(&record, &scrach)) {
-    merger.Serialize(record);
+  {
+    Merger merger("./data");
+    EXPECT_TRUE(merger.Init(2 * 1000, true));
+    std::string record;
+    std::string scrach;
+    while (merger.Deserialize(&record, &scrach)) {
+      merger.Serialize(record);
+    }
   }
-  Merger merger2("./data");
-  EXPECT_FALSE(merger2.Init(2 * 1000, true));
+  {
+    Merger merger2("./data");
+    EXPECT_FALSE(merger2.Init(2 * 1000, true));
+  }
 }
 }  // namespace raw_merge
