@@ -1,0 +1,6 @@
+cc_binary(name='multiindexdb_unittest',
+          srcs = ['multiindexdb_unittest.cc'],
+          deps = [
+                  '//third_part/testing/gtest/src:gtest',
+                  ],
+           )
