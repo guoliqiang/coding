@@ -112,3 +112,12 @@ cc_binary(name = 'stacktrace_unittest',
                    '//base/internal:base',
                    ],
            )
+
+cc_binary(name = 'holder_unittest',
+           srcs = [ 'holder_unittest.cc',
+                    'holder.cc'
+                  ],
+           deps = [
+                   '//base/internal:base',
+                   ],
+           )

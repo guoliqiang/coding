@@ -18,6 +18,7 @@ all:
   cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/time_limit_data_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
   cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/time_limit_thread_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
   cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/stacktrace_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
+  cp $(WORK_ROOT)/.snake/dbg/$(PROJ_NAME)/holder_unittest $(WORK_ROOT)/$(PROJ_NAME)/; \
 
 
 opt:
@@ -31,4 +32,5 @@ clean:
 	rm -rf time_limit_data_unittest
 	rm -rf time_limit_thread_unittest
 	rm -rf stacktrace_unittest
+	rm -rf holder_unittest
 
