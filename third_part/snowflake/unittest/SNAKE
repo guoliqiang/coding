@@ -1,0 +1,7 @@
+cc_binary(name='snowflake_unittest',
+          srcs = ['snowflake_unittest.cc'],
+          deps = [
+                  '//third_part/snowflake/internal:snowflake',
+                  '//third_part/testing/gtest/src:gtest',
+                  ],
+           )

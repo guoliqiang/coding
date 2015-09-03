@@ -1,0 +1,8 @@
+cc_library(name='snowflake',
+           srcs = [
+                   'id_worker.cc',
+                  ],
+           deps = [
+                   '//base/internal:base',
+                  ],
+          )
