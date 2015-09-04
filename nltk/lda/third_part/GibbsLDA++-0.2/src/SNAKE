@@ -1,0 +1,10 @@
+cc_binary(name = 'lda',
+          srcs = ['dataset.cc',
+                  'lda.cc',
+                  'model.cc',
+                  'strtokenizer.cc',
+                  'utils.cc',
+                 ],
+          deps = [],
+          cflags = ['-Wno-error']
+          )

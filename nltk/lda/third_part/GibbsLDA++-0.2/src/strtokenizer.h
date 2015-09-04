@@ -30,20 +30,17 @@
 using namespace std;
 
 class strtokenizer {
-protected:
-    vector<string> tokens;
-    int idx;
+ protected:
+  vector<string> tokens;
+  int idx;
 
-public:
-    strtokenizer(string str, string seperators = " ");    
-    
-    void parse(string str, string seperators);
-    
-    int count_tokens();
-    string next_token();   
-    void start_scan();
-
-    string token(int i);
+ public:
+  strtokenizer(string str, string seperators = " ");    
+  void parse(string str, string seperators);
+  int count_tokens();
+  string next_token();   
+  void start_scan();
+  string token(int i);
 };
 
 #endif
