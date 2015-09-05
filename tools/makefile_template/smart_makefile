@@ -3,10 +3,10 @@ AR = ar
 
 CPPFLAGS = -g -Wall -Werror -pipe -Wno-deprecaed -O3 -fno-strict-aliasing
 CPPINCLUD = -I. -I./public -I/usr/include/mysql/ -I/usr/local/include/
-CPPLIB = -Wl,-Bstatic 
+CPPLIB = -Wl,-Bstatic
   -L/usr/local/lib/ -lhiredis -lidn -ljsoncpp -lgflags -lgest -lgtest_main \
   -lssl -lcrypo -lz -ldl -lrt -pthread \
-	-Wl, -Bdynamic -L/usr/lib64/mysql/ -lmysqlclient_r
+	-Wl,-Bdynamic -L/usr/lib64/mysql/ -lmysqlclient_r
 # -Bstatic following static library
 #  compiler sequence from right to left, only left can depends right. e.g.
 #  -Bstatic -la -lb, a can depend b, b must not depend a
