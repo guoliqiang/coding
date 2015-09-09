@@ -35,13 +35,11 @@ int dataset::write_wordmap(string wordmapfile, mapword2id * pword2id) {
     printf("Cannot open file %s to write!\n", wordmapfile.c_str());
     return 1;
   }    
-
   mapword2id::iterator it;
   fprintf(fout, "%d\n", pword2id->size());
   for (it = pword2id->begin(); it != pword2id->end(); it++) {
     fprintf(fout, "%s %d\n", (it->first).c_str(), it->second);
   }
-
   fclose(fout);
   return 0;
 }
@@ -56,23 +54,19 @@ int dataset::read_wordmap(string wordmapfile, mapword2id * pword2id) {
 
   char buff[BUFF_SIZE_SHORT];
   string line;
-
   fgets(buff, BUFF_SIZE_SHORT - 1, fin);
   int nwords = atoi(buff);
 
   for (int i = 0; i < nwords; i++) {
     fgets(buff, BUFF_SIZE_SHORT - 1, fin);
     line = buff;
-
     strtokenizer strtok(line, " \t\r\n");
     if (strtok.count_tokens() != 2) {
       continue;
     }
-
     pword2id->insert(pair<string, int>(strtok.token(0),
         atoi(strtok.token(1).c_str())));
   }
-
   fclose(fin);
   return 0;
 }
@@ -88,25 +82,20 @@ int dataset::read_wordmap(string wordmapfile, mapid2word * pid2word) {
 
   char buff[BUFF_SIZE_SHORT];
   string line;
-
   fgets(buff, BUFF_SIZE_SHORT - 1, fin);
   int nwords = atoi(buff);
 
   for (int i = 0; i < nwords; i++) {
     fgets(buff, BUFF_SIZE_SHORT - 1, fin);
     line = buff;
-
     strtokenizer strtok(line, " \t\r\n");
     if (strtok.count_tokens() != 2) {
       continue;
     }
-
     pid2word->insert(pair<int, string>(atoi(strtok.token(1).c_str()),
         strtok.token(0)));
   }
-
   fclose(fin);
-
   return 0;
 }
 
@@ -140,7 +129,6 @@ int dataset::read_trndata(string dfile, string wordmapfile) {
 
   // set number of words to zero
   V = 0;
-
   for (int i = 0; i < M; i++) {
     fgets(buff, BUFF_SIZE_LONG - 1, fin);
     line = buff;
@@ -156,7 +144,6 @@ int dataset::read_trndata(string dfile, string wordmapfile) {
 
     // allocate new document
     document * pdoc = new document(length);
-
     for (int j = 0; j < length; j++) {
       it = word2id.find(strtok.token(j));
       if (it == word2id.end()) {
@@ -167,21 +154,17 @@ int dataset::read_trndata(string dfile, string wordmapfile) {
         pdoc->words[j] = it->second;
       }
     }
-
     // add new doc to the corpus
     add_doc(pdoc, i);
   }
-
   fclose(fin);
 
   // write word map to file
   if (write_wordmap(wordmapfile, &word2id)) {
     return 1;
   }
-
   // update number of words
   V = word2id.size();
-
   return 0;
 }
 

@@ -52,18 +52,18 @@ class model {
   string dir;			// model directory
   string dfile;		// data file    
   string model_name;		// model name
-  int model_status;		// model status:
   // MODEL_STATUS_UNKNOWN: unknown status
   // MODEL_STATUS_EST: estimating from scratch
   // MODEL_STATUS_ESTC: continue to estimate the model from a previous one
   // MODEL_STATUS_INF: do inference
+  int model_status;		// model status:
 
   dataset * ptrndata;	// pointer to training dataset object
   dataset * pnewdata; // pointer to new dataset object
 
   mapid2word id2word; // word map [int => string]
 
-  // --- model parameters and variables ---    
+  // model parameters and variables    
   int M; // dataset size (i.e., number of docs)
   int V; // vocabulary size
   int K; // number of topics
@@ -76,8 +76,11 @@ class model {
 
   double * p; // temp variable for sampling
   int ** z; // topic assignments for words, size M x doc.size()
-  int ** nw; // cwt[i][j]: number of instances of word/term i assigned to topic j, size V x K
-  int ** nd; // na[i][j]: number of words in document i assigned to topic j, size M x K
+  // cwt[i][j]: number of instances of word/term i assigned to topic j,
+  // size V x K
+  int ** nw;
+  // na[i][j]: number of words in document i assigned to topic j, size M x K
+  int ** nd;
   int * nwsum; // nwsum[j]: total number of words assigned to topic j, size K
   int * ndsum; // nasum[i]: total number of words in document i, size M
   double ** theta; // theta: document-topic distributions, size M x K
@@ -94,23 +97,18 @@ class model {
   int * newndsum;
   double ** newtheta;
   double ** newphi;
-  // --------------------------------------
 
   model() {
     set_default_values();
   }
-
   ~model();
 
   // set default values for variables
   void set_default_values();   
-
   // parse command line to get options
   int parse_args(int argc, char ** argv);
-
   // initialize the model
   int init(int argc, char ** argv);
-
   // load LDA model to continue estimating or to do inference
   int load_model(string model_name);
 

@@ -48,50 +48,35 @@ int utils::parse_args(int argc, char ** argv, model * pmodel) {
   int i = 0; 
   while (i < argc) {
     string arg = argv[i];
-
     if (arg == "-est") {
       model_status = MODEL_STATUS_EST;
-
     } else if (arg == "-estc") {
       model_status = MODEL_STATUS_ESTC;
-
     } else if (arg == "-inf") {
       model_status = MODEL_STATUS_INF;
-
     } else if (arg == "-dir") {
       dir = argv[++i];	    
-
     } else if (arg == "-dfile") {
       dfile = argv[++i];	    
-
     } else if (arg == "-model") {
       model_name = argv[++i];	    	    
-
     } else if (arg == "-alpha") {
       alpha = atof(argv[++i]);	    
-
     } else if (arg == "-beta") {
       beta = atof(argv[++i]);	    
-
     } else if (arg == "-ntopics") {
       K = atoi(argv[++i]);	    
-
     } else if (arg == "-niters") {
       niters = atoi(argv[++i]);	    
-
     } else if (arg == "-savestep") {
       savestep = atoi(argv[++i]);
-
     } else if (arg == "-twords") {
       twords = atoi(argv[++i]);
-
     } else if (arg == "-withrawdata") {
       withrawdata = 1;
-
     } else {
       // any more?
     }	
-
     i++;
   }
 
@@ -100,36 +85,28 @@ int utils::parse_args(int argc, char ** argv, model * pmodel) {
       printf("Please specify the input data file for model estimation!\n");
       return 1;
     }
-
     pmodel->model_status = model_status;
-
     if (K > 0) {
       pmodel->K = K;
     }
-
     if (alpha >= 0.0) {
       pmodel->alpha = alpha;
     } else {
       // default value for alpha
       pmodel->alpha = 50.0 / pmodel->K;
     }
-
     if (beta >= 0.0) {
       pmodel->beta = beta;
     }
-
     if (niters > 0) {
       pmodel->niters = niters;
     }
-
     if (savestep > 0) {
       pmodel->savestep = savestep;
     }
-
     if (twords > 0) {
       pmodel->twords = twords;
     }
-
     pmodel->dfile = dfile;
 
     string::size_type idx = dfile.find_last_of("/");			
@@ -148,34 +125,27 @@ int utils::parse_args(int argc, char ** argv, model * pmodel) {
       printf("Please specify model directory!\n");
       return 1;
     }
-
     if (model_name == "") {
       printf("Please specify model name upon that you want to continue "
              "estimating!\n");
       return 1;
     }	
-
     pmodel->model_status = model_status;
-
     if (dir[dir.size() - 1] != '/') {
       dir += "/";
     }
     pmodel->dir = dir;
-
     pmodel->model_name = model_name;
 
     if (niters > 0) {
       pmodel->niters = niters;
     }
-
     if (savestep > 0) {
       pmodel->savestep = savestep;
     }
-
     if (twords > 0) {
       pmodel->twords = twords;
     }
-
     // read <model>.others file to assign values for ntopics, alpha, beta, etc.
     if (read_and_parse(pmodel->dir + pmodel->model_name +
         pmodel->others_suffix, pmodel)) {
@@ -188,26 +158,21 @@ int utils::parse_args(int argc, char ** argv, model * pmodel) {
       printf("Please specify model directory please!\n");
       return 1;
     }
-
     if (model_name == "") {
       printf("Please specify model name for inference!\n");
       return 1;
     }	
-
     if (dfile == "") {
       printf("Please specify the new data file for inference!\n");
       return 1;
     }
 
     pmodel->model_status = model_status;
-
     if (dir[dir.size() - 1] != '/') {
       dir += "/";
     }
     pmodel->dir = dir;
-
     pmodel->model_name = model_name;
-
     pmodel->dfile = dfile;
 
     if (niters > 0) {
@@ -216,15 +181,12 @@ int utils::parse_args(int argc, char ** argv, model * pmodel) {
       // default number of Gibbs sampling iterations for doing inference
       pmodel->niters = 20;
     }
-
     if (twords > 0) {
       pmodel->twords = twords;
     }
-
     if (withrawdata > 0) {
       pmodel->withrawstrs = withrawdata;
     }
-
     // read <model>.others file to assign values for ntopics, alpha, beta, etc.
     if (read_and_parse(pmodel->dir + pmodel->model_name +
           pmodel->others_suffix, pmodel)) {
@@ -237,7 +199,6 @@ int utils::parse_args(int argc, char ** argv, model * pmodel) {
            "(-est/-estc/-inf)!\n");
     return 1;
   }
-
   return 0;
 }
 
@@ -258,45 +219,33 @@ int utils::read_and_parse(string filename, model * pmodel) {
 
   char buff[BUFF_SIZE_SHORT];
   string line;
-
   while (fgets(buff, BUFF_SIZE_SHORT - 1, fin)) {
     line = buff;
     strtokenizer strtok(line, "= \t\r\n");
     int count = strtok.count_tokens();
-
     if (count != 2) {
       // invalid, ignore this line
       continue;
     }
-
     string optstr = strtok.token(0);
     string optval = strtok.token(1);
-
     if (optstr == "alpha") {
       pmodel->alpha = atof(optval.c_str());
-
     } else if (optstr == "beta") {	    
       pmodel->beta = atof(optval.c_str());
-
     } else if (optstr == "ntopics") {
       pmodel->K = atoi(optval.c_str());
-
     } else if (optstr == "ndocs") {	   
       pmodel->M = atoi(optval.c_str());
-
     } else if (optstr == "nwords") {
       pmodel->V = atoi(optval.c_str());
-
     } else if (optstr == "liter") {
       pmodel->liter = atoi(optval.c_str());
-
     } else {
       // any more?
     }
   }
-
   fclose(fin);
-
   return 0;
 }
 
@@ -304,7 +253,6 @@ string utils::generate_model_name(int iter) {
   string model_name = "model-";
 
   char buff[BUFF_SIZE_SHORT];
-
   if (0 <= iter && iter < 10) {
     sprintf(buff, "0000%d", iter);
   } else if (10 <= iter && iter < 100) {
@@ -322,7 +270,6 @@ string utils::generate_model_name(int iter) {
   } else {
     model_name += "final";
   }
-
   return model_name;
 }
 

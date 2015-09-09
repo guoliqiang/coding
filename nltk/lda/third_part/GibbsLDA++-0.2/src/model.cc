@@ -208,26 +208,22 @@ int model::init(int argc, char ** argv) {
   if (parse_args(argc, argv)) {
     return 1;
   }
-
   if (model_status == MODEL_STATUS_EST) {
     // estimating the model from scratch
     if (init_est()) {
       return 1;
     }
-
   } else if (model_status == MODEL_STATUS_ESTC) {
     // estimating the model from a previously estimated one
     if (init_estc()) {
       return 1;
     }
-
   } else if (model_status == MODEL_STATUS_INF) {
     // do inference
     if (init_inf()) {
       return 1;
     }
   }
-
   return 0;
 }
 
@@ -264,13 +260,11 @@ int model::load_model(string model_name) {
     vector<int> topics;
     for (j = 0; j < length; j++) {
       string token = strtok.token(j);
-
       strtokenizer tok(token, ":");
       if (tok.count_tokens() != 2) {
         printf("Invalid word-topic assignment line!\n");
         return 1;
       }
-
       words.push_back(atoi(tok.token(0).c_str()));
       topics.push_back(atoi(tok.token(1).c_str()));
     }
@@ -285,9 +279,7 @@ int model::load_model(string model_name) {
       z[i][j] = topics[j];
     }
   }   
-
   fclose(fin);
-
   return 0;
 }
 
@@ -295,31 +287,25 @@ int model::save_model(string model_name) {
   if (save_model_tassign(dir + model_name + tassign_suffix)) {
     return 1;
   }
-
   if (save_model_others(dir + model_name + others_suffix)) {
     return 1;
   }
-
   if (save_model_theta(dir + model_name + theta_suffix)) {
     return 1;
   }
-
   if (save_model_phi(dir + model_name + phi_suffix)) {
     return 1;
   }
-
   if (twords > 0) {
     if (save_model_twords(dir + model_name + twords_suffix)) {
       return 1;
     }
   }
-
   return 0;
 }
 
 int model::save_model_tassign(string filename) {
   int i, j;
-
   FILE * fout = fopen(filename.c_str(), "w");
   if (!fout) {
     printf("Cannot open file %s to save!\n", filename.c_str());
@@ -333,9 +319,7 @@ int model::save_model_tassign(string filename) {
     }
     fprintf(fout, "\n");
   }
-
   fclose(fout);
-
   return 0;
 }
 
@@ -345,16 +329,13 @@ int model::save_model_theta(string filename) {
     printf("Cannot open file %s to save!\n", filename.c_str());
     return 1;
   }
-
   for (int i = 0; i < M; i++) {
     for (int j = 0; j < K; j++) {
       fprintf(fout, "%f ", theta[i][j]);
     }
     fprintf(fout, "\n");
   }
-
   fclose(fout);
-
   return 0;
 }
 
@@ -364,16 +345,13 @@ int model::save_model_phi(string filename) {
     printf("Cannot open file %s to save!\n", filename.c_str());
     return 1;
   }
-
   for (int i = 0; i < K; i++) {
     for (int j = 0; j < V; j++) {
       fprintf(fout, "%f ", phi[i][j]);
     }
     fprintf(fout, "\n");
   }
-
   fclose(fout);    
-
   return 0;
 }
 
@@ -383,16 +361,13 @@ int model::save_model_others(string filename) {
     printf("Cannot open file %s to save!\n", filename.c_str());
     return 1;
   }
-
   fprintf(fout, "alpha=%f\n", alpha);
   fprintf(fout, "beta=%f\n", beta);
   fprintf(fout, "ntopics=%d\n", K);
   fprintf(fout, "ndocs=%d\n", M);
   fprintf(fout, "nwords=%d\n", V);
   fprintf(fout, "liter=%d\n", liter);
-
   fclose(fout);    
-
   return 0;
 }
 
@@ -402,7 +377,6 @@ int model::save_model_twords(string filename) {
     printf("Cannot open file %s to save!\n", filename.c_str());
     return 1;
   }
-
   if (twords > V) {
     twords = V;
   }
@@ -424,13 +398,12 @@ int model::save_model_twords(string filename) {
     for (int i = 0; i < twords; i++) {
       it = id2word.find(words_probs[i].first);
       if (it != id2word.end()) {
-        fprintf(fout, "\t%s   %f\n", (it->second).c_str(), words_probs[i].second);
+        fprintf(fout, "\t%s   %f\n", (it->second).c_str(),
+                                      words_probs[i].second);
       }
     }
   }
-
   fclose(fout);    
-
   return 0;    
 }
 
@@ -438,31 +411,25 @@ int model::save_inf_model(string model_name) {
   if (save_inf_model_tassign(dir + model_name + tassign_suffix)) {
     return 1;
   }
-
   if (save_inf_model_others(dir + model_name + others_suffix)) {
     return 1;
   }
-
   if (save_inf_model_newtheta(dir + model_name + theta_suffix)) {
     return 1;
   }
-
   if (save_inf_model_newphi(dir + model_name + phi_suffix)) {
     return 1;
   }
-
   if (twords > 0) {
     if (save_inf_model_twords(dir + model_name + twords_suffix)) {
       return 1;
     }
   }
-
   return 0;
 }
 
 int model::save_inf_model_tassign(string filename) {
   int i, j;
-
   FILE * fout = fopen(filename.c_str(), "w");
   if (!fout) {
     printf("Cannot open file %s to save!\n", filename.c_str());
@@ -476,15 +443,12 @@ int model::save_inf_model_tassign(string filename) {
     }
     fprintf(fout, "\n");
   }
-
   fclose(fout);
-
   return 0;
 }
 
 int model::save_inf_model_newtheta(string filename) {
   int i, j;
-
   FILE * fout = fopen(filename.c_str(), "w");
   if (!fout) {
     printf("Cannot open file %s to save!\n", filename.c_str());
@@ -497,9 +461,7 @@ int model::save_inf_model_newtheta(string filename) {
     }
     fprintf(fout, "\n");
   }
-
   fclose(fout);
-
   return 0;
 }
 
@@ -516,9 +478,7 @@ int model::save_inf_model_newphi(string filename) {
     }
     fprintf(fout, "\n");
   }
-
   fclose(fout);    
-
   return 0;
 }
 
@@ -528,16 +488,13 @@ int model::save_inf_model_others(string filename) {
     printf("Cannot open file %s to save!\n", filename.c_str());
     return 1;
   }
-
   fprintf(fout, "alpha=%f\n", alpha);
   fprintf(fout, "beta=%f\n", beta);
   fprintf(fout, "ntopics=%d\n", K);
   fprintf(fout, "ndocs=%d\n", newM);
   fprintf(fout, "nwords=%d\n", newV);
   fprintf(fout, "liter=%d\n", inf_liter);
-
   fclose(fout);    
-
   return 0;
 }
 
@@ -578,16 +535,13 @@ int model::save_inf_model_twords(string filename) {
       }
     }
   }
-
   fclose(fout);    
-
   return 0;    
 }
 
 
 int model::init_est() {
   int m, n, w, k;
-
   p = new double[K];
 
   // + read training data
@@ -656,12 +610,10 @@ int model::init_est() {
   for (m = 0; m < M; m++) {
     theta[m] = new double[K];
   }
-
   phi = new double*[K];
   for (k = 0; k < K; k++) {
     phi[k] = new double[V];
   }    
-
   return 0;
 }
 
@@ -705,12 +657,10 @@ int model::init_estc() {
 
   for (m = 0; m < ptrndata->M; m++) {
     int N = ptrndata->docs[m]->length;
-
     // assign values for nw, nd, nwsum, and ndsum	
     for (n = 0; n < N; n++) {
       int w = ptrndata->docs[m]->words[n];
       int topic = z[m][n];
-
       // number of instances of word i assigned to topic j
       nw[w][topic] += 1;
       // number of words in document i assigned to topic j
@@ -726,12 +676,10 @@ int model::init_estc() {
   for (m = 0; m < M; m++) {
     theta[m] = new double[K];
   }
-
   phi = new double*[K];
   for (k = 0; k < K; k++) {
     phi[k] = new double[V];
   }    
-
   return 0;        
 }
 
@@ -740,7 +688,6 @@ void model::estimate() {
     // print out top words per topic
     dataset::read_wordmap(dir + wordmapfile, &id2word);
   }
-
   printf("Sampling %d iterations!\n", niters);
 
   int last_iter = liter;
@@ -798,7 +745,6 @@ int model::sampling(int m, int n) {
   }
   // scaled sample because of unnormalized p[]
   double u = ((double)random() / RAND_MAX) * p[K - 1];
-
   for (topic = 0; topic < K; topic++) {
     if (p[topic] > u) {
       break;
@@ -810,7 +756,6 @@ int model::sampling(int m, int n) {
   nd[m][topic] += 1;
   nwsum[topic] += 1;
   ndsum[m] += 1;    
-
   return topic;
 }
 
@@ -833,7 +778,6 @@ void model::compute_phi() {
 int model::init_inf() {
   // estimating the model from a previously estimated one
   int m, n, w, k;
-
   p = new double[K];
 
   // load moel, i.e., read z and ptrndata
@@ -875,7 +819,6 @@ int model::init_inf() {
     for (n = 0; n < N; n++) {
       int w = ptrndata->docs[m]->words[n];
       int topic = z[m][n];
-
       // number of instances of word i assigned to topic j
       nw[w][topic] += 1;
       // number of words in document i assigned to topic j
@@ -935,7 +878,6 @@ int model::init_inf() {
   for (m = 0; m < pnewdata->M; m++) {
     int N = pnewdata->docs[m]->length;
     newz[m] = new int[N];
-
     // assign values for nw, nd, nwsum, and ndsum	
     for (n = 0; n < N; n++) {
       int w = pnewdata->docs[m]->words[n];
@@ -958,12 +900,10 @@ int model::init_inf() {
   for (m = 0; m < newM; m++) {
     newtheta[m] = new double[K];
   }
-
   newphi = new double*[K];
   for (k = 0; k < K; k++) {
     newphi[k] = new double[newV];
   }    
-
   return 0;        
 }
 
