@@ -1,0 +1,11 @@
+cc_library(name = 'lda',
+           srcs = ['problem.cc',
+                   'model.cc',
+                   'gibbs_sample.cc',
+                   ],
+           deps = [
+                  '//base/internal:base',
+                  '//file/internal:file',
+#                  '//nltk/svm/proto:svm_thrift',
+                  ]
+           )
