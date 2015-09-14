@@ -13,12 +13,12 @@ DEFINE_int32(k, 100, "");
 DEFINE_double(alpha, 50, "");
 DEFINE_int32(niter, 2000, "");
 DEFINE_int32(save_niter, 200, "");
-DEFINE_int32(twords, 0, "");
+DEFINE_int32(twords, 10, "");
 
 TrainModel::TrainModel(const Problem & problem) {
   M_ = problem.doc_words_.size();
   K_ = FLAGS_k;
-  alpha_ = FLAGS_alpha / K_;
+  alpha_ = FLAGS_alpha == 50 ? FLAGS_alpha / K_ : FLAGS_alpha;
   beta_ = FLAGS_beta;
   niter_ = FLAGS_niter;
   save_niter_ = FLAGS_save_niter;
@@ -30,8 +30,7 @@ TrainModel::TrainModel(const Problem & problem) {
     for (int j = 0; j < problem.doc_words_[i].size(); j++) {
       const std::string & word = problem.doc_words_[i][j];
       if (!word2id_.count(word)) {
-        word2id_.insert(std::make_pair(word,
-            word2id_.size()));
+        word2id_.insert(std::make_pair(word, word2id_.size()));
         id2word_.insert(std::make_pair(word2id_[word], word));
       }
       doc_words_[i].push_back(word2id_[word]);
@@ -53,8 +52,7 @@ TrainModel::TrainModel(const Problem & problem) {
   }
 }
 
-PredictModel::PredictModel(const Problem & problem,
-                           const TrainModel & model) {
+PredictModel::PredictModel(const Problem & problem, const TrainModel & model) {
   M_ = problem.doc_words_.size();
   doc_words_.resize(M_);
 
@@ -67,9 +65,10 @@ PredictModel::PredictModel(const Problem & problem,
         continue;
       }
       if (!word2id_.count(word)) {
-        word2id_.insert(std::make_pair(word,
-            word2id_.size()));
+        word2id_.insert(std::make_pair(word, word2id_.size()));
         id2word_.insert(std::make_pair(word2id_[word], word));
+        id2id_.insert(std::make_pair(word2id_[word],
+            model.word2id_.find(word)->second));
       }
       doc_words_[i].push_back(word2id_[word]);
     }

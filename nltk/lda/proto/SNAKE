@@ -1,0 +1,4 @@
+thrift_library(name = 'lda_thrift',
+           srcs = ['lda.thrift'],
+           gen_cpp = 1,
+           )

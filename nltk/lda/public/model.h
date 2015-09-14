@@ -49,7 +49,7 @@ class TrainModel {
   // nword_[i][j] number of word[i] in topic[j]
   std::vector<std::vector<int> > nword_;
   // M_ x K_
-  // ntopic_[i][j] number of topic[j] in doc[i]
+  // ntopic_[i][j] number of topic[j] word in doc[i]
   std::vector<std::vector<int> > ntopic_;
   // M_ x doc.size()
   // z_[i][j] topic index of word[j] in doc[i],
@@ -67,14 +67,14 @@ class TrainModel {
 
 class PredictModel {
  public:
-  PredictModel(const Problem & problem,
-               const TrainModel & model);
+  PredictModel(const Problem & problem, const TrainModel & model);
 
  public:
   int M_;  // number of doc
   int V_;  // number of word
   std::map<std::string, int> word2id_;
   std::map<int, std::string> id2word_;
+  // new_wordid->old_wordid
   std::map<int, int> id2id_;
   // K_ x V_
   // phi_[i][j] probility of word[j] in topic[i]
@@ -86,7 +86,7 @@ class PredictModel {
   // nword_[i][j] number of word[i] in topic[j]
   std::vector<std::vector<int> > nword_;
   // M_ x K_
-  // ntopic_[i][j] number of topic[j] in doc[i]
+  // ntopic_[i][j] number of topic[j] word in doc[i]
   std::vector<std::vector<int> > ntopic_;
   // M_ x doc.size()
   // z_[i][j] topic index of word[j] in doc[i],
