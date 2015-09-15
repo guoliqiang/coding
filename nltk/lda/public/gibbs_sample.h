@@ -12,6 +12,8 @@
 #include "base/public/singleton.h"
 #include "nltk/lda/public/model.h"
 
+namespace nltk {
+
 namespace lda {
 
 class GibbsSample {
@@ -42,6 +44,6 @@ class GibbsSample {
 };
 
 }  // namespace lad
-
+}  // namespace nltk
 
 #endif  // NLTK_LDA_PUBLIC_GIBBS_SAMPLE_H_

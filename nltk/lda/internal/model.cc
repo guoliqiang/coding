@@ -6,6 +6,10 @@
 
 #include "nltk/lda/public/model.h"
 
+#include "file/public/file.h"
+
+namespace nltk {
+
 namespace lda {
 
 DEFINE_double(beta, 0.1, "");
@@ -14,6 +18,55 @@ DEFINE_double(alpha, 50, "");
 DEFINE_int32(niter, 2000, "");
 DEFINE_int32(save_niter, 200, "");
 DEFINE_int32(twords, 10, "");
+
+void TrainModel::LoadModel(const std::string & path) {
+  std::string content = "";
+  file::File::ReadFileToString(path, &content);
+  modelout model;
+  base::FromStringToThrift(content, &model);
+  M_ = model.M;
+  V_ = model.V;
+  K_ = model.K;
+  alpha_ = model.alpha;
+  beta_ = model.beta;
+  niter_ = model.niter;
+  save_niter_ = model.save_niter;
+  twords_ = model.twords;
+  word2id_ = model.word2id;
+  phi_ = model.phi;
+  theta_ = model.theta;
+  nword_ = model.nword;
+  ntopic_ = model.ntopic;
+  z_ = model.z;
+  nword_sum_ = model.nword_sum;
+  doc_words_ = model.doc_words;
+  for (int i = 0; i < doc_words_.size(); i++) {
+    doc_len_.push_back(doc_words_[i].size());
+  }
+  for (std::map<std::string, int>::iterator i = word2id_.begin();
+       i != word2id_.end(); i++) {
+    id2word_.insert(std::make_pair(i->second, i->first));
+  }
+}
+
+void TrainModel::Transfer(modelout * model) {
+  model->M = M_;
+  model->V = V_;
+  model->K = K_;
+  model->alpha = alpha_;
+  model->beta = beta_;
+  model->niter = niter_;
+  model->save_niter = save_niter_;
+  model->twords = twords_;
+  model->word2id = word2id_;
+  model->phi = phi_;
+  model->theta = theta_;
+  model->nword = nword_;
+  model->ntopic = ntopic_;
+  model->z = z_;
+  model->nword_sum = nword_sum_;
+  model->doc_words = doc_words_;
+}
 
 TrainModel::TrainModel(const Problem & problem) {
   M_ = problem.doc_words_.size();
@@ -89,4 +142,44 @@ PredictModel::PredictModel(const Problem & problem, const TrainModel & model) {
   }
 }
 
+void PredictModel::Transfer(modelout * model) {
+  model->M = M_;
+  model->V = V_;
+  model->word2id = word2id_;
+  model->id2id = id2id_;
+  model->phi = phi_;
+  model->theta = theta_;
+  model->nword = nword_;
+  model->ntopic = ntopic_;
+  model->z = z_;
+  model->nword_sum = nword_sum_;
+  model->doc_words = doc_words_;
+}
+
+void PredictModel::LoadModel(const std::string & path) {
+  std::string content = "";
+  file::File::ReadFileToString(path, &content);
+  modelout model;
+  base::FromStringToThrift(content, &model);
+  M_ = model.M;
+  V_ = model.V;
+  word2id_ = model.word2id;
+  id2id_ = model.id2id;
+  phi_ = model.phi;
+  theta_ = model.theta;
+  nword_ = model.nword;
+  ntopic_ = model.ntopic;
+  z_ = model.z;
+  nword_sum_ = model.nword_sum;
+  doc_words_ = model.doc_words;
+  for (int i = 0; i < doc_words_.size(); i++) {
+    doc_len_.push_back(doc_words_[i].size());
+  }
+  for (std::map<std::string, int>::iterator i = word2id_.begin();
+       i != word2id_.end(); i++) {
+    id2word_.insert(std::make_pair(i->second, i->first));
+  }
+}
+
 }  // namespace lad
+}  // namespace nltk

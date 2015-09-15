@@ -9,6 +9,8 @@
 #include <fstream>  // NOLINT
 #include "base/public/string_util.h"
 
+namespace nltk {
+
 namespace lda {
 
 Problem::Problem(const std::string & path) {
@@ -24,3 +26,4 @@ Problem::Problem(const std::string & path) {
 }
 
 }  // namespace lda
+}  // namespace nltk

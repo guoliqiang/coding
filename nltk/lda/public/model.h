@@ -12,12 +12,18 @@
 #include <vector>
 #include "base/public/logging.h"
 #include "nltk/lda/public/problem.h"
+#include "third_part/thrift/wrapper/public/thrift.h"
+#include "thrift-out/nltk/lda/proto/gen-cpp/lda_types.h"
+
+namespace nltk {
 
 namespace lda {
 
 class TrainModel {
  public:
   TrainModel(const Problem & problem);
+  void LoadModel(const std::string & path);
+  void Transfer(modelout * model);
 
  public:
   int M_;  // number of doc
@@ -68,6 +74,8 @@ class TrainModel {
 class PredictModel {
  public:
   PredictModel(const Problem & problem, const TrainModel & model);
+  void LoadModel(const std::string & path);
+  void Transfer(modelout * model);
 
  public:
   int M_;  // number of doc
@@ -103,5 +111,6 @@ class PredictModel {
 };
 
 }  // namespace lda
+}  // namespace nltk
 
 #endif  // NLTK_LDA_PUBLIC_MODEL_H_

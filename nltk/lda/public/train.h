@@ -7,19 +7,29 @@
 #ifndef  NLTK_LDA_PUBLIC_TRAIN_H_
 #define  NLTK_LDA_PUBLIC_TRAIN_H_
 
+#include <string>
 #include "base/public/logging.h"
-#include "nltk/lad/public/model.h"
+#include "nltk/lda/public/model.h"
+#include "nltk/lda/public/problem.h"
 #include "base/public/shared_ptr.h"
+
+namespace nltk {
 
 namespace lda {
 
 class Train {
  public:
+  Train(const std::string & tdata_path, const std::string & dir);
+  void Save(const std::string & suffix);
+  void DoTrain();
+
  private:
+  std::string dir_;
   base::shared_ptr<Problem> problem_;
   base::shared_ptr<TrainModel> model_;
 };
 
 }  // namespace lda
+}  // namespace nltk
 
 #endif  // NLTK_LDA_PUBLIC_TRAIN_TRAIN_H_

@@ -11,6 +11,8 @@
 #include <vector>
 #include "base/public/logging.h"
 
+namespace nltk{
+
 namespace lda {
 
 class Problem {
@@ -24,5 +26,6 @@ class Problem {
 };
 
 }  // namespace lda
+}  // namespace nltk
 
 #endif  // NLTK_LDA_PUBLIC_PROBLEM_H_

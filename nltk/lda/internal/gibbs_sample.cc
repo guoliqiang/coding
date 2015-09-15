@@ -8,6 +8,8 @@
 
 #include <time.h>
 
+namespace nltk {
+
 namespace lda {
 
 void GibbsSample::InitTrain(TrainModel * model) {
@@ -184,3 +186,4 @@ void GibbsSample::IterPredict(const TrainModel & tmodel,
 }
 
 }  // namespace lad
+}  // namespace nltk
