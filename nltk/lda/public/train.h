@@ -14,7 +14,6 @@
 #include "base/public/shared_ptr.h"
 
 namespace nltk {
-
 namespace lda {
 
 class Train {

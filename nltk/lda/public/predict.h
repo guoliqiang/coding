@@ -31,7 +31,7 @@ class Predict {
   base::shared_ptr<TrainModel> tmodel_;
 };
 
-}  // namespace lad
+}  // namespace lda
 }  // namespace nltk
 
 #endif  // NLTK_LDA_PUBLIC_PREDICT_H_

@@ -18,7 +18,7 @@ namespace lda {
 
 class GibbsSample {
  public:
-  GibbsSample & GetInstance() {
+  static GibbsSample & GetInstance() {
     return *Singleton<GibbsSample>::get();
   }
   GibbsSample() {}
@@ -27,7 +27,7 @@ class GibbsSample {
   void IterTrain(TrainModel * model, int steps);
 
   void InitPredict(const TrainModel & tmodel, PredictModel * pmodel);
-  void IterPredict(const TrainModel & tmodel, PredictModel * pmodel, int steps);
+  void IterPredict(const TrainModel & tmodel, int steps, PredictModel * pmodel);
 
  private:
   int Sampling(TrainModel * model, int m, int n);
@@ -43,7 +43,7 @@ class GibbsSample {
   DISALLOW_COPY_AND_ASSIGN(GibbsSample);
 };
 
-}  // namespace lad
+}  // namespace lda
 }  // namespace nltk
 
 #endif  // NLTK_LDA_PUBLIC_GIBBS_SAMPLE_H_

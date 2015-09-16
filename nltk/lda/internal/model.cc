@@ -17,7 +17,8 @@ DEFINE_int32(k, 100, "");
 DEFINE_double(alpha, 50, "");
 DEFINE_int32(niter, 2000, "");
 DEFINE_int32(save_niter, 200, "");
-DEFINE_int32(twords, 10, "");
+DEFINE_int32(out_words, 10, "");
+DEFINE_int32(out_topics, 10, "");
 
 void TrainModel::LoadModel(const std::string & path) {
   std::string content = "";
@@ -31,7 +32,8 @@ void TrainModel::LoadModel(const std::string & path) {
   beta_ = model.beta;
   niter_ = model.niter;
   save_niter_ = model.save_niter;
-  twords_ = model.twords;
+  out_words_ = model.out_words;
+  out_topics_ = model.out_topics;
   word2id_ = model.word2id;
   phi_ = model.phi;
   theta_ = model.theta;
@@ -57,7 +59,8 @@ void TrainModel::Transfer(modelout * model) {
   model->beta = beta_;
   model->niter = niter_;
   model->save_niter = save_niter_;
-  model->twords = twords_;
+  model->out_words = out_words_;
+  model->out_topics = out_topics_;
   model->word2id = word2id_;
   model->phi = phi_;
   model->theta = theta_;
@@ -68,14 +71,15 @@ void TrainModel::Transfer(modelout * model) {
   model->doc_words = doc_words_;
 }
 
-TrainModel::TrainModel(const Problem & problem) {
+void TrainModel::Init(const Problem & problem) {
   M_ = problem.doc_words_.size();
   K_ = FLAGS_k;
   alpha_ = FLAGS_alpha == 50 ? FLAGS_alpha / K_ : FLAGS_alpha;
   beta_ = FLAGS_beta;
   niter_ = FLAGS_niter;
   save_niter_ = FLAGS_save_niter;
-  twords_ = FLAGS_twords;
+  out_words_ = FLAGS_out_words;
+  out_topics_ = FLAGS_out_topics;
   doc_words_.resize(M_);
 
   for (int i = 0; i < problem.doc_words_.size(); i++) {
@@ -105,7 +109,7 @@ TrainModel::TrainModel(const Problem & problem) {
   }
 }
 
-PredictModel::PredictModel(const Problem & problem, const TrainModel & model) {
+void PredictModel::Init(const Problem & problem, const TrainModel & model) {
   M_ = problem.doc_words_.size();
   doc_words_.resize(M_);
 
@@ -181,5 +185,5 @@ void PredictModel::LoadModel(const std::string & path) {
   }
 }
 
-}  // namespace lad
+}  // namespace lda
 }  // namespace nltk

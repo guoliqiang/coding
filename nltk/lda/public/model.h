@@ -21,7 +21,7 @@ namespace lda {
 
 class TrainModel {
  public:
-  TrainModel(const Problem & problem);
+  void Init(const Problem & problem);
   void LoadModel(const std::string & path);
   void Transfer(modelout * model);
 
@@ -42,7 +42,9 @@ class TrainModel {
   // number of save iterations
   int save_niter_;
   // number of print word for each topic
-  int twords_;
+  int out_words_;
+  // number of print topic for each doc
+  int out_topics_;
   std::map<std::string, int> word2id_;
   std::map<int, std::string> id2word_;
   // K_ x V_
@@ -73,7 +75,7 @@ class TrainModel {
 
 class PredictModel {
  public:
-  PredictModel(const Problem & problem, const TrainModel & model);
+  void Init(const Problem & problem, const TrainModel & model);
   void LoadModel(const std::string & path);
   void Transfer(modelout * model);
 

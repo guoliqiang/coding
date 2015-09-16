@@ -172,8 +172,8 @@ void GibbsSample::IterTrain(TrainModel * model, int steps) {
   ComputeTheta(model);
 }
 
-void GibbsSample::IterPredict(const TrainModel & tmodel,
-                              PredictModel * pmodel, int steps) {
+void GibbsSample::IterPredict(const TrainModel & tmodel, int steps,
+                              PredictModel * pmodel) {
   for (int step = 0; step < steps; step++) {
     for (int i = 0; i < pmodel->M_; i++) {
       for (int j = 0; j < pmodel->doc_len_[i]; j++) {
@@ -185,5 +185,5 @@ void GibbsSample::IterPredict(const TrainModel & tmodel,
   ComputeTheta(tmodel, pmodel);
 }
 
-}  // namespace lad
+}  // namespace lda
 }  // namespace nltk

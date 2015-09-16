@@ -12,14 +12,23 @@ struct modelout {
   40: double beta;
   50: i32 niter;
   60: i32 save_niter;
-  70: i32 twords;
-  80: map<string, i32> word2id;
-  90: map<i32, i32> id2id;
-  100: list<list<double> > phi;
-  110:list<list<double> > theta;
-  120:list<list<i32> > nword;
-  130:list<list<i32> > ntopic;
-  140:list<list<i32> > z;
-  150:list<i32> nword_sum;
-  160:list<list<i32> > doc_words;
+  70: i32 out_words;
+  80: i32 out_topics;
+  90: map<string, i32> word2id;
+  100: map<i32, i32> id2id;
+  110: list<list<double> > phi;
+  120:list<list<double> > theta;
+  130:list<list<i32> > nword;
+  140:list<list<i32> > ntopic;
+  150:list<list<i32> > z;
+  160:list<i32> nword_sum;
+  170:list<list<i32> > doc_words;
+}
+
+struct doc_topic {
+  1 :  list< list<string> > top_topics;
+}
+
+struct topic_word {
+  1:  list< list<string> > top_words;
 }
