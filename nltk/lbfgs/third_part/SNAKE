@@ -1,0 +1,16 @@
+cc_library(name = 'lbfgs',
+           srcs = ['lbfgs.c',
+                   ],
+           deps = [
+                  ],
+           cflags = ['-DHAVE_CONFIG_H -DUSE_SSE'],
+           )
+
+cc_binary(name = 'sample',
+           srcs = ['sample.cc',
+                   ],
+           deps = [
+                   '//nltk/lbfgs/third_part:lbfgs',
+                  ],
+           cflags = ['-DHAVE_CONFIG_H -DUSE_SSE'],
+           )
