@@ -39,11 +39,11 @@ void Train::Save(const std::string & suffix) {
   topic_word topic_word_out;
   for (int i = 0; i < model_->phi_.size(); i++) {
     std::vector<std::pair<double, int> > v;
-    for (int j = 0; j < model_->phi_[i].size(); i++) {
+    for (int j = 0; j < model_->phi_[i].size(); j++) {
       v.push_back(std::make_pair(model_->phi_[i][j], j));
     }
     int offset = v.size() < model_->out_words_ ? v.size() : model_->out_words_;
-    std::partial_sort(v.begin(), v.begin() + offset, v.end());
+    std::partial_sort(v.begin(), v.begin() + offset, v.end(), CompPair);
 
     std::vector<std::string> words_str;
     for (int j = 0; j < offset; j++) {
@@ -59,12 +59,12 @@ void Train::Save(const std::string & suffix) {
   doc_topic doc_topic_out;
   for (int i = 0; i < model_->theta_.size(); i++) {
     std::vector<std::pair<double, int> > v;
-    for (int j = 0; j < model_->theta_[i].size(); i++) {
+    for (int j = 0; j < model_->theta_[i].size(); j++) {
       v.push_back(std::make_pair(model_->theta_[i][j], j));
     }
     int offset = v.size() < model_->out_topics_ ?
                  v.size() : model_->out_topics_;
-    std::partial_sort(v.begin(), v.begin() + offset, v.end());
+    std::partial_sort(v.begin(), v.begin() + offset, v.end(), CompPair);
 
     std::vector<std::string> words_str;
     for (int j = 0; j < offset; j++) {
@@ -74,16 +74,18 @@ void Train::Save(const std::string & suffix) {
     }
     doc_topic_out.top_topics.push_back(words_str);
   }
-  content_debug = base::FromThriftToUtf8DebugString(&topic_word_out);
+  content_debug = base::FromThriftToUtf8DebugString(&doc_topic_out);
   file::File::WriteStringToFile(content_debug, dir_ + "/doc-topics." + suffix);
 }
 
 void Train::DoTrain() {
   GibbsSample::GetInstance().InitTrain(model_.get());
   for (int i = 0; i < model_->niter_; i += model_->save_niter_) {
+    LOG(INFO) << "train :" << i << "/" << model_->niter_;
     int steps = std::min(model_->save_niter_, model_->niter_ - i);
     GibbsSample::GetInstance().IterTrain(model_.get(), steps);
     std::string suffix = IntToString(i + steps);
+    LOG(INFO) << "save :" << i << "/" << model_->niter_;
     Save(suffix);
   }
 }

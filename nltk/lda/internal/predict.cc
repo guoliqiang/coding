@@ -16,6 +16,9 @@
 namespace nltk {
 namespace lda {
 
+bool CompPair(const std::pair<double, int> & a,
+              const std::pair<double, int> & b);
+
 Predict::Predict(const std::string & pdata_path,
                  const std::string & tmodel_path,
                  const std::string & dir) {
@@ -33,18 +36,19 @@ void Predict::Save(const std::string & suffix) {
   pmodel_->Transfer(&model_out);
   std::string content = base::FromThriftToString(&model_out);
   std::string content_debug = base::FromThriftToUtf8DebugString(&model_out);
-  file::File::WriteStringToFile(content, dir_ + "/model." + suffix);
-  file::File::WriteStringToFile(content_debug, dir_ + "/model-debug." + suffix);
+  file::File::WriteStringToFile(content, dir_ + "/pmodel." + suffix);
+  file::File::WriteStringToFile(content_debug, dir_ + "/pmodel-debug." +
+                                suffix);
 
   topic_word topic_word_out;
   for (int i = 0; i < pmodel_->phi_.size(); i++) {
     std::vector<std::pair<double, int> > v;
-    for (int j = 0; j < pmodel_->phi_[i].size(); i++) {
+    for (int j = 0; j < pmodel_->phi_[i].size(); j++) {
       v.push_back(std::make_pair(pmodel_->phi_[i][j], j));
     }
     int offset = v.size() < tmodel_->out_words_ ?
                  v.size() : tmodel_->out_words_;
-    std::partial_sort(v.begin(), v.begin() + offset, v.end());
+    std::partial_sort(v.begin(), v.begin() + offset, v.end(), CompPair);
 
     std::vector<std::string> words_str;
     for (int j = 0; j < offset; j++) {
@@ -55,17 +59,18 @@ void Predict::Save(const std::string & suffix) {
     topic_word_out.top_words.push_back(words_str);
   }
   content_debug = base::FromThriftToUtf8DebugString(&topic_word_out);
-  file::File::WriteStringToFile(content_debug, dir_ + "/topic-words." + suffix);
+  file::File::WriteStringToFile(content_debug, dir_ + "/ptopic-words." +
+                                suffix);
 
   doc_topic doc_topic_out;
   for (int i = 0; i < pmodel_->theta_.size(); i++) {
     std::vector<std::pair<double, int> > v;
-    for (int j = 0; j < pmodel_->theta_[i].size(); i++) {
+    for (int j = 0; j < pmodel_->theta_[i].size(); j++) {
       v.push_back(std::make_pair(pmodel_->theta_[i][j], j));
     }
     int offset = v.size() < tmodel_->out_topics_ ?
                  v.size() : tmodel_->out_topics_;
-    std::partial_sort(v.begin(), v.begin() + offset, v.end());
+    std::partial_sort(v.begin(), v.begin() + offset, v.end(), CompPair);
 
     std::vector<std::string> words_str;
     for (int j = 0; j < offset; j++) {
@@ -75,8 +80,8 @@ void Predict::Save(const std::string & suffix) {
     }
     doc_topic_out.top_topics.push_back(words_str);
   }
-  content_debug = base::FromThriftToUtf8DebugString(&topic_word_out);
-  file::File::WriteStringToFile(content_debug, dir_ + "/doc-topics." + suffix);
+  content_debug = base::FromThriftToUtf8DebugString(&doc_topic_out);
+  file::File::WriteStringToFile(content_debug, dir_ + "/pdoc-topics." + suffix);
 }
 
 void Predict::DoPredict() {

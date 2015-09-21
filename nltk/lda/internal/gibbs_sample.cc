@@ -9,7 +9,6 @@
 #include <time.h>
 
 namespace nltk {
-
 namespace lda {
 
 void GibbsSample::InitTrain(TrainModel * model) {
@@ -140,6 +139,9 @@ void GibbsSample::ComputeTheta(const TrainModel & tmodel,
 void GibbsSample::ComputePhi(TrainModel * model) {
   for (int i = 0; i < model->K_; i++) {
     for (int j = 0; j < model->V_; j++) {
+      LOG(INFO) << "i="  << i << " j=" << j << " nword="
+                << model->nword_[j][i] << " nword_sum="
+                << model->nword_sum_[i];
       model->phi_[i][j] =
          (model->nword_[j][i] + model->beta_) /
          (model->nword_sum_[i] + model->V_ * model->beta_);
@@ -162,6 +164,7 @@ void GibbsSample::ComputePhi(const TrainModel & tmodel,
 
 void GibbsSample::IterTrain(TrainModel * model, int steps) {
   for (int step = 0; step < steps; step++) {
+    LOG(INFO) << "step " << step;
     for (int i = 0; i < model->M_; i++) {
       for (int j = 0; j < model->doc_len_[i]; j++) {
         model->z_[i][j] = Sampling(model, i, j);
