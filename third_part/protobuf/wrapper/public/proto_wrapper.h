@@ -1,3 +1,10 @@
+// Copyright 2013. All Rights Reserved.
+// Author: Liqiang Guo(guoliqiang@gmail.com)
+// Date  : 2013-07-27 23:28:20
+// File  : proto_wrapper.cc
+// Brief : https://github.com/leewaya/pb2jsoncpp/blob/master/pb2json.cpp
+// Use above to improve these funtions
+
 #ifndef PROTO_WRAPPER_H_
 #define PROTO_WRAPPER_H_
 
