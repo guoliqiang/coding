@@ -1,0 +1,8 @@
+cc_binary(name = 'lbfgs_unittest',
+           srcs = [
+                   'lbfgs_unittest.cc',
+                  ],
+           deps = [
+                   '//nltk/lbfgs/internal:lbfgs',
+                  ],
+           )
