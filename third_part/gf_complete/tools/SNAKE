@@ -1,0 +1,69 @@
+cc_binary(name='gf_methods',
+          srcs = ['gf_methods.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+
+cc_binary(name='gf_add',
+          srcs = ['gf_add.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+
+cc_binary(name='gf_div',
+          srcs = ['gf_div.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+
+cc_binary(name='gf_inline_time',
+          srcs = ['gf_inline_time.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+
+cc_binary(name='gf_mult',
+          srcs = ['gf_mult.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+
+cc_binary(name='gf_poly',
+          srcs = ['gf_poly.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+
+cc_binary(name='gf_time',
+          srcs = ['gf_time.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )

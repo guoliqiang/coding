@@ -1,0 +1,20 @@
+cc_library(name='gf_complete',
+    srcs = [
+            'gf.c',
+            'gf_general.c',
+            'gf_method.c',
+            'gf_rand.c',
+            'gf_w128.c',
+            'gf_w16.c',
+            'gf_w32.c',
+            'gf_w4.c',
+            'gf_w64.c',
+            'gf_w8.c',
+            'gf_wgen.c',
+    ],
+    deps = [
+    ],
+    cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+    ],
+    )

@@ -1,0 +1,209 @@
+cc_binary(name='cauchy_01',
+          srcs = ['cauchy_01.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='cauchy_02',
+          srcs = ['cauchy_02.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='cauchy_03',
+          srcs = ['cauchy_03.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='cauchy_04',
+          srcs = ['cauchy_04.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='decoder',
+          srcs = ['decoder.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='encoder',
+          srcs = ['encoder.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='jerasure_01',
+          srcs = ['jerasure_01.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='jerasure_02',
+          srcs = ['jerasure_02.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='jerasure_03',
+          srcs = ['jerasure_03.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='jerasure_04',
+          srcs = ['jerasure_04.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='jerasure_05',
+          srcs = ['jerasure_05.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='jerasure_06',
+          srcs = ['jerasure_06.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='jerasure_07',
+          srcs = ['jerasure_07.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='jerasure_08',
+          srcs = ['jerasure_08.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='liberation_01',
+          srcs = ['liberation_01.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='reed_sol_01',
+          srcs = ['reed_sol_01.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='reed_sol_02',
+          srcs = ['reed_sol_02.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='reed_sol_03',
+          srcs = ['reed_sol_03.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='reed_sol_04',
+          srcs = ['reed_sol_04.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='reed_sol_test_gf',
+          srcs = ['reed_sol_test_gf.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )
+
+cc_binary(name='reed_sol_time_gf',
+          srcs = ['reed_sol_time_gf.c'],
+          deps = [
+                  '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+             '-Wno-error -DHAVE_CONFIG_H'
+                    ],
+           )

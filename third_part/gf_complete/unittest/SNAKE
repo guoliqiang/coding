@@ -1,0 +1,46 @@
+cc_binary(name='gf_unit',
+          srcs = ['gf_unit.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+
+cc_binary(name='gf_example_1',
+          srcs = ['gf_example_1.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+cc_binary(name='gf_example_2',
+          srcs = ['gf_example_2.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+cc_binary(name='gf_example_3',
+          srcs = ['gf_example_3.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )
+cc_binary(name='gf_example_4',
+          srcs = ['gf_example_4.c'],
+          deps = [
+                  '//third_part/gf_complete/internal:gf_complete',
+                  ],
+           cflags = [
+           '-Wno-error -DHAVE_CONFIG_H -mmmx -DARCH_64 -msse -DINTEL_SSE -msse2 -DINTEL_SSE2 -msse3 -DINTEL_SSE3 -mpclmul -DINTEL_SSE4_PCLMUL -mssse3 -DINTEL_SSSE3 -msse4.1 -DINTEL_SSE4 -msse4.2 -DINTEL_SSE4 -mavx'
+                    ],
+           )

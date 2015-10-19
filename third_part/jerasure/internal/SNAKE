@@ -1,0 +1,18 @@
+cc_library(name='jerasure',
+    srcs = [
+            'cauchy_best_r6.c',
+            'cauchy.c',
+            'galois.c',
+            'jerasure.c',
+            'liberation.c',
+            'reed_sol.c',
+            'timing.c',
+    ],
+    deps = [
+      '//third_part/gf_complete/internal:gf_complete',
+    ],
+    cflags = [
+     '-DHAVE_CONFIG_H'
+    ],
+    )
+
