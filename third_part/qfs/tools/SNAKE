@@ -1,0 +1,45 @@
+cc_library(name='tools',
+           srcs = [
+                   'chunkfileinfo.cc',
+                   'FileSystem.cc',
+                   'kfsappend.cc',
+                   'kfscd.cc',
+                   'kfschangereplication.cc',
+                   'kfschgrp.cc',
+                   'kfschmod.cc',
+                   'kfschown.cc',
+                   'kfscp.cc',
+                   'kfsfstat.cc',
+                   'kfsls.cc',
+                   'kfsmkdirs.cc',
+                   'kfsmv.cc',
+                   'kfspwd.cc',
+                   'kfsrm.cc',
+                   'kfsrmdir.cc',
+                   'MonClient.cc',
+                   'Trash.cc',
+                   'utils.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/libclient:client',
+                   '//third_part/qfs/kfsio:kfsio',
+                   '//libs/third_part/openssl:ssl',
+                   '//libs/third_part/openssl:crypto',
+                  ],
+           cflags = [
+                    ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfsadmin_main',
+           srcs = [
+                  'qfsadmin_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )

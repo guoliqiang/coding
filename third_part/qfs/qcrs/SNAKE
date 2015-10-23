@@ -1,0 +1,36 @@
+cc_library(name='qcrs',
+           srcs = [
+                   'decode.c',
+                   'encode.c',
+                   'rs_table.c',
+                  ],
+           deps = [
+                  ],
+           cflags = [
+                    ],
+          )
+
+cc_binary(name='mktable_main',
+           srcs = [
+                   'mktable_main.c',
+                  ],
+           deps = [
+                   '//third_part/qfs/qcrs:qcrs',
+                  ],
+           cflags = [
+                     '-Wno-error'
+                    ],
+          )
+
+cc_binary(name='rs_test_main',
+           srcs = [
+                   'rs_test_main.c',
+                  ],
+           deps = [
+                   '//third_part/qfs/qcrs:qcrs',
+                  ],
+           cflags = [
+                     '-Wno-error'
+                    ],
+          )
+

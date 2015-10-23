@@ -1,0 +1,30 @@
+cc_library(name='kfsio',
+           srcs = [
+                   'Acceptor.cc',
+                   'Base64.cc',
+                   'checksum.cc',
+                   'ChunkAccessToken.cc',
+                   'ClientAuthContext.cc',
+                   'CryptoKeys.cc',
+                   'DelegationToken.cc',
+                   'Globals.cc',
+                   'IOBuffer.cc',
+                   'KfsCallbackObj.cc',
+                   'NetConnection.cc',
+                   'NetErrorSimulator.cc',
+                   'NetManager.cc',
+                   'PrngIsaac64.cc',
+                   'SslFilter.cc',
+                   'TcpSocket.cc',
+                   'ZlibInflate.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/common:common',
+                   '//third_part/qfs/krb:krb',
+                   '//libs/third_part/zlib:z',
+                   '//libs/third_part/boost:boost_regex',
+                  ],
+           cflags = [
+                    ],
+           copt = ['no_style_check']
+          )

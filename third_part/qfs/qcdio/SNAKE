@@ -1,0 +1,32 @@
+cc_library(name='qcdio',
+           srcs = [
+                   'QCDiskQueue.cc',
+                   'QCFdPoll.cc',
+                   'QCIoBufferPool.cc',
+                   'QCMutex.cc',
+                   'QCThread.cc',
+                   'QCUtils.cc',
+                   'iovperf.c',
+                  ],
+           deps = [
+                  ],
+           cflags = [
+                     '-D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE',
+                     ' -D_FILE_OFFSET_BITS=64 -DQC_OS_NAME_LINUX',
+                    ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qcunittest_main',
+           srcs = [
+                   'qcunittest_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/qcdio:qcdio',
+                  ],
+           cflags = [
+                     '-D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE',
+                     ' -D_FILE_OFFSET_BITS=64 -DQC_OS_NAME_LINUX',
+                    ],
+           copt = ['no_style_check']
+          )

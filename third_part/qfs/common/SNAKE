@@ -1,0 +1,25 @@
+cc_library(name='common',
+           srcs = [
+                   'BufferedLogWriter.cc',
+                   'hsieh_hash.cc',
+                   'kfsatomic.cc',
+                   'kfsdecls.cc',
+                   'kfserrno.cc',
+                   'KfsTraceNew.cc',
+                   'MemLock.cc',
+                   'MsgLogger.cc',
+                   'nofilelimit.cc',
+                   'Properties.cc',
+                   'RequestParser.cc',
+                   'rusage.cc',
+                   'time.cc',
+                   'Version.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/qcdio:qcdio',
+                  ],
+           cflags = [
+                    ],
+           copt = ['no_style_check']
+          )
+

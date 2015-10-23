@@ -1,0 +1,18 @@
+cc_library(name='krb',
+           srcs = [
+                   'KrbClient.cc',
+                   'KrbService.cc',
+                  ],
+           deps = [
+                  '//libs/third_part/krb5:krb5',
+                  '//libs/third_part/krb5:krb5_pkinit',
+                  '//libs/third_part/krb5:k5crypto',
+                  '//libs/third_part/krb5:krb5support',
+                  '//libs/third_part/krb5:com_err',
+                  ],
+           cflags = [
+                    '-DKRB5_HAS_krb5_unparse_name_flags_ext',
+                    ],
+           copt = ['no_style_check']
+          )
+

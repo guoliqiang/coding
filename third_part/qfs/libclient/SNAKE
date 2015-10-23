@@ -1,0 +1,30 @@
+cc_library(name='client',
+           srcs = [
+                   'ECMethod.cc',
+                   'ECMethodJerasure.cc',
+                   'FileOpener.cc',
+                   'KfsAttr.cc',
+                   'KfsClient.cc',
+                   'kfsglob.cc',
+                   'KfsNetClient.cc',
+                   'KfsOps.cc',
+                   'KfsProtocolWorker.cc',
+                   'KfsRead.cc',
+                   'KfsWrite.cc',
+                   'Path.cc',
+                   'QCECMethod.cc',
+                   'Reader.cc',
+                   'RSStriper.cc',
+                   'utils.cc',
+                   'WriteAppender.cc',
+                   'Writer.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/qcrs:qcrs',
+                   '//third_part/jerasure/internal:jerasure',
+                  ],
+           cflags = [
+                    ],
+           copt = ['no_style_check']
+          )
+

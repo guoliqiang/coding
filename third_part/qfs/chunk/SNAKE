@@ -1,0 +1,46 @@
+cc_library(name='chunk',
+           srcs = [
+                   'AtomicRecordAppender.cc',
+                   'BufferManager.cc',
+                   'Chunk.cc',
+                   'ChunkManager.cc',
+                   'ChunkServer.cc',
+                   'ClientManager.cc',
+                   'ClientSM.cc',
+                   'ClientThread.cc',
+                   'DirChecker.cc',
+                   'DiskIo.cc',
+                   'KfsOps.cc',
+                   'LeaseClerk.cc',
+                   'Logger.cc',
+                   'MetaServerSM.cc',
+                   'RemoteSyncSM.cc',
+                   'Replicator.cc',
+                   'utils.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/kfsio:kfsio',
+                   '//third_part/qfs/libclient:client',
+                   '//libs/third_part/openssl:ssl',
+                   '//libs/third_part/openssl:crypto',
+                  ],
+           cflags = [
+                    ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='chunkserver_main',
+          srcs = [
+                   'chunkserver_main.cc',
+                  ],
+           deps = [
+                   "//third_part/qfs/chunk:chunk",
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+
+
