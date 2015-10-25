@@ -24,10 +24,10 @@
 //
 //----------------------------------------------------------------------------
 
-#include "KrbService.h"
-#include "KrbClient.h"
+#include "third_part/qfs/krb/KrbService.h"
+#include "third_part/qfs/krb/KrbClient.h"
 
-#include "qcdio/QCThread.h"
+#include "third_part/qfs/qcdio/QCThread.h"
 
 #include <string.h>
 #include <stdlib.h>

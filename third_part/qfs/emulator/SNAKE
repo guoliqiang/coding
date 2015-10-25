@@ -1,0 +1,56 @@
+cc_library(name='emulator',
+           srcs = [
+                   'ChunkServerEmulator.cc',
+                   'emulator_setup.cc',
+                   'LayoutEmulator.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/libclient:client',
+                   '//third_part/qfs/kfsio:kfsio',
+                   '//third_part/qfs/meta:meta',
+                   '//libs/third_part/openssl:ssl',
+                   '//libs/third_part/openssl:crypto',
+                  ],
+           cflags = [
+                    ],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='rebalanceexecutor_main',
+          srcs = [
+                  'rebalanceexecutor_main.cc',
+                 ],
+           deps = [
+                   "//third_part/qfs/emulator:emulator",
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='rebalanceplanner_main',
+          srcs = [
+                  'rebalanceplanner_main.cc',
+                 ],
+           deps = [
+                   "//third_part/qfs/emulator:emulator",
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='replicachecker_main',
+          srcs = [
+                  'replicachecker_main.cc',
+                 ],
+           deps = [
+                   "//third_part/qfs/emulator:emulator",
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )

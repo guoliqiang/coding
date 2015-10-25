@@ -42,5 +42,42 @@ cc_binary(name='chunkserver_main',
            copt = ['no_style_check']
           )
 
+cc_binary(name='chunkscrubber_main',
+          srcs = [
+                   'chunkscrubber_main.cc',
+                  ],
+           deps = [
+                   "//third_part/qfs/chunk:chunk",
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
 
+cc_binary(name='chunktrimmer_main',
+          srcs = [
+                   'chunktrimmer_main.cc',
+                  ],
+           deps = [
+                   "//third_part/qfs/chunk:chunk",
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='chunkupgrade_main',
+          srcs = [
+                   'chunkupgrade_main.cc',
+                  ],
+           deps = [
+                   "//third_part/qfs/chunk:chunk",
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
 

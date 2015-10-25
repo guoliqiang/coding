@@ -16,3 +16,4 @@ opt:
 
 
 clean:
+	rm -rf metaserver_main

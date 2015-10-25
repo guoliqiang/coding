@@ -41,6 +41,8 @@
 #include "third_part/qfs/kfsio/FileHandle.h"
 #include "third_part/qfs/chunk/Chunk.h"
 #include "third_part/qfs/chunk/ChunkManager.h"
+#include "third_part/qfs/libclient/KfsClient.h"
+#include "third_part/qfs/chunk/KfsOps.h"
 
 using std::cout;
 using std::endl;
@@ -48,7 +50,9 @@ using std::string;
 using std::ostringstream;
 using boost::scoped_array;
 
-string KFS::RestartChunkServer();
+namespace KFS {
+string RestartChunkServer();
+}  // namespace KFS
 string KFS::RestartChunkServer()
 {
     return string("not supported");

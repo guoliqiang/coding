@@ -43,3 +43,134 @@ cc_binary(name='qfsadmin_main',
            link_flags = ['-lresolv'],
            copt = ['no_style_check']
           )
+
+cc_binary(name='qfscat_main',
+           srcs = [
+                  'qfscat_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfsdataverify_main',
+           srcs = [
+                  'qfsdataverify_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfsfileenum_main',
+           srcs = [
+                  'qfsfileenum_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfshibernate_main',
+           srcs = [
+                  'qfshibernate_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfs_main',
+           srcs = [
+                  'qfs_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfsping_main',
+           srcs = [
+                  'qfsping_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfsput_main',
+           srcs = [
+                  'qfsput_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfsshell_main',
+           srcs = [
+                  'qfsshell_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfsstats_main',
+           srcs = [
+                  'qfsstats_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+
+cc_binary(name='qfstoggleworm_main',
+           srcs = [
+                  'qfstoggleworm_main.cc',
+                  ],
+           deps = [
+                   '//third_part/qfs/tools:tools',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
+

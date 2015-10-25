@@ -16,3 +16,16 @@ cc_library(name='krb',
            copt = ['no_style_check']
           )
 
+cc_binary(name='krbtest_main',
+           srcs = [
+                   'krbtest_main.cc'
+                  ],
+           deps = [
+                  '//third_part/qfs/krb:krb',
+                  '//third_part/qfs/qcdio:qcdio',
+                  ],
+           cflags = [
+                    ],
+           link_flags = ['-lresolv'],
+           copt = ['no_style_check']
+          )
