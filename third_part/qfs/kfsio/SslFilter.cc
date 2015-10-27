@@ -34,12 +34,12 @@
 #include "third_part/qfs/common/Properties.h"
 #include "third_part/qfs/common/MsgLogger.h"
 
-#include <openssl/ssl.h>
-#include <openssl/evp.h>
-#include <openssl/err.h>
-#include <openssl/bio.h>
-#include <openssl/pem.h>
-#include <openssl/engine.h>
+#include "third_part/openssl/include/openssl/ssl.h"
+#include "third_part/openssl/include/openssl/evp.h"
+#include "third_part/openssl/include/openssl/err.h"
+#include "third_part/openssl/include/openssl/bio.h"
+#include "third_part/openssl/include/openssl/pem.h"
+#include "third_part/openssl/include/openssl/engine.h"
 
 #include <errno.h>
 #include <stdlib.h>

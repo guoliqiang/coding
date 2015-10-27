@@ -35,8 +35,8 @@
 #include "third_part/qfs/qcdio/qcstutils.h"
 #include "third_part/qfs/qcdio/QCUtils.h"
 
-#include <openssl/rand.h>
-#include <openssl/err.h>
+#include "third_part/openssl/include/openssl/rand.h"
+#include "third_part/openssl/include/openssl/err.h"
 
 #include <time.h>
 #include <stdlib.h>

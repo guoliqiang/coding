@@ -32,10 +32,10 @@
 #include "third_part/qfs/qcdio/qcdebug.h"
 #include "third_part/qfs/qcdio/QCUtils.h"
 
-#include <openssl/hmac.h>
-#include <openssl/err.h>
-#include <openssl/evp.h>
-#include <openssl/rand.h>
+#include "third_part/openssl/include/openssl/hmac.h"
+#include "third_part/openssl/include/openssl/err.h"
+#include "third_part/openssl/include/openssl/evp.h"
+#include "third_part/openssl/include/openssl/rand.h"
 
 #include <string.h>
 

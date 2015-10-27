@@ -24,7 +24,7 @@
 //----------------------------------------------------------------------------
 
 #include "third_part/qfs/kfsio/Base64.h"
-#include <openssl/evp.h>
+#include "third_part/openssl/include/openssl/evp.h"
 
 namespace KFS
 {

@@ -26,7 +26,7 @@
 
 #include "third_part/qfs/kfsio/PrngIsaac64.h"
 
-#include <openssl/rand.h>
+#include "third_part/openssl/include/openssl/rand.h"
 #include <stdlib.h>
 
 namespace KFS
@@ -39,7 +39,7 @@ private:
     typedef uint64_t ub8;
     typedef uint8_t  ub1;
     typedef int      word;
-#include "isaac64.c"
+#include "third_part/qfs/kfsio/isaac64.c"
 
     bool mInitFlag;
 public:
