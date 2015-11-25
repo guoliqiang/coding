@@ -82,6 +82,11 @@ void BaseServer::Start() {
   sockaddr_in listen_addr;
   bzero(&listen_addr, sizeof(listen_addr));
   listen_addr.sin_family = AF_INET;
+  // 0 means all ips in the host, if there are more than one netword cat, the
+  // host owns more than one ip. If want to listen some ip e.g. x.x.x.x, can set
+  // listen_addr.sin_addr.s_addr = x.x.x.x. Specially, if x.x.x.x == 127.0.0.1
+  // means this server only can be accessed from host(this machine).
+  // https://www.v2ex.com/t/231377
   listen_addr.sin_addr.s_addr = 0;
   listen_addr.sin_port = htons(port_);
   CHECK_EQ(bind(listen_fd, reinterpret_cast<sockaddr*>(&listen_addr),
