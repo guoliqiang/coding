@@ -1,0 +1,4 @@
+cc_library(name = 'btree',
+           srcs = ['btree.cc', 'fplan.cc'],
+           copt = ['no_Werror', 'no_style_check']
+           )

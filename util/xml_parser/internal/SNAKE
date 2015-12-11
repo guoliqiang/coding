@@ -1,0 +1,10 @@
+cc_library(name = 'xml_parser',
+           srcs = ['XMLNode.cc', 
+                   'XMLReader.cc',
+                   'XMLWriter.cc' 
+                  ],
+           deps = [],
+           copt = ['no_style_check']
+           )
+
+
