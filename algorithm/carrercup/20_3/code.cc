@@ -14,6 +14,23 @@
 #include "base/public/common_head.h"
 
 namespace algorithm {
+// under unkonwn the size, random select one.
+// proof:
+// eg {10, 20, 30}
+// select 10 probility is 1 * 1/2 * 2/3 = 1/3
+// select 20 probility is 1 * 1/2 * 2/3 = 1/3
+// select 30 probility is 1 * 1 * 1/3 = 1/3
+int SelectOne(std::list<int> & v) {
+  int random_v = 0;
+  int size = 0;
+  for (std::list<int>::iterator i = v.begin(); i != v.end(); i++) {
+    if (rand() % (++size) == 0) {
+      random_v = *i;
+    }
+  }
+  return random_v;
+}
+
 // 在不给定n大小情况下的方法：
 // special case : m == 1
 // 第i个出现在结果中，其概率为
