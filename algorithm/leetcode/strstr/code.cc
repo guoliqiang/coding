@@ -32,7 +32,7 @@ const char * BM(const char * str, const char * pattern) {
   int p_len = strlen(pattern);
   int s_len = strlen(str);
   if (p_len == 0) return str;
-  
+
   std::map<char, int> bc;
   std::vector<int> gs;
   std::vector<int> suffix;
@@ -322,6 +322,63 @@ int KMP(char * s, char * p) {
 }
 
 }  // namespcae update
+
+namespace mystyle {
+void Next(std::vector<int> & next, const char * p) {
+  int n = strlen(p);
+  if (n == 0) return;
+  next.resize(n, 0);
+  next[0] = -1;
+  for (int i = 1; i < n; i++) {
+    int t = next[i - 1];
+    while (t >= 0 && p[i - 1] != p[t]) t = next[t];
+    t++;
+    next[i] = t;
+    // if (p[i] == p[t]) next[i] = next[t];
+    // if t is local can not add this code, becase i - 1 loop need use the
+    // origin value
+  }
+}
+
+// this is the optimize version
+void NextOp(std::vector<int> & next, const char * p) {
+  int n = strlen(p);
+  if (n == 0) return;
+  next.resize(n, 0);
+  next[0] = -1;
+  int t = next[0];
+  for (int i = 1; i < n; i++) {
+    while (t >= 0 && p[i - 1] != p[t]) t = next[t];
+    t++;
+    next[i] = t;
+    if (p[i] == p[t]) next[i] = next[t];
+  }
+}
+
+int KMP(const char * s, const char * p) {
+  int s_len = strlen(s);
+  int p_len = strlen(p);
+  if (p_len == 0) return 0;
+  if (s_len == 0) return -1;
+  std::vector<int> next;
+  Next(next, p);
+  LOG(INFO) << JoinVector(next);
+  int i = 0;
+  int j = 0;
+  while (i < s_len) {
+    if (s[i] == p[j]) {
+      i++;
+      j++;
+    } else j = next[j];
+    if (j == p_len) return i - p_len;
+    if (j == -1) {
+      i++;
+      j++;
+    }
+  }
+  return -1;
+}
+}  // namespace mystyle
 using namespace algorithm;
 
 int main(int argc, char** argv) {
@@ -334,8 +391,9 @@ int main(int argc, char** argv) {
     LOG(INFO) << "not find";
   }
   */
-  if (twice::KMP(str.c_str(), pattern.c_str()) != NULL) {
-    LOG(INFO) << "KMP find at " << KMP(str.c_str(), pattern.c_str());
+  KMP(str.c_str(), pattern.c_str());
+  if (mystyle::KMP(str.c_str(), pattern.c_str()) != -1) {
+    LOG(INFO) << "KMP find at " << mystyle::KMP(str.c_str(), pattern.c_str());
   } else {
     LOG(INFO) << "KMP not find";
   }
