@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/graph/topo_order
+PROJ_NAME=algorithm/leetcode/house_robber_ii
 
 
 all:

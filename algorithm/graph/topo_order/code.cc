@@ -14,6 +14,7 @@ int count[MAX] = {0};
 int matrix[MAX][MAX] = {{0}};
 int queue[MAX] = {0};
 
+// BFS版本
 bool TopoOrder() {
   memset(count, 0, sizeof(count));
   memset(queue, 0, sizeof(queue));
@@ -37,6 +38,32 @@ bool TopoOrder() {
     }
   }
   return tail == N ? true : false;
+}
+
+// DFS版本
+int visite[MAX] = {0};
+int tail = 0;
+
+bool DFS(int k) {
+  visite[k] = -1;
+  for (int i = 0; i < N; i++) {
+    if (matrix[k][i] > 0) {
+      if (visite[i] == -1) return false;
+      DFS(i);
+    }
+  }
+  visite[k] = 1;
+  queue[tail++] = k;
+  return true;
+}
+
+bool TopoOrderDFS() {
+  for (int i = 0; i < N; i++) {
+    if (visite[i] == 0) {
+      if (DFS(i) == false) return false;
+    }
+  }
+  return true;
 }
 }  // namespace algorithm
 

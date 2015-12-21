@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/graph/topo_order
+PROJ_NAME=algorithm/leetcode/kth_largest_element_in_an_array
 
 
 all:

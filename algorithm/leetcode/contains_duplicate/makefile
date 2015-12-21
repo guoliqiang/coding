@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/graph/topo_order
+PROJ_NAME=algorithm/leetcode/contains_duplicate
 
 
 all:
