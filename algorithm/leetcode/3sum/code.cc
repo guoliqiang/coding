@@ -149,6 +149,8 @@ std::vector<std::vector<int> > ThreeSum(std::vector<int> &num) {
       int threesum = num[i] + num[b] + num[e];
       if (threesum == 0) {
         std::vector<int> foo;
+        while (b < e && nums[b + 1] = nums[b]) b++;
+        while (b < e && nums[e - 1] == nums[e]) e--;
         foo.push_back(num[i]);
         foo.push_back(num[b]);
         foo.push_back(num[e]);
@@ -161,6 +163,41 @@ std::vector<std::vector<int> > ThreeSum(std::vector<int> &num) {
   return std::vector<std::vector<int> >(rs.begin(), rs.end());
 }
 }  // twice
+
+namespace third {
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n = nums.size();
+        std::sort(nums.begin(), nums.end());
+        std::vector<std::vector<int> > rs;
+        std::vector<int> cur(3, 0);
+        for (int i = 0; i < n; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int b = i + 1;
+            int e = n - 1;
+            while (b < e) {
+                int t = nums[i] + nums[b] + nums[e];
+                if (t == 0) {
+                    // 没有下面两行会TLE
+                    while (b < e && nums[b + 1] == nums[b]) b++;
+                    while (b < e && nums[e] == nums[e - 1]) e--;
+                    cur[0] = nums[i];
+                    cur[1] = nums[b];
+                    cur[2] = nums[e];
+                    rs.push_back(cur);
+                    b++;
+                } else if (t < 0) {
+                    b++;
+                } else {
+                    e--;
+                }
+            }
+        }
+        return rs;
+    }
+};
+}  // namespace third
 
 int main(int argc, char** argv) {
   std::vector<int> foo;

@@ -27,7 +27,6 @@ return 4->5->1->2->3->NULL.
 #include <vector>
 #include "base/public/common_head.h"
 
-namespace algorithm {
 struct ListNode {
   int val;
   ListNode * next;
@@ -35,6 +34,7 @@ struct ListNode {
 };
 
 
+namespace algorithm {
 int Length(ListNode * head) {
   int rs = 0;
   while (head) {
@@ -118,18 +118,47 @@ ListNode *RotateRight(ListNode *head, int k) {
 }
 }  // namespace twice
 
+namespace third {
+ListNode* RotateRight(ListNode* head, int k) {
+        ListNode * cur = head;
+        int n = 0;
+        while (cur != NULL) {
+            cur = cur->next;
+            n++;
+        }
+        
+        if (n == 0 || k % n == 0) return head; 
+        k = k % n;
+        
+        cur = NULL;
+        ListNode * pre = NULL;
+        for (int i = 0; i <= n - k; i++) {
+            pre = cur;
+            if (i == 0) cur = head;
+            else cur = cur->next;
+        }
+        
+        ListNode * ans = cur;
+        while (cur->next != NULL) cur = cur->next;
+        
+        cur->next = head;
+        if (pre != NULL) pre->next = NULL;
+        return ans;
+    }
+}  // namespace third
+
 using namespace algorithm;
 
 
 int main(int argc, char** argv) {
   std::vector<int> foo;
-  for (int i = 0; i < 10; i++) {
+  for (int i = 1; i < 3; i++) {
     foo.push_back(i);
   }
   ListNode * head = Build(foo);
   Out(head);
   HERE(INFO);
-  head = RotateRight(head, 0);
+  head = third::RotateRight(head, 1);
   Out(head);
   return 0;
 }

@@ -234,6 +234,65 @@ bool IsMatch(std::string s, std::string p) {
 }
 }  // namespac twice
 
+namespace TLE {
+bool IsMatch(const std::string & s, int i, const std::string & p, int j) {
+    if (i == s.size() && j == p.size()) return true;
+    if (j == p.size()) return false;
+    if (p[j] == '*') {
+        if (IsMatch(s, i, p, j + 1)) return true;
+        if (i < s.size() && IsMatch(s, i + 1, p, j)) return true;
+        return false;
+    } else if (p[j] == '?') {
+        if (i < s.size() && IsMatch(s, i + 1, p, j + 1)) return true;
+        return false;
+    } else {
+        if (i < s.size() && s[i] == p[j]) {
+            return IsMatch(s, i + 1, p, j + 1);
+        }
+        return false;
+    }
+}
+}  // namespace TLE
+
+namespace NB {
+using namespace std;
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+       int i = 0;
+       int j = 0;
+       int start = -1;
+       int bi = 0;
+
+       while (i < s.size()) {
+           if (j < p.size() && (s[i] == p[j] || p[j] == '?')) {
+               i++;
+               j++;
+               continue;
+           }
+           // 一个也不匹配
+           if (j < p.size() && p[j] == '*') {
+               start = j;
+               j++;
+               bi = i;
+               continue;
+           }
+           // 至少匹配一个
+           if (start != -1) {
+               j = start + 1;
+               i = ++bi;
+               continue;
+           }
+           return false;
+       }
+
+       while (j < p.size() && p[j] == '*') j++;
+       return j == p.size();
+    }
+};
+}  // namespace NB
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

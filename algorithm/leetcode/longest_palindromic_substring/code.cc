@@ -7,6 +7,38 @@
 #include "code.h"
 using namespace algorithm;
 
+// O(n^2), O(1)
+namespace NB {
+bool IsPalindrome(const std::string & str) {
+  int b = 0;
+  int e = str.size() - 1;
+  while (b < e) {
+    if (str[b] == str[e]) {
+      b++;
+      e--;
+    } else return false;
+  }
+  return true;
+}
+
+std::string LongestPalindrome(const std::string & s) {
+  int idx = 0;
+  int len = 0;
+  for (int i = 0; i < s.size(); i++) {
+    if (IsPalindrome(s.substr(i - len, len + 1))) {
+      len += 1;
+      idx = i;
+    } else if (i - len - 1 >= 0 &&
+               IsPalindrome(s.substr(i - len - 1, len + 2))){
+      len += 2;
+      idx = i;
+    }
+  }
+  return s.substr(idx - len + 1, len);
+}
+}  // namespace NB
+
+// o(n)
 namespace twice {
 std::string Palindrome(std::string & s) {
   std::string str = "^";
@@ -44,8 +76,8 @@ std::string Palindrome(std::string & s) {
 }  // namespace twice
 
 int main(int argc, char** argv) {
-  std::string str = "bb";
+  std::string str = "abad";
   LOG(INFO) << twice::Palindrome(str);
-  // LOG(INFO) << LongestPalindrome(str);
+  LOG(INFO) << NB::LongestPalindrome(str);
   return 0;
 }

@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/leetcode/simplify_path
+PROJ_NAME=algorithm/leetcode/coin_change
 
 
 all:

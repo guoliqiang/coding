@@ -166,11 +166,50 @@ int Roman2Int(std::string str) {
   }
   return rs;
 }
+namespace NB {
+using namespace std;
+
+const std::string thouand[] = {"", "M", "MM", "MMM"};
+const std::string hundrend[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+const std::string ten[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+const std::string one[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+
+std::map<std::string, int> values;
+
+void Build() {
+    for (int i = 1; i < 4; i++) values[thouand[i]] = i * 1000;
+    for (int i = 1; i < 10; i++) values[hundrend[i]] = i * 100;
+    for (int i = 1; i < 10; i++) values[ten[i]] = i * 10;
+    for (int i = 1; i < 10; i++) values[one[i]] = i;
+}
+
+class Solution {
+public:
+    Solution() {
+        Build();
+    }
+
+    int romanToInt(string s) {
+        LOG(INFO) << s;
+        if (s.size() == 0) return 0;
+        if (s[0] == 'M') {
+            int it = s.find_first_not_of("M");
+            return values[s.substr(0, it)] + romanToInt((it != std::string::npos ? s.substr(it) : ""));
+        } else if (s[0] == 'C' || s[0] == 'D') {
+            int it = s.find_first_of("XLIV");
+            return values[s.substr(0, it)] + romanToInt((it != std::string::npos ? s.substr(it) : ""));
+        } else if (s[0] == 'X' || s[0] == 'L') {
+            int it = s.find_first_of("IV");
+            return values[s.substr(0, it)] + romanToInt((it != std::string::npos ? s.substr(it) : ""));
+        } else {
+            return values[s];
+        }
+    }
+};
+}  // namespace NB
 
 int main(int argc, char** argv) {
-  BuildMap();
-  LOG(INFO) << Int2Roman(333);
-  std::string str = "I";
-  LOG(INFO) << Roman2Int(str);
+  NB::Solution s;
+  LOG(INFO) << s.romanToInt("MMCCCVII");
   return 0;
 }

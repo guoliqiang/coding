@@ -85,6 +85,41 @@ std::string SimplyPath(std::string path) {
 using namespace algorithm;
 
 
+namespace third {
+
+std::string SimplifyPath(std::string path) {
+  // split 的写法，非常清晰
+  std::vector<std::string> parts;
+  std::string cur;
+  for (int i = 0; i < path.size(); i++) {
+    if (path[i] == '/') {
+      if (cur.size()) parts.push_back(cur);
+      cur.clear();
+    } else {
+      cur.push_back(path[i]);
+    }
+  }
+  if (cur.size()) parts.push_back(cur);
+
+  std::stack<std::string> stack;
+  for (int i = 0; i < parts.size(); i++) {
+    if (parts[i] == ".") continue;
+    if (parts[i] == "..") {
+      if (stack.size()) stack.pop();
+    } else {
+      stack.push(parts[i]);
+    }
+  }
+
+  std::string ans;
+  while (stack.size()) {
+    ans = "/" + stack.top() + ans;
+    stack.pop();
+  }
+  return ans.size() ? ans : "/";
+}
+}  // namespace third
+
 int main(int argc, char** argv) {
   std::string path = "/a/./b/../../c/";
   LOG(INFO) << SimplyPath(path);

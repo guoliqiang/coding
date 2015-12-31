@@ -136,60 +136,47 @@ vector<int> SpiralOrder(vector<vector<int> > &matrix) {
 }
 }  // namespace twice
 
+namespace third {
+using namespace std;
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int> >& matrix) {
+        std::vector<int> ans;
+        int n = matrix.size();
+        if (n == 0) return ans;
+        int m = matrix[0].size();
+        int b_i = 0;
+        int b_j = 0;
+        for (int i = m, j = n; i > 0 && j > 0; i-= 2, j-= 2) {
+            if (i == 1) {
+                for (int k = 0; k < j; k++) ans.push_back(matrix[b_i][b_j + k]);
+            } else if (j == 1) {
+                for (int k = 0; k < i; k++) ans.push_back(matrix[b_i + k][b_j]);  
+            } else {
+                for (int k = 0; k < i - 1; k++) ans.push_back(matrix[b_i][b_j + k]);
+                for (int k = 0; k < j - 1; k++) ans.push_back(matrix[b_i + k][b_j + i - 1]);
+                for (int k = 0; k < i - 1; k++) ans.push_back(matrix[b_i + j - 1][b_j + i - 1 - k]);
+                for (int k = 0; k < j - 1; k++) ans.push_back(matrix[b_i + j - 1 - k][b_j]);
+            }
+            b_i++;
+            b_j++;
+        }
+        return ans;
+    }
+};
+}  // namespace third
+
 int main(int argc, char** argv) {
   std::vector<std::vector<int> > matrix;
   std::vector<int> foo;
-  int n = 2;
-  for (int i = 0 ; i < n; i++) {
-    foo.push_back(i);
-  }
-  for (int i = 0; i < 1; i++) {
-    matrix.push_back(foo);
-  }
-  /*
-  matrix.clear();
-  foo.clear();
-  foo.push_back(1);
-  matrix.push_back(foo);
-
-  foo.clear();
   foo.push_back(2);
-  matrix.push_back(foo);
-  
-  foo.clear();
-  foo.push_back(3);
-  matrix.push_back(foo);
-  
-  foo.clear();
-  foo.push_back(4);
-  matrix.push_back(foo);
-  
-  foo.clear();
   foo.push_back(5);
-  matrix.push_back(foo);
-  
-  foo.clear();
-  foo.push_back(6);
-  matrix.push_back(foo);
-  
-  foo.clear();
-  foo.push_back(7);
-  matrix.push_back(foo);
-  
-  foo.clear();
   foo.push_back(8);
   matrix.push_back(foo);
-  
   foo.clear();
-  foo.push_back(9);
-  matrix.push_back(foo);
-  
-  foo.clear();
-  foo.push_back(10);
-  matrix.push_back(foo);
-  Out(matrix);
-  */
-  std::vector<int> rs = twice::SpiralOrder(matrix);
-  LOG(INFO) << JoinVector(rs);
+  third::Solution s;
+
+  LOG(INFO) << JoinVector(s.spiralOrder(matrix));
   return 0;
 }

@@ -164,6 +164,24 @@ bool IsMatch(const char * s, const char * p) {
 }
 }  // namespace twice
 
+namespace third {
+bool isMatch2(const std::string & s, int i, const std::string & p, int j) {
+    if (i == s.size() && j == p.size()) return true;
+    if (j == p.size()) return false;
+    
+    if (j + 1 < p.size() && p[j + 1] == '*') {
+        if (isMatch2(s, i, p, j + 2)) return true;
+        if (i < s.size() && (s[i] == p[j] || p[j] == '.')) {
+            return isMatch2(s, i + 1, p, j);
+        }
+        return false;
+    } else if (i < s.size() && (s[i] == p[j] || p[j] == '.')) {
+        return isMatch2(s, i + 1, p, j + 1);
+    }
+    return false;
+}
+}  // namespace third
+
 int main(int argc, char** argv) {
   std::string str = "";
   std::string pattern = ".";

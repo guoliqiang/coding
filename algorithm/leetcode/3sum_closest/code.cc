@@ -7,7 +7,7 @@
 
 #include <vector>
 #include <algorithm>
-#include "base/public/logging.h"
+#include "base/public/common_ojhead.h"
 
 /*
 Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target.
@@ -77,6 +77,32 @@ int threeSumClosest(vector<int> &num, int target) {
 }
 }  // namespace twice
 
+namespace analyze {
+void Foo(std::vector<int> vec) {
+  std::sort(vec.begin(), vec.end());
+  std::vector<int> cur;
+  for (int i = 0; i < vec.size(); i++) {
+    for (int j = i + 1; j < vec.size(); j++) {
+      cur.push_back(vec[i] + vec[j]);
+    }
+  }
+  std::sort(cur.begin(), cur.end());
+  LOG(INFO) << JoinVector(cur);
+}
+
+void Bar(std::vector<int> vec, int t) {
+  std::sort(vec.begin(), vec.end());
+  int b = 0;
+  int e = vec.size() - 1;
+  while (b < e) {
+    int c = vec[b] + vec[e];
+    if (c < t) b++;
+    else e--;
+    LOG(INFO) << c;
+  }
+}
+}  // namespace analyze
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
@@ -85,6 +111,10 @@ int main(int argc, char** argv) {
   foo.push_back(2);
   foo.push_back(1);
   foo.push_back(-4);
-  LOG(INFO) << ThreeSumClosest(foo, 1);
+  foo.push_back(15);
+  foo.push_back(16);
+  foo.push_back(27);
+  analyze::Foo(foo);
+  analyze::Bar(foo, 7);
   return 0;
 }
