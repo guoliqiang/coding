@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/leetcode/remove_duplicates_from_sorted_array2
+PROJ_NAME=algorithm/leetcode/number_of_islands2
 
 
 all:

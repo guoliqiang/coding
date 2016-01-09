@@ -114,6 +114,20 @@ int Remove(int A[], int n) {
 }
 }  // namespace NB
 
+namespace third {
+int RemoveDuplicates(std::vector<int>& nums) {
+  int idx = -1;
+  for (int i = 0; i < nums.size(); i++) {
+    if (i < 2) std::swap(nums[++idx], nums[i]);
+    else {
+      if (nums[i] == nums[idx] && nums[i] == nums[idx - 1]) continue;
+      else std::swap(nums[++idx], nums[i]);
+    }
+  }
+  return idx + 1;
+}
+}  // namespace third
+
 int main(int argc, char** argv) {
   int A[] = {1, 1, 1, 2, 3};
   int size = sizeof(A) / sizeof(int);

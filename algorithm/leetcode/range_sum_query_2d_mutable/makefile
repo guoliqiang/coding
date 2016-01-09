@@ -4,7 +4,7 @@
 
 
 WORK_ROOT=../../..
-PROJ_NAME=algorithm/leetcode/remove_duplicates_from_sorted_array2
+PROJ_NAME=algorithm/leetcode/range_sum_query_2d_mutable
 
 
 all:
