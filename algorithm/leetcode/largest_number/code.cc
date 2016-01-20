@@ -54,6 +54,37 @@ std::string LargestNumber(std::vector<int> nums) {
 }
 }  // namespace algorithm
 
+namespace twice {
+using namespace std;
+
+std::string IntToString(int v) {
+  char buff[100] = {0};
+  sprintf(buff, "%d", v);
+  return std::string(buff);
+}
+
+bool Cmp(int a, int b) {
+  std::string s1 = IntToString(a) + IntToString(b);
+  std::string s2 = IntToString(b) + IntToString(a);
+  return s1 > s2;
+}
+
+class Solution {
+  public:
+    string largestNumber(vector<int>& nums) {
+      std::sort(nums.begin(), nums.end(), Cmp);
+      std::string ans;
+      for (int i = 0; i < nums.size(); i++) {
+        ans += IntToString(nums[i]);
+      }
+      int idx = 0;
+      while (idx < ans.size() && ans[idx] == '0') idx++;
+      if (idx == ans.size()) return "0";
+      else return ans.substr(idx);
+    }
+};
+}  // namespace twice
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

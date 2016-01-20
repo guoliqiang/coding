@@ -73,6 +73,48 @@ std::vector<int> FindMinHeightTrees(int n,
 
 }  // namespace algorithm
 
+namespace NB {
+// delete layer by layer
+struct Node {
+  int v;
+  std::set<int> neighbors;
+  bool IsLeaf() { return neighbors.size() == 1; }
+};
+
+std::vector<int> FindMinHeightTrees(int n,
+    std::vector<std::pair<int, int> > & edges) {
+  std::vector<Node> graph(n, Node());
+  for (int i = 0; i < edges.size(); i++) {
+    graph[edges[i].first].neighbors.insert(edges[i].second);
+    graph[edges[i].second].neighbors.insert(edges[i].first);
+  }
+
+  std::queue<int> queue;
+  for (int i = 0; i < n; i++) {
+    if (graph[i].IsLeaf()) queue.push(i);
+  }
+  if (queue.size() == 0) return std::vector<int>(1, 0);
+
+  std::vector<int> ans;
+  while (queue.size()) {
+    ans.clear();
+    int size = queue.size();
+    for (int i = 0; i < size; i++) {
+      int cur = queue.front();
+      queue.pop();
+      ans.push_back(cur);
+      for (std::set<int>::iterator j = graph[cur].neighbors.begin();
+           j != graph[cur].neighbors.end(); j++) {
+        graph[*j].neighbors.erase(cur);
+        if (graph[*j].IsLeaf()) queue.push(*j);
+      }
+    }
+  }
+  std::sort(ans.begin(), ans.end());
+  return ans;
+}
+}  // namespace NB
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
@@ -81,6 +123,7 @@ int main(int argc, char** argv) {
   vec.push_back(std::make_pair(1, 2));
   vec.push_back(std::make_pair(1, 3));
   LOG(INFO) << JoinVector(FindMinHeightTrees(4, vec));
+  LOG(INFO) << JoinVector(NB::FindMinHeightTrees(4, vec));
   vec.clear();
   vec.push_back(std::make_pair(0, 3));
   vec.push_back(std::make_pair(1, 3));
@@ -88,6 +131,7 @@ int main(int argc, char** argv) {
   vec.push_back(std::make_pair(4, 3));
   vec.push_back(std::make_pair(5, 4));
   LOG(INFO) << JoinVector(FindMinHeightTrees(6, vec));
+  LOG(INFO) << JoinVector(NB::FindMinHeightTrees(6, vec));
   return 0;
 }
 

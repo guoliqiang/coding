@@ -6,13 +6,13 @@
 
 #include "base/public/common_ojhead.h"
 
-namespace algorithm {
 struct ListNode {
   int val;
   ListNode *next;
   ListNode(int x) : val(x), next(NULL) {}
 };
 
+namespace algorithm {
 ListNode* ReverseList(ListNode* head) {
   ListNode * ans = NULL;
   while (head != NULL) {
@@ -38,9 +38,23 @@ ListNode* ReverseList2(ListNode* head) {
   return ans;
 }
 
+
 }  // namespace algorithm
 
 using namespace algorithm;
+
+namespace NB {
+ListNode* reverseList(ListNode* head) {
+  ListNode * ans = NULL;
+  while (head != NULL) {
+    ListNode * next = head->next;
+    head->next = ans;
+    ans = head;
+    head = next;
+  }
+  return ans;
+}
+}  // namespace NB
 
 int main(int argc, char** argv) {
   return 0;

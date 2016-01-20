@@ -56,6 +56,51 @@ int MinArea(std::vector<std::vector<int> > & image, int x, int y) {
 
 }  // namespace algorithm
 
+namespace NB {
+int bsearch(const std::vector<int> & vec, int begin, int end) {
+  int b = begin;
+  int e = end;
+  bool flag = vec[begin] > 0;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (vec[mid] > 0) {
+      if (flag) {
+        if (mid == e || vec[mid + 1] == 0) return mid;
+        else b = mid + 1;
+      } else {
+        if (mid == b || vec[mid - 1] == 0) return mid;
+        else e = mid - 1;
+      }
+    } else {
+      if (flag) e = mid - 1;
+      else b = mid + 1;
+    }
+  }
+  return 0;
+}
+
+int MinArea(std::vector<std::vector<int> > & image, int x, int y) {
+  int m = image.size();
+  if (m == 0) return 0;
+
+  int n = image[0].size();
+  std::vector<int> row(m, 0);
+  std::vector<int> col(n, 0);
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      row[i] += image[i][j];
+      col[j] += image[i][j];
+    }
+  }
+  int up = bsearch(row, 0, x);
+  int down = bsearch(row, x, m - 1);
+  int left = bsearch(col, 0, y);
+  int right = bsearch(col, y, n - 1);
+
+  return (right - left + 1) * (down - up + 1);
+}
+}  // namespace NB
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
@@ -65,5 +110,6 @@ int main(int argc, char** argv) {
   vec[1][2] = 1;
   vec[2][1] = 1;
   LOG(INFO) << MinArea(vec, 0, 2);
+  LOG(INFO) << NB::MinArea(vec, 0, 2);
   return 0;
 }

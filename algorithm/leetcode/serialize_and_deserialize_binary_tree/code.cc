@@ -87,6 +87,75 @@ public:
 
 using namespace algorithm;
 
+namespace PreOrder {
+std::string IntToString(int v) {
+    char buff[100] = { 0 };
+    sprintf(buff, "%d", v);
+    return std::string(buff);
+}
+
+int StringToInt(std::string & str) {
+    return atoi(str.c_str());
+}
+
+std::vector<std::string> Split(const std::string & str) {
+    std::vector<std::string> ans;
+    std::string cur;
+    for (int i = 0; i < str.size(); i++) {
+        if (str[i] == ' ') {
+            if (cur.size()) ans.push_back(cur);
+            cur.clear();
+        } else {
+            cur.push_back(str[i]);
+        }
+    }
+    if (cur.size()) ans.push_back(cur);
+    return ans;
+}
+
+void Serialize(TreeNode * root, std::string & ans) {
+    if (root == NULL) ans += " N";
+    else {
+        ans += " " + IntToString(root->val);
+        Serialize(root->left, ans);
+        Serialize(root->right, ans);
+    }
+}
+
+void Deserialize(std::vector<std::string> & parts, int & idx, TreeNode * & root) {
+    if (idx == parts.size()) return;
+    if (parts[idx] == "N") {
+        idx += 1;
+        root = NULL;
+    } else {
+        root = new TreeNode(StringToInt(parts[idx]));
+        idx += 1;
+        Deserialize(parts, idx, root->left);
+        Deserialize(parts, idx, root->right);
+    }
+}
+
+class Codec {
+public:
+
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        std::string rs;
+        Serialize(root, rs);
+        return rs.substr(1);
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        std::vector<std::string> parts = Split(data);
+        TreeNode * root = NULL;
+        int idx = 0;
+        Deserialize(parts, idx, root);
+        return root;
+    }
+};
+}  // namespace PreOrder
+
 int main(int argc, char** argv) {
   Codec foo;
   LOG(INFO) << foo.serialize(NULL);

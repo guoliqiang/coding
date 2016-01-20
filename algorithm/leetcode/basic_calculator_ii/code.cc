@@ -97,7 +97,54 @@ int Calculate(const std::string & str) {
 
 using namespace algorithm;
 
+namespace NB {
+int ToInt(const std::string & str) {
+  int ans = 0;
+  for (int i = 0; i < str.size(); i++) {
+    ans = ans * 10 + str[i] - '0';
+  }
+  return ans;
+}
+
+int Calculate(const std::string & str) {
+  char sign = '+';
+  std::string num;
+  std::stack<int> data;
+  for (int i = 0; i < str.size(); i++) {
+    if (isdigit(str[i])) {
+      num.append(1, str[i]);
+    }
+
+    if ((!isdigit(str[i]) && str[i] != ' ') || i == str.size() - 1) {
+      if (sign == '+') {
+        data.push(ToInt(num));
+      } else if (sign == '-') {
+        data.push(-1 * ToInt(num));
+      } else if (sign == '*') {
+        int t = data.top();
+        data.pop();
+        data.push(t * ToInt(num));
+      } else {
+        int t = data.top();
+        data.pop();
+        data.push(t / ToInt(num));
+      }
+      num.clear();
+      sign = str[i];
+    }
+  }
+  int ans = 0;
+  while (data.size()) {
+    ans += data.top();
+    data.pop();
+  }
+  return ans;
+}
+
+}  // namespace NB
+
 int main(int argc, char** argv) {
   LOG(INFO) << Calculate("1*2-3/4+5*6-7*8+9/10");
+  LOG(INFO) << NB::Calculate("1*2-3/4+5*6-7*8+9/10");
   return 0;
 }

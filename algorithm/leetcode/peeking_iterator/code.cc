@@ -58,3 +58,69 @@ public:
   }
   std::list<int> v;
 };
+
+class PeekingIterator : public Iterator {
+public:
+  PeekingIterator(const vector<int>& nums) : Iterator(nums) {
+      // Initialize any member here.
+      // **DO NOT** save a copy of nums and manipulate it directly.
+      // You should only use the Iterator interface methods.
+      val = 0;
+      flag = false;
+  }
+
+    // Returns the next element in the iteration without advancing the iterator.
+  int peek() {
+      if (!flag) {
+          val = Iterator::next();
+          flag = true;
+      }
+      return val;
+  }
+
+  // hasNext() and next() should behave the same as in the Iterator interface.
+  // Override them if needed.
+  int next() {
+      if (flag) {
+          flag = false;
+          return val;
+      } else {
+          return Iterator::next();
+      }
+  }
+
+  bool hasNext() const {
+      if (flag) return true;
+      else return Iterator::hasNext();
+  }
+  
+  int val;
+  bool flag;
+};
+
+
+class PeekingIterator : public Iterator
+{
+public:
+    PeekingIterator(const vector<int> &nums) : Iterator(nums)
+    {
+    }
+
+    int peek()
+    {
+        return Iterator(*this).next();
+    }
+
+    int next()
+    {
+        return Iterator::next();
+    }
+
+    bool hasNext() const
+    {
+        return Iterator::hasNext();
+    }
+};
+
+
+

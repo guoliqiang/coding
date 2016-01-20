@@ -67,15 +67,15 @@ using namespace algorithm;
 
 namespace twice {
 void Permutation(std::vector<int> & vec, std::vector<int> & used, std::vector<int> & path,
-                 int cur, int cnt, std::vector<std::vector<int> > & rs) {
-  if (cur == cnt){
+                 int cnt, std::vector<std::vector<int> > & rs) {
+  if (path.size() == cnt){
       rs.push_back(path);
   }
   for (int i = 0; i < vec.size(); i++) {
       if (used[i] > 0) {
           used[i]--;
           path.push_back(vec[i]);
-          Permutation(vec, used, path, cur + 1, cnt, rs);
+          Permutation(vec, used, path, cnt, rs);
           used[i]++;
           path.pop_back();
       }
@@ -98,7 +98,7 @@ std::vector<std::vector<int> > Permutation(std::vector<int> & num) {
     }
     std::vector<int> path;
     std::vector<std::vector<int> > rs;
-    Permutation(vec, used, path, 0, cnt, rs);
+    Permutation(vec, used, path, cnt, rs);
     return rs;
 }
 }  // namespace twice

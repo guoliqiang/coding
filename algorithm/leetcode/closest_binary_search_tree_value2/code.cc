@@ -6,23 +6,23 @@
 
 #include "base/public/common_ojhead.h"
 
-namespace algorithm {
 struct TreeNode {
   int val;
   TreeNode * left;
   TreeNode * right;
 };
 
+namespace algorithm {
 std::vector<int> ClosestKValues(TreeNode * root, int target, int k) {
   std::queue<int> ans;
-  std::queue<TreeNode *> queue;
+  std::stack<TreeNode *> queue;
   while (root != NULL) {
     queue.push(root);
     root = root->left;
   }
 
   while (queue.size()) {
-    TreeNode * cur = queue.front();
+    TreeNode * cur = queue.top();
     queue.pop();
     if (ans.size() < k) ans.push(cur->val);
     else {
@@ -52,6 +52,52 @@ std::vector<int> ClosestKValues(TreeNode * root, int target, int k) {
 using namespace algorithm;
 
 namespace NB {
+
+void InOrder(TreeNode * root, int t, std::stack<int> & s) {
+  if (root == NULL) return;
+  InOrder(root->left, t, s);
+  if (root->val <= t) {
+    s.push(root->val);
+    InOrder(root->left, t, s);
+  }
+}
+
+void InOrder2(TreeNode * root, int t, std::stack<int> & s) {
+  if (root == NULL) return;
+  InOrder2(root->right, t, s);
+  if (root->val > t) {
+    s.push(root->val);
+    InOrder2(root->left, t, s);
+  }
+}
+
+std::vector<int> ClosestKValues(TreeNode * root, int target, int k) {
+  std::stack<int> pre;
+  std::stack<int> suc;
+  InOrder(root, target, pre);
+  InOrder2(root, target, suc);
+
+  std::vector<int> ans;
+  while (ans.size() < k && pre.size() + suc.size() > 0) {
+    if (pre.size() == 0) {
+      ans.push_back(suc.top());
+      suc.pop();
+    } else if (suc.size() == 0) {
+      ans.push_back(pre.top());
+      pre.pop();
+    } else if (fabs(pre.top() - target) < fabs(suc.top() - target)) {
+      ans.push_back(pre.top());
+      pre.pop();
+    } else {
+      ans.push_back(suc.top());
+      suc.pop();
+    }
+  }
+
+  return ans;
+}
+
+
 }  // namespace NB
 
 int main(int argc, char** argv) {

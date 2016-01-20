@@ -26,6 +26,22 @@ int MajorityElement(std::vector<int>& nums) {
 
 }  // namespace algorithm
 
+namespace clear {
+int majorityElement(std::vector<int>& nums) {
+  int cnt = 0;
+  int ans = 0;
+  for (int i = 0; i < nums.size(); i++) {
+      if (cnt == 0 || ans == nums[i]) {
+          cnt++;
+          ans = nums[i];
+      } else {
+          cnt--;
+      }
+  }
+  return ans;
+}
+}  // namespace clear
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

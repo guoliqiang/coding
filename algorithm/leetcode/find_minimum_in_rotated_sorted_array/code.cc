@@ -49,11 +49,84 @@ int FindMin2(std::vector<int> & v) {
 
 using namespace algorithm;
 
+int findMin(std::vector<int>& nums) {
+        int n = nums.size();
+        int b = 0;
+        int e = n - 1;
+        if (n == 1) return nums[0];
+        if (nums[0] < nums[n - 1]) return nums[0];
+        
+        while (b <= e) {
+            int mid = b + (e - b) / 2;
+            if (mid == b && mid == e) return nums[mid];
+            
+            if (mid == e) {
+                if (nums[mid] < nums[mid - 1]) return nums[mid];
+                else {
+                  e = mid - 1;
+                  continue;
+                }
+            }
+            
+            if (mid == b) {
+              if (nums[mid] < nums[mid + 1]) return nums[mid];
+              else {
+                b = mid + 1;
+                continue;
+              }
+            }
+            
+            if (nums[mid] < nums[mid - 1] && nums[mid] < nums[mid + 1]) return nums[mid];
+            else if (nums[mid] > nums[e]) b = mid + 1;
+            else e = mid - 1;
+        }
+        return 0;
+    }
+
+namespace best {
+    int findMin(vector<int>& nums) {
+        int n = nums.size();
+        int b = 0;
+        int e = n - 1;
+        while (b < e) {
+            int mid = b + (e - b) / 2;
+            if (mid == b) {
+                if (nums[mid] < nums[mid + 1]) return nums[mid];
+                else b = mid + 1;
+            } else {
+                if (nums[mid] < nums[mid + 1] && nums[mid] < nums[mid - 1]) return nums[mid];
+                else if (nums[mid] > nums[e]) b = mid + 1;
+                else e = mid - 1;
+            }
+        }
+        return nums[b];
+    }
+}  // namespace best
+
+
+namespace memory {
+int findMin(vector<int>& nums) {
+    int n = nums.size();
+    int b = 0;
+    int e = n - 1;
+    while (b < e) {
+        if (nums[b] < nums[e]) return nums[b];
+
+        int mid = b + (e - b) / 2;
+        if (nums[mid] > nums[e]) b = mid + 1;
+        else e = mid;
+     }
+     return nums[b];
+   }
+}  // namespace memory
+
 int main(int argc, char** argv) {
   std::vector<int> v;
-  v.push_back(0);
+  v.push_back(4);
   v.push_back(5);
   v.push_back(6);
-  v.push_back(7);
-  LOG(INFO) << FindMin(v);
+  v.push_back(1);
+  v.push_back(2);
+  v.push_back(3);
+  LOG(INFO) << findMin(v);
 }

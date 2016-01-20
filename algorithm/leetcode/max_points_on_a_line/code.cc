@@ -19,7 +19,6 @@ Given n points on a 2D plane, find the maximum number of points that lie on the 
 
 #include "base/public/common_ojhead.h"
 
-namespace algorithm {
 struct Point {
   int x;
   int y;
@@ -27,6 +26,7 @@ struct Point {
   Point(int a, int b): x(a), y(b) {}
 };
 
+namespace algorithm {
 class Cmp {
  public:
   bool operator() (const Point & p1, const Point & p2) const {
@@ -130,6 +130,101 @@ int MaxPoint(std::vector<Point> & v) {
   return max;
 }
 }
+
+namespace my {
+using namespace std;
+
+int gcd(int x, int y) {
+    if (!x) return y;
+    if (!y) return x;
+    return gcd(y, x % y);
+}
+
+bool Cmp(const Point & a, const Point & b) {
+    if (a.x == b.x) return a.y < b.y;
+    return a.x < b.x;
+}
+
+class Solution {
+public:
+    int maxPoints(vector<Point>& points) {
+        std::sort(points.begin(), points.end(), Cmp);
+
+        int n = points.size();
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            std::map<std::pair<int, int>, int> m;
+            int same = 0;
+            int max = 0;
+            for (int j = i; j < n; j++) {
+                int dx = points[j].x - points[i].x;
+                int dy = points[j].y - points[i].y;
+                int t = gcd(fabs(dx), fabs(dy));
+                if (t == 0) {
+                    same++;
+                    continue;
+                }
+                dx /= t;
+                dy /= t;
+                std::pair<int, int> cur(dx, dy);
+                if (!m.count(cur)) m[cur] = 0;
+                m[cur]++;
+                max = std::max(max, m[cur]);
+            }
+            ans = std::max(ans, max + same);
+        }
+        return ans;
+    }
+};
+
+namespace my2 {
+using namespace std;
+
+int gcd(int x, int y) {
+    if (!x) return y;
+    if (!y) return x;
+    return gcd(y, x % y);
+}
+
+class Solution {
+public:
+    int maxPoints(vector<Point>& points) {
+        std::sort(points.begin(), points.end(), Cmp);
+
+        int n = points.size();
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            std::map<std::pair<int, int>, int> m;
+            int same = 0;
+            int max = 0;
+            for (int j = i; j < n; j++) {
+                int dx = points[j].x - points[i].x;
+                int dy = points[j].y - points[i].y;
+                int t = gcd(fabs(dx), fabs(dy));
+                if (t == 0) {
+                    same++;
+                    continue;
+                }
+                dx /= t;
+                dy /= t;
+                if (dx * dy >= 0) {
+                  dx = fabs(dx);
+                  dy = fabs(dy);
+                } else if (dx * dy < 0 && dx > 0) {
+                  dx = -dx;
+                  dy = - dy;
+                }
+                std::pair<int, int> cur(dx, dy);
+                if (!m.count(cur)) m[cur] = 0;
+                m[cur]++;
+                max = std::max(max, m[cur]);
+            }
+            ans = std::max(ans, max + same);
+        }
+        return ans;
+    }
+};
+}  // namespace my
 
 /*
  * (0,9),(138,429),(115,359),(115,359),(-30,-102),(230,709),(-150,-686),(-135,-613),(-60,-248),(-161,-481),(207,639),(23,79),(-230,-691),(-115,-341),(92,289),(60,336),(-105,-467),(135,701),(-90,-394),(-184,-551),(150,774)

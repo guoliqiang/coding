@@ -45,11 +45,33 @@ int Count(TreeNode * n) {
   }
 }
 
+int Count2(TreeNode * root) {
+  if (root == NULL) return 0;
+  int ans = 0;
+
+  while (root != NULL) {
+    int l = DepthLeft(root->left);
+    int r = DepthLeft(root->right);
+    LOG(INFO) << r << "~" << l;
+    if (r == l) {
+      ans += pow(2, l);
+      root = root->right;
+    } else {
+      ans += pow(2, r);
+      root = root->left;
+    }
+  }
+  return ans;
+}
+
 
 }  // namespace algorithm
 
 using namespace algorithm;
 
 int main(int argc, char** argv) {
+  TreeNode * root = new TreeNode(2);
+  root->left = new TreeNode(1);
+  LOG(INFO) << Count2(root);
   return 0;
 }

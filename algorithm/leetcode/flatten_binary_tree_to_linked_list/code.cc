@@ -116,6 +116,21 @@ TreeNode * Flatten(TreeNode * root) {
 }
 }  // namespace twice
 
+namespace itera {
+TreeNode * Flatten(TreeNode * root) {
+  while (root != NULL) {
+    if (root->left) {
+      TreeNode * cur = root->left;
+      while (cur->right != NULL) cur = cur->right;
+      cur->right = root->right;
+      root->right = root->left;
+      root->left = NULL;
+    }
+    root = root->right;
+  }
+}
+}  // namespace itera
+
 
 int main(int argc, char** argv) {
   std::string str = "1,#,2,4,3,5,6";

@@ -48,7 +48,75 @@ class NumMatrix {
 using namespace algorithm;
 
 namespace NB {
-// 二维线段树/二维树状数组 log(n)
+// 二维线段树/二维树状数组 log(m) * log (n)
+class NumMatrix {
+ public:
+  int Low(int k) {
+    return k & (k ^ (k - 1));
+  }
+
+  NumMatrix(std::vector<std::vector<int> > & matrix) {
+    vec = matrix;
+    m = vec.size();
+    n = vec[0].size();
+
+    std::vector<std::vector<int> > sum1(m + 1, std::vector<int>(n + 1, 0));
+    std::vector<std::vector<int> > sum2(m + 1, std::vector<int>(n + 1, 0));
+    for (int i = 1; i <= m; i++) {
+      for (int j = 1; j <= n; j++) {
+        int t = 0;
+        for (int k = j - Low(j) + 1; k <= j; k++) t += matrix[i - 1][k - 1];
+        sum1[i][j] = t;
+      }
+    }
+    for (int j = 1; j <= n; j++) {
+      for (int i = 1; i <= m; i++) {
+        int t = 0;
+        for (int k = i - Low(i) + 1; k <= i; k++) t += sum1[k][j];
+        sum2[i][j] = t;
+      }
+    }
+    sum.swap(sum2);
+  }
+
+  void update(int row, int col, int val) {
+    int v = -vec[row][col] + val;
+    update2(row + 1, col + 1, v);
+  }
+
+  void update2(int x, int y, int v) {
+    for (int i = x; i <= m; i += Low(i)) {
+      for (int j = y; j <= n; j += Low(j)) {
+        sum[i][j] += v;
+      }
+    }
+  }
+
+  int sumRegion(int row1, int col1, int row2, int col2) {
+    int ans = sum2(row2 + 1, col2 + 1);
+    if (row1 - 1 >= 0 && col1 - 1 >= 0) {
+      ans += sum2(row1, col1);
+    }
+    if (col1 - 1 >= 0) ans -= sum2(row2 + 1, col1);
+    if (row1 - 1 >= 0) ans -= sum2(row1, col2 + 1);
+    return ans;
+  }
+
+  int sum2(int x, int y) {
+    int t = 0;
+    for (int i = x; i > 0; i -= Low(i)) {
+      for (int j = y; j > 0; j -= Low(j)) {
+        t += sum[i][j];
+      }
+    }
+    return t;
+  }
+
+  int m;
+  int n;
+  std::vector<std::vector<int> > sum;
+  std::vector<std::vector<int> > vec;
+};
 }  // namespace NB
 
 int main(int argc, char** argv) {
@@ -66,8 +134,12 @@ int main(int argc, char** argv) {
     }
   }
   NumMatrix foo(vec);
+  NB::NumMatrix foo2(vec);
   LOG(INFO) << foo.sumRegion(2, 1, 4, 3);
+  LOG(INFO) << foo2.sumRegion(2, 1, 4, 3);
   foo.update(3, 2, 2);
+  foo2.update(3, 2, 2);
   LOG(INFO) << foo.sumRegion(2, 1, 4, 3);
+  LOG(INFO) << foo2.sumRegion(2, 1, 4, 3);
   return 0;
 }

@@ -46,7 +46,6 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
 
 #include "base/public/common_head.h"
 
-namespace algorithm {
 
 struct TreeNode {
   int val;
@@ -55,6 +54,7 @@ struct TreeNode {
   TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+namespace algorithm {
 // wrong preorder can not determin a bst
 void Generate(std::string str, TreeNode ** p) {
   if (str.size() == 0) return;
@@ -312,14 +312,54 @@ std::vector<TreeNode *> Generate(int n) {
 }
 } // namespace third
 
+namespace four {
+std::vector<TreeNode *> Generate(std::vector<int> & vec, int b, int e) {
+    std::vector<TreeNode *> rs;
+
+    if (b == e) {
+        rs.push_back(new TreeNode(vec[b]));
+    } else {
+        for (int i = b; i <= e; i++) {
+            if (i == b) {
+                std::vector<TreeNode *> right = Generate(vec, b + 1, e);
+                for (int j = 0; j < right.size(); j++) {
+                    TreeNode * root = new TreeNode(vec[i]);
+                    root->right = right[j];
+                    rs.push_back(root);
+                }
+            } else if (i == e) {
+                std::vector<TreeNode *> left = Generate(vec, b, e - 1);
+                for (int j = 0; j < left.size(); j++) {
+                    TreeNode * root = new TreeNode(vec[i]);
+                    root->left = left[i];
+                    rs.push_back(root);
+                }
+            } else {
+                std::vector<TreeNode *> left = Generate(vec, b, i - 1);
+                std::vector<TreeNode *> right = Generate(vec, i + 1, e);
+                for (int j = 0; j < left.size(); j++) {
+                    for (int k = 0; k < right.size(); k++) {
+                        TreeNode * root = new TreeNode(vec[i]);
+                        root->left = left[j];
+                        root->right = right[k];
+                        rs.push_back(root);
+                    }
+                }
+            }
+        }
+    }
+    return rs;
+}
+}  // namespace four
+
 int main(int argc, char** argv) {
-  // std::vector<TreeNode *> rs = TreesNew(3);
-  std::vector<TreeNode *> rs = third::Generate(3);
-  LOG(INFO) << rs.size();
+  std::vector<int> vec;
+  vec.push_back(1);
+  vec.push_back(2);
+  std::vector<TreeNode *> rs = four::Generate(vec, 0, 1);
   for (int i = 0; i < rs.size(); i++) {
-    HERE(INFO);
     PreOrder(rs[i]);
+    LOG(INFO) << "i=" << i;
   }
-  // LOG(INFO) << JoinVector(rs);
   return 0;
 }

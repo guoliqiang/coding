@@ -44,12 +44,37 @@ class ZigzagIterator {
 
 using namespace algorithm;
 
+namespace NB {
+class ZigzagIterator {
+ public:
+  ZigzagIterator(std::vector<int>& v1, std::vector<int>& v2) {
+    if (v1.size()) queue.push(std::make_pair(v1.begin(), v1.end()));
+    if (v2.size()) queue.push(std::make_pair(v2.begin(), v2.end()));
+  }
+
+  int next() {
+    std::pair<std::vector<int>::iterator, std::vector<int>::iterator> cur = queue.front();
+    queue.pop();
+    int ans = *(cur.first);
+    cur.first++;
+    if (cur.first != cur.second) queue.push(cur);
+    return ans;
+  }
+
+  bool hasNext() {
+    return queue.size() > 0;
+  }
+  std::queue<std::pair<std::vector<int>::iterator, std::vector<int>::iterator> > queue;
+};
+
+}  // namespace NB
+
 int main(int argc, char** argv) {
   std::vector<int> vec1;
   std::vector<int> vec2;
   for (int i = 0; i < 10; i++) vec1.push_back(i);
   for (int i = 10; i < 18; i++) vec2.push_back(i);
-  ZigzagIterator foo(vec1, vec2);
+  NB::ZigzagIterator foo(vec1, vec2);
   while (foo.hasNext()) {
     LOG(INFO) << foo.next();
   }

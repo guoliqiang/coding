@@ -15,6 +15,21 @@
 对数字 a + b + c + d + e 反复执行同类操作，最后的结果就是一个 1-9 的数字加
 上一串数字，最左边的数字是 1-9 之间的，右侧的数字永远都是可以被9整除的。
 */
+/*
+this method depends on the truth:
+N=(a[0] * 1 + a[1] * 10 + ...a[n] * 10 ^n),and a[0]...a[n] are all between [0,9]
+we set M = a[0] + a[1] + ..a[n]
+and another truth is that:
+1 % 9 = 1
+10 % 9 = 1
+100 % 9 = 1
+
+so N % 9 = a[0] + a[1] + ..a[n]
+means N % 9 = M
+so N = M (% 9)
+as 9 % 9 = 0,so we can make (n - 1) % 9 + 1 to help us solve the problem
+when n is 9.as N is 9, ( 9 - 1) % 9 + 1 = 9
+*/
 namespace algorithm {
 int AddDigits(int num) {
   if (num == 0) return 0;

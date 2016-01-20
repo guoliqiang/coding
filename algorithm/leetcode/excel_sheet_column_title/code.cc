@@ -22,6 +22,6 @@ std::string ConvertToTitle(int n) {
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-  LOG(INFO) << ConvertToTitle(26);
+  LOG(INFO) << ConvertToTitle(26 * 26);
   return 0;
 }

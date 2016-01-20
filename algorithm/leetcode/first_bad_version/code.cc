@@ -25,6 +25,16 @@ int FirstBadVersion(int n) {
   return 0;
 }
 
+int FirstBadVersion2(int n) {
+  int b = 1;
+  int e = n;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (isBadVersion(mid)) e = mid - 1;
+    else b = mid + 1;
+  }
+  return b;
+}
 }  // namespace algorithm
 
 using namespace algorithm;

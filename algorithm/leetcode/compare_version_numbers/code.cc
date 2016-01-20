@@ -36,6 +36,46 @@ int CompareVersion(const std::string & version1, const std::string & version2) {
   return 0;
 }
 
+namespace cpp {
+int StringToInt(const std::string & str) {
+    return atoi(str.c_str());
+}
+
+std::vector<int> Split(const std::string & str) {
+    std::vector<int> rs;
+    std::string cur;
+    for (int i = 0; i < str.size(); i++) {
+        if (str[i] == '.') {
+            if (cur.size()) rs.push_back(StringToInt(cur));
+            cur.clear();
+        } else {
+            cur.push_back(str[i]);
+        }
+    }
+    if (cur.size()) rs.push_back(StringToInt(cur));
+    return rs;
+}
+
+class Solution {
+public:
+    int compareVersion(std::string version1, std::string version2) {
+        std::vector<int> v1 = Split(version1);
+        std::vector<int> v2 = Split(version2);
+        int i = 0;
+        int j = 0;
+        while (i < v1.size() || j < v2.size()) {
+            int t1 = i < v1.size() ? v1[i] : 0;
+            int t2 = j < v2.size() ? v2[j] : 0;
+            if (t1 < t2) return -1;
+            else if (t1 > t2) return 1;
+            i++;
+            j++;
+        }
+        return 0;
+    }
+};
+}  // namespace cpp
+
 int main(int argc, char** argv) {
   LOG(INFO) << CompareVersion("0.1", "0.0.1");
   return 0;

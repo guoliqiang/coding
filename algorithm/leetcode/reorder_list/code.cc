@@ -27,7 +27,6 @@ Given {1,2,3,4}, reorder it to {1,4,2,3}.
  *
  * */
 
-namespace algorithm {
 
 struct ListNode {
   int val;
@@ -35,6 +34,7 @@ struct ListNode {
   ListNode(int x) : val(x), next(NULL){}
 };
 
+namespace algorithm {
 void ReorderList(ListNode * head) {
   int len = 0;
   ListNode * foo = head;
@@ -123,9 +123,69 @@ void ReOrder(ListNode * head) {
 }
 }  // namespace twice
 
+namespace third {
+   void ReorderList(ListNode* head) {
+        if (head == NULL) return;
+        
+        int len = 0;
+        ListNode * cur = head;
+        while (cur != NULL) {
+            len++;
+            cur = cur->next;
+        }
+        int half = len / 2 + (len % 2);
+        
+        ListNode * head1 = NULL;
+        ListNode * tail1 = NULL;
+        ListNode * head2 = NULL;
+        ListNode * tail2 = NULL;
+        
+        int cnt = 0;
+        while (head != NULL) {
+            ListNode * next = head->next;
+            if (cnt < half) {
+                if (head1 == NULL) {
+                    head1 = head;
+                    tail1 = head;
+                } else {
+                    tail1->next = head;
+                    tail1 = head;
+                }
+            } else {
+                if (head2 == NULL) {
+                    head2 = head;
+                    tail2 = head;
+                } else {
+                    head->next = tail2;
+                    tail2 = head;
+                }
+            }
+            cnt++;
+            head = next;
+        }
+        if (tail1 != NULL) tail1->next = NULL;
+        if (head2 != NULL) head2->next = NULL;
+
+        ListNode * ans = NULL;
+        ListNode ** pre = &ans;
+        while (head1 != NULL || tail2 != NULL) {
+            ListNode * next = head1->next;
+            *pre = head1;
+            pre = &((*pre)->next);
+            if (tail2 != NULL) {
+                *pre = tail2;
+                pre = &((*pre)->next);
+            }
+            head1 = next;
+            if (tail2 != NULL) tail2 = tail2->next;
+        }
+        *pre = NULL;
+    }
+}  // naspace third
+
 int main(int argc, char** argv) {
   ListNode * head = new ListNode(1);
   head->next = new ListNode(2);
-  ReorderList(head);
+  third::ReorderList(head);
   return 0;
 }

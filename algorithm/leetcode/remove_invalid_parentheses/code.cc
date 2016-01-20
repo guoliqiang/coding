@@ -96,6 +96,46 @@ std::vector<std::string> RemoveInvalidParentheses(const std::string & s) {
 
 }  // namespace NB
 
+namespace DFS {
+using namespace std;
+void DFS(std::string cur, int left, int right, const std::string & s, int idx, std::set<std::string> & ans, int & size) {
+    if (left < right) return;
+    if (idx == s.size()) {
+        if (left != right) return;
+
+        if (size == -1 || size == cur.size()) {
+            ans.insert(cur);
+            size = cur.size();
+        } else if (size < cur.size()) {
+            ans.clear();
+            ans.insert(cur);
+            size = cur.size();
+        }
+        return;
+    }
+
+    if (s[idx] == '(') {
+        DFS(cur + "(", left + 1, right, s, idx + 1, ans, size);
+        DFS(cur, left, right, s, idx + 1, ans, size);
+    } else if (s[idx] == ')') {
+        DFS(cur + ")", left, right + 1, s, idx + 1, ans, size);
+        DFS(cur, left, right, s, idx + 1, ans, size);
+    } else {
+        DFS(cur + s.substr(idx, 1), left, right, s, idx + 1, ans, size);
+    }
+}
+
+class Solution {
+public:
+    vector<string> removeInvalidParentheses(string s) {
+        std::set<std::string> ans;
+        int size = -1;
+        DFS("", 0, 0, s, 0, ans, size);
+        return std::vector<std::string>(ans.begin(), ans.end());
+    }
+};
+}  // namespace DFS
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

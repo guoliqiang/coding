@@ -20,7 +20,23 @@ int NumWays(int n, int k) {
 
 using namespace algorithm;
 
+namespace clear {
+int NumWays(int n, int k) {
+  if (n <= 0) return 0;
+  if (n == 1) return k;
+  int same = k;
+  int diff = k * (k - 1);
+  for (int i = 2; i < n; i++) {
+    int t = same;
+    same = diff;
+    diff = t * (k - 1) + diff * (k - 1);
+  }
+  return same + diff;
+}
+}  // namespace clear
 
 int main(int argc, char** argv) {
+  LOG(INFO) << NumWays(10, 4);
+  LOG(INFO) << clear::NumWays(10, 4);
   return 0;
 }

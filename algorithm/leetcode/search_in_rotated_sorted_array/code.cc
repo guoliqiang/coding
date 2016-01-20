@@ -189,6 +189,43 @@ void BinarySearchTester(int * a, int n, int t) {
 
 using namespace algorithm;
 
+// 最清晰，最不容易出错的写法，先找最小的位置，然后做标准的二分查找
+namespace clear {
+using namespace std;
+int FindMinIdx(std::vector<int> & nums) {
+    int n = nums.size();
+    int b = 0;
+    int e = n - 1;
+    while (b < e) {
+        if (nums[b] < nums[e]) return b;
+        
+        int mid = b + (e - b) / 2;
+        if (nums[mid] > nums[e]) b = mid + 1;
+        else e = mid;
+    }
+    return b;
+}
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int n = nums.size();
+        if (n == 0) return -1;
+        
+        int min_idx = FindMinIdx(nums);
+        int b = target <= nums[n - 1] ? min_idx : 0;
+        int e = target <= nums[n - 1] ? n - 1 : min_idx - 1;
+        
+        while (b <= e) {
+            int mid = b + (e - b) / 2;
+            if (nums[mid] == target) return mid;
+            else if (nums[mid] < target) b = mid + 1;
+            else e = mid - 1;
+        }
+        return -1;
+    }
+};
+}  // namespace clear
 
 int main(int argc, char** argv) {
   int A[] = {4,5,6,7,0,1,2};

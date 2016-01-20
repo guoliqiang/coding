@@ -105,12 +105,32 @@ int Single(int A[], int n) {
 }
 }  // namespace third
 
+namespace four {
+int SingleNumber(std::vector<int>& nums) {
+        int one = 0;
+        int two = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            int cur_two = one & nums[i];
+            int cur_three = two & nums[i];
+
+            two |= cur_two;
+            two &= (~cur_three);
+
+            nums[i] &= (~cur_three);
+            one |= nums[i];
+            one &= (~cur_two);
+        }
+        if (one == 0) return two;
+        else return one;
+    }
+}  // namespace four
+
 int main(int argc, char** argv) {
-  // int A[] = {5, 5, 4, 8, 8, 8};
-  int A[] = {4, 8, 8, 8};
-  LOG(INFO) << SingleNumber(A, sizeof(A) / sizeof(int));
-  LOG(INFO) << SingleNumber2(A, sizeof(A) / sizeof(int));
-  LOG(INFO) << twice::SingleNumber(A, sizeof(A) / sizeof(int));
-  LOG(INFO) << third::Single(A, sizeof(A) / sizeof(int));
+  std::vector<int> vec;
+  vec.push_back(2);
+  vec.push_back(2);
+  vec.push_back(3);
+  vec.push_back(2);
+  LOG(INFO) << four::SingleNumber(vec);
   return 0;
 }

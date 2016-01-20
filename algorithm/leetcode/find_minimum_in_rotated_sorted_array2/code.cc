@@ -7,6 +7,8 @@
 #include <vector>
 #include "base/public/common_ojhead.h"
 
+using namespace std;
+
 namespace algorithm {
 
 // 188 / 188 test cases passed.
@@ -34,6 +36,51 @@ int FindMin(const std::vector<int> & vec) {
 }
 
 }  // namespace algorithm
+
+namespace Best {
+// 一定要和最后一个比较，否则的话处理不了一直递增的情况，如果和第一个比较，一直递增就判断错了
+int findMin(vector<int>& nums) {
+    int n = nums.size();
+    int b = 0;
+    int e = n - 1;
+    
+    while (b < e) {
+        int mid = b + (e - b) / 2;
+        if (mid == b) {
+            if (nums[mid] < nums[mid + 1]) return nums[mid];
+            else b = mid + 1;
+        } else {
+            if (nums[mid] < nums[mid - 1] && nums[mid] <= nums[mid + 1]) {
+                return nums[mid];
+            } else {
+                if (nums[mid] > nums[e]) b = mid + 1;
+                else if (nums[mid] < nums[e]) e = mid - 1;
+                else e--;
+            }
+        }
+    }
+    return nums[b];
+}
+}  // namespace Best
+
+namespace memory {
+int findMin(vector<int>& nums) {
+    int n = nums.size();
+    int b = 0;
+    int e = n - 1;
+    while (b < e) {
+        if (nums[b] < nums[e]) return nums[b];
+        else if (nums[b] == nums[e]) e--;
+        else {
+          int mid = b + (e - b) / 2;
+          if (nums[mid] > nums[e]) b = mid + 1;
+          else if (nums[mid] < nums[e]) e = mid;
+          else e--;
+        }
+    }
+    return nums[b];
+}
+}  // namespace memory
 
 using namespace algorithm;
 

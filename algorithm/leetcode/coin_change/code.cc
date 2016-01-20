@@ -40,6 +40,35 @@ int CoinChange(std::vector<int>& coins, int amount) {
 
 using namespace algorithm;
 
+namespace NB {
+using namespace std;
+
+int coinChange(vector<int>& coins, int amount) {
+  std::vector<int> dp(amount + 1, amount + 1);
+  dp[0] = 0;
+  for (int i = 0; i < coins.size(); i++) {
+    for (int j = 0; j <= amount; j++) {
+      if (j >= coins[i]) dp[j] = std::min(dp[j], dp[j - coins[i]] + 1);
+    }
+  }
+  return dp[amount] == amount + 1 ? -1 : dp[amount];
+}
+
+int coinChange(vector<int>& coins, vector<int> & limit, int amount) {
+  int n = coins.size();
+  std::vector<int> dp(amount + 1, amount + 1);
+  dp[0] = 0;
+  for (int i = 0; i < n; i++) {
+    for (int j = amount; j >= coins[i]; j--) {
+      for (int k = 1; k <= std::min(limit[i], j / coins[i]); k++) {
+        dp[j] = std::min(dp[j], dp[j - coins[i] * k] + k);
+      }
+    }
+  }
+  return dp[amount] == amount + 1 ? -1 : dp[amount];
+}
+}  // namespace NB
+
 int main(int argc, char** argv) {
   std::vector<int> vec;
   vec.push_back(1);
@@ -47,7 +76,12 @@ int main(int argc, char** argv) {
   vec.push_back(5);
   LOG(INFO) << CoinChange(vec, 11);
   vec.clear();
-  vec.push_back(2);
+  vec.push_back(1);
+  vec.push_back(3);
   LOG(INFO) << CoinChange(vec, 3);
+  std::vector<int> limit;
+  limit.push_back(1);
+  limit.push_back(2);
+  LOG(INFO) << NB::coinChange(vec, limit, 7);
   return 0;
 }

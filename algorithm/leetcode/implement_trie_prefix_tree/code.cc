@@ -63,8 +63,72 @@ class Trie {
 
 }  // namespace algorithm
 
-using namespace algorithm;
+namespace twice {
+using namespace std;
 
+class TrieNode {
+public:
+    // Initialize your data structure here.
+    TrieNode() {
+        end = false;
+    }
+    bool end;
+    std::map<char, TrieNode *> child;
+};
+
+class Trie {
+public:
+    Trie() {
+        root = new TrieNode();
+    }
+
+    // Inserts a word into the trie.
+    void insert(string word) {
+        TrieNode * cur = root;
+        for (int i = 0; i < word.size(); i++) {
+            if (!(cur->child.count(word[i]))) {
+                cur->child[word[i]] = new TrieNode();
+            }
+            cur = cur->child[word[i]];
+        }
+        cur->end = true;
+    }
+
+    // Returns if the word is in the trie.
+    bool search(string word) {
+        TrieNode * cur = root;
+        for (int i = 0; i < word.size(); i++) {
+            if (!(cur->child.count(word[i]))) return false;
+            cur = cur->child[word[i]];
+        }
+        return cur->end;
+    }
+
+    // Returns if there is any word in the trie
+    // that starts with the given prefix.
+    bool startsWith(string prefix) {
+        TrieNode * cur = root;
+        for (int i = 0; i < prefix.size(); i++) {
+            if (!(cur->child.count([prefix[i]]))) return false;
+            cur = cur->child[prefix[i]];
+        }
+        return true;
+    }
+
+private:
+    TrieNode* root;
+};
+}  // namespace twice
+
+using namespace algorithm;
 int main(int argc, char** argv) {
+  algorithm::Trie trie;
+  trie.insert("ab");
+  trie.search("abc");
+  trie.search("ab");
+  trie.startsWith("abc");
+  trie.startsWith("ab");
+  trie.insert("ab");
+  trie.search("abc");
   return 0;
 }

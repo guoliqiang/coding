@@ -15,7 +15,7 @@ The solution is guaranteed to be unique.
 
 */
 
-#include "base/public/logging.h"
+#include "base/public/ojhead.h"
 
 /*
  * 12 / 12 test cases passed.
@@ -106,6 +106,34 @@ int CanCompleteCircuit(std::vector<int> & gas, std::vector<int> & cost) {
 
 using namespace algorithm;
 
+namespace my {
+using namespace std;
+
+class Solution {
+public:
+    int canCompleteCircuit(std::vector<int>& gas, std::vector<int>& cost) {
+        int n = gas.size();
+        int idx = 0;
+        std::set<int> vis;
+
+        while (true) {
+            if (vis.count(idx)) break;
+            vis.insert(idx);
+
+            int sum = 0;
+            int i = 0;
+            for (i = 0; i < n; i++) {
+                int cur = (idx + i) % n;
+                sum += gas[cur] - cost[cur];
+                if (sum < 0) break;
+            }
+            if (i == n) return idx;
+            idx = (idx + i + 1) % n;
+        }
+        return -1;
+    }
+};
+}  // namespace my
 
 int main(int argc, char** argv) {
   std::vector<int> gas;

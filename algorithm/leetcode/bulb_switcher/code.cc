@@ -5,6 +5,7 @@
 // Brief :
 
 // https://leetcode.com/discuss/75014/math-solution
+// Take 18 and 16 as an example: 18 has factor pairs of [1,18], [2,9], [3,6] while 16 as factor pairs of [1,16], [2,8], [4], as you can see, perfect squares will always have a factor pair that contains only one number which makes it perfect squares.
 #include "base/public/common_ojhead.h"
 
 namespace NB {

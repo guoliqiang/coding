@@ -38,13 +38,6 @@ bool CanWin(const std::string & str) {
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-  LOG(INFO) << CanWin("--++--", 0);
-  LOG(INFO) << NB::CanWin("--++--");
-  LOG(INFO) << CanWin("----", 0);
-  LOG(INFO) << NB::CanWin("----");
-  LOG(INFO) << CanWin("++++--", 0);
-  LOG(INFO) << NB::CanWin("++++--");
-  LOG(INFO) << CanWin("++--++", 0);
-  LOG(INFO) << NB::CanWin("++--++");
+  LOG(INFO) << NB::CanWin("++--++++");
   return 0;
 }

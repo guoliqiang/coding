@@ -69,13 +69,46 @@ int MaxProfit(int k, std::vector<int>& prices) {
 }  // namespace algorithm
 
 using namespace algorithm;
+namespace twice {
+int MaxProfit(int k, std::vector<int>& prices) {
+        if (k <= 0) return 0;
+        
+        std::vector<int> vec;
+        for (int i = 1; i < prices.size(); i++) {
+            vec.push_back(prices[i] - prices[i - 1]);
+        }
+        int n = vec.size();
 
+        std::vector<std::vector<int> > dp(2, std::vector<int>(n, 0));
+        std::vector<std::vector<int> > max(2, std::vector<int>(n, 0));
+        int ans = 0;
+        for (int i = 0; i < k; i++) {
+            for (int j = i; j < n; j++) {
+                if (i == 0) {
+                    dp[i % 2][j] = (j - 1 >= 0) ? std::max(dp[i % 2][j - 1] + vec[j], vec[j]) : vec[j];
+                } else {
+                    dp[i % 2][j] = std::max(max[(i + 1) % 2][j - 1] + vec[j], dp[i % 2][j - 1] + vec[j]);
+                    dp[i % 2][j] = std::max(dp[i % 2][j], dp[(i + 1) % 2][j]);
+                }
+                max[i % 2][j] = (j == 0) ? 0 : std::max(max[i % 2][j - 1], dp[i % 2][j - 1]);
+                ans = std::max(ans, dp[i % 2][j]);
+            }
+        }
+        return ans;
+    }
+}  // namespace twice
 int main(int argc, char** argv) {
   std::vector<int> vec;
   vec.push_back(1);
   vec.push_back(2);
+  vec.push_back(4);
+  vec.push_back(2);
   vec.push_back(5);
-  vec.push_back(10);
-  LOG(INFO) << MaxProfit(10, vec);
+  vec.push_back(7);
+  vec.push_back(2);
+  vec.push_back(4);
+  vec.push_back(9);
+  vec.push_back(0);
+  LOG(INFO) << twice::MaxProfit(4, vec);
   return 0;
 }

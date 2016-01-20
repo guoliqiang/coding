@@ -3,6 +3,9 @@
 // Date  : 2015-12-22 18:03:19
 // File  : code.cc
 // Brief :
+// https://www.hikyle.me/archives/957/
+// http://www.acmerblog.com/lca-lowest-common-ancestor-5574.html
+// https://leetcode.com/discuss/44959/3-lines-with-o-1-space-1-liners-alternatives
 
 #include "base/public/common_ojhead.h"
 
@@ -21,6 +24,21 @@ TreeNode * LCANB(TreeNode * root, TreeNode * p, TreeNode * q) {
   } else if ((root->val < p->val) && (root->val < q->val)) {
     return LCANB(root->right, p, q);
   } else return root;
+}
+
+TreeNode * LCAIte(TreeNode * root, TreeNode * p, TreeNode * q) {
+  if (root == NULL || p == NULL || q == NULL) return NULL;
+
+  while (true) {
+    if (p->val > root->val && q->val > root->val) {
+      root = root->right;
+    } else if (p->val < root->val && q->val < root->val) {
+      root = root->left;
+    } else {
+      return root;
+    }
+  }
+  return NULL;
 }
 
 void LCA(TreeNode * root, int * flag, TreeNode * * ans,
