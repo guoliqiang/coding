@@ -98,16 +98,28 @@ class Solution {
 };
 }  // namespace NB
 
+namespace my {
+ int divide(int dividend, int divisor) {
+        bool minus = ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) ? true : false;
+        long long int dr = fabs(divisor);
+        long long int dd = fabs(dividend);
+
+        long long int ans = 0;
+        while (dd >= dr) {
+            long long int t = 0;
+            while((dr << t) <= dd) t++;
+            t -= 1;
+            ans += ((long long int)1 << t);  // bug fixed
+            dd -= (dr << t);
+        }
+        if (ans > INT_MAX) return minus ? INT_MIN : INT_MAX;
+        return minus ? -ans : ans;
+    }
+}  // namespace my
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-  LOG(INFO) << "7/3:" << divide(-2147483648, -2147483648);
-  LOG(INFO) << "6/3:" << divide(6, 3);
-  LOG(INFO) << "6/5:" << divide(6, 5);
-  LOG(INFO) << "6/1:" << divide(6, 1);
-  LOG(INFO) << "0/1:" << divide(0, 1);
-  
-  LOG(INFO) << "-6/1:" << divide(-6, 1);
-  LOG(INFO) << "6/-2:" << divide(6, -2);
+  LOG(INFO) << "7/3:" << my::divide(-2147483648, -1);
   return 0;
 }

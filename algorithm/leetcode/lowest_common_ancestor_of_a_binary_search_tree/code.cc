@@ -9,7 +9,6 @@
 
 #include "base/public/common_ojhead.h"
 
-namespace algorithm {
 struct TreeNode {
   int val;
   TreeNode *left;
@@ -17,6 +16,7 @@ struct TreeNode {
   TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+namespace algorithm {
 TreeNode * LCANB(TreeNode * root, TreeNode * p, TreeNode * q) {
   if (root == NULL) return NULL;
   if ((root->val > p->val) && (root->val > q->val)) {
@@ -67,6 +67,18 @@ TreeNode* LowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
 
 }
 }  // namespace algorithm
+
+namespace iter {
+TreeNode* LowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+  if (root == NULL || p == NULL || q == NULL) return NULL;
+  while (root != NULL) {
+    if (p->val < root->val && q->val < root->val) root = root->left;
+    else if (p->val > root->val && q->val > root->val) root = root->right;
+    else return root;
+  }
+  return NULL;
+}
+}  // namespace iter
 
 using namespace algorithm;
 

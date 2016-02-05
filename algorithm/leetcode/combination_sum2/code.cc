@@ -138,19 +138,19 @@ void Combine(std::vector<int> & num, int target, int k, std::vector<int> & path,
   }
 }
 
+// 只能选一次的
 void Combine2(std::vector<int> & num, int target, int k, std::vector<int> & path,
              std::set<std::vector<int> > & rs, int cur) {
-  LOG(INFO) << JoinVector(path);
   if (cur == target) {
     rs.insert(path);
     return;
-  } else if (cur > target || k == num.size()) return;
-  else {
-    Combine2(num, target, k + 1, path, rs, cur);
-    path.push_back(num[k]);
-    Combine2(num, target, k + 1, path, rs, cur + num[k]);
-    path.pop_back();
   }
+  if (cur > target || k == num.size()) return;
+
+  Combine2(num, target, k + 1, path, rs, cur);
+  path.push_back(num[k]);
+  Combine2(num, target, k + 1, path, rs, cur + num[k]);
+  path.pop_back();
 }
 
 class Solution {

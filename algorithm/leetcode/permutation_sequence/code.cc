@@ -79,6 +79,31 @@ std::string GetPermutation(int n, int k) {
 
 using namespace algorithm;
 
+namespace Iter {
+int F(int n) {
+    if (n <= 1) return 1;
+    return n * F(n - 1);
+}
+
+std::string getPermutation(int n, int k) {
+    k = k - 1;
+    std::string ans;
+    std::string rs;
+    for (int i = 0; i < n; i++) ans.push_back('1' + i);
+
+    while (k > 0) {
+        int size = F(ans.size() - 1);
+        int idx = k / size;
+
+        rs.push_back(*(ans.begin() + idx));
+        ans.erase(ans.begin() + idx);
+        k %= size;
+    }
+    rs.append(ans);
+    return rs;
+}
+}  // namespace Iter
+
 int main(int argc, char** argv) {
   LOG(INFO) << GetPermutation(1, 1);
   LOG(INFO) << GetPermutation(3, 2);

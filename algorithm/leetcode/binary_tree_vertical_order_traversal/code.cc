@@ -6,6 +6,7 @@
 
 #include "base/public/common_ojhead.h"
 
+// from top to bottom, from left to right
 namespace algorithm {
 struct TreeNode {
   TreeNode(int v) : val(v), left(NULL), right(NULL) {}

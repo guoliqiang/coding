@@ -118,10 +118,10 @@ namespace third {
 int RemoveDuplicates(std::vector<int>& nums) {
   int idx = -1;
   for (int i = 0; i < nums.size(); i++) {
-    if (i < 2) std::swap(nums[++idx], nums[i]);
+    if (i < 2) nums[++idx] = nums[i];
     else {
       if (nums[i] == nums[idx] && nums[i] == nums[idx - 1]) continue;
-      else std::swap(nums[++idx], nums[i]);
+      else nums[++idx] = nums[i];
     }
   }
   return idx + 1;

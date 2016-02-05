@@ -6,7 +6,6 @@
 
 #include "base/public/common_ojhead.h"
 
-namespace algorithm {
 
 struct TreeNode {
   int val;
@@ -14,6 +13,8 @@ struct TreeNode {
   TreeNode *right;
   TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
+
+namespace algorithm {
 
 std::vector<int> RightSideView(TreeNode* root) {
   std::vector<int> ans;
@@ -43,6 +44,21 @@ std::vector<int> RightSideView(TreeNode* root) {
 }  // namespace algorithm
 
 using namespace algorithm;
+
+namespace NB {
+void PreOrder(TreeNode * root, int level, std::vector<int> & ans) {
+  if (root == NULL) return;
+  if (ans.size() < level) ans.push_back(root->val);
+  PreOrder(root->right, level + 1, ans);
+  PreOrder(root->left, level + 1, ans);
+}
+
+std::vector<int> RightSideView(TreeNode* root) {
+  std::vector<int> ans;
+  PreOrder(root, 1, ans);
+  return ans;
+}
+}  // namespace NB
 
 int main(int argc, char** argv) {
   return 0;

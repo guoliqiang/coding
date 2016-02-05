@@ -97,6 +97,28 @@ std::string LongestCommon(std::vector<std::string> & str) {
 }
 }  // namespace third
 
+namespace clear {
+
+std::string LongestCommonPrefix(std::vector<std::string> & strs) {
+  int n = strs.size();
+  if (n == 0) return "";
+  if (n == 1) return strs[0];
+
+  int size = 0;
+  while (size < strs[0].size()) {
+    int i = 1;
+    for (i = 1; i < strs.size(); i++) {
+      if (size == strs[i].size() || strs[i][size] != strs[0][size]) {
+        break;
+      }
+    }
+    if (i < strs.size()) break;
+    size++;
+  }
+  return strs[0].substr(0, size);
+}
+}  // namespace clear
+
 
 int main(int argc, char** argv) {
   std::vector<std::string> v;

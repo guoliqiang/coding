@@ -3,20 +3,60 @@
 // Date  : 2016-01-11 23:57:16
 // File  : code.cc
 // Brief :
- private int buffPtr = 0;
-    private int buffCnt = 0;
-    private char[] buff = new char[4];
-    public int read(char[] buf, int n) {
-        int ptr = 0;
-        while (ptr < n) {
-            if (buffPtr == 0) {
-                buffCnt = read4(buff);
-            }
-            if (buffCnt == 0) break;
-            while (ptr < n && buffPtr < buffCnt) {
-                buf[ptr++] = buff[buffPtr++];
-            }
-            if (buffPtr >= buffCnt) buffPtr = 0;
-        }
-        return ptr;
+
+#include "base/public/common_ojhead.h"
+
+namespace algorithm {
+class Solution {
+ public:
+  Solution() {
+    cnt = 0;
+    memset(buff, 0, sizeof(buff));
+  }
+
+  int read4(char * buff) { return 0; }
+
+  int read2(char * data, int n) {
+    int len = 0;
+    while (len < n) {
+      while (len < n && index < cnt) {
+        data[len++] = buff[index++];
+      }
+      if (index == cnt) {
+        index = 0;
+        cnt = read4(buff);
+      }
+      if (cnt == 0) break;
     }
+    return len;
+  }
+  int read(char * data, int n) {
+    int k = 0;
+    while (k < n) {
+      if (index == 0) {
+        cnt = read4(buff);
+      }
+      if (cnt == 0) break;
+
+      while (k < n && index < cnt) {
+        data[k++] = buff[index++];
+      }
+      if (index == cnt) {
+        index = 0;
+      }
+    }
+    return k;
+  }
+
+ private:
+  char buff[4];
+  int index;
+  int cnt;
+};
+}  // namespace algorithm
+
+using namespace algorithm;
+
+int main(int argc, char** argv) {
+  return 0;
+}

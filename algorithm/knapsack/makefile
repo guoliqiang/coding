@@ -20,3 +20,7 @@ opt:
 
 
 clean:
+	rm -rf code
+	rm -rf code2
+	rm -rf code3
+	rm -rf code4

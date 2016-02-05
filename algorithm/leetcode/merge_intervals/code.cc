@@ -62,6 +62,24 @@ std::vector<Interval> Merge(std::vector<Interval> & v) {
 
 using namespace algorithm;
 
+namespace clear {
+bool Cmp(const Interval & x, const Interval & y) {
+    return x.start < y.start;
+}
+
+std::vector<Interval> merge(std::vector<Interval>& intervals) {
+    std::sort(intervals.begin(), intervals.end(), Cmp);
+    std::vector<Interval> ans;
+    for (int i = 0; i < intervals.size(); i++) {
+        if (ans.size() == 0) ans.push_back(intervals[i]);
+        else {
+            if (ans.back().end < intervals[i].start) ans.push_back(intervals[i]);
+            else ans.back().end = std::max(ans.back().end, intervals[i].end);  // bug fixed, add max
+        }
+    }
+    return ans;
+}
+}  // namespace clear
 
 int main(int argc, char** argv) {
   std::vector<Interval> foo;

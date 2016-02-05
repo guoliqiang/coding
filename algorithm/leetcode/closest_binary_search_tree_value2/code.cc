@@ -4,6 +4,16 @@
 // File  : code.cc
 // Brief :
 
+/*
+Given a non-empty binary search tree and a target value, find k values in the BST that are closest to the target.
+
+Note: Given target value is a floating point. You may assume k is always valid, that is: k ≤ total nodes. You are guaranteed to have only one unique set of k values in the BST that are closest to the target. Follow up: Assume that the BST is balanced, could you solve it in less than O(n) runtime (where n = total nodes)?
+
+Hint:
+
+Consider implement these two helper functions: getPredecessor(N), which returns the next smaller node to N. getSuccessor(N), which returns the next larger node to N.
+*/
+
 #include "base/public/common_ojhead.h"
 
 struct TreeNode {
@@ -53,15 +63,16 @@ using namespace algorithm;
 
 namespace NB {
 
+// 从小到大的访问，然后把小于的加入到栈中
 void InOrder(TreeNode * root, int t, std::stack<int> & s) {
   if (root == NULL) return;
   InOrder(root->left, t, s);
   if (root->val <= t) {
     s.push(root->val);
-    InOrder(root->left, t, s);
+    InOrder(root->right, t, s);
   }
 }
-
+// 其实是从大到小的访问，然后把大于的加入到栈中
 void InOrder2(TreeNode * root, int t, std::stack<int> & s) {
   if (root == NULL) return;
   InOrder2(root->right, t, s);

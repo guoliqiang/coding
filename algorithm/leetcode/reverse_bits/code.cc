@@ -26,7 +26,20 @@ uint32_t ReverseBits(uint32_t n) {
 
 using namespace algorithm;
 
+namespace clear {
+uint32_t ReverseBits(uint32_t n) {
+    uint32_t ans = 0;
+    for (int i = 0; i < 32; i++) {
+        ans += (n & 1);
+        if (i == 31) break;
+        ans <<= 1;
+        n >>= 1;
+    }
+    return ans;
+}
+}  // namespace clear
+
 int main(int argc, char** argv) {
-  LOG(INFO) << ReverseBits(43261596);
+  LOG(INFO) << clear::ReverseBits(1);
   return 0;
 }

@@ -126,6 +126,73 @@ bool ContainsNearbyAlmostDuplicate(std::vector<int>& nums, int k, int t) {
   return false;
 }
 }  // namespace NB
+
+namespace st2 {
+struct Node {
+    long long int b;
+    long long int e;
+    int cnt;
+    Node * left;
+    Node * right;
+    Node() : b(0), e(0), cnt(0), left(NULL), right(NULL) {}
+};
+
+void Build(std::vector<long long int> & vec, int b, int e, Node * & root) {
+    root = new Node();
+    root->b = vec[b];
+    root->e = vec[e];
+    if (b != e) {
+        int mid = b + (e - b) / 2;
+        Build(vec, b, mid, root->left);
+        Build(vec, mid + 1, e, root->right);
+    }
+}
+
+void Update(Node * root, long long int key, int val) {
+    if (root == NULL || root->b > key || root->e < key) return;
+    if (root->b == key && root->e == key) {
+        root->cnt += val;
+    } else {
+        root->cnt += val;
+        Update(root->left, key, val);
+        Update(root->right, key, val);
+    }
+}
+
+bool Find(Node * root, long long int b, long long int e) {
+    if (root == NULL || root->b > e || root->e < b) return false;
+    if (root->b >= b && root->e <= e) {
+        return root->cnt > 0;
+    } else if (b >= root->b && e<= root->e) {
+        return Find(root->left, b, e) || Find(root->right, b, e);
+    } else if (b >= root->b) {
+        return Find(root, b, root->e);
+    } else {
+        return Find(root, root->b, e);
+    }
+}
+
+bool containsNearbyAlmostDuplicate(std::vector<int>& nums, int k, int t) {
+    if (nums.size() == 0) return false;
+    
+    std::vector<long long int> vec(nums.begin(), nums.end());
+    std::sort(vec.begin(), vec.end());
+    vec.resize(std::unique(vec.begin(), vec.end()) - vec.begin());
+    
+    Node * root = NULL;
+    Build(vec, 0, vec.size() - 1, root);
+    for (int i = 0; i < nums.size(); i++) {
+        if (i > k) {
+            Update(root, nums[i - k - 1], -1);
+        }
+        long long int low = (long long int)nums[i] - t;
+        long long int up = (long long int)nums[i] + t;
+        if (Find(root, low, up)) return true;
+        Update(root, nums[i], 1);
+    }
+    return false;
+}
+}  // namespace st2
 int main(int argc, char** argv) {
   std::vector<int> vec;
   vec.push_back(0);

@@ -155,10 +155,18 @@ int DP(int m, int n) {
 
 using namespace algorithm;
 
+namespace NB {
+int UniquePath(int m, int n) {
+  double ans = 1;
+  for (int i = 1; i < m; i++) {
+      ans =  ans * (n + i - 1) / (i);
+  }
+  return ans;
+}
+}  // namespace NB
+
 
 int main(int argc, char** argv) {
-  int m = 4;
-  int n = 3;
   /*
   m = 4;
   n = 3;
@@ -168,9 +176,9 @@ int main(int argc, char** argv) {
   n = 2;
   LOG(INFO) << m << " " << n << " : " << UniquePath(m, n);
   */
-  m = 10;
-  n = 10;
-  LOG(INFO) << m << " " << n << " : " << UniquePath(m, n);
+  int m = 10;
+  int n = 10;
+  LOG(INFO) << m << " " << n << " : " << NB::UniquePath(m, n);
   LOG(INFO) << m << " " << n << " : " << UniquePathDP(m, n);
  
   // test for bitset

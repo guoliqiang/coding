@@ -57,6 +57,27 @@ int DP(int A[], int n) {
 
 }  // namespace algorithm
 
+namespace BFS {
+int jump(vector<int>& nums) {
+    int n = nums.size();
+    if (n == 0) return 0;
+
+    int right = 0;
+    int left = 0;
+    int level = 0;
+    while (right != n - 1) {
+        int t = right;
+        for (int i = left; i <= right; i++) {
+            t = std::max(t, nums[i] + i);
+        }
+        level++;
+        left = right + 1;
+        right = std::min(t, n - 1);
+    }
+    return level;
+}
+}  // namespace BFS
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

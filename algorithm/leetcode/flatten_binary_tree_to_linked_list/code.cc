@@ -131,6 +131,69 @@ TreeNode * Flatten(TreeNode * root) {
 }
 }  // namespace itera
 
+namespace iter_clear1 {
+void flatten(TreeNode* root) {
+  std::stack<std::pair<TreeNode *, TreeNode *> > stack;
+  TreeNode * pre = NULL;
+  while (root != NULL) {
+      if (pre != NULL) {
+          pre->left = NULL;
+          pre->right = root;
+      }
+      stack.push(std::make_pair(root, root->right));
+      pre = root;
+      root = root->left;
+  }
+
+  while (stack.size()) {
+      std::pair<TreeNode *, TreeNode *> cur = stack.top();
+      stack.pop();
+
+      root = cur.second;
+      while (root != NULL) {
+          if (pre != NULL) {
+              pre->right = root;
+              pre->left = NULL;
+          }
+          stack.push(std::make_pair(root, root->right));
+          pre = root;
+          root = root->left;
+      }
+  }
+}
+}  // namespace iter_clear1
+
+namespace iter_clear2 {
+void flatten(TreeNode* root) {
+  std::stack<TreeNode *> stack;
+  TreeNode * pre = NULL;
+  while (root != NULL) {
+      if (pre != NULL) {
+          pre->left = NULL;
+          pre->right = root;
+      }
+      stack.push(root->right);
+      pre = root;
+      root = root->left;
+  }
+
+  while (stack.size()) {
+      root = stack.top();
+      stack.pop();
+
+      while (root != NULL) {
+          if (pre != NULL) {
+              pre->right = root;
+              pre->left = NULL;
+          }
+          stack.push(root->right);
+          pre = root;
+          root = root->left;
+      }
+  }
+}
+}  // namespace iter_clear2
+
 
 int main(int argc, char** argv) {
   std::string str = "1,#,2,4,3,5,6";

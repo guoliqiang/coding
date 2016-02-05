@@ -17,3 +17,4 @@ opt:
 
 
 clean:
+	rm -rf code

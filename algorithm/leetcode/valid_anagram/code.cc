@@ -13,15 +13,24 @@ bool IsAnagram(const std::string & s, const std::string & t) {
   int vec[26] = {0};
   for (int i = 0; i < s.size(); i++) {
     vec[s[i] - 'a']++;
-  }
-  for (int i = 0; i < t.size(); i++) {
-    if (vec[t[i] - 'a'] == 0) return false;
     vec[t[i] - 'a']--;
+  }
+  for (int i = 0; i < 26; i++) {
+    if (vec[i] != 0) return false;
   }
   return true;
 }
 
 }  // namespace algorithm
+
+namespace twice {
+
+bool IsAnagram(std::string & s, std::string & t) {
+  std::sort(s.begin(), s.end());
+  std::sort(t.begin(), t.end());
+  return s == t;
+}
+}  // namespace twice
 
 using namespace algorithm;
 

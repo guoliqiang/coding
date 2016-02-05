@@ -155,7 +155,7 @@ void Combine2(std::vector<int> & num, int target, int k, int cur, std::vector<in
 
 class Solution {
 public:
-    vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+    std::vector<std::vector<int> > combinationSum(std::vector<int> &candidates, int target) {
         // Note: The Solution object is instantiated only once and is reused by each test case.
         std::sort(candidates.begin(), candidates.end());
         std::vector<int> path;
@@ -166,15 +166,82 @@ public:
 };
 }  // namespace twice
 
+// 可重复选择若干次的情况
+namespace clear {
+void TraceBack(std::vector<int> & path, std::vector<int> & num, int t, int idx, std::vector<std::vector<int> > & ans) {
+    if (t == 0) {
+        ans.push_back(path);
+        return;
+    }
+    if (t <= 0 || idx == num.size()) return;
+
+    TraceBack(path, num, t, idx + 1, ans);
+    path.push_back(num[idx]);
+    TraceBack(path, num, t - num[idx], idx, ans);
+    path.pop_back();
+}
+}  // namespace clear
+
+// 背包问题的dp解法的回溯找出结果
+namespace dp_a{
+void Trace(std::vector<std::vector<int> > & dp, int x, int y, std::vector<int> & candi,
+           std::vector<int> & path, std::vector<std::vector<int> > & ans) {
+    if (x == 0 && y == 0) {
+        ans.push_back(path);
+        std::sort(ans.back().begin(), ans.back().end());
+        return;
+    }
+    if (dp[x][y - 1] == 1) Trace(dp, x, y - 1, candi, path, ans);
+    if (x - candi[y] >= 0 && dp[x - candi[y]][y] == 1) {
+        path.push_back(candi[y]);
+        Trace(dp, x - candi[y], y, candi, path, ans);
+        path.pop_back();
+    }
+}
+
+std::vector<std::vector<int> > DP(std::vector<int> & candi, int target) {
+    std::vector<std::vector<int> > ans;
+    int n = candi.size();
+    int m = target;
+    if (n == 0 || m == 0) return ans;
+    
+    std::vector<std::vector<int> > dp(m + 1, std::vector<int>(n, 0));
+    
+    for (int i = 0; i <= m; i++) {
+        if (i == 0) dp[i][0] = 1;
+        else if (i >= candi[0]) {
+            dp[i][0] = dp[i - candi[0]][0];
+        }
+    }
+    
+    for (int j = 1; j < n; j++) {
+        for (int i = 0; i <= m; i++) {
+            if (i == 0) dp[i][j] = 1;
+            else if (i < candi[j]) {
+                dp[i][j] = dp[i][j - 1];
+            } else {
+                dp[i][j] = std::max(dp[i][j - 1], dp[i - candi[j]][j]);
+            }
+        }
+    }
+    
+    std::vector<int> path;
+    if (dp[m][n - 1] == 1) {
+        Trace(dp, m, n - 1, candi, path, ans);
+    }
+    return ans;
+}
+std::vector<std::vector<int > > CombinationSum(std::vector<int>& candidates, int target) {
+  return DP(candidates, target);
+}
+}  // namespace dp_a
 
 int main(int argc, char** argv) {
   std::vector<int> candi;
-  candi.push_back(7);
-  candi.push_back(3);
+  candi.push_back(1);
   candi.push_back(2);
-  // candi.push_back(7);
-  int n = 18;
-  std::vector<std::vector<int> > rs = CombinationSum(candi, n);
+  int n = 4;
+  std::vector<std::vector<int> > rs = dp_a::CombinationSum(candi, n);
   for (int i = 0; i < rs.size(); i++) {
     LOG(INFO) << JoinVector(rs[i]);
   }

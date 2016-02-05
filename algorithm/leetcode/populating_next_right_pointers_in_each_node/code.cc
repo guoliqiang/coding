@@ -59,7 +59,6 @@ After calling your function, the tree should look like:
 #include "base/public/common_head.h"
 #include "../ojbst/ojbst.h"
 
-namespace algorithm {
 
 struct TreeLinkNode {
   int val;
@@ -67,7 +66,6 @@ struct TreeLinkNode {
   TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
 };
 
-}  // namespace algorithm
 
 namespace NB {
 
@@ -221,6 +219,25 @@ void Connect(TreeLinkNode * root) {
   }
 }
 }  // namespace twice
+
+namespace clear {
+void connect(TreeLinkNode *root) {
+    while (root != NULL && root->left != NULL) {
+      TreeLinkNode * next = root->left;
+      TreeLinkNode * pre = NULL;
+
+      while (root != NULL) {
+          root->left->next = root->right;
+          if (pre != NULL) {
+              pre->right->next = root->left;
+          }
+          pre = root;
+          root = root->next;
+      }
+      root = next;
+    }
+}
+}  // namespace clear
 
 
 int main(int argc, char** argv) {

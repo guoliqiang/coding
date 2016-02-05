@@ -66,6 +66,41 @@ std::vector<std::vector<int> > SubsetWithDup(std::vector<int> & s) {
 
 }  // namespace algorithm
 
+// 另一种写法
+namespace other {
+void Trace(std::vector<int> & vec, std::vector<int> & cnt, std::vector<int> & path,
+           std::vector<std::vector<int> > &rs, int idx) {
+  if (idx == vec.size()) {
+    rs.push_back(path);
+  } else {
+    for (int i = 0; i <= cnt[idx]; i++) {
+      for (int k = 0; k < i; k++) path.push_back(vec[idx]);
+      Trace(vec, cnt, path, rs, idx + 1);
+      for (int k = 0; k < i; k++) path.pop_back();
+    }
+  }
+}
+
+std::vector<std::vector<int> > Trace(std::vector<int> & s) {
+    std::map<int, int> tmap;
+    for (int i = 0; i < s.size(); i++) {
+        if (tmap.count(s[i])) tmap[s[i]]++;
+        else tmap[s[i]] = 1;
+    }
+    std::vector<int> vec;
+    std::vector<int> cnt;
+    for (std::map<int, int>::iterator i = tmap.begin(); i != tmap.end(); i++) {
+        vec.push_back(i->first);
+        cnt.push_back(i->second);
+    }
+    tmap.clear();
+    std::vector<int> path;
+    std::vector<std::vector<int> > rs;
+    Trace(vec, cnt, path, rs, 0);
+    return rs;
+}
+}  // namespace other
+
 namespace twice {
 void Trace(std::vector<int> & vec, std::vector<int> & used, std::vector<int> & path,
            std::vector<std::vector<int> > &rs, int k) {

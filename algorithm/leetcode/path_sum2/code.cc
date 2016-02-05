@@ -115,6 +115,21 @@ std::vector<std::vector<int> > Path(TreeNode * root, int sum) {
 
 }
 
+namespace clear {
+void Get(TreeNode * root, int sum, int cur, std::vector<int> & path, std::vector<std::vector<int> > & ans) {
+    if (root == NULL) return;
+    cur += root->val;
+    path.push_back(root->val);
+
+    if (root->left == NULL && root->right == NULL) {
+        if (cur == sum) ans.push_back(path);
+    }
+    Get(root->left, sum, cur, path, ans);
+    Get(root->right, sum, cur, path, ans);
+    path.pop_back();
+}
+}  // namespace clear
+
 int main(int argc, char** argv) {
   return 0;
 }

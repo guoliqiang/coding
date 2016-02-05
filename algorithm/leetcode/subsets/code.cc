@@ -5,6 +5,7 @@
 // File  : code.cc
 // Brief :
 
+// 背包问题的暴力搜索解法
 /*
 Given a set of distinct integers, S, return all possible subsets.
 Note:
@@ -71,7 +72,7 @@ std::vector<std::vector<int> > Subsets(std::vector<int> & v) {
 
 namespace twice {
 using namespace std;
-
+// 遍历树的写法，左侧表示不选当前节点，右侧表示选择当前节点
 void Trace(std::vector<int> & s, std::vector<int> & path,
            int k, std::vector<std::vector<int> > & rs) {
   if (k == s.size()) {
@@ -95,8 +96,39 @@ class Solution {
 };
 }  // namespace twice
 
+namespace other {
+// 很容易扩展到对数量有限制的情况, 不允许重复的情况
+void TraceBack(std::vector<int> & vec, std::vector<int> & path, std::vector<std::vector<int> > & ans, int idx) {
+    ans.push_back(path);
+
+    for (int i = idx; i < vec.size(); i++) {
+        path.push_back(vec[i]);
+        TraceBack(vec, path, ans, i + 1);
+        path.pop_back();
+    }
+}
+}  // namespace other
+
 using namespace algorithm;
 
+namespace iter {
+std::vector<std::vector<int > > subsets(std::vector<int>& nums) {
+  std::sort(nums.begin(), nums.end());
+
+  int n = nums.size();
+  int size = pow(2, n);
+  std::vector<std::vector<int> > ans;
+
+  for (int i = 0; i < size; i++) {
+      std::vector<int> cur;
+      for (int j = 0; j < n; j++) {
+          if (i & (1 << j)) cur.push_back(nums[j]);
+      }
+      ans.push_back(cur);
+  }
+  return ans;
+}
+}  // namespace iter
 
 int main(int argc, char** argv) {
   std::vector<int> bar;

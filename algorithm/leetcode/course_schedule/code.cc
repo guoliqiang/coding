@@ -42,6 +42,44 @@ bool CanFinish(int num, const std::vector<std::pair<int, int> >& pre) {
 
 using namespace algorithm;
 
+namespace twice {
+bool CanFinish(int numCourses, std::vector<std::pair<int, int> >& prerequisites) {
+  int n = numCourses;
+  std::map<int, std::set<int> > graph;
+  std::vector<int> degree(n, 0);
+  for (int i = 0; i < prerequisites.size(); i++) {
+    graph[prerequisites[i].first].insert(prerequisites[i].second);
+  }
+
+  for (std::map<int, std::set<int> >::iterator i = graph.begin(); i != graph.end(); i++) {
+    for (std::set<int>::iterator j = i->second.begin(); j != i->second.end(); j++) {
+      degree[*j]++;
+    }
+  }
+  std::queue<int> queue;
+  for (int i = 0; i < n; i++) {
+    if (degree[i] == 0) queue.push(i);
+  }
+  int cnt = 0;
+  while (queue.size()) {
+    int cur = queue.front();
+    cnt++;
+    queue.pop();
+    std::set<int> & neighbors = graph[cur];
+    for (std::set<int>::iterator i = neighbors.begin(); i != neighbors.end(); i++) {
+      degree[*i]--;
+      if (degree[*i] == 0) queue.push(*i);
+    }
+  }
+  return cnt == n;
+}
+}  // namespace twice
+
+namespace other {
+// DFS 找环
+// https://leetcode.com/discuss/34791/bfs-topological-sort-and-dfs-finding-cycle-by-c
+}  // namespace other
+
 int main(int argc, char** argv) {
   std::vector<std::pair<int, int> > vec;
   vec.push_back(std::make_pair(0, 1));

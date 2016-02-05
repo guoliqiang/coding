@@ -17,4 +17,4 @@ opt:
 
 
 clean:
-	rm -rf find_sub_tree
+	rm -rf code

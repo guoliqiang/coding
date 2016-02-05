@@ -4,6 +4,7 @@
 // File  : code.cc
 // Brief :
 
+// DFS 可以直接求出depth和pre数组
 #include "base/public/common_ojhead.h"
 
 namespace algorithm {

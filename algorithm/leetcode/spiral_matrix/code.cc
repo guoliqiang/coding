@@ -167,6 +167,36 @@ public:
 };
 }  // namespace third
 
+namespace clear {
+std::vector<int> SpiralOrder(std::vector<std::vector<int> > & matrix) {
+  std::vector<int> ans;
+  while (matrix.size() > 0) {
+    ans.insert(ans.end(), matrix[0].begin(), matrix[0].end());
+    matrix.erase(matrix.begin());
+
+    for (int i = 0; i < matrix.size(); i++) {
+        ans.push_back(matrix[i].back());
+        matrix[i].pop_back();
+    }
+    if (matrix.size() && matrix.back().size() == 0) matrix.clear();
+
+    if (matrix.size()) {
+        std::vector<int> t = matrix.back();
+        std::reverse(t.begin(), t.end());
+        ans.insert(ans.end(), t.begin(), t.end());
+        matrix.pop_back();
+    }
+
+    for (int i = matrix.size() - 1; i >= 0; i--) {
+        ans.push_back(*matrix[i].begin());
+        matrix[i].erase(matrix[i].begin());
+    }
+    if (matrix.size() && matrix.back().size() == 0) matrix.clear();
+  }
+  return ans;
+}
+}  // namespace clear
+
 int main(int argc, char** argv) {
   std::vector<std::vector<int> > matrix;
   std::vector<int> foo;

@@ -38,6 +38,7 @@ public:
 using namespace algorithm;
 
 namespace NB {
+// 注意对相同数据的处理
 class TwoSum {
 public:
   // if use hash map add O(1), find O(n)

@@ -231,7 +231,8 @@ int LadderLength(std::string & start, std::string & end, std::unordered_set<std:
 }  // namespace algorithm
 
 using namespace algorithm;
-
+// 双端BFS的写法
+// https://leetcode.com/discuss/82417/56ms-c-solution-two-end-bfs-easy-understanding
 
 int main(int argc, char** argv) {
   std::string start = "hit";

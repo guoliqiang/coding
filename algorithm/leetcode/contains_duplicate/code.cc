@@ -19,6 +19,12 @@ bool ContainsDuplicate(std::vector<int>& nums) {
 
 using namespace algorithm;
 
+namespace NB {
+bool ContainsDuplicate(std::vector<int>& nums) {
+  return nums.size() > std::set<int>(nums.begin(), nums.end()).size();
+}
+}  // namespace NB
+
 int main(int argc, char** argv) {
   return 0;
 }

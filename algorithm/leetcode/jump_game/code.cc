@@ -98,6 +98,35 @@ bool DP3(int A[], int n) {
 }
 }  // namespace twice
 
+namespace BFS {
+bool CanJump(std::vector<int>& nums) {
+  int n = nums.size();
+
+  int left = 0;
+  int right = 0;
+  while (right != n - 1 && right >= left) {
+      int t = right;
+      for (int i = left; i <= right; i++) {
+          t = std::max(t, i + nums[i]);
+      }
+      left = right + 1;
+      right = std::min(t, n - 1);
+  }
+  return right == n - 1;
+}
+}  // namespace BFS
+
+namespace NB {
+bool canJump(std::vector<int>& nums) {
+  int n = nums.size();
+  int right = 0;
+  for (int i = 0; i < n && i <= right; i++) {
+      right = std::max(right, i + nums[i]);
+  }
+  return right >= n - 1;
+}
+}  // namespace NB
+
 int main(int argc, char** argv) {
   // int A[] = {2,3,1,1,4};
   // int A[] = {3,2,1,0,4};

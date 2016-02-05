@@ -65,12 +65,59 @@ int NumIslands(std::vector<std::vector<char> > grid) {
 
 using namespace algorithm;
 
+namespace twice {
+int Find(std::vector<int> & v, int idx) {
+    while (v[idx] != idx) idx = v[idx];
+    return idx;
+}
+
+void Union(std::vector<int> & v, int x, int y) {
+    v[x] = y;
+}
+
+int NumIslands(std::vector<std::vector<char> > & grid) {
+  int m = grid.size();
+  if (m == 0) return 0;
+  int n = grid[0].size();
+  
+  int size = m * n;
+  std::vector<int> vec(size, 0);
+  for (int i = 0; i < size; i++) vec[i] = i;
+
+  int ans = 0;
+  for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+          if (grid[i][j] == '1') {
+              ans++;
+              if (j - 1 >= 0 && grid[i][j - 1] == '1') {
+                  int r1 = Find(vec, i * n + j);
+                  int r2 = Find(vec, i * n + j - 1);
+                  if (r1 != r2) {
+                      ans--;
+                      Union(vec, r1, r2);
+                  }
+              }
+              if (i - 1 >= 0 && grid[i - 1][j] == '1') {
+                  int r1 = Find(vec, i * n + j);
+                  int r2 = Find(vec, (i - 1) * n + j);
+                  if (r1 != r2) {
+                      ans--;
+                      Union(vec, r1, r2);
+                  }
+              }
+          }
+      }
+  }
+  return ans;
+}
+}  // namepsace twice
+
 int main(int argc, char** argv) {
   std::vector<std::vector<char> > grid;
-  grid.push_back(std::vector<char>(3, '1'));
-  grid.push_back(std::vector<char>(3, '0'));
-  grid.push_back(std::vector<char>(3, '1'));
-  grid[1][1] = '1';
-  LOG(INFO) << NumIslands(grid);
+  grid.push_back(std::vector<char>(2, '1'));
+  // grid.push_back(std::vector<char>(3, '0'));
+  // grid.push_back(std::vector<char>(3, '1'));
+  // grid[1][1] = '1';
+  LOG(INFO) << twice::NumIslands(grid);
   return 0;
 }

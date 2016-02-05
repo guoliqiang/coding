@@ -69,12 +69,53 @@ class ZigzagIterator {
 
 }  // namespace NB
 
+namespace NB2 {
+class ZigzagIterator {
+ public:
+  ZigzagIterator(std::vector<int>& v1, std::vector<int>& v2) {
+    queue.push(std::make_pair(v1.begin(), v1.end()));
+    queue.push(std::make_pair(v2.begin(), v2.end()));
+  }
+
+  int next() {
+    std::pair<std::vector<int>::iterator, std::vector<int>::iterator> cur = queue.front();
+    queue.pop();
+    int ans = *(cur.first);
+    cur.first++;
+    queue.push(cur);
+    return ans;
+  }
+
+  bool hasNext() {
+    int size = queue.size();
+    for (int i = 0; i < size; i++) {
+      std::pair<std::vector<int>::iterator, std::vector<int>::iterator> cur = queue.front();
+      if (cur.first == cur.second) {
+        queue.pop();
+        queue.push(cur);
+      } else return true;
+    }
+    return false;
+  }
+  std::queue<std::pair<std::vector<int>::iterator, std::vector<int>::iterator> > queue;
+};
+
+}  // namespace NB
+
+
 int main(int argc, char** argv) {
+  std::set<std::pair<int, int> > set;
+  std::vector<std::pair<int, int> > vec;
+  std::pair<int, int> s = std::make_pair(0, 1);
+  do {
+    
+  } while (true)
+  return 0;
   std::vector<int> vec1;
   std::vector<int> vec2;
   for (int i = 0; i < 10; i++) vec1.push_back(i);
   for (int i = 10; i < 18; i++) vec2.push_back(i);
-  NB::ZigzagIterator foo(vec1, vec2);
+  NB2::ZigzagIterator foo(vec1, vec2);
   while (foo.hasNext()) {
     LOG(INFO) << foo.next();
   }

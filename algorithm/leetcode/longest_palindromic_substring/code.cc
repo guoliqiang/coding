@@ -8,6 +8,7 @@
 using namespace algorithm;
 
 // O(n^2), O(1)
+// 本质还是DP，直接暴力搜索判断的算法是O(n^3)
 namespace NB {
 bool IsPalindrome(const std::string & str) {
   int b = 0;

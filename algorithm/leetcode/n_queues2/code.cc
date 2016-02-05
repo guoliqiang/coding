@@ -26,7 +26,7 @@ Now, instead outputting board configurations, return the total number of distinc
 #include <vector>
 #include <algorithm>
 #include <iostream>
-#include "base/public/logging.h"
+#include "base/public/common_ojhead.h"
 
 // 普通的回溯方法会T
 // 这个方法check的次数会少
@@ -75,6 +75,37 @@ void Out(std::vector<std::vector<std::string> > & v) {
 }  // namespace algorithm
 
 using namespace algorithm;
+
+namespace clear {
+bool Check(std::vector<int> & vec, int x) {
+  for (int i = 0; i < x; i++) {
+      if (vec[i] == vec[x] || fabs(vec[i] - vec[x]) == fabs(i - x)) return false;
+  }
+  return true;
+}
+
+int TotalNQueens(int n) {
+  std::vector<int> vec(n, -1);
+  int idx = 0;
+  int ans = 0;
+  while (idx >= 0) {
+      vec[idx]++;
+      if (vec[idx] == n) {
+          vec[idx] = -1;
+          idx--;
+      } else {
+          if (!Check(vec, idx)) continue;
+
+          if (idx == n - 1) {
+              ans++;
+          } else {
+              idx++;
+          }
+      }
+  }
+  return ans;
+}
+}  // namespace clear
 
 int main(int argc, char** argv) {
   int rs = NQueues(8);

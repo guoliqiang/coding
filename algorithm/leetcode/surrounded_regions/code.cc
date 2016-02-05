@@ -198,6 +198,62 @@ void Solve(std::vector<std::vector<char> > & v) {
 
 using namespace algorithm;
 
+namespace BFS {
+// 注意需要加visited 否则，一个点会被加入多次，虽然不是错误，但会TLE
+void BFS(std::vector<std::vector<char> > & board, int x, int y) {
+    if (board[x][y] != 'O') return;
+    
+    int m = board.size();
+    int n = board[0].size();
+    int dir[][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    std::queue<std::pair<int, int> > queue;
+    queue.push(std::make_pair(x, y));
+    std::set<std::pair<int, int> > visited;
+    visited.insert(std::make_pair(x, y));
+    
+    while (queue.size()) {
+        std::pair<int, int> cur = queue.front();
+        queue.pop();
+        board[cur.first][cur.second] = 'M';
+        for (int i = 0; i < 4; i++) {
+            int nx = cur.first + dir[i][0];
+            int ny = cur.second + dir[i][1];
+            if (nx < 0 || nx >= m || ny < 0 || ny >= n) continue;
+            if (board[nx][ny] != 'O') continue;
+            if (visited.count(std::make_pair(nx, ny))) continue;
+            queue.push(std::make_pair(nx, ny));
+            visited.insert(std::make_pair(nx, ny));
+        }
+    }
+}
+
+class Solution {
+public:
+    void solve(vector<vector<char>>& board) {
+        int m = board.size();
+        if (m == 0) return;
+        int n = board[0].size();
+        
+        for (int i = 0; i < m; i++) {
+            BFS(board, i, 0);
+            BFS(board, i, n - 1);
+        }
+        
+        for (int i = 0; i < n; i++) {
+            BFS(board, 0, i);
+            BFS(board, m - 1, i);
+        }
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == 'M') board[i][j] = 'O';
+                else if (board[i][j] == 'O') board[i][j] = 'X';
+            }
+        }
+    }
+};
+}  // namespace BFS
+
 
 int main(int argc, char** argv) {
   std::vector<std::vector<char> > v(4, std::vector<char>(4, 'X'));

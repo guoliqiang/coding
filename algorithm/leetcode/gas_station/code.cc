@@ -135,6 +135,31 @@ public:
 };
 }  // namespace my
 
+// Whenever the sum is negative, reset it and let the car start from next point.
+// In the mean time, add up all of the left gas to total. If it's negative finally, return -1 since it's impossible to finish.
+// If it's non-negative, return the last point saved in res;
+namespace NB {
+ int canCompleteCircuit(std::vector<int>& gas, std::vector<int>& cost) {
+        int n = gas.size();
+        int sum = 0;
+        int cur = 0;
+        int ans = 0;
+        
+        for (int i = 0; i < n; i++) {
+            cur += gas[i] - cost[i];
+            if (cur < 0) {
+                ans = i + 1;
+                sum += cur;
+                cur = 0;
+            }
+        }
+        sum += cur;
+        
+        if (sum < 0) return -1;
+        else return ans;
+    }
+}  // namespace NB
+
 int main(int argc, char** argv) {
   std::vector<int> gas;
   std::vector<int> cost;

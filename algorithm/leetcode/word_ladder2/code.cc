@@ -314,17 +314,68 @@ FindLadder(std::string & start, std::string & end, std::unordered_set<std::strin
 
 using namespace algorithm;
 
+namespace BFS1 {
+std::vector<std::vector<std::string> > BFS(std::string & start, std::string & end, std::unordered_set<std::string> & dict) {
+    std::vector<std::vector<std::string> > ans;
+    
+    std::vector<std::string> queue;
+    std::set<std::string> visited;
+    std::vector<int> pre;
+    queue.push_back(start);
+    pre.push_back(-1);
+    
+    int s_idx = 0;
+    while (ans.size() == 0 && s_idx < queue.size()) {
+        LOG(INFO) << queue.size() << " " << s_idx;
+        int e_idx = queue.size();
+        for (int i = s_idx; i < e_idx; i++) {
+            std::string cur = queue[i];
+            
+            for (int j = 0; j < cur.size(); j++) {
+                for (int k = 0; k < 26; k++) {
+                    if (cur[j] == 'a' + k) continue;
+                    std::string t = cur;
+                    t[j] = 'a' + k;
+                    if (t == end) {
+                        std::vector<std::string> path;
+                        path.insert(path.begin(), t);
+                        path.insert(path.begin(), cur);
+                        int m = i;
+                        while (pre[m] != -1) {
+                            path.insert(path.begin(), queue[pre[m]]);
+                            m = pre[m];
+                        }
+                        ans.push_back(path);
+                    } else {
+                         if (!dict.count(t)) continue;
+                         if (visited.count(t)) continue;
+                         queue.push_back(t);
+                         visited.insert(t);
+                         pre.push_back(i);
+                    }
+                }
+            }
+        }
+        s_idx = e_idx;
+    }
+    return ans;
+}
+}  // namespace BFS1
+
 
 int main(int argc, char** argv) {
-  std::string start = "a";
-  std::string end = "c";
+  std::string start = "hit";
+  std::string end = "cog";
   std::unordered_set<std::string> dict;
-  dict.insert("a");
-  dict.insert("b");
-  dict.insert("c");
+  dict.insert("hot");
+  dict.insert("cog");
+  dict.insert("dot");
+  dict.insert("dog");
+  dict.insert("hit");
+  dict.insert("lot");
   // dict.insert("lot");
-  // dict.insert("log");
-  std::vector<std::vector<std::string> > rs = FindLadder(start, end, dict);
+  dict.insert("log");
+  std::vector<std::vector<std::string> > rs = BFS1::BFS(start, end, dict);
   LOG(INFO) << JoinMatrix(&rs);
   return 0;
 }

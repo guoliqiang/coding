@@ -39,6 +39,37 @@ bool SameTree(TreeNode * root1, TreeNode * root2) {
 
 using namespace algorithm;
 
+namespace iter {
+bool isSameTree(TreeNode* p, TreeNode* q) {
+    if (p == NULL && q == NULL) return true;
+    if (p == NULL || q == NULL) return false;
+
+    std::stack<std::pair<TreeNode *, TreeNode * > > stack;
+    while (p != NULL && q != NULL){
+        if (p->val != q->val) return false;
+        stack.push(std::make_pair(p, q));
+        p = p->left;
+        q = q->left;
+    }
+    if (p != NULL || q != NULL) return false;
+
+    while (stack.size()) {
+        std::pair<TreeNode *, TreeNode *> cur = stack.top();
+        stack.pop();
+
+        p = cur.first->right;
+        q = cur.second->right;
+        while (p != NULL && q != NULL) {
+            if (p->val != q->val) return false;
+            stack.push(std::make_pair(p, q));
+            p = p->left;
+            q = q->left;
+        }
+        if (p != NULL || q != NULL) return false;
+    }
+    return true;
+}
+}  // namespace iter
 
 int main(int argc, char** argv) {
 

@@ -4,6 +4,10 @@
 // File  : code.cc
 // Brief :
 
+/*
+连续n个元素，如果至少有一个重复的，必能组成环
+*/
+
 #include "base/public/common_ojhead.h"
 // http://segmentfault.com/a/1190000003817671
 
@@ -45,6 +49,24 @@ int FindDuplicate(std::vector<int>& nums) {
   return find;
 }
 }  // namespace NB
+
+
+namespace my {
+int findDuplicate(vector<int>& nums) {
+  int n = nums.size();
+  int idx = 0;
+  while (idx < n) {
+    if (nums[idx] != idx + 1) {
+      int t = nums[idx] - 1;
+      if (nums[t] == nums[idx]) return nums[idx];
+      else std::swap(nums[t], nums[idx]);
+    } else {
+      idx++;
+    }
+  }
+  return 0;
+}
+}  // namespace my
 using namespace algorithm;
 
 int main(int argc, char** argv) {

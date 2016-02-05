@@ -95,6 +95,27 @@ void Sort(int A[], int n) {
 }
 }  // namespace third
 
+namespace NB {
+
+void SortColors(std::vector<int>& nums) {
+  int idx0 = -1;
+  int idx1 = -1;
+  int idx2 = -1;
+  for (int i = 0; i < nums.size(); i++) {
+    if (nums[i] == 0) {
+      nums[++idx2] = 2;
+      nums[++idx1] = 1;
+      nums[++idx0] = 0;
+    } else if (nums[i] == 1) {
+      nums[++idx2] = 2;
+      nums[++idx1] = 1;
+    } else {
+      nums[++idx2] = 2;
+    }
+  }
+}
+}  // namespace NB
+
 
 int main(int argc, char** argv) {
   int A[] = {2, 1, 1, 1, 0, 0, 2};

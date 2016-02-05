@@ -28,7 +28,7 @@ For example,
 #include "base/public/string_util.h"
 
 namespace algorithm {
-
+// 其实就是DFS
 void PermuteSub(std::vector<int> & num, int n, std::vector<std::vector<int> > * rs) {
   if (n >= num.size()) {
     rs->push_back(num);
@@ -48,6 +48,37 @@ std::vector<std::vector<int> > Permute(std::vector<int> & num) {
 }
 }  // namespace algorithm
 
+namespace iter {
+bool Next(std::vector<int> & num) {
+  int n = num.size();
+  int idx1 = n - 2;
+  while (idx1 >= 0 && num[idx1] >= num[idx1 + 1]) idx1--;
+  if (idx1 < 0) return false;
+
+  int idx2 = n - 1;
+  while (num[idx2] < num[idx1]) idx2--;
+  std::swap(num[idx1], num[idx2]);
+
+  int b = idx1 + 1;
+  int e = n - 1;
+  while (b < e) {
+    std::swap(num[b], num[e]);
+    b++;
+    e--;
+  }
+  return true;
+}
+
+std::vector<std::vector<int> > Permute(std::vector<int> & num) {
+  std::sort(num.begin(), num.end());
+  std::vector<std::vector<int> > ans;
+  do {
+    ans.push_back(num);
+  } while (Next(num));
+  return ans;
+}
+}  // namespace iter
+
 using namespace algorithm;
 
 
@@ -56,7 +87,7 @@ int main(int argc, char** argv) {
   num.push_back(1);
   num.push_back(2);
   num.push_back(3);
-  std::vector<std::vector<int> > foo = Permute(num);
+  std::vector<std::vector<int> > foo = iter::Permute(num);
   for (int i = 0; i < foo.size(); i++) {
     LOG(INFO) << JoinVector(foo[i]);
   }

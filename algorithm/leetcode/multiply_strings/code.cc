@@ -104,6 +104,32 @@ std::string Multiply(std::string num1, std::string num2) {
 }
 }  // namespace third
 
+namespace NB {
+std::string multiply(std::string num1, std::string num2) {
+  int m = num1.size();
+  int n = num2.size();
+  std::string ans(m + n, '0');
+
+  int idx = m + n - 1;
+  for (int i = m - 1; i >= 0; i--) {
+      int k = idx;
+
+      for (int j = n - 1; j >= 0; j--) {
+          int c = (ans[k] - '0') + (num2[j] - '0') * (num1[i] - '0');
+          ans[k] = c % 10 + '0';
+          ans[k - 1] += c / 10;
+          k--;
+      }
+      idx--;
+  }
+
+  idx = 0;
+  while (idx < m + n && ans[idx] == '0') idx++;
+  if (idx == m + n) return "0";
+  else return ans.substr(idx);
+}
+}  // namespace NB
+
 int main(int argc, char** argv) {
   std::string s1;
   std::string s2;

@@ -145,6 +145,38 @@ void Trace(std::string digits, int k, std::string & path, std::vector<std::strin
 
 using namespace algorithm;
 
+namespace iterator {
+const std::string phone[] = {"", "", "abc", "def", "ghi", "jkl", "mno", "qprs", "tuv", "wxyz"};
+
+std::vector<std::string> LetterCombinations(std::string digits) {
+  std::vector<std::string> ans;
+  int n = digits.size();
+  if (n == 0) return ans;
+
+  std::vector<int> path(n, -1);
+  int idx = 0;
+  while (idx >= 0) {
+    path[idx]++;
+    if (path[idx] == phone[digits[idx] - '0'].size()) {
+      path[idx] = -1;
+      idx--;
+      continue;
+    }
+
+    if (idx == n - 1) {
+      std::string cur;
+      for (int i = 0; i < n; i++) {
+          cur.push_back(phone[digits[i] - '0'][path[i]]);
+      }
+      ans.push_back(cur);
+    } else {
+      idx++;
+    }
+  }
+  return ans;
+}
+}  // namespace iterator
+
 int main(int argc, char** argv) {
   std::string digits = "234";
   std::vector<std::string> rs = LetterCombinations(digits);

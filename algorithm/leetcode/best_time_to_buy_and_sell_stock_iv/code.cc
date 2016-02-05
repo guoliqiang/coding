@@ -72,7 +72,7 @@ using namespace algorithm;
 namespace twice {
 int MaxProfit(int k, std::vector<int>& prices) {
         if (k <= 0) return 0;
-        
+
         std::vector<int> vec;
         for (int i = 1; i < prices.size(); i++) {
             vec.push_back(prices[i] - prices[i - 1]);
@@ -97,6 +97,36 @@ int MaxProfit(int k, std::vector<int>& prices) {
         return ans;
     }
 }  // namespace twice
+
+namespace clear {
+using namespace std;
+
+// 最大K段子段和问题的O(n*k) 写法
+int MaxProfit(int k, vector<int>& prices) {
+    if (k <= 0) return 0;
+    std::vector<int> vec;
+    for (int i = 1; i < prices.size(); i++) {
+        vec.push_back(prices[i] - prices[i - 1]);
+    }
+    int n = vec.size();
+
+    int ans = 0;
+    std::vector<std::vector<int> > dp(k, std::vector<int>(n, 0));
+    std::vector<std::vector<int> > max(k, std::vector<int>(n, 0));
+    for (int i = 0; i < k; i++) {
+        for (int j = i; j < n; j++) {
+            if (i == 0) {
+                dp[i][j] = (j - 1 >= 0) ? std::max(dp[i][j - 1] + vec[j], vec[j]) : vec[j];
+            } else {
+                dp[i][j] = std::max(max[i - 1][j - 1] + vec[j], dp[i][j - 1] + vec[j]);
+            }
+            max[i][j] = (j == 0) ? dp[i][j] : std::max(max[i][j - 1], dp[i][j]);
+            ans = std::max(ans, dp[i][j]);
+        }
+    }
+    return ans;
+}
+}  // namepsace clear
 int main(int argc, char** argv) {
   std::vector<int> vec;
   vec.push_back(1);
@@ -109,6 +139,6 @@ int main(int argc, char** argv) {
   vec.push_back(4);
   vec.push_back(9);
   vec.push_back(0);
-  LOG(INFO) << twice::MaxProfit(4, vec);
+  LOG(INFO) << clear::MaxProfit(1, vec);
   return 0;
 }

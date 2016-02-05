@@ -6,7 +6,6 @@
 
 #include "base/public/common_ojhead.h"
 
-namespace algorithm {
 struct TreeNode {
   int val;
   TreeNode * left;
@@ -14,15 +13,30 @@ struct TreeNode {
   TreeNode(int v) : val(v), left(NULL), right(NULL) {}
 };
 
+namespace preorder {
+void Get(TreeNode * root, TreeNode * pre, int cur, int * ans) {
+  if (pre != NULL && root->val == pre->val + 1) {
+    cur += 1;
+  } else cur = 1;
+
+  *ans = std::max(*ans, cur);
+  Get(root->left, root, cur, ans);
+  Get(root->right, root, cur, ans);
+}
+}
+
+namespace algorithm {
 int Get(TreeNode * root, int * ans) {
   if (root == NULL) return 0;
 
   int cur = 1;
-  if (root->left != NULL && root->left->val == root->val + 1) {
-    cur = std::max(cur, 1 + Get(root->left, ans));
+  int l = Get(root->left, ans);
+  int r = Get(root->right, ans);
+  if (root->left != NULL && root->left->val - 1 == root->val) {
+    cur = std::max(cur, cur + l);
   }
-  if (root->right != NULL && root->right->val == root->val + 1) {
-    cur = std::max(cur, 1 + Get(root->right, ans));
+  if (root->right != NULL && root->right->val - 1 == root->val) {
+    cur = std::max(cur, cur + r);
   }
   *ans = std::max(*ans, cur);
   return cur;

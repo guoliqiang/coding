@@ -101,7 +101,6 @@ bool Mirror2(TreeNode * root1, TreeNode * root2) {
 }  // namespace twice
 
 namespace third {
-using namespace algorithm;
 bool IsSym(TreeNode * root1, TreeNode * root2) {
   std::stack<std::pair<TreeNode *, TreeNode *> > stack;
   while (root1 != NULL || root2 != NULL) {
@@ -131,7 +130,43 @@ bool IsSym(TreeNode * root) {
 }
 }  // namespace third
 
+namespace iter {
+bool isSymmetric(TreeNode* root) {
+  if (root == NULL || (root->left == NULL && root->right == NULL)) return true;
+
+  TreeNode * p = root->left;
+  TreeNode * q = root->right;
+  std::stack<std::pair<TreeNode *, TreeNode *> > stack;
+  while (p != NULL && q != NULL) {
+      if (p->val != q->val) return false;
+      stack.push(std::make_pair(p, q));
+      p = p->left;
+      q = q->right;
+  }
+  if (p != NULL || q != NULL) return false;
+
+  while (stack.size()) {
+      std::pair<TreeNode *, TreeNode *> cur = stack.top();
+      stack.pop();
+      p = cur.first;
+      q = cur.second;
+
+      p = p->right;
+      q = q->left;
+      while (p != NULL && q != NULL) {
+          if (p->val != q->val) return false;
+          stack.push(std::make_pair(p, q));
+          p = p->left;
+          q = q->right;
+      }
+      if (p != NULL || q != NULL) return false;
+  }
+  return true;
+}
+}  // namespace iter
+
 using namespace algorithm;
+
 
 
 int main(int argc, char** argv) {

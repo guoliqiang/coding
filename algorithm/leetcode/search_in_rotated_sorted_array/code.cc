@@ -213,8 +213,17 @@ public:
         if (n == 0) return -1;
         
         int min_idx = FindMinIdx(nums);
+        // 只和最后一个比较
         int b = target <= nums[n - 1] ? min_idx : 0;
         int e = target <= nums[n - 1] ? n - 1 : min_idx - 1;
+        /*
+        int b = 0;
+        int e = n - 1;
+        if (mid != 0) {
+          if (target > nums[n - 1]) e = min - 1;
+          else b = mid + 1;
+        }
+        */
         
         while (b <= e) {
             int mid = b + (e - b) / 2;

@@ -212,6 +212,40 @@ public:
 
 using namespace algorithm;
 
+namespace twobytwo {
+
+using namespace std;
+
+ListNode * Merge(ListNode * l1, ListNode * l2) {
+  ListNode * ans = NULL;
+  ListNode ** pre = &ans;
+  while (l1 != NULL && l2 != NULL) {
+      if (l1->val < l2->val) {
+          *pre = l1;
+          l1 = l1->next;
+      } else {
+          *pre = l2;
+          l2 = l2->next;
+      }
+      pre = &((*pre)->next);
+  }
+  *pre = l1 != NULL ? l1 : l2;
+  return ans;
+}
+
+ListNode* mergeKLists(vector<ListNode*>& lists) {
+  if (lists.size() == 0) return NULL;
+  while(lists.size() > 1) {
+    ListNode * t = Merge(lists[0], lists[1]);
+    lists.erase(lists.begin());
+    lists.erase(lists.begin());
+    lists.push_back(t);
+  }
+  return lists.front();
+}
+
+}  // namespace twobytwo
+
 int main(int argc, char** argv) {
   PriorityQ();
   return 0;

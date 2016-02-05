@@ -20,7 +20,7 @@ int HIndex(std::vector<int>& citations) {
 
 using namespace algorithm;
 
-namespace clear {
+namespace NB {
 int hIndex(std::vector<int>& citations) {
   int n = citations.size();
   int b = 0;
@@ -33,7 +33,29 @@ int hIndex(std::vector<int>& citations) {
   }
   return n - b;
 }
-}  // namespace clear
+}  // namespace NB
+
+namespace my {
+int hIndex(std::vector<int>& citations) {
+  int n = citations.size();
+  if (n == 0) return 0;
+
+  int b = 0;
+  int e = n - 1;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (mid == b) {
+      if (citations[mid] >= n - mid) return n - mid;
+      else b = mid + 1;
+    } else {
+      if (citations[mid] >= n - mid && citations[mid - 1] < n - (mid - 1)) return n - mid;
+      else if (citations[mid] >= n - mid) e = mid - 1;
+      else b = mid + 1;
+    }
+  }
+  return 0;
+}
+}  // namespace my
 
 int main(int argc, char** argv) {
   return 0;

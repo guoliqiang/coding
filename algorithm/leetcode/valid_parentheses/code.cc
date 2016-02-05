@@ -45,6 +45,7 @@ bool IsValid(std::string s) {
 }
 }  // namespace algorithm
 
+// 不能用计数统计，无法处理([)]
 namespace twice {
 
 bool isValid(std::string s) {

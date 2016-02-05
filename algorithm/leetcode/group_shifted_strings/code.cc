@@ -28,6 +28,29 @@ std::vector<std::vector<std::string> > GroupStrings(std::vector<std::string> & s
 }
 }  // namespace algorithm
 
+namespace other {
+// 所有都rotate到以a开头
+std::vector<std::vector<std::string> > GroupStrings(std::vector<std::string> & strs) {
+  std::vector<std::vector<std::string> > ans;
+  std::map<std::string, std::vector<std::string> > m;
+  for (int i = 0; i < strs.size(); i++) {
+    std::string cur = strs[i];
+    int diff = cur[0] - 'a';
+    for (int j = 0; j < cur.size(); j++) {
+      if (cur[j] - diff >= 'a') cur[j] -= diff;
+      else cur[j] -= (diff - 26);
+    }
+    m[cur].push_back(strs[i]);
+  }
+  for (std::map<std::string, std::vector<std::string> >::iterator i = m.begin();
+       i != m.end(); i++) {
+    LOG(INFO) << i->first;
+    ans.push_back(i->second);
+  }
+  return ans;
+}
+}  // namespace other
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {
@@ -43,5 +66,7 @@ int main(int argc, char** argv) {
 
   std::vector<std::vector<std::string> > matrix = GroupStrings(vec);
   LOG(INFO) << JoinMatrix(&matrix);
+  std::vector<std::vector<std::string> > matrix1 = other::GroupStrings(vec);
+  LOG(INFO) << JoinMatrix(&matrix1);
   return 0;
 }

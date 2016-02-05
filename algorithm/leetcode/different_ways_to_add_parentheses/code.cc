@@ -48,44 +48,60 @@ std::vector<int> DiffWaysToCompute(const std::string & input) {
 }  // namespace algorithm
 
 namespace recursive {
-public class Solution {
-    public List<Integer> diffWaysToCompute(String input) {
-        List<Integer> ret = new LinkedList<Integer>();
-        for (int i=0; i<input.length(); i++) {
-            if (input.charAt(i) == '-' ||
-                input.charAt(i) == '*' ||
-                input.charAt(i) == '+' ) {
-                String part1 = input.substring(0, i);
-                String part2 = input.substring(i+1);
-                List<Integer> part1Ret = diffWaysToCompute(part1);
-                List<Integer> part2Ret = diffWaysToCompute(part2);
-                for (Integer p1 :   part1Ret) {
-                    for (Integer p2 :   part2Ret) {
-                        int c = 0;
-                        switch (input.charAt(i)) {
-                            case '+': c = p1+p2;
-                                break;
-                            case '-': c = p1-p2;
-                                break;
-                            case '*': c = p1*p2;
-                                break;
-                        }
-                        ret.add(c);
-                    }
-                }
-            }
+
+std::vector<int> Get(std::vector<int> & num, std::vector<char> & op, int b, int e) {
+  if (b == e) return std::vector<int>(1, num[b]);
+  else {
+    std::vector<int> ans;
+    for (int i = b; i < e; i++) {
+      std::vector<int> l = Get(num, op, b, i);
+      std::vector<int> r = Get(num, op, i + 1, e);
+      for (int k1 = 0; k1 < l.size(); k1++) {
+        for (int k2 = 0; k2 < r.size(); k2++) {
+          if (op[i] == '+') ans.push_back(l[k1] + r[k2]);
+          else if (op[i] == '-') ans.push_back(l[k1] - r[k2]);
+          else ans.push_back(l[k1] * r[k2]);
         }
-        if (ret.size() == 0) {
-            ret.add(Integer.valueOf(input));
-        }
-        return ret;
+      }
     }
+    return ans;
+  }
+}
+
+int StringToInt(const std::string & str) {
+  return atoi(str.c_str());
+}
+
+std::vector<int> DiffWaysToCompute(std::string input) {
+  int n = input.size();
+  if (n == 0) return std::vector<int>();
+
+  std::vector<int> num;
+  std::vector<char> op;
+  std::string cur;
+  for (int i = 0; i < n; i++) {
+    if (input[i] == ' ') {
+      if (cur.size()) num.push_back(StringToInt(cur));
+      cur.clear();
+    } else if (input[i] == '+' || input[i] == '-' || input[i] == '*') {
+      if (cur.size()) num.push_back(StringToInt(cur));
+      cur.clear();
+      op.push_back(input[i]);
+    } else {
+      cur.push_back(input[i]);
+    }
+  }
+  if (cur.size()) num.push_back(StringToInt(cur));
+  if (num.size() == 0) return std::vector<int>();
+  if (op.size() == 0) return std::vector<int>(1, num[0]);
+
+  return Get(num, op, 0, num.size() - 1);
 }
 }  // namespace recursive
 
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-  LOG(INFO) << JoinVector(DiffWaysToCompute("2*3-4*5"));
+  LOG(INFO) << JoinVector(recursive::DiffWaysToCompute("2*3-4*5"));
   return 0;
 }

@@ -4,6 +4,12 @@
 // File  : code.cc
 // Brief :
 
+/*
+Given a string, determine if a permutation of the string could form a palindrome.
+For example,
+"code" -> False, "aab" -> True, "carerac" -> True.
+*/
+
 #include "base/public/common_ojhead.h"
 
 namespace algorithm {

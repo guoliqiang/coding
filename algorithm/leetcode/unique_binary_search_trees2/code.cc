@@ -352,6 +352,48 @@ std::vector<TreeNode *> Generate(std::vector<int> & vec, int b, int e) {
 }
 }  // namespace four
 
+namespace dp_clear {
+std::vector<TreeNode*> generateTrees(int n) {
+  if (n == 0) return std::vector<TreeNode *>();
+  std::vector<std::vector<std::vector<TreeNode *> > > dp(n,
+    std::vector<std::vector<TreeNode *> >(n, std::vector<TreeNode *>()));
+
+  for (int k = 0; k < n; k++) {
+      for (int i = 0; i + k < n; i++) {
+          if (k == 0) dp[i][i + k].push_back(new TreeNode(i + 1));
+          else {
+              for (int j = i; j <= i + k; j++) {
+                  if (j == i) {
+                      std::vector<TreeNode *> & r = dp[j + 1][i + k];
+                      for (int m1 = 0; m1 < r.size(); m1++) {
+                          dp[i][i + k].push_back(new TreeNode(j + 1));
+                          dp[i][i + k].back()->right = r[m1];
+                      }
+                  } else if (j == i + k) {
+                      std::vector<TreeNode *> & l = dp[i][i + k - 1];
+                      for (int m1 = 0; m1 < l.size(); m1++) {
+                          dp[i][i + k].push_back(new TreeNode(j + 1));
+                          dp[i][i + k].back()->left = l[m1];
+                      }
+                  } else {
+                      std::vector<TreeNode *> & l = dp[i][j - 1];
+                      std::vector<TreeNode *> & r = dp[j + 1][i + k];
+                      for (int m1 = 0; m1 < l.size(); m1++) {
+                          for (int m2 = 0; m2 < r.size(); m2++) {
+                              dp[i][i + k].push_back(new TreeNode(j + 1));
+                              dp[i][i + k].back()->left = l[m1];
+                              dp[i][i + k].back()->right = r[m2];
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  }
+  return dp[0][n - 1];
+}
+}  // naspace dp_clear
+
 int main(int argc, char** argv) {
   std::vector<int> vec;
   vec.push_back(1);

@@ -68,6 +68,30 @@ int ClimbStairs(int n ) {
 
 using namespace algorithm;
 
+namespace clear {
+std::vector<std::vector<int> > Multi(std::vector<std::vector<int> > & x, std::vector<std::vector<int> > & y) {
+    std::vector<std::vector<int> > ans(2, std::vector<int>(2, 0));
+    ans[0][0] = x[0][0] * y[0][0] + x[0][1] * y[1][0];
+    ans[0][1] = x[0][0] * y[0][1] + x[0][1] * y[1][1];
+    ans[1][0] = x[1][0] * y[0][0] + x[1][1] * y[1][0];
+    ans[1][1] = x[1][0] * y[0][1] + x[1][1] * y[1][1];
+    return ans;
+}
+
+int climbStairs(int n) {
+    std::vector<std::vector<int> > ans(2, std::vector<int>(2, 0));
+    std::vector<std::vector<int> > t(2, std::vector<int>(2, 0));
+    ans[0][0] = ans[1][1] = 1;
+    t[0][0] = t[0][1] = t[1][0] = 1;
+    while (n > 0) {
+        if (n % 2) ans = Multi(ans, t);
+        t = Multi(t, t);
+        n /= 2;
+    }
+    return ans[0][0];
+}
+}  // namespace clear
+
 
 int main(int argc, char** argv) {
   LOG(INFO) << ClimbStairs(3);

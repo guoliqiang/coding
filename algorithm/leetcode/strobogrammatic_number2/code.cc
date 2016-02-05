@@ -4,6 +4,10 @@
 // File  : code.cc
 // Brief :
 
+/*
+Strobogrammatic Number II give us all the strings with length n.
+*/
+
 #include "base/public/common_ojhead.h"
 
 namespace algorithm {

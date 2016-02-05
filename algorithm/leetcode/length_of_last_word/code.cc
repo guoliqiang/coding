@@ -75,6 +75,23 @@ int lengthOfLastWord(const char *s) {
 }
 }  // namespace twice
 
+namespace clear {
+int LengthOfLastWord(std::string s) {
+  int ans = 0;
+  std::string cur;
+  for (int i = 0; i < s.size(); i++) {
+      if (s[i] == ' ') {
+          if (cur.size()) ans = cur.size();
+          cur.clear();
+      } else {
+          cur.push_back(s[i]);
+      }
+  }
+  if (cur.size()) ans = cur.size();
+  return ans;
+}
+}  // namepsace clear
+
 using namespace algorithm;
 
 

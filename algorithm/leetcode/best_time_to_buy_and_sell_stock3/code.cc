@@ -164,6 +164,8 @@ int MaxProfit(std::vector<int> & v) {
 // 可以抽象成：最大M段子段和问题
 namespace NB2 {
 // O(n^3) 会T
+// dp[i][j] 前j个元素，正好选取i段的最大值，如果是dp[2][2],其实就是2个元素，一个算一段，两个段是挨着的
+// 也就是这个问题段和段之间是可以挨着的
 int MaxMSeg(std::vector<int> v, int m) {
   v.insert(v.begin(), 0);
   m += 1;

@@ -30,6 +30,34 @@ std::vector<std::string> FindRepeatedDnaSequences(const std::string & s) {
 
 }  // namespace algorithm
 
+namespace clear {
+int StringToInt(const std::string & s) {
+  int ans = 0;
+  for (int i = 0; i < s.size(); i++) {
+    if (s[i] == 'A') ans += 00;
+    else if (s[i] == 'C') ans += 01;
+    else if (s[i] == 'G') ans += 02;
+    else ans += 03;
+    ans <<= 2;
+  }
+  return ans;
+}
+
+std::vector<std::string> FindRepeatedDnaSequences(std::string s) {
+  std::map<int, int> dict;
+  std::vector<std::string> ans;
+  for (int i = 0; i + 10 <= s.size(); i++) {
+    std::string cur = s.substr(i, 10);
+    int num = StringToInt(cur);
+
+    if (!dict.count(num)) dict[num] = 0;
+    dict[num]++;
+    if (dict[num] == 2) ans.push_back(cur);
+  }
+  return ans;
+}
+}  // namespace clear
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

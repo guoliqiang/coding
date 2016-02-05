@@ -208,6 +208,87 @@ public:
 };
 }  // namespace NB
 
+using namespace std;
+namespace NB2 {
+
+int GetValue(char ch) {
+    if (ch == 'M') return 1000;
+    else if (ch == 'D') return 500;
+    else if (ch == 'C') return 100;
+    else if (ch == 'L') return 50;
+    else if (ch == 'X') return 10;
+    else if (ch == 'V') return 5;
+    else return 1;
+}
+
+int romanToInt(string s) {
+  int n = s.size();
+  int ans = 0;
+  for (int i = 0; i < n; i++) {
+      if (i == n - 1) ans += GetValue(s[i]);
+      else {
+          if (GetValue(s[i + 1]) > GetValue(s[i])) ans -= GetValue(s[i]);
+          else ans += GetValue(s[i]);
+      }
+  }
+  return ans;
+}
+}  // namespace NB2
+
+namespace clear {
+const std::string thouand[] = {"", "M", "MM", "MMM"};
+const std::string hundrend[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+const std::string ten[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+const std::string one[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+
+std::map<std::string, int> values;
+
+void Build() {
+    for (int i = 1; i < 4; i++) values[thouand[i]] = i * 1000;
+    for (int i = 1; i < 10; i++) values[hundrend[i]] = i * 100;
+    for (int i = 1; i < 10; i++) values[ten[i]] = i * 10;
+    for (int i = 1; i < 10; i++) values[one[i]] = i;
+}
+
+class Solution {
+public:
+    Solution() {
+        Build();
+    }
+
+    int romanToInt(string s) {
+        if (s.size() == 0) return 0;
+        if (s[0] == 'M') {
+            int it = s.find_first_not_of("M");
+            return values[s.substr(0, it)] + romanToInt((it != std::string::npos ? s.substr(it) : ""));
+        } else if (s[0] == 'C' || s[0] == 'D') {
+            int it = s.find_first_of("XLIV");
+            return values[s.substr(0, it)] + romanToInt((it != std::string::npos ? s.substr(it) : ""));
+        } else if (s[0] == 'X' || s[0] == 'L') {
+            int it = s.find_first_of("IV");
+            return values[s.substr(0, it)] + romanToInt((it != std::string::npos ? s.substr(it) : ""));
+        } else {
+            return values[s];
+        }
+    }
+};
+}  // namespace clear
+
+namespace clear2 {
+const std::string thouand[] = {"", "M", "MM", "MMM"};
+const std::string hundrend[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+const std::string ten[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+const std::string one[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+
+std::string intToRoman(int num) {
+  if (num >= 1000) return thouand[num / 1000] + intToRoman(num % 1000);
+  else if (num >= 100) return hundrend[num / 100] + intToRoman(num % 100);
+  else if (num >= 10) return ten[num / 10] + intToRoman(num % 10);
+  else return one[num];
+}
+
+}  // namespace clear2
+
 int main(int argc, char** argv) {
   NB::Solution s;
   LOG(INFO) << s.romanToInt("MMCCCVII");

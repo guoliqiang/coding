@@ -379,6 +379,46 @@ int KMP(const char * s, const char * p) {
   return -1;
 }
 }  // namespace mystyle
+
+
+namespace DP {
+std::vector<int> Next(const std::string & pattern) {
+    int n = pattern.size();
+    if (n == 0) return std::vector<int>();
+    
+    std::vector<int> dp(n, 0);
+    for (int i = 0; i < n; i++) {
+        if (i == 0) dp[i] = -1;
+        else {
+            int t = dp[i - 1];
+            while (t >= 0 && pattern[t] != pattern[i - 1]) t = dp[t];
+            dp[i] = t + 1;
+        }
+    }
+    return dp;
+}
+
+int KMP(const std::string & str, const std::string & pattern) {
+    if (pattern.size() == 0) return 0;
+    std::vector<int> next = Next(pattern);
+    
+    int i = 0;
+    int j = 0;
+    while (i < str.size()) {
+        if (str[i] == pattern[j]) {
+            i++;
+            j++;
+        } else j = next[j];
+        
+        if (j < 0) {
+            i++;
+            j++;
+        }
+        if (j == pattern.size()) return i - j;
+    }
+    return -1;
+}
+}  // namespace DP
 using namespace algorithm;
 
 int main(int argc, char** argv) {

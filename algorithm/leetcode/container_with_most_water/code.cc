@@ -89,6 +89,23 @@ int MaxArea(std::vector<int> & h) {
   return max;
 }
 
+namespace clear {
+// https://leetcode.com/discuss/11482/yet-another-way-to-see-what-happens-in-the-o-n-algorithm
+int maxArea(std::vector<int> & height) {
+  int n = height.size();
+  int b = 0;
+  int e = n - 1;
+  int ans = 0;
+  while (b < e) {
+    int cur = std::min(height[b], height[e]) * (e - b);
+    ans = std::max(ans, cur);
+    if (height[b] < height[e]) b++;
+    else e--;
+  }
+  return ans;
+}
+}  // namespace clear
+
 int main(int argc, char** argv) {
   std::vector<int> foo;
   foo.push_back(1);

@@ -86,6 +86,35 @@ std::vector<std::string> WordBreak(std::string & s, std::unordered_set<std::stri
 
 using namespace algorithm;
 
+// 会超内存
+namespace DP {
+vector<string> wordBreak(string s, unordered_set<string>& wordDict) {
+        int len = 0;
+        for (unordered_set<string>::iterator i = wordDict.begin(); i != wordDict.end(); i++) {
+            len = std::max(len, (int)(i->size()));
+        }
+        int n = s.size();
+        if (n == 0) return std::vector<std::string>();
+        std::vector<std::vector<std::string> > dp(n, std::vector<std::string>());
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = std::max(0, i - len + 1); j <= i; j++) {
+                std::string cur = s.substr(j, i - j + 1);
+                
+                if (wordDict.count(cur)) {
+                    if (j == 0) dp[i].push_back(cur);
+                    else {
+                        for (int k = 0; k < dp[j - 1].size(); k++) {
+                            std::string t = dp[j - 1][k] + " " + cur;
+                            dp[i].push_back(t);
+                        }
+                    }
+                }
+            }
+        }
+        return dp[n - 1];
+    }
+}  // namespace DP
 
 int main(int argc, char** argv) {
   std::string s = "catsanddog";

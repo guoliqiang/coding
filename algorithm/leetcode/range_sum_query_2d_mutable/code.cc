@@ -4,6 +4,7 @@
 // File  : code.cc
 // Brief :
 
+// 注意第0行第0列是不用的
 #include "base/public/common_ojhead.h"
 
 namespace algorithm {
@@ -31,6 +32,7 @@ class NumMatrix {
     for (int i = row; i < m; i++) {
       sum[i][col] +=(-vec[row][col] + val);
     }
+    vec[row][col] = val;
   }
 
   int sumRegion(int row1, int col1, int row2, int col2) {
@@ -52,7 +54,8 @@ namespace NB {
 class NumMatrix {
  public:
   int Low(int k) {
-    return k & (k ^ (k - 1));
+    // return k & (k ^ (k - 1));
+    return k & (-k);
   }
 
   NumMatrix(std::vector<std::vector<int> > & matrix) {
@@ -81,6 +84,7 @@ class NumMatrix {
 
   void update(int row, int col, int val) {
     int v = -vec[row][col] + val;
+    vec[row][col] = val;
     update2(row + 1, col + 1, v);
   }
 
@@ -117,7 +121,64 @@ class NumMatrix {
   std::vector<std::vector<int> > sum;
   std::vector<std::vector<int> > vec;
 };
+
 }  // namespace NB
+
+namespace clear {
+class NumMatrix {
+ public:
+  int Low(int i) {
+    return i & (-i);
+  }
+
+  NumMatrix(std::vector<std::vector<int> > & matrix) {
+    m = matrix.size();
+    n = matrix[0].size();
+    sum.resize(m + 1, std::vector<int>(n + 1, 0));
+    val.resize(m + 1, std::vector<int>(n + 1, 0));
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        update(i, j, matrix[i][j]);
+      }
+    }
+  }
+
+  void update(int x, int y, int v) {
+    x += 1;
+    y += 1;
+    int diff = v - val[x][y];
+    val[x][y] = v;
+    for (int i = x; i <= m; i += Low(i)) {
+      for (int j = y; j <= n; j += Low(j)) {
+        sum[i][j] += diff;
+      }
+    }
+  }
+
+  int Range(int x, int y) {
+    x += 1;
+    y += 1;
+    int ans = 0;
+    for (int i = x; i > 0; i -= Low(i)) {
+      for (int j = y; j > 0; j -= Low(j)) {
+        ans += sum[i][j];
+      }
+    }
+    return ans;
+  }
+
+  int sumRegion(int row1, int col1, int row2, int col2) {
+    int ans = Range(row2, col2) - Range(row2, col1 - 1) - Range(row1 - 1, col2) + Range(row1 - 1, col1 - 1);
+    return ans;
+  }
+
+
+  int m;
+  int n;
+  std::vector<std::vector<int> > sum;
+  std::vector<std::vector<int> > val;
+};
+}  // namespace clear
 
 int main(int argc, char** argv) {
   int matrix[][5] = {
@@ -135,11 +196,23 @@ int main(int argc, char** argv) {
   }
   NumMatrix foo(vec);
   NB::NumMatrix foo2(vec);
+  LOG(INFO) << JoinMatrix(&vec);
+  clear::NumMatrix foo3(vec);
   LOG(INFO) << foo.sumRegion(2, 1, 4, 3);
   LOG(INFO) << foo2.sumRegion(2, 1, 4, 3);
+  LOG(INFO) << foo3.sumRegion(2, 1, 4, 3);
   foo.update(3, 2, 2);
   foo2.update(3, 2, 2);
+  foo3.update(3, 2, 2);
   LOG(INFO) << foo.sumRegion(2, 1, 4, 3);
   LOG(INFO) << foo2.sumRegion(2, 1, 4, 3);
+  LOG(INFO) << foo3.sumRegion(2, 1, 4, 3);
+
+  foo.update(3, 2, -9);
+  foo2.update(3, 2, -9);
+  foo3.update(3, 2, -9);
+  LOG(INFO) << foo.sumRegion(2, 1, 4, 3);
+  LOG(INFO) << foo2.sumRegion(2, 1, 4, 3);
+  LOG(INFO) << foo3.sumRegion(2, 1, 4, 3);
   return 0;
 }

@@ -42,8 +42,37 @@ int CountPrimes(int n) {
 
 using namespace algorithm;
 
+namespace twice {
+ int CountPrimes(int n) {
+        char * ptr = new char[n / 8 + 1];
+        memset(ptr, 0xFF, sizeof(char) * (n / 8 + 1));
+        
+        for (int i = 2; i < n; i++) {
+            int idx = i / 8;
+            int offset = i % 8;
+            if ((ptr[idx] & (1 << offset)) == 0) continue;
+            
+            int j = i + i;
+            while (j < n) {
+                int idx2 = j / 8;
+                int offset2 = j % 8;
+                ptr[idx] &= ~(1 << offset);
+                j += i;
+            }
+        }
+        int ans = 0;
+        for (int i = 2; i < n; i++) {
+            int idx = i / 8;
+            int offset = i % 8;
+            if (ptr[idx] & (1 << offset)) ans++;
+        }
+        return ans;
+    }
+}
+
 int main(int argc, char** argv) {
-  LOG(INFO) << CountPrimes(2);
+  LOG(INFO) << twice::CountPrimes(2);
+  return 0;
   LOG(INFO) << CountPrimes(100);
   LOG(INFO) << CountPrimes(1000);
   LOG(INFO) << CountPrimes(1500000);

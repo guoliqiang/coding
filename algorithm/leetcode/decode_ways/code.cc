@@ -53,6 +53,38 @@ int NumDecodings(std::string & s) {
 
 }  // namespace algorithm
 
+namespace clear {
+bool Valid(char x, char y) {
+    if (x == '0') return false;
+    int cur = (x - '0') * 10 + (y - '0');
+    return cur >= 1 && cur <= 26;
+}
+
+int NumDecodings(std::string s) {
+    int n = s.size();
+    if (n == 0) return 0;
+    if (s[0] == '0') return 0;
+
+    std::vector<int> dp(n, 0);
+
+    for (int i = 0; i < n; i++) {
+        if (i == 0) dp[i] = 1;
+        else if (i == 1) {
+            if (s[i] == '0') {
+                if (!Valid(s[i - 1], s[i])) return 0;
+                else dp[i] = 1;
+            } else dp[i] = dp[i - 1] + (Valid(s[i - 1], s[i]) ? 1 : 0);
+        } else {
+            if (s[i] == '0') {
+                if (!Valid(s[i - 1], s[i])) return 0;
+                dp[i] = dp[i - 2];
+            } else dp[i] = dp[i - 1] + (Valid(s[i - 1], s[i]) ? dp[i - 2] : 0);
+        }
+    }
+    return dp[n - 1];
+}
+}  // namespace clear
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

@@ -67,7 +67,7 @@ public:
     TreeNode* deserialize(string data) {
         std::vector<std::string> parts = Split(data);
         TreeNode * root = NULL;
-        
+
         std::queue<TreeNode ** > queue;
         queue.push(&root);
         for (int i = 0; i < parts.size(); i++) {
@@ -122,6 +122,7 @@ void Serialize(TreeNode * root, std::string & ans) {
     }
 }
 
+// idx 一定要是引用才可以
 void Deserialize(std::vector<std::string> & parts, int & idx, TreeNode * & root) {
     if (idx == parts.size()) return;
     if (parts[idx] == "N") {
@@ -156,8 +157,78 @@ public:
 };
 }  // namespace PreOrder
 
+namespace twice {
+std::string IntToString(int v) {
+    char buff[100] = { 0 };
+    sprintf(buff, "%d", v);
+    return std::string(buff);
+}
+
+int StringToInt(const std::string & str) {
+    return atoi(str.c_str());
+}
+
+void Seril(TreeNode * root, std::string & ans) {
+    if (root == NULL) {
+        ans += " N";
+    } else {
+      ans += " " + IntToString(root->val);
+      Seril(root->left, ans);
+      Seril(root->right, ans);
+    }
+}
+
+void DeSeril(std::vector<std::string> & vec, int & idx, TreeNode * & root) {
+    if (idx == vec.size()) return;
+    if (vec[idx] == "N") {
+        root = NULL;
+        idx++;
+    } else {
+        root = new TreeNode(StringToInt(vec[idx]));
+        idx++;
+        DeSeril(vec, idx, root->left);
+        DeSeril(vec, idx, root->right);
+    }
+}
+
+std::vector<std::string> Split(const std::string & str) {
+    std::vector<std::string> vec;
+    std::string cur;
+    for (int i = 0; i < str.size(); i++) {
+        if (str[i] == ' ') {
+            if (cur.size()) vec.push_back(cur);
+            cur.clear();
+        } else {
+            cur.push_back(str[i]);
+        }
+    }
+    if (cur.size()) vec.push_back(cur);
+    return vec;
+}
+
+class Codec {
+public:
+
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        std::string ans;
+        Seril(root, ans);
+        return ans.substr(1);
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        std::vector<std::string> vec = Split(data);
+        TreeNode * root;
+        int idx = 0;
+        DeSeril(vec, idx, root);
+        return root;
+    }
+};
+}  // namespace twice
+
 int main(int argc, char** argv) {
-  Codec foo;
+  twice::Codec foo;
   LOG(INFO) << foo.serialize(NULL);
   foo.deserialize(foo.serialize(NULL));
   return 0;

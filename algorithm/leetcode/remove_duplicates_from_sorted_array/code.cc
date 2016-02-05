@@ -56,6 +56,18 @@ class Solution {
 };
 }  // namespace twice
 
+namespace clear {
+int removeDuplicates(std::vector<int>& nums) {
+  int idx = -1;
+  for (int i = 0; i < nums.size(); i++) {
+    if (idx == -1 || nums[i] != nums[idx]) {
+      nums[++idx] = nums[i];
+    }
+  }
+  return idx + 1;
+}
+}  // namespace clear
+
 
 int main(int argc, char** argv) {
   return 0;

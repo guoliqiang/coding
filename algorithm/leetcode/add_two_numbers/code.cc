@@ -84,17 +84,15 @@ namespace NB {
 using namespace algorithm;
 
 ListNode * Add(ListNode * l1, ListNode * l2) {
-  int carry = 0;
   ListNode * rs = NULL;
   ListNode ** tail = &rs;
+  int carry = 0;
   while (l1 != NULL || l2 != NULL || carry != 0) {
-    int t = l1 == NULL ? 0 : l1->val;
-    t += (l2 == NULL ? 0 : l2->val);
-    t += carry;
-    carry = t / 10;
-    t %= 10;
-    *tail = new ListNode(t);
+    carry += (l1 == NULL ? 0 : l1->val) + (l2 == NULL ? 0 : l2->val);
+    *tail = new ListNode(carry % 10);
     tail = &((*tail)->next);
+    carry /= 10;
+
     l1 = l1 == NULL ? NULL : l1->next;
     l2 = l2 == NULL ? NULL : l2->next;
   }

@@ -26,6 +26,31 @@ bool IsHappy(int n) {
 
 using namespace algorithm;
 
+namespace NB {
+class Solution {
+ public:
+  bool isHappy(int n) {
+    int A = nxt(n), B = nxt(nxt(n));
+    while (A != 1 && A != B) {
+      A = nxt(A);
+      B = nxt(B);
+      B = nxt(B);
+    }
+    return A == 1;
+  }
+
+ private:
+  int nxt(int num) {
+    int res = 0;
+    while (num) {
+      res += (num % 10) * (num % 10);
+      num /= 10;
+    }
+    return res;
+  }
+};
+}  // namespace NB
+
 int main(int argc, char** argv) {
   LOG(INFO) << IsHappy(33);
   return 0;

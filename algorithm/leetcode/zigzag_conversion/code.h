@@ -79,4 +79,46 @@ std::string Convert(std::string s, int row) {
 }
 }  // namespace twice
 
+namespace NB {
+using namespace std;
+
+string convert(string s, int numRows) {
+    if (numRows <= 1) return s;
+    
+    std::vector<std::string> vec(numRows, "");
+    int idx = 0;
+    bool add = true;
+    for (int i = 0; i < s.size(); i++) {
+        vec[idx].push_back(s[i]);
+        
+        if (idx == numRows - 1) add = false;
+        if (idx == 0) add = true;
+        
+        if (add) idx += 1;
+        else idx -= 1;
+    }
+    std::string ans;
+    for (int i = 0; i < numRows; i++) ans += vec[i];
+    return ans;
+}
+}  // namespace NB
+
+namespace NB2 {
+using namespace std;
+
+string convert(string s, int numRows) {
+    std::vector<std::string> vec(numRows, "");
+    int idx = 0;
+    while (idx < s.size()) {
+        for (int i = 0; i < numRows && idx < s.size(); i++) vec[i].push_back(s[idx++]);
+        for (int i = numRows - 2; i > 0 && idx < s.size(); i--) vec[i].push_back(s[idx++]);
+    }
+    std::string ans;
+    for (int i = 0; i < numRows; i++) {
+        ans += vec[i];
+    }
+    return ans;
+}
+}  // namespace NB2
+
 #endif  //__CODE_H_

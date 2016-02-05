@@ -6,6 +6,7 @@
 
 #include "base/public/common_ojhead.h"
 
+// 是否存在某种移动方式，该方式下第一个移动者是赢的
 namespace algorithm {
 bool CanWin(const std::string & str, int cnt) {
   bool flag = false;

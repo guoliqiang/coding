@@ -18,7 +18,8 @@ int MaximumGap(std::vector<int> nums) {
   }
   if (max == min) return 0;
 
-  double interval = (double)(max - min) / (n - 1);
+  double interval = (double)(max - min) / (n - 1);  // 除以n - 1 实际上是分成n个筒，因为最大的那个数,必然存在，比如[1, 5],
+  // 若果除以2的话，最大值5实际上是在第三个筒里面
   std::vector<std::pair<int, int> > bucket(n, std::pair<int, int>(0, 0));
   std::vector<int> size(n, 0);
 

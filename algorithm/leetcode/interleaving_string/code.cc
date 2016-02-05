@@ -83,6 +83,50 @@ bool InterleavingString(const std::string & str1, const std::string & str2,
 
 using namespace algorithm;
 
+namespace NB {
+bool Judge(std::string & s1, int i1, std::string & s2, int i2, std::string & s3, int i3) {
+  if (i1 == s1.size() && i2 == s2.size() && i3 == s3.size()) return true;
+  if (i1 < s1.size() && s3[i3] == s1[i1] && Judge(s1, i1 + 1, s2, i2, s3, i3 + 1)) return true;
+  if (i2 < s2.size() && s3[i3] == s2[i2] && Judge(s1, i1, s2, i2 + 1, s3, i3 + 1)) return true;
+  return false;
+}
+
+bool isInterleave(std::string s1, std::string s2, std::string s3) {
+  if (s1.size() + s2.size() != s3.size()) return false;
+  return Judge(s1, 0, s2, 0, s3, 0);
+}
+
+}  // namespace NB
+
+
+namespace DP2 {
+bool isInterleave(std::string s1, std::string s2, std::string s3) {
+  if (s1.size() + s2.size() != s3.size()) return false;
+  if (s3.size() == 0) return true;
+
+  s1 = " " + s1;
+  s2 = " " + s2;
+  int m = s1.size();
+  int n = s2.size();
+
+  std::vector<std::vector<int> > dp(m, std::vector<int>(n, 0));
+  for (int i = 1; i < n; i++) {
+      dp[0][i] = s2.substr(1, i) == s3.substr(0, i) ? 1 : 0;
+  }
+  for (int i = 1; i < m; i++) {
+      dp[i][0] = s1.substr(1, i) == s3.substr(0, i) ? 1 : 0;
+  }
+
+  for (int i = 1; i < m; i++) {
+      for (int j = 1; j < n; j++) {
+          int idx = i + j - 1;
+          if (s3[idx] == s1[i]) dp[i][j] = dp[i - 1][j];
+          if (s3[idx] == s2[j]) dp[i][j] = std::max(dp[i][j], dp[i][j - 1]);
+      }
+  }
+  return dp[m - 1][n - 1];
+}
+}  // namespace DP2
 
 int main(int argc, char** argv) {
   std::string str1 = "aabcc";

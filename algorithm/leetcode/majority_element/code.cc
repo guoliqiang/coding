@@ -42,6 +42,49 @@ int majorityElement(std::vector<int>& nums) {
 }
 }  // namespace clear
 
+namespace other {
+// 如果是排序好的就可以直接用二分查找找中间元素的左右边界然后判断是不是大于n/2
+int MajorityElement(std::vector<int>& nums) {
+  nth_element(nums.begin(), nums.begin() + nums.size() / 2, nums.end());
+  return nums[nums.size() / 2];
+}
+
+}  // namespace other
+
+namespace extend {
+// find element counts greater than  n / k
+// 当k比较大时，还不如直接用个map统计复杂度底
+std::vector<int> Major(std::vector<int> & nums, int k) {
+  std::vector<int> v(k - 1, 0);
+  std::vector<int> c(k - 1, 0);
+
+  for (int i = 0; i < nums.size(); i++) {
+    int j = 0;
+    for (j = 0; j < k - 1; j++) {
+      if (c[j] == 0 || v[j] == nums[i]) {
+        c[j]++;
+        v[j] = nums[i];
+        break;
+      }
+    }
+    if (j == k) {
+      for (int m = 0; m < k - 1; k++) c[m]--;
+    }
+  }
+  for (int i = 0; i < k - 1; i++) c[i] = 0;
+  for (int i = 0; i < nums.size(); i++) {
+    for (int j = 0; j < k - 1; j++) {
+      if (v[j] == nums[i]) c[j]++;
+    }
+  }
+  std::vector<int> ans;
+  for (int i = 0; i < k - 1; i++) {
+    if (c[i] > nums.size() / k) ans.push_back(v[i]);
+  }
+  return ans;
+}
+}  // namespace extend
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

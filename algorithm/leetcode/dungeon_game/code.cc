@@ -3,7 +3,8 @@
 // Date  : 2015-12-16 12:08:49
 // File  : code.cc
 // Brief :
-
+// 抽象成存在目的和源点，中间有补给。
+// gas station 是无目的源点，中间有补给
 #include "base/public/common_ojhead.h"
 
 namespace algorithm {

@@ -13,6 +13,8 @@ using namespace std;
 vector<int> maxSlidingWindow(vector<int>& nums, int k) {
   std::vector<int> ans;
   std::deque<int> queue;
+  // list也可以
+  // std::list<int> queue;
   for (int i = 0; i < nums.size(); i++) {
     while (queue.size() && queue.back() < nums[i]) queue.pop_back();
     queue.push_back(nums[i]);

@@ -176,17 +176,9 @@ public:
         return ans;
     }
 };
-
-namespace my2 {
 using namespace std;
 
-int gcd(int x, int y) {
-    if (!x) return y;
-    if (!y) return x;
-    return gcd(y, x % y);
-}
-
-class Solution {
+class Solution2 {
 public:
     int maxPoints(vector<Point>& points) {
         std::sort(points.begin(), points.end(), Cmp);
@@ -226,34 +218,61 @@ public:
 };
 }  // namespace my
 
+
+namespace practice {
+using namespace std;
+
+int gcd(int x, int y) {
+    if (!x) return y;
+    if (!y) return x;
+    return gcd(y, x % y);
+}
+int MaxPoints(vector<Point>& points) {
+    int ans = 0;
+    int n = points.size();
+    for (int i = 0; i < n; i++) {
+        int same = 1;
+        int max = 0;
+        std::map<std::pair<int, int>, int> dict;
+        for (int j = i + 1; j < n; j++) {
+            int dx = points[j].x - points[i].x;
+            int dy = points[j].y - points[i].y;
+
+            int t = gcd(fabs(dx), fabs(dy));
+            if (t == 0) {
+                same++;
+                continue;
+            }
+            dx /= t;
+            dy /= t;
+            if (dx * dy >= 0) {
+                dx = fabs(dx);
+                dy = fabs(dy);
+            } else if (dx > 0 && dy < 0) {
+                dx = -dx;
+                dy = -dy;
+            }
+            std::pair<int, int> key(dx, dy);
+            if (!dict.count(key)) dict[key] = 0;
+            dict[key]++;
+            max = std::max(max, dict[key]);
+        }
+        ans = std::max(ans, max + same);
+    }
+    return ans;
+}
+}  // namespace practice
+
 /*
  * (0,9),(138,429),(115,359),(115,359),(-30,-102),(230,709),(-150,-686),(-135,-613),(-60,-248),(-161,-481),(207,639),(23,79),(-230,-691),(-115,-341),(92,289),(60,336),(-105,-467),(135,701),(-90,-394),(-184,-551),(150,774)
  * */
 
 int main(int argc, char** argv) {
   std::vector<Point> data;
-  data.push_back(Point(0, 9));
-  data.push_back(Point(138, 429));
-  data.push_back(Point(115, 359));
-  data.push_back(Point(115, 359));
-  data.push_back(Point(-30, -102));
-  data.push_back(Point(230, 709));
-  data.push_back(Point(-150, -686));
-  data.push_back(Point(-135, -613));
-  data.push_back(Point(-60, -248));
-  data.push_back(Point(-161, -481));
-  data.push_back(Point(207, 639));
-  data.push_back(Point(23, 79));
-  data.push_back(Point(-230, -691));
-  data.push_back(Point(-115, -341));
-  data.push_back(Point(92, 289));
-  data.push_back(Point(60, 336));
-  data.push_back(Point(-105, -467));
-  data.push_back(Point(135, 701));
-  data.push_back(Point(-90, -394));
-  data.push_back(Point(-184, -551));
-  data.push_back(Point(150, 774));
+  data.push_back(Point(0, 0));
+  data.push_back(Point(1, 1));
+  data.push_back(Point(1, -1));
 
-  LOG(INFO) << MaxPoints(data);
+  LOG(INFO) << practice::MaxPoints(data);
   return 0;
 }

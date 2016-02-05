@@ -137,6 +137,36 @@ class Solution {
 
 }  // namespace twice
 
+
+namespace clear {
+ListNode* swapPairs(ListNode* head) {
+  ListNode * ans = NULL;
+  ListNode ** pre = &ans;
+  ListNode * tmp = NULL;
+
+  while (head != NULL) {
+    ListNode * next = head->next;
+
+    if (tmp == NULL) tmp = head;
+    else {
+      *pre = head;
+      pre = &((*pre)->next);
+      *pre = tmp;
+      pre = &((*pre)->next);
+      tmp = NULL;
+    }
+    head = next;
+  }
+
+  if (tmp != NULL) {
+    *pre = tmp;
+    pre = &((*pre)->next);
+  }
+  *pre = NULL;
+  return ans;
+}
+}  // namespace clear
+
 int main(int argc, char** argv) {
   std::vector<int> foo;
   

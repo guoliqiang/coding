@@ -258,6 +258,41 @@ class Solution {
 };
 }  // namespace twice
 
+namespace clear {
+ListNode* reverseKGroup(ListNode* head, int k) {
+  std::vector<ListNode *> tmp;
+  ListNode * ans = NULL;
+  ListNode * * pre = &ans;
+
+  while (head != NULL) {
+    if (tmp.size() == k) {
+      for (int i = k - 1; i >= 0; i--) {
+        *pre = tmp[i];
+        pre = &((*pre)->next);
+      }
+      tmp.clear();
+    }
+    tmp.push_back(head);
+    head = head->next;
+  }
+
+  if (tmp.size() == k) {
+    for (int i = k - 1; i >= 0; i--) {
+      *pre = tmp[i];
+      pre = &((*pre)->next);
+    }
+  } else {
+    for (int i = 0; i < tmp.size(); i++) {
+      *pre = tmp[i];
+      pre = &((*pre)->next);
+    }
+  }
+
+  *pre = NULL;
+  return ans;
+}
+}  // namespace clear
+
 int main(int argc, char** argv) {
   std::vector<int> foo;
   

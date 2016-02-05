@@ -45,6 +45,16 @@ TreeNode * LCA(int x, int y, TreeNode * root) {
 
 } // namespace algorithm
 
+namespace NB {
+// for bst
+TreeNode * LCA(TreeNode * root, int x, int y) {
+  if (root == NULL) return NULL;
+  if (x > root->val && y > root->val) return LCA(root->right, x, y);
+  if (x < root->val && y < root->val) return LCA(root->left, x, y);
+  return root;
+}
+}  // namespace NB
+
 using namespace algorithm;
 
 int main(int argc, char** argv) {

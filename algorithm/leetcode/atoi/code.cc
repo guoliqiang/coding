@@ -64,6 +64,7 @@ namespace twice {
 // 注意判断越界的情况有两种
 // 1. 加着加着t变为负数
 // 2. (t* 10) / 10 != t
+// 看　five中的
 
 int Atoi(const char * ptr) {
   while (*ptr != '\0' && (*ptr == ' ' || *ptr == '\t')) ptr++;
@@ -146,8 +147,36 @@ int Atoi(const char * ptr) {
 }
 }  // namespace four
 
+namespace five {
+int Atoi(const char * ptr) {
+  while (*ptr != '\0' && (*ptr == ' ' || *ptr == '\t')) ptr++;
+  bool minus = false;
+  if (*ptr == '\0') return 0;
+  else if (*ptr == '-') {
+      minus = true;
+      ptr++;
+  } else if (*ptr == '+') {
+      ptr++;
+  }
+
+  int t = 0;
+  while (*ptr != '\0') {
+      if (*ptr >= '0' && *ptr <= '9') {
+        if (t > INT_MAX / 10 || (t == INT_MAX / 10 && *ptr > '7')) {  // 使用int判断是不是要越界
+          t = -1;
+          break;
+        }
+        t = t * 10 + (*ptr - '0');
+      } else break;
+      ptr++;
+  }
+  if (t < 0) return minus ? INT_MIN : INT_MAX;
+  return minus ? -t : t;
+}
+}  // namespace five
+
 int main(int argc, char** argv) {
   std::string str = "    10522545459";
-  LOG(INFO) << atoi(str.c_str());
+  LOG(INFO) << five::Atoi(str.c_str());
   return 0;
 }

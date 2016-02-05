@@ -32,7 +32,6 @@ This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
 #include <algorithm>
 #include "base/public/logging.h"
 
-namespace algorithm {
 
 struct Interval {
   int start;
@@ -41,6 +40,7 @@ struct Interval {
   Interval(int s, int e) : start(s), end(e) {}
 };
 
+namespace algorithm {
 bool Compare(const Interval & a, const Interval & b) {
   return a.start < b.start;
 }
@@ -170,15 +170,120 @@ std::vector<Interval> Insert(std::vector<Interval> &intervals, Interval newInter
 
 }  // namespace third
 
+namespace clear {
+std::vector<Interval> insert(std::vector<Interval>& intervals, Interval newInterval) {
+  std::vector<Interval> t(1, newInterval);
+  std::vector<Interval> ans;
+  int i = 0;
+  int j = 0;
+  while (i < intervals.size() || j < t.size()) {
+      Interval cur;
+      if (i == intervals.size()) {
+          cur = t[j];
+          j++;
+      } else if (j == t.size()) {
+          cur = intervals[i];
+          i++;
+      } else if (intervals[i].start < t[j].start) {
+          cur = intervals[i];
+          i++;
+      } else {
+          cur = t[j];
+          j++;
+      }
+      if (ans.size() == 0 || ans.back().end < cur.start) ans.push_back(cur);
+      else ans.back().end = std::max(ans.back().end, cur.end);
+  }
+  return ans;
+}
+}  // namespcae clear
+
+namespace other {
+std::vector<Interval> insert(std::vector<Interval>& intervals, Interval newInterval) {
+  std::vector<Interval> ans;
+  int n = intervals.size();
+  int i = 0;
+  while (i < n && intervals[i].end < newInterval.start) {
+    ans.push_back(intervals[i]);
+    i++;
+  }
+
+  while (i < n && intervals[i].start <= newInterval.end) {
+    newInterval.start = std::min(newInterval.start, intervals[i].start);
+    newInterval.end = std::max(newInterval.end, intervals[i].end);
+    i++;
+  }
+  ans.push_back(newInterval);
+  while (i < n) {
+    ans.push_back(intervals[i]);
+    i++;
+  }
+  return ans;
+}
+}  // namespace other
+
+namespace best {
+
+int Search(std::vector<Interval> & intervals, int v) {
+  int n = intervals.size();
+  int b = 0;
+  int e = n - 1;
+  while (b <= e) {
+    int mid = b + (e - b) / 2;
+    if (intervals[mid].start < v) b = mid + 1;
+    else e = mid - 1;
+  }
+  return b;
+}
+
+std::vector<Interval> Insert(std::vector<Interval>& intervals, Interval nv) {
+  int n = intervals.size();
+  if (n == 0) return std::vector<Interval>(1, nv);
+  if (intervals[0].start > nv.end) {
+    intervals.insert(intervals.begin(), nv);
+    return intervals;
+  }
+  if (intervals[n - 1].end < nv.start) {
+    intervals.push_back(nv);
+    return intervals;
+  }
+
+  std::vector<Interval> & vec = intervals;
+
+  int left = Search(vec, nv.start);
+  int right = Search(vec, nv.end);
+  LOG(INFO) << "l=" << left << " r=" << right;
+  if (left > 0 && vec[left - 1].end >= nv.start) left -= 1;
+  if (right == n || vec[right].start > nv.end) right -= 1;
+  LOG(INFO) << "l=" << left << " r=" << right;
+
+  Interval l = vec[left];
+  Interval r = vec[right];
+  vec.erase(vec.begin() + left, vec.begin() + right + 1);
+  int lv = std::min(l.start, nv.start);
+  int rv = std::max(nv.end, r.end);
+  vec.insert(vec.begin() + left, Interval(lv, rv));
+
+  return vec;
+}
+}  // namespace best
+
 int main(int argc, char** argv) {
   std::vector<Interval> foo;
   foo.push_back(Interval(1, 2));
-  foo.push_back(Interval(3, 5));
-  foo.push_back(Interval(6, 7));
-  foo.push_back(Interval(8, 10));
-  foo.push_back(Interval(12, 16));
-  Interval k(4, 9);
+  foo.push_back(Interval(7, 9));
+  Interval k(3, 5);
+  std::vector<Interval> foo2 = foo;
   std::vector<Interval> rs = Insert(foo, k);
+
+  for (int i = 0; i < rs.size(); i++) {
+    LOG(INFO) << rs[i].start << " " << rs[i].end;
+  }
+  LOG(INFO) << "---";
+  for (int i = 0; i < foo2.size(); i++) {
+    LOG(INFO) << foo2[i].start << " " << foo2[i].end;
+  }
+  rs = best::Insert(foo2, k);
 
   for (int i = 0; i < rs.size(); i++) {
     LOG(INFO) << rs[i].start << " " << rs[i].end;

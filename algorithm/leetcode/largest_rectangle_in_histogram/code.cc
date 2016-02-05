@@ -122,7 +122,7 @@ int Largest(std::vector<int> height) {
   std::stack<int> stack;
   int i = 0;
   while (i < height.size()) {   // bug fixed, 注意写成for的形式有个trick需要注意，见poj3494
-    if (stack.empty() || height[i] >= height[stack.top()]) {
+    if (stack.empty() || height[i] >= height[stack.top()]) {  // >= . > 都行
       stack.push(i);
       i++;
     } else {

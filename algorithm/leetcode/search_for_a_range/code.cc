@@ -115,6 +115,48 @@ std::vector<int> SearchRange(int A[], int n, int target) {
 }  // namespace twice
 using namespace algorithm;
 
+// search for left && right
+namespace clear {
+
+int Left(std::vector<int> & nums, int t) {
+    int n = nums.size();
+    int b = 0;
+    int e = n - 1;
+    while (b <= e) {
+        int mid = b + (e - b) / 2;
+        if (mid == b) {
+            if (nums[mid] == t) return mid;
+            else b = mid + 1;
+        } else {
+            if (nums[mid] == t && nums[mid - 1] < t) return mid;
+            else if (nums[mid] < t) b = mid + 1;
+            else e = mid - 1;
+        }
+    }
+    return -1;
+}
+
+
+int Right(std::vector<int> & nums, int t) {
+    int n = nums.size();
+    int b = 0;
+    int e = n - 1;
+    while (b <= e) {
+        int mid = b + (e - b) / 2;
+        if (mid == e) {
+            if (nums[mid] == t) return mid;
+            else e = mid - 1;
+        } else {
+            if (nums[mid] == t && nums[mid + 1] > t) return mid;
+            else if (nums[mid] > t) e = mid - 1;
+            else b = mid + 1;
+        }
+    }
+    return -1;
+}
+
+}  // namespace clear
+
 int main(int argc, char** argv) {
   std::vector<int> rs;
   int A[] = {5, 7, 7, 8, 8, 10};

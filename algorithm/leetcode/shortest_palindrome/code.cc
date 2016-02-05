@@ -60,6 +60,8 @@ std::string ShortestPalindrome(const std::string & s) {
     idx++;
     next[i] = idx;
   }
+  LOG(INFO) << str;
+  LOG(INFO) << JoinVector(next);
 
   std::string ans = s;
   for (int i = next[n - 1] + 1; i < s.size(); i++) {
@@ -72,8 +74,6 @@ std::string ShortestPalindrome(const std::string & s) {
 using namespace algorithm;
 
 int main(int argc, char** argv) {
-  LOG(INFO) << NB::ShortestPalindrome("acecaaa");
-  LOG(INFO) << NB::ShortestPalindrome("abcd");
-  LOG(INFO) << NB::ShortestPalindrome("aba");
+  LOG(INFO) << NB::ShortestPalindrome("abc");
   return 0;
 }

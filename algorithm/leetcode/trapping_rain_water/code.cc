@@ -153,6 +153,32 @@ int Trap(int * a, int n) {
 
 using namespace algorithm;
 
+namespace NB {
+int trap(std::vector<int>& height) {
+  int ans = 0;
+  int n = height.size();
+  if (n == 0) return ans;
+
+  int b = 0;
+  int e = n - 1;
+  int leftmax = height[b];
+  int rightmax = height[e];
+
+  while (b <= e) {
+    if (height[b] < height[e]) {
+      ans += std::max(0, leftmax - height[b]);
+      leftmax = std::max(leftmax, height[b]);
+      b++;
+    } else {
+      ans += std::max(0, rightmax - height[e]);
+      rightmax = std::max(rightmax, height[e]);
+      e--;
+    }
+  }
+  return ans;
+}
+}  // namespace NB
+
 int main(int argc, char** argv) {
   // int A[] = {0,1,0,2,1,0,1,3,2,1,2,1};
   // int A[] = {5,5,1,7,1,1,5,2,7,6};

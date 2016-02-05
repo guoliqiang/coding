@@ -93,6 +93,15 @@ class Solution {
 
 using namespace algorithm;
 
+namespace NB {
+double pow(double x, int n) {
+    double d = 1;
+    int m = n;
+    for (; n; x *= x, n /= 2) if (n % 2) d *= x;
+    return m >= 0 ? d : 1. / d;
+}
+}  // namespace NB
+
 
 int main(int argc, char** argv) {
   LOG(INFO) << PowR(2, 4);
