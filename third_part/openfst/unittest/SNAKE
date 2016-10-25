@@ -1,0 +1,30 @@
+cc_binary(name='algo_test',
+          srcs = ['algo_test.cc'],
+          deps = [
+                  '//libs/third_part/openfst:fst'
+                  ],
+           cflags = [
+                     '-Ithird_part/openfst/include/'
+                    ],
+           )
+
+cc_binary(name='fst_test',
+          srcs = ['fst_test.cc'],
+          deps = [
+                  '//libs/third_part/openfst:fst'
+                  ],
+           cflags = [
+                     '-Ithird_part/openfst/include/'
+                    ],
+           )
+
+cc_binary(name='weight_test',
+          srcs = ['weight_test.cc'],
+          deps = [
+                  '//libs/third_part/openfst:fst'
+                  ],
+           cflags = [
+                     '-Ithird_part/openfst/include/'
+                    ],
+           )
+
