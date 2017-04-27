@@ -57,7 +57,8 @@ void Predict::SvmPredict(const std::string & input,
     }
     CHECK_EQ(class_score.size(), 1)  << class_score.size();
     rs += DoubleToString(class_score.begin()->second) + "\n";
-    LOG(INFO) << i << "/" << lines.size() << " " << class_score.begin()->second;
+    LOG(INFO) << i << "/" << lines.size() << " " << class_score.begin()->second
+              << " predict_lable=" << predict_lable;
   }
   file::File::WriteStringToFile(rs, output);
 }
