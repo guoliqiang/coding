@@ -33,4 +33,5 @@ clean:
 	rm -rf time_limit_thread_unittest
 	rm -rf stacktrace_unittest
 	rm -rf holder_unittest
-
+	rm -rf flag_unittest
+	rm -rf heap_unittest
