@@ -14,6 +14,14 @@
 #include "base/public/mutex.h"
 #include "base/public/thread.h"
 
+// https://stackoverflow.com/questions/4343220/does-insertion-to-stl-map-
+// invalidate-other-existing-iterator
+// Map has the important property that inserting a new element into a map does
+// not invalidate iterators that point to existing elements.
+// Erasing an element from a map also does not invalidate any iterators, except,
+// of course, for iterators that actually point to the element that
+// is being erased.
+
 namespace base {
 // not thread-safe
 template<typename KeyType, typename ValueType>
