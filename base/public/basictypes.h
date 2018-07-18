@@ -12,7 +12,12 @@
 #include <string.h>         // for memcpy
 
 #include "./port.h"    // Types that only need exist on certain systems
-
+// https://stackoverflow.com/questions/2054939/is-char-signed-or-unsigned
+// -by-default
+//
+// https://stackoverflow.com/questions/75191/what-is-an-unsigned-char
+// For char, gcc treat it as signed by deault. if you want to print it as a
+// number, you should convert in when output e.g. int8 a = -1; count << (int)a
 typedef signed char         schar;
 typedef signed char         int8;
 typedef short               int16;
